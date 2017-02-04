@@ -1,0 +1,18 @@
+Project Name : PT4-Camping
+Developers   : Yonnel BERWIT, Alexandre JACQUOT, Arthur JOLIVET, Claire MARCINIAK, Valentine RENAUD
+
+Current version : v0.1
+
+==================================================================================================
+
+v0.1 (04/02/2017)
+
+- Project creation
+	- Visual Studio project created
+	- README added
+	- Changelog added
+	- .travis.yml added
+- Added stub Connexion and Home winforms
+
+
+--------------------------------------------------------------------------
