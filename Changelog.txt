@@ -5,6 +5,16 @@ Current version : v0.1
 
 ==================================================================================================
 
+v0.1.1 (08/02/2017)
+
+- Changed window handling
+	- There is only one winform
+	- Each screen is a UserControl inherited class
+- Added all the needed screens
+
+
+--------------------------------------------------------------------------
+
 v0.1 (04/02/2017)
 
 - Project creation
