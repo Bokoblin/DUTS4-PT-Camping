@@ -23,6 +23,7 @@ namespace PT_Camping
         {
             InitializeComponent();
             appBarTitle.Text = "Gestion des stocks";
+            handleResize();
         }
     }
 }

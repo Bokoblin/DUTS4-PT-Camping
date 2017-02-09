@@ -12,20 +12,28 @@ namespace PT_Camping
 {
     /// <summary>
     /// The HomeUserControl is a UserControl handling the application's home screen.
-    /// It allows access to a management process screen or the Card screen with a tab system.
+    /// It allows access to a management process screen or the Map screen with a tab system.
     /// 
     /// Authors : Arthur
     /// Since : 08/08/17
     /// </summary>
     public partial class HomeUserControl : UserControl
     {
-        private PT_Camping.Window mWindow;
+        private AppWindow mWindow;
+        private ManagementUserControl mClientsUC;
+        private ManagementUserControl mIssuesUC;
+        private ManagementUserControl mEmployeesUC;
+        private ManagementUserControl mStocksUC;
+        private ManagementUserControl mProvidersUC;
+        private ManagementUserControl mStatsUC;
+        private MapUserControl mMapUC;
 
 
-        public HomeUserControl(PT_Camping.Window window)
+        public HomeUserControl(AppWindow window)
         {
             InitializeComponent();
             mWindow = window;
+            handleResize();
         }
 
 
@@ -36,51 +44,97 @@ namespace PT_Camping
         }
 
 
-        private void clientButton_Click(object sender, EventArgs e)
+        private void clientsButton_Click(object sender, EventArgs e)
         {
-            mWindow.WindowPanel.Controls.Add(new ClientsUserControl(this));
+            mClientsUC = new ClientsUserControl(this);
+            mWindow.WindowPanel.Controls.Add(mClientsUC);
             mWindow.WindowPanel.Controls.Remove(this);
         }
 
 
         private void issuesButton_Click(object sender, EventArgs e)
         {
-            mWindow.WindowPanel.Controls.Add(new IssuesUserControl(this));
+            mIssuesUC = new IssuesUserControl(this);
+            mWindow.WindowPanel.Controls.Add(mIssuesUC);
             mWindow.WindowPanel.Controls.Remove(this);
         }
 
 
-        private void employeeButton_Click(object sender, EventArgs e)
+        private void employeesButton_Click(object sender, EventArgs e)
         {
-            mWindow.WindowPanel.Controls.Add(new EmployeesUserControl(this));
+            mEmployeesUC = new EmployeesUserControl(this);
+            mWindow.WindowPanel.Controls.Add(mEmployeesUC);
             mWindow.WindowPanel.Controls.Remove(this);
         }
 
 
         private void stocksButton_Click(object sender, EventArgs e)
         {
-            mWindow.WindowPanel.Controls.Add(new StocksUserControl(this));
+            mStocksUC = new StocksUserControl(this);
+            mWindow.WindowPanel.Controls.Add(mStocksUC);
             mWindow.WindowPanel.Controls.Remove(this);
         }
 
 
-        private void providerButton_Click(object sender, EventArgs e)
+        private void providersButton_Click(object sender, EventArgs e)
         {
-            mWindow.WindowPanel.Controls.Add(new ProvidersUserControl(this));
+            mProvidersUC = new ProvidersUserControl(this);
+            mWindow.WindowPanel.Controls.Add(mProvidersUC);
             mWindow.WindowPanel.Controls.Remove(this);
         }
 
 
         private void statsButton_Click(object sender, EventArgs e)
         {
-            mWindow.WindowPanel.Controls.Add(new StatsUserControl(this));
+            mStatsUC = new StatsUserControl(this);
+            mWindow.WindowPanel.Controls.Add(mStatsUC);
             mWindow.WindowPanel.Controls.Remove(this);
         }
+
+
+        internal void handleResize()
+        {
+            Size = mWindow.Size;
+            managementTab.Size = mWindow.Size;
+            appBar.Size = new Size(mWindow.Size.Width, appBar.Size.Height);
+            homeTabControl.ItemSize = new Size(mWindow.Size.Width / 2-30, homeTabControl.ItemSize.Height);
+            if (mClientsUC != null)
+                mClientsUC.handleResize();
+            if (mIssuesUC != null)
+                mIssuesUC.handleResize();
+            if (mEmployeesUC != null)
+                mEmployeesUC.handleResize();
+            if (mStocksUC != null)
+                mStocksUC.handleResize();
+            if (mProvidersUC != null)
+                mProvidersUC.handleResize();
+            if (mStatsUC != null)
+                mStatsUC.handleResize();
+        }
+
+
+        private void homeTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch ((sender as TabControl).SelectedIndex)
+            {
+                case 0:
+                    // Do nothing here
+                    break;
+                case 1:
+                    if (mMapUC == null)
+                    {
+                        mMapUC = new MapUserControl(this);
+                        mapTab.Controls.Add(mMapUC);
+                    }
+                    break;
+            }
+        }
+
 
         /// <summary>
         /// Properties (Getters & Setters)
         /// </summary>
 
-        public PT_Camping.Window Window { get { return mWindow; } set { mWindow = value; } }
+        public AppWindow Window { get { return mWindow; } set { mWindow = value; } }
     }
 }

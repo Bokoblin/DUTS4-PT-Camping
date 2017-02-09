@@ -19,18 +19,25 @@ namespace PT_Camping
     /// </summary>
     public partial class ConnectionUserControl : UserControl
     {
-        private PT_Camping.Window mWindow;
+        private AppWindow mWindow;
 
 
-        public ConnectionUserControl(PT_Camping.Window window)
+        public ConnectionUserControl(AppWindow window)
         {
             InitializeComponent();
             mWindow = window;
+            handleResize();
         }
 
         private void connectionButton_Click(object sender, EventArgs e)
         {
             mWindow.login();
+        }
+
+        internal void handleResize()
+        {
+            Size = mWindow.Size;
+            appBar.Size = new Size(mWindow.Size.Width, appBar.Size.Height);
         }
     }
 }

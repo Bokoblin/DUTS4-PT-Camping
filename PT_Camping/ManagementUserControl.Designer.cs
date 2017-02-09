@@ -44,9 +44,9 @@
             this.backArrow});
             this.appBar.Location = new System.Drawing.Point(0, 0);
             this.appBar.Name = "appBar";
-            this.appBar.Size = new System.Drawing.Size(784, 50);
+            this.appBar.Size = new System.Drawing.Size(800, 50);
             this.appBar.TabIndex = 5;
-            this.appBar.Text = "menuStrip1";
+            this.appBar.Text = "appBar";
             // 
             // backArrow
             // 
@@ -69,12 +69,13 @@
             this.appBarTitle.ForeColor = System.Drawing.Color.White;
             this.appBarTitle.Location = new System.Drawing.Point(40, 15);
             this.appBarTitle.Name = "appBarTitle";
-            this.appBarTitle.Size = new System.Drawing.Size(93, 20);
+            this.appBarTitle.Size = new System.Drawing.Size(107, 20);
             this.appBarTitle.TabIndex = 6;
-            this.appBarTitle.Text = "default_text";
+            this.appBarTitle.Text = "TITLE_NAME";
             // 
             // logoutButton
             // 
+            this.logoutButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.logoutButton.BackColor = System.Drawing.Color.RoyalBlue;
             this.logoutButton.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
             this.logoutButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -97,8 +98,7 @@
             this.Controls.Add(this.appBarTitle);
             this.Controls.Add(this.appBar);
             this.Name = "ManagementUserControl";
-            this.Size = new System.Drawing.Size(784, 600);
-            this.Load += new System.EventHandler(this.ManagementUserControl_Load);
+            this.Size = new System.Drawing.Size(800, 600);
             this.appBar.ResumeLayout(false);
             this.appBar.PerformLayout();
             this.ResumeLayout(false);

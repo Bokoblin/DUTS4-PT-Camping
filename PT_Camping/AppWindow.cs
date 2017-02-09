@@ -18,14 +18,14 @@ namespace PT_Camping
     /// Authors : Arthur
     /// Since : 06/08/17
     /// </summary>
-    public partial class Window : Form
+    public partial class AppWindow : Form
     {
         private ConnectionUserControl mConnectionUserControl;
         private HomeUserControl mHomeUserControl;
 
-        public Window()
+        public AppWindow()
         {
-            this.StartPosition = FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
             mConnectionUserControl = new ConnectionUserControl(this);
             windowPanel.Controls.Add(mConnectionUserControl);
@@ -47,10 +47,20 @@ namespace PT_Camping
         }
 
 
+        private void Window_Resize(object sender, EventArgs e)
+        {
+            windowPanel.Size = this.Size;
+            if (mConnectionUserControl != null)
+                mConnectionUserControl.handleResize();
+            if (mHomeUserControl != null)
+                mHomeUserControl.handleResize();
+        }
+
+
         /// <summary>
         /// Properties (Getters & Setters)
         /// </summary>
-        
+
         public Panel WindowPanel { get { return windowPanel; } set { windowPanel = value; } }
     }
 }
