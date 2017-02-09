@@ -34,14 +34,15 @@
             this.userTextBox = new System.Windows.Forms.TextBox();
             this.labelMenuStrip = new System.Windows.Forms.Label();
             this.connectionButton = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.appBar = new System.Windows.Forms.MenuStrip();
             this.SuspendLayout();
             // 
             // passLabel
             // 
+            this.passLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.passLabel.AutoSize = true;
             this.passLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passLabel.Location = new System.Drawing.Point(184, 320);
+            this.passLabel.Location = new System.Drawing.Point(185, 305);
             this.passLabel.Name = "passLabel";
             this.passLabel.Size = new System.Drawing.Size(105, 20);
             this.passLabel.TabIndex = 14;
@@ -49,9 +50,10 @@
             // 
             // userLabel
             // 
+            this.userLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.userLabel.AutoSize = true;
             this.userLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userLabel.Location = new System.Drawing.Point(184, 250);
+            this.userLabel.Location = new System.Drawing.Point(185, 235);
             this.userLabel.Name = "userLabel";
             this.userLabel.Size = new System.Drawing.Size(80, 20);
             this.userLabel.TabIndex = 13;
@@ -59,8 +61,9 @@
             // 
             // passwordTextBox
             // 
+            this.passwordTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.passwordTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordTextBox.Location = new System.Drawing.Point(315, 320);
+            this.passwordTextBox.Location = new System.Drawing.Point(315, 300);
             this.passwordTextBox.MinimumSize = new System.Drawing.Size(4, 30);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(160, 30);
@@ -69,8 +72,9 @@
             // 
             // userTextBox
             // 
+            this.userTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.userTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userTextBox.Location = new System.Drawing.Point(315, 250);
+            this.userTextBox.Location = new System.Drawing.Point(315, 230);
             this.userTextBox.MinimumSize = new System.Drawing.Size(4, 30);
             this.userTextBox.Name = "userTextBox";
             this.userTextBox.Size = new System.Drawing.Size(160, 30);
@@ -90,26 +94,24 @@
             // 
             // connectionButton
             // 
-            this.connectionButton.Location = new System.Drawing.Point(346, 485);
+            this.connectionButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.connectionButton.Location = new System.Drawing.Point(350, 500);
             this.connectionButton.Name = "connectionButton";
-            this.connectionButton.Size = new System.Drawing.Size(91, 30);
+            this.connectionButton.Size = new System.Drawing.Size(90, 30);
             this.connectionButton.TabIndex = 8;
             this.connectionButton.Text = "Entrer";
             this.connectionButton.UseVisualStyleBackColor = true;
             this.connectionButton.Click += new System.EventHandler(this.connectionButton_Click);
             // 
-            // menuStrip1
+            // appBar
             // 
-            this.menuStrip1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.menuStrip1.AutoSize = false;
-            this.menuStrip1.BackColor = System.Drawing.Color.RoyalBlue;
-            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(784, 50);
-            this.menuStrip1.TabIndex = 9;
-            this.menuStrip1.Text = "menuStrip1";
+            this.appBar.AutoSize = false;
+            this.appBar.BackColor = System.Drawing.Color.RoyalBlue;
+            this.appBar.Location = new System.Drawing.Point(0, 0);
+            this.appBar.Name = "appBar";
+            this.appBar.Size = new System.Drawing.Size(800, 50);
+            this.appBar.TabIndex = 9;
+            this.appBar.Text = "appBar";
             // 
             // ConnectionUserControl
             // 
@@ -122,9 +124,9 @@
             this.Controls.Add(this.userTextBox);
             this.Controls.Add(this.labelMenuStrip);
             this.Controls.Add(this.connectionButton);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.appBar);
             this.Name = "ConnectionUserControl";
-            this.Size = new System.Drawing.Size(784, 600);
+            this.Size = new System.Drawing.Size(800, 600);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -138,6 +140,6 @@
         private System.Windows.Forms.TextBox userTextBox;
         private System.Windows.Forms.Label labelMenuStrip;
         private System.Windows.Forms.Button connectionButton;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip appBar;
     }
 }

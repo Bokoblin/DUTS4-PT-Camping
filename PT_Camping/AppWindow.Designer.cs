@@ -1,6 +1,6 @@
 ﻿namespace PT_Camping
 {
-    partial class Window
+    partial class AppWindow
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
@@ -34,25 +34,33 @@
             // 
             // windowPanel
             // 
-            this.windowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.windowPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.windowPanel.AutoSize = true;
             this.windowPanel.Location = new System.Drawing.Point(0, 0);
-            this.windowPanel.MinimumSize = new System.Drawing.Size(784, 600);
+            this.windowPanel.MinimumSize = new System.Drawing.Size(900, 600);
             this.windowPanel.Name = "windowPanel";
-            this.windowPanel.Size = new System.Drawing.Size(784, 600);
+            this.windowPanel.Size = new System.Drawing.Size(900, 600);
             this.windowPanel.TabIndex = 0;
             // 
             // Window
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(900, 561);
             this.Controls.Add(this.windowPanel);
-            this.MinimumSize = new System.Drawing.Size(800, 600);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MinimumSize = new System.Drawing.Size(900, 600);
             this.Name = "Window";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PT4-BJJMR";
+            this.MaximizedBoundsChanged += new System.EventHandler(this.Window_Resize);
+            this.Resize += new System.EventHandler(this.Window_Resize);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

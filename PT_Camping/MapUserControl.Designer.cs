@@ -1,6 +1,6 @@
 ﻿namespace PT_Camping
 {
-    partial class ClientsUserControl
+    partial class MapUserControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,27 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.SuspendLayout();
             // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // ClientUserControl
+            // CardUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "ClientUserControl";
-            this.Size = new System.Drawing.Size(800, 600);
+            this.Name = "MapUserControl";
+            this.Size = new System.Drawing.Size(550, 350);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.ImageList imageList1;
     }
 }

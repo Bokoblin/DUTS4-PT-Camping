@@ -1,15 +1,16 @@
 Project Name : PT4-Camping
 Developers   : Yonnel BERWIT, Alexandre JACQUOT, Arthur JOLIVET, Claire MARCINIAK, Valentine RENAUD
 
-Current version : v0.1
+Current version : v0.1.1
 
 ==================================================================================================
 
-v0.1.1 (08/02/2017)
+v0.1.1 (09/02/2017)
 
 - Changed window handling
 	- There is only one winform
 	- Each screen is a UserControl inherited class
+        - Maximize window is well supported
 - Added all the needed screens
 
 

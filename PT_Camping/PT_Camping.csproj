@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MapUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MapUserControl.Designer.cs">
+      <DependentUpon>MapUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ClientsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -100,14 +106,17 @@
     <Compile Include="StocksUserControl.Designer.cs">
       <DependentUpon>StocksUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Window.cs">
+    <Compile Include="AppWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Window.Designer.cs">
-      <DependentUpon>Window.cs</DependentUpon>
+    <Compile Include="AppWindow.Designer.cs">
+      <DependentUpon>AppWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="MapUserControl.resx">
+      <DependentUpon>MapUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ClientsUserControl.resx">
       <DependentUpon>ClientsUserControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -123,8 +132,8 @@
     <EmbeddedResource Include="ManagementUserControl.resx">
       <DependentUpon>ManagementUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Window.resx">
-      <DependentUpon>Window.cs</DependentUpon>
+    <EmbeddedResource Include="AppWindow.resx">
+      <DependentUpon>AppWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -27,7 +27,6 @@ namespace PT_Camping
         {
             InitializeComponent();
             logoutButton.FlatAppearance.BorderSize = 0;
-            
         }
 
         public ManagementUserControl(HomeUserControl homeUserControl)
@@ -49,9 +48,11 @@ namespace PT_Camping
             mHomeUserControl.Window.WindowPanel.Controls.Remove(this);
         }
 
-        private void ManagementUserControl_Load(object sender, EventArgs e)
+
+        internal void handleResize()
         {
-            appBar.Size = new Size(mHomeUserControl.Window.Size.Width, appBar.Size.Height);
+            Size = mHomeUserControl.Size;
+            appBar.Size = new Size(mHomeUserControl.Size.Width, appBar.Size.Height);
         }
     }
 }
