@@ -46,25 +46,94 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Accueil.cs">
+    <Compile Include="MapUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MapUserControl.Designer.cs">
+      <DependentUpon>MapUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClientsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ClientsUserControl.Designer.cs">
+      <DependentUpon>ClientsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConnectionUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ConnectionUserControl.Designer.cs">
+      <DependentUpon>ConnectionUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeesUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EmployeesUserControl.Designer.cs">
+      <DependentUpon>EmployeesUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HomeUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HomeUserControl.Designer.cs">
+      <DependentUpon>HomeUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IssuesUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IssuesUserControl.Designer.cs">
+      <DependentUpon>IssuesUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ManagementUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ManagementUserControl.Designer.cs">
+      <DependentUpon>ManagementUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProvidersUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ProvidersUserControl.Designer.cs">
+      <DependentUpon>ProvidersUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StatsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StatsUserControl.Designer.cs">
+      <DependentUpon>StatsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StocksUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StocksUserControl.Designer.cs">
+      <DependentUpon>StocksUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AppWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Accueil.Designer.cs">
-      <DependentUpon>Accueil.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Connexion.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Connexion.Designer.cs">
-      <DependentUpon>Connexion.cs</DependentUpon>
+    <Compile Include="AppWindow.Designer.cs">
+      <DependentUpon>AppWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Accueil.resx">
-      <DependentUpon>Accueil.cs</DependentUpon>
+    <EmbeddedResource Include="MapUserControl.resx">
+      <DependentUpon>MapUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Connexion.resx">
-      <DependentUpon>Connexion.cs</DependentUpon>
+    <EmbeddedResource Include="ClientsUserControl.resx">
+      <DependentUpon>ClientsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConnectionUserControl.resx">
+      <DependentUpon>ConnectionUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HomeUserControl.resx">
+      <DependentUpon>HomeUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IssuesUserControl.resx">
+      <DependentUpon>IssuesUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManagementUserControl.resx">
+      <DependentUpon>ManagementUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AppWindow.resx">
+      <DependentUpon>AppWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
