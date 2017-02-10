@@ -33,8 +33,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -87,6 +98,72 @@
     </Compile>
     <Compile Include="ManagementUserControl.Designer.cs">
       <DependentUpon>ManagementUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\App.cs">
+      <DependentUpon>BDD_Camping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\A_vendu.cs">
+      <DependentUpon>BDD_Camping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BDD_Camping.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDD_Camping.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BDD_Camping.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDD_Camping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BDD_Camping.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDD_Camping.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Caracteristique_Emplacement.cs">
+      <DependentUpon>BDD_Camping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Client.cs">
+      <DependentUpon>BDD_Camping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Droit.cs">
+      <DependentUpon>BDD_Camping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Emplacement.cs">
+      <DependentUpon>BDD_Camping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Employe.cs">
+      <DependentUpon>BDD_Camping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Facture.cs">
+      <DependentUpon>BDD_Camping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Fournisseur.cs">
+      <DependentUpon>BDD_Camping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Incident.cs">
+      <DependentUpon>BDD_Camping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Loge.cs">
+      <DependentUpon>BDD_Camping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Personne.cs">
+      <DependentUpon>BDD_Camping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Produit.cs">
+      <DependentUpon>BDD_Camping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Reservation.cs">
+      <DependentUpon>BDD_Camping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sysdiagrams.cs">
+      <DependentUpon>BDD_Camping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Type_Emplacement.cs">
+      <DependentUpon>BDD_Camping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Type_Incident.cs">
+      <DependentUpon>BDD_Camping.tt</DependentUpon>
     </Compile>
     <Compile Include="ProvidersUserControl.cs">
       <SubType>UserControl</SubType>
@@ -144,6 +221,22 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EntityDeploy Include="Model\BDD_Camping.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BDD_Camping.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\BDD_Camping.edmx.diagram">
+      <DependentUpon>BDD_Camping.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="packages\EntityFramework.6.1.3\content\App.config.transform" />
+    <None Include="packages\EntityFramework.6.1.3\content\Web.config.transform" />
+    <None Include="packages\EntityFramework.6.1.3\EntityFramework.6.1.3.nupkg" />
+    <None Include="packages\EntityFramework.6.1.3\tools\EntityFramework.psd1" />
+    <None Include="packages\EntityFramework.6.1.3\tools\EntityFramework.psm1" />
+    <None Include="packages\EntityFramework.6.1.3\tools\init.ps1" />
+    <None Include="packages\EntityFramework.6.1.3\tools\install.ps1" />
+    <None Include="packages\EntityFramework.fr.6.1.3\EntityFramework.fr.6.1.3.nupkg" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -156,6 +249,42 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model\BDD_Camping.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BDD_Camping.Context.cs</LastGenOutput>
+      <DependentUpon>BDD_Camping.edmx</DependentUpon>
+    </Content>
+    <Content Include="Model\BDD_Camping.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BDD_Camping.edmx</DependentUpon>
+      <LastGenOutput>BDD_Camping.cs</LastGenOutput>
+    </Content>
+    <Content Include="packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll" />
+    <Content Include="packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll" />
+    <Content Include="packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.xml" />
+    <Content Include="packages\EntityFramework.6.1.3\lib\net40\EntityFramework.xml" />
+    <Content Include="packages\EntityFramework.6.1.3\lib\net40\fr\EntityFramework.resources.dll" />
+    <Content Include="packages\EntityFramework.6.1.3\lib\net40\fr\EntityFramework.xml" />
+    <Content Include="packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll" />
+    <Content Include="packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll" />
+    <Content Include="packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.xml" />
+    <Content Include="packages\EntityFramework.6.1.3\lib\net45\EntityFramework.xml" />
+    <Content Include="packages\EntityFramework.6.1.3\lib\net45\fr\EntityFramework.resources.dll" />
+    <Content Include="packages\EntityFramework.6.1.3\lib\net45\fr\EntityFramework.xml" />
+    <Content Include="packages\EntityFramework.6.1.3\tools\about_EntityFramework.help.txt" />
+    <Content Include="packages\EntityFramework.6.1.3\tools\EntityFramework.PowerShell.dll" />
+    <Content Include="packages\EntityFramework.6.1.3\tools\EntityFramework.PowerShell.Utility.dll" />
+    <Content Include="packages\EntityFramework.6.1.3\tools\migrate.exe" />
+    <Content Include="packages\EntityFramework.fr.6.1.3\lib\net40\fr\EntityFramework.resources.dll" />
+    <Content Include="packages\EntityFramework.fr.6.1.3\lib\net40\fr\EntityFramework.xml" />
+    <Content Include="packages\EntityFramework.fr.6.1.3\lib\net45\fr\EntityFramework.resources.dll" />
+    <Content Include="packages\EntityFramework.fr.6.1.3\lib\net45\fr\EntityFramework.xml" />
+    <Content Include="res\images\ic_arrow_back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
