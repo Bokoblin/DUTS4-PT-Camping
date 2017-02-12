@@ -13,10 +13,10 @@ namespace PT_Camping.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Database : DbContext
+    public partial class DataBase : DbContext
     {
-        public Database()
-            : base("name=Database")
+        public DataBase()
+            : base("name=DataBase")
         {
         }
     
@@ -39,7 +39,6 @@ namespace PT_Camping.Model
         public virtual DbSet<Personne> Personne { get; set; }
         public virtual DbSet<Produit> Produit { get; set; }
         public virtual DbSet<Reservation> Reservation { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Type_Emplacement> Type_Emplacement { get; set; }
         public virtual DbSet<Type_Incident> Type_Incident { get; set; }
     }
