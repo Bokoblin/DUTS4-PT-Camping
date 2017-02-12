@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Database_Context.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DataBaseModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="A_le_droit">
           <Key>
             <PropertyRef Name="Code_Personne" />
@@ -18,7 +18,7 @@
             <PropertyRef Name="Code_Personne" />
             <PropertyRef Name="Code_Produit" />
           </Key>
-          <Property Name="Date_Vente" Type="datetime" Nullable="false" />
+          <Property Name="Date_Vente" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="Code_Personne" Type="int" Nullable="false" />
           <Property Name="Code_Produit" Type="int" Nullable="false" />
         </EntityType>
@@ -26,7 +26,7 @@
           <Key>
             <PropertyRef Name="Code_App" />
           </Key>
-          <Property Name="Fond_Image" Type="image" Nullable="false" />
+          <Property Name="Fond_Image" Type="mediumtext" />
           <Property Name="Code_App" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Caracteristique_Emplacement">
@@ -40,7 +40,7 @@
           <Key>
             <PropertyRef Name="Code_Personne" />
           </Key>
-          <Property Name="Date_Inscription" Type="datetime" Nullable="false" />
+          <Property Name="Date_Inscription" Type="date" Nullable="false" />
           <Property Name="Code_Personne" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Droit">
@@ -77,7 +77,7 @@
           </Key>
           <Property Name="Code_Facture" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Montant" Type="float" Nullable="false" />
-          <Property Name="Date_Emission" Type="datetime" />
+          <Property Name="Date_Emission" Type="datetime" Precision="0" />
           <Property Name="Code_Reservation" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Fournisseur">
@@ -100,8 +100,8 @@
             <PropertyRef Name="Code_Incident" />
           </Key>
           <Property Name="Code_Incident" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Date_Incident" Type="datetime" Nullable="false" />
-          <Property Name="Date_Resolution" Type="datetime" />
+          <Property Name="Date_Incident" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="Date_Resolution" Type="datetime" Precision="0" />
           <Property Name="Criticite" Type="int" Nullable="false" />
           <Property Name="Description_Avancement" Type="varchar" MaxLength="255" />
           <Property Name="Code_Emplacement" Type="int" Nullable="false" />
@@ -150,21 +150,11 @@
             <PropertyRef Name="Code_Reservation" />
           </Key>
           <Property Name="Code_Reservation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Date_Debut" Type="datetime" Nullable="false" />
-          <Property Name="Date_Fin" Type="datetime" Nullable="false" />
-          <Property Name="Est_Paye" Type="bit" Nullable="false" />
+          <Property Name="Date_Debut" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="Date_Fin" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="Est_Paye" Type="bool" Nullable="false" />
           <Property Name="Code_Personne" Type="int" Nullable="false" />
           <Property Name="Code_Facture" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Type_Emplacement">
           <Key>
@@ -408,27 +398,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Database_ContextStoreContainer">
-          <EntitySet Name="A_le_droit" EntityType="Self.A_le_droit" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="A_vendu" EntityType="Self.A_vendu" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="App" EntityType="Self.App" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Caracteristique_Emplacement" EntityType="Self.Caracteristique_Emplacement" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Droit" EntityType="Self.Droit" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Emplacement" EntityType="Self.Emplacement" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Employe" EntityType="Self.Employe" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Facture" EntityType="Self.Facture" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Fournisseur" EntityType="Self.Fournisseur" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Fournit" EntityType="Self.Fournit" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Incident" EntityType="Self.Incident" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Loge" EntityType="Self.Loge" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Personne" EntityType="Self.Personne" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Possede" EntityType="Self.Possede" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Produit" EntityType="Self.Produit" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Type_Emplacement" EntityType="Self.Type_Emplacement" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Type_Incident" EntityType="Self.Type_Incident" Schema="dbo" store:Type="Tables" />
+        <EntityContainer Name="DataBaseModelStoreContainer">
+          <EntitySet Name="A_le_droit" EntityType="Self.A_le_droit" Schema="PT_Camping" store:Type="Tables" />
+          <EntitySet Name="A_vendu" EntityType="Self.A_vendu" Schema="PT_Camping" store:Type="Tables" />
+          <EntitySet Name="App" EntityType="Self.App" Schema="PT_Camping" store:Type="Tables" />
+          <EntitySet Name="Caracteristique_Emplacement" EntityType="Self.Caracteristique_Emplacement" Schema="PT_Camping" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="PT_Camping" store:Type="Tables" />
+          <EntitySet Name="Droit" EntityType="Self.Droit" Schema="PT_Camping" store:Type="Tables" />
+          <EntitySet Name="Emplacement" EntityType="Self.Emplacement" Schema="PT_Camping" store:Type="Tables" />
+          <EntitySet Name="Employe" EntityType="Self.Employe" Schema="PT_Camping" store:Type="Tables" />
+          <EntitySet Name="Facture" EntityType="Self.Facture" Schema="PT_Camping" store:Type="Tables" />
+          <EntitySet Name="Fournisseur" EntityType="Self.Fournisseur" Schema="PT_Camping" store:Type="Tables" />
+          <EntitySet Name="Fournit" EntityType="Self.Fournit" Schema="PT_Camping" store:Type="Tables" />
+          <EntitySet Name="Incident" EntityType="Self.Incident" Schema="PT_Camping" store:Type="Tables" />
+          <EntitySet Name="Loge" EntityType="Self.Loge" Schema="PT_Camping" store:Type="Tables" />
+          <EntitySet Name="Personne" EntityType="Self.Personne" Schema="PT_Camping" store:Type="Tables" />
+          <EntitySet Name="Possede" EntityType="Self.Possede" Schema="PT_Camping" store:Type="Tables" />
+          <EntitySet Name="Produit" EntityType="Self.Produit" Schema="PT_Camping" store:Type="Tables" />
+          <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="PT_Camping" store:Type="Tables" />
+          <EntitySet Name="Type_Emplacement" EntityType="Self.Type_Emplacement" Schema="PT_Camping" store:Type="Tables" />
+          <EntitySet Name="Type_Incident" EntityType="Self.Type_Incident" Schema="PT_Camping" store:Type="Tables" />
           <AssociationSet Name="FK_A_le_droit_Code_Droit" Association="Self.FK_A_le_droit_Code_Droit">
             <End Role="Droit" EntitySet="Droit" />
             <End Role="A_le_droit" EntitySet="A_le_droit" />
@@ -510,13 +499,13 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Database_Context" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="DataBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="A_vendu">
           <Key>
             <PropertyRef Name="Code_Personne" />
             <PropertyRef Name="Code_Produit" />
           </Key>
-          <Property Name="Date_Vente" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Date_Vente" Type="DateTime" Nullable="false" />
           <Property Name="Code_Personne" Type="Int32" Nullable="false" />
           <Property Name="Code_Produit" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Personne" Relationship="Self.FK_A_vendu_Code_Personne" FromRole="A_vendu" ToRole="Personne" />
@@ -526,7 +515,7 @@
           <Key>
             <PropertyRef Name="Code_App" />
           </Key>
-          <Property Name="Fond_Image" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Fond_Image" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
           <Property Name="Code_App" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="Caracteristique_Emplacement">
@@ -541,7 +530,7 @@
           <Key>
             <PropertyRef Name="Code_Personne" />
           </Key>
-          <Property Name="Date_Inscription" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Date_Inscription" Type="DateTime" Nullable="false" />
           <Property Name="Code_Personne" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Personne" Relationship="Self.FK_Client_Code_Personne" FromRole="Client" ToRole="Personne" />
         </EntityType>
@@ -558,12 +547,12 @@
             <PropertyRef Name="Code_Emplacement" />
           </Key>
           <Property Name="Code_Emplacement" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Cordonnee_X" Type="Double" Nullable="false" />
-          <Property Name="Coordonnee_Y" Type="Double" Nullable="false" />
+          <Property Name="Cordonnee_X" Type="Single" Nullable="false" />
+          <Property Name="Coordonnee_Y" Type="Single" Nullable="false" />
           <Property Name="Nom_Emplacement" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Rotation" Type="Double" Nullable="false" />
-          <Property Name="Taille_X" Type="Double" Nullable="false" />
-          <Property Name="Taille_Y" Type="Double" Nullable="false" />
+          <Property Name="Rotation" Type="Single" Nullable="false" />
+          <Property Name="Taille_X" Type="Single" Nullable="false" />
+          <Property Name="Taille_Y" Type="Single" Nullable="false" />
           <Property Name="Code_Type" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Type_Emplacement" Relationship="Self.FK_Emplacement_Code_Type" FromRole="Emplacement" ToRole="Type_Emplacement" />
           <NavigationProperty Name="Incident" Relationship="Self.FK_Incident_Code_Emplacement" FromRole="Emplacement" ToRole="Incident" />
@@ -584,8 +573,8 @@
             <PropertyRef Name="Code_Facture" />
           </Key>
           <Property Name="Code_Facture" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Montant" Type="Double" Nullable="false" />
-          <Property Name="Date_Emission" Type="DateTime" Precision="3" />
+          <Property Name="Montant" Type="Single" Nullable="false" />
+          <Property Name="Date_Emission" Type="DateTime" />
           <Property Name="Code_Reservation" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Reservation" Relationship="Self.FK_Facture_Code_Reservation" FromRole="Facture" ToRole="Reservation" />
           <NavigationProperty Name="Reservation1" Relationship="Self.FK_Reservation_Code_Facture" FromRole="Facture" ToRole="Reservation" />
@@ -603,8 +592,8 @@
             <PropertyRef Name="Code_Incident" />
           </Key>
           <Property Name="Code_Incident" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Date_Incident" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Date_Resolution" Type="DateTime" Precision="3" />
+          <Property Name="Date_Incident" Type="DateTime" Nullable="false" />
+          <Property Name="Date_Resolution" Type="DateTime" />
           <Property Name="Criticite" Type="Int32" Nullable="false" />
           <Property Name="Description_Avancement" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Code_Emplacement" Type="Int32" Nullable="false" />
@@ -648,7 +637,7 @@
           </Key>
           <Property Name="Code_Produit" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Libelle_Produit" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Prix" Type="Double" Nullable="false" />
+          <Property Name="Prix" Type="Single" Nullable="false" />
           <Property Name="Quantite_Stock" Type="Int32" Nullable="false" />
           <NavigationProperty Name="A_vendu" Relationship="Self.FK_A_vendu_Code_Produit" FromRole="Produit" ToRole="A_vendu" />
           <NavigationProperty Name="Fournisseur" Relationship="Self.Fournit" FromRole="Produit" ToRole="Fournisseur" />
@@ -658,8 +647,8 @@
             <PropertyRef Name="Code_Reservation" />
           </Key>
           <Property Name="Code_Reservation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Date_Debut" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Date_Fin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Date_Debut" Type="DateTime" Nullable="false" />
+          <Property Name="Date_Fin" Type="DateTime" Nullable="false" />
           <Property Name="Est_Paye" Type="Boolean" Nullable="false" />
           <Property Name="Code_Personne" Type="Int32" Nullable="false" />
           <Property Name="Code_Facture" Type="Int32" Nullable="false" />
@@ -667,16 +656,6 @@
           <NavigationProperty Name="Facture1" Relationship="Self.FK_Reservation_Code_Facture" FromRole="Reservation" ToRole="Facture" />
           <NavigationProperty Name="Loge" Relationship="Self.FK_Loge_Code_Reservation" FromRole="Reservation" ToRole="Loge" />
           <NavigationProperty Name="Personne" Relationship="Self.FK_Reservation_Code_Personne" FromRole="Reservation" ToRole="Personne" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Type_Emplacement">
           <Key>
@@ -862,7 +841,7 @@
           <End Role="Caracteristique_Emplacement" Type="Self.Caracteristique_Emplacement" Multiplicity="*" />
           <End Role="Emplacement" Type="Self.Emplacement" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="Database" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DataBase" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="A_vendu" EntityType="Self.A_vendu" />
           <EntitySet Name="App" EntityType="Self.App" />
           <EntitySet Name="Caracteristique_Emplacement" EntityType="Self.Caracteristique_Emplacement" />
@@ -877,7 +856,6 @@
           <EntitySet Name="Personne" EntityType="Self.Personne" />
           <EntitySet Name="Produit" EntityType="Self.Produit" />
           <EntitySet Name="Reservation" EntityType="Self.Reservation" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Type_Emplacement" EntityType="Self.Type_Emplacement" />
           <EntitySet Name="Type_Incident" EntityType="Self.Type_Incident" />
           <AssociationSet Name="FK_A_vendu_Code_Personne" Association="Self.FK_A_vendu_Code_Personne">
@@ -950,9 +928,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Database_ContextStoreContainer" CdmEntityContainer="Database">
+        <EntityContainerMapping StorageEntityContainer="DataBaseModelStoreContainer" CdmEntityContainer="DataBase">
           <EntitySetMapping Name="A_vendu">
-            <EntityTypeMapping TypeName="Database_Context.A_vendu">
+            <EntityTypeMapping TypeName="DataBaseModel.A_vendu">
               <MappingFragment StoreEntitySet="A_vendu">
                 <ScalarProperty Name="Date_Vente" ColumnName="Date_Vente" />
                 <ScalarProperty Name="Code_Personne" ColumnName="Code_Personne" />
@@ -961,7 +939,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="App">
-            <EntityTypeMapping TypeName="Database_Context.App">
+            <EntityTypeMapping TypeName="DataBaseModel.App">
               <MappingFragment StoreEntitySet="App">
                 <ScalarProperty Name="Fond_Image" ColumnName="Fond_Image" />
                 <ScalarProperty Name="Code_App" ColumnName="Code_App" />
@@ -969,7 +947,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Caracteristique_Emplacement">
-            <EntityTypeMapping TypeName="Database_Context.Caracteristique_Emplacement">
+            <EntityTypeMapping TypeName="DataBaseModel.Caracteristique_Emplacement">
               <MappingFragment StoreEntitySet="Caracteristique_Emplacement">
                 <ScalarProperty Name="Code_Caracteristique" ColumnName="Code_Caracteristique" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -977,7 +955,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Client">
-            <EntityTypeMapping TypeName="Database_Context.Client">
+            <EntityTypeMapping TypeName="DataBaseModel.Client">
               <MappingFragment StoreEntitySet="Client">
                 <ScalarProperty Name="Date_Inscription" ColumnName="Date_Inscription" />
                 <ScalarProperty Name="Code_Personne" ColumnName="Code_Personne" />
@@ -985,7 +963,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Droit">
-            <EntityTypeMapping TypeName="Database_Context.Droit">
+            <EntityTypeMapping TypeName="DataBaseModel.Droit">
               <MappingFragment StoreEntitySet="Droit">
                 <ScalarProperty Name="Code_Droit" ColumnName="Code_Droit" />
                 <ScalarProperty Name="Libelle_Droit" ColumnName="Libelle_Droit" />
@@ -993,7 +971,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Emplacement">
-            <EntityTypeMapping TypeName="Database_Context.Emplacement">
+            <EntityTypeMapping TypeName="DataBaseModel.Emplacement">
               <MappingFragment StoreEntitySet="Emplacement">
                 <ScalarProperty Name="Code_Emplacement" ColumnName="Code_Emplacement" />
                 <ScalarProperty Name="Cordonnee_X" ColumnName="Cordonnee_X" />
@@ -1007,7 +985,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Employe">
-            <EntityTypeMapping TypeName="Database_Context.Employe">
+            <EntityTypeMapping TypeName="DataBaseModel.Employe">
               <MappingFragment StoreEntitySet="Employe">
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
@@ -1016,7 +994,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Facture">
-            <EntityTypeMapping TypeName="Database_Context.Facture">
+            <EntityTypeMapping TypeName="DataBaseModel.Facture">
               <MappingFragment StoreEntitySet="Facture">
                 <ScalarProperty Name="Code_Facture" ColumnName="Code_Facture" />
                 <ScalarProperty Name="Montant" ColumnName="Montant" />
@@ -1026,7 +1004,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Fournisseur">
-            <EntityTypeMapping TypeName="Database_Context.Fournisseur">
+            <EntityTypeMapping TypeName="DataBaseModel.Fournisseur">
               <MappingFragment StoreEntitySet="Fournisseur">
                 <ScalarProperty Name="Code_Fournisseur" ColumnName="Code_Fournisseur" />
                 <ScalarProperty Name="Nom_Fournisseur" ColumnName="Nom_Fournisseur" />
@@ -1034,7 +1012,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Incident">
-            <EntityTypeMapping TypeName="Database_Context.Incident">
+            <EntityTypeMapping TypeName="DataBaseModel.Incident">
               <MappingFragment StoreEntitySet="Incident">
                 <ScalarProperty Name="Code_Incident" ColumnName="Code_Incident" />
                 <ScalarProperty Name="Date_Incident" ColumnName="Date_Incident" />
@@ -1047,7 +1025,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Loge">
-            <EntityTypeMapping TypeName="Database_Context.Loge">
+            <EntityTypeMapping TypeName="DataBaseModel.Loge">
               <MappingFragment StoreEntitySet="Loge">
                 <ScalarProperty Name="Code_Reservation" ColumnName="Code_Reservation" />
                 <ScalarProperty Name="Code_Personne" ColumnName="Code_Personne" />
@@ -1056,7 +1034,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Personne">
-            <EntityTypeMapping TypeName="Database_Context.Personne">
+            <EntityTypeMapping TypeName="DataBaseModel.Personne">
               <MappingFragment StoreEntitySet="Personne">
                 <ScalarProperty Name="Code_Personne" ColumnName="Code_Personne" />
                 <ScalarProperty Name="Nom_Personne" ColumnName="Nom_Personne" />
@@ -1068,7 +1046,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Produit">
-            <EntityTypeMapping TypeName="Database_Context.Produit">
+            <EntityTypeMapping TypeName="DataBaseModel.Produit">
               <MappingFragment StoreEntitySet="Produit">
                 <ScalarProperty Name="Code_Produit" ColumnName="Code_Produit" />
                 <ScalarProperty Name="Libelle_Produit" ColumnName="Libelle_Produit" />
@@ -1078,7 +1056,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Reservation">
-            <EntityTypeMapping TypeName="Database_Context.Reservation">
+            <EntityTypeMapping TypeName="DataBaseModel.Reservation">
               <MappingFragment StoreEntitySet="Reservation">
                 <ScalarProperty Name="Code_Reservation" ColumnName="Code_Reservation" />
                 <ScalarProperty Name="Date_Debut" ColumnName="Date_Debut" />
@@ -1089,19 +1067,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="Database_Context.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Type_Emplacement">
-            <EntityTypeMapping TypeName="Database_Context.Type_Emplacement">
+            <EntityTypeMapping TypeName="DataBaseModel.Type_Emplacement">
               <MappingFragment StoreEntitySet="Type_Emplacement">
                 <ScalarProperty Name="Code_Type" ColumnName="Code_Type" />
                 <ScalarProperty Name="Libelle_Type" ColumnName="Libelle_Type" />
@@ -1109,14 +1076,14 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Type_Incident">
-            <EntityTypeMapping TypeName="Database_Context.Type_Incident">
+            <EntityTypeMapping TypeName="DataBaseModel.Type_Incident">
               <MappingFragment StoreEntitySet="Type_Incident">
                 <ScalarProperty Name="Code_Type" ColumnName="Code_Type" />
                 <ScalarProperty Name="Type_Incident1" ColumnName="Type_Incident" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="A_le_droit" TypeName="Database_Context.A_le_droit" StoreEntitySet="A_le_droit">
+          <AssociationSetMapping Name="A_le_droit" TypeName="DataBaseModel.A_le_droit" StoreEntitySet="A_le_droit">
             <EndProperty Name="Droit">
               <ScalarProperty Name="Code_Droit" ColumnName="Code_Droit" />
             </EndProperty>
@@ -1124,7 +1091,7 @@
               <ScalarProperty Name="Code_Personne" ColumnName="Code_Personne" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="Fournit" TypeName="Database_Context.Fournit" StoreEntitySet="Fournit">
+          <AssociationSetMapping Name="Fournit" TypeName="DataBaseModel.Fournit" StoreEntitySet="Fournit">
             <EndProperty Name="Fournisseur">
               <ScalarProperty Name="Code_Fournisseur" ColumnName="Code_Fournisseur" />
             </EndProperty>
@@ -1132,7 +1099,7 @@
               <ScalarProperty Name="Code_Produit" ColumnName="Code_Produit" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="Possede" TypeName="Database_Context.Possede" StoreEntitySet="Possede">
+          <AssociationSetMapping Name="Possede" TypeName="DataBaseModel.Possede" StoreEntitySet="Possede">
             <EndProperty Name="Caracteristique_Emplacement">
               <ScalarProperty Name="Code_Caracteristique" ColumnName="Code_Caracteristique" />
             </EndProperty>
