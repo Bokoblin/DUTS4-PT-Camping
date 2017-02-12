@@ -23,7 +23,7 @@ namespace PT_Camping.Model
     
         public int Code_Produit { get; set; }
         public string Libelle_Produit { get; set; }
-        public double Prix { get; set; }
+        public float Prix { get; set; }
         public int Quantite_Stock { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
