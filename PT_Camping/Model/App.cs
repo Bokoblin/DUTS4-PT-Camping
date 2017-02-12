@@ -14,7 +14,7 @@ namespace PT_Camping.Model
     
     public partial class App
     {
-        public byte[] Fond_Image { get; set; }
+        public string Fond_Image { get; set; }
         public int Code_App { get; set; }
     }
 }
