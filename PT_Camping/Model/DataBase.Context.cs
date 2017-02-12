@@ -9,15 +9,14 @@
 
 namespace PT_Camping.Model
 {
-    using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
     public partial class DataBase : DbContext
     {
-        public DataBase()
-            : base("name=DataBase")
+        public DataBase() : base("name=Database_Alex")
         {
+
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
