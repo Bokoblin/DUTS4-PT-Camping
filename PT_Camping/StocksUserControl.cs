@@ -37,6 +37,13 @@ namespace PT_Camping
             database.Produit.Add(p);
             database.SaveChanges();
             */
+            //DataGridView
+            //SaveChanges()
+            DataGridViewProduct.ReadOnly = true;
+            DataGridViewProduct.DataSource = database.Produit.ToList();
+            DataGridViewProduct.Columns["Code_Produit"].Visible = false;
+            DataGridViewProduct.Columns["A_Vendu"].Visible = false;
+            DataGridViewProduct.Columns["Fournisseur"].Visible = false;
             MessageBox.Show("There are : " + database.Produit.Count().ToString() + " products in store.");
         }
     }
