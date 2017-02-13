@@ -33,6 +33,9 @@ namespace PT_Camping
             }*/
             DataBase bdd = new DataBase();
             listF.DataSource = bdd.Fournisseur.ToList();
+            listF.RowHeadersVisible = false;
+            listF.Columns["Code_Fournisseur"].Visible = false;
+            listF.Columns["Nom_Fournisseur"].Width = 150;
 
 
 

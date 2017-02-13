@@ -46,7 +46,7 @@
             this.listF.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.listF.Location = new System.Drawing.Point(68, 75);
             this.listF.Name = "listF";
-            this.listF.Size = new System.Drawing.Size(247, 446);
+            this.listF.Size = new System.Drawing.Size(255, 446);
             this.listF.TabIndex = 11;
             // 
             // detailsF
