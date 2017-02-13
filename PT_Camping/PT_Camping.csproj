@@ -239,6 +239,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ProvidersUserControl.resx">
+      <DependentUpon>ProvidersUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EntityDeploy Include="Model\DataBase.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DataBase.Designer.cs</LastGenOutput>
