@@ -48,6 +48,7 @@
             this.listF.Name = "listF";
             this.listF.Size = new System.Drawing.Size(255, 446);
             this.listF.TabIndex = 11;
+            this.listF.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.listF_CellClick);
             // 
             // detailsF
             // 

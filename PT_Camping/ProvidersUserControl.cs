@@ -20,6 +20,7 @@ namespace PT_Camping
     /// </summary>
     public partial class ProvidersUserControl : ManagementUserControl
     {
+        int cpt = 0;
         public ProvidersUserControl(HomeUserControl homeUserControl) : base(homeUserControl)
         {
             InitializeComponent();
@@ -36,9 +37,16 @@ namespace PT_Camping
             listF.RowHeadersVisible = false;
             listF.Columns["Code_Fournisseur"].Visible = false;
             listF.Columns["Nom_Fournisseur"].Width = 150;
+        }
 
 
-
+        private void listF_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //Fournisseur f = (Fournisseur)sender;
+            cpt++;
+            detailsF.Items.Clear();
+            string nom = "test" + cpt;
+            detailsF.Items.Add(nom, 1);
         }
     }
 }
