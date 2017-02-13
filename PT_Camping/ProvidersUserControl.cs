@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PT_Camping.Model;
 
 namespace PT_Camping
 {
@@ -24,6 +25,17 @@ namespace PT_Camping
             InitializeComponent();
             appBarTitle.Text = "Gestion des fournisseurs";
             handleResize();
+            /*DataBase bdd = new DataBase();
+            foreach (Fournisseur f in bdd.Fournisseur){
+                ListViewItem item = new ListViewItem();
+                item.SubItems.Add(f.Nom_Fournisseur);
+                listView1.Items.AddRange(new ListViewItem[] { item });
+            }*/
+            DataBase bdd = new DataBase();
+            listF.DataSource = bdd.Fournisseur.ToList();
+
+
+
         }
     }
 }
