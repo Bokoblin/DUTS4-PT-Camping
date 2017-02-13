@@ -27,11 +27,22 @@ namespace PT_Camping
             InitializeComponent();
             mWindow = window;
             handleResize();
+            errorLabel.Visible = false;
         }
 
         private void connectionButton_Click(object sender, EventArgs e)
         {
-            mWindow.login();
+            String passwordEntered = this.passwordTextBox.Text;
+            mWindow.CurrentUser = this.userTextBox.Text;
+            mWindow.HashedPassword = AppWindow.sha256_hash(passwordEntered);
+            if(mWindow.checkConnection())
+            {
+                mWindow.login();
+            } else
+            {
+                errorLabel.Visible = true;
+                this.passwordTextBox.Text = "";
+            }
         }
 
         internal void handleResize()

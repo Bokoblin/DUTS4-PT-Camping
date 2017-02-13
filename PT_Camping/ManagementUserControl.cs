@@ -43,7 +43,6 @@ namespace PT_Camping
 
         private void logoutButton_Click(object sender, EventArgs e)
         {
-            //temporary behaviour
             mHomeUserControl.Window.logout();
             mHomeUserControl.Window.WindowPanel.Controls.Remove(this);
         }

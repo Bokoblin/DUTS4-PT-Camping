@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PT_Camping.Model;
+using System.Security.Cryptography;
 
 namespace PT_Camping
 {
@@ -22,6 +24,8 @@ namespace PT_Camping
     {
         private ConnectionUserControl mConnectionUserControl;
         private HomeUserControl mHomeUserControl;
+        public String CurrentUser { get; set; }
+        public String HashedPassword { get; set; }
 
         public AppWindow()
         {
@@ -31,6 +35,29 @@ namespace PT_Camping
             windowPanel.Controls.Add(mConnectionUserControl);
         }
 
+        public static String sha256_hash(String value)
+        {
+            StringBuilder Sb = new StringBuilder();
+
+            using (SHA256 hash = SHA256Managed.Create())
+            {
+                Encoding enc = Encoding.UTF8;
+                Byte[] result = hash.ComputeHash(enc.GetBytes(value));
+
+                foreach (Byte b in result)
+                {
+                    Sb.Append(b.ToString("x2"));
+                }
+            }
+
+            return Sb.ToString();
+        }
+
+        public bool checkConnection()
+        {
+            DataBase db = new DataBase();
+            return (db.Employe.Where(u => u.Login == CurrentUser && u.Password == HashedPassword).Count() >= 1);
+        }
 
         internal void login()
         {
@@ -42,6 +69,8 @@ namespace PT_Camping
 
         internal void logout()
         {
+            CurrentUser = "";
+            HashedPassword = "";
             mConnectionUserControl = new ConnectionUserControl(this);
             windowPanel.Controls.Add(mConnectionUserControl);
         }
