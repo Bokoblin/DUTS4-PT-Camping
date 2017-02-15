@@ -136,5 +136,10 @@ namespace PT_Camping
         /// </summary>
 
         public AppWindow Window { get { return mWindow; } set { mWindow = value; } }
+
+        private void appBar_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
 }
