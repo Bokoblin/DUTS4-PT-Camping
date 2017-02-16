@@ -15,12 +15,13 @@ namespace PT_Camping.Model
     public partial class Incident
     {
         public int Code_Incident { get; set; }
-        public System.DateTime Date_Incident { get; set; }
-        public Nullable<System.DateTime> Date_Resolution { get; set; }
-        public int Criticite { get; set; }
-        public string Description_Avancement { get; set; }
         public int Code_Emplacement { get; set; }
         public int Code_Type { get; set; }
+        public string Description_Incident { get; set; }
+        public System.DateTime Date_Incident { get; set; }
+        public Nullable<System.DateTime> Date_Resolution { get; set; }
+        public int Criticite_Incident { get; set; }
+        public string Avancement_Incident { get; set; }
     
         public virtual Emplacement Emplacement { get; set; }
         public virtual Type_Incident Type_Incident { get; set; }

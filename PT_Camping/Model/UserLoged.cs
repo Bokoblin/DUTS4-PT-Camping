@@ -5,32 +5,36 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PT_Camping.Model
 {
     public class UserLoged
     {
-        private String _login;
-        public String Login {
-            get
-            {
-                return _login;
-            }
-            set
-            {
-                _login = value;
-                DataBase db = new DataBase();
-                Person = db.Personne.FirstOrDefault(p => p.Code_Personne == db.Employe.FirstOrDefault(l => l.Login == this.Login).Code_Personne); 
-            }
-        }
+        public String Login { get; set; }
+
         public String HashedPassword { get; set; }
 
         public Personne Person { get; set; }
 
         public bool checkConnection()
         {
-            DataBase db = new DataBase();
-            return (db.Employe.Where(u => u.Login == Login && u.Password == HashedPassword).Count() >= 1);
+            try
+            {
+                DataBase db = new DataBase();
+                bool exist = (db.Employe.Where(u => u.Login == Login && u.Password == HashedPassword).Count() >= 1);
+                db.Dispose();
+                if (exist)
+                {
+                    Person = db.Personne.FirstOrDefault(p => p.Code_Personne == db.Employe.FirstOrDefault(l => l.Login == this.Login).Code_Personne);
+                }
+                return exist;
+            } catch (Exception e)
+            {
+                MessageBox.Show("Erreur lors de la connexion à la base de données");
+                Application.Exit();
+            }
+            return false;
         }
 
         public static String sha256_hash(String value)

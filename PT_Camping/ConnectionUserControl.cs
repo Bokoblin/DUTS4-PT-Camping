@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PT_Camping.Model;
 
 namespace PT_Camping
 {
@@ -30,25 +31,47 @@ namespace PT_Camping
             errorLabel.Visible = false;
         }
 
-        private void connectionButton_Click(object sender, EventArgs e)
+        private void tryToConnect()
         {
             String passwordEntered = this.passwordTextBox.Text;
-            mWindow.CurrentUser = this.userTextBox.Text;
-            mWindow.HashedPassword = AppWindow.sha256_hash(passwordEntered);
-            if(mWindow.checkConnection())
+            mWindow.userLoged.Login = this.userTextBox.Text;
+            mWindow.userLoged.HashedPassword = UserLoged.sha256_hash(passwordEntered);
+            if (mWindow.userLoged.checkConnection())
             {
                 mWindow.login();
-            } else
+            }
+            else
             {
                 errorLabel.Visible = true;
                 this.passwordTextBox.Text = "";
             }
         }
 
+        private void connectionButton_Click(object sender, EventArgs e)
+        {
+            tryToConnect();
+        }
+
         internal void handleResize()
         {
             Size = mWindow.Size;
             appBar.Size = new Size(mWindow.Size.Width, appBar.Size.Height);
+        }
+
+        private void passwordTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                tryToConnect();
+            }
+        }
+
+        private void userTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                tryToConnect();
+            }
         }
     }
 }
