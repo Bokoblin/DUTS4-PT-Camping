@@ -14,9 +14,9 @@ namespace PT_Camping
     /// The EmployeesUserControl inherits from ManagementHomeControl.
     /// It is used to manage the camping's employees.
     /// 
-    /// Authors : Arthur
-    /// Since : 08/08/17
     /// </summary>
+    /// Authors : Arthur
+    /// Since : 08/02/17
     public partial class EmployeesUserControl : ManagementUserControl
     {
         public EmployeesUserControl(HomeUserControl homeUserControl) : base(homeUserControl)

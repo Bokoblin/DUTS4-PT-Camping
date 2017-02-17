@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using PT_Camping.Model;
+using System;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using PT_Camping.Model;
 
 namespace PT_Camping
 {
@@ -17,9 +11,9 @@ namespace PT_Camping
     /// It provides a common AppBar for each management process with a back button to return to home,
     /// a title and a logout button.
     /// 
-    /// Authors : Arthur
-    /// Since : 08/08/17
     /// </summary>
+    /// Authors : Arthur
+    /// Since : 08/02/17
     public partial class ManagementUserControl : UserControl
     {
         protected HomeUserControl mHomeUserControl;
