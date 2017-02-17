@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using PT_Camping.Model;
+
 
 namespace PT_Camping
 {
@@ -23,7 +26,37 @@ namespace PT_Camping
         {
             InitializeComponent();
             appBarTitle.Text = "Gestion des incidents";
+            db = new DataBase();
+
+            issuesListView.View = View.Details;
+            issuesListView.Columns.Add("Description", -2);
+            issuesListView.Columns.Add("Date", -2);
+
+            fillIssuesListView();
             handleResize();
         }
+
+        public void fillIssuesListView()
+        {
+            foreach (var incident in db.Incident)
+            {
+                string description_incident = incident.Description_Incident;
+                string date_incident = incident.Date_Incident.ToShortDateString();
+
+                var item = new ListViewItem(new[] { description_incident, date_incident });
+                issuesListView.Items.Add(item);
+            }
+        }
+
+        internal new void handleResize()
+        {
+            base.handleResize();
+
+            issuesListView.Size = new Size(
+                Convert.ToInt32(mHomeUserControl.Size.Width * 0.3),
+                Convert.ToInt32(issuesListView.Size.Height)
+                );
+        }
+
     }
 }
