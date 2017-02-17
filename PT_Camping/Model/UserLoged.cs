@@ -23,11 +23,11 @@ namespace PT_Camping.Model
             {
                 DataBase db = new DataBase();
                 bool exist = (db.Employe.Where(u => u.Login == Login && u.Password == HashedPassword).Count() >= 1);
-                db.Dispose();
                 if (exist)
                 {
                     Person = db.Personne.FirstOrDefault(p => p.Code_Personne == db.Employe.FirstOrDefault(l => l.Login == this.Login).Code_Personne);
                 }
+                db.Dispose();
                 return exist;
             } catch (Exception e)
             {
