@@ -15,12 +15,12 @@ namespace PT_Camping
     public partial class HomeUserControl : UserControl
     {
         private AppWindow mWindow;
-        private ManagementUserControl mClientsUC;
-        private ManagementUserControl mIssuesUC;
-        private ManagementUserControl mEmployeesUC;
-        private ManagementUserControl mStocksUC;
-        private ManagementUserControl mProvidersUC;
-        private ManagementUserControl mStatsUC;
+        private ClientsUserControl mClientsUC;
+        private IssuesUserControl mIssuesUC;
+        private EmployeesUserControl mEmployeesUC;
+        private StocksUserControl mStocksUC;
+        private ProvidersUserControl mProvidersUC;
+        private StatsUserControl mStatsUC;
         private MapUserControl mMapUC;
 
 
