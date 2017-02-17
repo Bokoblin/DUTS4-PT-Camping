@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PT_Camping.Model;
 
 namespace PT_Camping
 {
@@ -33,6 +34,11 @@ namespace PT_Camping
         {
             InitializeComponent();
             mHomeUserControl = homeUserControl;
+            Personne personLoged = mHomeUserControl.Window.userLoged.Person;
+            if (personLoged != null)
+            {
+                userNameLabel.Text = "Bonjour " + personLoged.Prenom_Personne + " " + personLoged.Nom_Personne;
+            }
         }
 
         private void backArrow_Click(object sender, EventArgs e)
@@ -43,7 +49,6 @@ namespace PT_Camping
 
         private void logoutButton_Click(object sender, EventArgs e)
         {
-            //temporary behaviour
             mHomeUserControl.Window.logout();
             mHomeUserControl.Window.WindowPanel.Controls.Remove(this);
         }

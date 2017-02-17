@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PT_Camping.Model;
+using System.Security.Cryptography;
 
 namespace PT_Camping
 {
@@ -22,6 +24,7 @@ namespace PT_Camping
     {
         private ConnectionUserControl mConnectionUserControl;
         private HomeUserControl mHomeUserControl;
+        public UserLoged userLoged { get; set; }
 
         public AppWindow()
         {
@@ -29,8 +32,8 @@ namespace PT_Camping
             InitializeComponent();
             mConnectionUserControl = new ConnectionUserControl(this);
             windowPanel.Controls.Add(mConnectionUserControl);
+            userLoged = new UserLoged();
         }
-
 
         internal void login()
         {
@@ -42,6 +45,8 @@ namespace PT_Camping
 
         internal void logout()
         {
+            userLoged.Login = "";
+            userLoged.HashedPassword = "";
             mConnectionUserControl = new ConnectionUserControl(this);
             windowPanel.Controls.Add(mConnectionUserControl);
         }

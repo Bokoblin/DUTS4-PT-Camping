@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PT_Camping.Model;
 
 namespace PT_Camping
 {
@@ -34,6 +35,11 @@ namespace PT_Camping
             InitializeComponent();
             mWindow = window;
             handleResize();
+            Personne personLoged = Window.userLoged.Person;
+            if (personLoged != null)
+            {
+                userNameLabel.Text = "Bonjour " + personLoged.Prenom_Personne + " " + personLoged.Nom_Personne;
+            }
         }
 
 
@@ -136,5 +142,10 @@ namespace PT_Camping
         /// </summary>
 
         public AppWindow Window { get { return mWindow; } set { mWindow = value; } }
+
+        private void appBar_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
 }

@@ -40,6 +40,7 @@
             this.clientButton = new System.Windows.Forms.Button();
             this.mapTab = new System.Windows.Forms.TabPage();
             this.logoutButton = new System.Windows.Forms.Button();
+            this.userNameLabel = new System.Windows.Forms.Label();
             this.homeTabControl.SuspendLayout();
             this.managementTab.SuspendLayout();
             this.SuspendLayout();
@@ -48,10 +49,12 @@
             // 
             this.appBar.AutoSize = false;
             this.appBar.BackColor = System.Drawing.Color.RoyalBlue;
+            this.appBar.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.appBar.Location = new System.Drawing.Point(0, 0);
             this.appBar.Name = "appBar";
             this.appBar.Size = new System.Drawing.Size(803, 50);
             this.appBar.TabIndex = 3;
+            this.appBar.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.appBar_ItemClicked);
             // 
             // homeTitle
             // 
@@ -175,7 +178,7 @@
             this.mapTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mapTab.Location = new System.Drawing.Point(4, 34);
             this.mapTab.Name = "mapTab";
-            this.mapTab.Size = new System.Drawing.Size(792, 512);
+            this.mapTab.Size = new System.Drawing.Size(792, 502);
             this.mapTab.TabIndex = 1;
             this.mapTab.Text = "CARTE";
             this.mapTab.UseVisualStyleBackColor = true;
@@ -188,7 +191,7 @@
             this.logoutButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.logoutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logoutButton.ForeColor = System.Drawing.Color.White;
-            this.logoutButton.Location = new System.Drawing.Point(633, 7);
+            this.logoutButton.Location = new System.Drawing.Point(663, 6);
             this.logoutButton.Name = "logoutButton";
             this.logoutButton.Size = new System.Drawing.Size(120, 36);
             this.logoutButton.TabIndex = 10;
@@ -196,11 +199,26 @@
             this.logoutButton.UseVisualStyleBackColor = false;
             this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
             // 
+            // userNameLabel
+            // 
+            this.userNameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.userNameLabel.BackColor = System.Drawing.Color.RoyalBlue;
+            this.userNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userNameLabel.ForeColor = System.Drawing.Color.White;
+            this.userNameLabel.Location = new System.Drawing.Point(429, -1);
+            this.userNameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.userNameLabel.Name = "userNameLabel";
+            this.userNameLabel.Size = new System.Drawing.Size(229, 50);
+            this.userNameLabel.TabIndex = 12;
+            this.userNameLabel.Text = "User Name";
+            this.userNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // HomeUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.Controls.Add(this.userNameLabel);
             this.Controls.Add(this.logoutButton);
             this.Controls.Add(this.homeTabControl);
             this.Controls.Add(this.homeTitle);
@@ -228,5 +246,6 @@
         private System.Windows.Forms.Button clientButton;
         private System.Windows.Forms.TabPage mapTab;
         protected System.Windows.Forms.Button logoutButton;
+        private System.Windows.Forms.Label userNameLabel;
     }
 }
