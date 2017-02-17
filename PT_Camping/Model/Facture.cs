@@ -21,7 +21,7 @@ namespace PT_Camping.Model
         }
     
         public int Code_Facture { get; set; }
-        public float Montant { get; set; }
+        public double Montant { get; set; }
         public Nullable<System.DateTime> Date_Emission { get; set; }
         public int Code_Reservation { get; set; }
     
