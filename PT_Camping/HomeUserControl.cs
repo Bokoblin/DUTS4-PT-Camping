@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using PT_Camping.Model;
+using System;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using PT_Camping.Model;
 
 namespace PT_Camping
 {
@@ -15,9 +9,9 @@ namespace PT_Camping
     /// The HomeUserControl is a UserControl handling the application's home screen.
     /// It allows access to a management process screen or the Map screen with a tab system.
     /// 
-    /// Authors : Arthur
-    /// Since : 08/08/17
     /// </summary>
+    /// Authors : Arthur
+    /// Since : 08/02/17
     public partial class HomeUserControl : UserControl
     {
         private AppWindow mWindow;
@@ -142,10 +136,5 @@ namespace PT_Camping
         /// </summary>
 
         public AppWindow Window { get { return mWindow; } set { mWindow = value; } }
-
-        private void appBar_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
     }
 }

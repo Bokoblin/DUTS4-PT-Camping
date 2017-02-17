@@ -14,9 +14,9 @@ namespace PT_Camping
     /// The ClientUserControl inherits from ManagementHomeControl.
     /// It is used to manage the camping's clients.
     /// 
-    /// Authors : Arthur
-    /// Since : 08/08/17
     /// </summary>
+    /// Authors : Arthur
+    /// Since : 08/02/17
     public partial class ClientsUserControl : ManagementUserControl
     {
         public ClientsUserControl(HomeUserControl homeUserControl) : base(homeUserControl)

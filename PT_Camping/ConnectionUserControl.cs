@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using PT_Camping.Model;
+using System;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using PT_Camping.Model;
 
 namespace PT_Camping
 {
@@ -15,9 +9,9 @@ namespace PT_Camping
     /// The ConnectionUserControl is a UserControl handling the application's authentication at launch.
     /// Home can't be accessed if the user is not authenticated.
     /// 
-    /// Authors : Arthur
-    /// Since : 07/08/17
     /// </summary>
+    /// Authors : Alexandre, Arthur
+    /// Since : 07/02/17
     public partial class ConnectionUserControl : UserControl
     {
         private AppWindow mWindow;
@@ -35,7 +29,7 @@ namespace PT_Camping
         {
             String passwordEntered = this.passwordTextBox.Text;
             mWindow.userLoged.Login = this.userTextBox.Text;
-            mWindow.userLoged.HashedPassword = UserLoged.sha256_hash(passwordEntered);
+            mWindow.userLoged.HashedPassword = LoginTools.sha256_hash(passwordEntered);
             if (mWindow.userLoged.checkConnection())
             {
                 mWindow.login();

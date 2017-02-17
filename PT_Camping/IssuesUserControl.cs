@@ -14,9 +14,9 @@ namespace PT_Camping
     /// The IssuesUserControl inherits from ManagementHomeControl.
     /// It is used to manage the camping's issues.
     /// 
-    /// Authors : Arthur
-    /// Since : 08/08/17
     /// </summary>
+    /// Authors : Arthur
+    /// Since : 08/02/17
     public partial class IssuesUserControl : ManagementUserControl
     {
         public IssuesUserControl(HomeUserControl homeUserControl) : base(homeUserControl)

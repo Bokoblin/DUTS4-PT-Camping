@@ -186,7 +186,7 @@
     <Compile Include="Model\Type_Incident.cs">
       <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\UserLoged.cs" />
+    <Compile Include="Model\LoginTools.cs" />
     <Compile Include="ProvidersUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

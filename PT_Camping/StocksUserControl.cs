@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
+﻿using PT_Camping.Model;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using PT_Camping.Model;
 
 namespace PT_Camping
 {
@@ -15,9 +8,9 @@ namespace PT_Camping
     /// The StocksUserControl inherits from ManagementHomeControl.
     /// It is used to manage the camping's products stocks.
     /// 
-    /// Authors : Arthur
-    /// Since : 08/08/17
     /// </summary>
+    /// Authors : Arthur
+    /// Since : 08/02/17
     public partial class StocksUserControl : ManagementUserControl
     {
         private DataBase database;
@@ -28,16 +21,6 @@ namespace PT_Camping
             appBarTitle.Text = "Gestion des stocks";
             database = new DataBase();
             handleResize();
-
-            /* -- Working example (to not execute again)
-            Produit p = new Produit();
-            p.Libelle_Produit = "Bouteille d'eau";
-            p.Prix = 0.56F;
-            p.Quantite_Stock = 54;
-            database.Produit.Add(p);
-            database.SaveChanges();
-            */
-            MessageBox.Show("There are : " + database.Produit.Count().ToString() + " products in store.");
         }
     }
 }

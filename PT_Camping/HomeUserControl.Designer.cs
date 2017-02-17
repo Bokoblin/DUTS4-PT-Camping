@@ -54,7 +54,6 @@
             this.appBar.Name = "appBar";
             this.appBar.Size = new System.Drawing.Size(803, 50);
             this.appBar.TabIndex = 3;
-            this.appBar.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.appBar_ItemClicked);
             // 
             // homeTitle
             // 
