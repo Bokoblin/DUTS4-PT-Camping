@@ -37,7 +37,7 @@ namespace PT_Camping
             Personne personLoged = mHomeUserControl.Window.userLoged.Person;
             if (personLoged != null)
             {
-                userNameLabel.Text = "Bonjour " + personLoged.Nom_Personne.Substring(0, 1) + " " + personLoged.Prenom_Personne;
+                userNameLabel.Text = "Bonjour " + personLoged.Prenom_Personne + " " + personLoged.Nom_Personne;
             }
         }
 
