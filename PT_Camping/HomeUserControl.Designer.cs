@@ -52,7 +52,8 @@
             this.appBar.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.appBar.Location = new System.Drawing.Point(0, 0);
             this.appBar.Name = "appBar";
-            this.appBar.Size = new System.Drawing.Size(803, 50);
+            this.appBar.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.appBar.Size = new System.Drawing.Size(1071, 62);
             this.appBar.TabIndex = 3;
             // 
             // homeTitle
@@ -61,9 +62,10 @@
             this.homeTitle.BackColor = System.Drawing.Color.RoyalBlue;
             this.homeTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.homeTitle.ForeColor = System.Drawing.Color.White;
-            this.homeTitle.Location = new System.Drawing.Point(40, 15);
+            this.homeTitle.Location = new System.Drawing.Point(53, 18);
+            this.homeTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.homeTitle.Name = "homeTitle";
-            this.homeTitle.Size = new System.Drawing.Size(60, 20);
+            this.homeTitle.Size = new System.Drawing.Size(76, 25);
             this.homeTitle.TabIndex = 4;
             this.homeTitle.Text = "Accueil";
             // 
@@ -75,11 +77,12 @@
             this.homeTabControl.Controls.Add(this.managementTab);
             this.homeTabControl.Controls.Add(this.mapTab);
             this.homeTabControl.ItemSize = new System.Drawing.Size(360, 30);
-            this.homeTabControl.Location = new System.Drawing.Point(0, 52);
+            this.homeTabControl.Location = new System.Drawing.Point(0, 64);
+            this.homeTabControl.Margin = new System.Windows.Forms.Padding(4);
             this.homeTabControl.Name = "homeTabControl";
             this.homeTabControl.Padding = new System.Drawing.Point(50, 3);
             this.homeTabControl.SelectedIndex = 0;
-            this.homeTabControl.Size = new System.Drawing.Size(800, 540);
+            this.homeTabControl.Size = new System.Drawing.Size(1067, 665);
             this.homeTabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.homeTabControl.TabIndex = 7;
             this.homeTabControl.SelectedIndexChanged += new System.EventHandler(this.homeTabControl_SelectedIndexChanged);
@@ -94,8 +97,9 @@
             this.managementTab.Controls.Add(this.clientButton);
             this.managementTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.managementTab.Location = new System.Drawing.Point(4, 34);
+            this.managementTab.Margin = new System.Windows.Forms.Padding(4);
             this.managementTab.Name = "managementTab";
-            this.managementTab.Size = new System.Drawing.Size(792, 502);
+            this.managementTab.Size = new System.Drawing.Size(1059, 627);
             this.managementTab.TabIndex = 0;
             this.managementTab.Text = "GESTION";
             this.managementTab.UseVisualStyleBackColor = true;
@@ -104,9 +108,10 @@
             // 
             this.providerButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.providerButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.providerButton.Location = new System.Drawing.Point(113, 362);
+            this.providerButton.Location = new System.Drawing.Point(151, 446);
+            this.providerButton.Margin = new System.Windows.Forms.Padding(4);
             this.providerButton.Name = "providerButton";
-            this.providerButton.Size = new System.Drawing.Size(169, 64);
+            this.providerButton.Size = new System.Drawing.Size(225, 79);
             this.providerButton.TabIndex = 11;
             this.providerButton.Text = "FOURNISSEURS";
             this.providerButton.UseVisualStyleBackColor = true;
@@ -116,9 +121,10 @@
             // 
             this.statsButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.statsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statsButton.Location = new System.Drawing.Point(468, 362);
+            this.statsButton.Location = new System.Drawing.Point(624, 446);
+            this.statsButton.Margin = new System.Windows.Forms.Padding(4);
             this.statsButton.Name = "statsButton";
-            this.statsButton.Size = new System.Drawing.Size(169, 64);
+            this.statsButton.Size = new System.Drawing.Size(225, 79);
             this.statsButton.TabIndex = 10;
             this.statsButton.Text = "STATS";
             this.statsButton.UseVisualStyleBackColor = true;
@@ -128,9 +134,10 @@
             // 
             this.stocksButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.stocksButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stocksButton.Location = new System.Drawing.Point(468, 225);
+            this.stocksButton.Location = new System.Drawing.Point(624, 277);
+            this.stocksButton.Margin = new System.Windows.Forms.Padding(4);
             this.stocksButton.Name = "stocksButton";
-            this.stocksButton.Size = new System.Drawing.Size(169, 64);
+            this.stocksButton.Size = new System.Drawing.Size(225, 79);
             this.stocksButton.TabIndex = 9;
             this.stocksButton.Text = "STOCKS";
             this.stocksButton.UseVisualStyleBackColor = true;
@@ -140,9 +147,10 @@
             // 
             this.employeeButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.employeeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.employeeButton.Location = new System.Drawing.Point(113, 225);
+            this.employeeButton.Location = new System.Drawing.Point(151, 277);
+            this.employeeButton.Margin = new System.Windows.Forms.Padding(4);
             this.employeeButton.Name = "employeeButton";
-            this.employeeButton.Size = new System.Drawing.Size(169, 64);
+            this.employeeButton.Size = new System.Drawing.Size(225, 79);
             this.employeeButton.TabIndex = 8;
             this.employeeButton.Text = "EMPLOYÉS";
             this.employeeButton.UseVisualStyleBackColor = true;
@@ -152,9 +160,10 @@
             // 
             this.issuesButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.issuesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.issuesButton.Location = new System.Drawing.Point(468, 83);
+            this.issuesButton.Location = new System.Drawing.Point(624, 102);
+            this.issuesButton.Margin = new System.Windows.Forms.Padding(4);
             this.issuesButton.Name = "issuesButton";
-            this.issuesButton.Size = new System.Drawing.Size(169, 64);
+            this.issuesButton.Size = new System.Drawing.Size(225, 79);
             this.issuesButton.TabIndex = 7;
             this.issuesButton.Text = "INCIDENTS";
             this.issuesButton.UseVisualStyleBackColor = true;
@@ -164,9 +173,10 @@
             // 
             this.clientButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.clientButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clientButton.Location = new System.Drawing.Point(113, 83);
+            this.clientButton.Location = new System.Drawing.Point(151, 102);
+            this.clientButton.Margin = new System.Windows.Forms.Padding(4);
             this.clientButton.Name = "clientButton";
-            this.clientButton.Size = new System.Drawing.Size(169, 64);
+            this.clientButton.Size = new System.Drawing.Size(225, 79);
             this.clientButton.TabIndex = 6;
             this.clientButton.Text = "CLIENTS";
             this.clientButton.UseVisualStyleBackColor = true;
@@ -174,13 +184,15 @@
             // 
             // mapTab
             // 
+            this.mapTab.BackColor = System.Drawing.SystemColors.Control;
+            this.mapTab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mapTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mapTab.Location = new System.Drawing.Point(4, 34);
+            this.mapTab.Margin = new System.Windows.Forms.Padding(4);
             this.mapTab.Name = "mapTab";
-            this.mapTab.Size = new System.Drawing.Size(792, 502);
+            this.mapTab.Size = new System.Drawing.Size(1059, 627);
             this.mapTab.TabIndex = 1;
             this.mapTab.Text = "CARTE";
-            this.mapTab.UseVisualStyleBackColor = true;
             // 
             // logoutButton
             // 
@@ -190,9 +202,10 @@
             this.logoutButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.logoutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logoutButton.ForeColor = System.Drawing.Color.White;
-            this.logoutButton.Location = new System.Drawing.Point(663, 6);
+            this.logoutButton.Location = new System.Drawing.Point(884, 7);
+            this.logoutButton.Margin = new System.Windows.Forms.Padding(4);
             this.logoutButton.Name = "logoutButton";
-            this.logoutButton.Size = new System.Drawing.Size(120, 36);
+            this.logoutButton.Size = new System.Drawing.Size(160, 44);
             this.logoutButton.TabIndex = 10;
             this.logoutButton.Text = "Déconnexion";
             this.logoutButton.UseVisualStyleBackColor = false;
@@ -204,17 +217,16 @@
             this.userNameLabel.BackColor = System.Drawing.Color.RoyalBlue;
             this.userNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userNameLabel.ForeColor = System.Drawing.Color.White;
-            this.userNameLabel.Location = new System.Drawing.Point(429, -1);
-            this.userNameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.userNameLabel.Location = new System.Drawing.Point(572, -1);
             this.userNameLabel.Name = "userNameLabel";
-            this.userNameLabel.Size = new System.Drawing.Size(229, 50);
+            this.userNameLabel.Size = new System.Drawing.Size(305, 62);
             this.userNameLabel.TabIndex = 12;
             this.userNameLabel.Text = "User Name";
             this.userNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // HomeUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.Controls.Add(this.userNameLabel);
@@ -222,8 +234,9 @@
             this.Controls.Add(this.homeTabControl);
             this.Controls.Add(this.homeTitle);
             this.Controls.Add(this.appBar);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "HomeUserControl";
-            this.Size = new System.Drawing.Size(803, 600);
+            this.Size = new System.Drawing.Size(1071, 738);
             this.homeTabControl.ResumeLayout(false);
             this.managementTab.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -243,8 +256,8 @@
         private System.Windows.Forms.Button employeeButton;
         private System.Windows.Forms.Button issuesButton;
         private System.Windows.Forms.Button clientButton;
-        private System.Windows.Forms.TabPage mapTab;
         protected System.Windows.Forms.Button logoutButton;
         private System.Windows.Forms.Label userNameLabel;
+        private System.Windows.Forms.TabPage mapTab;
     }
 }

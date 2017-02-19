@@ -28,7 +28,7 @@ namespace PT_Camping
         {
             InitializeComponent();
             mHomeUserControl = homeUserControl;
-            Personne personLoged = mHomeUserControl.Window.userLoged.Person;
+            Personne personLoged = LoginTools.Person;
             if (personLoged != null)
             {
                 userNameLabel.Text = "Bonjour " + personLoged.Prenom_Personne + " " + personLoged.Nom_Personne;
