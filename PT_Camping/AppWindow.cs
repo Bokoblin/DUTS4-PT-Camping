@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PT_Camping.Model;
+using System;
 using System.Windows.Forms;
 
 namespace PT_Camping
@@ -15,13 +9,13 @@ namespace PT_Camping
     /// It handles UserControls which display the different screens of the app.
     /// 
     /// </summary>
-    /// Authors : Arthur
-    /// Since : 06/08/17
-    /// </summary>
+    /// Authors : Alexandre, Arthur
+    /// Since : 06/02/17
     public partial class AppWindow : Form
     {
         private ConnectionUserControl mConnectionUserControl;
         private HomeUserControl mHomeUserControl;
+        public LoginTools userLoged { get; set; }
 
         public AppWindow()
         {
@@ -29,8 +23,8 @@ namespace PT_Camping
             InitializeComponent();
             mConnectionUserControl = new ConnectionUserControl(this);
             windowPanel.Controls.Add(mConnectionUserControl);
+            userLoged = new LoginTools();
         }
-
 
         internal void login()
         {
@@ -42,6 +36,8 @@ namespace PT_Camping
 
         internal void logout()
         {
+            userLoged.Login = "";
+            userLoged.HashedPassword = "";
             mConnectionUserControl = new ConnectionUserControl(this);
             windowPanel.Controls.Add(mConnectionUserControl);
         }
