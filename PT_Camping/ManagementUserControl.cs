@@ -17,6 +17,7 @@ namespace PT_Camping
     public partial class ManagementUserControl : UserControl
     {
         protected HomeUserControl mHomeUserControl;
+        protected DataBase db;
 
         public ManagementUserControl()
         {
