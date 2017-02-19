@@ -243,14 +243,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <EmbeddedResource Include="StocksUserControl.resx">
       <DependentUpon>StocksUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EntityDeploy Include="Model\DataBase.edmx">
-=======
     <EntityDeploy Include="Model\InfoJoyeuxDB.edmx">
->>>>>>> 0356621b2b2712f6f6463a73590a18b2e7806c60
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>InfoJoyeuxDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
