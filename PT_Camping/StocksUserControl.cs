@@ -1,11 +1,7 @@
 ﻿using PT_Camping.Model;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-<<<<<<< HEAD
-using PT_Camping.Model;
-using System.Data.Entity.Core.Objects;
-=======
->>>>>>> 0356621b2b2712f6f6463a73590a18b2e7806c60
 
 namespace PT_Camping
 {
@@ -26,8 +22,6 @@ namespace PT_Camping
             appBarTitle.Text = "Gestion des stocks";
             database = new DataBase();
             handleResize();
-<<<<<<< HEAD
-
             /* -- Working example (to not execute again)
             Produit p = new Produit();
             p.Libelle_Produit = "Bouteille d'eau";
@@ -41,14 +35,32 @@ namespace PT_Camping
             MessageBox.Show("There are : " + database.Produit.Count().ToString() + " products in store.");*/
             //var query = from produit in database.Produit select produit.Libelle_Produit;
 
-            foreach (var result in database.Produit )
+            ProductListView.Columns.Add("Produits",-2);
+            ProductListView.Columns.Add("Quantité",-2,HorizontalAlignment.Center);
+            ProductListView.View = View.Details;
+            foreach (var result in database.Produit)
             {
-                ProductListView.Items.Add(result.Libelle_Produit);
+                string[] row1 = { result.Quantite_Stock.ToString() };
+                ProductListView.Items.Add(result.Libelle_Produit).SubItems.AddRange(row1);
+                //ProductListView.Items.Add(result.Libelle_Produit);
+                //ProductListView.Items.Add(result.Quantite_Stock.ToString());
             }
             //ProductDataGridView.DataSource = query.ToList();
         }
 
-        private void buttonAddStock_MouseClick(object sender, MouseEventArgs e)
+        private void ProductListView_MouseClick(object sender, MouseEventArgs e)
+        {
+            
+            string[] ProductInformation = {"jean","jaques" };
+            ProductInformationListView.View = View.Details;
+            ProductInformationListView.Items.Add("Nom").SubItems.Add(ProductInformation[0]);
+            
+            ProductInformationPanel.Controls.Add(ProductInformationListView);
+
+            Controls.Add(ProductInformationPanel);
+        }
+
+        /*private void buttonAddStock_MouseClick(object sender, MouseEventArgs e)
         {
             Panel dynamicPanel = new Panel();
             dynamicPanel.Location = new System.Drawing.Point(26, 12);
@@ -71,8 +83,6 @@ namespace PT_Camping
             dynamicPanel.Controls.Add(checkBox1);
 
             Controls.Add(dynamicPanel);
-=======
->>>>>>> 0356621b2b2712f6f6463a73590a18b2e7806c60
-        }
+        }*/
     }
 }
