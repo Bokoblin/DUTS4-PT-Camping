@@ -29,7 +29,7 @@ namespace PT_Camping
             InitializeComponent();
             mWindow = window;
             handleResize();
-            Personne personLoged = Window.userLoged.Person;
+            Personne personLoged = LoginTools.Person;
             if (personLoged != null)
             {
                 userNameLabel.Text = "Bonjour " + personLoged.Prenom_Personne + " " + personLoged.Nom_Personne;

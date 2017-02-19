@@ -15,7 +15,6 @@ namespace PT_Camping
     {
         private ConnectionUserControl mConnectionUserControl;
         private HomeUserControl mHomeUserControl;
-        public LoginTools userLoged { get; set; }
 
         public AppWindow()
         {
@@ -23,7 +22,6 @@ namespace PT_Camping
             InitializeComponent();
             mConnectionUserControl = new ConnectionUserControl(this);
             windowPanel.Controls.Add(mConnectionUserControl);
-            userLoged = new LoginTools();
         }
 
         internal void login()
@@ -36,8 +34,8 @@ namespace PT_Camping
 
         internal void logout()
         {
-            userLoged.Login = "";
-            userLoged.HashedPassword = "";
+            LoginTools.Login = "";
+            LoginTools.HashedPassword = "";
             mConnectionUserControl = new ConnectionUserControl(this);
             windowPanel.Controls.Add(mConnectionUserControl);
         }

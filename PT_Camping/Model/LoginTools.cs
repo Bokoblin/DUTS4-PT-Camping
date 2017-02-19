@@ -13,15 +13,15 @@ namespace PT_Camping.Model
     /// </summary>
     /// Authors : Alexandre
     /// Since : 15/02/17
-    public class LoginTools
+    public static class LoginTools
     {
-        public String Login { get; set; }
+        public static String Login { get; set; }
 
-        public String HashedPassword { get; set; }
+        public static String HashedPassword { get; set; }
 
-        public Personne Person { get; set; }
+        public static Personne Person { get; set; }
 
-        public bool checkConnection()
+        public static bool checkConnection()
         {
             try
             {
@@ -29,11 +29,11 @@ namespace PT_Camping.Model
                 bool exist = (db.Employe.Where(u => u.Login == Login && u.Password == HashedPassword).Count() >= 1);
                 if (exist)
                 {
-                    Person = db.Personne.FirstOrDefault(p => p.Code_Personne == db.Employe.FirstOrDefault(l => l.Login == this.Login).Code_Personne);
+                    Person = db.Personne.FirstOrDefault(p => p.Code_Personne == db.Employe.FirstOrDefault(l => l.Login == Login).Code_Personne);
                 }
                 db.Dispose();
                 return exist;
-            } catch (Exception e)
+            } catch (Exception)
             {
                 MessageBox.Show("Erreur lors de la connexion à la base de données");
                 Application.Exit();

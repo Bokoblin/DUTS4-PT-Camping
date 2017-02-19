@@ -28,9 +28,9 @@ namespace PT_Camping
         private void tryToConnect()
         {
             String passwordEntered = this.passwordTextBox.Text;
-            mWindow.userLoged.Login = this.userTextBox.Text;
-            mWindow.userLoged.HashedPassword = LoginTools.sha256_hash(passwordEntered);
-            if (mWindow.userLoged.checkConnection())
+            LoginTools.Login = this.userTextBox.Text;
+            LoginTools.HashedPassword = LoginTools.sha256_hash(passwordEntered);
+            if (LoginTools.checkConnection())
             {
                 mWindow.login();
             }
