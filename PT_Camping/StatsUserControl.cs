@@ -14,9 +14,9 @@ namespace PT_Camping
     /// The StatsUserControl inherits from ManagementHomeControl.
     /// It is used to manage the camping's statistics.
     /// 
-    /// Authors : Arthur
-    /// Since : 08/08/17
     /// </summary>
+    /// Authors : Arthur
+    /// Since : 08/02/17
     public partial class StatsUserControl : ManagementUserControl
     {
         public StatsUserControl(HomeUserControl homeUserControl) : base(homeUserControl)

@@ -15,9 +15,9 @@ namespace PT_Camping
     /// It allows visualizing the map with the infrastrures,
     /// adding, removing, modifying a camping accommodation.
     /// 
-    /// Authors : Arthur
-    /// Since : 09/08/17
     /// </summary>
+    /// Authors : Arthur
+    /// Since : 09/02/17
     public partial class MapUserControl : UserControl
     {
         private HomeUserControl mHomeUserControl;

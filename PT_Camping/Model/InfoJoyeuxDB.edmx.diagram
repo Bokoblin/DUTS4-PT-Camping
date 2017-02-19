@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7c554ddb574640c68f9ede79c4760fff" Name="Diagram1">
+        <EntityTypeShape EntityType="InfoJoyeuxDB.A_vendu" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.App" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Caracteristique_Emplacement" Width="1.5" PointX="3.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Client" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Droit" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Emplacement" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Employe" Width="1.5" PointX="5.25" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Facture" Width="1.5" PointX="10.5" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Fournisseur" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Incident" Width="1.5" PointX="8.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Loge" Width="1.5" PointX="8.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Personne" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Produit" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Reservation" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.sysdiagrams" Width="1.5" PointX="0.75" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Type_Emplacement" Width="1.5" PointX="3.75" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Type_Incident" Width="1.5" PointX="6" PointY="16.75" IsExpanded="true" />
+        <AssociationConnector Association="InfoJoyeuxDB.FK_A_vendu_Code_Personne" ManuallyRouted="false" />
+        <AssociationConnector Association="InfoJoyeuxDB.FK_A_vendu_Code_Produit" ManuallyRouted="false" />
+        <AssociationConnector Association="InfoJoyeuxDB.FK_Client_Code_Personne" ManuallyRouted="false" />
+        <AssociationConnector Association="InfoJoyeuxDB.FK_Emplacement_Code_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="InfoJoyeuxDB.FK_Incident_Code_Emplacement" ManuallyRouted="false" />
+        <AssociationConnector Association="InfoJoyeuxDB.FK_Loge_Code_Emplacement" ManuallyRouted="false" />
+        <AssociationConnector Association="InfoJoyeuxDB.FK_Employe_Code_Personne" ManuallyRouted="false" />
+        <AssociationConnector Association="InfoJoyeuxDB.FK_Facture_Code_Reservation" ManuallyRouted="false" />
+        <AssociationConnector Association="InfoJoyeuxDB.FK_Reservation_Code_Facture" ManuallyRouted="false" />
+        <AssociationConnector Association="InfoJoyeuxDB.FK_Incident_Code_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="InfoJoyeuxDB.FK_Loge_Code_Personne" ManuallyRouted="false" />
+        <AssociationConnector Association="InfoJoyeuxDB.FK_Loge_Code_Reservation" ManuallyRouted="false" />
+        <AssociationConnector Association="InfoJoyeuxDB.FK_Reservation_Code_Personne" ManuallyRouted="false" />
+        <AssociationConnector Association="InfoJoyeuxDB.A_le_droit" ManuallyRouted="false" />
+        <AssociationConnector Association="InfoJoyeuxDB.Fournit" ManuallyRouted="false" />
+        <AssociationConnector Association="InfoJoyeuxDB.Possede" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

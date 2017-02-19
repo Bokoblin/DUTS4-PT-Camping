@@ -121,68 +121,72 @@
       <DependentUpon>ManagementUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\App.cs">
-      <DependentUpon>DataBase.tt</DependentUpon>
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\A_vendu.cs">
-      <DependentUpon>DataBase.tt</DependentUpon>
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Caracteristique_Emplacement.cs">
-      <DependentUpon>DataBase.tt</DependentUpon>
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Client.cs">
-      <DependentUpon>DataBase.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\DataBase.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataBase.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\DataBase.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataBase.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\DataBase.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataBase.edmx</DependentUpon>
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Droit.cs">
-      <DependentUpon>DataBase.tt</DependentUpon>
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Emplacement.cs">
-      <DependentUpon>DataBase.tt</DependentUpon>
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Employe.cs">
-      <DependentUpon>DataBase.tt</DependentUpon>
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Facture.cs">
-      <DependentUpon>DataBase.tt</DependentUpon>
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Fournisseur.cs">
-      <DependentUpon>DataBase.tt</DependentUpon>
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Incident.cs">
-      <DependentUpon>DataBase.tt</DependentUpon>
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\InfoJoyeuxDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InfoJoyeuxDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\InfoJoyeuxDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\InfoJoyeuxDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InfoJoyeuxDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\Loge.cs">
-      <DependentUpon>DataBase.tt</DependentUpon>
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Personne.cs">
-      <DependentUpon>DataBase.tt</DependentUpon>
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Produit.cs">
-      <DependentUpon>DataBase.tt</DependentUpon>
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Reservation.cs">
-      <DependentUpon>DataBase.tt</DependentUpon>
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sysdiagrams.cs">
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Type_Emplacement.cs">
-      <DependentUpon>DataBase.tt</DependentUpon>
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Type_Incident.cs">
-      <DependentUpon>DataBase.tt</DependentUpon>
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\LoginTools.cs" />
     <Compile Include="ProvidersUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -239,15 +243,19 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <EmbeddedResource Include="StocksUserControl.resx">
       <DependentUpon>StocksUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="Model\DataBase.edmx">
+=======
+    <EntityDeploy Include="Model\InfoJoyeuxDB.edmx">
+>>>>>>> 0356621b2b2712f6f6463a73590a18b2e7806c60
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DataBase.Designer.cs</LastGenOutput>
+      <LastGenOutput>InfoJoyeuxDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model\DataBase.edmx.diagram">
-      <DependentUpon>DataBase.edmx</DependentUpon>
+    <None Include="Model\InfoJoyeuxDB.edmx.diagram">
+      <DependentUpon>InfoJoyeuxDB.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="packages\EntityFramework.6.1.3\content\App.config.transform" />
@@ -274,15 +282,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model\DataBase.Context.tt">
+    <Content Include="Model\InfoJoyeuxDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DataBase.edmx</DependentUpon>
-      <LastGenOutput>DataBase.Context.cs</LastGenOutput>
+      <DependentUpon>InfoJoyeuxDB.edmx</DependentUpon>
+      <LastGenOutput>InfoJoyeuxDB.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model\DataBase.tt">
+    <Content Include="Model\InfoJoyeuxDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DataBase.edmx</DependentUpon>
-      <LastGenOutput>DataBase.cs</LastGenOutput>
+      <DependentUpon>InfoJoyeuxDB.edmx</DependentUpon>
+      <LastGenOutput>InfoJoyeuxDB.cs</LastGenOutput>
     </Content>
     <Content Include="packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll" />
     <Content Include="packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll" />

@@ -23,12 +23,12 @@ namespace PT_Camping.Model
         }
     
         public int Code_Emplacement { get; set; }
-        public float Cordonnee_X { get; set; }
-        public float Coordonnee_Y { get; set; }
+        public double Cordonnee_X { get; set; }
+        public double Coordonnee_Y { get; set; }
         public string Nom_Emplacement { get; set; }
-        public float Rotation { get; set; }
-        public float Taille_X { get; set; }
-        public float Taille_Y { get; set; }
+        public double Rotation { get; set; }
+        public double Taille_X { get; set; }
+        public double Taille_Y { get; set; }
         public int Code_Type { get; set; }
     
         public virtual Type_Emplacement Type_Emplacement { get; set; }
