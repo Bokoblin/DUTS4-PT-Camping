@@ -58,14 +58,22 @@ namespace PT_Camping
         {
             mapTablePanel.Visible = false;
             importMapPanel.Visible = false;
+            categoriesCheckedListBox.Visible = false;
+            addItemList.Visible = false;
+            editLocationPanel.Visible = false;
             switch (mode)
             {
                 case MapMode.LOAD_IMAGE:
                     importMapPanel.Visible = true;
                     break;
                 case MapMode.NORMAL:
+                    mapTablePanel.Visible = true;
+                    categoriesCheckedListBox.Visible = true;
+                    break;
                 case MapMode.EDIT:
                     mapTablePanel.Visible = true;
+                    addItemList.Visible = true;
+                    editLocationPanel.Visible = true;
                     break;
                 default:
                     break;
@@ -111,6 +119,18 @@ namespace PT_Camping
                     }
                 }
             }
+        }
+
+        private void modeCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (((CheckBox)sender).Checked)
+            {
+                mode = MapMode.EDIT;
+            } else
+            {
+                mode = MapMode.NORMAL;
+            }
+            changeMode(mode);
         }
     }
 }
