@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IssuesUserControl));
             this.issuesListView = new System.Windows.Forms.ListView();
-            this.newIssueButton = new System.Windows.Forms.Button();
+            this.addIssueButton = new System.Windows.Forms.Button();
             this.detailsPanel = new System.Windows.Forms.Panel();
             this.emplacementTextBox = new System.Windows.Forms.TextBox();
             this.emplacementLabel = new System.Windows.Forms.Label();
@@ -76,16 +76,16 @@
             this.issuesListView.View = System.Windows.Forms.View.List;
             this.issuesListView.SelectedIndexChanged += new System.EventHandler(this.issuesListView_SelectedIndexChanged);
             // 
-            // newIssueButton
+            // addIssueButton
             // 
-            this.newIssueButton.AutoSize = true;
-            this.newIssueButton.Location = new System.Drawing.Point(100, 520);
-            this.newIssueButton.Name = "newIssueButton";
-            this.newIssueButton.Size = new System.Drawing.Size(166, 38);
-            this.newIssueButton.TabIndex = 11;
-            this.newIssueButton.Text = "Nouvel incident";
-            this.newIssueButton.UseVisualStyleBackColor = true;
-            this.newIssueButton.Click += new System.EventHandler(this.newIssueButton_Click);
+            this.addIssueButton.AutoSize = true;
+            this.addIssueButton.Location = new System.Drawing.Point(100, 520);
+            this.addIssueButton.Name = "addIssueButton";
+            this.addIssueButton.Size = new System.Drawing.Size(166, 38);
+            this.addIssueButton.TabIndex = 11;
+            this.addIssueButton.Text = "Nouvel incident";
+            this.addIssueButton.UseVisualStyleBackColor = true;
+            this.addIssueButton.Click += new System.EventHandler(this.onAddIssueButtonClick);
             // 
             // detailsPanel
             // 
@@ -201,7 +201,7 @@
             this.deleteButton.Size = new System.Drawing.Size(30, 30);
             this.deleteButton.TabIndex = 11;
             this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            this.deleteButton.Click += new System.EventHandler(this.onDeleteIssueButtonClick);
             // 
             // editButton
             // 
@@ -212,7 +212,7 @@
             this.editButton.Size = new System.Drawing.Size(30, 30);
             this.editButton.TabIndex = 10;
             this.editButton.UseVisualStyleBackColor = true;
-            this.editButton.Click += new System.EventHandler(this.editButton_Click);
+            this.editButton.Click += new System.EventHandler(this.onEditButtonClick);
             // 
             // detailsTitleBarPanel
             // 
@@ -240,13 +240,13 @@
             // resolveButton
             // 
             this.resolveButton.AutoSize = true;
-            this.resolveButton.Location = new System.Drawing.Point(108, 341);
+            this.resolveButton.Location = new System.Drawing.Point(105, 345);
             this.resolveButton.Name = "resolveButton";
-            this.resolveButton.Size = new System.Drawing.Size(121, 23);
+            this.resolveButton.Size = new System.Drawing.Size(130, 30);
             this.resolveButton.TabIndex = 8;
             this.resolveButton.Text = "Marqué comme résolu";
             this.resolveButton.UseVisualStyleBackColor = true;
-            this.resolveButton.Click += new System.EventHandler(this.resolveButton_Click);
+            this.resolveButton.Click += new System.EventHandler(this.onResolveIssueButtonClick);
             // 
             // descriptionLabel
             // 
@@ -316,11 +316,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.detailsPanel);
-            this.Controls.Add(this.newIssueButton);
+            this.Controls.Add(this.addIssueButton);
             this.Controls.Add(this.issuesListView);
             this.Name = "IssuesUserControl";
             this.Controls.SetChildIndex(this.issuesListView, 0);
-            this.Controls.SetChildIndex(this.newIssueButton, 0);
+            this.Controls.SetChildIndex(this.addIssueButton, 0);
             this.Controls.SetChildIndex(this.detailsPanel, 0);
             this.Controls.SetChildIndex(this.appBarTitle, 0);
             this.Controls.SetChildIndex(this.logoutButton, 0);
@@ -335,7 +335,7 @@
 
         #endregion
         private System.Windows.Forms.ListView issuesListView;
-        private System.Windows.Forms.Button newIssueButton;
+        private System.Windows.Forms.Button addIssueButton;
         private System.Windows.Forms.Panel detailsPanel;
         private System.Windows.Forms.Button editButton;
         private System.Windows.Forms.Panel detailsTitleBarPanel;

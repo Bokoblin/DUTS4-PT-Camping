@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using PT_Camping.Model;
+using System;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PT_Camping
@@ -23,7 +18,167 @@ namespace PT_Camping
         {
             InitializeComponent();
             appBarTitle.Text = "Gestion des employés";
+            db = new DataBase();
+
+            employeeListView.View = View.Details;
+            employeeListView.Columns.Add("Employé", -2);
+
+            updateEmployeesListView();
             handleResize();
         }
+
+
+        internal new void handleResize()
+        {
+            base.handleResize();
+
+            employeeListView.Size = new Size(
+                Convert.ToInt32(mHomeUserControl.Size.Width * 0.3),
+                Convert.ToInt32(employeeListView.Size.Height)
+                );
+        }
+
+
+        private void updateEmployeesListView()
+        {
+            employeeListView.Items.Clear();
+
+            foreach (var employee in db.Employe)
+            {
+                string surnameAndName = employee.Personne.Nom_Personne.ToUpper() 
+                    + " " + employee.Personne.Prenom_Personne;
+
+                var item = new ListViewItem(new[] { surnameAndName });
+                item.Name = employee.Code_Personne.ToString();
+                employeeListView.Items.Add(item);
+            }
+
+            if (employeeListView.Items.Count > 0)
+            {
+                employeeListView.Items[0].Selected = true;
+                employeeListView.Select();
+            }
+        }
+
+
+        private void updateEmployeeDetails()
+        {
+            if (employeeListView.SelectedItems.Count != 0)
+            {
+                int code = int.Parse(employeeListView.SelectedItems[0].Name);
+                var employee = db.Employe.Find(code);
+
+                surnameTextBox.Text = employee.Personne.Nom_Personne;
+                surnameTextBox.Text = employee.Personne.Nom_Personne;
+                //ageTextBox.Text = employee.Personne.a; -- waiting for db update
+                addressTextBox.Text = employee.Personne.Adresse;
+                phoneTextBox.Text = employee.Personne.Telephone;
+                emailTextBox.Text = employee.Personne.Email;
+                loginTextBox.Text = employee.Login;
+
+                //resolveButton.Enabled = (employee.Avancement_Incident != "Terminé");
+            }
+
+        }
+
+
+        private void onAddEmployeeButtonClick(object sender, EventArgs e)
+        {
+            //TODO : new employee dialog
+
+            updateEmployeesListView();
+       
+        }
+   
+
+        private void onEditButtonClick(object sender, EventArgs e)
+        {
+            if (addressTextBox.ReadOnly == true)
+            {
+                addressTextBox.ReadOnly = false;
+                phoneTextBox.ReadOnly = false;
+                emailTextBox.ReadOnly = false;
+                loginTextBox.ReadOnly = false;
+            }
+            else
+            {
+                addressTextBox.ReadOnly = true;
+                phoneTextBox.ReadOnly = true;
+                emailTextBox.ReadOnly = true;
+                loginTextBox.ReadOnly = true;
+
+                string message = "Les données suivantes ont été mises à jour : \n";
+                int cptModifications = 0;
+
+                int code = int.Parse(employeeListView.SelectedItems[0].Name);
+                var employee = db.Employe.Find(code);
+
+                if (addressTextBox.Text != employee.Personne.Adresse)
+                {
+                    employee.Personne.Adresse = addressTextBox.Text;
+                    message += "adresse";
+                    cptModifications++;
+                }
+
+                if (phoneTextBox.Text != employee.Personne.Telephone)
+                {
+                    int phone;
+                    if (int.TryParse(phoneTextBox.Text, out phone) && phoneTextBox.Text.Length == 10)
+                    {
+                        employee.Personne.Telephone = phoneTextBox.Text;
+                        message += "téléphone\n";
+                        cptModifications++;
+                    }
+                    else
+                        MessageBox.Show("Téléphone doit être un entier de 10 chiffres");
+                }
+
+                if (emailTextBox.Text != employee.Personne.Email)
+                {
+                    if ( (emailTextBox.Text.EndsWith(".com") || emailTextBox.Text.EndsWith(".fr")) 
+                        && emailTextBox.Text.Contains("@") )
+                    {
+                        employee.Personne.Email = emailTextBox.Text;
+                        message += "email";
+                        cptModifications++;
+                    }
+                    else
+                        MessageBox.Show("Email doit contenir un @ et se terminer par .com/.fr");
+                }
+
+                if (loginTextBox.Text != employee.Login)
+                {
+                    employee.Login = loginTextBox.Text;
+                    message += "login";
+                    cptModifications++;
+                }
+
+                db.SaveChanges();
+
+                updateEmployeeDetails();
+
+                if (cptModifications > 0)
+                    MessageBox.Show(message);
+            }
+        }
+
+
+        private void onPermissionButtonClick(object sender, EventArgs e)
+        {
+            //TODO - permissions
+        }
+
+
+        private void onDismissEmployeeButtonClick(object sender, EventArgs e)
+        {
+            //TODO -- waiting for DB update
+        }
+
+
+        private void employeeListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            updateEmployeeDetails();
+        }
+
     }
 }

@@ -25,12 +25,23 @@ namespace PT_Camping
             issuesListView.Columns.Add("Description", -2);
             issuesListView.Columns.Add("Date", -2);
 
-            fillIssuesListView();
+            updateIssuesListView();
             handleResize();
         }
 
 
-        public void fillIssuesListView()
+        internal new void handleResize()
+        {
+            base.handleResize();
+
+            issuesListView.Size = new Size(
+                Convert.ToInt32(mHomeUserControl.Size.Width * 0.3),
+                Convert.ToInt32(issuesListView.Size.Height)
+                );
+        }
+
+
+        private void updateIssuesListView()
         {
             issuesListView.Items.Clear();
 
@@ -48,30 +59,6 @@ namespace PT_Camping
             {
                 issuesListView.Items[0].Selected = true;
                 issuesListView.Select();
-            }
-        }
-
-
-        internal new void handleResize()
-        {
-            base.handleResize();
-
-            issuesListView.Size = new Size(
-                Convert.ToInt32(mHomeUserControl.Size.Width * 0.3),
-                Convert.ToInt32(issuesListView.Size.Height)
-                );
-        }
-
-
-        private void updateIssuesListView()
-        { 
-            foreach (ListViewItem item in issuesListView.Items)
-            {
-                int code = int.Parse(issuesListView.SelectedItems[0].Name);
-                var incident = db.Incident.Find(code);
-
-                item.SubItems[0].Text = incident.Description_Incident;
-                item.SubItems[0].Text = incident.Date_Incident.ToShortDateString();
             }
         }
 
@@ -98,7 +85,7 @@ namespace PT_Camping
         }
 
 
-        private void newIssueButton_Click(object sender, EventArgs e)
+        private void onAddIssueButtonClick(object sender, EventArgs e)
         {
             //TODO : Open Map's new issue adding
 
@@ -114,25 +101,25 @@ namespace PT_Camping
             db.Incident.Add(i);
             db.SaveChanges();
 
-            fillIssuesListView();
+            updateIssuesListView();
 
             MessageBox.Show("A template item has been added. \n"
                 + "This is a temporary behaviour until Map issues adding feature is implemented");
         }
 
 
-        private void deleteButton_Click(object sender, EventArgs e)
+        private void onDeleteIssueButtonClick(object sender, EventArgs e)
         {
             int code = int.Parse(issuesListView.SelectedItems[0].Name);
             var incident = db.Incident.Find(code);
 
             db.Incident.Remove(incident);
             db.SaveChanges();
-            fillIssuesListView();
+            updateIssuesListView();
         }
 
 
-        private void editButton_Click(object sender, EventArgs e)
+        private void onEditButtonClick(object sender, EventArgs e)
         {
             if (resolutionDateTextBox.ReadOnly == true)
             {
@@ -154,9 +141,9 @@ namespace PT_Camping
                 int code = int.Parse(issuesListView.SelectedItems[0].Name);
                 var incident = db.Incident.Find(code);
 
-                try
+                if (resolutionDateTextBox.Text != incident.Date_Resolution.ToString())
                 {
-                    if (resolutionDateTextBox.Text != incident.Date_Resolution.ToString())
+                    try
                     {
                         if (resolutionDateTextBox.Text == "")
                         {
@@ -172,36 +159,30 @@ namespace PT_Camping
                         message += "date de résolution\n";
                         cptModifications++;
                     }
-                }
-                catch (ArgumentNullException ANE)
-                {
-                    incident.Date_Resolution = null;
-                    message += "date de résolution\n";
-                    cptModifications++;
-                }
-                catch (FormatException FE)
-                {
-                    resolutionDateTextBox.Text = incident.Date_Resolution.ToString();
-                    MessageBox.Show("Le format de date n'est pas correct");
-                }
-                try
-                {
-                    if ( criticStateTextBox.Text != (incident.Criticite_Incident.ToString() + "/5") )
+                    catch (ArgumentNullException ANE)
                     {
-                        int criticite;
-                        if (int.TryParse(criticStateTextBox.Text, out criticite) && criticite >= 1 && criticite <= 5)
-                        {
-                            incident.Criticite_Incident = criticite;
-                            message += "criticité\n";
-                            cptModifications++;
-                        }
-                        else
-                            throw new Exception("Criticité doit être un entier compris entre 1 et 5");
+                        incident.Date_Resolution = null;
+                        message += "date de résolution\n";
+                        cptModifications++;
+                    }
+                    catch (FormatException FE)
+                    {
+                        resolutionDateTextBox.Text = incident.Date_Resolution.ToString();
+                        MessageBox.Show("Le format de date n'est pas correct");
                     }
                 }
-                catch (Exception ex)
+
+                if (criticStateTextBox.Text != (incident.Criticite_Incident.ToString() + "/5"))
                 {
-                    MessageBox.Show(ex.Message);
+                    int criticite;
+                    if (int.TryParse(criticStateTextBox.Text, out criticite) && criticite >= 1 && criticite <= 5)
+                    {
+                        incident.Criticite_Incident = criticite;
+                        message += "criticité\n";
+                        cptModifications++;
+                    }
+                    else
+                        MessageBox.Show("Criticité doit être un entier compris entre 1 et 5");
                 }
 
                 if (stateTextBox.Text != incident.Avancement_Incident)
@@ -217,6 +198,7 @@ namespace PT_Camping
                         cptModifications++;
                     }
                 }
+
                 if (descriptionTextBox.Text != incident.Description_Incident)
                 {
                     incident.Description_Incident = descriptionTextBox.Text;
@@ -234,7 +216,7 @@ namespace PT_Camping
         }
 
 
-        private void resolveButton_Click(object sender, EventArgs e)
+        private void onResolveIssueButtonClick(object sender, EventArgs e)
         {
             int code = int.Parse(issuesListView.SelectedItems[0].Name);
             var incident = db.Incident.Find(code);
