@@ -35,10 +35,14 @@ namespace PT_Camping
         private MapMode mode;
         private List<GraphicLocation> locationsList;
         private GraphicLocation selectedLocation;
+        private bool moving;
+        private Point offsetMoving;
 
         public MapUserControl(HomeUserControl homeUserControl)
         {
             InitializeComponent();
+            moving = false;
+            offsetMoving = new Point();
             mHomeUserControl = homeUserControl;
             Dock = DockStyle.Fill;
             LoginTools.checkConnection();
@@ -181,18 +185,92 @@ namespace PT_Camping
                 {
                     if (selectedLocation != null)
                     {
-                        location.draw(e.Graphics, selectedLocation.Equals(location.Location));
+                        location.draw(e, selectedLocation.Equals(location));
                     } else
                     {
-                        location.draw(e.Graphics, false);
+                        location.draw(e, false);
                     }
                 }
             }
         }
 
-        private void categoriesCheckedListBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void pictureBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (selectedLocation != null)
+            {
+                if (mode == MapMode.EDIT && selectedLocation.Position.Contains(e.Location))
+                {
+                    Cursor = Cursors.SizeAll;
+                } else
+                {
+                    Cursor = Cursors.Default;
+                }
+            } else
+            {
+                Cursor = Cursors.Default;
+            }
+            if (moving && selectedLocation!= null)
+            {
+                Point movePoint = new Point();
+                movePoint.X = e.Location.X - offsetMoving.X;
+                movePoint.Y = e.Location.Y - offsetMoving.Y;
+                selectedLocation.move(movePoint, pictureBox);
+                pictureBox.Refresh();
+            }
+        }
+
+        private void pictureBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            bool selected = false;
+            foreach(GraphicLocation location in locationsList)
+            {
+                if (location.Position.Contains(e.Location))
+                {
+                    selectedLocation = location;
+                    selected = true;
+                }
+            }
+            if (!selected)
+            {
+                selectedLocation = null;
+            }
+            Refresh();
+        }
+
+        private void categoriesCheckedListBox_MouseUp(object sender, MouseEventArgs e)
         {
             Refresh();
+        }
+
+        private void pictureBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (selectedLocation != null)
+            {
+                if (selectedLocation.Position.Contains(e.Location) && mode == MapMode.EDIT)
+                {
+                    moving = true;
+                    offsetMoving.X = e.Location.X - selectedLocation.Position.X;
+                    offsetMoving.Y = e.Location.Y - selectedLocation.Position.Y;
+                }
+            }
+        }
+
+        private void pictureBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (moving)
+            {
+                moving = false;
+            }
+        }
+
+        private void validateChangesButton_Click(object sender, EventArgs e)
+        {
+            LoginTools.checkConnection();
+            DataBase db = new DataBase();
+            foreach(GraphicLocation location in locationsList)
+            {
+                location.saveToDB(db);
+            }
         }
     }
 }
