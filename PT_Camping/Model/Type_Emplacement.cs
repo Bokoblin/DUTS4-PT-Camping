@@ -22,6 +22,8 @@ namespace PT_Camping.Model
     
         public int Code_Type { get; set; }
         public string Libelle_Type { get; set; }
+        public Nullable<int> Couleur { get; set; }
+        public byte[] Icone { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Emplacement> Emplacement { get; set; }
