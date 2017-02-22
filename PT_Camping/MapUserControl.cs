@@ -46,9 +46,9 @@ namespace PT_Camping
                 mode = MapMode.LOAD_IMAGE;
             } else
             {
-                MemoryStream ms = new MemoryStream(db.App.FirstOrDefault().Fond_Image);
+                /*MemoryStream ms = new MemoryStream(db.App.FirstOrDefault().Fond_Image);
                 image = new Bitmap(ms);
-                ms.Close();
+                ms.Close();*/
                 mode = MapMode.NORMAL;
             }
             changeMode(mode);
@@ -61,6 +61,7 @@ namespace PT_Camping
             categoriesCheckedListBox.Visible = false;
             addItemList.Visible = false;
             editLocationPanel.Visible = false;
+            detailsLocationPanel.Visible = false;
             switch (mode)
             {
                 case MapMode.LOAD_IMAGE:
@@ -69,6 +70,7 @@ namespace PT_Camping
                 case MapMode.NORMAL:
                     mapTablePanel.Visible = true;
                     categoriesCheckedListBox.Visible = true;
+                    detailsLocationPanel.Visible = true;
                     break;
                 case MapMode.EDIT:
                     mapTablePanel.Visible = true;
