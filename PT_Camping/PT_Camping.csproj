@@ -78,6 +78,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GraphicLocation.cs" />
     <Compile Include="MapUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

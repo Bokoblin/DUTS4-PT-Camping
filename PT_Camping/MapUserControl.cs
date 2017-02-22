@@ -33,6 +33,8 @@ namespace PT_Camping
         private HomeUserControl mHomeUserControl;
         private Bitmap image;
         private MapMode mode;
+        private List<GraphicLocation> locationsList;
+        private GraphicLocation selectedLocation;
 
         public MapUserControl(HomeUserControl homeUserControl)
         {
@@ -41,14 +43,45 @@ namespace PT_Camping
             Dock = DockStyle.Fill;
             LoginTools.checkConnection();
             DataBase db = new DataBase();
-            if (db.App.Where(m => m.Fond_Image != null).Count() < 1)
+            List<Emplacement> locations = db.Emplacement.ToList();
+            locationsList = new List<GraphicLocation>();
+            foreach(Emplacement loc in locations)
+            {
+                locationsList.Add(new GraphicLocation(loc));
+            }
+            List<Type_Emplacement> typesLocations = db.Type_Emplacement.ToList();
+            int i = 0;
+            foreach(Type_Emplacement type in typesLocations)
+            {
+                Button button = new Button();
+                button.Click += addLocationClick;
+                button.Text = type.Libelle_Type;
+                button.Height = 30;
+                button.Top = i * (button.Height+10);
+                button.Left = 10;
+                if (type.Icone != null)
+                {
+                    MemoryStream ms = new MemoryStream(db.App.FirstOrDefault().Fond_Image);
+                    button.Image = new Bitmap(ms);
+                    ms.Close();
+                    button.ImageAlign = ContentAlignment.MiddleRight;
+                }
+                button.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+                addLocationPanel.Controls.Add(button);
+                i++;
+
+                categoriesCheckedListBox.Items.Add(type.Libelle_Type, true);
+            }
+
+            //if (db.App.Where(m => m.Fond_Image != null).Count() < 1)
+            if (true)
             {
                 mode = MapMode.LOAD_IMAGE;
             } else
             {
-                /*MemoryStream ms = new MemoryStream(db.App.FirstOrDefault().Fond_Image);
+                MemoryStream ms = new MemoryStream(db.App.FirstOrDefault().Fond_Image);
                 image = new Bitmap(ms);
-                ms.Close();*/
+                ms.Close();
                 mode = MapMode.NORMAL;
             }
             changeMode(mode);
@@ -59,7 +92,7 @@ namespace PT_Camping
             mapTablePanel.Visible = false;
             importMapPanel.Visible = false;
             categoriesCheckedListBox.Visible = false;
-            addItemList.Visible = false;
+            addLocationPanel.Visible = false;
             editLocationPanel.Visible = false;
             detailsLocationPanel.Visible = false;
             switch (mode)
@@ -74,7 +107,7 @@ namespace PT_Camping
                     break;
                 case MapMode.EDIT:
                     mapTablePanel.Visible = true;
-                    addItemList.Visible = true;
+                    addLocationPanel.Visible = true;
                     editLocationPanel.Visible = true;
                     break;
                 default:
@@ -94,7 +127,7 @@ namespace PT_Camping
                     {
                         importMapPanel.Visible = false;
                         image = new Bitmap(fd.FileName);
-                        LoginTools.checkConnection();
+                        /*LoginTools.checkConnection();
                         DataBase db = new DataBase();
                         App app = db.App.FirstOrDefault();
                         if (app == null)
@@ -104,14 +137,14 @@ namespace PT_Camping
                         }
                         ImageConverter converter = new ImageConverter();
                         app.Fond_Image = (byte[])converter.ConvertTo(image, typeof(byte[]));
-                        db.SaveChanges();
-                        pictureBox.Image = image;
-                        mode = MapMode.NORMAL;
-                        changeMode(mode);
+                        db.SaveChanges();*/
                         if (image == null)
                         {
                             throw new FileLoadException();
                         }
+                        pictureBox.Image = image;
+                        mode = MapMode.NORMAL;
+                        changeMode(mode);
                     } catch (FileNotFoundException)
                     {
                         MessageBox.Show("Fichier non trouvé ! Veuillez réessayer.");
@@ -121,6 +154,11 @@ namespace PT_Camping
                     }
                 }
             }
+        }
+
+        private void addLocationClick(object sender, EventArgs e)
+        {
+
         }
 
         private void modeCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -133,6 +171,28 @@ namespace PT_Camping
                 mode = MapMode.NORMAL;
             }
             changeMode(mode);
+        }
+
+        private void pictureBox_Paint(object sender, PaintEventArgs e)
+        {
+            foreach (GraphicLocation location in locationsList)
+            {
+                if (categoriesCheckedListBox.CheckedItems.Contains(location.Location.Type_Emplacement.Libelle_Type))
+                {
+                    if (selectedLocation != null)
+                    {
+                        location.draw(e.Graphics, selectedLocation.Equals(location.Location));
+                    } else
+                    {
+                        location.draw(e.Graphics, false);
+                    }
+                }
+            }
+        }
+
+        private void categoriesCheckedListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Refresh();
         }
     }
 }
