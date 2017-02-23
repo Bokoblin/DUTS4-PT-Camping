@@ -78,6 +78,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="addNewStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addNewStock.Designer.cs">
+      <DependentUpon>addNewStock.cs</DependentUpon>
+    </Compile>
     <Compile Include="MapUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -213,6 +219,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="addNewStock.resx">
+      <DependentUpon>addNewStock.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MapUserControl.resx">
       <DependentUpon>MapUserControl.cs</DependentUpon>
     </EmbeddedResource>
