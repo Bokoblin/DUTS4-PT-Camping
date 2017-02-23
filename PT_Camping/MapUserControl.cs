@@ -28,6 +28,16 @@ namespace PT_Camping
         EDIT
     };
 
+    public enum CursorAction
+    {
+        DEFAULT,
+        MOVE,
+        RESIZE_N,
+        RESIZE_E,
+        RESIZE_S,
+        RESIZE_W
+    };
+
     public partial class MapUserControl : UserControl
     {
         private HomeUserControl mHomeUserControl;
@@ -37,10 +47,14 @@ namespace PT_Camping
         private GraphicLocation selectedLocation;
         private bool moving;
         private Point offsetMoving;
+        private Point startClick;
+        private Size oldSize;
+        private CursorAction cursorAction;
 
         public MapUserControl(HomeUserControl homeUserControl)
         {
             InitializeComponent();
+            cursorAction = CursorAction.DEFAULT;
             moving = false;
             offsetMoving = new Point();
             mHomeUserControl = homeUserControl;
@@ -198,9 +212,41 @@ namespace PT_Camping
         {
             if (selectedLocation != null)
             {
-                if (mode == MapMode.EDIT && selectedLocation.Position.Contains(e.Location))
+                Rectangle position = selectedLocation.Position;
+                if (mode == MapMode.EDIT)
                 {
-                    Cursor = Cursors.SizeAll;
+                    if (!moving)
+                    {
+                        if (new Rectangle(position.X - 2, position.Y, 4, position.Height).Contains(e.Location))
+                        {
+                            Cursor = Cursors.SizeWE;
+                            cursorAction = CursorAction.RESIZE_W;
+                        }
+                        else if (new Rectangle(position.X + position.Width, position.Y, 4, position.Height).Contains(e.Location))
+                        {
+                            Cursor = Cursors.SizeWE;
+                            cursorAction = CursorAction.RESIZE_E;
+                        }
+                        else if (new Rectangle(position.X, position.Y - 2, position.Width, 4).Contains(e.Location))
+                        {
+                            Cursor = Cursors.SizeNS;
+                            cursorAction = CursorAction.RESIZE_N;
+                        }
+                        else if (new Rectangle(position.X, position.Y + position.Height, position.Width, 4).Contains(e.Location))
+                        {
+                            Cursor = Cursors.SizeNS;
+                            cursorAction = CursorAction.RESIZE_S;
+                        }
+                        else if (position.Contains(e.Location))
+                        {
+                            Cursor = Cursors.SizeAll;
+                            cursorAction = CursorAction.MOVE;
+                        }
+                        else
+                        {
+                            Cursor = Cursors.Default;
+                        }
+                    }
                 } else
                 {
                     Cursor = Cursors.Default;
@@ -211,10 +257,59 @@ namespace PT_Camping
             }
             if (moving && selectedLocation!= null)
             {
-                Point movePoint = new Point();
-                movePoint.X = e.Location.X - offsetMoving.X;
-                movePoint.Y = e.Location.Y - offsetMoving.Y;
-                selectedLocation.move(movePoint, pictureBox);
+                switch (cursorAction)
+                {
+                    case CursorAction.MOVE:
+                        {
+                            Point movePoint = new Point();
+                            movePoint.X = e.Location.X - offsetMoving.X;
+                            movePoint.Y = e.Location.Y - offsetMoving.Y;
+                            selectedLocation.move(movePoint, pictureBox);
+                        }
+                        break;
+                    case CursorAction.RESIZE_E:
+                        {
+                            Size newSize = new Size();
+                            newSize.Height = oldSize.Height;
+                            newSize.Width = oldSize.Width + (e.Location.X - startClick.X);
+                            selectedLocation.resize(newSize, pictureBox);
+                        }
+                        break;
+                    case CursorAction.RESIZE_N:
+                        {
+                            Point newPosition = new Point();
+                            newPosition.Y = e.Location.Y;
+                            newPosition.X = selectedLocation.Position.X;
+                            Size newSize = new Size();
+                            newSize.Height = oldSize.Height - (e.Location.Y - startClick.Y);
+                            newSize.Width = oldSize.Width;
+                            selectedLocation.resize(newSize, pictureBox);
+                            selectedLocation.move(newPosition, pictureBox);
+                        }
+                        break;
+                    case CursorAction.RESIZE_S:
+                        {
+                            Size newSize = new Size();
+                            newSize.Height = oldSize.Height + (e.Location.Y - startClick.Y);
+                            newSize.Width = oldSize.Width;
+                            selectedLocation.resize(newSize, pictureBox);
+                        }
+                        break;
+                    case CursorAction.RESIZE_W:
+                        {
+                            Point newPosition = new Point();
+                            newPosition.Y = selectedLocation.Position.Y;
+                            newPosition.X = e.Location.X;
+                            Size newSize = new Size();
+                            newSize.Height = oldSize.Height;
+                            newSize.Width = oldSize.Width - (e.Location.X - startClick.X);
+                            selectedLocation.resize(newSize, pictureBox);
+                            selectedLocation.move(newPosition, pictureBox);
+                        }
+                        break;
+                    default:
+                        break;
+                }
                 pictureBox.Refresh();
             }
         }
@@ -239,6 +334,7 @@ namespace PT_Camping
 
         private void categoriesCheckedListBox_MouseUp(object sender, MouseEventArgs e)
         {
+            cursorAction = CursorAction.DEFAULT;
             Refresh();
         }
 
@@ -246,9 +342,11 @@ namespace PT_Camping
         {
             if (selectedLocation != null)
             {
-                if (selectedLocation.Position.Contains(e.Location) && mode == MapMode.EDIT)
+                if (cursorAction != CursorAction.DEFAULT && mode == MapMode.EDIT)
                 {
                     moving = true;
+                    startClick = e.Location;
+                    oldSize = selectedLocation.Position.Size;
                     offsetMoving.X = e.Location.X - selectedLocation.Position.X;
                     offsetMoving.Y = e.Location.Y - selectedLocation.Position.Y;
                 }

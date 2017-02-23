@@ -29,7 +29,7 @@ namespace PT_Camping
             Location.Coordonnee_Y = (float)position.Y / coefHeight;
         }
 
-        public void resize(Size size, UserControl control)
+        public void resize(Size size, Control control)
         {
             float coefWidth = (float)control.Width / 100f;
             float coefHeight = (float)control.Height / 100f;
@@ -55,7 +55,7 @@ namespace PT_Camping
                 }
                 if (Location.Taille_Y > 0)
                 {
-                    size.Height = (int)(Location.Taille_X * coefHeight);
+                    size.Height = (int)(Location.Taille_Y * coefHeight);
                 }
                 Point position = new Point();
                 position.X = (int)(Location.Cordonnee_X * coefWidth);
