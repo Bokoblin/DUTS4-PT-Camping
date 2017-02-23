@@ -1,4 +1,5 @@
 ﻿using PT_Camping.Model;
+using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -21,7 +22,7 @@ namespace PT_Camping
             InitializeComponent();
             appBarTitle.Text = "Gestion des stocks";
             database = new DataBase();
-            handleResize();
+          
             /* -- Working example (to not execute again)
             Produit p = new Produit();
             p.Libelle_Produit = "Bouteille d'eau";
@@ -34,55 +35,61 @@ namespace PT_Camping
             /*
             MessageBox.Show("There are : " + database.Produit.Count().ToString() + " products in store.");*/
             //var query = from produit in database.Produit select produit.Libelle_Produit;
-
+            ProductListView.View = View.Details;
             ProductListView.Columns.Add("Produits",-2);
             ProductListView.Columns.Add("Quantité",-2,HorizontalAlignment.Center);
-            ProductListView.View = View.Details;
-            foreach (var result in database.Produit)
+
+            fillStockListView();
+            handleResize();
+        }
+
+        public void fillStockListView()
+        {
+            ProductListView.Items.Clear();
+            foreach (var product in database.Produit)
             {
-                string[] row1 = { result.Quantite_Stock.ToString() };
-                ProductListView.Items.Add(result.Libelle_Produit).SubItems.AddRange(row1);
-                //ProductListView.Items.Add(result.Libelle_Produit);
-                //ProductListView.Items.Add(result.Quantite_Stock.ToString());
+                string product_name = product.Libelle_Produit;
+                string product_stock = product.Quantite_Stock.ToString();
+
+                var item = new ListViewItem(new[] { product_name, product_stock });
+                item.Name = product.Code_Produit.ToString();
+                ProductListView.Items.Add(item);
             }
-            //ProductDataGridView.DataSource = query.ToList();
+
+            if (ProductListView.Items.Count > 0)
+            {
+                ProductListView.Items[0].Selected = true;
+                ProductListView.Select();
+            }
         }
 
-        private void ProductListView_MouseClick(object sender, MouseEventArgs e)
+        private void updateIssueDetails()
+         {
+             if (ProductListView.SelectedItems.Count != 0)
+             {
+                 int code = int.Parse(ProductListView.SelectedItems[0].Name);
+                 var product = db.Produit.Find(code);
+ 
+                 idTextBox.Text = product.Code_Produit.ToString();
+                 emplacementTextBox.Text = incident.Emplacement.Code_Emplacement.ToString();
+                 typeTextBox.Text = incident.Type_Incident.Type_Incident1;
+                 creationDateTextBox.Text = incident.Date_Incident.ToShortDateString();
+                 resolutionDateTextBox.Text = incident.Date_Resolution.ToString();
+                 criticStateTextBox.Text = incident.Criticite_Incident.ToString() + "/5";
+                 stateTextBox.Text = incident.Avancement_Incident;
+                 descriptionTextBox.Text = incident.Description_Incident;
+             }
+             
+         }
+        private void issuesListView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-            string[] ProductInformation = {"jean","jaques" };
-            ProductInformationListView.View = View.Details;
-            ProductInformationListView.Items.Add("Nom").SubItems.Add(ProductInformation[0]);
-            
-            ProductInformationPanel.Controls.Add(ProductInformationListView);
-
-            Controls.Add(ProductInformationPanel);
+             updateIssueDetails();
         }
 
-        /*private void buttonAddStock_MouseClick(object sender, MouseEventArgs e)
+        private void addStockButton_MouseClick(object sender, MouseEventArgs e)
         {
-            Panel dynamicPanel = new Panel();
-            dynamicPanel.Location = new System.Drawing.Point(26, 12);
-            dynamicPanel.Name = "Panel1";
-            dynamicPanel.Size = new System.Drawing.Size(228, 200);
-            dynamicPanel.BackColor = Color.LightBlue;
-
-
-            TextBox textBox1 = new TextBox();
-            textBox1.Location = new Point(10, 10);
-            textBox1.Text = "I am a TextBox5";
-            textBox1.Size = new Size(200, 30);
-
-            CheckBox checkBox1 = new CheckBox();
-            checkBox1.Location = new Point(10, 50);
-            checkBox1.Text = "Check Me";
-            checkBox1.Size = new Size(200, 30);
-
-            dynamicPanel.Controls.Add(textBox1);
-            dynamicPanel.Controls.Add(checkBox1);
-
-            Controls.Add(dynamicPanel);
-        }*/
+            addNewStock newStock = new addNewStock(this);
+            newStock.Show();
+        }
     }
 }
