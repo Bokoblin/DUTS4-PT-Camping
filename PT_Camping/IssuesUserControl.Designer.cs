@@ -53,7 +53,6 @@
             this.creationDateLabel = new System.Windows.Forms.Label();
             this.TypeLabel = new System.Windows.Forms.Label();
             this.idLabel = new System.Windows.Forms.Label();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.detailsPanel.SuspendLayout();
             this.detailsTitleBarPanel.SuspendLayout();
             this.SuspendLayout();
@@ -349,7 +348,6 @@
         private System.Windows.Forms.Label TypeLabel;
         private System.Windows.Forms.Label idLabel;
         private System.Windows.Forms.Button deleteButton;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.TextBox descriptionTextBox;
         private System.Windows.Forms.TextBox stateTextBox;
         private System.Windows.Forms.TextBox criticStateTextBox;

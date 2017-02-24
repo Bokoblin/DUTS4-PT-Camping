@@ -122,12 +122,13 @@
             this.errorLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.errorLabel.AutoSize = true;
             this.errorLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorLabel.Location = new System.Drawing.Point(312, 318);
+            this.errorLabel.Location = new System.Drawing.Point(312, 296);
             this.errorLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(209, 13);
+            this.errorLabel.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
+            this.errorLabel.Size = new System.Drawing.Size(178, 16);
             this.errorLabel.TabIndex = 16;
-            this.errorLabel.Text = "Nom d\'utilisateur ou mot de passe incorrect";
+            this.errorLabel.Text = "Identifiant ou mot de passe incorrect";
             // 
             // ConnectionUserControl
             // 

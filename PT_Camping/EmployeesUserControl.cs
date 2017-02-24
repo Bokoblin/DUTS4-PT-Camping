@@ -74,7 +74,8 @@ namespace PT_Camping
 
                 surnameTextBox.Text = employee.Personne.Nom_Personne;
                 nameTextBox.Text = employee.Personne.Prenom_Personne;
-                birthDateTextBox.Text = ((DateTime)employee.Personne.Date_Naissance).ToShortDateString();
+                if (employee.Personne.Date_Naissance != null)
+                    birthDateTextBox.Text = ((DateTime)employee.Personne.Date_Naissance).ToShortDateString();
                 addressTextBox.Text = employee.Personne.Adresse;
                 phoneTextBox.Text = employee.Personne.Telephone;
                 emailTextBox.Text = employee.Personne.Email;
@@ -97,8 +98,7 @@ namespace PT_Camping
 
         private void onAddEmployeeButtonClick(object sender, EventArgs e)
         {
-            //TODO : new employee dialog
-
+            new AddEmployee(db).ShowDialog();
             updateEmployeesListView();
         }
    
@@ -180,6 +180,7 @@ namespace PT_Camping
             int code = int.Parse(employeeListView.SelectedItems[0].Name);
             var employee = db.Employe.Find(code);
             new Permissions(employee, db).ShowDialog();
+            db.SaveChanges();
         }
 
 

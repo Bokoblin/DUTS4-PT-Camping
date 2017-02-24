@@ -302,7 +302,6 @@ namespace PT_Camping
             }
             #endregion
 
-            db.SaveChanges();
             this.Close();
         }
     }
