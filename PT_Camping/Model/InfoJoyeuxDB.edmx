@@ -70,6 +70,8 @@
           <Property Name="Login" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="Code_Personne" Type="int" Nullable="false" />
+          <Property Name="EstLicencie" Type="bit" Nullable="false" />
+          <Property Name="Photo" Type="image" />
         </EntityType>
         <EntityType Name="Facture">
           <Key>
@@ -128,6 +130,7 @@
           <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Telephone" Type="varchar" MaxLength="25" />
           <Property Name="Adresse" Type="varchar" MaxLength="250" />
+          <Property Name="Date_Naissance" Type="date" />
         </EntityType>
         <EntityType Name="Possede">
           <Key>
@@ -580,6 +583,8 @@
           <Property Name="Password" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Code_Personne" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Personne" Relationship="Self.FK_Employe_Code_Personne" FromRole="Employe" ToRole="Personne" />
+          <Property Name="EstLicencie" Type="Boolean" Nullable="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Facture">
           <Key>
@@ -644,6 +649,7 @@
           <NavigationProperty Name="Loge" Relationship="Self.FK_Loge_Code_Personne" FromRole="Personne" ToRole="Loge" />
           <NavigationProperty Name="Reservation" Relationship="Self.FK_Reservation_Code_Personne" FromRole="Personne" ToRole="Reservation" />
           <NavigationProperty Name="Droit" Relationship="Self.A_le_droit" FromRole="Personne" ToRole="Droit" />
+          <Property Name="Date_Naissance" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Produit">
           <Key>
@@ -1014,6 +1020,8 @@
           <EntitySetMapping Name="Employe">
             <EntityTypeMapping TypeName="InfoJoyeuxDB.Employe">
               <MappingFragment StoreEntitySet="Employe">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="EstLicencie" ColumnName="EstLicencie" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Code_Personne" ColumnName="Code_Personne" />
@@ -1064,6 +1072,7 @@
           <EntitySetMapping Name="Personne">
             <EntityTypeMapping TypeName="InfoJoyeuxDB.Personne">
               <MappingFragment StoreEntitySet="Personne">
+                <ScalarProperty Name="Date_Naissance" ColumnName="Date_Naissance" />
                 <ScalarProperty Name="Code_Personne" ColumnName="Code_Personne" />
                 <ScalarProperty Name="Nom_Personne" ColumnName="Nom_Personne" />
                 <ScalarProperty Name="Prenom_Personne" ColumnName="Prenom_Personne" />

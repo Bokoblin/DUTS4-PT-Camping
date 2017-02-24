@@ -16,7 +16,7 @@ namespace PT_Camping
     /// Since : 08/02/17
     public partial class ManagementUserControl : UserControl
     {
-        protected HomeUserControl mHomeUserControl;
+        protected HomeUserControl mHomeUC;
         protected DataBase db;
 
         public ManagementUserControl()
@@ -28,8 +28,8 @@ namespace PT_Camping
         public ManagementUserControl(HomeUserControl homeUserControl)
         {
             InitializeComponent();
-            mHomeUserControl = homeUserControl;
-            Personne personLoged = mHomeUserControl.Window.userLoged.Person;
+            mHomeUC = homeUserControl;
+            Personne personLoged = mHomeUC.Window.userLoged.Person;
             if (personLoged != null)
             {
                 userNameLabel.Text = "Bonjour " + personLoged.Prenom_Personne + " " + personLoged.Nom_Personne;
@@ -38,21 +38,24 @@ namespace PT_Camping
 
         private void backArrow_Click(object sender, EventArgs e)
         {
-            mHomeUserControl.Window.WindowPanel.Controls.Add(mHomeUserControl);
-            mHomeUserControl.Window.WindowPanel.Controls.Remove(this);
+            mHomeUC.Window.WindowPanel.Controls.Add(mHomeUC);
+            mHomeUC.Window.WindowPanel.Controls.Remove(this);
         }
 
         private void logoutButton_Click(object sender, EventArgs e)
         {
-            mHomeUserControl.Window.logout();
-            mHomeUserControl.Window.WindowPanel.Controls.Remove(this);
+            mHomeUC.Window.logout();
+            mHomeUC.Window.WindowPanel.Controls.Remove(this);
         }
 
 
         internal void handleResize()
         {
-            Size = mHomeUserControl.Size;
-            appBar.Size = new Size(mHomeUserControl.Size.Width, appBar.Size.Height);
+            Size = mHomeUC.Size;
+            appBar.Size = new Size(mHomeUC.Size.Width, appBar.Size.Height);
         }
+
+
+        public HomeUserControl HomeUC { get { return mHomeUC; } set { mHomeUC = value; } }
     }
 }
