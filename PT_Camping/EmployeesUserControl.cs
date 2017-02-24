@@ -14,7 +14,7 @@ namespace PT_Camping
     /// Since : 08/02/17
     public partial class EmployeesUserControl : ManagementUserControl
     {
-        public EmployeesUserControl(HomeUserControl homeUserControl) : base(homeUserControl)
+        public EmployeesUserControl(HomeUserControl home) : base(home)
         {
             InitializeComponent();
             appBarTitle.Text = "Gestion des employés";
@@ -33,7 +33,7 @@ namespace PT_Camping
             base.handleResize();
 
             employeeListView.Size = new Size(
-                Convert.ToInt32(mHomeUserControl.Size.Width * 0.3),
+                Convert.ToInt32(mHomeUC.Size.Width * 0.3),
                 Convert.ToInt32(employeeListView.Size.Height)
                 );
         }
@@ -45,12 +45,15 @@ namespace PT_Camping
 
             foreach (var employee in db.Employe)
             {
-                string surnameAndName = employee.Personne.Nom_Personne.ToUpper() 
-                    + " " + employee.Personne.Prenom_Personne;
+                if (!employee.EstLicencie)
+                {
+                    string surnameAndName = employee.Personne.Nom_Personne.ToUpper()
+                        + " " + employee.Personne.Prenom_Personne;
 
-                var item = new ListViewItem(new[] { surnameAndName });
-                item.Name = employee.Code_Personne.ToString();
-                employeeListView.Items.Add(item);
+                    var item = new ListViewItem(new[] { surnameAndName });
+                    item.Name = employee.Code_Personne.ToString();
+                    employeeListView.Items.Add(item);
+                }
             }
 
             if (employeeListView.Items.Count > 0)
@@ -69,16 +72,15 @@ namespace PT_Camping
                 var employee = db.Employe.Find(code);
 
                 surnameTextBox.Text = employee.Personne.Nom_Personne;
-                surnameTextBox.Text = employee.Personne.Nom_Personne;
-                //ageTextBox.Text = employee.Personne.a; -- waiting for db update
+                nameTextBox.Text = employee.Personne.Prenom_Personne;
+                birthDateTextBox.Text = ((DateTime)employee.Personne.Date_Naissance).ToShortDateString();
                 addressTextBox.Text = employee.Personne.Adresse;
                 phoneTextBox.Text = employee.Personne.Telephone;
                 emailTextBox.Text = employee.Personne.Email;
                 loginTextBox.Text = employee.Login;
 
-                //resolveButton.Enabled = (employee.Avancement_Incident != "Terminé");
+                dismissButton.Enabled = (employee.Personne.Code_Personne != 1); //You can't dismiss Mr Campo
             }
-
         }
 
 
@@ -165,13 +167,19 @@ namespace PT_Camping
 
         private void onPermissionButtonClick(object sender, EventArgs e)
         {
-            //TODO - permissions
+            int code = int.Parse(employeeListView.SelectedItems[0].Name);
+            var employee = db.Employe.Find(code);
+            new Permissions(employee, db).ShowDialog();
         }
 
 
         private void onDismissEmployeeButtonClick(object sender, EventArgs e)
         {
-            //TODO -- waiting for DB update
+            int code = int.Parse(employeeListView.SelectedItems[0].Name);
+            var employee = db.Employe.Find(code);
+            employee.EstLicencie = true;
+            db.SaveChanges();
+            updateEmployeesListView();
         }
 
 

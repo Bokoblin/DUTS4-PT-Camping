@@ -35,7 +35,7 @@ namespace PT_Camping
             base.handleResize();
 
             issuesListView.Size = new Size(
-                Convert.ToInt32(mHomeUserControl.Size.Width * 0.3),
+                Convert.ToInt32(mHomeUC.Size.Width * 0.3),
                 Convert.ToInt32(issuesListView.Size.Height)
                 );
         }
@@ -74,7 +74,10 @@ namespace PT_Camping
                 emplacementTextBox.Text = incident.Emplacement.Code_Emplacement.ToString();
                 typeTextBox.Text = incident.Type_Incident.Type_Incident1;
                 creationDateTextBox.Text = incident.Date_Incident.ToShortDateString();
-                resolutionDateTextBox.Text = incident.Date_Resolution.ToString();
+                if (incident.Date_Resolution != null)
+                    resolutionDateTextBox.Text = ((DateTime)incident.Date_Resolution).ToShortDateString();
+                else
+                    resolutionDateTextBox.Text = "";
                 criticStateTextBox.Text = incident.Criticite_Incident.ToString() + "/5";
                 stateTextBox.Text = incident.Avancement_Incident;
                 descriptionTextBox.Text = incident.Description_Incident;
@@ -141,7 +144,7 @@ namespace PT_Camping
                 int code = int.Parse(issuesListView.SelectedItems[0].Name);
                 var incident = db.Incident.Find(code);
 
-                if (resolutionDateTextBox.Text != incident.Date_Resolution.ToString())
+                if (resolutionDateTextBox.Text != ((DateTime)incident.Date_Resolution).ToShortDateString())
                 {
                     try
                     {
@@ -159,13 +162,13 @@ namespace PT_Camping
                         message += "date de résolution\n";
                         cptModifications++;
                     }
-                    catch (ArgumentNullException ANE)
+                    catch (ArgumentNullException)
                     {
                         incident.Date_Resolution = null;
                         message += "date de résolution\n";
                         cptModifications++;
                     }
-                    catch (FormatException FE)
+                    catch (FormatException)
                     {
                         resolutionDateTextBox.Text = incident.Date_Resolution.ToString();
                         MessageBox.Show("Le format de date n'est pas correct");

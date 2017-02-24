@@ -32,13 +32,13 @@
             this.employeeListView = new System.Windows.Forms.ListView();
             this.detailsPanel = new System.Windows.Forms.Panel();
             this.dismissButton = new System.Windows.Forms.Button();
-            this.emplacementTextBox = new System.Windows.Forms.TextBox();
+            this.nameTextBox = new System.Windows.Forms.TextBox();
             this.nameLabel = new System.Windows.Forms.Label();
             this.loginTextBox = new System.Windows.Forms.TextBox();
             this.emailTextBox = new System.Windows.Forms.TextBox();
             this.phoneTextBox = new System.Windows.Forms.TextBox();
             this.addressTextBox = new System.Windows.Forms.TextBox();
-            this.ageTextBox = new System.Windows.Forms.TextBox();
+            this.birthDateTextBox = new System.Windows.Forms.TextBox();
             this.surnameTextBox = new System.Windows.Forms.TextBox();
             this.editButton = new System.Windows.Forms.Button();
             this.detailsTitleBarPanel = new System.Windows.Forms.Panel();
@@ -48,7 +48,7 @@
             this.emailLabel = new System.Windows.Forms.Label();
             this.phoneLabel = new System.Windows.Forms.Label();
             this.addressLabel = new System.Windows.Forms.Label();
-            this.ageLabel = new System.Windows.Forms.Label();
+            this.birthDateLabel = new System.Windows.Forms.Label();
             this.surnameLabel = new System.Windows.Forms.Label();
             this.addEmployeeButton = new System.Windows.Forms.Button();
             this.detailsPanel.SuspendLayout();
@@ -80,13 +80,13 @@
             this.detailsPanel.BackColor = System.Drawing.Color.White;
             this.detailsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.detailsPanel.Controls.Add(this.dismissButton);
-            this.detailsPanel.Controls.Add(this.emplacementTextBox);
+            this.detailsPanel.Controls.Add(this.nameTextBox);
             this.detailsPanel.Controls.Add(this.nameLabel);
             this.detailsPanel.Controls.Add(this.loginTextBox);
             this.detailsPanel.Controls.Add(this.emailTextBox);
             this.detailsPanel.Controls.Add(this.phoneTextBox);
             this.detailsPanel.Controls.Add(this.addressTextBox);
-            this.detailsPanel.Controls.Add(this.ageTextBox);
+            this.detailsPanel.Controls.Add(this.birthDateTextBox);
             this.detailsPanel.Controls.Add(this.surnameTextBox);
             this.detailsPanel.Controls.Add(this.editButton);
             this.detailsPanel.Controls.Add(this.detailsTitleBarPanel);
@@ -95,7 +95,7 @@
             this.detailsPanel.Controls.Add(this.emailLabel);
             this.detailsPanel.Controls.Add(this.phoneLabel);
             this.detailsPanel.Controls.Add(this.addressLabel);
-            this.detailsPanel.Controls.Add(this.ageLabel);
+            this.detailsPanel.Controls.Add(this.birthDateLabel);
             this.detailsPanel.Controls.Add(this.surnameLabel);
             this.detailsPanel.Location = new System.Drawing.Point(420, 80);
             this.detailsPanel.Name = "detailsPanel";
@@ -113,13 +113,13 @@
             this.dismissButton.UseVisualStyleBackColor = true;
             this.dismissButton.Click += new System.EventHandler(this.onDismissEmployeeButtonClick);
             // 
-            // emplacementTextBox
+            // nameTextBox
             // 
-            this.emplacementTextBox.Location = new System.Drawing.Point(160, 124);
-            this.emplacementTextBox.Name = "emplacementTextBox";
-            this.emplacementTextBox.ReadOnly = true;
-            this.emplacementTextBox.Size = new System.Drawing.Size(120, 20);
-            this.emplacementTextBox.TabIndex = 20;
+            this.nameTextBox.Location = new System.Drawing.Point(160, 124);
+            this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.ReadOnly = true;
+            this.nameTextBox.Size = new System.Drawing.Size(120, 20);
+            this.nameTextBox.TabIndex = 20;
             // 
             // nameLabel
             // 
@@ -163,13 +163,13 @@
             this.addressTextBox.Size = new System.Drawing.Size(120, 40);
             this.addressTextBox.TabIndex = 14;
             // 
-            // ageTextBox
+            // dateOfBirthTextBox
             // 
-            this.ageTextBox.Location = new System.Drawing.Point(160, 150);
-            this.ageTextBox.Name = "ageTextBox";
-            this.ageTextBox.ReadOnly = true;
-            this.ageTextBox.Size = new System.Drawing.Size(120, 20);
-            this.ageTextBox.TabIndex = 13;
+            this.birthDateTextBox.Location = new System.Drawing.Point(160, 150);
+            this.birthDateTextBox.Name = "dateOfBirthTextBox";
+            this.birthDateTextBox.ReadOnly = true;
+            this.birthDateTextBox.Size = new System.Drawing.Size(120, 20);
+            this.birthDateTextBox.TabIndex = 13;
             // 
             // surnameTextBox
             // 
@@ -260,14 +260,14 @@
             this.addressLabel.TabIndex = 3;
             this.addressLabel.Text = "Adresse";
             // 
-            // ageLabel
+            // birthDateLabel
             // 
-            this.ageLabel.AutoSize = true;
-            this.ageLabel.Location = new System.Drawing.Point(29, 153);
-            this.ageLabel.Name = "ageLabel";
-            this.ageLabel.Size = new System.Drawing.Size(26, 13);
-            this.ageLabel.TabIndex = 2;
-            this.ageLabel.Text = "Age";
+            this.birthDateLabel.AutoSize = true;
+            this.birthDateLabel.Location = new System.Drawing.Point(29, 153);
+            this.birthDateLabel.Name = "birthDateLabel";
+            this.birthDateLabel.Size = new System.Drawing.Size(98, 13);
+            this.birthDateLabel.TabIndex = 2;
+            this.birthDateLabel.Text = "Date de Naissance";
             // 
             // surnameLabel
             // 
@@ -315,13 +315,13 @@
 
         private System.Windows.Forms.ListView employeeListView;
         private System.Windows.Forms.Panel detailsPanel;
-        private System.Windows.Forms.TextBox emplacementTextBox;
+        private System.Windows.Forms.TextBox nameTextBox;
         private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.TextBox loginTextBox;
         private System.Windows.Forms.TextBox emailTextBox;
         private System.Windows.Forms.TextBox phoneTextBox;
         private System.Windows.Forms.TextBox addressTextBox;
-        private System.Windows.Forms.TextBox ageTextBox;
+        private System.Windows.Forms.TextBox birthDateTextBox;
         private System.Windows.Forms.TextBox surnameTextBox;
         private System.Windows.Forms.Button editButton;
         private System.Windows.Forms.Panel detailsTitleBarPanel;
@@ -331,7 +331,7 @@
         private System.Windows.Forms.Label emailLabel;
         private System.Windows.Forms.Label phoneLabel;
         private System.Windows.Forms.Label addressLabel;
-        private System.Windows.Forms.Label ageLabel;
+        private System.Windows.Forms.Label birthDateLabel;
         private System.Windows.Forms.Label surnameLabel;
         private System.Windows.Forms.Button dismissButton;
         private System.Windows.Forms.Button addEmployeeButton;
