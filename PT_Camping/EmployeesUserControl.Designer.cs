@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EmployeesUserControl));
             this.employeeListView = new System.Windows.Forms.ListView();
             this.detailsPanel = new System.Windows.Forms.Panel();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
             this.dismissButton = new System.Windows.Forms.Button();
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.nameLabel = new System.Windows.Forms.Label();
@@ -52,6 +53,7 @@
             this.surnameLabel = new System.Windows.Forms.Label();
             this.addEmployeeButton = new System.Windows.Forms.Button();
             this.detailsPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.detailsTitleBarPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,7 +69,7 @@
             this.employeeListView.Location = new System.Drawing.Point(25, 80);
             this.employeeListView.MultiSelect = false;
             this.employeeListView.Name = "employeeListView";
-            this.employeeListView.Size = new System.Drawing.Size(320, 400);
+            this.employeeListView.Size = new System.Drawing.Size(320, 450);
             this.employeeListView.TabIndex = 11;
             this.employeeListView.UseCompatibleStateImageBehavior = false;
             this.employeeListView.View = System.Windows.Forms.View.List;
@@ -79,6 +81,7 @@
             this.detailsPanel.AutoSize = true;
             this.detailsPanel.BackColor = System.Drawing.Color.White;
             this.detailsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.detailsPanel.Controls.Add(this.pictureBox);
             this.detailsPanel.Controls.Add(this.dismissButton);
             this.detailsPanel.Controls.Add(this.nameTextBox);
             this.detailsPanel.Controls.Add(this.nameLabel);
@@ -99,13 +102,25 @@
             this.detailsPanel.Controls.Add(this.surnameLabel);
             this.detailsPanel.Location = new System.Drawing.Point(420, 80);
             this.detailsPanel.Name = "detailsPanel";
-            this.detailsPanel.Size = new System.Drawing.Size(352, 400);
+            this.detailsPanel.Size = new System.Drawing.Size(352, 450);
             this.detailsPanel.TabIndex = 13;
+            // 
+            // pictureBox
+            // 
+            this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox.ErrorImage = global::PT_Camping.Properties.Resources.contact_default;
+            this.pictureBox.Image = global::PT_Camping.Properties.Resources.contact_default;
+            this.pictureBox.Location = new System.Drawing.Point(144, 55);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(60, 70);
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox.TabIndex = 22;
+            this.pictureBox.TabStop = false;
             // 
             // dismissButton
             // 
             this.dismissButton.AutoSize = true;
-            this.dismissButton.Location = new System.Drawing.Point(190, 340);
+            this.dismissButton.Location = new System.Drawing.Point(190, 390);
             this.dismissButton.Name = "dismissButton";
             this.dismissButton.Size = new System.Drawing.Size(120, 30);
             this.dismissButton.TabIndex = 21;
@@ -115,7 +130,7 @@
             // 
             // nameTextBox
             // 
-            this.nameTextBox.Location = new System.Drawing.Point(160, 124);
+            this.nameTextBox.Location = new System.Drawing.Point(176, 177);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.ReadOnly = true;
             this.nameTextBox.Size = new System.Drawing.Size(120, 20);
@@ -124,7 +139,7 @@
             // nameLabel
             // 
             this.nameLabel.AutoSize = true;
-            this.nameLabel.Location = new System.Drawing.Point(29, 127);
+            this.nameLabel.Location = new System.Drawing.Point(53, 180);
             this.nameLabel.Name = "nameLabel";
             this.nameLabel.Size = new System.Drawing.Size(43, 13);
             this.nameLabel.TabIndex = 19;
@@ -132,7 +147,7 @@
             // 
             // loginTextBox
             // 
-            this.loginTextBox.Location = new System.Drawing.Point(160, 274);
+            this.loginTextBox.Location = new System.Drawing.Point(176, 327);
             this.loginTextBox.Name = "loginTextBox";
             this.loginTextBox.ReadOnly = true;
             this.loginTextBox.Size = new System.Drawing.Size(120, 20);
@@ -140,7 +155,7 @@
             // 
             // emailTextBox
             // 
-            this.emailTextBox.Location = new System.Drawing.Point(160, 248);
+            this.emailTextBox.Location = new System.Drawing.Point(176, 301);
             this.emailTextBox.Name = "emailTextBox";
             this.emailTextBox.ReadOnly = true;
             this.emailTextBox.Size = new System.Drawing.Size(120, 20);
@@ -148,7 +163,7 @@
             // 
             // phoneTextBox
             // 
-            this.phoneTextBox.Location = new System.Drawing.Point(160, 222);
+            this.phoneTextBox.Location = new System.Drawing.Point(176, 275);
             this.phoneTextBox.Name = "phoneTextBox";
             this.phoneTextBox.ReadOnly = true;
             this.phoneTextBox.Size = new System.Drawing.Size(120, 20);
@@ -156,24 +171,24 @@
             // 
             // addressTextBox
             // 
-            this.addressTextBox.Location = new System.Drawing.Point(160, 176);
+            this.addressTextBox.Location = new System.Drawing.Point(176, 229);
             this.addressTextBox.Multiline = true;
             this.addressTextBox.Name = "addressTextBox";
             this.addressTextBox.ReadOnly = true;
             this.addressTextBox.Size = new System.Drawing.Size(120, 40);
             this.addressTextBox.TabIndex = 14;
             // 
-            // dateOfBirthTextBox
+            // birthDateTextBox
             // 
-            this.birthDateTextBox.Location = new System.Drawing.Point(160, 150);
-            this.birthDateTextBox.Name = "dateOfBirthTextBox";
+            this.birthDateTextBox.Location = new System.Drawing.Point(176, 203);
+            this.birthDateTextBox.Name = "birthDateTextBox";
             this.birthDateTextBox.ReadOnly = true;
             this.birthDateTextBox.Size = new System.Drawing.Size(120, 20);
             this.birthDateTextBox.TabIndex = 13;
             // 
             // surnameTextBox
             // 
-            this.surnameTextBox.Location = new System.Drawing.Point(160, 98);
+            this.surnameTextBox.Location = new System.Drawing.Point(176, 151);
             this.surnameTextBox.Name = "surnameTextBox";
             this.surnameTextBox.ReadOnly = true;
             this.surnameTextBox.Size = new System.Drawing.Size(120, 20);
@@ -216,7 +231,7 @@
             // permissionButton
             // 
             this.permissionButton.AutoSize = true;
-            this.permissionButton.Location = new System.Drawing.Point(40, 340);
+            this.permissionButton.Location = new System.Drawing.Point(40, 390);
             this.permissionButton.Name = "permissionButton";
             this.permissionButton.Size = new System.Drawing.Size(120, 30);
             this.permissionButton.TabIndex = 8;
@@ -227,7 +242,7 @@
             // loginLabel
             // 
             this.loginLabel.AutoSize = true;
-            this.loginLabel.Location = new System.Drawing.Point(29, 277);
+            this.loginLabel.Location = new System.Drawing.Point(53, 330);
             this.loginLabel.Name = "loginLabel";
             this.loginLabel.Size = new System.Drawing.Size(33, 13);
             this.loginLabel.TabIndex = 6;
@@ -236,7 +251,7 @@
             // emailLabel
             // 
             this.emailLabel.AutoSize = true;
-            this.emailLabel.Location = new System.Drawing.Point(29, 251);
+            this.emailLabel.Location = new System.Drawing.Point(53, 304);
             this.emailLabel.Name = "emailLabel";
             this.emailLabel.Size = new System.Drawing.Size(32, 13);
             this.emailLabel.TabIndex = 5;
@@ -245,7 +260,7 @@
             // phoneLabel
             // 
             this.phoneLabel.AutoSize = true;
-            this.phoneLabel.Location = new System.Drawing.Point(29, 225);
+            this.phoneLabel.Location = new System.Drawing.Point(53, 278);
             this.phoneLabel.Name = "phoneLabel";
             this.phoneLabel.Size = new System.Drawing.Size(58, 13);
             this.phoneLabel.TabIndex = 4;
@@ -254,7 +269,7 @@
             // addressLabel
             // 
             this.addressLabel.AutoSize = true;
-            this.addressLabel.Location = new System.Drawing.Point(29, 179);
+            this.addressLabel.Location = new System.Drawing.Point(53, 232);
             this.addressLabel.Name = "addressLabel";
             this.addressLabel.Size = new System.Drawing.Size(45, 13);
             this.addressLabel.TabIndex = 3;
@@ -263,7 +278,7 @@
             // birthDateLabel
             // 
             this.birthDateLabel.AutoSize = true;
-            this.birthDateLabel.Location = new System.Drawing.Point(29, 153);
+            this.birthDateLabel.Location = new System.Drawing.Point(53, 206);
             this.birthDateLabel.Name = "birthDateLabel";
             this.birthDateLabel.Size = new System.Drawing.Size(98, 13);
             this.birthDateLabel.TabIndex = 2;
@@ -272,7 +287,7 @@
             // surnameLabel
             // 
             this.surnameLabel.AutoSize = true;
-            this.surnameLabel.Location = new System.Drawing.Point(29, 101);
+            this.surnameLabel.Location = new System.Drawing.Point(53, 154);
             this.surnameLabel.Name = "surnameLabel";
             this.surnameLabel.Size = new System.Drawing.Size(29, 13);
             this.surnameLabel.TabIndex = 1;
@@ -281,7 +296,7 @@
             // addEmployeeButton
             // 
             this.addEmployeeButton.AutoSize = true;
-            this.addEmployeeButton.Location = new System.Drawing.Point(100, 520);
+            this.addEmployeeButton.Location = new System.Drawing.Point(100, 550);
             this.addEmployeeButton.Name = "addEmployeeButton";
             this.addEmployeeButton.Size = new System.Drawing.Size(166, 38);
             this.addEmployeeButton.TabIndex = 14;
@@ -304,6 +319,7 @@
             this.Controls.SetChildIndex(this.addEmployeeButton, 0);
             this.detailsPanel.ResumeLayout(false);
             this.detailsPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.detailsTitleBarPanel.ResumeLayout(false);
             this.detailsTitleBarPanel.PerformLayout();
             this.ResumeLayout(false);
@@ -335,5 +351,6 @@
         private System.Windows.Forms.Label surnameLabel;
         private System.Windows.Forms.Button dismissButton;
         private System.Windows.Forms.Button addEmployeeButton;
+        private System.Windows.Forms.PictureBox pictureBox;
     }
 }

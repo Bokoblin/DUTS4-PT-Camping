@@ -1,6 +1,7 @@
 ﻿using PT_Camping.Model;
 using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace PT_Camping
@@ -79,6 +80,16 @@ namespace PT_Camping
                 emailTextBox.Text = employee.Personne.Email;
                 loginTextBox.Text = employee.Login;
 
+                if (employee.Photo != null)
+                {
+                    MemoryStream ms = new MemoryStream(employee.Photo);
+                    Bitmap bitmap = new Bitmap(ms);
+                    pictureBox.Image = bitmap;
+                    ms.Close();
+                }
+                else
+                    pictureBox.Image = new Bitmap(Properties.Resources.contact_default);
+
                 dismissButton.Enabled = (employee.Personne.Code_Personne != 1); //You can't dismiss Mr Campo
             }
         }
@@ -89,7 +100,6 @@ namespace PT_Camping
             //TODO : new employee dialog
 
             updateEmployeesListView();
-       
         }
    
 
@@ -187,6 +197,5 @@ namespace PT_Camping
         {
             updateEmployeeDetails();
         }
-
     }
 }
