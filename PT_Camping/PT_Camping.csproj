@@ -78,52 +78,58 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddEmployee.cs">
+    <Compile Include="View\Forms\AddIssue.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddEmployee.Designer.cs">
+    <Compile Include="View\Forms\AddIssue.Designer.cs">
+      <DependentUpon>AddIssue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Forms\AddEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Forms\AddEmployee.Designer.cs">
       <DependentUpon>AddEmployee.cs</DependentUpon>
     </Compile>
-    <Compile Include="MapUserControl.cs">
+    <Compile Include="View\UserControls\MapUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MapUserControl.Designer.cs">
+    <Compile Include="View\UserControls\MapUserControl.Designer.cs">
       <DependentUpon>MapUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ClientsUserControl.cs">
+    <Compile Include="View\UserControls\ClientsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ClientsUserControl.Designer.cs">
+    <Compile Include="View\UserControls\ClientsUserControl.Designer.cs">
       <DependentUpon>ClientsUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ConnectionUserControl.cs">
+    <Compile Include="View\UserControls\ConnectionUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ConnectionUserControl.Designer.cs">
+    <Compile Include="View\UserControls\ConnectionUserControl.Designer.cs">
       <DependentUpon>ConnectionUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="EmployeesUserControl.cs">
+    <Compile Include="View\UserControls\EmployeesUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="EmployeesUserControl.Designer.cs">
+    <Compile Include="View\UserControls\EmployeesUserControl.Designer.cs">
       <DependentUpon>EmployeesUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="HomeUserControl.cs">
+    <Compile Include="View\UserControls\HomeUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="HomeUserControl.Designer.cs">
+    <Compile Include="View\UserControls\HomeUserControl.Designer.cs">
       <DependentUpon>HomeUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="IssuesUserControl.cs">
+    <Compile Include="View\UserControls\IssuesUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="IssuesUserControl.Designer.cs">
+    <Compile Include="View\UserControls\IssuesUserControl.Designer.cs">
       <DependentUpon>IssuesUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ManagementUserControl.cs">
+    <Compile Include="View\UserControls\ManagementUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ManagementUserControl.Designer.cs">
+    <Compile Include="View\UserControls\ManagementUserControl.Designer.cs">
       <DependentUpon>ManagementUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\App.cs">
@@ -193,66 +199,69 @@
       <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\LoginTools.cs" />
-    <Compile Include="Permissions.cs">
+    <Compile Include="View\Forms\Permissions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Permissions.Designer.cs">
+    <Compile Include="View\Forms\Permissions.Designer.cs">
       <DependentUpon>Permissions.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProvidersUserControl.cs">
+    <Compile Include="View\UserControls\ProvidersUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ProvidersUserControl.Designer.cs">
+    <Compile Include="View\UserControls\ProvidersUserControl.Designer.cs">
       <DependentUpon>ProvidersUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="StatsUserControl.cs">
+    <Compile Include="View\UserControls\StatsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="StatsUserControl.Designer.cs">
+    <Compile Include="View\UserControls\StatsUserControl.Designer.cs">
       <DependentUpon>StatsUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="StocksUserControl.cs">
+    <Compile Include="View\UserControls\StocksUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="StocksUserControl.Designer.cs">
+    <Compile Include="View\UserControls\StocksUserControl.Designer.cs">
       <DependentUpon>StocksUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="AppWindow.cs">
+    <Compile Include="View\Forms\AppWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AppWindow.Designer.cs">
+    <Compile Include="View\Forms\AppWindow.Designer.cs">
       <DependentUpon>AppWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AddEmployee.resx">
+    <EmbeddedResource Include="View\Forms\AddIssue.resx">
+      <DependentUpon>AddIssue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Forms\AddEmployee.resx">
       <DependentUpon>AddEmployee.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EmployeesUserControl.resx">
+    <EmbeddedResource Include="View\UserControls\EmployeesUserControl.resx">
       <DependentUpon>EmployeesUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MapUserControl.resx">
+    <EmbeddedResource Include="View\UserControls\MapUserControl.resx">
       <DependentUpon>MapUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ClientsUserControl.resx">
+    <EmbeddedResource Include="View\UserControls\ClientsUserControl.resx">
       <DependentUpon>ClientsUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ConnectionUserControl.resx">
+    <EmbeddedResource Include="View\UserControls\ConnectionUserControl.resx">
       <DependentUpon>ConnectionUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HomeUserControl.resx">
+    <EmbeddedResource Include="View\UserControls\HomeUserControl.resx">
       <DependentUpon>HomeUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="IssuesUserControl.resx">
+    <EmbeddedResource Include="View\UserControls\IssuesUserControl.resx">
       <DependentUpon>IssuesUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManagementUserControl.resx">
+    <EmbeddedResource Include="View\UserControls\ManagementUserControl.resx">
       <DependentUpon>ManagementUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AppWindow.resx">
+    <EmbeddedResource Include="View\Forms\AppWindow.resx">
       <DependentUpon>AppWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Permissions.resx">
+    <EmbeddedResource Include="View\Forms\Permissions.resx">
       <DependentUpon>Permissions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -333,6 +342,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

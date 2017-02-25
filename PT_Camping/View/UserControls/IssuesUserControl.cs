@@ -22,6 +22,7 @@ namespace PT_Camping
             db = new DataBase();
 
             issuesListView.View = View.Details;
+            issuesListView.Columns.Add("Type d'incident", -2);
             issuesListView.Columns.Add("Description", -2);
             issuesListView.Columns.Add("Date", -2);
 
@@ -35,7 +36,7 @@ namespace PT_Camping
             base.handleResize();
 
             issuesListView.Size = new Size(
-                Convert.ToInt32(mHomeUC.Size.Width * 0.3),
+                Convert.ToInt32(mHomeUC.Size.Width * 0.4),
                 Convert.ToInt32(issuesListView.Size.Height)
                 );
         }
@@ -47,10 +48,11 @@ namespace PT_Camping
 
             foreach (var incident in db.Incident)
             {
+                string type_incident = incident.Type_Incident.Type_Incident1;
                 string description_incident = incident.Description_Incident;
                 string date_incident = incident.Date_Incident.ToShortDateString();
 
-                var item = new ListViewItem(new[] { description_incident, date_incident });
+                var item = new ListViewItem(new[] { type_incident, description_incident, date_incident });
                 item.Name = incident.Code_Incident.ToString();
                 issuesListView.Items.Add(item);
             }
@@ -78,8 +80,8 @@ namespace PT_Camping
                     resolutionDateTextBox.Text = ((DateTime)incident.Date_Resolution).ToShortDateString();
                 else
                     resolutionDateTextBox.Text = "";
-                criticStateTextBox.Text = incident.Criticite_Incident.ToString() + "/5";
-                stateTextBox.Text = incident.Avancement_Incident;
+                criticalityTextBox.Text = incident.Criticite_Incident.ToString() + "/5";
+                statusTextBox.Text = incident.Avancement_Incident;
                 descriptionTextBox.Text = incident.Description_Incident;
 
                 resolveButton.Enabled = (incident.Avancement_Incident != "Terminé");
@@ -90,24 +92,21 @@ namespace PT_Camping
 
         private void onAddIssueButtonClick(object sender, EventArgs e)
         {
-            //TODO : Open Map's new issue adding
+            /* TODO ***
+            
+            Expected behaviour after merging this branch + Alex's branch + 1 commit : 
+            
+            This method opens Map's issue section with aside a card with a drag & drop issue icon
+            By dragging this icon on a campground and dropping it, it opens a dialog 
+            where you have to add issue type, description and criticality. 
+            Automactic DateTime.now() is set at OkButton event with status "Nouveau" and the issue is now added.
 
-            //Temporary behaviour :
+            */
 
-            Incident i = new Incident();
-            i.Avancement_Incident = "Nouveau";
-            i.Code_Emplacement = 1;
-            i.Code_Type = 3;
-            i.Criticite_Incident = 2;
-            i.Date_Incident = DateTime.Now;
-            i.Description_Incident = "Sans commentaire";
-            db.Incident.Add(i);
-            db.SaveChanges();
+            //TEMPORARY BEHAVIOUR : "AddIssue" dialog called here with Code_Emplacement = 1
 
+            new AddIssue(db, 1).ShowDialog();
             updateIssuesListView();
-
-            MessageBox.Show("A template item has been added. \n"
-                + "This is a temporary behaviour until Map issues adding feature is implemented");
         }
 
 
@@ -127,15 +126,15 @@ namespace PT_Camping
             if (resolutionDateTextBox.ReadOnly == true)
             {
                 resolutionDateTextBox.ReadOnly = false;
-                criticStateTextBox.ReadOnly = false;
-                stateTextBox.ReadOnly = false;
+                criticalityTextBox.ReadOnly = false;
+                statusTextBox.ReadOnly = false;
                 descriptionTextBox.ReadOnly = false;
             }
             else
             {
                 resolutionDateTextBox.ReadOnly = true;
-                criticStateTextBox.ReadOnly = true;
-                stateTextBox.ReadOnly = true;
+                criticalityTextBox.ReadOnly = true;
+                statusTextBox.ReadOnly = true;
                 descriptionTextBox.ReadOnly = true;
 
                 string message = "Les données suivantes ont été mises à jour : \n";
@@ -144,43 +143,51 @@ namespace PT_Camping
                 int code = int.Parse(issuesListView.SelectedItems[0].Name);
                 var incident = db.Incident.Find(code);
 
-                if (resolutionDateTextBox.Text != ((DateTime)incident.Date_Resolution).ToShortDateString())
+                try
                 {
-                    try
-                    {
-                        if (resolutionDateTextBox.Text == "")
-                        {
-                            incident.Date_Resolution = null;
-                            message += "date de résolution\n";
-                            cptModifications++;
-                        }
 
-                        /* DateTime.Parse isn't 100% working concerning compatibility with datebase DateTime :
-                         * db.saveChanges() throws exceptions in certain cases due to that incompatibility
-                         */
-                        incident.Date_Resolution = DateTime.Parse(resolutionDateTextBox.Text);
-                        message += "date de résolution\n";
-                        cptModifications++;
-                    }
-                    catch (ArgumentNullException)
+                    if (resolutionDateTextBox.Text == "" && incident.Date_Resolution != null)
                     {
                         incident.Date_Resolution = null;
                         message += "date de résolution\n";
                         cptModifications++;
                     }
-                    catch (FormatException)
+                    else if (resolutionDateTextBox.Text != "")
                     {
-                        resolutionDateTextBox.Text = incident.Date_Resolution.ToString();
-                        MessageBox.Show("Le format de date n'est pas correct");
+                        incident.Date_Resolution = DateTime.Parse(resolutionDateTextBox.Text);
+
+                        if (incident.Date_Resolution < incident.Date_Incident)
+                        {
+                            if (incident.Date_Resolution.Value.Day == incident.Date_Incident.Day)
+                                incident.Date_Resolution = incident.Date_Incident.AddSeconds(1);
+                            else
+                            {
+                                incident.Date_Resolution = null;
+                                throw new Exception();
+                            }
+                                
+                        }
+
+                        if ( ((DateTime)incident.Date_Resolution).ToShortDateString() != resolutionDateTextBox.Text)
+                        {
+                            message += "date de résolution\n";
+                            cptModifications++;
+                        }
+                        
                     }
                 }
-
-                if (criticStateTextBox.Text != (incident.Criticite_Incident.ToString() + "/5"))
+                catch (Exception)
                 {
-                    int criticite;
-                    if (int.TryParse(criticStateTextBox.Text, out criticite) && criticite >= 1 && criticite <= 5)
+                    resolutionDateTextBox.Text = incident.Date_Resolution.ToString();
+                    MessageBox.Show("La date n'est pas valide. \nVérifier que la date au format YYYY-MM-DD HH:MM:SS \net supérieure à la date de l'incident.");
+                }
+
+                if (criticalityTextBox.Text != (incident.Criticite_Incident.ToString() + "/5"))
+                {
+                    int criticality;
+                    if (int.TryParse(criticalityTextBox.Text, out criticality) && criticality >= 1 && criticality <= 5)
                     {
-                        incident.Criticite_Incident = criticite;
+                        incident.Criticite_Incident = criticality;
                         message += "criticité\n";
                         cptModifications++;
                     }
@@ -188,13 +195,13 @@ namespace PT_Camping
                         MessageBox.Show("Criticité doit être un entier compris entre 1 et 5");
                 }
 
-                if (stateTextBox.Text != incident.Avancement_Incident)
+                if (statusTextBox.Text != incident.Avancement_Incident)
                 {
-                    incident.Avancement_Incident = stateTextBox.Text;
+                    incident.Avancement_Incident = statusTextBox.Text;
                     message += "avancement\n";
                     cptModifications++;
 
-                    if (stateTextBox.Text != "Terminé" && resolutionDateTextBox.Text != null)
+                    if (statusTextBox.Text != "Terminé" && resolutionDateTextBox.Text != null)
                     {
                         incident.Date_Resolution = null;
                         message += "date de résolution\n";
@@ -234,6 +241,10 @@ namespace PT_Camping
 
         private void issuesListView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            resolutionDateTextBox.ReadOnly = true;
+            criticalityTextBox.ReadOnly = true;
+            statusTextBox.ReadOnly = true;
+            descriptionTextBox.ReadOnly = true;
             updateIssueDetails();
         }
     }

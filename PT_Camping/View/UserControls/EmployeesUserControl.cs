@@ -132,7 +132,7 @@ namespace PT_Camping
                     cptModifications++;
                 }
 
-                if (phoneTextBox.Text != employee.Personne.Telephone)
+                if (phoneTextBox.Text != "" && phoneTextBox.Text != employee.Personne.Telephone)
                 {
                     int phone;
                     if (int.TryParse(phoneTextBox.Text, out phone) && phoneTextBox.Text.Length == 10)
@@ -196,6 +196,10 @@ namespace PT_Camping
 
         private void employeeListView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            addressTextBox.ReadOnly = true;
+            phoneTextBox.ReadOnly = true;
+            emailTextBox.ReadOnly = true;
+            loginTextBox.ReadOnly = true;
             updateEmployeeDetails();
         }
     }

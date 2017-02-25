@@ -35,8 +35,8 @@
             this.emplacementTextBox = new System.Windows.Forms.TextBox();
             this.emplacementLabel = new System.Windows.Forms.Label();
             this.descriptionTextBox = new System.Windows.Forms.TextBox();
-            this.stateTextBox = new System.Windows.Forms.TextBox();
-            this.criticStateTextBox = new System.Windows.Forms.TextBox();
+            this.statusTextBox = new System.Windows.Forms.TextBox();
+            this.criticalityTextBox = new System.Windows.Forms.TextBox();
             this.resolutionDateTextBox = new System.Windows.Forms.TextBox();
             this.creationDateTextBox = new System.Windows.Forms.TextBox();
             this.typeTextBox = new System.Windows.Forms.TextBox();
@@ -47,8 +47,8 @@
             this.detailsTitle = new System.Windows.Forms.Label();
             this.resolveButton = new System.Windows.Forms.Button();
             this.descriptionLabel = new System.Windows.Forms.Label();
-            this.stateLabel = new System.Windows.Forms.Label();
-            this.criticStateLabel = new System.Windows.Forms.Label();
+            this.statusLabel = new System.Windows.Forms.Label();
+            this.criticalityLabel = new System.Windows.Forms.Label();
             this.ResolutionDateLabel = new System.Windows.Forms.Label();
             this.creationDateLabel = new System.Windows.Forms.Label();
             this.TypeLabel = new System.Windows.Forms.Label();
@@ -57,20 +57,26 @@
             this.detailsTitleBarPanel.SuspendLayout();
             this.SuspendLayout();
             // 
+            // appBarTitle
+            // 
+            this.appBarTitle.TabIndex = 0;
+            // 
             // logoutButton
             // 
             this.logoutButton.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
             this.logoutButton.FlatAppearance.BorderSize = 0;
+            this.logoutButton.TabIndex = 7;
             // 
             // issuesListView
             // 
+            this.issuesListView.FullRowSelect = true;
             this.issuesListView.GridLines = true;
             this.issuesListView.HideSelection = false;
             this.issuesListView.Location = new System.Drawing.Point(25, 80);
             this.issuesListView.MultiSelect = false;
             this.issuesListView.Name = "issuesListView";
             this.issuesListView.Size = new System.Drawing.Size(320, 400);
-            this.issuesListView.TabIndex = 10;
+            this.issuesListView.TabIndex = 8;
             this.issuesListView.UseCompatibleStateImageBehavior = false;
             this.issuesListView.View = System.Windows.Forms.View.List;
             this.issuesListView.SelectedIndexChanged += new System.EventHandler(this.issuesListView_SelectedIndexChanged);
@@ -95,8 +101,8 @@
             this.detailsPanel.Controls.Add(this.emplacementTextBox);
             this.detailsPanel.Controls.Add(this.emplacementLabel);
             this.detailsPanel.Controls.Add(this.descriptionTextBox);
-            this.detailsPanel.Controls.Add(this.stateTextBox);
-            this.detailsPanel.Controls.Add(this.criticStateTextBox);
+            this.detailsPanel.Controls.Add(this.statusTextBox);
+            this.detailsPanel.Controls.Add(this.criticalityTextBox);
             this.detailsPanel.Controls.Add(this.resolutionDateTextBox);
             this.detailsPanel.Controls.Add(this.creationDateTextBox);
             this.detailsPanel.Controls.Add(this.typeTextBox);
@@ -106,8 +112,8 @@
             this.detailsPanel.Controls.Add(this.detailsTitleBarPanel);
             this.detailsPanel.Controls.Add(this.resolveButton);
             this.detailsPanel.Controls.Add(this.descriptionLabel);
-            this.detailsPanel.Controls.Add(this.stateLabel);
-            this.detailsPanel.Controls.Add(this.criticStateLabel);
+            this.detailsPanel.Controls.Add(this.statusLabel);
+            this.detailsPanel.Controls.Add(this.criticalityLabel);
             this.detailsPanel.Controls.Add(this.ResolutionDateLabel);
             this.detailsPanel.Controls.Add(this.creationDateLabel);
             this.detailsPanel.Controls.Add(this.TypeLabel);
@@ -115,7 +121,7 @@
             this.detailsPanel.Location = new System.Drawing.Point(420, 80);
             this.detailsPanel.Name = "detailsPanel";
             this.detailsPanel.Size = new System.Drawing.Size(352, 400);
-            this.detailsPanel.TabIndex = 12;
+            this.detailsPanel.TabIndex = 9;
             // 
             // emplacementTextBox
             // 
@@ -123,7 +129,7 @@
             this.emplacementTextBox.Name = "emplacementTextBox";
             this.emplacementTextBox.ReadOnly = true;
             this.emplacementTextBox.Size = new System.Drawing.Size(120, 20);
-            this.emplacementTextBox.TabIndex = 20;
+            this.emplacementTextBox.TabIndex = 13;
             // 
             // emplacementLabel
             // 
@@ -141,23 +147,23 @@
             this.descriptionTextBox.Name = "descriptionTextBox";
             this.descriptionTextBox.ReadOnly = true;
             this.descriptionTextBox.Size = new System.Drawing.Size(120, 40);
-            this.descriptionTextBox.TabIndex = 18;
+            this.descriptionTextBox.TabIndex = 19;
             // 
-            // stateTextBox
+            // statusTextBox
             // 
-            this.stateTextBox.Location = new System.Drawing.Point(161, 254);
-            this.stateTextBox.Name = "stateTextBox";
-            this.stateTextBox.ReadOnly = true;
-            this.stateTextBox.Size = new System.Drawing.Size(120, 20);
-            this.stateTextBox.TabIndex = 17;
+            this.statusTextBox.Location = new System.Drawing.Point(161, 254);
+            this.statusTextBox.Name = "statusTextBox";
+            this.statusTextBox.ReadOnly = true;
+            this.statusTextBox.Size = new System.Drawing.Size(120, 20);
+            this.statusTextBox.TabIndex = 18;
             // 
-            // criticStateTextBox
+            // criticalityTextBox
             // 
-            this.criticStateTextBox.Location = new System.Drawing.Point(161, 228);
-            this.criticStateTextBox.Name = "criticStateTextBox";
-            this.criticStateTextBox.ReadOnly = true;
-            this.criticStateTextBox.Size = new System.Drawing.Size(120, 20);
-            this.criticStateTextBox.TabIndex = 16;
+            this.criticalityTextBox.Location = new System.Drawing.Point(161, 228);
+            this.criticalityTextBox.Name = "criticalityTextBox";
+            this.criticalityTextBox.ReadOnly = true;
+            this.criticalityTextBox.Size = new System.Drawing.Size(120, 20);
+            this.criticalityTextBox.TabIndex = 17;
             // 
             // resolutionDateTextBox
             // 
@@ -165,7 +171,7 @@
             this.resolutionDateTextBox.Name = "resolutionDateTextBox";
             this.resolutionDateTextBox.ReadOnly = true;
             this.resolutionDateTextBox.Size = new System.Drawing.Size(120, 20);
-            this.resolutionDateTextBox.TabIndex = 15;
+            this.resolutionDateTextBox.TabIndex = 16;
             // 
             // creationDateTextBox
             // 
@@ -173,7 +179,7 @@
             this.creationDateTextBox.Name = "creationDateTextBox";
             this.creationDateTextBox.ReadOnly = true;
             this.creationDateTextBox.Size = new System.Drawing.Size(120, 20);
-            this.creationDateTextBox.TabIndex = 14;
+            this.creationDateTextBox.TabIndex = 15;
             // 
             // typeTextBox
             // 
@@ -181,7 +187,7 @@
             this.typeTextBox.Name = "typeTextBox";
             this.typeTextBox.ReadOnly = true;
             this.typeTextBox.Size = new System.Drawing.Size(120, 20);
-            this.typeTextBox.TabIndex = 13;
+            this.typeTextBox.TabIndex = 14;
             // 
             // idTextBox
             // 
@@ -198,7 +204,7 @@
             this.deleteButton.Location = new System.Drawing.Point(281, 46);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(30, 30);
-            this.deleteButton.TabIndex = 11;
+            this.deleteButton.TabIndex = 10;
             this.deleteButton.UseVisualStyleBackColor = true;
             this.deleteButton.Click += new System.EventHandler(this.onDeleteIssueButtonClick);
             // 
@@ -209,7 +215,7 @@
             this.editButton.Location = new System.Drawing.Point(317, 46);
             this.editButton.Name = "editButton";
             this.editButton.Size = new System.Drawing.Size(30, 30);
-            this.editButton.TabIndex = 10;
+            this.editButton.TabIndex = 11;
             this.editButton.UseVisualStyleBackColor = true;
             this.editButton.Click += new System.EventHandler(this.onEditButtonClick);
             // 
@@ -242,7 +248,7 @@
             this.resolveButton.Location = new System.Drawing.Point(105, 345);
             this.resolveButton.Name = "resolveButton";
             this.resolveButton.Size = new System.Drawing.Size(130, 30);
-            this.resolveButton.TabIndex = 8;
+            this.resolveButton.TabIndex = 20;
             this.resolveButton.Text = "Marqué comme résolu";
             this.resolveButton.UseVisualStyleBackColor = true;
             this.resolveButton.Click += new System.EventHandler(this.onResolveIssueButtonClick);
@@ -256,23 +262,23 @@
             this.descriptionLabel.TabIndex = 7;
             this.descriptionLabel.Text = "Description";
             // 
-            // stateLabel
+            // statusLabel
             // 
-            this.stateLabel.AutoSize = true;
-            this.stateLabel.Location = new System.Drawing.Point(29, 257);
-            this.stateLabel.Name = "stateLabel";
-            this.stateLabel.Size = new System.Drawing.Size(67, 13);
-            this.stateLabel.TabIndex = 6;
-            this.stateLabel.Text = "Avancement";
+            this.statusLabel.AutoSize = true;
+            this.statusLabel.Location = new System.Drawing.Point(29, 257);
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(67, 13);
+            this.statusLabel.TabIndex = 6;
+            this.statusLabel.Text = "Avancement";
             // 
-            // criticStateLabel
+            // criticalityLabel
             // 
-            this.criticStateLabel.AutoSize = true;
-            this.criticStateLabel.Location = new System.Drawing.Point(29, 231);
-            this.criticStateLabel.Name = "criticStateLabel";
-            this.criticStateLabel.Size = new System.Drawing.Size(41, 13);
-            this.criticStateLabel.TabIndex = 5;
-            this.criticStateLabel.Text = "Criticité";
+            this.criticalityLabel.AutoSize = true;
+            this.criticalityLabel.Location = new System.Drawing.Point(29, 231);
+            this.criticalityLabel.Name = "criticalityLabel";
+            this.criticalityLabel.Size = new System.Drawing.Size(41, 13);
+            this.criticalityLabel.TabIndex = 5;
+            this.criticalityLabel.Text = "Criticité";
             // 
             // ResolutionDateLabel
             // 
@@ -341,16 +347,16 @@
         private System.Windows.Forms.Label detailsTitle;
         private System.Windows.Forms.Button resolveButton;
         private System.Windows.Forms.Label descriptionLabel;
-        private System.Windows.Forms.Label stateLabel;
-        private System.Windows.Forms.Label criticStateLabel;
+        private System.Windows.Forms.Label statusLabel;
+        private System.Windows.Forms.Label criticalityLabel;
         private System.Windows.Forms.Label ResolutionDateLabel;
         private System.Windows.Forms.Label creationDateLabel;
         private System.Windows.Forms.Label TypeLabel;
         private System.Windows.Forms.Label idLabel;
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.TextBox descriptionTextBox;
-        private System.Windows.Forms.TextBox stateTextBox;
-        private System.Windows.Forms.TextBox criticStateTextBox;
+        private System.Windows.Forms.TextBox statusTextBox;
+        private System.Windows.Forms.TextBox criticalityTextBox;
         private System.Windows.Forms.TextBox resolutionDateTextBox;
         private System.Windows.Forms.TextBox creationDateTextBox;
         private System.Windows.Forms.TextBox typeTextBox;

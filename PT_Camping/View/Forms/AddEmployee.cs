@@ -1,16 +1,18 @@
 ﻿using PT_Camping.Model;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PT_Camping
 {
+    /// <summary>
+    /// This dialog allows to add a new employee
+    /// by choosing a name, a surname, a date of birth, a phone number,
+    /// an address, an email, a login and a password
+    /// 
+    /// </summary>
+    /// Authors : Arthur
+    /// Since : 24/02/17
     public partial class AddEmployee : Form
     {
         private DataBase db;
