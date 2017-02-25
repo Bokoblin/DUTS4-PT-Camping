@@ -123,7 +123,7 @@
             this.dismissButton.Location = new System.Drawing.Point(190, 390);
             this.dismissButton.Name = "dismissButton";
             this.dismissButton.Size = new System.Drawing.Size(120, 30);
-            this.dismissButton.TabIndex = 21;
+            this.dismissButton.TabIndex = 23;
             this.dismissButton.Text = "Licencier";
             this.dismissButton.UseVisualStyleBackColor = true;
             this.dismissButton.Click += new System.EventHandler(this.onDismissEmployeeButtonClick);
@@ -134,7 +134,7 @@
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.ReadOnly = true;
             this.nameTextBox.Size = new System.Drawing.Size(120, 20);
-            this.nameTextBox.TabIndex = 20;
+            this.nameTextBox.TabIndex = 16;
             // 
             // nameLabel
             // 
@@ -151,7 +151,7 @@
             this.loginTextBox.Name = "loginTextBox";
             this.loginTextBox.ReadOnly = true;
             this.loginTextBox.Size = new System.Drawing.Size(120, 20);
-            this.loginTextBox.TabIndex = 17;
+            this.loginTextBox.TabIndex = 21;
             // 
             // emailTextBox
             // 
@@ -159,7 +159,7 @@
             this.emailTextBox.Name = "emailTextBox";
             this.emailTextBox.ReadOnly = true;
             this.emailTextBox.Size = new System.Drawing.Size(120, 20);
-            this.emailTextBox.TabIndex = 16;
+            this.emailTextBox.TabIndex = 20;
             // 
             // phoneTextBox
             // 
@@ -167,7 +167,7 @@
             this.phoneTextBox.Name = "phoneTextBox";
             this.phoneTextBox.ReadOnly = true;
             this.phoneTextBox.Size = new System.Drawing.Size(120, 20);
-            this.phoneTextBox.TabIndex = 15;
+            this.phoneTextBox.TabIndex = 19;
             // 
             // addressTextBox
             // 
@@ -176,7 +176,7 @@
             this.addressTextBox.Name = "addressTextBox";
             this.addressTextBox.ReadOnly = true;
             this.addressTextBox.Size = new System.Drawing.Size(120, 40);
-            this.addressTextBox.TabIndex = 14;
+            this.addressTextBox.TabIndex = 18;
             // 
             // birthDateTextBox
             // 
@@ -184,7 +184,7 @@
             this.birthDateTextBox.Name = "birthDateTextBox";
             this.birthDateTextBox.ReadOnly = true;
             this.birthDateTextBox.Size = new System.Drawing.Size(120, 20);
-            this.birthDateTextBox.TabIndex = 13;
+            this.birthDateTextBox.TabIndex = 17;
             // 
             // surnameTextBox
             // 
@@ -192,7 +192,7 @@
             this.surnameTextBox.Name = "surnameTextBox";
             this.surnameTextBox.ReadOnly = true;
             this.surnameTextBox.Size = new System.Drawing.Size(120, 20);
-            this.surnameTextBox.TabIndex = 12;
+            this.surnameTextBox.TabIndex = 15;
             // 
             // editButton
             // 
@@ -201,7 +201,7 @@
             this.editButton.Location = new System.Drawing.Point(317, 46);
             this.editButton.Name = "editButton";
             this.editButton.Size = new System.Drawing.Size(30, 30);
-            this.editButton.TabIndex = 10;
+            this.editButton.TabIndex = 14;
             this.editButton.UseVisualStyleBackColor = true;
             this.editButton.Click += new System.EventHandler(this.onEditButtonClick);
             // 
@@ -234,7 +234,7 @@
             this.permissionButton.Location = new System.Drawing.Point(40, 390);
             this.permissionButton.Name = "permissionButton";
             this.permissionButton.Size = new System.Drawing.Size(120, 30);
-            this.permissionButton.TabIndex = 8;
+            this.permissionButton.TabIndex = 22;
             this.permissionButton.Text = "Permissions";
             this.permissionButton.UseVisualStyleBackColor = true;
             this.permissionButton.Click += new System.EventHandler(this.onPermissionButtonClick);
@@ -299,7 +299,7 @@
             this.addEmployeeButton.Location = new System.Drawing.Point(100, 550);
             this.addEmployeeButton.Name = "addEmployeeButton";
             this.addEmployeeButton.Size = new System.Drawing.Size(166, 38);
-            this.addEmployeeButton.TabIndex = 14;
+            this.addEmployeeButton.TabIndex = 12;
             this.addEmployeeButton.Text = "Nouvel employé";
             this.addEmployeeButton.UseVisualStyleBackColor = true;
             this.addEmployeeButton.Click += new System.EventHandler(this.onAddEmployeeButtonClick);

@@ -6,6 +6,18 @@ using System.Collections.Generic;
 
 namespace PT_Camping
 {
+    /// <summary>
+    /// This dialog allows to select the permission given to each employee
+    /// It is divided in two category READ and WRITE :
+    /// - Without READ or WRITE, you can't access management process of the app
+    /// - With only READ, you can only read the informations of the authorized section
+    /// - With READ and WRITE, you can read the informations of the authorized section and edit them
+    /// 
+    /// Note : WRITE permission can't be set without READ permission
+    /// 
+    /// </summary>
+    /// Authors : Arthur
+    /// Since : 22/02/17
     public partial class Permissions : Form
     {
         private DataBase db;
@@ -303,6 +315,78 @@ namespace PT_Camping
             #endregion
 
             this.Close();
+        }
+
+        private void readClients_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!readClients.Checked)
+                writeClients.Checked = false;
+        }
+
+        private void readIssues_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!readIssues.Checked)
+                writeIssues.Checked = false;
+        }
+
+        private void readEmployees_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!readEmployees.Checked)
+                writeEmployees.Checked = false;
+        }
+
+        private void readProviders_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!readProviders.Checked)
+                writeProviders.Checked = false;
+        }
+
+        private void readStocks_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!readStocks.Checked)
+                writeStocks.Checked = false;
+        }
+
+        private void readMap_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!readMap.Checked)
+                writeMap.Checked = false;
+        }
+
+        private void writeClients_CheckedChanged(object sender, EventArgs e)
+        {
+            if (writeClients.Checked)
+                readClients.Checked = true;
+        }
+
+        private void writeIssues_CheckedChanged(object sender, EventArgs e)
+        {
+            if (writeIssues.Checked)
+                readIssues.Checked = true;
+        }
+
+        private void writeEmployees_CheckedChanged(object sender, EventArgs e)
+        {
+            if (writeEmployees.Checked)
+                readEmployees.Checked = true;
+        }
+
+        private void writeProviders_CheckedChanged(object sender, EventArgs e)
+        {
+            if (writeProviders.Checked)
+                readProviders.Checked = true;
+        }
+
+        private void writeStocks_CheckedChanged(object sender, EventArgs e)
+        {
+            if (writeStocks.Checked)
+                readStocks.Checked = true;
+        }
+
+        private void writeMap_CheckedChanged(object sender, EventArgs e)
+        {
+            if (writeMap.Checked)
+                readMap.Checked = true;
         }
     }
 }
