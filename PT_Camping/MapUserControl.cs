@@ -75,6 +75,11 @@ namespace PT_Camping
             Dock = DockStyle.Fill;
             LoginTools.checkConnection();
             DataBase db = new DataBase();
+            foreach (Caracteristique_Emplacement car in db.Caracteristique_Emplacement)
+            {
+                carCheckedListBox.Items.Add(car);
+            }
+            carCheckedListBox.DisplayMember = "Description";
             List<Emplacement> locations = db.Emplacement.ToList();
             locationsList = new List<GraphicLocation>();
             foreach(Emplacement loc in locations)
@@ -85,6 +90,7 @@ namespace PT_Camping
             int i = 0;
             foreach(Type_Emplacement type in typesLocations)
             {
+                typeLocationComboBox.Items.Add(type);
                 Button button = new Button();
                 button.Click += addLocationClick;
                 button.Text = type.Libelle_Type;
@@ -104,9 +110,9 @@ namespace PT_Camping
 
                 categoriesCheckedListBox.Items.Add(type.Libelle_Type, true);
             }
-
-            //if (db.App.Where(m => m.Fond_Image != null).Count() < 1)
+            typeLocationComboBox.DisplayMember = "Libelle_Type";
             if (true)
+            //if (db.App.Where(m => m.Fond_Image != null).Count() < 1)
             {
                 mode = MapMode.LOAD_IMAGE;
             } else
@@ -114,6 +120,7 @@ namespace PT_Camping
                 MemoryStream ms = new MemoryStream(db.App.FirstOrDefault().Fond_Image);
                 image = new Bitmap(ms);
                 ms.Close();
+                pictureBox.Image = image;
                 mode = MapMode.NORMAL;
             }
             changeMode(mode);
@@ -402,8 +409,14 @@ namespace PT_Camping
                 resStateLabel.Text = "Libre";
                 resButton.Text = "Réserver";
             }
+            locationNameTextBox.DataBindings.Clear();
+            locationNameTextBox.DataBindings.Add("Text", selectedLocation.Location, "Nom_Emplacement", false, DataSourceUpdateMode.OnPropertyChanged);
+            
+            typeLocationComboBox.DataBindings.Clear();
+            //typeLocationComboBox.DataBindings.Add("SelectedItem", selectedLocation.Location, "Type_Emplacement", false, DataSourceUpdateMode.OnPropertyChanged);
 
-            locationNameTextBox.Text = selectedLocation.Location.Nom_Emplacement;
+            //carCheckedListBox.DataBindings.Clear();
+            //carCheckedListBox.DataBindings.Add("CheckedItems", selectedLocation.Location, "Caracteristique_Emplacement", false, DataSourceUpdateMode.OnPropertyChanged);
         }
 
         private void dateTimePicker_ValueChanged(object sender, EventArgs e)
