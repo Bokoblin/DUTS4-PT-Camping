@@ -17,6 +17,8 @@ namespace PT_Camping.Model
         public string Login { get; set; }
         public string Password { get; set; }
         public int Code_Personne { get; set; }
+        public bool EstLicencie { get; set; }
+        public byte[] Photo { get; set; }
     
         public virtual Personne Personne { get; set; }
     }
