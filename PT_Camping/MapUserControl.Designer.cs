@@ -106,7 +106,7 @@
             this.mapTablePanel.ColumnCount = 3;
             this.mapTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.mapTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
-            this.mapTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 263F));
+            this.mapTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 264F));
             this.mapTablePanel.Controls.Add(this.modeCheckBox, 0, 0);
             this.mapTablePanel.Controls.Add(this.dateTimePicker, 1, 0);
             this.mapTablePanel.Controls.Add(this.validateChangesButton, 2, 0);
@@ -142,6 +142,7 @@
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.Size = new System.Drawing.Size(210, 22);
             this.dateTimePicker.TabIndex = 2;
+            this.dateTimePicker.ValueChanged += new System.EventHandler(this.dateTimePicker_ValueChanged);
             // 
             // validateChangesButton
             // 
