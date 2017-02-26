@@ -44,7 +44,21 @@ namespace PT_Camping
         private Bitmap image;
         private MapMode mode;
         private List<GraphicLocation> locationsList;
-        private GraphicLocation selectedLocation;
+        private GraphicLocation _selectedLocation;
+        private GraphicLocation selectedLocation {
+            set
+            {
+                _selectedLocation = value;
+                if (_selectedLocation != null)
+                {
+                    updateRightMenu();
+                }
+            }
+            get
+            {
+                return _selectedLocation;
+            }
+        }
         private bool moving;
         private Point offsetMoving;
         private Point startClick;
@@ -369,6 +383,32 @@ namespace PT_Camping
             {
                 location.saveToDB(db);
             }
+        }
+
+        private void updateRightMenu()
+        {
+            LoginTools.checkConnection();
+            DataBase db = new DataBase();
+            Panel details = detailsLocationPanel;
+            Panel edit = editLocationPanel;
+            string resState = resStateLabel.Text;
+            string buttonText = resButton.Text;
+            if (db.Reservation.Where(r => r.Date_Fin < dateTimePicker.Value).SelectMany(a => a.Loge).Where(l => l.Code_Emplacement == selectedLocation.Location.Code_Emplacement).Count() >= 1)
+            {
+                resStateLabel.Text = "Reservé";
+                resButton.Text = "Libérer";
+            } else
+            {
+                resStateLabel.Text = "Libre";
+                resButton.Text = "Réserver";
+            }
+
+            locationNameTextBox.Text = selectedLocation.Location.Nom_Emplacement;
+        }
+
+        private void dateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            updateRightMenu();
         }
     }
 }
