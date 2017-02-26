@@ -22,21 +22,12 @@ namespace PT_Camping
             db = new DataBase();
 
             employeeListView.View = View.Details;
-            employeeListView.Columns.Add("Employé", -2);
+            employeeListView.Columns.Add("Nom", -2);
+            employeeListView.Columns.Add("Prénom", -2);
+            employeeListView.Columns.Add("Email", -2);
 
             updateEmployeesListView();
             handleResize();
-        }
-
-
-        internal new void handleResize()
-        {
-            base.handleResize();
-
-            employeeListView.Size = new Size(
-                Convert.ToInt32(mHomeUC.Size.Width * 0.3),
-                Convert.ToInt32(employeeListView.Size.Height)
-                );
         }
 
 
@@ -48,10 +39,11 @@ namespace PT_Camping
             {
                 if (!employee.EstLicencie)
                 {
-                    string surnameAndName = employee.Personne.Nom_Personne.ToUpper()
-                        + " " + employee.Personne.Prenom_Personne;
+                    string surname = employee.Personne.Nom_Personne.ToUpper();
+                    string name = employee.Personne.Prenom_Personne;
+                    string email = employee.Personne.Email;
 
-                    var item = new ListViewItem(new[] { surnameAndName });
+                    var item = new ListViewItem(new[] { surname, name, email });
                     item.Name = employee.Code_Personne.ToString();
                     employeeListView.Items.Add(item);
                 }
@@ -201,6 +193,16 @@ namespace PT_Camping
             emailTextBox.ReadOnly = true;
             loginTextBox.ReadOnly = true;
             updateEmployeeDetails();
+        }
+
+        private void employeeListView_Resize(object sender, EventArgs e)
+        {
+            if (employeeListView.Columns.Count == 3)
+            {
+                employeeListView.Columns[0].Width = employeeListView.Width / 3;
+                employeeListView.Columns[1].Width = employeeListView.Width / 3;
+                employeeListView.Columns[2].Width = employeeListView.Width / 3;
+            }
         }
     }
 }
