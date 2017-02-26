@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IssuesUserControl));
+            this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.issuesListView = new System.Windows.Forms.ListView();
             this.addIssueButton = new System.Windows.Forms.Button();
             this.detailsPanel = new System.Windows.Forms.Panel();
@@ -53,6 +54,7 @@
             this.creationDateLabel = new System.Windows.Forms.Label();
             this.TypeLabel = new System.Windows.Forms.Label();
             this.idLabel = new System.Windows.Forms.Label();
+            this.tableLayoutPanel.SuspendLayout();
             this.detailsPanel.SuspendLayout();
             this.detailsTitleBarPanel.SuspendLayout();
             this.SuspendLayout();
@@ -67,26 +69,52 @@
             this.logoutButton.FlatAppearance.BorderSize = 0;
             this.logoutButton.TabIndex = 7;
             // 
+            // tableLayoutPanel
+            // 
+            this.tableLayoutPanel.ColumnCount = 5;
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel.Controls.Add(this.detailsPanel, 3, 1);
+            this.tableLayoutPanel.Controls.Add(this.issuesListView, 1, 1);
+            this.tableLayoutPanel.Controls.Add(this.addIssueButton, 1, 2);
+            this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel.Location = new System.Drawing.Point(0, 50);
+            this.tableLayoutPanel.Name = "tableLayoutPanel";
+            this.tableLayoutPanel.RowCount = 4;
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 72F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel.Size = new System.Drawing.Size(803, 553);
+            this.tableLayoutPanel.TabIndex = 12;
+            // 
             // issuesListView
             // 
+            this.issuesListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.issuesListView.FullRowSelect = true;
             this.issuesListView.GridLines = true;
             this.issuesListView.HideSelection = false;
-            this.issuesListView.Location = new System.Drawing.Point(25, 80);
+            this.issuesListView.Location = new System.Drawing.Point(43, 47);
             this.issuesListView.MultiSelect = false;
             this.issuesListView.Name = "issuesListView";
-            this.issuesListView.Size = new System.Drawing.Size(320, 400);
-            this.issuesListView.TabIndex = 8;
+            this.issuesListView.Scrollable = false;
+            this.issuesListView.Size = new System.Drawing.Size(315, 392);
+            this.issuesListView.TabIndex = 10;
             this.issuesListView.UseCompatibleStateImageBehavior = false;
             this.issuesListView.View = System.Windows.Forms.View.List;
             this.issuesListView.SelectedIndexChanged += new System.EventHandler(this.issuesListView_SelectedIndexChanged);
+            this.issuesListView.Resize += new System.EventHandler(this.issuesListView_Resize);
             // 
             // addIssueButton
             // 
+            this.addIssueButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.addIssueButton.AutoSize = true;
-            this.addIssueButton.Location = new System.Drawing.Point(100, 520);
+            this.addIssueButton.Location = new System.Drawing.Point(140, 465);
             this.addIssueButton.Name = "addIssueButton";
-            this.addIssueButton.Size = new System.Drawing.Size(166, 38);
+            this.addIssueButton.Size = new System.Drawing.Size(120, 35);
             this.addIssueButton.TabIndex = 11;
             this.addIssueButton.Text = "Nouvel incident";
             this.addIssueButton.UseVisualStyleBackColor = true;
@@ -94,7 +122,6 @@
             // 
             // detailsPanel
             // 
-            this.detailsPanel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.detailsPanel.AutoSize = true;
             this.detailsPanel.BackColor = System.Drawing.Color.White;
             this.detailsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -118,14 +145,16 @@
             this.detailsPanel.Controls.Add(this.creationDateLabel);
             this.detailsPanel.Controls.Add(this.TypeLabel);
             this.detailsPanel.Controls.Add(this.idLabel);
-            this.detailsPanel.Location = new System.Drawing.Point(420, 80);
+            this.detailsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.detailsPanel.Location = new System.Drawing.Point(444, 47);
             this.detailsPanel.Name = "detailsPanel";
-            this.detailsPanel.Size = new System.Drawing.Size(352, 400);
-            this.detailsPanel.TabIndex = 9;
+            this.detailsPanel.Size = new System.Drawing.Size(315, 392);
+            this.detailsPanel.TabIndex = 11;
             // 
             // emplacementTextBox
             // 
-            this.emplacementTextBox.Location = new System.Drawing.Point(161, 124);
+            this.emplacementTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.emplacementTextBox.Location = new System.Drawing.Point(161, 125);
             this.emplacementTextBox.Name = "emplacementTextBox";
             this.emplacementTextBox.ReadOnly = true;
             this.emplacementTextBox.Size = new System.Drawing.Size(120, 20);
@@ -133,8 +162,9 @@
             // 
             // emplacementLabel
             // 
+            this.emplacementLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.emplacementLabel.AutoSize = true;
-            this.emplacementLabel.Location = new System.Drawing.Point(29, 127);
+            this.emplacementLabel.Location = new System.Drawing.Point(29, 128);
             this.emplacementLabel.Name = "emplacementLabel";
             this.emplacementLabel.Size = new System.Drawing.Size(71, 13);
             this.emplacementLabel.TabIndex = 19;
@@ -142,7 +172,8 @@
             // 
             // descriptionTextBox
             // 
-            this.descriptionTextBox.Location = new System.Drawing.Point(161, 280);
+            this.descriptionTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.descriptionTextBox.Location = new System.Drawing.Point(161, 281);
             this.descriptionTextBox.Multiline = true;
             this.descriptionTextBox.Name = "descriptionTextBox";
             this.descriptionTextBox.ReadOnly = true;
@@ -151,7 +182,8 @@
             // 
             // statusTextBox
             // 
-            this.statusTextBox.Location = new System.Drawing.Point(161, 254);
+            this.statusTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.statusTextBox.Location = new System.Drawing.Point(161, 255);
             this.statusTextBox.Name = "statusTextBox";
             this.statusTextBox.ReadOnly = true;
             this.statusTextBox.Size = new System.Drawing.Size(120, 20);
@@ -159,7 +191,8 @@
             // 
             // criticalityTextBox
             // 
-            this.criticalityTextBox.Location = new System.Drawing.Point(161, 228);
+            this.criticalityTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.criticalityTextBox.Location = new System.Drawing.Point(161, 229);
             this.criticalityTextBox.Name = "criticalityTextBox";
             this.criticalityTextBox.ReadOnly = true;
             this.criticalityTextBox.Size = new System.Drawing.Size(120, 20);
@@ -167,7 +200,8 @@
             // 
             // resolutionDateTextBox
             // 
-            this.resolutionDateTextBox.Location = new System.Drawing.Point(161, 202);
+            this.resolutionDateTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.resolutionDateTextBox.Location = new System.Drawing.Point(161, 203);
             this.resolutionDateTextBox.Name = "resolutionDateTextBox";
             this.resolutionDateTextBox.ReadOnly = true;
             this.resolutionDateTextBox.Size = new System.Drawing.Size(120, 20);
@@ -175,7 +209,8 @@
             // 
             // creationDateTextBox
             // 
-            this.creationDateTextBox.Location = new System.Drawing.Point(161, 176);
+            this.creationDateTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.creationDateTextBox.Location = new System.Drawing.Point(161, 177);
             this.creationDateTextBox.Name = "creationDateTextBox";
             this.creationDateTextBox.ReadOnly = true;
             this.creationDateTextBox.Size = new System.Drawing.Size(120, 20);
@@ -183,7 +218,8 @@
             // 
             // typeTextBox
             // 
-            this.typeTextBox.Location = new System.Drawing.Point(161, 150);
+            this.typeTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.typeTextBox.Location = new System.Drawing.Point(161, 151);
             this.typeTextBox.Name = "typeTextBox";
             this.typeTextBox.ReadOnly = true;
             this.typeTextBox.Size = new System.Drawing.Size(120, 20);
@@ -191,7 +227,8 @@
             // 
             // idTextBox
             // 
-            this.idTextBox.Location = new System.Drawing.Point(161, 98);
+            this.idTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.idTextBox.Location = new System.Drawing.Point(161, 99);
             this.idTextBox.Name = "idTextBox";
             this.idTextBox.ReadOnly = true;
             this.idTextBox.Size = new System.Drawing.Size(120, 20);
@@ -199,9 +236,10 @@
             // 
             // deleteButton
             // 
+            this.deleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.deleteButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("deleteButton.BackgroundImage")));
             this.deleteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.deleteButton.Location = new System.Drawing.Point(281, 46);
+            this.deleteButton.Location = new System.Drawing.Point(244, 46);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(30, 30);
             this.deleteButton.TabIndex = 10;
@@ -210,9 +248,10 @@
             // 
             // editButton
             // 
+            this.editButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.editButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("editButton.BackgroundImage")));
             this.editButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.editButton.Location = new System.Drawing.Point(317, 46);
+            this.editButton.Location = new System.Drawing.Point(280, 46);
             this.editButton.Name = "editButton";
             this.editButton.Size = new System.Drawing.Size(30, 30);
             this.editButton.TabIndex = 11;
@@ -226,13 +265,12 @@
             this.detailsTitleBarPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.detailsTitleBarPanel.Location = new System.Drawing.Point(0, 0);
             this.detailsTitleBarPanel.Name = "detailsTitleBarPanel";
-            this.detailsTitleBarPanel.Size = new System.Drawing.Size(350, 40);
+            this.detailsTitleBarPanel.Size = new System.Drawing.Size(313, 40);
             this.detailsTitleBarPanel.TabIndex = 9;
             // 
             // detailsTitle
             // 
-            this.detailsTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.detailsTitle.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.detailsTitle.AutoSize = true;
             this.detailsTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.detailsTitle.ForeColor = System.Drawing.Color.White;
@@ -244,8 +282,9 @@
             // 
             // resolveButton
             // 
+            this.resolveButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.resolveButton.AutoSize = true;
-            this.resolveButton.Location = new System.Drawing.Point(105, 345);
+            this.resolveButton.Location = new System.Drawing.Point(95, 343);
             this.resolveButton.Name = "resolveButton";
             this.resolveButton.Size = new System.Drawing.Size(130, 30);
             this.resolveButton.TabIndex = 20;
@@ -255,8 +294,9 @@
             // 
             // descriptionLabel
             // 
+            this.descriptionLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.descriptionLabel.AutoSize = true;
-            this.descriptionLabel.Location = new System.Drawing.Point(29, 283);
+            this.descriptionLabel.Location = new System.Drawing.Point(29, 284);
             this.descriptionLabel.Name = "descriptionLabel";
             this.descriptionLabel.Size = new System.Drawing.Size(60, 13);
             this.descriptionLabel.TabIndex = 7;
@@ -264,8 +304,9 @@
             // 
             // statusLabel
             // 
+            this.statusLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.statusLabel.AutoSize = true;
-            this.statusLabel.Location = new System.Drawing.Point(29, 257);
+            this.statusLabel.Location = new System.Drawing.Point(29, 258);
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(67, 13);
             this.statusLabel.TabIndex = 6;
@@ -273,8 +314,9 @@
             // 
             // criticalityLabel
             // 
+            this.criticalityLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.criticalityLabel.AutoSize = true;
-            this.criticalityLabel.Location = new System.Drawing.Point(29, 231);
+            this.criticalityLabel.Location = new System.Drawing.Point(29, 232);
             this.criticalityLabel.Name = "criticalityLabel";
             this.criticalityLabel.Size = new System.Drawing.Size(41, 13);
             this.criticalityLabel.TabIndex = 5;
@@ -282,8 +324,9 @@
             // 
             // ResolutionDateLabel
             // 
+            this.ResolutionDateLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.ResolutionDateLabel.AutoSize = true;
-            this.ResolutionDateLabel.Location = new System.Drawing.Point(29, 205);
+            this.ResolutionDateLabel.Location = new System.Drawing.Point(29, 206);
             this.ResolutionDateLabel.Name = "ResolutionDateLabel";
             this.ResolutionDateLabel.Size = new System.Drawing.Size(93, 13);
             this.ResolutionDateLabel.TabIndex = 4;
@@ -291,8 +334,9 @@
             // 
             // creationDateLabel
             // 
+            this.creationDateLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.creationDateLabel.AutoSize = true;
-            this.creationDateLabel.Location = new System.Drawing.Point(29, 179);
+            this.creationDateLabel.Location = new System.Drawing.Point(29, 180);
             this.creationDateLabel.Name = "creationDateLabel";
             this.creationDateLabel.Size = new System.Drawing.Size(86, 13);
             this.creationDateLabel.TabIndex = 3;
@@ -300,8 +344,9 @@
             // 
             // TypeLabel
             // 
+            this.TypeLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.TypeLabel.AutoSize = true;
-            this.TypeLabel.Location = new System.Drawing.Point(29, 153);
+            this.TypeLabel.Location = new System.Drawing.Point(29, 154);
             this.TypeLabel.Name = "TypeLabel";
             this.TypeLabel.Size = new System.Drawing.Size(31, 13);
             this.TypeLabel.TabIndex = 2;
@@ -309,8 +354,9 @@
             // 
             // idLabel
             // 
+            this.idLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.idLabel.AutoSize = true;
-            this.idLabel.Location = new System.Drawing.Point(29, 101);
+            this.idLabel.Location = new System.Drawing.Point(29, 102);
             this.idLabel.Name = "idLabel";
             this.idLabel.Size = new System.Drawing.Size(57, 13);
             this.idLabel.TabIndex = 1;
@@ -320,15 +366,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.detailsPanel);
-            this.Controls.Add(this.addIssueButton);
-            this.Controls.Add(this.issuesListView);
+            this.Controls.Add(this.tableLayoutPanel);
             this.Name = "IssuesUserControl";
-            this.Controls.SetChildIndex(this.issuesListView, 0);
-            this.Controls.SetChildIndex(this.addIssueButton, 0);
-            this.Controls.SetChildIndex(this.detailsPanel, 0);
+            this.Size = new System.Drawing.Size(803, 603);
+            this.Controls.SetChildIndex(this.tableLayoutPanel, 0);
             this.Controls.SetChildIndex(this.appBarTitle, 0);
             this.Controls.SetChildIndex(this.logoutButton, 0);
+            this.tableLayoutPanel.ResumeLayout(false);
+            this.tableLayoutPanel.PerformLayout();
             this.detailsPanel.ResumeLayout(false);
             this.detailsPanel.PerformLayout();
             this.detailsTitleBarPanel.ResumeLayout(false);
@@ -339,13 +384,15 @@
         }
 
         #endregion
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
         private System.Windows.Forms.ListView issuesListView;
         private System.Windows.Forms.Button addIssueButton;
         private System.Windows.Forms.Panel detailsPanel;
         private System.Windows.Forms.Button editButton;
+        private System.Windows.Forms.Button resolveButton;
         private System.Windows.Forms.Panel detailsTitleBarPanel;
         private System.Windows.Forms.Label detailsTitle;
-        private System.Windows.Forms.Button resolveButton;
+        private System.Windows.Forms.Label emplacementLabel;
         private System.Windows.Forms.Label descriptionLabel;
         private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.Label criticalityLabel;
@@ -362,6 +409,5 @@
         private System.Windows.Forms.TextBox typeTextBox;
         private System.Windows.Forms.TextBox idTextBox;
         private System.Windows.Forms.TextBox emplacementTextBox;
-        private System.Windows.Forms.Label emplacementLabel;
     }
 }

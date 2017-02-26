@@ -1,6 +1,5 @@
 ﻿using PT_Camping.Model;
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 
@@ -28,17 +27,6 @@ namespace PT_Camping
 
             updateIssuesListView();
             handleResize();
-        }
-
-
-        internal new void handleResize()
-        {
-            base.handleResize();
-
-            issuesListView.Size = new Size(
-                Convert.ToInt32(mHomeUC.Size.Width * 0.4),
-                Convert.ToInt32(issuesListView.Size.Height)
-                );
         }
 
 
@@ -143,6 +131,7 @@ namespace PT_Camping
                 int code = int.Parse(issuesListView.SelectedItems[0].Name);
                 var incident = db.Incident.Find(code);
 
+                #region CHECK & APPLY RESOLUTION DATE CHANGES
                 try
                 {
 
@@ -181,6 +170,7 @@ namespace PT_Camping
                     resolutionDateTextBox.Text = incident.Date_Resolution.ToString();
                     MessageBox.Show("La date n'est pas valide. \nVérifier que la date au format YYYY-MM-DD HH:MM:SS \net supérieure à la date de l'incident.");
                 }
+                #endregion
 
                 if (criticalityTextBox.Text != (incident.Criticite_Incident.ToString() + "/5"))
                 {
@@ -246,6 +236,16 @@ namespace PT_Camping
             statusTextBox.ReadOnly = true;
             descriptionTextBox.ReadOnly = true;
             updateIssueDetails();
+        }
+
+        private void issuesListView_Resize(object sender, EventArgs e)
+        {
+            if ( issuesListView.Columns.Count == 3)
+            {
+                issuesListView.Columns[0].Width = issuesListView.Width / 3;
+                issuesListView.Columns[1].Width = issuesListView.Width / 3;
+                issuesListView.Columns[2].Width = issuesListView.Width / 3;
+            }
         }
     }
 }
