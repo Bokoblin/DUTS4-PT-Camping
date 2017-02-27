@@ -82,6 +82,12 @@ namespace PT_Camping
                 LoginTools.checkConnection();
                 Emplacement location2 = db.Emplacement.First(e => e.Code_Emplacement == Location.Code_Emplacement);
                 db.Entry(location2).CurrentValues.SetValues(Location);
+                location2.Type_Emplacement = db.Type_Emplacement.Where(a => a.Code_Type == Location.Type_Emplacement.Code_Type).First();
+                location2.Caracteristique_Emplacement.Clear();
+                foreach (var car in Location.Caracteristique_Emplacement)
+                {
+                    location2.Caracteristique_Emplacement.Add(db.Caracteristique_Emplacement.Where(a => a.Code_Caracteristique == car.Code_Caracteristique).First());
+                }
                 db.SaveChanges();
             }
         }
