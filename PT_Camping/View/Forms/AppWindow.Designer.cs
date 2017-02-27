@@ -28,14 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.windowPanel = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // windowPanel
             // 
-            this.windowPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.windowPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.windowPanel.AutoSize = true;
             this.windowPanel.Location = new System.Drawing.Point(0, 0);
@@ -44,7 +43,7 @@
             this.windowPanel.Size = new System.Drawing.Size(900, 600);
             this.windowPanel.TabIndex = 0;
             // 
-            // Window
+            // AppWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -53,7 +52,7 @@
             this.Controls.Add(this.windowPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MinimumSize = new System.Drawing.Size(900, 600);
-            this.Name = "Window";
+            this.Name = "AppWindow";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PT4-BJJMR";
@@ -66,7 +65,6 @@
 
         #endregion
 
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Panel windowPanel;
     }
 }

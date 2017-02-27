@@ -13,24 +13,23 @@ namespace PT_Camping
     /// Since : 06/02/17
     public partial class AppWindow : Form
     {
-        private ConnectionUserControl mConnectionUserControl;
-        private HomeUserControl mHomeUserControl;
-        public LoginTools userLoged { get; set; }
+        private ConnectionUserControl mConnectionUC;
+        private HomeUserControl mHomeUC;
 
         public AppWindow()
         {
             StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
-            mConnectionUserControl = new ConnectionUserControl(this);
-            windowPanel.Controls.Add(mConnectionUserControl);
+            mConnectionUC = new ConnectionUserControl(this);
+            windowPanel.Controls.Add(mConnectionUC);
             userLoged = new LoginTools();
         }
 
         internal void login()
         {
-            mHomeUserControl = new HomeUserControl(this);
-            windowPanel.Controls.Add(mHomeUserControl);
-            windowPanel.Controls.Remove(mConnectionUserControl);
+            mHomeUC = new HomeUserControl(this);
+            windowPanel.Controls.Add(mHomeUC);
+            windowPanel.Controls.Remove(mConnectionUC);
         }
 
 
@@ -38,18 +37,18 @@ namespace PT_Camping
         {
             userLoged.Login = "";
             userLoged.HashedPassword = "";
-            mConnectionUserControl = new ConnectionUserControl(this);
-            windowPanel.Controls.Add(mConnectionUserControl);
+            mConnectionUC = new ConnectionUserControl(this);
+            windowPanel.Controls.Add(mConnectionUC);
         }
 
 
         private void Window_Resize(object sender, EventArgs e)
         {
             windowPanel.Size = this.Size;
-            if (mConnectionUserControl != null)
-                mConnectionUserControl.handleResize();
-            if (mHomeUserControl != null)
-                mHomeUserControl.handleResize();
+            if (mConnectionUC != null)
+                mConnectionUC.handleResize();
+            if (mHomeUC != null)
+                mHomeUC.handleResize();
         }
 
 
@@ -58,5 +57,6 @@ namespace PT_Camping
         /// </summary>
 
         public Panel WindowPanel { get { return windowPanel; } set { windowPanel = value; } }
+        public LoginTools userLoged { get; set; }
     }
 }

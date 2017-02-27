@@ -33,7 +33,7 @@ namespace PT_Camping.Model
                 }
                 db.Dispose();
                 return exist;
-            } catch (Exception e)
+            } catch (Exception)
             {
                 MessageBox.Show("Erreur lors de la connexion à la base de données");
                 Application.Exit();
