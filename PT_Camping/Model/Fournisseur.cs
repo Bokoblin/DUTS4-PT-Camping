@@ -22,6 +22,9 @@ namespace PT_Camping.Model
     
         public int Code_Fournisseur { get; set; }
         public string Nom_Fournisseur { get; set; }
+        public string Email_Fournisseur { get; set; }
+        public string Site_web_Fournisseur { get; set; }
+        public string Adresse_Fournisseur { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Produit> Produit { get; set; }

@@ -88,6 +88,9 @@
           </Key>
           <Property Name="Code_Fournisseur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nom_Fournisseur" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Email_Fournisseur" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Site_web_Fournisseur" Type="varchar" MaxLength="50" />
+          <Property Name="Adresse_Fournisseur" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Fournit">
           <Key>
@@ -130,7 +133,7 @@
           <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Telephone" Type="varchar" MaxLength="25" />
           <Property Name="Adresse" Type="varchar" MaxLength="250" />
-          <Property Name="Date_Naissance" Type="date" />
+          <Property Name="Date_Naissance" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Possede">
           <Key>
@@ -604,6 +607,9 @@
           <Property Name="Code_Fournisseur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nom_Fournisseur" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Produit" Relationship="Self.Fournit" FromRole="Fournisseur" ToRole="Produit" />
+          <Property Name="Email_Fournisseur" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Site_web_Fournisseur" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Adresse_Fournisseur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Incident">
           <Key>
@@ -649,7 +655,7 @@
           <NavigationProperty Name="Loge" Relationship="Self.FK_Loge_Code_Personne" FromRole="Personne" ToRole="Loge" />
           <NavigationProperty Name="Reservation" Relationship="Self.FK_Reservation_Code_Personne" FromRole="Personne" ToRole="Reservation" />
           <NavigationProperty Name="Droit" Relationship="Self.A_le_droit" FromRole="Personne" ToRole="Droit" />
-          <Property Name="Date_Naissance" Type="DateTime" Precision="0" />
+          <Property Name="Date_Naissance" Type="DateTime" Precision="0" Nullable="false" />
         </EntityType>
         <EntityType Name="Produit">
           <Key>
@@ -1041,6 +1047,9 @@
           <EntitySetMapping Name="Fournisseur">
             <EntityTypeMapping TypeName="InfoJoyeuxDB.Fournisseur">
               <MappingFragment StoreEntitySet="Fournisseur">
+                <ScalarProperty Name="Adresse_Fournisseur" ColumnName="Adresse_Fournisseur" />
+                <ScalarProperty Name="Site_web_Fournisseur" ColumnName="Site_web_Fournisseur" />
+                <ScalarProperty Name="Email_Fournisseur" ColumnName="Email_Fournisseur" />
                 <ScalarProperty Name="Code_Fournisseur" ColumnName="Code_Fournisseur" />
                 <ScalarProperty Name="Nom_Fournisseur" ColumnName="Nom_Fournisseur" />
               </MappingFragment>

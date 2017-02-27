@@ -274,6 +274,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\UserControls\ProvidersUserControl.resx">
+      <DependentUpon>ProvidersUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EntityDeploy Include="Model\InfoJoyeuxDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>InfoJoyeuxDB.Designer.cs</LastGenOutput>
