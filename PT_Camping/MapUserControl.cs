@@ -400,7 +400,7 @@ namespace PT_Camping
             Panel edit = editLocationPanel;
             string resState = resStateLabel.Text;
             string buttonText = resButton.Text;
-            if (db.Reservation.Where(r => r.Date_Fin < dateTimePicker.Value).SelectMany(a => a.Loge).Where(l => l.Code_Emplacement == selectedLocation.Location.Code_Emplacement).Count() >= 1)
+            if (db.Reservation.Where(r => r.Date_Debut < dateTimePicker.Value && dateTimePicker.Value < r.Date_Fin ).SelectMany(a => a.Loge).Where(l => l.Code_Emplacement == selectedLocation.Location.Code_Emplacement).Count() >= 1)
             {
                 resStateLabel.Text = "Reservé";
                 resButton.Text = "Libérer";
@@ -413,10 +413,15 @@ namespace PT_Camping
             locationNameTextBox.DataBindings.Add("Text", selectedLocation.Location, "Nom_Emplacement", false, DataSourceUpdateMode.OnPropertyChanged);
             
             typeLocationComboBox.DataBindings.Clear();
-            //typeLocationComboBox.DataBindings.Add("SelectedItem", selectedLocation.Location, "Type_Emplacement", false, DataSourceUpdateMode.OnPropertyChanged);
+            typeLocationComboBox.DataBindings.Add("SelectedItem", selectedLocation.Location, "Type_Emplacement", false, DataSourceUpdateMode.OnPropertyChanged);
 
-            //carCheckedListBox.DataBindings.Clear();
-            //carCheckedListBox.DataBindings.Add("CheckedItems", selectedLocation.Location, "Caracteristique_Emplacement", false, DataSourceUpdateMode.OnPropertyChanged);
+            foreach (var car in selectedLocation.Location.Caracteristique_Emplacement)
+            {
+                carCheckedListBox.SetItemChecked(carCheckedListBox carCheckedListBox.Items.(car));
+            }
+            
+            carCheckedListBox.DataBindings.Clear();
+            carCheckedListBox.DataBindings.Add("CheckedItems", selectedLocation.Location, "Caracteristique_Emplacement", false, DataSourceUpdateMode.OnPropertyChanged);
         }
 
         private void dateTimePicker_ValueChanged(object sender, EventArgs e)
