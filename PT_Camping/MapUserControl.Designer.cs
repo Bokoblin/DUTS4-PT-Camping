@@ -356,10 +356,11 @@
             // 
             this.carCheckedListBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.carCheckedListBox.FormattingEnabled = true;
-            this.carCheckedListBox.Location = new System.Drawing.Point(21, 189);
+            this.carCheckedListBox.Location = new System.Drawing.Point(21, 170);
             this.carCheckedListBox.Name = "carCheckedListBox";
             this.carCheckedListBox.Size = new System.Drawing.Size(208, 157);
             this.carCheckedListBox.TabIndex = 5;
+            this.carCheckedListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(carCheckedListBox_Check);
             // 
             // label3
             // 
