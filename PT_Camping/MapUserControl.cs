@@ -111,14 +111,16 @@ namespace PT_Camping
                 categoriesCheckedListBox.Items.Add(type.Libelle_Type, true);
             }
             typeLocationComboBox.DisplayMember = "Libelle_Type";
-            if (true)
-            //if (db.App.Where(m => m.Fond_Image != null).Count() < 1)
+            //if (true)
+            if (db.App.Where(m => m.Fond_Image != null).Count() < 1)
             {
                 mode = MapMode.LOAD_IMAGE;
             } else
             {
                 MemoryStream ms = new MemoryStream(db.App.FirstOrDefault().Fond_Image);
-                image = new Bitmap(ms);
+                Image imageJpeg;
+                imageJpeg = Image.FromStream(ms);
+                image = new Bitmap(imageJpeg);
                 ms.Close();
                 pictureBox.Image = image;
                 mode = MapMode.NORMAL;
@@ -166,7 +168,8 @@ namespace PT_Camping
                     {
                         importMapPanel.Visible = false;
                         image = new Bitmap(fd.FileName);
-                        /*LoginTools.checkConnection();
+                        image.SetResolution(800, 600);
+                        LoginTools.checkConnection();
                         DataBase db = new DataBase();
                         App app = db.App.FirstOrDefault();
                         if (app == null)
@@ -174,9 +177,10 @@ namespace PT_Camping
                             app = new App();
                             db.App.Add(app);
                         }
-                        ImageConverter converter = new ImageConverter();
-                        app.Fond_Image = (byte[])converter.ConvertTo(image, typeof(byte[]));
-                        db.SaveChanges();*/
+                        MemoryStream jpegStream = new MemoryStream();
+                        image.Save(jpegStream, System.Drawing.Imaging.ImageFormat.Jpeg);
+                        app.Fond_Image = jpegStream.ToArray();
+                        db.SaveChanges();
                         if (image == null)
                         {
                             throw new FileLoadException();
@@ -415,18 +419,41 @@ namespace PT_Camping
             typeLocationComboBox.DataBindings.Clear();
             typeLocationComboBox.DataBindings.Add("SelectedItem", selectedLocation.Location, "Type_Emplacement", false, DataSourceUpdateMode.OnPropertyChanged);
 
+
+            foreach (int i in carCheckedListBox.CheckedIndices)
+            {
+                carCheckedListBox.SetItemCheckState(i, CheckState.Unchecked);
+            }
             foreach (var car in selectedLocation.Location.Caracteristique_Emplacement)
             {
-                carCheckedListBox.SetItemChecked(carCheckedListBox carCheckedListBox.Items.(car));
+                carCheckedListBox.SetItemChecked(carCheckedListBox.Items.IndexOf(car), true);
             }
-            
-            carCheckedListBox.DataBindings.Clear();
-            carCheckedListBox.DataBindings.Add("CheckedItems", selectedLocation.Location, "Caracteristique_Emplacement", false, DataSourceUpdateMode.OnPropertyChanged);
         }
 
         private void dateTimePicker_ValueChanged(object sender, EventArgs e)
         {
             updateRightMenu();
+        }
+
+        private void carCheckedListBox_Check(object sender, ItemCheckEventArgs e)
+        {
+            if (selectedLocation != null)
+            {
+                var item = carCheckedListBox.Items[e.Index];
+                if (e.NewValue == CheckState.Checked)
+                {
+                    if (!selectedLocation.Location.Caracteristique_Emplacement.Contains(item))
+                    {
+                        selectedLocation.Location.Caracteristique_Emplacement.Add((Caracteristique_Emplacement) item);
+                    }
+                } else
+                {
+                    if (selectedLocation.Location.Caracteristique_Emplacement.Contains(item))
+                    {
+                        selectedLocation.Location.Caracteristique_Emplacement.Remove((Caracteristique_Emplacement)item);
+                    }
+                }
+            }
         }
     }
 }
