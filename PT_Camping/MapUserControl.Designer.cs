@@ -256,6 +256,7 @@
             this.catLocationListView.Size = new System.Drawing.Size(219, 113);
             this.catLocationListView.TabIndex = 9;
             this.catLocationListView.UseCompatibleStateImageBehavior = false;
+            this.catLocationListView.View = System.Windows.Forms.View.List;
             // 
             // label6
             // 
@@ -360,7 +361,7 @@
             this.carCheckedListBox.Name = "carCheckedListBox";
             this.carCheckedListBox.Size = new System.Drawing.Size(208, 157);
             this.carCheckedListBox.TabIndex = 5;
-            this.carCheckedListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(carCheckedListBox_Check);
+            this.carCheckedListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.carCheckedListBox_Check);
             // 
             // label3
             // 

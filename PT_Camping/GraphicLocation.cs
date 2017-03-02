@@ -23,24 +23,24 @@ namespace PT_Camping
 
         public void move(Point position, Control control)
         {
-            float coefWidth = (float)control.Width / 100f;
-            float coefHeight = (float)control.Height / 100f;
+            double coefWidth = (float)control.Width / 100f;
+            double coefHeight = (float)control.Height / 100f;
             Location.Cordonnee_X = (float)position.X / coefWidth;
             Location.Coordonnee_Y = (float)position.Y / coefHeight;
         }
 
         public void resize(Size size, Control control)
         {
-            float coefWidth = (float)control.Width / 100f;
-            float coefHeight = (float)control.Height / 100f;
+            double coefWidth = (float)control.Width / 100f;
+            double coefHeight = (float)control.Height / 100f;
             Location.Taille_X = (float)size.Width / coefWidth;
             Location.Taille_Y = (float)size.Height / coefHeight;
         }
         
         public void draw (PaintEventArgs e, bool check)
         {
-            float coefWidth = (float)e.ClipRectangle.Width / 100f;
-            float coefHeight = (float)e.ClipRectangle.Height / 100f;
+            double coefWidth = (float)e.ClipRectangle.Width / 100f;
+            double coefHeight = (float)e.ClipRectangle.Height / 100f;
             if (Location != null)
             {
                 Color color = Color.Red;
