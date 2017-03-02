@@ -63,6 +63,7 @@ namespace PT_Camping
         private Point offsetMoving;
         private Point startClick;
         private Size oldSize;
+        private Point oldPosition;
         private CursorAction cursorAction;
 
         public MapUserControl(HomeUserControl homeUserControl)
@@ -80,9 +81,8 @@ namespace PT_Camping
                 carCheckedListBox.Items.Add(car);
             }
             carCheckedListBox.DisplayMember = "Description";
-            List<Emplacement> locations = db.Emplacement.ToList();
             locationsList = new List<GraphicLocation>();
-            foreach(Emplacement loc in locations)
+            foreach(Emplacement loc in db.Emplacement)
             {
                 locationsList.Add(new GraphicLocation(loc));
             }
@@ -91,27 +91,35 @@ namespace PT_Camping
             foreach(Type_Emplacement type in typesLocations)
             {
                 typeLocationComboBox.Items.Add(type);
-                Button button = new Button();
-                button.Click += addLocationClick;
-                button.Text = type.Libelle_Type;
-                button.Height = 30;
-                button.Top = i * (button.Height+10);
-                button.Left = 10;
+                Panel panelType = new FlowLayoutPanel();
+                panelType.Height = 50;
+                panelType.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+                panelType.Top = i * (panelType.Height + 10);
+                panelType.BackColor = Color.Gray;
+                panelType.MouseEnter += PanelType_MouseEnter;
+                panelType.MouseLeave += PanelType_MouseLeave;
+                Label labelType = new Label();
+                PictureBox imageType = new PictureBox();
+                panelType.Controls.Add(imageType);
+                panelType.Controls.Add(labelType);
+                imageType.Dock = DockStyle.Left;
+                imageType.Width = 50;
+                imageType.Margin = new Padding(0, 0, 10, 0);
+                labelType.Text = type.Libelle_Type;
+                labelType.Anchor = AnchorStyles.Bottom;
+                panelType.Width = imageType.Width + imageType.Margin.Right + labelType.Width;
                 if (type.Icone != null)
                 {
                     MemoryStream ms = new MemoryStream(db.App.FirstOrDefault().Fond_Image);
-                    button.Image = new Bitmap(ms);
+                    pictureBox.Image = new Bitmap(ms);
                     ms.Close();
-                    button.ImageAlign = ContentAlignment.MiddleRight;
                 }
-                button.Anchor = AnchorStyles.Top | AnchorStyles.Left;
-                addLocationPanel.Controls.Add(button);
+                addLocationPanel.Controls.Add(panelType);
                 i++;
 
                 categoriesCheckedListBox.Items.Add(type.Libelle_Type, true);
             }
             typeLocationComboBox.DisplayMember = "Libelle_Type";
-            //if (true)
             if (db.App.Where(m => m.Fond_Image != null).Count() < 1)
             {
                 mode = MapMode.LOAD_IMAGE;
@@ -126,6 +134,18 @@ namespace PT_Camping
                 mode = MapMode.NORMAL;
             }
             changeMode(mode);
+        }
+
+        private void PanelType_MouseEnter(object sender, EventArgs e)
+        {
+            Panel panel = (Panel)sender;
+            panel.BackColor = Color.DimGray;
+        }
+
+        private void PanelType_MouseLeave(object sender, EventArgs e)
+        {
+            Panel panel = (Panel)sender;
+            panel.BackColor = Color.Gray;
         }
 
         private void changeMode (MapMode mode)
@@ -304,7 +324,7 @@ namespace PT_Camping
                         {
                             Point newPosition = new Point();
                             newPosition.Y = e.Location.Y;
-                            newPosition.X = selectedLocation.Position.X;
+                            newPosition.X = oldPosition.X;
                             Size newSize = new Size();
                             newSize.Height = oldSize.Height - (e.Location.Y - startClick.Y);
                             newSize.Width = oldSize.Width;
@@ -323,7 +343,7 @@ namespace PT_Camping
                     case CursorAction.RESIZE_W:
                         {
                             Point newPosition = new Point();
-                            newPosition.Y = selectedLocation.Position.Y;
+                            newPosition.Y = oldPosition.Y;
                             newPosition.X = e.Location.X;
                             Size newSize = new Size();
                             newSize.Height = oldSize.Height;
@@ -348,6 +368,7 @@ namespace PT_Camping
                 {
                     selectedLocation = location;
                     selected = true;
+                    break;
                 }
             }
             if (!selected)
@@ -367,11 +388,12 @@ namespace PT_Camping
         {
             if (selectedLocation != null)
             {
-                if (cursorAction != CursorAction.DEFAULT && mode == MapMode.EDIT)
+                if (cursorAction != CursorAction.DEFAULT && mode == MapMode.EDIT && !moving)
                 {
                     moving = true;
                     startClick = e.Location;
                     oldSize = selectedLocation.Position.Size;
+                    oldPosition = selectedLocation.Position.Location;
                     offsetMoving.X = e.Location.X - selectedLocation.Position.X;
                     offsetMoving.Y = e.Location.Y - selectedLocation.Position.Y;
                 }
@@ -413,21 +435,28 @@ namespace PT_Camping
                 resStateLabel.Text = "Libre";
                 resButton.Text = "Réserver";
             }
-            locationNameTextBox.DataBindings.Clear();
-            locationNameTextBox.DataBindings.Add("Text", selectedLocation.Location, "Nom_Emplacement", false, DataSourceUpdateMode.OnPropertyChanged);
-            
-            typeLocationComboBox.DataBindings.Clear();
-            typeLocationComboBox.DataBindings.Add("SelectedItem", selectedLocation.Location, "Type_Emplacement", false, DataSourceUpdateMode.OnPropertyChanged);
-
+            locationNameLabel.Text = selectedLocation.Location.Nom_Emplacement;
+            catLocationLabel.Text = selectedLocation.Location.Type_Emplacement.Libelle_Type;
+            catLocationListView.Items.Clear();
 
             foreach (int i in carCheckedListBox.CheckedIndices)
             {
                 carCheckedListBox.SetItemCheckState(i, CheckState.Unchecked);
             }
-            foreach (var car in selectedLocation.Location.Caracteristique_Emplacement)
+
+            foreach (Caracteristique_Emplacement car in db.Entry(selectedLocation.Location).Entity.Caracteristique_Emplacement)
             {
+                catLocationListView.Items.Add(car.Description);
+                int a = carCheckedListBox.Items.IndexOf(car);
                 carCheckedListBox.SetItemChecked(carCheckedListBox.Items.IndexOf(car), true);
             }
+
+            locationNameTextBox.DataBindings.Clear();
+            locationNameTextBox.DataBindings.Add("Text", selectedLocation.Location, "Nom_Emplacement", false, DataSourceUpdateMode.OnPropertyChanged);
+            
+            typeLocationComboBox.DataBindings.Clear();
+            typeLocationComboBox.DataBindings.Add("SelectedItem", selectedLocation.Location, "Type_Emplacement", false, DataSourceUpdateMode.OnPropertyChanged);
+            
         }
 
         private void dateTimePicker_ValueChanged(object sender, EventArgs e)
@@ -446,7 +475,7 @@ namespace PT_Camping
                     {
                         selectedLocation.Location.Caracteristique_Emplacement.Add((Caracteristique_Emplacement) item);
                     }
-                } else
+                } else if (e.NewValue == CheckState.Unchecked)
                 {
                     if (selectedLocation.Location.Caracteristique_Emplacement.Contains(item))
                     {
