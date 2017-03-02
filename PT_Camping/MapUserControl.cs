@@ -41,6 +41,7 @@ namespace PT_Camping
     public partial class MapUserControl : UserControl
     {
         private HomeUserControl mHomeUserControl;
+        private DataBase db;
         private Bitmap image;
         private MapMode mode;
         private List<GraphicLocation> locationsList;
@@ -75,7 +76,7 @@ namespace PT_Camping
             mHomeUserControl = homeUserControl;
             Dock = DockStyle.Fill;
             LoginTools.checkConnection();
-            DataBase db = new DataBase();
+            db = new DataBase();
             foreach (Caracteristique_Emplacement car in db.Caracteristique_Emplacement)
             {
                 carCheckedListBox.Items.Add(car);
@@ -120,6 +121,7 @@ namespace PT_Camping
                 categoriesCheckedListBox.Items.Add(type.Libelle_Type, true);
             }
             typeLocationComboBox.DisplayMember = "Libelle_Type";
+            typeLocationComboBox.ValueMember = "Code_Type";
             if (db.App.Where(m => m.Fond_Image != null).Count() < 1)
             {
                 mode = MapMode.LOAD_IMAGE;
@@ -190,7 +192,6 @@ namespace PT_Camping
                         image = new Bitmap(fd.FileName);
                         image.SetResolution(800, 600);
                         LoginTools.checkConnection();
-                        DataBase db = new DataBase();
                         App app = db.App.FirstOrDefault();
                         if (app == null)
                         {
@@ -411,17 +412,12 @@ namespace PT_Camping
         private void validateChangesButton_Click(object sender, EventArgs e)
         {
             LoginTools.checkConnection();
-            DataBase db = new DataBase();
-            foreach(GraphicLocation location in locationsList)
-            {
-                location.saveToDB(db);
-            }
+            db.SaveChanges();
         }
 
         private void updateRightMenu()
         {
             LoginTools.checkConnection();
-            DataBase db = new DataBase();
             Panel details = detailsLocationPanel;
             Panel edit = editLocationPanel;
             string resState = resStateLabel.Text;
@@ -444,16 +440,15 @@ namespace PT_Camping
                 carCheckedListBox.SetItemCheckState(i, CheckState.Unchecked);
             }
 
-            foreach (Caracteristique_Emplacement car in db.Entry(selectedLocation.Location).Entity.Caracteristique_Emplacement)
+            foreach (Caracteristique_Emplacement car in selectedLocation.Location.Caracteristique_Emplacement)
             {
                 catLocationListView.Items.Add(car.Description);
-                int a = carCheckedListBox.Items.IndexOf(car);
                 carCheckedListBox.SetItemChecked(carCheckedListBox.Items.IndexOf(car), true);
             }
 
             locationNameTextBox.DataBindings.Clear();
             locationNameTextBox.DataBindings.Add("Text", selectedLocation.Location, "Nom_Emplacement", false, DataSourceUpdateMode.OnPropertyChanged);
-            
+             
             typeLocationComboBox.DataBindings.Clear();
             typeLocationComboBox.DataBindings.Add("SelectedItem", selectedLocation.Location, "Type_Emplacement", false, DataSourceUpdateMode.OnPropertyChanged);
             
@@ -468,18 +463,18 @@ namespace PT_Camping
         {
             if (selectedLocation != null)
             {
-                var item = carCheckedListBox.Items[e.Index];
+                Caracteristique_Emplacement item = (Caracteristique_Emplacement) carCheckedListBox.Items[e.Index];
                 if (e.NewValue == CheckState.Checked)
                 {
                     if (!selectedLocation.Location.Caracteristique_Emplacement.Contains(item))
                     {
-                        selectedLocation.Location.Caracteristique_Emplacement.Add((Caracteristique_Emplacement) item);
+                        selectedLocation.Location.Caracteristique_Emplacement.Add(item);
                     }
                 } else if (e.NewValue == CheckState.Unchecked)
                 {
                     if (selectedLocation.Location.Caracteristique_Emplacement.Contains(item))
                     {
-                        selectedLocation.Location.Caracteristique_Emplacement.Remove((Caracteristique_Emplacement)item);
+                        selectedLocation.Location.Caracteristique_Emplacement.Remove(item);
                     }
                 }
             }
