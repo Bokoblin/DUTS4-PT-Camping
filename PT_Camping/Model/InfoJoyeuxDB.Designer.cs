@@ -1,4 +1,4 @@
-﻿// La génération de code T4 est activée pour le modèle 'C:\Users\Alexandre\Documents\0_Cours_IUT\Projet\Projet Camping\DUTS4-PT-Camping\PT_Camping\Model\InfoJoyeuxDB.edmx'. 
+﻿// La génération de code T4 est activée pour le modèle 'C:\Users\yonnel\Desktop\DUTS4-PT-Camping\PT_Camping\Model\InfoJoyeuxDB.edmx'. 
 // Pour activer la génération de code héritée, définissez la valeur de la propriété
 // du concepteur 'Stratégie de génération de code' sur 'ObjectContext hérité'. Cette propriété est disponible dans la fenêtre Propriétés lorsque le modèle
 //  est ouvert dans le concepteur.

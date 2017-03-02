@@ -1,5 +1,6 @@
 ﻿using PT_Camping.Model;
 using System;
+using System.Data.Entity.Infrastructure;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -23,18 +24,6 @@ namespace PT_Camping
             appBarTitle.Text = "Gestion des stocks";
             database = new DataBase();
           
-            /* -- Working example (to not execute again)
-            Produit p = new Produit();
-            p.Libelle_Produit = "Bouteille d'eau";
-            p.Prix = 0.56F;
-            p.Quantite_Stock = 54;
-            database.Produit.Add(p);
-            database.SaveChanges();
-            */
-            //SaveChanges()
-            /*
-            MessageBox.Show("There are : " + database.Produit.Count().ToString() + " products in store.");*/
-            //var query = from produit in database.Produit select produit.Libelle_Produit;
             ProductListView.View = View.Details;
             ProductListView.Columns.Add("Produits",-2);
             ProductListView.Columns.Add("Quantité",-2,HorizontalAlignment.Center);
@@ -53,7 +42,16 @@ namespace PT_Camping
 
                 var item = new ListViewItem(new[] { product_name, product_stock });
                 item.Name = product.Code_Produit.ToString();
+                if(product.Quantite_Stock<=5)
+                {
+                    item.BackColor = Color.Red;
+                }
+                else if(product.Quantite_Stock>5 && product.Quantite_Stock<=15)
+                {
+                    item.BackColor = Color.Orange;
+                }
                 ProductListView.Items.Add(item);
+
             }
 
             if (ProductListView.Items.Count > 0)
@@ -67,29 +65,111 @@ namespace PT_Camping
          {
              if (ProductListView.SelectedItems.Count != 0)
              {
-                 int code = int.Parse(ProductListView.SelectedItems[0].Name);
-                 var product = db.Produit.Find(code);
- 
-                 idTextBox.Text = product.Code_Produit.ToString();
-                 emplacementTextBox.Text = incident.Emplacement.Code_Emplacement.ToString();
-                 typeTextBox.Text = incident.Type_Incident.Type_Incident1;
-                 creationDateTextBox.Text = incident.Date_Incident.ToShortDateString();
-                 resolutionDateTextBox.Text = incident.Date_Resolution.ToString();
-                 criticStateTextBox.Text = incident.Criticite_Incident.ToString() + "/5";
-                 stateTextBox.Text = incident.Avancement_Incident;
-                 descriptionTextBox.Text = incident.Description_Incident;
-             }
+                int code = int.Parse(ProductListView.SelectedItems[0].Name);
+                var product = database.Produit.Find(code);
+
+                idTextBox.Text = product.Code_Produit.ToString();
+                productNameTextBox.Text = product.Libelle_Produit.ToString();
+                amountTextBox.Text = product.Quantite_Stock.ToString();
+                priceTextBox.Text = product.Prix.ToString();
+
+            }
              
          }
-        private void issuesListView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-             updateIssueDetails();
-        }
 
         private void addStockButton_MouseClick(object sender, MouseEventArgs e)
         {
-            addNewStock newStock = new addNewStock(this);
+            addStock newStock = new addStock(this);
             newStock.Show();
+        }
+
+        private void ProductListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            updateIssueDetails();
+        }
+
+        private void deleteProductButton_Click(object sender, EventArgs e)
+        {
+            int code = int.Parse(ProductListView.SelectedItems[0].Name);
+            var product = database.Produit.Find(code);
+
+            database.Produit.Remove(product);
+            database.SaveChanges();
+            fillStockListView();
+        }
+
+        private void editProductButton_Click(object sender, EventArgs e)
+        {
+            if(amountTextBox.ReadOnly)
+            { 
+                editProductButton.Text = "Valider";
+                resetButton.Visible = true;
+                amountTextBox.ReadOnly = false;
+                priceTextBox.ReadOnly = false;
+                productNameTextBox.ReadOnly = false;
+            }
+            else
+            {
+                editProductButton.Text = "Modifier";
+                amountTextBox.ReadOnly = true;
+                priceTextBox.ReadOnly = true;
+                productNameTextBox.ReadOnly = true;
+                resetButton.Visible = false;
+
+                int code = int.Parse(ProductListView.SelectedItems[0].Name);
+                var product = database.Produit.Find(code);
+
+                try
+                {
+                    product.Quantite_Stock = Convert.ToInt32(amountTextBox.Text);
+                }
+                catch(FormatException fe)
+                {
+                    MessageBox.Show("La quantité n'est pas correcte");
+                }
+
+                product.Libelle_Produit = productNameTextBox.Text;
+                try
+                {
+                    product.Prix = Convert.ToDouble(priceTextBox.Text);
+                }
+                catch (FormatException fe)
+                {
+                    MessageBox.Show("Prix incorrect !");
+                }
+                try
+                {
+                    database.SaveChanges();
+                }
+                catch(DbUpdateException)
+                {
+                    MessageBox.Show("Le nom de produit existe déjà !");
+                }
+                
+                updateIssueDetails();
+                fillStockListView();
+            }
+        }
+
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            resetButton.Visible = false;
+            editProductButton.Text = "Modifier";
+            updateIssueDetails();
+        }
+
+        private void productProviderButton_Click(object sender, EventArgs e)
+        {
+            ProviderChoice providerChoice = new ProviderChoice();
+            providerChoice.ShowDialog();
+        }
+
+        private void commandButton_Click(object sender, EventArgs e)
+        {
+            int code = int.Parse(ProductListView.SelectedItems[0].Name);
+            var product = database.Produit.Find(code);
+            CommandStock commandStock = new CommandStock(productNameTextBox.Text);
+            commandStock.ShowDialog();
         }
     }
 }

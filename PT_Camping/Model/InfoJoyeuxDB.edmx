@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="InfoJoyeuxDB.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="InfoJoyeuxDB.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="A_le_droit">
           <Key>
             <PropertyRef Name="Code_Personne" />
@@ -70,6 +70,8 @@
           <Property Name="Login" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="Code_Personne" Type="int" Nullable="false" />
+          <Property Name="EstLicencie" Type="bit" Nullable="false" />
+          <Property Name="Photo" Type="image" />
         </EntityType>
         <EntityType Name="Facture">
           <Key>
@@ -86,6 +88,10 @@
           </Key>
           <Property Name="Code_Fournisseur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nom_Fournisseur" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Email_Fournisseur" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Site_web_Fournisseur" Type="varchar" MaxLength="50" />
+          <Property Name="Adresse_Fournisseur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="est_approuvé" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Fournit">
           <Key>
@@ -128,6 +134,7 @@
           <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Telephone" Type="varchar" MaxLength="25" />
           <Property Name="Adresse" Type="varchar" MaxLength="250" />
+          <Property Name="Date_Naissance" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Possede">
           <Key>
@@ -173,6 +180,8 @@
           </Key>
           <Property Name="Code_Type" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Libelle_Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Couleur" Type="int" />
+          <Property Name="Icone" Type="image" />
         </EntityType>
         <EntityType Name="Type_Incident">
           <Key>
@@ -507,8 +516,7 @@
             <End Role="Reservation" EntitySet="Reservation" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="InfoJoyeuxDB" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -579,6 +587,8 @@
           <Property Name="Password" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Code_Personne" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Personne" Relationship="Self.FK_Employe_Code_Personne" FromRole="Employe" ToRole="Personne" />
+          <Property Name="EstLicencie" Type="Boolean" Nullable="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Facture">
           <Key>
@@ -598,6 +608,10 @@
           <Property Name="Code_Fournisseur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nom_Fournisseur" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Produit" Relationship="Self.Fournit" FromRole="Fournisseur" ToRole="Produit" />
+          <Property Name="Email_Fournisseur" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Site_web_Fournisseur" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Adresse_Fournisseur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="est_approuvé" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Incident">
           <Key>
@@ -643,6 +657,7 @@
           <NavigationProperty Name="Loge" Relationship="Self.FK_Loge_Code_Personne" FromRole="Personne" ToRole="Loge" />
           <NavigationProperty Name="Reservation" Relationship="Self.FK_Reservation_Code_Personne" FromRole="Personne" ToRole="Reservation" />
           <NavigationProperty Name="Droit" Relationship="Self.A_le_droit" FromRole="Personne" ToRole="Droit" />
+          <Property Name="Date_Naissance" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="Produit">
           <Key>
@@ -687,6 +702,8 @@
           <Property Name="Code_Type" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Libelle_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Emplacement" Relationship="Self.FK_Emplacement_Code_Type" FromRole="Type_Emplacement" ToRole="Emplacement" />
+          <Property Name="Couleur" Type="Int32" />
+          <Property Name="Icone" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Type_Incident">
           <Key>
@@ -1011,6 +1028,8 @@
           <EntitySetMapping Name="Employe">
             <EntityTypeMapping TypeName="InfoJoyeuxDB.Employe">
               <MappingFragment StoreEntitySet="Employe">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="EstLicencie" ColumnName="EstLicencie" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Code_Personne" ColumnName="Code_Personne" />
@@ -1030,6 +1049,10 @@
           <EntitySetMapping Name="Fournisseur">
             <EntityTypeMapping TypeName="InfoJoyeuxDB.Fournisseur">
               <MappingFragment StoreEntitySet="Fournisseur">
+                <ScalarProperty Name="est_approuvé" ColumnName="est_approuvé" />
+                <ScalarProperty Name="Adresse_Fournisseur" ColumnName="Adresse_Fournisseur" />
+                <ScalarProperty Name="Site_web_Fournisseur" ColumnName="Site_web_Fournisseur" />
+                <ScalarProperty Name="Email_Fournisseur" ColumnName="Email_Fournisseur" />
                 <ScalarProperty Name="Code_Fournisseur" ColumnName="Code_Fournisseur" />
                 <ScalarProperty Name="Nom_Fournisseur" ColumnName="Nom_Fournisseur" />
               </MappingFragment>
@@ -1061,6 +1084,7 @@
           <EntitySetMapping Name="Personne">
             <EntityTypeMapping TypeName="InfoJoyeuxDB.Personne">
               <MappingFragment StoreEntitySet="Personne">
+                <ScalarProperty Name="Date_Naissance" ColumnName="Date_Naissance" />
                 <ScalarProperty Name="Code_Personne" ColumnName="Code_Personne" />
                 <ScalarProperty Name="Nom_Personne" ColumnName="Nom_Personne" />
                 <ScalarProperty Name="Prenom_Personne" ColumnName="Prenom_Personne" />
@@ -1106,6 +1130,8 @@
           <EntitySetMapping Name="Type_Emplacement">
             <EntityTypeMapping TypeName="InfoJoyeuxDB.Type_Emplacement">
               <MappingFragment StoreEntitySet="Type_Emplacement">
+                <ScalarProperty Name="Icone" ColumnName="Icone" />
+                <ScalarProperty Name="Couleur" ColumnName="Couleur" />
                 <ScalarProperty Name="Code_Type" ColumnName="Code_Type" />
                 <ScalarProperty Name="Libelle_Type" ColumnName="Libelle_Type" />
               </MappingFragment>
