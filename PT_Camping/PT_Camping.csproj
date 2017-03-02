@@ -78,11 +78,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="addNewStock.cs">
+    <Compile Include="addStock.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="addNewStock.Designer.cs">
-      <DependentUpon>addNewStock.cs</DependentUpon>
+    <Compile Include="addStock.Designer.cs">
+      <DependentUpon>addStock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommandStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommandStock.Designer.cs">
+      <DependentUpon>CommandStock.cs</DependentUpon>
     </Compile>
     <Compile Include="MapUserControl.cs">
       <SubType>UserControl</SubType>
@@ -193,6 +199,12 @@
       <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\LoginTools.cs" />
+    <Compile Include="ProviderChoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProviderChoice.Designer.cs">
+      <DependentUpon>ProviderChoice.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProvidersUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -219,8 +231,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="addNewStock.resx">
-      <DependentUpon>addNewStock.cs</DependentUpon>
+    <EmbeddedResource Include="addStock.resx">
+      <DependentUpon>addStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommandStock.resx">
+      <DependentUpon>CommandStock.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MapUserControl.resx">
       <DependentUpon>MapUserControl.cs</DependentUpon>
@@ -252,6 +267,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ProviderChoice.resx">
+      <DependentUpon>ProviderChoice.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StocksUserControl.resx">
       <DependentUpon>StocksUserControl.cs</DependentUpon>
     </EmbeddedResource>
