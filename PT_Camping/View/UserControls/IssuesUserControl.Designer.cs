@@ -33,14 +33,14 @@
             this.issuesListView = new System.Windows.Forms.ListView();
             this.addIssueButton = new System.Windows.Forms.Button();
             this.detailsPanel = new System.Windows.Forms.Panel();
-            this.emplacementTextBox = new System.Windows.Forms.TextBox();
+            this.locationTextBox = new System.Windows.Forms.TextBox();
             this.emplacementLabel = new System.Windows.Forms.Label();
             this.descriptionTextBox = new System.Windows.Forms.TextBox();
             this.statusTextBox = new System.Windows.Forms.TextBox();
             this.criticalityTextBox = new System.Windows.Forms.TextBox();
             this.resolutionDateTextBox = new System.Windows.Forms.TextBox();
             this.creationDateTextBox = new System.Windows.Forms.TextBox();
-            this.typeTextBox = new System.Windows.Forms.TextBox();
+            this.issueTypeTextBox = new System.Windows.Forms.TextBox();
             this.idTextBox = new System.Windows.Forms.TextBox();
             this.deleteButton = new System.Windows.Forms.Button();
             this.editButton = new System.Windows.Forms.Button();
@@ -125,14 +125,14 @@
             this.detailsPanel.AutoSize = true;
             this.detailsPanel.BackColor = System.Drawing.Color.White;
             this.detailsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.detailsPanel.Controls.Add(this.emplacementTextBox);
+            this.detailsPanel.Controls.Add(this.locationTextBox);
             this.detailsPanel.Controls.Add(this.emplacementLabel);
             this.detailsPanel.Controls.Add(this.descriptionTextBox);
             this.detailsPanel.Controls.Add(this.statusTextBox);
             this.detailsPanel.Controls.Add(this.criticalityTextBox);
             this.detailsPanel.Controls.Add(this.resolutionDateTextBox);
             this.detailsPanel.Controls.Add(this.creationDateTextBox);
-            this.detailsPanel.Controls.Add(this.typeTextBox);
+            this.detailsPanel.Controls.Add(this.issueTypeTextBox);
             this.detailsPanel.Controls.Add(this.idTextBox);
             this.detailsPanel.Controls.Add(this.deleteButton);
             this.detailsPanel.Controls.Add(this.editButton);
@@ -153,12 +153,12 @@
             // 
             // emplacementTextBox
             // 
-            this.emplacementTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.emplacementTextBox.Location = new System.Drawing.Point(161, 125);
-            this.emplacementTextBox.Name = "emplacementTextBox";
-            this.emplacementTextBox.ReadOnly = true;
-            this.emplacementTextBox.Size = new System.Drawing.Size(120, 20);
-            this.emplacementTextBox.TabIndex = 13;
+            this.locationTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.locationTextBox.Location = new System.Drawing.Point(161, 125);
+            this.locationTextBox.Name = "emplacementTextBox";
+            this.locationTextBox.ReadOnly = true;
+            this.locationTextBox.Size = new System.Drawing.Size(120, 20);
+            this.locationTextBox.TabIndex = 13;
             // 
             // emplacementLabel
             // 
@@ -218,12 +218,12 @@
             // 
             // typeTextBox
             // 
-            this.typeTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.typeTextBox.Location = new System.Drawing.Point(161, 151);
-            this.typeTextBox.Name = "typeTextBox";
-            this.typeTextBox.ReadOnly = true;
-            this.typeTextBox.Size = new System.Drawing.Size(120, 20);
-            this.typeTextBox.TabIndex = 14;
+            this.issueTypeTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.issueTypeTextBox.Location = new System.Drawing.Point(161, 151);
+            this.issueTypeTextBox.Name = "typeTextBox";
+            this.issueTypeTextBox.ReadOnly = true;
+            this.issueTypeTextBox.Size = new System.Drawing.Size(120, 20);
+            this.issueTypeTextBox.TabIndex = 14;
             // 
             // idTextBox
             // 
@@ -406,8 +406,8 @@
         private System.Windows.Forms.TextBox criticalityTextBox;
         private System.Windows.Forms.TextBox resolutionDateTextBox;
         private System.Windows.Forms.TextBox creationDateTextBox;
-        private System.Windows.Forms.TextBox typeTextBox;
+        private System.Windows.Forms.TextBox issueTypeTextBox;
         private System.Windows.Forms.TextBox idTextBox;
-        private System.Windows.Forms.TextBox emplacementTextBox;
+        private System.Windows.Forms.TextBox locationTextBox;
     }
 }

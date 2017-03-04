@@ -29,7 +29,7 @@ namespace PT_Camping.Model
         public string Email { get; set; }
         public string Telephone { get; set; }
         public string Adresse { get; set; }
-        public Nullable<System.DateTime> Date_Naissance { get; set; }
+        public System.DateTime Date_Naissance { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<A_vendu> A_vendu { get; set; }

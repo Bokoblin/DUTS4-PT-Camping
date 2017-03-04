@@ -21,9 +21,9 @@ namespace PT_Camping
             db = new DataBase();
 
             issuesListView.View = View.Details;
-            issuesListView.Columns.Add("Type d'incident", -2);
-            issuesListView.Columns.Add("Description", -2);
-            issuesListView.Columns.Add("Date", -2);
+            issuesListView.Columns.Add("Type d'incident");
+            issuesListView.Columns.Add("Description");
+            issuesListView.Columns.Add("Date");
 
             updateIssuesListView();
             handleResize();
@@ -34,14 +34,14 @@ namespace PT_Camping
         {
             issuesListView.Items.Clear();
 
-            foreach (var incident in db.Incident)
+            foreach (var issue in db.Incident)
             {
-                string type_incident = incident.Type_Incident.Type_Incident1;
-                string description_incident = incident.Description_Incident;
-                string date_incident = incident.Date_Incident.ToShortDateString();
+                string issueType = issue.Type_Incident.Type_Incident1;
+                string issueDescription = issue.Description_Incident;
+                string issueDate = issue.Date_Incident.ToShortDateString();
 
-                var item = new ListViewItem(new[] { type_incident, description_incident, date_incident });
-                item.Name = incident.Code_Incident.ToString();
+                var item = new ListViewItem(new[] { issueType, issueDescription, issueDate });
+                item.Name = issue.Code_Incident.ToString();
                 issuesListView.Items.Add(item);
             }
 
@@ -58,21 +58,21 @@ namespace PT_Camping
             if (issuesListView.SelectedItems.Count != 0)
             {
                 int code = int.Parse(issuesListView.SelectedItems[0].Name);
-                var incident = db.Incident.Find(code);
+                var issue = db.Incident.Find(code);
 
-                idTextBox.Text = incident.Code_Incident.ToString();
-                emplacementTextBox.Text = incident.Emplacement.Code_Emplacement.ToString();
-                typeTextBox.Text = incident.Type_Incident.Type_Incident1;
-                creationDateTextBox.Text = incident.Date_Incident.ToShortDateString();
-                if (incident.Date_Resolution != null)
-                    resolutionDateTextBox.Text = ((DateTime)incident.Date_Resolution).ToShortDateString();
+                idTextBox.Text = issue.Code_Incident.ToString();
+                locationTextBox.Text = issue.Emplacement.Code_Emplacement.ToString();
+                issueTypeTextBox.Text = issue.Type_Incident.Type_Incident1;
+                creationDateTextBox.Text = issue.Date_Incident.ToShortDateString();
+                if (issue.Date_Resolution != null)
+                    resolutionDateTextBox.Text = ((DateTime)issue.Date_Resolution).ToShortDateString();
                 else
                     resolutionDateTextBox.Text = "";
-                criticalityTextBox.Text = incident.Criticite_Incident.ToString() + "/5";
-                statusTextBox.Text = incident.Avancement_Incident;
-                descriptionTextBox.Text = incident.Description_Incident;
+                criticalityTextBox.Text = issue.Criticite_Incident.ToString() + "/5";
+                statusTextBox.Text = issue.Avancement_Incident;
+                descriptionTextBox.Text = issue.Description_Incident;
 
-                resolveButton.Enabled = (incident.Avancement_Incident != "Terminé");
+                resolveButton.Enabled = (issue.Avancement_Incident != "Terminé");
             }
             
         }
@@ -101,9 +101,9 @@ namespace PT_Camping
         private void onDeleteIssueButtonClick(object sender, EventArgs e)
         {
             int code = int.Parse(issuesListView.SelectedItems[0].Name);
-            var incident = db.Incident.Find(code);
+            var issue = db.Incident.Find(code);
 
-            db.Incident.Remove(incident);
+            db.Incident.Remove(issue);
             db.SaveChanges();
             updateIssuesListView();
         }
@@ -219,10 +219,10 @@ namespace PT_Camping
         private void onResolveIssueButtonClick(object sender, EventArgs e)
         {
             int code = int.Parse(issuesListView.SelectedItems[0].Name);
-            var incident = db.Incident.Find(code);
+            var issue = db.Incident.Find(code);
 
-            incident.Date_Resolution = DateTime.Now;
-            incident.Avancement_Incident = "Terminé";
+            issue.Date_Resolution = DateTime.Now;
+            issue.Avancement_Incident = "Terminé";
             db.SaveChanges();
 
             updateIssueDetails();
@@ -238,13 +238,13 @@ namespace PT_Camping
             updateIssueDetails();
         }
 
+
         private void issuesListView_Resize(object sender, EventArgs e)
         {
-            if ( issuesListView.Columns.Count == 3)
+            if (issuesListView.Columns.Count != 0)
             {
-                issuesListView.Columns[0].Width = issuesListView.Width / 3;
-                issuesListView.Columns[1].Width = issuesListView.Width / 3;
-                issuesListView.Columns[2].Width = issuesListView.Width / 3;
+                foreach (ColumnHeader columnHeader in issuesListView.Columns)
+                    columnHeader.Width = issuesListView.Width / issuesListView.Columns.Count;
             }
         }
     }
