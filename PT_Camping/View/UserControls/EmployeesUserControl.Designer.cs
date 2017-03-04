@@ -30,7 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EmployeesUserControl));
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.employeeListView = new System.Windows.Forms.ListView();
+            this.employeesListView = new System.Windows.Forms.ListView();
+            this.addEmployeeButton = new System.Windows.Forms.Button();
             this.detailsPanel = new System.Windows.Forms.Panel();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.dismissButton = new System.Windows.Forms.Button();
@@ -52,7 +53,6 @@
             this.addressLabel = new System.Windows.Forms.Label();
             this.birthDateLabel = new System.Windows.Forms.Label();
             this.surnameLabel = new System.Windows.Forms.Label();
-            this.addEmployeeButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel.SuspendLayout();
             this.detailsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -72,7 +72,7 @@
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel.Controls.Add(this.employeeListView, 1, 1);
+            this.tableLayoutPanel.Controls.Add(this.employeesListView, 1, 1);
             this.tableLayoutPanel.Controls.Add(this.addEmployeeButton, 1, 2);
             this.tableLayoutPanel.Controls.Add(this.detailsPanel, 3, 1);
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -88,20 +88,32 @@
             // 
             // employeeListView
             // 
-            this.employeeListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.employeeListView.FullRowSelect = true;
-            this.employeeListView.GridLines = true;
-            this.employeeListView.HideSelection = false;
-            this.employeeListView.Location = new System.Drawing.Point(43, 47);
-            this.employeeListView.MultiSelect = false;
-            this.employeeListView.Name = "employeeListView";
-            this.employeeListView.Scrollable = false;
-            this.employeeListView.Size = new System.Drawing.Size(314, 390);
-            this.employeeListView.TabIndex = 14;
-            this.employeeListView.UseCompatibleStateImageBehavior = false;
-            this.employeeListView.View = System.Windows.Forms.View.List;
-            this.employeeListView.SelectedIndexChanged += new System.EventHandler(this.employeeListView_SelectedIndexChanged);
-            this.employeeListView.Resize += new System.EventHandler(this.employeeListView_Resize);
+            this.employeesListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.employeesListView.FullRowSelect = true;
+            this.employeesListView.GridLines = true;
+            this.employeesListView.HideSelection = false;
+            this.employeesListView.Location = new System.Drawing.Point(43, 47);
+            this.employeesListView.MultiSelect = false;
+            this.employeesListView.Name = "employeeListView";
+            this.employeesListView.Scrollable = false;
+            this.employeesListView.Size = new System.Drawing.Size(314, 390);
+            this.employeesListView.TabIndex = 14;
+            this.employeesListView.UseCompatibleStateImageBehavior = false;
+            this.employeesListView.View = System.Windows.Forms.View.List;
+            this.employeesListView.SelectedIndexChanged += new System.EventHandler(this.employeeListView_SelectedIndexChanged);
+            this.employeesListView.Resize += new System.EventHandler(this.employeeListView_Resize);
+            // 
+            // addEmployeeButton
+            // 
+            this.addEmployeeButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.addEmployeeButton.AutoSize = true;
+            this.addEmployeeButton.Location = new System.Drawing.Point(140, 463);
+            this.addEmployeeButton.Name = "addEmployeeButton";
+            this.addEmployeeButton.Size = new System.Drawing.Size(120, 35);
+            this.addEmployeeButton.TabIndex = 15;
+            this.addEmployeeButton.Text = "Nouvel employé";
+            this.addEmployeeButton.UseVisualStyleBackColor = true;
+            this.addEmployeeButton.Click += new System.EventHandler(this.onAddEmployeeButtonClick);
             // 
             // detailsPanel
             // 
@@ -256,16 +268,15 @@
             // 
             // detailsTitle
             // 
-            this.detailsTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.detailsTitle.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.detailsTitle.AutoSize = true;
             this.detailsTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.detailsTitle.ForeColor = System.Drawing.Color.White;
             this.detailsTitle.Location = new System.Drawing.Point(104, 10);
             this.detailsTitle.Name = "detailsTitle";
-            this.detailsTitle.Size = new System.Drawing.Size(121, 20);
+            this.detailsTitle.Size = new System.Drawing.Size(113, 20);
             this.detailsTitle.TabIndex = 0;
-            this.detailsTitle.Text = "Détail employés";
+            this.detailsTitle.Text = "Détail employé";
             // 
             // permissionButton
             // 
@@ -339,18 +350,6 @@
             this.surnameLabel.TabIndex = 1;
             this.surnameLabel.Text = "Nom";
             // 
-            // addEmployeeButton
-            // 
-            this.addEmployeeButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.addEmployeeButton.AutoSize = true;
-            this.addEmployeeButton.Location = new System.Drawing.Point(140, 463);
-            this.addEmployeeButton.Name = "addEmployeeButton";
-            this.addEmployeeButton.Size = new System.Drawing.Size(120, 35);
-            this.addEmployeeButton.TabIndex = 15;
-            this.addEmployeeButton.Text = "Nouvel employé";
-            this.addEmployeeButton.UseVisualStyleBackColor = true;
-            this.addEmployeeButton.Click += new System.EventHandler(this.onAddEmployeeButtonClick);
-            // 
             // EmployeesUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -375,7 +374,7 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
-        private System.Windows.Forms.ListView employeeListView;
+        private System.Windows.Forms.ListView employeesListView;
         private System.Windows.Forms.Panel detailsPanel;
         private System.Windows.Forms.TextBox nameTextBox;
         private System.Windows.Forms.Label nameLabel;

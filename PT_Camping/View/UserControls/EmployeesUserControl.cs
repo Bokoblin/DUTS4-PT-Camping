@@ -21,10 +21,10 @@ namespace PT_Camping
             appBarTitle.Text = "Gestion des employés";
             db = new DataBase();
 
-            employeeListView.View = View.Details;
-            employeeListView.Columns.Add("Nom", -2);
-            employeeListView.Columns.Add("Prénom", -2);
-            employeeListView.Columns.Add("Email", -2);
+            employeesListView.View = View.Details;
+            employeesListView.Columns.Add("Nom");
+            employeesListView.Columns.Add("Prénom");
+            employeesListView.Columns.Add("Email");
 
             updateEmployeesListView();
             handleResize();
@@ -33,7 +33,7 @@ namespace PT_Camping
 
         private void updateEmployeesListView()
         {
-            employeeListView.Items.Clear();
+            employeesListView.Items.Clear();
 
             foreach (var employee in db.Employe)
             {
@@ -45,23 +45,23 @@ namespace PT_Camping
 
                     var item = new ListViewItem(new[] { surname, name, email });
                     item.Name = employee.Code_Personne.ToString();
-                    employeeListView.Items.Add(item);
+                    employeesListView.Items.Add(item);
                 }
             }
 
-            if (employeeListView.Items.Count > 0)
+            if (employeesListView.Items.Count > 0)
             {
-                employeeListView.Items[0].Selected = true;
-                employeeListView.Select();
+                employeesListView.Items[0].Selected = true;
+                employeesListView.Select();
             }
         }
 
 
         private void updateEmployeeDetails()
         {
-            if (employeeListView.SelectedItems.Count != 0)
+            if (employeesListView.SelectedItems.Count != 0)
             {
-                int code = int.Parse(employeeListView.SelectedItems[0].Name);
+                int code = int.Parse(employeesListView.SelectedItems[0].Name);
                 var employee = db.Employe.Find(code);
 
                 surnameTextBox.Text = employee.Personne.Nom_Personne;
@@ -114,7 +114,7 @@ namespace PT_Camping
                 string message = "Les données suivantes ont été mises à jour : \n";
                 int cptModifications = 0;
 
-                int code = int.Parse(employeeListView.SelectedItems[0].Name);
+                int code = int.Parse(employeesListView.SelectedItems[0].Name);
                 var employee = db.Employe.Find(code);
 
                 if (addressTextBox.Text != employee.Personne.Adresse)
@@ -169,7 +169,7 @@ namespace PT_Camping
 
         private void onPermissionButtonClick(object sender, EventArgs e)
         {
-            int code = int.Parse(employeeListView.SelectedItems[0].Name);
+            int code = int.Parse(employeesListView.SelectedItems[0].Name);
             var employee = db.Employe.Find(code);
             new Permissions(employee, db).ShowDialog();
             db.SaveChanges();
@@ -178,7 +178,7 @@ namespace PT_Camping
 
         private void onDismissEmployeeButtonClick(object sender, EventArgs e)
         {
-            int code = int.Parse(employeeListView.SelectedItems[0].Name);
+            int code = int.Parse(employeesListView.SelectedItems[0].Name);
             var employee = db.Employe.Find(code);
             employee.EstLicencie = true;
             db.SaveChanges();
@@ -195,13 +195,13 @@ namespace PT_Camping
             updateEmployeeDetails();
         }
 
+
         private void employeeListView_Resize(object sender, EventArgs e)
         {
-            if (employeeListView.Columns.Count == 3)
+            if (employeesListView.Columns.Count != 0)
             {
-                employeeListView.Columns[0].Width = employeeListView.Width / 3;
-                employeeListView.Columns[1].Width = employeeListView.Width / 3;
-                employeeListView.Columns[2].Width = employeeListView.Width / 3;
+                foreach (ColumnHeader columnHeader in employeesListView.Columns)
+                    columnHeader.Width = employeesListView.Width / employeesListView.Columns.Count;
             }
         }
     }
