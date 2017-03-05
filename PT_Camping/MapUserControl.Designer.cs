@@ -110,7 +110,7 @@
             this.mapTablePanel.ColumnCount = 3;
             this.mapTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.mapTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
-            this.mapTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 199F));
+            this.mapTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             this.mapTablePanel.Controls.Add(this.modeCheckBox, 0, 0);
             this.mapTablePanel.Controls.Add(this.dateTimePicker, 1, 0);
             this.mapTablePanel.Controls.Add(this.validateChangesButton, 2, 0);
@@ -381,9 +381,9 @@
             // 
             // deleteButton
             // 
-            this.deleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.deleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Bottom));
             this.deleteButton.BackColor = System.Drawing.Color.Red;
-            this.deleteButton.Location = new System.Drawing.Point(69, 464);
+            this.deleteButton.Location = new System.Drawing.Point(70, 440);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(75, 23);
             this.deleteButton.TabIndex = 6;
