@@ -754,7 +754,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Incident_Code_Emplacement">
-          <End Role="Emplacement" Type="Self.Emplacement" Multiplicity="1" />
+          <End Role="Emplacement" Type="Self.Emplacement" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Incident" Type="Self.Incident" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Emplacement">
@@ -766,7 +768,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Loge_Code_Emplacement">
-          <End Role="Emplacement" Type="Self.Emplacement" Multiplicity="1" />
+          <End Role="Emplacement" Type="Self.Emplacement" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Loge" Type="Self.Loge" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Emplacement">
@@ -871,7 +875,7 @@
         </Association>
         <Association Name="Possede">
           <End Role="Caracteristique_Emplacement" Type="Self.Caracteristique_Emplacement" Multiplicity="*" />
-          <End Role="Emplacement" Type="Self.Emplacement" Multiplicity="*" />
+          <End Role="Emplacement" Type="Self.Emplacement" Multiplicity="*" ></End>
         </Association>
         <EntityContainer Name="DataBase" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="A_vendu" EntityType="Self.A_vendu" />
