@@ -92,29 +92,8 @@ namespace PT_Camping
             foreach(Type_Emplacement type in typesLocations)
             {
                 typeLocationComboBox.Items.Add(type);
-                Panel panelType = new FlowLayoutPanel();
-                panelType.Height = 50;
-                panelType.Anchor = AnchorStyles.Top | AnchorStyles.Left;
-                panelType.Top = i * (panelType.Height + 10);
-                panelType.BackColor = Color.Gray;
-                panelType.MouseEnter += PanelType_MouseEnter;
-                panelType.MouseLeave += PanelType_MouseLeave;
-                Label labelType = new Label();
-                PictureBox imageType = new PictureBox();
-                panelType.Controls.Add(imageType);
-                panelType.Controls.Add(labelType);
-                imageType.Dock = DockStyle.Left;
-                imageType.Width = 50;
-                imageType.Margin = new Padding(0, 0, 10, 0);
-                labelType.Text = type.Libelle_Type;
-                labelType.Anchor = AnchorStyles.Bottom;
-                panelType.Width = imageType.Width + imageType.Margin.Right + labelType.Width;
-                if (type.Icone != null)
-                {
-                    MemoryStream ms = new MemoryStream(db.App.FirstOrDefault().Fond_Image);
-                    pictureBox.Image = new Bitmap(ms);
-                    ms.Close();
-                }
+
+                TableLayoutPanel panelType = createInsertLocationButton(type);
                 addLocationPanel.Controls.Add(panelType);
                 i++;
 
@@ -138,6 +117,76 @@ namespace PT_Camping
             changeMode(mode);
         }
 
+        private TableLayoutPanel createInsertLocationButton(Type_Emplacement type)
+        {
+            TableLayoutPanel typePanel = new TableLayoutPanel();
+            PictureBox typePicture = new PictureBox();
+            Label typeLabel = new Label();
+
+            // 
+            // panel
+            // 
+            typePanel.ColumnCount = 2;
+            typePanel.Size = new Size(150, 50);
+            typePanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 50));
+            typePanel.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+            typePanel.Controls.Add(typePicture, 0, 0);
+            typePanel.Controls.Add(typeLabel, 1, 0);
+            typePanel.RowCount = 1;
+            typePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            typePanel.TabIndex = 0;
+            typePanel.Dock = DockStyle.Top;
+            typePanel.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+            typePanel.Margin = new Padding(5);
+            typePanel.BackColor = Color.Gray;
+            typePanel.MouseEnter += PanelType_MouseEnter;
+            typePanel.MouseLeave += PanelType_MouseLeave;
+            typePanel.Click += TypePanel_Click;
+            // 
+            // pictureBox
+            // 
+            typePicture.Dock = DockStyle.Fill;
+            typePicture.TabIndex = 0;
+            typePicture.TabStop = false;
+            if (type.Icone != null)
+            {
+                MemoryStream ms = new MemoryStream(db.App.FirstOrDefault().Fond_Image);
+                typePicture.Image = new Bitmap(ms);
+                ms.Close();
+            }
+            // 
+            // label
+            // 
+            typeLabel.Anchor = AnchorStyles.Right;
+            typeLabel.AutoSize = true;
+            typeLabel.TabIndex = 1;
+            typeLabel.Text = type.Libelle_Type;
+            typeLabel.ForeColor = Color.White;
+            typeLabel.Name = "typeLabel";
+
+            return typePanel;
+        }
+
+        private void TypePanel_Click(object sender, EventArgs e)
+        {
+            Panel panel = (Panel)sender;
+            Label typeLabel = (Label)panel.Controls.Find("typeLabel", true).First();
+            LoginTools.checkConnection();
+            Emplacement newLocation = new Emplacement();
+            db.Emplacement.Add(newLocation);
+            newLocation.Cordonnee_X = 10;
+            newLocation.Coordonnee_Y = 10;
+            newLocation.Taille_X = 10;
+            newLocation.Taille_Y = 10;
+            newLocation.Nom_Emplacement = "Emplacement " + db.Emplacement.Count();
+            newLocation.Type_Emplacement = db.Type_Emplacement.First(a => a.Libelle_Type == typeLabel.Text);
+            db.SaveChanges();
+            GraphicLocation newGraphicLocation = new GraphicLocation(newLocation);
+            locationsList.Add(newGraphicLocation);
+            selectedLocation = newGraphicLocation;
+            Refresh();
+        }
+
         private void PanelType_MouseEnter(object sender, EventArgs e)
         {
             Panel panel = (Panel)sender;
@@ -147,7 +196,10 @@ namespace PT_Camping
         private void PanelType_MouseLeave(object sender, EventArgs e)
         {
             Panel panel = (Panel)sender;
-            panel.BackColor = Color.Gray;
+            if (!panel.ClientRectangle.Contains(panel.PointToClient(Cursor.Position)))
+            {
+                panel.BackColor = Color.Gray;
+            }
         }
 
         private void changeMode (MapMode mode)
