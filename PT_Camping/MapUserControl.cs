@@ -471,13 +471,13 @@ namespace PT_Camping
         private void validateChangesButton_Click(object sender, EventArgs e)
         {
             LoginTools.checkConnection();
-            /*foreach(GraphicLocation location in locationsList)
+            foreach(GraphicLocation location in locationsList)
             {
-                if (!db.Emplacement.Contains(location.Location))
+                if (location.Location.Code_Emplacement == 0)
                 {
                     db.Emplacement.Add(location.Location);
                 }
-            }*/
+            }
             List<int> toDelete = new List<int>();
             foreach (Emplacement location in db.Emplacement)
             {
