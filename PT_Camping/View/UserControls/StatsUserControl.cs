@@ -1,6 +1,8 @@
 ﻿using PT_Camping.Model;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Linq;
 
 
 namespace PT_Camping
@@ -68,16 +70,36 @@ namespace PT_Camping
 
         private void updateIssueslistView()
         {
-            //TEMPORARY : ALL ISSUES DISPLAYING  
-
             mostCommonIssueslistView.View = View.Details;
+            mostCommonIssueslistView.Columns.Add("#");
             mostCommonIssueslistView.Columns.Add("Type d'incident");
+            mostCommonIssueslistView.Columns.Add("Nombre d'incidents associés");
+
+            var statsIssues = new Dictionary<String, int>();
 
             foreach (Type_Incident issueType in db.Type_Incident)
             {
-                var item = new ListViewItem(new[] { issueType.Type_Incident1 });
+                statsIssues.Add(issueType.Type_Incident1, db.Incident.Where(it => it.Code_Type == issueType.Code_Type).Count());
+            }
+
+            foreach (Type_Incident issueType in db.Type_Incident)
+            {
+                var item = new ListViewItem(new[] { "", issueType.Type_Incident1, statsIssues[issueType.Type_Incident1].ToString() });
                 item.Name = issueType.Code_Type.ToString();
                 mostCommonIssueslistView.Items.Add(item);
+            }
+
+            //=== Sorting by incident type
+
+            var orderedList =  mostCommonIssueslistView.Items.Cast<ListViewItem>().Select(x => x).OrderByDescending(x => x.SubItems[2].Text).Take(10).ToList();
+            mostCommonIssueslistView.Items.Clear();
+            mostCommonIssueslistView.Items.AddRange(orderedList.ToArray());
+
+            int cpt = 1;
+            foreach (ListViewItem item in mostCommonIssueslistView.Items)
+            {
+                item.SubItems[0].Text = cpt.ToString();
+                cpt++;
             }
         }
 
@@ -130,6 +152,9 @@ namespace PT_Camping
                 foreach (ColumnHeader columnHeader in mostCommonIssueslistView.Columns)
                     columnHeader.Width = mostCommonIssueslistView.Width / mostCommonIssueslistView.Columns.Count;
             }
+            mostCommonIssueslistView.Columns[0].Width = 30;
+            mostCommonIssueslistView.Columns[1].Width = mostCommonIssueslistView.Width / 2 - 15;
+            mostCommonIssueslistView.Columns[2].Width = mostCommonIssueslistView.Width / 2 - 15;
         }
 
 
@@ -139,6 +164,16 @@ namespace PT_Camping
             {
                 foreach (ColumnHeader columnHeader in bestClientsListView.Columns)
                     columnHeader.Width = bestClientsListView.Width / bestClientsListView.Columns.Count;
+            }
+        }
+
+        private void mostCommonIssueslistView_DoubleClick(object sender, EventArgs e)
+        {
+            if (mostCommonIssueslistView.SelectedItems.Count > 0)
+            {
+                int code = int.Parse(mostCommonIssueslistView.SelectedItems[0].Name);
+                mHomeUC.Window.WindowPanel.Controls.Remove(this);
+                mHomeUC.startIssuesFromStats(code);
             }
         }
     }

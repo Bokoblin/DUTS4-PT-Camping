@@ -49,6 +49,8 @@ namespace PT_Camping
                 }
             }
 
+            //=== Select the first of the list
+
             if (employeesListView.Items.Count > 0)
             {
                 employeesListView.Items[0].Selected = true;
@@ -66,8 +68,7 @@ namespace PT_Camping
 
                 surnameTextBox.Text = employee.Personne.Nom_Personne;
                 nameTextBox.Text = employee.Personne.Prenom_Personne;
-                if (employee.Personne.Date_Naissance != null)
-                    birthDateTextBox.Text = ((DateTime)employee.Personne.Date_Naissance).ToShortDateString();
+                birthDateTextBox.Text = employee.Personne.Date_Naissance.ToShortDateString();
                 addressTextBox.Text = employee.Personne.Adresse;
                 phoneTextBox.Text = employee.Personne.Telephone;
                 emailTextBox.Text = employee.Personne.Email;

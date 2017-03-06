@@ -37,6 +37,14 @@ namespace PT_Camping
         }
 
 
+        public void startIssuesFromStats(int issueCode)
+        {
+            mIssuesUC = new IssuesUserControl(this, issueCode);
+            mWindow.WindowPanel.Controls.Add(mIssuesUC);
+            mWindow.WindowPanel.Controls.Remove(this);
+        }
+
+
         private void logoutButton_Click(object sender, EventArgs e)
         {
             mWindow.logout();
