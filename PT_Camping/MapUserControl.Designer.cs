@@ -75,9 +75,9 @@
             this.importMapPanel.Controls.Add(this.importMapButton);
             this.importMapPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.importMapPanel.Location = new System.Drawing.Point(0, 0);
-            this.importMapPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.importMapPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.importMapPanel.Name = "importMapPanel";
-            this.importMapPanel.Size = new System.Drawing.Size(804, 523);
+            this.importMapPanel.Size = new System.Drawing.Size(1072, 644);
             this.importMapPanel.TabIndex = 0;
             this.importMapPanel.Visible = false;
             // 
@@ -85,10 +85,9 @@
             // 
             this.importLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.importLabel.AutoSize = true;
-            this.importLabel.Location = new System.Drawing.Point(220, 193);
-            this.importLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.importLabel.Location = new System.Drawing.Point(293, 238);
             this.importLabel.Name = "importLabel";
-            this.importLabel.Size = new System.Drawing.Size(342, 13);
+            this.importLabel.Size = new System.Drawing.Size(457, 17);
             this.importLabel.TabIndex = 1;
             this.importLabel.Text = "Aucune carte n\'a été trouvé pour ce camping. Veuillez en importer une.";
             // 
@@ -96,10 +95,10 @@
             // 
             this.importMapButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.importMapButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.importMapButton.Location = new System.Drawing.Point(319, 283);
-            this.importMapButton.Margin = new System.Windows.Forms.Padding(2);
+            this.importMapButton.Location = new System.Drawing.Point(425, 348);
+            this.importMapButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.importMapButton.Name = "importMapButton";
-            this.importMapButton.Size = new System.Drawing.Size(142, 43);
+            this.importMapButton.Size = new System.Drawing.Size(189, 53);
             this.importMapButton.TabIndex = 0;
             this.importMapButton.Text = "Importer une carte";
             this.importMapButton.UseVisualStyleBackColor = true;
@@ -107,10 +106,11 @@
             // 
             // mapTablePanel
             // 
+            this.mapTablePanel.AllowDrop = true;
             this.mapTablePanel.ColumnCount = 3;
             this.mapTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.mapTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
-            this.mapTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.mapTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 268F));
             this.mapTablePanel.Controls.Add(this.modeCheckBox, 0, 0);
             this.mapTablePanel.Controls.Add(this.dateTimePicker, 1, 0);
             this.mapTablePanel.Controls.Add(this.validateChangesButton, 2, 0);
@@ -119,23 +119,25 @@
             this.mapTablePanel.Controls.Add(this.panel1, 2, 1);
             this.mapTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mapTablePanel.Location = new System.Drawing.Point(0, 0);
-            this.mapTablePanel.Margin = new System.Windows.Forms.Padding(2);
+            this.mapTablePanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.mapTablePanel.Name = "mapTablePanel";
             this.mapTablePanel.RowCount = 2;
             this.mapTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.590064F));
             this.mapTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 94.40993F));
-            this.mapTablePanel.Size = new System.Drawing.Size(804, 523);
+            this.mapTablePanel.Size = new System.Drawing.Size(1072, 644);
             this.mapTablePanel.TabIndex = 1;
             this.mapTablePanel.Visible = false;
+            this.mapTablePanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.mapTablePanel_DragDrop);
+            this.mapTablePanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.mapTablePanel_DragEnter);
             // 
             // modeCheckBox
             // 
             this.modeCheckBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.modeCheckBox.AutoSize = true;
-            this.modeCheckBox.Location = new System.Drawing.Point(31, 6);
-            this.modeCheckBox.Margin = new System.Windows.Forms.Padding(2);
+            this.modeCheckBox.Location = new System.Drawing.Point(44, 7);
+            this.modeCheckBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.modeCheckBox.Name = "modeCheckBox";
-            this.modeCheckBox.Size = new System.Drawing.Size(88, 17);
+            this.modeCheckBox.Size = new System.Drawing.Size(112, 21);
             this.modeCheckBox.TabIndex = 0;
             this.modeCheckBox.Text = "Mode Edition";
             this.modeCheckBox.UseVisualStyleBackColor = true;
@@ -144,20 +146,20 @@
             // dateTimePicker
             // 
             this.dateTimePicker.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.dateTimePicker.Location = new System.Drawing.Point(298, 4);
-            this.dateTimePicker.Margin = new System.Windows.Forms.Padding(2);
+            this.dateTimePicker.Location = new System.Drawing.Point(398, 7);
+            this.dateTimePicker.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateTimePicker.Name = "dateTimePicker";
-            this.dateTimePicker.Size = new System.Drawing.Size(158, 20);
+            this.dateTimePicker.Size = new System.Drawing.Size(209, 22);
             this.dateTimePicker.TabIndex = 2;
             this.dateTimePicker.ValueChanged += new System.EventHandler(this.dateTimePicker_ValueChanged);
             // 
             // validateChangesButton
             // 
             this.validateChangesButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.validateChangesButton.Location = new System.Drawing.Point(676, 5);
-            this.validateChangesButton.Margin = new System.Windows.Forms.Padding(2);
+            this.validateChangesButton.Location = new System.Drawing.Point(900, 6);
+            this.validateChangesButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.validateChangesButton.Name = "validateChangesButton";
-            this.validateChangesButton.Size = new System.Drawing.Size(56, 19);
+            this.validateChangesButton.Size = new System.Drawing.Size(75, 23);
             this.validateChangesButton.TabIndex = 3;
             this.validateChangesButton.Text = "Valider";
             this.validateChangesButton.UseVisualStyleBackColor = true;
@@ -166,10 +168,10 @@
             // pictureBox
             // 
             this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox.Location = new System.Drawing.Point(153, 31);
-            this.pictureBox.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox.Location = new System.Drawing.Point(204, 38);
+            this.pictureBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(449, 490);
+            this.pictureBox.Size = new System.Drawing.Size(597, 604);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox.TabIndex = 4;
             this.pictureBox.TabStop = false;
@@ -184,10 +186,10 @@
             this.leftPanel.Controls.Add(this.categoriesCheckedListBox);
             this.leftPanel.Controls.Add(this.addLocationPanel);
             this.leftPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.leftPanel.Location = new System.Drawing.Point(2, 31);
-            this.leftPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.leftPanel.Location = new System.Drawing.Point(3, 38);
+            this.leftPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.leftPanel.Name = "leftPanel";
-            this.leftPanel.Size = new System.Drawing.Size(147, 490);
+            this.leftPanel.Size = new System.Drawing.Size(195, 604);
             this.leftPanel.TabIndex = 6;
             // 
             // categoriesCheckedListBox
@@ -195,9 +197,9 @@
             this.categoriesCheckedListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.categoriesCheckedListBox.FormattingEnabled = true;
             this.categoriesCheckedListBox.Location = new System.Drawing.Point(0, 0);
-            this.categoriesCheckedListBox.Margin = new System.Windows.Forms.Padding(2);
+            this.categoriesCheckedListBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.categoriesCheckedListBox.Name = "categoriesCheckedListBox";
-            this.categoriesCheckedListBox.Size = new System.Drawing.Size(147, 490);
+            this.categoriesCheckedListBox.Size = new System.Drawing.Size(195, 604);
             this.categoriesCheckedListBox.TabIndex = 1;
             this.categoriesCheckedListBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.categoriesCheckedListBox_MouseUp);
             // 
@@ -205,9 +207,9 @@
             // 
             this.addLocationPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.addLocationPanel.Location = new System.Drawing.Point(0, 0);
-            this.addLocationPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.addLocationPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addLocationPanel.Name = "addLocationPanel";
-            this.addLocationPanel.Size = new System.Drawing.Size(147, 490);
+            this.addLocationPanel.Size = new System.Drawing.Size(195, 604);
             this.addLocationPanel.TabIndex = 0;
             // 
             // panel1
@@ -215,10 +217,10 @@
             this.panel1.Controls.Add(this.detailsLocationPanel);
             this.panel1.Controls.Add(this.editLocationPanel);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(606, 31);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2);
+            this.panel1.Location = new System.Drawing.Point(807, 38);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(196, 490);
+            this.panel1.Size = new System.Drawing.Size(262, 604);
             this.panel1.TabIndex = 7;
             // 
             // detailsLocationPanel
@@ -236,9 +238,9 @@
             this.detailsLocationPanel.Controls.Add(this.ResTitleLabel);
             this.detailsLocationPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.detailsLocationPanel.Location = new System.Drawing.Point(0, 0);
-            this.detailsLocationPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.detailsLocationPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.detailsLocationPanel.Name = "detailsLocationPanel";
-            this.detailsLocationPanel.Size = new System.Drawing.Size(196, 490);
+            this.detailsLocationPanel.Size = new System.Drawing.Size(262, 604);
             this.detailsLocationPanel.TabIndex = 5;
             this.detailsLocationPanel.Visible = false;
             // 
@@ -246,30 +248,30 @@
             // 
             this.incidentsListBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.incidentsListBox.FormattingEnabled = true;
-            this.incidentsListBox.Location = new System.Drawing.Point(11, 296);
-            this.incidentsListBox.Margin = new System.Windows.Forms.Padding(2);
+            this.incidentsListBox.ItemHeight = 16;
+            this.incidentsListBox.Location = new System.Drawing.Point(16, 364);
+            this.incidentsListBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.incidentsListBox.Name = "incidentsListBox";
-            this.incidentsListBox.Size = new System.Drawing.Size(163, 69);
+            this.incidentsListBox.Size = new System.Drawing.Size(216, 84);
             this.incidentsListBox.TabIndex = 11;
             // 
             // label7
             // 
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(9, 280);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Location = new System.Drawing.Point(13, 345);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(100, 13);
+            this.label7.Size = new System.Drawing.Size(131, 17);
             this.label7.TabIndex = 10;
             this.label7.Text = "Incidents en cours :";
             // 
             // catLocationListView
             // 
             this.catLocationListView.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.catLocationListView.Location = new System.Drawing.Point(11, 180);
-            this.catLocationListView.Margin = new System.Windows.Forms.Padding(2);
+            this.catLocationListView.Location = new System.Drawing.Point(16, 222);
+            this.catLocationListView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.catLocationListView.Name = "catLocationListView";
-            this.catLocationListView.Size = new System.Drawing.Size(165, 93);
+            this.catLocationListView.Size = new System.Drawing.Size(219, 114);
             this.catLocationListView.TabIndex = 9;
             this.catLocationListView.UseCompatibleStateImageBehavior = false;
             this.catLocationListView.View = System.Windows.Forms.View.List;
@@ -278,10 +280,9 @@
             // 
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(9, 164);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label6.Location = new System.Drawing.Point(13, 202);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(173, 13);
+            this.label6.Size = new System.Drawing.Size(232, 17);
             this.label6.TabIndex = 8;
             this.label6.Text = "Caractéristiques de l\'emplacement :";
             // 
@@ -289,10 +290,9 @@
             // 
             this.catLocationLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.catLocationLabel.AutoSize = true;
-            this.catLocationLabel.Location = new System.Drawing.Point(9, 137);
-            this.catLocationLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.catLocationLabel.Location = new System.Drawing.Point(13, 169);
             this.catLocationLabel.Name = "catLocationLabel";
-            this.catLocationLabel.Size = new System.Drawing.Size(63, 13);
+            this.catLocationLabel.Size = new System.Drawing.Size(81, 17);
             this.catLocationLabel.TabIndex = 7;
             this.catLocationLabel.Text = "catLocation";
             // 
@@ -300,10 +300,9 @@
             // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(8, 122);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Location = new System.Drawing.Point(12, 150);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(143, 13);
+            this.label5.Size = new System.Drawing.Size(191, 17);
             this.label5.TabIndex = 6;
             this.label5.Text = "Catégorie de l\'emplacement :";
             // 
@@ -311,10 +310,9 @@
             // 
             this.locationNameLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.locationNameLabel.AutoSize = true;
-            this.locationNameLabel.Location = new System.Drawing.Point(9, 90);
-            this.locationNameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.locationNameLabel.Location = new System.Drawing.Point(13, 111);
             this.locationNameLabel.Name = "locationNameLabel";
-            this.locationNameLabel.Size = new System.Drawing.Size(72, 13);
+            this.locationNameLabel.Size = new System.Drawing.Size(94, 17);
             this.locationNameLabel.TabIndex = 5;
             this.locationNameLabel.Text = "locationName";
             // 
@@ -322,20 +320,19 @@
             // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 76);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Location = new System.Drawing.Point(13, 94);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(120, 13);
+            this.label4.Size = new System.Drawing.Size(159, 17);
             this.label4.TabIndex = 4;
             this.label4.Text = "Nom de l\'emplacement :";
             // 
             // resButton
             // 
             this.resButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.resButton.Location = new System.Drawing.Point(70, 42);
-            this.resButton.Margin = new System.Windows.Forms.Padding(2);
+            this.resButton.Location = new System.Drawing.Point(94, 52);
+            this.resButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.resButton.Name = "resButton";
-            this.resButton.Size = new System.Drawing.Size(56, 19);
+            this.resButton.Size = new System.Drawing.Size(75, 23);
             this.resButton.TabIndex = 2;
             this.resButton.Text = "Réserver";
             this.resButton.UseVisualStyleBackColor = true;
@@ -344,10 +341,9 @@
             // 
             this.resStateLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.resStateLabel.AutoSize = true;
-            this.resStateLabel.Location = new System.Drawing.Point(9, 26);
-            this.resStateLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.resStateLabel.Location = new System.Drawing.Point(13, 32);
             this.resStateLabel.Name = "resStateLabel";
-            this.resStateLabel.Size = new System.Drawing.Size(46, 13);
+            this.resStateLabel.Size = new System.Drawing.Size(61, 17);
             this.resStateLabel.TabIndex = 1;
             this.resStateLabel.Text = "resState";
             // 
@@ -355,10 +351,9 @@
             // 
             this.ResTitleLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.ResTitleLabel.AutoSize = true;
-            this.ResTitleLabel.Location = new System.Drawing.Point(9, 11);
-            this.ResTitleLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.ResTitleLabel.Location = new System.Drawing.Point(13, 14);
             this.ResTitleLabel.Name = "ResTitleLabel";
-            this.ResTitleLabel.Size = new System.Drawing.Size(110, 13);
+            this.ResTitleLabel.Size = new System.Drawing.Size(147, 17);
             this.ResTitleLabel.TabIndex = 0;
             this.ResTitleLabel.Text = "Etat de la réservation:";
             // 
@@ -373,19 +368,20 @@
             this.editLocationPanel.Controls.Add(this.label1);
             this.editLocationPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.editLocationPanel.Location = new System.Drawing.Point(0, 0);
-            this.editLocationPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.editLocationPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.editLocationPanel.Name = "editLocationPanel";
-            this.editLocationPanel.Size = new System.Drawing.Size(196, 490);
+            this.editLocationPanel.Size = new System.Drawing.Size(262, 604);
             this.editLocationPanel.TabIndex = 3;
             this.editLocationPanel.Visible = false;
             // 
             // deleteButton
             // 
-            this.deleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Bottom));
+            this.deleteButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.deleteButton.BackColor = System.Drawing.Color.Red;
-            this.deleteButton.Location = new System.Drawing.Point(70, 440);
+            this.deleteButton.Location = new System.Drawing.Point(94, 543);
+            this.deleteButton.Margin = new System.Windows.Forms.Padding(4);
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(75, 23);
+            this.deleteButton.Size = new System.Drawing.Size(100, 28);
             this.deleteButton.TabIndex = 6;
             this.deleteButton.Text = "Supprimer";
             this.deleteButton.UseVisualStyleBackColor = false;
@@ -395,10 +391,10 @@
             // 
             this.carCheckedListBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.carCheckedListBox.FormattingEnabled = true;
-            this.carCheckedListBox.Location = new System.Drawing.Point(17, 138);
-            this.carCheckedListBox.Margin = new System.Windows.Forms.Padding(2);
+            this.carCheckedListBox.Location = new System.Drawing.Point(24, 170);
+            this.carCheckedListBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.carCheckedListBox.Name = "carCheckedListBox";
-            this.carCheckedListBox.Size = new System.Drawing.Size(157, 124);
+            this.carCheckedListBox.Size = new System.Drawing.Size(208, 140);
             this.carCheckedListBox.TabIndex = 5;
             this.carCheckedListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.carCheckedListBox_Check);
             // 
@@ -406,10 +402,9 @@
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 108);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Location = new System.Drawing.Point(21, 133);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(154, 13);
+            this.label3.Size = new System.Drawing.Size(206, 17);
             this.label3.TabIndex = 4;
             this.label3.Text = "Caractéristiques emplacement :";
             // 
@@ -417,53 +412,52 @@
             // 
             this.typeLocationComboBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.typeLocationComboBox.FormattingEnabled = true;
-            this.typeLocationComboBox.Location = new System.Drawing.Point(15, 76);
-            this.typeLocationComboBox.Margin = new System.Windows.Forms.Padding(2);
+            this.typeLocationComboBox.Location = new System.Drawing.Point(21, 94);
+            this.typeLocationComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.typeLocationComboBox.Name = "typeLocationComboBox";
-            this.typeLocationComboBox.Size = new System.Drawing.Size(118, 21);
+            this.typeLocationComboBox.Size = new System.Drawing.Size(156, 24);
             this.typeLocationComboBox.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 58);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(21, 71);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(122, 13);
+            this.label2.Size = new System.Drawing.Size(162, 17);
             this.label2.TabIndex = 2;
             this.label2.Text = "Type de l\'emplacement :";
             // 
             // locationNameTextBox
             // 
             this.locationNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.locationNameTextBox.Location = new System.Drawing.Point(15, 31);
-            this.locationNameTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.locationNameTextBox.Location = new System.Drawing.Point(21, 38);
+            this.locationNameTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.locationNameTextBox.Name = "locationNameTextBox";
-            this.locationNameTextBox.Size = new System.Drawing.Size(118, 20);
+            this.locationNameTextBox.Size = new System.Drawing.Size(156, 22);
             this.locationNameTextBox.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 12);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(18, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(120, 13);
+            this.label1.Size = new System.Drawing.Size(159, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Nom de l\'emplacement :";
             // 
             // MapUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.mapTablePanel);
             this.Controls.Add(this.importMapPanel);
             this.Cursor = System.Windows.Forms.Cursors.Default;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MapUserControl";
-            this.Size = new System.Drawing.Size(804, 523);
+            this.Size = new System.Drawing.Size(1072, 644);
             this.importMapPanel.ResumeLayout(false);
             this.importMapPanel.PerformLayout();
             this.mapTablePanel.ResumeLayout(false);
