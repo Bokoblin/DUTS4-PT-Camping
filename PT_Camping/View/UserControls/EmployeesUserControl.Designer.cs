@@ -86,7 +86,7 @@
             this.tableLayoutPanel.Size = new System.Drawing.Size(800, 550);
             this.tableLayoutPanel.TabIndex = 11;
             // 
-            // employeeListView
+            // employeesListView
             // 
             this.employeesListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.employeesListView.FullRowSelect = true;
@@ -94,7 +94,7 @@
             this.employeesListView.HideSelection = false;
             this.employeesListView.Location = new System.Drawing.Point(43, 47);
             this.employeesListView.MultiSelect = false;
-            this.employeesListView.Name = "employeeListView";
+            this.employeesListView.Name = "employeesListView";
             this.employeesListView.Scrollable = false;
             this.employeesListView.Size = new System.Drawing.Size(314, 390);
             this.employeesListView.TabIndex = 14;

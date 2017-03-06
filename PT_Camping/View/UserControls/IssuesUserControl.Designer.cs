@@ -30,8 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IssuesUserControl));
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.issuesListView = new System.Windows.Forms.ListView();
-            this.addIssueButton = new System.Windows.Forms.Button();
             this.detailsPanel = new System.Windows.Forms.Panel();
             this.locationTextBox = new System.Windows.Forms.TextBox();
             this.emplacementLabel = new System.Windows.Forms.Label();
@@ -54,6 +52,8 @@
             this.creationDateLabel = new System.Windows.Forms.Label();
             this.TypeLabel = new System.Windows.Forms.Label();
             this.idLabel = new System.Windows.Forms.Label();
+            this.issuesListView = new System.Windows.Forms.ListView();
+            this.addIssueButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel.SuspendLayout();
             this.detailsPanel.SuspendLayout();
             this.detailsTitleBarPanel.SuspendLayout();
@@ -91,35 +91,6 @@
             this.tableLayoutPanel.Size = new System.Drawing.Size(803, 553);
             this.tableLayoutPanel.TabIndex = 12;
             // 
-            // issuesListView
-            // 
-            this.issuesListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.issuesListView.FullRowSelect = true;
-            this.issuesListView.GridLines = true;
-            this.issuesListView.HideSelection = false;
-            this.issuesListView.Location = new System.Drawing.Point(43, 47);
-            this.issuesListView.MultiSelect = false;
-            this.issuesListView.Name = "issuesListView";
-            this.issuesListView.Scrollable = false;
-            this.issuesListView.Size = new System.Drawing.Size(315, 392);
-            this.issuesListView.TabIndex = 10;
-            this.issuesListView.UseCompatibleStateImageBehavior = false;
-            this.issuesListView.View = System.Windows.Forms.View.List;
-            this.issuesListView.SelectedIndexChanged += new System.EventHandler(this.issuesListView_SelectedIndexChanged);
-            this.issuesListView.Resize += new System.EventHandler(this.issuesListView_Resize);
-            // 
-            // addIssueButton
-            // 
-            this.addIssueButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.addIssueButton.AutoSize = true;
-            this.addIssueButton.Location = new System.Drawing.Point(140, 465);
-            this.addIssueButton.Name = "addIssueButton";
-            this.addIssueButton.Size = new System.Drawing.Size(120, 35);
-            this.addIssueButton.TabIndex = 11;
-            this.addIssueButton.Text = "Nouvel incident";
-            this.addIssueButton.UseVisualStyleBackColor = true;
-            this.addIssueButton.Click += new System.EventHandler(this.onAddIssueButtonClick);
-            // 
             // detailsPanel
             // 
             this.detailsPanel.AutoSize = true;
@@ -151,11 +122,11 @@
             this.detailsPanel.Size = new System.Drawing.Size(315, 392);
             this.detailsPanel.TabIndex = 11;
             // 
-            // emplacementTextBox
+            // locationTextBox
             // 
             this.locationTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.locationTextBox.Location = new System.Drawing.Point(161, 125);
-            this.locationTextBox.Name = "emplacementTextBox";
+            this.locationTextBox.Name = "locationTextBox";
             this.locationTextBox.ReadOnly = true;
             this.locationTextBox.Size = new System.Drawing.Size(120, 20);
             this.locationTextBox.TabIndex = 13;
@@ -216,11 +187,11 @@
             this.creationDateTextBox.Size = new System.Drawing.Size(120, 20);
             this.creationDateTextBox.TabIndex = 15;
             // 
-            // typeTextBox
+            // issueTypeTextBox
             // 
             this.issueTypeTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.issueTypeTextBox.Location = new System.Drawing.Point(161, 151);
-            this.issueTypeTextBox.Name = "typeTextBox";
+            this.issueTypeTextBox.Name = "issueTypeTextBox";
             this.issueTypeTextBox.ReadOnly = true;
             this.issueTypeTextBox.Size = new System.Drawing.Size(120, 20);
             this.issueTypeTextBox.TabIndex = 14;
@@ -361,6 +332,36 @@
             this.idLabel.Size = new System.Drawing.Size(57, 13);
             this.idLabel.TabIndex = 1;
             this.idLabel.Text = "Référence";
+            // 
+            // issuesListView
+            // 
+            this.issuesListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.issuesListView.FullRowSelect = true;
+            this.issuesListView.GridLines = true;
+            this.issuesListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.issuesListView.HideSelection = false;
+            this.issuesListView.Location = new System.Drawing.Point(43, 47);
+            this.issuesListView.MultiSelect = false;
+            this.issuesListView.Name = "issuesListView";
+            this.issuesListView.Scrollable = false;
+            this.issuesListView.Size = new System.Drawing.Size(315, 392);
+            this.issuesListView.TabIndex = 10;
+            this.issuesListView.UseCompatibleStateImageBehavior = false;
+            this.issuesListView.View = System.Windows.Forms.View.List;
+            this.issuesListView.SelectedIndexChanged += new System.EventHandler(this.issuesListView_SelectedIndexChanged);
+            this.issuesListView.Resize += new System.EventHandler(this.issuesListView_Resize);
+            // 
+            // addIssueButton
+            // 
+            this.addIssueButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.addIssueButton.AutoSize = true;
+            this.addIssueButton.Location = new System.Drawing.Point(140, 465);
+            this.addIssueButton.Name = "addIssueButton";
+            this.addIssueButton.Size = new System.Drawing.Size(120, 35);
+            this.addIssueButton.TabIndex = 11;
+            this.addIssueButton.Text = "Nouvel incident";
+            this.addIssueButton.UseVisualStyleBackColor = true;
+            this.addIssueButton.Click += new System.EventHandler(this.onAddIssueButtonClick);
             // 
             // IssuesUserControl
             // 

@@ -1,5 +1,6 @@
 ﻿using PT_Camping.Model;
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 
@@ -29,6 +30,29 @@ namespace PT_Camping
             handleResize();
         }
 
+        public IssuesUserControl(HomeUserControl homeUserControl, int issueCode) : base(homeUserControl)
+        {
+            InitializeComponent();
+            appBarTitle.Text = "Gestion des incidents";
+            db = new DataBase();
+
+            issuesListView.View = View.Details;
+            issuesListView.Columns.Add("Type d'incident");
+            issuesListView.Columns.Add("Description");
+            issuesListView.Columns.Add("Date");
+
+            updateIssuesListView();
+            handleResize();
+
+            foreach (ListViewItem item in issuesListView.Items)
+            {
+                if (item.Name == issueCode.ToString())
+                    item.Selected = true;
+                else
+                    item.Selected = false;
+            }
+        }
+
 
         private void updateIssuesListView()
         {
@@ -45,11 +69,20 @@ namespace PT_Camping
                 issuesListView.Items.Add(item);
             }
 
+            //=== Select the first of the list
+
             if (issuesListView.Items.Count > 0)
             {
                 issuesListView.Items[0].Selected = true;
                 issuesListView.Select();
             }
+
+            //=== Order list items by date
+
+            var orderedList = issuesListView.Items.Cast<ListViewItem>().Select(x => x)
+                .OrderBy(x => DateTime.Parse(x.SubItems[2].Text)).ToList();
+            issuesListView.Items.Clear();
+            issuesListView.Items.AddRange(orderedList.ToArray());
         }
 
 
