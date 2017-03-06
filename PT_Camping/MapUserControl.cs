@@ -180,7 +180,19 @@ namespace PT_Camping
             newLocation.Coordonnee_Y = 10;
             newLocation.Taille_X = 10;
             newLocation.Taille_Y = 10;
-            newLocation.Nom_Emplacement = "Emplacement " + locationsList.Count();
+            int i = locationsList.Count();
+            while (db.Emplacement.Where(a => a.Nom_Emplacement.Equals("Emplacement " + i)).Count() > 0)
+            {
+                i++;
+            }
+            foreach (GraphicLocation graphicLocation in locationsList)
+            {
+                if (graphicLocation.Location.Nom_Emplacement.Equals("Emplacement " + i))
+                {
+                    i++;
+                }
+            }
+            newLocation.Nom_Emplacement = "Emplacement " + i;
             newLocation.Type_Emplacement = db.Type_Emplacement.First(a => a.Libelle_Type == typeLabel.Text);
             GraphicLocation newGraphicLocation = new GraphicLocation(newLocation);
             locationsList.Add(newGraphicLocation);
@@ -273,11 +285,6 @@ namespace PT_Camping
                     }
                 }
             }
-        }
-
-        private void addLocationClick(object sender, EventArgs e)
-        {
-
         }
 
         private void modeCheckBox_CheckedChanged(object sender, EventArgs e)
