@@ -91,6 +91,7 @@
           <Property Name="Email_Fournisseur" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Site_web_Fournisseur" Type="varchar" MaxLength="50" />
           <Property Name="Adresse_Fournisseur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="est_approuvé" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Fournit">
           <Key>
@@ -610,6 +611,7 @@
           <Property Name="Email_Fournisseur" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Site_web_Fournisseur" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Adresse_Fournisseur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="est_approuvé" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Incident">
           <Key>
@@ -1047,6 +1049,7 @@
           <EntitySetMapping Name="Fournisseur">
             <EntityTypeMapping TypeName="InfoJoyeuxDB.Fournisseur">
               <MappingFragment StoreEntitySet="Fournisseur">
+                <ScalarProperty Name="est_approuvé" ColumnName="est_approuvé" />
                 <ScalarProperty Name="Adresse_Fournisseur" ColumnName="Adresse_Fournisseur" />
                 <ScalarProperty Name="Site_web_Fournisseur" ColumnName="Site_web_Fournisseur" />
                 <ScalarProperty Name="Email_Fournisseur" ColumnName="Email_Fournisseur" />

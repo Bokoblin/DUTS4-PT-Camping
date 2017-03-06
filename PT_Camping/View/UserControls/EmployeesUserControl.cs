@@ -21,7 +21,7 @@ namespace PT_Camping
             appBarTitle.Text = "Gestion des employés";
             db = new DataBase();
 
-            employeeListView.View = View.Details;
+            employeeListView.View = System.Windows.Forms.View.Details;
             employeeListView.Columns.Add("Nom", -2);
             employeeListView.Columns.Add("Prénom", -2);
             employeeListView.Columns.Add("Email", -2);
