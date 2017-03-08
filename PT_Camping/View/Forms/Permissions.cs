@@ -31,11 +31,11 @@ namespace PT_Camping
             permissionsList = mConcernedEmployee.Personne.Droit.ToList();
             this.db = db;
 
-            updateCheckBoxes();
+            UpdateCheckBoxes();
         }
 
 
-        private void updateCheckBoxes()
+        private void UpdateCheckBoxes()
         {
             readClients.Checked = permissionsList.Any(d => d.Libelle_Droit == "readClients");
             readIssues.Checked = permissionsList.Any(d => d.Libelle_Droit == "readIssues");
@@ -53,13 +53,13 @@ namespace PT_Camping
         }
 
 
-        private void onCancelButtonClick(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
 
-        private void onOkButtonClick(object sender, EventArgs e)
+        private void OkButton_Click(object sender, EventArgs e)
         {
             #region CLIENTS READ PERMISSION
 
@@ -317,73 +317,73 @@ namespace PT_Camping
             this.Close();
         }
 
-        private void readClients_CheckedChanged(object sender, EventArgs e)
+        private void ReadClients_CheckedChanged(object sender, EventArgs e)
         {
             if (!readClients.Checked)
                 writeClients.Checked = false;
         }
 
-        private void readIssues_CheckedChanged(object sender, EventArgs e)
+        private void ReadIssues_CheckedChanged(object sender, EventArgs e)
         {
             if (!readIssues.Checked)
                 writeIssues.Checked = false;
         }
 
-        private void readEmployees_CheckedChanged(object sender, EventArgs e)
+        private void ReadEmployees_CheckedChanged(object sender, EventArgs e)
         {
             if (!readEmployees.Checked)
                 writeEmployees.Checked = false;
         }
 
-        private void readProviders_CheckedChanged(object sender, EventArgs e)
+        private void ReadProviders_CheckedChanged(object sender, EventArgs e)
         {
             if (!readProviders.Checked)
                 writeProviders.Checked = false;
         }
 
-        private void readStocks_CheckedChanged(object sender, EventArgs e)
+        private void ReadStocks_CheckedChanged(object sender, EventArgs e)
         {
             if (!readStocks.Checked)
                 writeStocks.Checked = false;
         }
 
-        private void readMap_CheckedChanged(object sender, EventArgs e)
+        private void ReadMap_CheckedChanged(object sender, EventArgs e)
         {
             if (!readMap.Checked)
                 writeMap.Checked = false;
         }
 
-        private void writeClients_CheckedChanged(object sender, EventArgs e)
+        private void WriteClients_CheckedChanged(object sender, EventArgs e)
         {
             if (writeClients.Checked)
                 readClients.Checked = true;
         }
 
-        private void writeIssues_CheckedChanged(object sender, EventArgs e)
+        private void WriteIssues_CheckedChanged(object sender, EventArgs e)
         {
             if (writeIssues.Checked)
                 readIssues.Checked = true;
         }
 
-        private void writeEmployees_CheckedChanged(object sender, EventArgs e)
+        private void WriteEmployees_CheckedChanged(object sender, EventArgs e)
         {
             if (writeEmployees.Checked)
                 readEmployees.Checked = true;
         }
 
-        private void writeProviders_CheckedChanged(object sender, EventArgs e)
+        private void WriteProviders_CheckedChanged(object sender, EventArgs e)
         {
             if (writeProviders.Checked)
                 readProviders.Checked = true;
         }
 
-        private void writeStocks_CheckedChanged(object sender, EventArgs e)
+        private void WriteStocks_CheckedChanged(object sender, EventArgs e)
         {
             if (writeStocks.Checked)
                 readStocks.Checked = true;
         }
 
-        private void writeMap_CheckedChanged(object sender, EventArgs e)
+        private void WriteMap_CheckedChanged(object sender, EventArgs e)
         {
             if (writeMap.Checked)
                 readMap.Checked = true;

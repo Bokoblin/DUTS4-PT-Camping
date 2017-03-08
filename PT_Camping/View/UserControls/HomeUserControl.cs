@@ -28,8 +28,8 @@ namespace PT_Camping
         {
             InitializeComponent();
             mWindow = window;
-            handleResize();
-            Personne personLoged = Window.userLoged.Person;
+            HandleResize();
+            Personne personLoged = Window.UserLoged.Person;
             if (personLoged != null)
             {
                 userNameLabel.Text = "Bonjour " + personLoged.Prenom_Personne + " " + personLoged.Nom_Personne;
@@ -37,7 +37,7 @@ namespace PT_Camping
         }
 
 
-        public void startIssuesFromStats(int issueCode)
+        public void StartIssuesFromStats(int issueCode)
         {
             mIssuesUC = new IssuesUserControl(this, issueCode);
             mWindow.WindowPanel.Controls.Add(mIssuesUC);
@@ -45,14 +45,14 @@ namespace PT_Camping
         }
 
 
-        private void logoutButton_Click(object sender, EventArgs e)
+        private void LogoutButton_Click(object sender, EventArgs e)
         {
-            mWindow.logout();
+            mWindow.Logout();
             mWindow.WindowPanel.Controls.Remove(this);
         }
 
 
-        private void clientsButton_Click(object sender, EventArgs e)
+        private void ClientsButton_Click(object sender, EventArgs e)
         {
             mClientsUC = new ClientsUserControl(this);
             mWindow.WindowPanel.Controls.Add(mClientsUC);
@@ -60,7 +60,7 @@ namespace PT_Camping
         }
 
 
-        private void issuesButton_Click(object sender, EventArgs e)
+        private void IssuesButton_Click(object sender, EventArgs e)
         {
             mIssuesUC = new IssuesUserControl(this);
             mWindow.WindowPanel.Controls.Add(mIssuesUC);
@@ -68,7 +68,7 @@ namespace PT_Camping
         }
 
 
-        private void employeesButton_Click(object sender, EventArgs e)
+        private void EmployeesButton_Click(object sender, EventArgs e)
         {
             mEmployeesUC = new EmployeesUserControl(this);
             mWindow.WindowPanel.Controls.Add(mEmployeesUC);
@@ -76,7 +76,7 @@ namespace PT_Camping
         }
 
 
-        private void stocksButton_Click(object sender, EventArgs e)
+        private void StocksButton_Click(object sender, EventArgs e)
         {
             mStocksUC = new StocksUserControl(this);
             mWindow.WindowPanel.Controls.Add(mStocksUC);
@@ -84,7 +84,7 @@ namespace PT_Camping
         }
 
 
-        private void providersButton_Click(object sender, EventArgs e)
+        private void ProvidersButton_Click(object sender, EventArgs e)
         {
             mProvidersUC = new ProvidersUserControl(this);
             mWindow.WindowPanel.Controls.Add(mProvidersUC);
@@ -92,7 +92,7 @@ namespace PT_Camping
         }
 
 
-        private void statsButton_Click(object sender, EventArgs e)
+        private void StatsButton_Click(object sender, EventArgs e)
         {
             mStatsUC = new StatsUserControl(this);
             mWindow.WindowPanel.Controls.Add(mStatsUC);
@@ -100,28 +100,28 @@ namespace PT_Camping
         }
 
 
-        internal void handleResize()
+        internal void HandleResize()
         {
             Size = mWindow.Size;
             managementTab.Size = mWindow.Size;
             appBar.Size = new Size(mWindow.Size.Width, appBar.Size.Height);
             homeTabControl.ItemSize = new Size(mWindow.Size.Width / 2-30, homeTabControl.ItemSize.Height);
             if (mClientsUC != null)
-                mClientsUC.handleResize();
+                mClientsUC.HandleResize();
             if (mIssuesUC != null)
-                mIssuesUC.handleResize();
+                mIssuesUC.HandleResize();
             if (mEmployeesUC != null)
-                mEmployeesUC.handleResize();
+                mEmployeesUC.HandleResize();
             if (mStocksUC != null)
-                mStocksUC.handleResize();
+                mStocksUC.HandleResize();
             if (mProvidersUC != null)
-                mProvidersUC.handleResize();
+                mProvidersUC.HandleResize();
             if (mStatsUC != null)
-                mStatsUC.handleResize();
+                mStatsUC.HandleResize();
         }
 
 
-        private void homeTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        private void HomeTabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch ((sender as TabControl).SelectedIndex)
             {

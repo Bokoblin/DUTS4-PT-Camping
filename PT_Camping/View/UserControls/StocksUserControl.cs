@@ -13,14 +13,11 @@ namespace PT_Camping
     /// Since : 08/02/17
     public partial class StocksUserControl : ManagementUserControl
     {
-        private DataBase database;
-
         public StocksUserControl(HomeUserControl homeUserControl) : base(homeUserControl)
         {
             InitializeComponent();
             appBarTitle.Text = "Gestion des stocks";
-            database = new DataBase();
-            handleResize();
+            HandleResize();
         }
     }
 }

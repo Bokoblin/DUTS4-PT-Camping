@@ -194,7 +194,7 @@
             this.permissionButton.TabIndex = 9;
             this.permissionButton.Text = "Permissions";
             this.permissionButton.UseVisualStyleBackColor = true;
-            this.permissionButton.Click += new System.EventHandler(this.onPermissionButtonClick);
+            this.permissionButton.Click += new System.EventHandler(this.OnPermissionButtonClick);
             // 
             // cancelButton
             // 
@@ -204,7 +204,7 @@
             this.cancelButton.TabIndex = 10;
             this.cancelButton.Text = "Annuler";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.onCancelButtonClick);
+            this.cancelButton.Click += new System.EventHandler(this.OnCancelButtonClick);
             // 
             // OKButton
             // 
@@ -214,7 +214,7 @@
             this.OKButton.TabIndex = 11;
             this.OKButton.Text = "Valider";
             this.OKButton.UseVisualStyleBackColor = true;
-            this.OKButton.Click += new System.EventHandler(this.onOkButtonClick);
+            this.OKButton.Click += new System.EventHandler(this.OnOkButtonClick);
             // 
             // label1
             // 

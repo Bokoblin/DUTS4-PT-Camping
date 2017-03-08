@@ -88,7 +88,7 @@
             this.mostAskedlocationsListView.TabIndex = 0;
             this.mostAskedlocationsListView.UseCompatibleStateImageBehavior = false;
             this.mostAskedlocationsListView.View = System.Windows.Forms.View.List;
-            this.mostAskedlocationsListView.Resize += new System.EventHandler(this.mostAskedlocationsListView_Resize);
+            this.mostAskedlocationsListView.Resize += new System.EventHandler(this.MostAskedlocationsListView_Resize);
             // 
             // mostAskedProductsListView
             // 
@@ -104,7 +104,7 @@
             this.mostAskedProductsListView.TabIndex = 1;
             this.mostAskedProductsListView.UseCompatibleStateImageBehavior = false;
             this.mostAskedProductsListView.View = System.Windows.Forms.View.List;
-            this.mostAskedProductsListView.Resize += new System.EventHandler(this.mostAskedProductsListView_Resize);
+            this.mostAskedProductsListView.Resize += new System.EventHandler(this.MostAskedProductsListView_Resize);
             // 
             // mostCommonIssueslistView
             // 
@@ -120,8 +120,8 @@
             this.mostCommonIssueslistView.TabIndex = 2;
             this.mostCommonIssueslistView.UseCompatibleStateImageBehavior = false;
             this.mostCommonIssueslistView.View = System.Windows.Forms.View.List;
-            this.mostCommonIssueslistView.DoubleClick += new System.EventHandler(this.mostCommonIssueslistView_DoubleClick);
-            this.mostCommonIssueslistView.Resize += new System.EventHandler(this.mostCommonIssueslistView_Resize);
+            this.mostCommonIssueslistView.DoubleClick += new System.EventHandler(this.MostCommonIssueslistView_DoubleClick);
+            this.mostCommonIssueslistView.Resize += new System.EventHandler(this.MostCommonIssueslistView_Resize);
             // 
             // bestClientsListView
             // 
@@ -137,7 +137,7 @@
             this.bestClientsListView.TabIndex = 3;
             this.bestClientsListView.UseCompatibleStateImageBehavior = false;
             this.bestClientsListView.View = System.Windows.Forms.View.List;
-            this.bestClientsListView.Resize += new System.EventHandler(this.bestClientsListView_Resize);
+            this.bestClientsListView.Resize += new System.EventHandler(this.BestClientsListView_Resize);
             // 
             // productsStatsTitle
             // 

@@ -61,7 +61,7 @@
             this.OKButton.TabIndex = 0;
             this.OKButton.Text = "Valider";
             this.OKButton.UseVisualStyleBackColor = true;
-            this.OKButton.Click += new System.EventHandler(this.onOkButtonClick);
+            this.OKButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
             // cancelButton
             // 
@@ -71,7 +71,7 @@
             this.cancelButton.TabIndex = 1;
             this.cancelButton.Text = "Annuler";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.onCancelButtonClick);
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // clientLabel
             // 
@@ -135,7 +135,7 @@
             this.readClients.Size = new System.Drawing.Size(15, 14);
             this.readClients.TabIndex = 8;
             this.readClients.UseVisualStyleBackColor = true;
-            this.readClients.CheckedChanged += new System.EventHandler(this.readClients_CheckedChanged);
+            this.readClients.CheckedChanged += new System.EventHandler(this.ReadClients_CheckedChanged);
             // 
             // readIssues
             // 
@@ -145,7 +145,7 @@
             this.readIssues.Size = new System.Drawing.Size(15, 14);
             this.readIssues.TabIndex = 9;
             this.readIssues.UseVisualStyleBackColor = true;
-            this.readIssues.CheckedChanged += new System.EventHandler(this.readIssues_CheckedChanged);
+            this.readIssues.CheckedChanged += new System.EventHandler(this.ReadIssues_CheckedChanged);
             // 
             // readEmployees
             // 
@@ -155,7 +155,7 @@
             this.readEmployees.Size = new System.Drawing.Size(15, 14);
             this.readEmployees.TabIndex = 10;
             this.readEmployees.UseVisualStyleBackColor = true;
-            this.readEmployees.CheckedChanged += new System.EventHandler(this.readEmployees_CheckedChanged);
+            this.readEmployees.CheckedChanged += new System.EventHandler(this.ReadEmployees_CheckedChanged);
             // 
             // readProviders
             // 
@@ -165,7 +165,7 @@
             this.readProviders.Size = new System.Drawing.Size(15, 14);
             this.readProviders.TabIndex = 11;
             this.readProviders.UseVisualStyleBackColor = true;
-            this.readProviders.CheckedChanged += new System.EventHandler(this.readProviders_CheckedChanged);
+            this.readProviders.CheckedChanged += new System.EventHandler(this.ReadProviders_CheckedChanged);
             // 
             // readStocks
             // 
@@ -175,7 +175,7 @@
             this.readStocks.Size = new System.Drawing.Size(15, 14);
             this.readStocks.TabIndex = 12;
             this.readStocks.UseVisualStyleBackColor = true;
-            this.readStocks.CheckedChanged += new System.EventHandler(this.readStocks_CheckedChanged);
+            this.readStocks.CheckedChanged += new System.EventHandler(this.ReadStocks_CheckedChanged);
             // 
             // readMap
             // 
@@ -185,7 +185,7 @@
             this.readMap.Size = new System.Drawing.Size(15, 14);
             this.readMap.TabIndex = 13;
             this.readMap.UseVisualStyleBackColor = true;
-            this.readMap.CheckedChanged += new System.EventHandler(this.readMap_CheckedChanged);
+            this.readMap.CheckedChanged += new System.EventHandler(this.ReadMap_CheckedChanged);
             // 
             // writeIssues
             // 
@@ -195,7 +195,7 @@
             this.writeIssues.Size = new System.Drawing.Size(15, 14);
             this.writeIssues.TabIndex = 15;
             this.writeIssues.UseVisualStyleBackColor = true;
-            this.writeIssues.CheckedChanged += new System.EventHandler(this.writeIssues_CheckedChanged);
+            this.writeIssues.CheckedChanged += new System.EventHandler(this.WriteIssues_CheckedChanged);
             // 
             // writeClients
             // 
@@ -205,7 +205,7 @@
             this.writeClients.Size = new System.Drawing.Size(15, 14);
             this.writeClients.TabIndex = 16;
             this.writeClients.UseVisualStyleBackColor = true;
-            this.writeClients.CheckedChanged += new System.EventHandler(this.writeClients_CheckedChanged);
+            this.writeClients.CheckedChanged += new System.EventHandler(this.WriteClients_CheckedChanged);
             // 
             // writeEmployees
             // 
@@ -215,7 +215,7 @@
             this.writeEmployees.Size = new System.Drawing.Size(15, 14);
             this.writeEmployees.TabIndex = 17;
             this.writeEmployees.UseVisualStyleBackColor = true;
-            this.writeEmployees.CheckedChanged += new System.EventHandler(this.writeEmployees_CheckedChanged);
+            this.writeEmployees.CheckedChanged += new System.EventHandler(this.WriteEmployees_CheckedChanged);
             // 
             // writeProviders
             // 
@@ -225,7 +225,7 @@
             this.writeProviders.Size = new System.Drawing.Size(15, 14);
             this.writeProviders.TabIndex = 18;
             this.writeProviders.UseVisualStyleBackColor = true;
-            this.writeProviders.CheckedChanged += new System.EventHandler(this.writeProviders_CheckedChanged);
+            this.writeProviders.CheckedChanged += new System.EventHandler(this.WriteProviders_CheckedChanged);
             // 
             // writeStocks
             // 
@@ -235,7 +235,7 @@
             this.writeStocks.Size = new System.Drawing.Size(15, 14);
             this.writeStocks.TabIndex = 19;
             this.writeStocks.UseVisualStyleBackColor = true;
-            this.writeStocks.CheckedChanged += new System.EventHandler(this.writeStocks_CheckedChanged);
+            this.writeStocks.CheckedChanged += new System.EventHandler(this.WriteStocks_CheckedChanged);
             // 
             // writeMap
             // 
@@ -245,7 +245,7 @@
             this.writeMap.Size = new System.Drawing.Size(15, 14);
             this.writeMap.TabIndex = 20;
             this.writeMap.UseVisualStyleBackColor = true;
-            this.writeMap.CheckedChanged += new System.EventHandler(this.writeMap_CheckedChanged);
+            this.writeMap.CheckedChanged += new System.EventHandler(this.WriteMap_CheckedChanged);
             // 
             // readPermissionLabel
             // 

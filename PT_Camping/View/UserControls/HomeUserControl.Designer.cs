@@ -82,7 +82,7 @@
             this.homeTabControl.Size = new System.Drawing.Size(800, 540);
             this.homeTabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.homeTabControl.TabIndex = 2;
-            this.homeTabControl.SelectedIndexChanged += new System.EventHandler(this.homeTabControl_SelectedIndexChanged);
+            this.homeTabControl.SelectedIndexChanged += new System.EventHandler(this.HomeTabControl_SelectedIndexChanged);
             // 
             // managementTab
             // 
@@ -110,7 +110,7 @@
             this.providerButton.TabIndex = 10;
             this.providerButton.Text = "FOURNISSEURS";
             this.providerButton.UseVisualStyleBackColor = true;
-            this.providerButton.Click += new System.EventHandler(this.providersButton_Click);
+            this.providerButton.Click += new System.EventHandler(this.ProvidersButton_Click);
             // 
             // statsButton
             // 
@@ -122,7 +122,7 @@
             this.statsButton.TabIndex = 11;
             this.statsButton.Text = "STATS";
             this.statsButton.UseVisualStyleBackColor = true;
-            this.statsButton.Click += new System.EventHandler(this.statsButton_Click);
+            this.statsButton.Click += new System.EventHandler(this.StatsButton_Click);
             // 
             // stocksButton
             // 
@@ -134,7 +134,7 @@
             this.stocksButton.TabIndex = 9;
             this.stocksButton.Text = "STOCKS";
             this.stocksButton.UseVisualStyleBackColor = true;
-            this.stocksButton.Click += new System.EventHandler(this.stocksButton_Click);
+            this.stocksButton.Click += new System.EventHandler(this.StocksButton_Click);
             // 
             // employeeButton
             // 
@@ -146,7 +146,7 @@
             this.employeeButton.TabIndex = 8;
             this.employeeButton.Text = "EMPLOYÉS";
             this.employeeButton.UseVisualStyleBackColor = true;
-            this.employeeButton.Click += new System.EventHandler(this.employeesButton_Click);
+            this.employeeButton.Click += new System.EventHandler(this.EmployeesButton_Click);
             // 
             // issuesButton
             // 
@@ -158,7 +158,7 @@
             this.issuesButton.TabIndex = 7;
             this.issuesButton.Text = "INCIDENTS";
             this.issuesButton.UseVisualStyleBackColor = true;
-            this.issuesButton.Click += new System.EventHandler(this.issuesButton_Click);
+            this.issuesButton.Click += new System.EventHandler(this.IssuesButton_Click);
             // 
             // clientButton
             // 
@@ -170,7 +170,7 @@
             this.clientButton.TabIndex = 6;
             this.clientButton.Text = "CLIENTS";
             this.clientButton.UseVisualStyleBackColor = true;
-            this.clientButton.Click += new System.EventHandler(this.clientsButton_Click);
+            this.clientButton.Click += new System.EventHandler(this.ClientsButton_Click);
             // 
             // mapTab
             // 
@@ -196,7 +196,7 @@
             this.logoutButton.TabIndex = 1;
             this.logoutButton.Text = "Déconnexion";
             this.logoutButton.UseVisualStyleBackColor = false;
-            this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
+            this.logoutButton.Click += new System.EventHandler(this.LogoutButton_Click);
             // 
             // userNameLabel
             // 

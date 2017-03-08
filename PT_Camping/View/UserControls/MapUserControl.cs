@@ -27,11 +27,11 @@ namespace PT_Camping
         {
             InitializeComponent();
             mHomeUserControl = homeUserControl;
-            handleResize();
+            HandleResize();
         }
 
 
-        internal void handleResize()
+        internal void HandleResize()
         {
             Size = mHomeUserControl.Size;
         }

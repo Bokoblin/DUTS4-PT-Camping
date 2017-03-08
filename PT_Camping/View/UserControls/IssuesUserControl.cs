@@ -15,7 +15,7 @@ namespace PT_Camping
     /// Since : 08/02/17
     public partial class IssuesUserControl : ManagementUserControl
     {
-        public IssuesUserControl(HomeUserControl homeUserControl) : base(homeUserControl)
+        public IssuesUserControl(HomeUserControl homeUC) : base(homeUC)
         {
             InitializeComponent();
             appBarTitle.Text = "Gestion des incidents";
@@ -26,11 +26,11 @@ namespace PT_Camping
             issuesListView.Columns.Add("Description");
             issuesListView.Columns.Add("Date");
 
-            updateIssuesListView();
-            handleResize();
+            UpdateIssuesListView();
+            HandleResize();
         }
 
-        public IssuesUserControl(HomeUserControl homeUserControl, int issueCode) : base(homeUserControl)
+        public IssuesUserControl(HomeUserControl homeUC, int issueCode) : base(homeUC)
         {
             InitializeComponent();
             appBarTitle.Text = "Gestion des incidents";
@@ -41,8 +41,8 @@ namespace PT_Camping
             issuesListView.Columns.Add("Description");
             issuesListView.Columns.Add("Date");
 
-            updateIssuesListView();
-            handleResize();
+            UpdateIssuesListView();
+            HandleResize();
 
             foreach (ListViewItem item in issuesListView.Items)
             {
@@ -54,7 +54,7 @@ namespace PT_Camping
         }
 
 
-        private void updateIssuesListView()
+        private void UpdateIssuesListView()
         {
             issuesListView.Items.Clear();
 
@@ -64,8 +64,10 @@ namespace PT_Camping
                 string issueDescription = issue.Description_Incident;
                 string issueDate = issue.Date_Incident.ToShortDateString();
 
-                var item = new ListViewItem(new[] { issueType, issueDescription, issueDate });
-                item.Name = issue.Code_Incident.ToString();
+                var item = new ListViewItem(new[] { issueType, issueDescription, issueDate })
+                {
+                    Name = issue.Code_Incident.ToString()
+                };
                 issuesListView.Items.Add(item);
             }
 
@@ -86,15 +88,15 @@ namespace PT_Camping
         }
 
 
-        private void updateIssueDetails()
+        private void UpdateIssueDetails()
         {
             if (issuesListView.SelectedItems.Count != 0)
             {
                 int code = int.Parse(issuesListView.SelectedItems[0].Name);
                 var issue = db.Incident.Find(code);
 
-                idTextBox.Text = issue.Code_Incident.ToString();
-                locationTextBox.Text = issue.Emplacement.Code_Emplacement.ToString();
+                idTextBox.Text = "#" + issue.Code_Incident.ToString();
+                locationTextBox.Text = issue.Emplacement.Nom_Emplacement;
                 issueTypeTextBox.Text = issue.Type_Incident.Type_Incident1;
                 creationDateTextBox.Text = issue.Date_Incident.ToShortDateString();
                 if (issue.Date_Resolution != null)
@@ -111,7 +113,7 @@ namespace PT_Camping
         }
 
 
-        private void onAddIssueButtonClick(object sender, EventArgs e)
+        private void OnAddIssueButtonClick(object sender, EventArgs e)
         {
             /* TODO ***
             
@@ -127,22 +129,22 @@ namespace PT_Camping
             //TEMPORARY BEHAVIOUR : "AddIssue" dialog called here with Code_Emplacement = 1
 
             new AddIssue(db, 1).ShowDialog();
-            updateIssuesListView();
+            UpdateIssuesListView();
         }
 
 
-        private void onDeleteIssueButtonClick(object sender, EventArgs e)
+        private void OnDeleteIssueButtonClick(object sender, EventArgs e)
         {
             int code = int.Parse(issuesListView.SelectedItems[0].Name);
             var issue = db.Incident.Find(code);
 
             db.Incident.Remove(issue);
             db.SaveChanges();
-            updateIssuesListView();
+            UpdateIssuesListView();
         }
 
 
-        private void onEditButtonClick(object sender, EventArgs e)
+        private void OnEditButtonClick(object sender, EventArgs e)
         {
             if (resolutionDateTextBox.ReadOnly == true)
             {
@@ -207,8 +209,7 @@ namespace PT_Camping
 
                 if (criticalityTextBox.Text != (incident.Criticite_Incident.ToString() + "/5"))
                 {
-                    int criticality;
-                    if (int.TryParse(criticalityTextBox.Text, out criticality) && criticality >= 1 && criticality <= 5)
+                    if (int.TryParse(criticalityTextBox.Text, out int criticality) && criticality >= 1 && criticality <= 5)
                     {
                         incident.Criticite_Incident = criticality;
                         message += "criticité\n";
@@ -241,7 +242,7 @@ namespace PT_Camping
 
                 db.SaveChanges();
 
-                updateIssueDetails();
+                UpdateIssueDetails();
 
                 if (cptModifications > 0)
                     MessageBox.Show(message);
@@ -249,7 +250,7 @@ namespace PT_Camping
         }
 
 
-        private void onResolveIssueButtonClick(object sender, EventArgs e)
+        private void OnResolveIssueButtonClick(object sender, EventArgs e)
         {
             int code = int.Parse(issuesListView.SelectedItems[0].Name);
             var issue = db.Incident.Find(code);
@@ -258,21 +259,21 @@ namespace PT_Camping
             issue.Avancement_Incident = "Terminé";
             db.SaveChanges();
 
-            updateIssueDetails();
+            UpdateIssueDetails();
         }
 
 
-        private void issuesListView_SelectedIndexChanged(object sender, EventArgs e)
+        private void IssuesListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             resolutionDateTextBox.ReadOnly = true;
             criticalityTextBox.ReadOnly = true;
             statusTextBox.ReadOnly = true;
             descriptionTextBox.ReadOnly = true;
-            updateIssueDetails();
+            UpdateIssueDetails();
         }
 
 
-        private void issuesListView_Resize(object sender, EventArgs e)
+        private void IssuesListView_Resize(object sender, EventArgs e)
         {
             if (issuesListView.Columns.Count != 0)
             {
