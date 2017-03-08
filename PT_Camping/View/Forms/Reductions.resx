@@ -117,30 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="imageList1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>122, 17</value>
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="deleteButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAM1JREFUaEPt
-        0TEKAkEQBdE5jXhMbyR6MBE0157ArAIX6w+ydMHLxN+7O7qu63bTqby+NH/7V205/mP5Q9ARSXo0kqRH
-        I0l6NJLU7Tb63KZ4NGqKR6OmeDRqikejpng0aopHo6Z4NGqKR6OmeDRqikejpng0aopHo6Z4NGqKR6Om
-        eDRqikejpng0aopHo6Z4NGqKR6OmeDRqikejpng0aor3LDRseJR410LjhnOJdyz3Qgf84lYOZUnzIS5l
-        fnI6Zov5H/PNLzu+67rOaow3ySAeIIrYKFcAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="EditButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAQNJREFUaEPt
-        lssJwlAQRQPW4bcXcWE1gh3YgliBrbi1A39FCOJG7yBPQrjJSxScGZwDB0JW58LLI0UQBEEAxnAP73AD
-        e9ANE3iBj5Jb6GIEi3czoik+aXrEErLoqqZHrCCLrrqGJpBjM3s9vmkz4grVSWf+BufyokRuxA6qUv1g
-        u4w4wD5Uo+62aTNC4gdQjdxV2TRCPV5+D3L3vMhGLKCL+CQboUbX+KSMmEJVPo0X3Zx5ZsR/g/v4M2Rx
-        OV3HH2HEf4rr+BGMeA3+On4I1Yh4TVzHCywup5l4gQU2eYJm4gUWWae5eIGFMk3GCyy2qtl4gQWXNR0v
-        sOik+fggCIJfUBRPA+mxCK5ahN0AAAAASUVORK5CYII=
-</value>
-  </data>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>25</value>
-  </metadata>
 </root>
