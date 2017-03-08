@@ -45,7 +45,8 @@ namespace PT_Camping
                 if (criticalityTextBox.Text == "")
                     throw new Exception("Criticité est un champs obligatoire (entier compris entre 1 et 5).");
 
-                if (int.TryParse(criticalityTextBox.Text, out int criticality) && criticality >= 1 && criticality <= 5)
+                int criticality;
+                if (int.TryParse(criticalityTextBox.Text, out criticality) && criticality >= 1 && criticality <= 5)
                 {
                     newIssue.Criticite_Incident = criticality;
                 }

@@ -129,7 +129,8 @@ namespace PT_Camping
 
                 if (phoneTextBox.Text != "" && phoneTextBox.Text != employee.Personne.Telephone)
                 {
-                    if (int.TryParse(phoneTextBox.Text, out int phone) && phoneTextBox.Text.Length == 10)
+                    int phone;
+                    if (int.TryParse(phoneTextBox.Text, out phone) && phoneTextBox.Text.Length == 10)
                     {
                         employee.Personne.Telephone = phoneTextBox.Text;
                         message += "téléphone\n";

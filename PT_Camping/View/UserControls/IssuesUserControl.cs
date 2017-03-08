@@ -209,7 +209,8 @@ namespace PT_Camping
 
                 if (criticalityTextBox.Text != (incident.Criticite_Incident.ToString() + "/5"))
                 {
-                    if (int.TryParse(criticalityTextBox.Text, out int criticality) && criticality >= 1 && criticality <= 5)
+                    int criticality;
+                    if (int.TryParse(criticalityTextBox.Text, out criticality) && criticality >= 1 && criticality <= 5)
                     {
                         incident.Criticite_Incident = criticality;
                         message += "criticité\n";

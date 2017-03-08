@@ -53,7 +53,8 @@ namespace PT_Camping
                 if (surnameTextBox.Text.Any(char.IsDigit) || nameTextBox.Text.Any(char.IsDigit))
                     throw new Exception("Le nom et/ou le prénom ne peuvent contenir de valeur numérique.");
 
-                if (phoneTextBox.Text != "" && (!int.TryParse(phoneTextBox.Text, out int phone) || phoneTextBox.Text.Length != 10))
+                int phone;
+                if (phoneTextBox.Text != "" && (!int.TryParse(phoneTextBox.Text, out phone) || phoneTextBox.Text.Length != 10))
                     throw new Exception("Téléphone doit être un entier de 10 chiffres");
 
                 if ((!emailTextBox.Text.EndsWith(".com") && !emailTextBox.Text.EndsWith(".fr"))
