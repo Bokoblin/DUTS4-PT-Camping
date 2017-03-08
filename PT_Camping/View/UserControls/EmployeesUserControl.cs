@@ -26,12 +26,12 @@ namespace PT_Camping
             employeesListView.Columns.Add("Prénom");
             employeesListView.Columns.Add("Email");
 
-            updateEmployeesListView();
-            handleResize();
+            UpdateEmployeesListView();
+            HandleResize();
         }
 
 
-        private void updateEmployeesListView()
+        private void UpdateEmployeesListView()
         {
             employeesListView.Items.Clear();
 
@@ -43,8 +43,10 @@ namespace PT_Camping
                     string name = employee.Personne.Prenom_Personne;
                     string email = employee.Personne.Email;
 
-                    var item = new ListViewItem(new[] { surname, name, email });
-                    item.Name = employee.Code_Personne.ToString();
+                    var item = new ListViewItem(new[] { surname, name, email })
+                    {
+                        Name = employee.Code_Personne.ToString()
+                    };
                     employeesListView.Items.Add(item);
                 }
             }
@@ -59,7 +61,7 @@ namespace PT_Camping
         }
 
 
-        private void updateEmployeeDetails()
+        private void UpdateEmployeeDetails()
         {
             if (employeesListView.SelectedItems.Count != 0)
             {
@@ -89,14 +91,14 @@ namespace PT_Camping
         }
 
 
-        private void onAddEmployeeButtonClick(object sender, EventArgs e)
+        private void AddEmployeeButton_Click(object sender, EventArgs e)
         {
             new AddEmployee(db).ShowDialog();
-            updateEmployeesListView();
+            UpdateEmployeesListView();
         }
    
 
-        private void onEditButtonClick(object sender, EventArgs e)
+        private void EditButton_Click(object sender, EventArgs e)
         {
             if (addressTextBox.ReadOnly == true)
             {
@@ -127,8 +129,7 @@ namespace PT_Camping
 
                 if (phoneTextBox.Text != "" && phoneTextBox.Text != employee.Personne.Telephone)
                 {
-                    int phone;
-                    if (int.TryParse(phoneTextBox.Text, out phone) && phoneTextBox.Text.Length == 10)
+                    if (int.TryParse(phoneTextBox.Text, out int phone) && phoneTextBox.Text.Length == 10)
                     {
                         employee.Personne.Telephone = phoneTextBox.Text;
                         message += "téléphone\n";
@@ -160,7 +161,7 @@ namespace PT_Camping
 
                 db.SaveChanges();
 
-                updateEmployeeDetails();
+                UpdateEmployeeDetails();
 
                 if (cptModifications > 0)
                     MessageBox.Show(message);
@@ -168,7 +169,7 @@ namespace PT_Camping
         }
 
 
-        private void onPermissionButtonClick(object sender, EventArgs e)
+        private void PermissionButton_Click(object sender, EventArgs e)
         {
             int code = int.Parse(employeesListView.SelectedItems[0].Name);
             var employee = db.Employe.Find(code);
@@ -177,27 +178,27 @@ namespace PT_Camping
         }
 
 
-        private void onDismissEmployeeButtonClick(object sender, EventArgs e)
+        private void DismissEmployeeButton_Click(object sender, EventArgs e)
         {
             int code = int.Parse(employeesListView.SelectedItems[0].Name);
             var employee = db.Employe.Find(code);
             employee.EstLicencie = true;
             db.SaveChanges();
-            updateEmployeesListView();
+            UpdateEmployeesListView();
         }
 
 
-        private void employeeListView_SelectedIndexChanged(object sender, EventArgs e)
+        private void EmployeeListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             addressTextBox.ReadOnly = true;
             phoneTextBox.ReadOnly = true;
             emailTextBox.ReadOnly = true;
             loginTextBox.ReadOnly = true;
-            updateEmployeeDetails();
+            UpdateEmployeeDetails();
         }
 
 
-        private void employeeListView_Resize(object sender, EventArgs e)
+        private void EmployeeListView_Resize(object sender, EventArgs e)
         {
             if (employeesListView.Columns.Count != 0)
             {

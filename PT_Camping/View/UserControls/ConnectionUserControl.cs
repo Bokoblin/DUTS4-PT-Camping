@@ -21,18 +21,18 @@ namespace PT_Camping
         {
             InitializeComponent();
             mWindow = window;
-            handleResize();
+            HandleResize();
             errorLabel.Visible = false;
         }
 
-        private void tryToConnect()
+        private void TryToConnect()
         {
             String passwordEntered = this.passwordTextBox.Text;
-            mWindow.userLoged.Login = this.userTextBox.Text;
-            mWindow.userLoged.HashedPassword = LoginTools.sha256_hash(passwordEntered);
-            if (mWindow.userLoged.checkConnection())
+            mWindow.UserLoged.Login = this.userTextBox.Text;
+            mWindow.UserLoged.HashedPassword = LoginTools.sha256_hash(passwordEntered);
+            if (mWindow.UserLoged.checkConnection())
             {
-                mWindow.login();
+                mWindow.Login();
             }
             else
             {
@@ -41,30 +41,30 @@ namespace PT_Camping
             }
         }
 
-        private void connectionButton_Click(object sender, EventArgs e)
+        private void ConnectionButton_Click(object sender, EventArgs e)
         {
-            tryToConnect();
+            TryToConnect();
         }
 
-        internal void handleResize()
+        internal void HandleResize()
         {
             Size = mWindow.Size;
             appBar.Size = new Size(mWindow.Size.Width, appBar.Size.Height);
         }
 
-        private void passwordTextBox_KeyDown(object sender, KeyEventArgs e)
+        private void PasswordTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                tryToConnect();
+                TryToConnect();
             }
         }
 
-        private void userTextBox_KeyDown(object sender, KeyEventArgs e)
+        private void UserTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                tryToConnect();
+                TryToConnect();
             }
         }
     }

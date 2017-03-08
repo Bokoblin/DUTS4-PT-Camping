@@ -18,35 +18,36 @@ namespace PT_Camping
         private DataBase db;
         private Incident newIssue;
 
+
         public AddIssue(DataBase db, int code)
         {
             InitializeComponent();
             this.db = db;
-            newIssue = new Incident();
-            newIssue.Code_Emplacement = code;
-
+            newIssue = new Incident()
+            {
+                Code_Emplacement = code
+            };
             var types = db.Type_Incident.Select(t => t.Type_Incident1).ToList();
             issueTypecomboBox.DataSource = types;
         }
 
 
-        private void onCancelButtonClick(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
 
-        private void onOkButtonClick(object sender, EventArgs e)
+        private void OkButton_Click(object sender, EventArgs e)
         {
             try
             {
                 if (criticalityTextBox.Text == "")
                     throw new Exception("Criticité est un champs obligatoire (entier compris entre 1 et 5).");
 
-                int criticality;
-                if (int.TryParse(criticalityTextBox.Text, out criticality) && criticality >= 1 && criticality <= 5)
+                if (int.TryParse(criticalityTextBox.Text, out int criticality) && criticality >= 1 && criticality <= 5)
                 {
-                        newIssue.Criticite_Incident = criticality;
+                    newIssue.Criticite_Incident = criticality;
                 }
                 else
                     throw new Exception("Criticité doit être un entier compris entre 1 et 5");
@@ -61,7 +62,7 @@ namespace PT_Camping
 
                 db.Incident.Add(newIssue);
                 db.SaveChanges();
-                this.Close();
+                Close();
             }
             catch (Exception exception)
             {

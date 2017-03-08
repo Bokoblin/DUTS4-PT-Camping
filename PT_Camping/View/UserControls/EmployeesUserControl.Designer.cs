@@ -100,8 +100,8 @@
             this.employeesListView.TabIndex = 14;
             this.employeesListView.UseCompatibleStateImageBehavior = false;
             this.employeesListView.View = System.Windows.Forms.View.List;
-            this.employeesListView.SelectedIndexChanged += new System.EventHandler(this.employeeListView_SelectedIndexChanged);
-            this.employeesListView.Resize += new System.EventHandler(this.employeeListView_Resize);
+            this.employeesListView.SelectedIndexChanged += new System.EventHandler(this.EmployeeListView_SelectedIndexChanged);
+            this.employeesListView.Resize += new System.EventHandler(this.EmployeeListView_Resize);
             // 
             // addEmployeeButton
             // 
@@ -113,7 +113,7 @@
             this.addEmployeeButton.TabIndex = 15;
             this.addEmployeeButton.Text = "Nouvel employé";
             this.addEmployeeButton.UseVisualStyleBackColor = true;
-            this.addEmployeeButton.Click += new System.EventHandler(this.onAddEmployeeButtonClick);
+            this.addEmployeeButton.Click += new System.EventHandler(this.AddEmployeeButton_Click);
             // 
             // detailsPanel
             // 
@@ -168,7 +168,7 @@
             this.dismissButton.TabIndex = 23;
             this.dismissButton.Text = "Licencier";
             this.dismissButton.UseVisualStyleBackColor = true;
-            this.dismissButton.Click += new System.EventHandler(this.onDismissEmployeeButtonClick);
+            this.dismissButton.Click += new System.EventHandler(this.DismissEmployeeButton_Click);
             // 
             // nameTextBox
             // 
@@ -254,7 +254,7 @@
             this.editButton.Size = new System.Drawing.Size(30, 30);
             this.editButton.TabIndex = 14;
             this.editButton.UseVisualStyleBackColor = true;
-            this.editButton.Click += new System.EventHandler(this.onEditButtonClick);
+            this.editButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // detailsTitleBarPanel
             // 
@@ -288,7 +288,7 @@
             this.permissionButton.TabIndex = 22;
             this.permissionButton.Text = "Permissions";
             this.permissionButton.UseVisualStyleBackColor = true;
-            this.permissionButton.Click += new System.EventHandler(this.onPermissionButtonClick);
+            this.permissionButton.Click += new System.EventHandler(this.PermissionButton_Click);
             // 
             // loginLabel
             // 

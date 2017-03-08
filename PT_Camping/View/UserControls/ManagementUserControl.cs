@@ -29,27 +29,27 @@ namespace PT_Camping
         {
             InitializeComponent();
             mHomeUC = homeUserControl;
-            Personne personLoged = mHomeUC.Window.userLoged.Person;
+            Personne personLoged = mHomeUC.Window.UserLoged.Person;
             if (personLoged != null)
             {
                 userNameLabel.Text = "Bonjour " + personLoged.Prenom_Personne + " " + personLoged.Nom_Personne;
             }
         }
 
-        private void backArrow_Click(object sender, EventArgs e)
+        private void BackArrow_Click(object sender, EventArgs e)
         {
             mHomeUC.Window.WindowPanel.Controls.Add(mHomeUC);
             mHomeUC.Window.WindowPanel.Controls.Remove(this);
         }
 
-        private void logoutButton_Click(object sender, EventArgs e)
+        private void LogoutButton_Click(object sender, EventArgs e)
         {
-            mHomeUC.Window.logout();
+            mHomeUC.Window.Logout();
             mHomeUC.Window.WindowPanel.Controls.Remove(this);
         }
 
 
-        internal void handleResize()
+        internal void HandleResize()
         {
             Size = mHomeUC.Size;
             appBar.Size = new Size(mHomeUC.Size.Width, appBar.Size.Height);

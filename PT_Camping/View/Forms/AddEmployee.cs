@@ -22,28 +22,27 @@ namespace PT_Camping
         {
             InitializeComponent();
             this.db = db;
-            newEmployee = new Employe();
-            newEmployee.Personne = new Personne();
-
-            
+            newEmployee = new Employe()
+            {
+                Personne = new Personne()
+            };
             toolTip1.SetToolTip(birthDateTextBox, "Au format : 1970-01-01 00:00");
         }
 
 
-        private void onPermissionButtonClick(object sender, EventArgs e)
+        private void OnPermissionButtonClick(object sender, EventArgs e)
         {
             new Permissions(newEmployee, db).ShowDialog();
-            //might have issues
         }
 
 
-        private void onCancelButtonClick(object sender, EventArgs e)
+        private void OnCancelButtonClick(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
 
-        private void onOkButtonClick(object sender, EventArgs e)
+        private void OnOkButtonClick(object sender, EventArgs e)
         {
             try
             {
@@ -54,8 +53,7 @@ namespace PT_Camping
                 if (surnameTextBox.Text.Any(char.IsDigit) || nameTextBox.Text.Any(char.IsDigit))
                     throw new Exception("Le nom et/ou le prénom ne peuvent contenir de valeur numérique.");
 
-                int phone;
-                if (phoneTextBox.Text != "" && (!int.TryParse(phoneTextBox.Text, out phone) || phoneTextBox.Text.Length != 10))
+                if (phoneTextBox.Text != "" && (!int.TryParse(phoneTextBox.Text, out int phone) || phoneTextBox.Text.Length != 10))
                     throw new Exception("Téléphone doit être un entier de 10 chiffres");
 
                 if ((!emailTextBox.Text.EndsWith(".com") && !emailTextBox.Text.EndsWith(".fr"))

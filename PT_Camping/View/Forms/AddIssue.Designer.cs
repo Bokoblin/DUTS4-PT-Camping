@@ -75,7 +75,7 @@
             this.cancelButton.TabIndex = 10;
             this.cancelButton.Text = "Annuler";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.onCancelButtonClick);
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // OKButton
             // 
@@ -85,7 +85,7 @@
             this.OKButton.TabIndex = 11;
             this.OKButton.Text = "Valider";
             this.OKButton.UseVisualStyleBackColor = true;
-            this.OKButton.Click += new System.EventHandler(this.onOkButtonClick);
+            this.OKButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
             // criticalityLabel
             // 

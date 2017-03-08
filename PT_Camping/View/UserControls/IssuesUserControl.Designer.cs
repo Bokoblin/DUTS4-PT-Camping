@@ -215,7 +215,7 @@
             this.deleteButton.Size = new System.Drawing.Size(30, 30);
             this.deleteButton.TabIndex = 10;
             this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.onDeleteIssueButtonClick);
+            this.deleteButton.Click += new System.EventHandler(this.OnDeleteIssueButtonClick);
             // 
             // editButton
             // 
@@ -227,7 +227,7 @@
             this.editButton.Size = new System.Drawing.Size(30, 30);
             this.editButton.TabIndex = 11;
             this.editButton.UseVisualStyleBackColor = true;
-            this.editButton.Click += new System.EventHandler(this.onEditButtonClick);
+            this.editButton.Click += new System.EventHandler(this.OnEditButtonClick);
             // 
             // detailsTitleBarPanel
             // 
@@ -261,7 +261,7 @@
             this.resolveButton.TabIndex = 20;
             this.resolveButton.Text = "Marqué comme résolu";
             this.resolveButton.UseVisualStyleBackColor = true;
-            this.resolveButton.Click += new System.EventHandler(this.onResolveIssueButtonClick);
+            this.resolveButton.Click += new System.EventHandler(this.OnResolveIssueButtonClick);
             // 
             // descriptionLabel
             // 
@@ -348,8 +348,8 @@
             this.issuesListView.TabIndex = 10;
             this.issuesListView.UseCompatibleStateImageBehavior = false;
             this.issuesListView.View = System.Windows.Forms.View.List;
-            this.issuesListView.SelectedIndexChanged += new System.EventHandler(this.issuesListView_SelectedIndexChanged);
-            this.issuesListView.Resize += new System.EventHandler(this.issuesListView_Resize);
+            this.issuesListView.SelectedIndexChanged += new System.EventHandler(this.IssuesListView_SelectedIndexChanged);
+            this.issuesListView.Resize += new System.EventHandler(this.IssuesListView_Resize);
             // 
             // addIssueButton
             // 
@@ -361,7 +361,7 @@
             this.addIssueButton.TabIndex = 11;
             this.addIssueButton.Text = "Nouvel incident";
             this.addIssueButton.UseVisualStyleBackColor = true;
-            this.addIssueButton.Click += new System.EventHandler(this.onAddIssueButtonClick);
+            this.addIssueButton.Click += new System.EventHandler(this.OnAddIssueButtonClick);
             // 
             // IssuesUserControl
             // 

@@ -16,16 +16,17 @@ namespace PT_Camping
         private ConnectionUserControl mConnectionUC;
         private HomeUserControl mHomeUC;
 
+
         public AppWindow()
         {
             StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
             mConnectionUC = new ConnectionUserControl(this);
             windowPanel.Controls.Add(mConnectionUC);
-            userLoged = new LoginTools();
+            UserLoged = new LoginTools();
         }
 
-        internal void login()
+        internal void Login()
         {
             mHomeUC = new HomeUserControl(this);
             windowPanel.Controls.Add(mHomeUC);
@@ -33,10 +34,10 @@ namespace PT_Camping
         }
 
 
-        internal void logout()
+        internal void Logout()
         {
-            userLoged.Login = "";
-            userLoged.HashedPassword = "";
+            UserLoged.Login = "";
+            UserLoged.HashedPassword = "";
             mConnectionUC = new ConnectionUserControl(this);
             windowPanel.Controls.Add(mConnectionUC);
         }
@@ -46,9 +47,9 @@ namespace PT_Camping
         {
             windowPanel.Size = this.Size;
             if (mConnectionUC != null)
-                mConnectionUC.handleResize();
+                mConnectionUC.HandleResize();
             if (mHomeUC != null)
-                mHomeUC.handleResize();
+                mHomeUC.HandleResize();
         }
 
 
@@ -57,6 +58,6 @@ namespace PT_Camping
         /// </summary>
 
         public Panel WindowPanel { get { return windowPanel; } set { windowPanel = value; } }
-        public LoginTools userLoged { get; set; }
+        public LoginTools UserLoged { get; set; }
     }
 }

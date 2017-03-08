@@ -22,21 +22,21 @@ namespace PT_Camping
             appBarTitle.Text = "Gestion des statistiques";
             db = new DataBase();
 
-            updateListViews();
-            handleResize();
+            UpdateListViews();
+            HandleResize();
         }
 
 
-        private void updateListViews()
+        private void UpdateListViews()
         {
-            updateLocationsListView();
-            updateProductsListView();
-            updateIssueslistView();
-            updateClientsListView();
+            UpdateLocationsListView();
+            UpdateProductsListView();
+            UpdateIssueslistView();
+            UpdateClientsListView();
         }
 
 
-        private void updateLocationsListView()
+        private void UpdateLocationsListView()
         {
             //TEMPORARY : ALL LOCATIONS DISPLAYING
 
@@ -45,14 +45,16 @@ namespace PT_Camping
 
             foreach (Emplacement location in db.Emplacement)
             {
-                var item = new ListViewItem(new[] { location.Nom_Emplacement });
-                item.Name = location.Code_Emplacement.ToString();
+                var item = new ListViewItem(new[] { location.Nom_Emplacement })
+                {
+                    Name = location.Code_Emplacement.ToString()
+                };
                 mostAskedlocationsListView.Items.Add(item);
             }
         }
 
 
-        private void updateProductsListView()
+        private void UpdateProductsListView()
         {
             //TEMPORARY : ALL PRODUCTS DISPLAYING
 
@@ -61,14 +63,16 @@ namespace PT_Camping
 
             foreach (Produit product in db.Produit)
             {
-                var item = new ListViewItem(new[] { product.Libelle_Produit });
-                item.Name = product.Code_Produit.ToString();
+                var item = new ListViewItem(new[] { product.Libelle_Produit })
+                {
+                    Name = product.Code_Produit.ToString()
+                };
                 mostAskedProductsListView.Items.Add(item);
             }
         }
 
 
-        private void updateIssueslistView()
+        private void UpdateIssueslistView()
         {
             mostCommonIssueslistView.View = View.Details;
             mostCommonIssueslistView.Columns.Add("#");
@@ -79,19 +83,23 @@ namespace PT_Camping
 
             foreach (Type_Incident issueType in db.Type_Incident)
             {
-                statsIssues.Add(issueType.Type_Incident1, db.Incident.Where(it => it.Code_Type == issueType.Code_Type).Count());
+                statsIssues.Add(issueType.Type_Incident1, 
+                    db.Incident.Where(it => it.Code_Type == issueType.Code_Type).Count());
             }
 
             foreach (Type_Incident issueType in db.Type_Incident)
             {
-                var item = new ListViewItem(new[] { "", issueType.Type_Incident1, statsIssues[issueType.Type_Incident1].ToString() });
-                item.Name = issueType.Code_Type.ToString();
+                var item = new ListViewItem(new[] { "", issueType.Type_Incident1, statsIssues[issueType.Type_Incident1].ToString() })
+                {
+                    Name = issueType.Code_Type.ToString()
+                };
                 mostCommonIssueslistView.Items.Add(item);
             }
 
             //=== Sorting by incident type
 
-            var orderedList =  mostCommonIssueslistView.Items.Cast<ListViewItem>().Select(x => x).OrderByDescending(x => x.SubItems[2].Text).Take(10).ToList();
+            var orderedList =  mostCommonIssueslistView.Items.Cast<ListViewItem>()
+                .Select(x => x).OrderByDescending(x => x.SubItems[2].Text).Take(10).ToList();
             mostCommonIssueslistView.Items.Clear();
             mostCommonIssueslistView.Items.AddRange(orderedList.ToArray());
 
@@ -104,7 +112,7 @@ namespace PT_Camping
         }
 
 
-        private void updateClientsListView()
+        private void UpdateClientsListView()
         {
             //TEMPORARY : ALL CLIENTS DISPLAYING
 
@@ -118,14 +126,16 @@ namespace PT_Camping
                 string name = client.Personne.Prenom_Personne;
                 string email = client.Personne.Email;
 
-                var item = new ListViewItem(new[] { surname, name, email });
-                item.Name = client.Code_Personne.ToString();
+                var item = new ListViewItem(new[] { surname, name, email })
+                {
+                    Name = client.Code_Personne.ToString()
+                };
                 bestClientsListView.Items.Add(item);
             }
         }
 
 
-        private void mostAskedlocationsListView_Resize(object sender, EventArgs e)
+        private void MostAskedlocationsListView_Resize(object sender, EventArgs e)
         {
             if (mostAskedlocationsListView.Columns.Count != 0)
             {
@@ -135,7 +145,7 @@ namespace PT_Camping
         }
 
 
-        private void mostAskedProductsListView_Resize(object sender, EventArgs e)
+        private void MostAskedProductsListView_Resize(object sender, EventArgs e)
         {
             if (mostAskedProductsListView.Columns.Count != 0)
             {
@@ -145,7 +155,7 @@ namespace PT_Camping
         }
 
 
-        private void mostCommonIssueslistView_Resize(object sender, EventArgs e)
+        private void MostCommonIssueslistView_Resize(object sender, EventArgs e)
         {
             if (mostCommonIssueslistView.Columns.Count != 0)
             {
@@ -158,7 +168,7 @@ namespace PT_Camping
         }
 
 
-        private void bestClientsListView_Resize(object sender, EventArgs e)
+        private void BestClientsListView_Resize(object sender, EventArgs e)
         {
             if (bestClientsListView.Columns.Count != 0)
             {
@@ -167,13 +177,13 @@ namespace PT_Camping
             }
         }
 
-        private void mostCommonIssueslistView_DoubleClick(object sender, EventArgs e)
+        private void MostCommonIssueslistView_DoubleClick(object sender, EventArgs e)
         {
             if (mostCommonIssueslistView.SelectedItems.Count > 0)
             {
                 int code = int.Parse(mostCommonIssueslistView.SelectedItems[0].Name);
                 mHomeUC.Window.WindowPanel.Controls.Remove(this);
-                mHomeUC.startIssuesFromStats(code);
+                mHomeUC.StartIssuesFromStats(code);
             }
         }
     }
