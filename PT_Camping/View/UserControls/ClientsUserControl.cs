@@ -21,8 +21,7 @@ namespace PT_Camping
     /// Since : 08/02/17
     public partial class ClientsUserControl : ManagementUserControl
     {
-        private DataBase db;
-        public ClientsUserControl(HomeUserControl homeUserControl) : base(homeUserControl)
+        public ClientsUserControl(HomeUserControl home) : base(home)
         {
             InitializeComponent();
             appBarTitle.Text = "Gestion des clients";
@@ -64,7 +63,7 @@ namespace PT_Camping
             {
                 int code = int.Parse(ClientlistView.SelectedItems[0].Name);
                 var client = db.Client.Find(code);
-
+                dateInscripTextBox.Text = client.Date_Inscription.ToShortDateString();
                 surnameTextBox.Text =client.Personne.Nom_Personne;
                 nameTextBox.Text = client.Personne.Prenom_Personne;
                 if (client.Personne.Date_Naissance != null)
@@ -72,6 +71,7 @@ namespace PT_Camping
                 addressTextBox.Text = client.Personne.Adresse;
                 phoneTextBox.Text = client.Personne.Telephone;
                 emailTextBox.Text = client.Personne.Email;
+
                 //resaTextBox.Text = ;
             }
         }
@@ -82,66 +82,124 @@ namespace PT_Camping
             updateClientlistView();
         }
 
-        private void ClientsUserControl_Load(object sender, EventArgs e)
+        private void editClient_Click(object sender, EventArgs e)
+        {
+            if (addressTextBox.ReadOnly == true)
+            {
+                //surnameTextBox.ReadOnly = false;
+                addressTextBox.ReadOnly = false;
+                phoneTextBox.ReadOnly = false;
+                emailTextBox.ReadOnly = false;
+                //resaTextBox.ReadOnly = false;
+               
+            }
+            else
+            {
+                surnameTextBox.ReadOnly = true;
+                addressTextBox.ReadOnly = true;
+                phoneTextBox.ReadOnly = true;
+                emailTextBox.ReadOnly = true;
+                //resaTextBox.ReadOnly = true;
+
+                string message = "Les données suivantes ont été mises à jour : \n";
+                int cptModifications = 0;
+
+                int code = int.Parse(ClientlistView.SelectedItems[0].Name);
+                var client = db.Client.Find(code);
+
+                if (addressTextBox.Text != client.Personne.Adresse)
+                {
+                    client.Personne.Adresse = addressTextBox.Text;
+                    message += "adresse";
+                    cptModifications++;
+                }
+
+                if (phoneTextBox.Text != "" && phoneTextBox.Text != client.Personne.Telephone)
+                {
+                    int phone;
+                    if (int.TryParse(phoneTextBox.Text, out phone) && phoneTextBox.Text.Length == 10)
+                    {
+                        client.Personne.Telephone = phoneTextBox.Text;
+                        message += "téléphone\n";
+                        cptModifications++;
+                    }
+                    else
+                        MessageBox.Show("Téléphone doit être un entier de 10 chiffres");
+                }
+
+               /* if (surnameTextBox.Text != "" && phoneTextBox.Text != client.Personne.Telephone)
+                {
+                    int phone;
+                    if (int.TryParse(phoneTextBox.Text, out phone) && phoneTextBox.Text.Length == 10)
+                    {
+                        client.Personne.Telephone = phoneTextBox.Text;
+                        message += "téléphone\n";
+                        cptModifications++;
+                    }
+                    else
+                        MessageBox.Show("Téléphone doit être un entier de 10 chiffres");
+                }*/
+
+                if (emailTextBox.Text != client.Personne.Email)
+                {
+                    if ((emailTextBox.Text.EndsWith(".com") || emailTextBox.Text.EndsWith(".fr"))
+                        && emailTextBox.Text.Contains("@"))
+                    {
+                        client.Personne.Email = emailTextBox.Text;
+                        message += "email";
+                        cptModifications++;
+                    }
+                    else
+                        MessageBox.Show("Email doit contenir un @ et se terminer par .com/.fr");
+                }
+
+                /*if (resaTextBox.Text != )
+                {
+                    client.Login = loginTextBox.Text;
+                    message += "login";
+                    cptModifications++;
+                }*/
+
+                db.SaveChanges();
+
+                updateClientDetails();
+
+                if (cptModifications > 0)
+                    MessageBox.Show(message);
+            }
+        }
+
+        private void DismissClientButton_Click(object sender, EventArgs e)
+        {
+            int code = int.Parse(ClientlistView.SelectedItems[0].Name);
+            var client = db.Client.Find(code);
+            db.Client.Remove(client);
+            db.SaveChanges();
+            updateClientlistView();
+        }
+
+        private void employeeListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            addressTextBox.ReadOnly = true;
+            phoneTextBox.ReadOnly = true;
+            emailTextBox.ReadOnly = true;
+           
+            updateClientDetails();
+        }
+
+        private void ClientlistView_Resize(object sender, EventArgs e)
+        {
+            if (ClientlistView.Columns.Count == 3)
+            {
+                ClientlistView.Columns[0].Width = ClientlistView.Width / 3;
+                ClientlistView.Columns[1].Width = ClientlistView.Width / 3;
+                ClientlistView.Columns[2].Width = ClientlistView.Width / 3;
+            }
+        }
+
+        private void ReducClient_Click(object sender, EventArgs e)
         {
 
         }
-
-        private void DetailsPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void surnameLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void surnameTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void addressTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void nameLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void birthDateLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void addressLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
     }
 }

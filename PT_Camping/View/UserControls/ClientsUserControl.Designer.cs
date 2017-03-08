@@ -35,6 +35,8 @@
             this.addClientButton = new System.Windows.Forms.Button();
             this.ClientlistView = new System.Windows.Forms.ListView();
             this.DetailsPanel = new System.Windows.Forms.Panel();
+            this.dateInscripLabel = new System.Windows.Forms.Label();
+            this.dateInscripTextBox = new System.Windows.Forms.TextBox();
             this.LiberationButton = new System.Windows.Forms.Button();
             this.FacturationButton = new System.Windows.Forms.Button();
             this.ReductionButton = new System.Windows.Forms.Button();
@@ -122,12 +124,15 @@
             this.ClientlistView.Size = new System.Drawing.Size(420, 397);
             this.ClientlistView.TabIndex = 12;
             this.ClientlistView.UseCompatibleStateImageBehavior = false;
+            this.ClientlistView.SelectedIndexChanged += new System.EventHandler(this.employeeListView_SelectedIndexChanged);
             // 
             // DetailsPanel
             // 
             this.DetailsPanel.AutoSize = true;
             this.DetailsPanel.BackColor = System.Drawing.Color.White;
             this.DetailsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.DetailsPanel.Controls.Add(this.dateInscripLabel);
+            this.DetailsPanel.Controls.Add(this.dateInscripTextBox);
             this.DetailsPanel.Controls.Add(this.LiberationButton);
             this.DetailsPanel.Controls.Add(this.FacturationButton);
             this.DetailsPanel.Controls.Add(this.ReductionButton);
@@ -155,12 +160,32 @@
             this.DetailsPanel.Name = "DetailsPanel";
             this.DetailsPanel.Size = new System.Drawing.Size(418, 395);
             this.DetailsPanel.TabIndex = 14;
-            this.DetailsPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.DetailsPanel_Paint);
+            // 
+            // dateInscripLabel
+            // 
+            this.dateInscripLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.dateInscripLabel.AutoSize = true;
+            this.dateInscripLabel.Location = new System.Drawing.Point(48, 337);
+            this.dateInscripLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.dateInscripLabel.Name = "dateInscripLabel";
+            this.dateInscripLabel.Size = new System.Drawing.Size(117, 17);
+            this.dateInscripLabel.TabIndex = 38;
+            this.dateInscripLabel.Text = "Date d\'inscription";
+            // 
+            // dateInscripTextBox
+            // 
+            this.dateInscripTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.dateInscripTextBox.Location = new System.Drawing.Point(205, 337);
+            this.dateInscripTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.dateInscripTextBox.Name = "dateInscripTextBox";
+            this.dateInscripTextBox.ReadOnly = true;
+            this.dateInscripTextBox.Size = new System.Drawing.Size(159, 22);
+            this.dateInscripTextBox.TabIndex = 39;
             // 
             // LiberationButton
             // 
             this.LiberationButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.LiberationButton.Location = new System.Drawing.Point(232, 240);
+            this.LiberationButton.Location = new System.Drawing.Point(232, 282);
             this.LiberationButton.Margin = new System.Windows.Forms.Padding(4);
             this.LiberationButton.Name = "LiberationButton";
             this.LiberationButton.Size = new System.Drawing.Size(100, 35);
@@ -171,7 +196,7 @@
             // FacturationButton
             // 
             this.FacturationButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.FacturationButton.Location = new System.Drawing.Point(91, 302);
+            this.FacturationButton.Location = new System.Drawing.Point(91, 344);
             this.FacturationButton.Margin = new System.Windows.Forms.Padding(4);
             this.FacturationButton.Name = "FacturationButton";
             this.FacturationButton.Size = new System.Drawing.Size(100, 35);
@@ -182,13 +207,14 @@
             // ReductionButton
             // 
             this.ReductionButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.ReductionButton.Location = new System.Drawing.Point(232, 302);
+            this.ReductionButton.Location = new System.Drawing.Point(232, 344);
             this.ReductionButton.Margin = new System.Windows.Forms.Padding(4);
             this.ReductionButton.Name = "ReductionButton";
             this.ReductionButton.Size = new System.Drawing.Size(100, 35);
             this.ReductionButton.TabIndex = 35;
             this.ReductionButton.Text = "Réduction(s)";
             this.ReductionButton.UseVisualStyleBackColor = true;
+            this.ReductionButton.Click += new System.EventHandler(this.ReducClient_Click);
             // 
             // surnameTextBox
             // 
@@ -199,12 +225,11 @@
             this.surnameTextBox.ReadOnly = true;
             this.surnameTextBox.Size = new System.Drawing.Size(159, 22);
             this.surnameTextBox.TabIndex = 25;
-            this.surnameTextBox.TextChanged += new System.EventHandler(this.surnameTextBox_TextChanged);
             // 
             // resaTextBox
             // 
             this.resaTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.resaTextBox.Location = new System.Drawing.Point(205, 334);
+            this.resaTextBox.Location = new System.Drawing.Point(205, 373);
             this.resaTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.resaTextBox.Name = "resaTextBox";
             this.resaTextBox.ReadOnly = true;
@@ -214,14 +239,13 @@
             // reservationButton
             // 
             this.reservationButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.reservationButton.Location = new System.Drawing.Point(91, 240);
+            this.reservationButton.Location = new System.Drawing.Point(91, 282);
             this.reservationButton.Margin = new System.Windows.Forms.Padding(4);
             this.reservationButton.Name = "reservationButton";
             this.reservationButton.Size = new System.Drawing.Size(100, 35);
             this.reservationButton.TabIndex = 34;
             this.reservationButton.Text = "Réserver";
             this.reservationButton.UseVisualStyleBackColor = true;
-            this.reservationButton.Click += new System.EventHandler(this.button1_Click);
             // 
             // deleteButton
             // 
@@ -234,6 +258,7 @@
             this.deleteButton.Size = new System.Drawing.Size(40, 37);
             this.deleteButton.TabIndex = 31;
             this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.DismissClientButton_Click);
             // 
             // surnameLabel
             // 
@@ -245,7 +270,6 @@
             this.surnameLabel.Size = new System.Drawing.Size(37, 17);
             this.surnameLabel.TabIndex = 16;
             this.surnameLabel.Text = "Nom";
-            this.surnameLabel.Click += new System.EventHandler(this.surnameLabel_Click);
             // 
             // EditButton
             // 
@@ -258,12 +282,13 @@
             this.EditButton.Size = new System.Drawing.Size(40, 37);
             this.EditButton.TabIndex = 15;
             this.EditButton.UseVisualStyleBackColor = true;
+            this.EditButton.Click += new System.EventHandler(this.editClient_Click);
             // 
             // NameReservLabel
             // 
             this.NameReservLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.NameReservLabel.AutoSize = true;
-            this.NameReservLabel.Location = new System.Drawing.Point(48, 334);
+            this.NameReservLabel.Location = new System.Drawing.Point(48, 376);
             this.NameReservLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.NameReservLabel.Name = "NameReservLabel";
             this.NameReservLabel.Size = new System.Drawing.Size(143, 17);
@@ -304,7 +329,6 @@
             this.nameLabel.Size = new System.Drawing.Size(57, 17);
             this.nameLabel.TabIndex = 20;
             this.nameLabel.Text = "Prénom";
-            this.nameLabel.Click += new System.EventHandler(this.nameLabel_Click);
             // 
             // addressTextBox
             // 
@@ -316,7 +340,6 @@
             this.addressTextBox.ReadOnly = true;
             this.addressTextBox.Size = new System.Drawing.Size(159, 48);
             this.addressTextBox.TabIndex = 28;
-            this.addressTextBox.TextChanged += new System.EventHandler(this.addressTextBox_TextChanged);
             // 
             // birthDateLabel
             // 
@@ -328,7 +351,6 @@
             this.birthDateLabel.Size = new System.Drawing.Size(128, 17);
             this.birthDateLabel.TabIndex = 21;
             this.birthDateLabel.Text = "Date de Naissance";
-            this.birthDateLabel.Click += new System.EventHandler(this.birthDateLabel_Click);
             // 
             // nameTextBox
             // 
@@ -339,7 +361,6 @@
             this.nameTextBox.ReadOnly = true;
             this.nameTextBox.Size = new System.Drawing.Size(159, 22);
             this.nameTextBox.TabIndex = 26;
-            this.nameTextBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // emailTextBox
             // 
@@ -360,7 +381,6 @@
             this.birthDateTextBox.ReadOnly = true;
             this.birthDateTextBox.Size = new System.Drawing.Size(159, 22);
             this.birthDateTextBox.TabIndex = 27;
-            this.birthDateTextBox.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // addressLabel
             // 
@@ -372,7 +392,6 @@
             this.addressLabel.Size = new System.Drawing.Size(60, 17);
             this.addressLabel.TabIndex = 22;
             this.addressLabel.Text = "Adresse";
-            this.addressLabel.Click += new System.EventHandler(this.addressLabel_Click);
             // 
             // emailLabel
             // 
@@ -394,7 +413,6 @@
             this.phoneTextBox.ReadOnly = true;
             this.phoneTextBox.Size = new System.Drawing.Size(159, 22);
             this.phoneTextBox.TabIndex = 29;
-            this.phoneTextBox.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // phoneLabel
             // 
@@ -416,7 +434,6 @@
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "ClientsUserControl";
             this.Size = new System.Drawing.Size(1067, 600);
-            this.Load += new System.EventHandler(this.ClientsUserControl_Load);
             this.Controls.SetChildIndex(this.tableLayoutPanel1, 0);
             this.Controls.SetChildIndex(this.appBarTitle, 0);
             this.Controls.SetChildIndex(this.logoutButton, 0);
@@ -459,5 +476,7 @@
         private System.Windows.Forms.Button LiberationButton;
         private System.Windows.Forms.Button FacturationButton;
         private System.Windows.Forms.Button ReductionButton;
+        private System.Windows.Forms.Label dateInscripLabel;
+        private System.Windows.Forms.TextBox dateInscripTextBox;
     }
 }

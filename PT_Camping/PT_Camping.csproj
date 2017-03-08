@@ -96,6 +96,12 @@
     <Compile Include="View\Forms\AddEmployee.Designer.cs">
       <DependentUpon>AddEmployee.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\Forms\Reductions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Forms\Reductions.Designer.cs">
+      <DependentUpon>Reductions.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\UserControls\MapUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -245,6 +251,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Forms\AddEmployee.resx">
       <DependentUpon>AddEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Forms\Reductions.resx">
+      <DependentUpon>Reductions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\UserControls\EmployeesUserControl.resx">
       <DependentUpon>EmployeesUserControl.cs</DependentUpon>
