@@ -1,11 +1,13 @@
-﻿using PT_Camping.Model;
-using System;
+﻿using System;
 using System.Drawing;
 using System.IO;
 using System.Net.Mail;
 using System.Windows.Forms;
+using PT_Camping.Model;
+using PT_Camping.Properties;
+using PT_Camping.Views.Forms;
 
-namespace PT_Camping
+namespace PT_Camping.Views.UserControls
 {
     /// <summary>
     /// The EmployeesUserControl inherits from ManagementHomeControl.
@@ -19,8 +21,8 @@ namespace PT_Camping
         public EmployeesUserControl(HomeUserControl home) : base(home)
         {
             InitializeComponent();
-            appBarTitle.Text = "Gestion des employés";
-            db = new DataBase();
+            appBarTitle.Text = Resources.employee_management;
+            Db = new DataBase();
 
             employeesListView.View = View.Details;
             employeesListView.Columns.Add("Nom");
@@ -36,7 +38,7 @@ namespace PT_Camping
         {
             employeesListView.Items.Clear();
 
-            foreach (var employee in db.Employe)
+            foreach (var employee in Db.Employe)
             {
                 if (!employee.EstLicencie)
                 {
@@ -67,7 +69,9 @@ namespace PT_Camping
             if (employeesListView.SelectedItems.Count != 0)
             {
                 int code = int.Parse(employeesListView.SelectedItems[0].Name);
-                var employee = db.Employe.Find(code);
+                var employee = Db.Employe.Find(code);
+
+                if (employee == null) return;
 
                 surnameTextBox.Text = employee.Personne.Nom_Personne;
                 nameTextBox.Text = employee.Personne.Prenom_Personne;
@@ -85,7 +89,7 @@ namespace PT_Camping
                     ms.Close();
                 }
                 else
-                    pictureBox.Image = new Bitmap(Properties.Resources.contact_default);
+                    pictureBox.Image = new Bitmap(Resources.contact_default);
 
                 dismissButton.Enabled = (employee.Personne.Code_Personne != 1); //You can't dismiss Mr Campo
             }
@@ -94,14 +98,14 @@ namespace PT_Camping
 
         private void AddEmployeeButton_Click(object sender, EventArgs e)
         {
-            new AddEmployee(db).ShowDialog();
+            new AddEmployee(Db).ShowDialog();
             UpdateEmployeesListView();
         }
    
 
         private void EditButton_Click(object sender, EventArgs e)
         {
-            if (addressTextBox.ReadOnly == true)
+            if (addressTextBox.ReadOnly)
             {
                 addressTextBox.ReadOnly = false;
                 phoneTextBox.ReadOnly = false;
@@ -119,45 +123,48 @@ namespace PT_Camping
                 int cptModifications = 0;
 
                 int code = int.Parse(employeesListView.SelectedItems[0].Name);
-                var employee = db.Employe.Find(code);
+                var employee = Db.Employe.Find(code);
 
-                if (addressTextBox.Text != employee.Personne.Adresse)
+                if (employee != null)
                 {
-                    employee.Personne.Adresse = addressTextBox.Text;
-                    message += "adresse";
-                    cptModifications++;
-                }
-
-                if (phoneTextBox.Text != "" && phoneTextBox.Text != employee.Personne.Telephone)
-                {
-                    employee.Personne.Telephone = phoneTextBox.Text;
-                    message += "téléphone\n";
-                    cptModifications++;
-                }
-
-                if (emailTextBox.Text != employee.Personne.Email)
-                {
-                    try
+                    if (addressTextBox.Text != employee.Personne.Adresse)
                     {
-                        var test = new MailAddress(emailTextBox.Text);
-                        employee.Personne.Email = emailTextBox.Text;
-                        message += "email";
+                        employee.Personne.Adresse = addressTextBox.Text;
+                        message += "adresse";
                         cptModifications++;
                     }
-                    catch (FormatException)
+
+                    if (phoneTextBox.Text != "" && phoneTextBox.Text != employee.Personne.Telephone)
                     {
-                        MessageBox.Show("Email n'est pas une adresse mail valide");
+                        employee.Personne.Telephone = phoneTextBox.Text;
+                        message += "téléphone\n";
+                        cptModifications++;
+                    }
+
+                    if (emailTextBox.Text != employee.Personne.Email)
+                    {
+                        try
+                        {
+                            employee.Personne.Email = new MailAddress(emailTextBox.Text).ToString();
+                            message += "email";
+                            cptModifications++;
+                        }
+                        catch (FormatException)
+                        {
+                            MessageBox.Show(Resources.unrecognized_email);
+                        }
+                    }
+
+                    if (loginTextBox.Text != employee.Login)
+                    {
+                        employee.Login = loginTextBox.Text;
+                        message += "login";
+                        cptModifications++;
                     }
                 }
+                
 
-                if (loginTextBox.Text != employee.Login)
-                {
-                    employee.Login = loginTextBox.Text;
-                    message += "login";
-                    cptModifications++;
-                }
-
-                db.SaveChanges();
+                Db.SaveChanges();
 
                 UpdateEmployeeDetails();
 
@@ -170,18 +177,19 @@ namespace PT_Camping
         private void PermissionButton_Click(object sender, EventArgs e)
         {
             int code = int.Parse(employeesListView.SelectedItems[0].Name);
-            var employee = db.Employe.Find(code);
-            new Permissions(employee, db).ShowDialog();
-            db.SaveChanges();
+            var employee = Db.Employe.Find(code);
+            new Permissions(employee, Db).ShowDialog();
+            Db.SaveChanges();
         }
 
 
         private void DismissEmployeeButton_Click(object sender, EventArgs e)
         {
             int code = int.Parse(employeesListView.SelectedItems[0].Name);
-            var employee = db.Employe.Find(code);
-            employee.EstLicencie = true;
-            db.SaveChanges();
+            var employee = Db.Employe.Find(code);
+            if (employee != null)
+                employee.EstLicencie = true;
+            Db.SaveChanges();
             UpdateEmployeesListView();
         }
 

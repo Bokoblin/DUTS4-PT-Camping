@@ -1,9 +1,10 @@
-﻿using PT_Camping.Model;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using PT_Camping.Model;
+using PT_Camping.Properties;
 
-namespace PT_Camping
+namespace PT_Camping.Views.UserControls
 {
     /// <summary>
     /// The ManagementUserControl is a UserControl handling the application's management process.
@@ -16,8 +17,7 @@ namespace PT_Camping
     /// Since : 08/02/17
     public partial class ManagementUserControl : UserControl
     {
-        protected HomeUserControl mHomeUC;
-        protected DataBase db;
+        protected DataBase Db;
 
         public ManagementUserControl()
         {
@@ -28,34 +28,34 @@ namespace PT_Camping
         public ManagementUserControl(HomeUserControl homeUserControl)
         {
             InitializeComponent();
-            mHomeUC = homeUserControl;
-            Employe employeeLoged = mHomeUC.Window.UserLoged.Employee;
+            HomeUc = homeUserControl;
+            Employe employeeLoged = HomeUc.Window.UserLoged.Employee;
             if (employeeLoged != null)
             {
-                userNameLabel.Text = "Bonjour " + employeeLoged.Personne.Prenom_Personne + " " + employeeLoged.Personne.Nom_Personne;
+                userNameLabel.Text = Resources.hello_user + employeeLoged.Personne.Prenom_Personne + " " + employeeLoged.Personne.Nom_Personne;
             }
         }
 
         private void BackArrow_Click(object sender, EventArgs e)
         {
-            mHomeUC.Window.WindowPanel.Controls.Add(mHomeUC);
-            mHomeUC.Window.WindowPanel.Controls.Remove(this);
+            HomeUc.Window.WindowPanel.Controls.Add(HomeUc);
+            HomeUc.Window.WindowPanel.Controls.Remove(this);
         }
 
         private void LogoutButton_Click(object sender, EventArgs e)
         {
-            mHomeUC.Window.Logout();
-            mHomeUC.Window.WindowPanel.Controls.Remove(this);
+            HomeUc.Window.Logout();
+            HomeUc.Window.WindowPanel.Controls.Remove(this);
         }
 
 
         internal void HandleResize()
         {
-            Size = mHomeUC.Size;
-            appBar.Size = new Size(mHomeUC.Size.Width, appBar.Size.Height);
+            Size = HomeUc.Size;
+            appBar.Size = new Size(HomeUc.Size.Width, appBar.Size.Height);
         }
 
 
-        public HomeUserControl HomeUC { get { return mHomeUC; } set { mHomeUC = value; } }
+        public HomeUserControl HomeUc {get; set; }
     }
 }

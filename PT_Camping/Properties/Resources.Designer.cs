@@ -61,12 +61,129 @@ namespace PT_Camping.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Gestion des clients.
+        /// </summary>
+        internal static string clients_management {
+            get {
+                return ResourceManager.GetString("clients_management", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap contact_default {
             get {
                 object obj = ResourceManager.GetObject("contact_default", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à /5.
+        /// </summary>
+        internal static string criticality_max {
+            get {
+                return ResourceManager.GetString("criticality_max", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Erreur lors de la connexion à la base de données.
+        /// </summary>
+        internal static string database_connection_error {
+            get {
+                return ResourceManager.GetString("database_connection_error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Terminé.
+        /// </summary>
+        internal static string done_issue {
+            get {
+                return ResourceManager.GetString("done_issue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Gestion des employés.
+        /// </summary>
+        internal static string employee_management {
+            get {
+                return ResourceManager.GetString("employee_management", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à #.
+        /// </summary>
+        internal static string hash_symbol {
+            get {
+                return ResourceManager.GetString("hash_symbol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Bonjour .
+        /// </summary>
+        internal static string hello_user {
+            get {
+                return ResourceManager.GetString("hello_user", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Gestion des incidents.
+        /// </summary>
+        internal static string issues_management {
+            get {
+                return ResourceManager.GetString("issues_management", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à WARNING : This feature is not implemented yet..
+        /// </summary>
+        internal static string not_implemented_feature {
+            get {
+                return ResourceManager.GetString("not_implemented_feature", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Gestion des fournisseurs.
+        /// </summary>
+        internal static string provider_management {
+            get {
+                return ResourceManager.GetString("provider management", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Gestion des statistiques.
+        /// </summary>
+        internal static string stats_management {
+            get {
+                return ResourceManager.GetString("stats_management", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Gestion des stocks.
+        /// </summary>
+        internal static string stocks_management {
+            get {
+                return ResourceManager.GetString("stocks_management", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Email n&apos;est pas une adresse mail valide.
+        /// </summary>
+        internal static string unrecognized_email {
+            get {
+                return ResourceManager.GetString("unrecognized_email", resourceCulture);
             }
         }
     }

@@ -1,11 +1,11 @@
-﻿using PT_Camping.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using System.Linq;
+using System.Windows.Forms;
+using PT_Camping.Model;
+using PT_Camping.Properties;
 
-
-namespace PT_Camping
+namespace PT_Camping.Views.UserControls
 {
     /// <summary>
     /// The StatsUserControl inherits from ManagementHomeControl.
@@ -16,12 +16,12 @@ namespace PT_Camping
     /// Since : 08/02/17
     public partial class StatsUserControl : ManagementUserControl
     {
-        private int currentYear;
+        private int _currentYear;
         public StatsUserControl(HomeUserControl homeUserControl) : base(homeUserControl)
         {
             InitializeComponent();
-            appBarTitle.Text = "Gestion des statistiques";
-            db = new DataBase();
+            appBarTitle.Text = Resources.stats_management;
+            Db = new DataBase();
 
             UpdateListViews();
             HandleResize();
@@ -38,7 +38,7 @@ namespace PT_Camping
             mostCommonIssueslistView.Items.Clear();
             bestClientsListView.Items.Clear();
 
-            currentYear = yearPicker.Value.Year;
+            _currentYear = yearPicker.Value.Year;
 
             UpdateLocationsListView();
             UpdateProductsListView();
@@ -57,16 +57,15 @@ namespace PT_Camping
 
             var statsClients = new Dictionary<int, int>();
 
-            foreach (Emplacement location in db.Emplacement)
+            foreach (Emplacement location in Db.Emplacement)
             {
                 statsClients.Add(location.Code_Emplacement,
-                    db.Reservation.Where(
+                    Db.Reservation.Count(
                         res => res.Code_Personne == location.Code_Emplacement
-                        && (res.Date_Debut.Year == currentYear || res.Date_Debut.Year == currentYear) 
-                        ).Count());
+                        && (res.Date_Debut.Year == _currentYear || res.Date_Debut.Year == _currentYear)));
             }
 
-            foreach (Emplacement location in db.Emplacement)
+            foreach (Emplacement location in Db.Emplacement)
             {
                 string name = location.Nom_Emplacement;
                 string type = location.Type_Emplacement.Libelle_Type;
@@ -86,7 +85,7 @@ namespace PT_Camping
             mostAskedlocationsListView.Items.Clear();
             mostAskedlocationsListView.Items.AddRange(orderedList.ToArray());
 
-            int cpt = 1;
+            var cpt = 1;
             foreach (ListViewItem item in mostAskedlocationsListView.Items)
             {
                 item.SubItems[0].Text = cpt.ToString();
@@ -104,19 +103,22 @@ namespace PT_Camping
 
             var statsItem = new Dictionary<int, int>();
 
-            foreach (Produit product in db.Produit)
+            foreach (var product in Db.Produit)
             {
-                var soldPerProduct = db.A_vendu.Where(
+                var soldPerProduct = Db.A_vendu.Where(
                         av => av.Code_Produit == product.Code_Produit
-                        && av.Date_Vente.Year == currentYear).ToList();
+                        && av.Date_Vente.Year == _currentYear).ToList();
 
-                int? count = 0;
-                soldPerProduct.ForEach(s => count += s.Quantite_Produit);
+                int count = 0;
+                soldPerProduct.ForEach(s => {
+                    if (s.Quantite_Produit != null)
+                        count += s.Quantite_Produit.Value;
+                });
 
-                statsItem.Add(product.Code_Produit, count.Value);
+                statsItem.Add(product.Code_Produit, count);
             }
 
-            foreach (Produit product in db.Produit)
+            foreach (var product in Db.Produit)
             {
                 var item = new ListViewItem(new[] { "", product.Libelle_Produit, statsItem[product.Code_Produit].ToString() })
                 {
@@ -148,18 +150,14 @@ namespace PT_Camping
             mostCommonIssueslistView.Columns.Add("Type d'incident");
             mostCommonIssueslistView.Columns.Add("Incidents associés");
 
-            var statsIssues = new Dictionary<int, int>();
+            var statsIssues = Db.Type_Incident.ToDictionary(
+                issueType => issueType.Code_Type, 
+                issueType => Db.Incident.Count(
+                    it => it.Code_Type == issueType.Code_Type 
+                    && (it.Date_Incident.Year == _currentYear || it.Date_Resolution.Value.Year == _currentYear))
+                    );
 
-            foreach (Type_Incident issueType in db.Type_Incident)
-            {
-                statsIssues.Add(issueType.Code_Type, 
-                    db.Incident.Where(
-                        it => it.Code_Type == issueType.Code_Type
-                        && ( it.Date_Incident.Year == currentYear || it.Date_Resolution.Value.Year == currentYear)
-                        ).Count());
-            }
-
-            foreach (Type_Incident issueType in db.Type_Incident)
+            foreach (Type_Incident issueType in Db.Type_Incident)
             {
                 var item = new ListViewItem(new[] { "", issueType.Type_Incident1, statsIssues[issueType.Code_Type].ToString() })
                 {
@@ -192,18 +190,14 @@ namespace PT_Camping
             bestClientsListView.Columns.Add("Prénom");
             bestClientsListView.Columns.Add("Réservations");
 
-            var statsClients = new Dictionary<int, int>();
+            var statsClients = Db.Client.ToDictionary(
+                client => client.Code_Personne, 
+                client => Db.Reservation.Count(
+                    res => res.Code_Personne == client.Code_Personne 
+                    && (res.Date_Debut.Year == _currentYear || res.Date_Debut.Year == _currentYear))
+                    );
 
-            foreach (Client client in db.Client)
-            {
-                statsClients.Add(client.Code_Personne,
-                    db.Reservation.Where(
-                        res => res.Code_Personne == client.Code_Personne
-                        && (res.Date_Debut.Year == currentYear || res.Date_Debut.Year == currentYear)
-                        ).Count());
-            }
-
-            foreach (Client client in db.Client)
+            foreach (Client client in Db.Client)
             {
                 string surname = client.Personne.Nom_Personne.ToUpper();
                 string name = client.Personne.Prenom_Personne;
@@ -292,9 +286,9 @@ namespace PT_Camping
             if (mostAskedlocationsListView.SelectedItems.Count > 0)
             {
                 int code = int.Parse(mostAskedlocationsListView.SelectedItems[0].Name);
-                //mHomeUC.Window.WindowPanel.Controls.Remove(this);
-                MessageBox.Show("WARNING : This feature is not implemented yet.");
-                mHomeUC.StartLocationsFromStats(code);
+                //HomeUC.Window.WindowPanel.Controls.Remove(this);
+                MessageBox.Show(Resources.not_implemented_feature);
+                HomeUc.StartLocationsFromStats(code);
             }
         }
 
@@ -303,10 +297,10 @@ namespace PT_Camping
         {
             if (mostAskedProductsListView.SelectedItems.Count > 0)
             {
-                int code = int.Parse(mostAskedProductsListView.SelectedItems[0].Name);
-                //mHomeUC.Window.WindowPanel.Controls.Remove(this);
-                MessageBox.Show("WARNING : This feature is not implemented yet.");
-                mHomeUC.StartProductsFromStats(code);
+                var code = int.Parse(mostAskedProductsListView.SelectedItems[0].Name);
+                //HomeUC.Window.WindowPanel.Controls.Remove(this);
+                MessageBox.Show(Resources.not_implemented_feature);
+                HomeUc.StartProductsFromStats(code);
             }
         }
 
@@ -314,12 +308,12 @@ namespace PT_Camping
         private void MostCommonIssuesListView_DoubleClick(object sender, EventArgs e)
         {
             if (mostCommonIssueslistView.SelectedItems.Count > 0
-                && mostCommonIssueslistView.SelectedItems[0].SubItems[2].Text != "0")
+                && mostCommonIssueslistView.SelectedItems[0].SubItems[2].Text != 0.ToString())
             {
                 int codeType = int.Parse(mostCommonIssueslistView.SelectedItems[0].Name);
-                int code = db.Incident.Where(i => i.Code_Type == codeType).First().Code_Incident;
-                mHomeUC.Window.WindowPanel.Controls.Remove(this);
-                mHomeUC.StartIssuesFromStats(code);
+                int code = Db.Incident.First(i => i.Code_Type == codeType).Code_Incident;
+                HomeUc.Window.WindowPanel.Controls.Remove(this);
+                HomeUc.StartIssuesFromStats(code);
             }
         }
 
@@ -329,9 +323,9 @@ namespace PT_Camping
             if (bestClientsListView.SelectedItems.Count > 0)
             {
                 int code = int.Parse(bestClientsListView.SelectedItems[0].Name);
-                //mHomeUC.Window.WindowPanel.Controls.Remove(this);
-                MessageBox.Show("WARNING : This feature is not implemented yet.");
-                mHomeUC.StartClientsFromStats(code);
+                //HomeUC.Window.WindowPanel.Controls.Remove(this);
+                MessageBox.Show(Resources.not_implemented_feature);
+                HomeUc.StartClientsFromStats(code);
             }
         }
 

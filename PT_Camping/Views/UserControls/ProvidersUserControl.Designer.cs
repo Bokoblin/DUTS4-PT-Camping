@@ -1,6 +1,6 @@
-﻿namespace PT_Camping
+﻿namespace PT_Camping.Views.UserControls
 {
-    partial class StocksUserControl
+    partial class ProvidersUserControl
     {
         /// <summary> 
         /// Required designer variable.

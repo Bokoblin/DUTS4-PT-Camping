@@ -1,8 +1,6 @@
-﻿using PT_Camping.Model;
-using System.Linq;
-using System.Windows.Forms;
+﻿using PT_Camping.Properties;
 
-namespace PT_Camping
+namespace PT_Camping.Views.UserControls
 {
     /// <summary>
     /// The StocksUserControl inherits from ManagementHomeControl.
@@ -16,7 +14,7 @@ namespace PT_Camping
         public StocksUserControl(HomeUserControl homeUserControl) : base(homeUserControl)
         {
             InitializeComponent();
-            appBarTitle.Text = "Gestion des stocks";
+            appBarTitle.Text = Resources.stocks_management;
             HandleResize();
         }
     }
