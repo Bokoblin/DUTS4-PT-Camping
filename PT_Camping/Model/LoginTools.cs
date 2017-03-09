@@ -19,9 +19,9 @@ namespace PT_Camping.Model
 
         public String HashedPassword { get; set; }
 
-        public Personne Person { get; set; }
+        public Employe Employee { get; set; }
 
-        public bool checkConnection()
+        public bool CheckConnection()
         {
             try
             {
@@ -29,7 +29,8 @@ namespace PT_Camping.Model
                 bool exist = (db.Employe.Where(u => u.Login == Login && u.Password == HashedPassword).Count() >= 1);
                 if (exist)
                 {
-                    Person = db.Personne.FirstOrDefault(p => p.Code_Personne == db.Employe.FirstOrDefault(l => l.Login == this.Login).Code_Personne);
+                    Employee = db.Employe.FirstOrDefault(e => e.Code_Personne == db.Employe.FirstOrDefault(l => l.Login == this.Login).Code_Personne);
+                    Employee.Personne = db.Personne.FirstOrDefault(p => p.Code_Personne == db.Employe.FirstOrDefault(l => l.Login == this.Login).Code_Personne);
                 }
                 db.Dispose();
                 return exist;
@@ -41,7 +42,7 @@ namespace PT_Camping.Model
             return false;
         }
 
-        public static String sha256_hash(String value)
+        public static String Sha256_hash(String value)
         {
             StringBuilder Sb = new StringBuilder();
 

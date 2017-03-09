@@ -29,10 +29,10 @@ namespace PT_Camping
         {
             InitializeComponent();
             mHomeUC = homeUserControl;
-            Personne personLoged = mHomeUC.Window.UserLoged.Person;
-            if (personLoged != null)
+            Employe employeeLoged = mHomeUC.Window.UserLoged.Employee;
+            if (employeeLoged != null)
             {
-                userNameLabel.Text = "Bonjour " + personLoged.Prenom_Personne + " " + personLoged.Nom_Personne;
+                userNameLabel.Text = "Bonjour " + employeeLoged.Personne.Prenom_Personne + " " + employeeLoged.Personne.Nom_Personne;
             }
         }
 

@@ -28,14 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.nameLabel = new System.Windows.Forms.Label();
             this.loginTextBox = new System.Windows.Forms.TextBox();
             this.emailTextBox = new System.Windows.Forms.TextBox();
             this.phoneTextBox = new System.Windows.Forms.TextBox();
             this.addressTextBox = new System.Windows.Forms.TextBox();
-            this.birthDateTextBox = new System.Windows.Forms.TextBox();
             this.surnameTextBox = new System.Windows.Forms.TextBox();
             this.loginLabel = new System.Windows.Forms.Label();
             this.emailLabel = new System.Windows.Forms.Label();
@@ -48,8 +46,8 @@
             this.permissionButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.OKButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.mandatoryValuesTip = new System.Windows.Forms.Label();
+            this.birthDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // nameTextBox
@@ -85,9 +83,11 @@
             // phoneTextBox
             // 
             this.phoneTextBox.Location = new System.Drawing.Point(56, 169);
+            this.phoneTextBox.MaxLength = 10;
             this.phoneTextBox.Name = "phoneTextBox";
             this.phoneTextBox.Size = new System.Drawing.Size(156, 20);
             this.phoneTextBox.TabIndex = 4;
+            this.phoneTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PhoneTextBox_KeyPress);
             // 
             // addressTextBox
             // 
@@ -96,13 +96,6 @@
             this.addressTextBox.Name = "addressTextBox";
             this.addressTextBox.Size = new System.Drawing.Size(156, 40);
             this.addressTextBox.TabIndex = 5;
-            // 
-            // birthDateTextBox
-            // 
-            this.birthDateTextBox.Location = new System.Drawing.Point(56, 123);
-            this.birthDateTextBox.Name = "birthDateTextBox";
-            this.birthDateTextBox.Size = new System.Drawing.Size(156, 20);
-            this.birthDateTextBox.TabIndex = 3;
             // 
             // surnameTextBox
             // 
@@ -135,7 +128,7 @@
             this.phoneLabel.Name = "phoneLabel";
             this.phoneLabel.Size = new System.Drawing.Size(240, 20);
             this.phoneLabel.TabIndex = 24;
-            this.phoneLabel.Text = "Téléphone";
+            this.phoneLabel.Text = "Téléphone*";
             this.phoneLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // addressLabel
@@ -194,7 +187,7 @@
             this.permissionButton.TabIndex = 9;
             this.permissionButton.Text = "Permissions";
             this.permissionButton.UseVisualStyleBackColor = true;
-            this.permissionButton.Click += new System.EventHandler(this.OnPermissionButtonClick);
+            this.permissionButton.Click += new System.EventHandler(this.PermissionButton_Click);
             // 
             // cancelButton
             // 
@@ -204,7 +197,7 @@
             this.cancelButton.TabIndex = 10;
             this.cancelButton.Text = "Annuler";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.OnCancelButtonClick);
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // OKButton
             // 
@@ -214,23 +207,33 @@
             this.OKButton.TabIndex = 11;
             this.OKButton.Text = "Valider";
             this.OKButton.UseVisualStyleBackColor = true;
-            this.OKButton.Click += new System.EventHandler(this.OnOkButtonClick);
+            this.OKButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
-            // label1
+            // mandatoryValuesTip
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 410);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(225, 13);
-            this.label1.TabIndex = 40;
-            this.label1.Text = "Les valeurs marquées d\'une * sont obligatoires";
+            this.mandatoryValuesTip.AutoSize = true;
+            this.mandatoryValuesTip.Location = new System.Drawing.Point(20, 410);
+            this.mandatoryValuesTip.Name = "mandatoryValuesTip";
+            this.mandatoryValuesTip.Size = new System.Drawing.Size(225, 13);
+            this.mandatoryValuesTip.TabIndex = 40;
+            this.mandatoryValuesTip.Text = "Les valeurs marquées d\'une * sont obligatoires";
+            // 
+            // birthDateTimePicker
+            // 
+            this.birthDateTimePicker.CustomFormat = "dd MMMM yyyy";
+            this.birthDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.birthDateTimePicker.Location = new System.Drawing.Point(56, 123);
+            this.birthDateTimePicker.Name = "birthDateTimePicker";
+            this.birthDateTimePicker.Size = new System.Drawing.Size(156, 20);
+            this.birthDateTimePicker.TabIndex = 3;
             // 
             // AddEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(264, 511);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.birthDateTimePicker);
+            this.Controls.Add(this.mandatoryValuesTip);
             this.Controls.Add(this.OKButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.permissionButton);
@@ -243,7 +246,6 @@
             this.Controls.Add(this.emailTextBox);
             this.Controls.Add(this.phoneTextBox);
             this.Controls.Add(this.addressTextBox);
-            this.Controls.Add(this.birthDateTextBox);
             this.Controls.Add(this.surnameTextBox);
             this.Controls.Add(this.loginLabel);
             this.Controls.Add(this.emailLabel);
@@ -269,7 +271,6 @@
         private System.Windows.Forms.TextBox emailTextBox;
         private System.Windows.Forms.TextBox phoneTextBox;
         private System.Windows.Forms.TextBox addressTextBox;
-        private System.Windows.Forms.TextBox birthDateTextBox;
         private System.Windows.Forms.TextBox surnameTextBox;
         private System.Windows.Forms.Label loginLabel;
         private System.Windows.Forms.Label emailLabel;
@@ -282,7 +283,7 @@
         private System.Windows.Forms.Button permissionButton;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button OKButton;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label mandatoryValuesTip;
+        private System.Windows.Forms.DateTimePicker birthDateTimePicker;
     }
 }

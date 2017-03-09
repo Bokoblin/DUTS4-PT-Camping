@@ -103,7 +103,7 @@ namespace PT_Camping
                     resolutionDateTextBox.Text = ((DateTime)issue.Date_Resolution).ToShortDateString();
                 else
                     resolutionDateTextBox.Text = "";
-                criticalityTextBox.Text = issue.Criticite_Incident.ToString() + "/5";
+                criticalityComboBox.Text = issue.Criticite_Incident.ToString() + "/5";
                 statusTextBox.Text = issue.Avancement_Incident;
                 descriptionTextBox.Text = issue.Description_Incident;
 
@@ -149,14 +149,14 @@ namespace PT_Camping
             if (resolutionDateTextBox.ReadOnly == true)
             {
                 resolutionDateTextBox.ReadOnly = false;
-                criticalityTextBox.ReadOnly = false;
+                criticalityComboBox.Enabled = true;
                 statusTextBox.ReadOnly = false;
                 descriptionTextBox.ReadOnly = false;
             }
             else
             {
                 resolutionDateTextBox.ReadOnly = true;
-                criticalityTextBox.ReadOnly = true;
+                criticalityComboBox.Enabled = false;
                 statusTextBox.ReadOnly = true;
                 descriptionTextBox.ReadOnly = true;
 
@@ -207,19 +207,13 @@ namespace PT_Camping
                 }
                 #endregion
 
-                if (criticalityTextBox.Text != (incident.Criticite_Incident.ToString() + "/5"))
+                if (criticalityComboBox.Text != (incident.Criticite_Incident.ToString() + "/5"))
                 {
-                    int criticality;
-                    if (int.TryParse(criticalityTextBox.Text, out criticality) && criticality >= 1 && criticality <= 5)
-                    {
-                        incident.Criticite_Incident = criticality;
-                        message += "criticité\n";
-                        cptModifications++;
-                    }
-                    else
-                        MessageBox.Show("Criticité doit être un entier compris entre 1 et 5");
+                    incident.Criticite_Incident = int.Parse(criticalityComboBox.Text);
+                    message += "criticité\n";
+                    cptModifications++;
                 }
-
+                
                 if (statusTextBox.Text != incident.Avancement_Incident)
                 {
                     incident.Avancement_Incident = statusTextBox.Text;
@@ -267,7 +261,7 @@ namespace PT_Camping
         private void IssuesListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             resolutionDateTextBox.ReadOnly = true;
-            criticalityTextBox.ReadOnly = true;
+            criticalityComboBox.Enabled = false;
             statusTextBox.ReadOnly = true;
             descriptionTextBox.ReadOnly = true;
             UpdateIssueDetails();

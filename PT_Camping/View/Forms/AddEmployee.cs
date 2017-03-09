@@ -1,6 +1,7 @@
 ﻿using PT_Camping.Model;
 using System;
 using System.Linq;
+using System.Net.Mail;
 using System.Windows.Forms;
 
 namespace PT_Camping
@@ -26,59 +27,75 @@ namespace PT_Camping
             {
                 Personne = new Personne()
             };
-            toolTip1.SetToolTip(birthDateTextBox, "Au format : 1970-01-01 00:00");
+            birthDateTimePicker.MinDate = DateTime.Now.AddYears(-100);
+            birthDateTimePicker.MaxDate = DateTime.Now.AddYears(-16);
         }
 
 
-        private void OnPermissionButtonClick(object sender, EventArgs e)
+        private void PermissionButton_Click(object sender, EventArgs e)
         {
             new Permissions(newEmployee, db).ShowDialog();
         }
 
 
-        private void OnCancelButtonClick(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             Close();
         }
 
 
-        private void OnOkButtonClick(object sender, EventArgs e)
+        private void OkButton_Click(object sender, EventArgs e)
         {
             try
             {
-                if (surnameTextBox.Text == "" || nameTextBox.Text == "" || emailTextBox.Text == ""
-                    || birthDateTextBox.Text == "" || loginTextBox.Text == "" || passwordTextBox.Text == "")
+                if (surnameTextBox.Text == "" || nameTextBox.Text == "" || emailTextBox.Text == "" 
+                    || phoneTextBox.Text == "" || loginTextBox.Text == "" || passwordTextBox.Text == "")
                     throw new Exception("Toutes les valeurs marquées d'une étoile doivent être remplies.");
 
-                if (surnameTextBox.Text.Any(char.IsDigit) || nameTextBox.Text.Any(char.IsDigit))
-                    throw new Exception("Le nom et/ou le prénom ne peuvent contenir de valeur numérique.");
+                if (surnameTextBox.Text.Any(char.IsDigit))
+                    throw new Exception("Le prénom ne peut contenir de valeur numérique.");
 
-                int phone;
-                if (phoneTextBox.Text != "" && (!int.TryParse(phoneTextBox.Text, out phone) || phoneTextBox.Text.Length != 10))
-                    throw new Exception("Téléphone doit être un entier de 10 chiffres");
+                if (nameTextBox.Text.Any(char.IsDigit))
+                    throw new Exception("Le nom ne peut contenir de valeur numérique.");
 
-                if ((!emailTextBox.Text.EndsWith(".com") && !emailTextBox.Text.EndsWith(".fr"))
-                        || !emailTextBox.Text.Contains("@"))
-                    throw new Exception("Email doit contenir un @ et se terminer par .com/.fr");
+                try
+                {
+                    var test = new MailAddress(emailTextBox.Text);
+                }
+                catch (FormatException)
+                {
+                    throw new Exception("Email n'est pas une adresse mail valide");
+                }
 
 
                 newEmployee.Personne.Nom_Personne = surnameTextBox.Text;
                 newEmployee.Personne.Prenom_Personne = nameTextBox.Text;
-                newEmployee.Personne.Date_Naissance = DateTime.Parse(birthDateTextBox.Text);
-                if (phoneTextBox.Text != "")
-                    newEmployee.Personne.Telephone = phoneTextBox.Text;
+                newEmployee.Personne.Date_Naissance = birthDateTimePicker.Value.Date;
+                newEmployee.Personne.Telephone = phoneTextBox.Text;
                 newEmployee.Personne.Adresse = addressTextBox.Text;
                 newEmployee.Personne.Email = emailTextBox.Text;
                 newEmployee.Login = loginTextBox.Text;
-                newEmployee.Password = LoginTools.sha256_hash(passwordTextBox.Text);
+                newEmployee.Password = LoginTools.Sha256_hash(passwordTextBox.Text);
 
                 db.Employe.Add(newEmployee);
                 db.SaveChanges();
-                this.Close();
+                Close();
             }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
+            }
+        }
+
+
+        /**
+         * Prevent typing non digit values in the phone textbox
+         */
+        private void PhoneTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
             }
         }
     }

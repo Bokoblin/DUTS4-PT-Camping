@@ -21,6 +21,7 @@
           <Property Name="Date_Vente" Type="datetime" Nullable="false" />
           <Property Name="Code_Personne" Type="int" Nullable="false" />
           <Property Name="Code_Produit" Type="int" Nullable="false" />
+          <Property Name="Quantite_Produit" Type="int" />
         </EntityType>
         <EntityType Name="App">
           <Key>
@@ -530,6 +531,7 @@
           <Property Name="Code_Produit" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Personne" Relationship="Self.FK_A_vendu_Code_Personne" FromRole="A_vendu" ToRole="Personne" />
           <NavigationProperty Name="Produit" Relationship="Self.FK_A_vendu_Code_Produit" FromRole="A_vendu" ToRole="Produit" />
+          <Property Name="Quantite_Produit" Type="Int32" />
         </EntityType>
         <EntityType Name="App">
           <Key>
@@ -973,6 +975,7 @@
           <EntitySetMapping Name="A_vendu">
             <EntityTypeMapping TypeName="InfoJoyeuxDB.A_vendu">
               <MappingFragment StoreEntitySet="A_vendu">
+                <ScalarProperty Name="Quantite_Produit" ColumnName="Quantite_Produit" />
                 <ScalarProperty Name="Date_Vente" ColumnName="Date_Vente" />
                 <ScalarProperty Name="Code_Personne" ColumnName="Code_Personne" />
                 <ScalarProperty Name="Code_Produit" ColumnName="Code_Produit" />
