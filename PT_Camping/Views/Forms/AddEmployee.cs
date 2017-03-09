@@ -1,10 +1,10 @@
-﻿using PT_Camping.Model;
-using System;
+﻿using System;
 using System.Linq;
 using System.Net.Mail;
 using System.Windows.Forms;
+using PT_Camping.Model;
 
-namespace PT_Camping
+namespace PT_Camping.Views.Forms
 {
     /// <summary>
     /// This dialog allows to add a new employee
@@ -16,14 +16,14 @@ namespace PT_Camping
     /// Since : 24/02/17
     public partial class AddEmployee : Form
     {
-        private DataBase db;
-        private Employe newEmployee;
+        private readonly DataBase _db;
+        private readonly Employe _newEmployee;
 
         public AddEmployee(DataBase db)
         {
             InitializeComponent();
-            this.db = db;
-            newEmployee = new Employe()
+            _db = db;
+            _newEmployee = new Employe()
             {
                 Personne = new Personne()
             };
@@ -34,7 +34,7 @@ namespace PT_Camping
 
         private void PermissionButton_Click(object sender, EventArgs e)
         {
-            new Permissions(newEmployee, db).ShowDialog();
+            new Permissions(_newEmployee, _db).ShowDialog();
         }
 
 
@@ -60,7 +60,7 @@ namespace PT_Camping
 
                 try
                 {
-                    var test = new MailAddress(emailTextBox.Text);
+                    _newEmployee.Personne.Email = new MailAddress(emailTextBox.Text).ToString();
                 }
                 catch (FormatException)
                 {
@@ -68,17 +68,17 @@ namespace PT_Camping
                 }
 
 
-                newEmployee.Personne.Nom_Personne = surnameTextBox.Text;
-                newEmployee.Personne.Prenom_Personne = nameTextBox.Text;
-                newEmployee.Personne.Date_Naissance = birthDateTimePicker.Value.Date;
-                newEmployee.Personne.Telephone = phoneTextBox.Text;
-                newEmployee.Personne.Adresse = addressTextBox.Text;
-                newEmployee.Personne.Email = emailTextBox.Text;
-                newEmployee.Login = loginTextBox.Text;
-                newEmployee.Password = LoginTools.Sha256_hash(passwordTextBox.Text);
+                _newEmployee.Personne.Nom_Personne = surnameTextBox.Text;
+                _newEmployee.Personne.Prenom_Personne = nameTextBox.Text;
+                _newEmployee.Personne.Date_Naissance = birthDateTimePicker.Value.Date;
+                _newEmployee.Personne.Telephone = phoneTextBox.Text;
+                _newEmployee.Personne.Adresse = addressTextBox.Text;
+                _newEmployee.Personne.Email = emailTextBox.Text;
+                _newEmployee.Login = loginTextBox.Text;
+                _newEmployee.Password = LoginTools.Sha256_hash(passwordTextBox.Text);
 
-                db.Employe.Add(newEmployee);
-                db.SaveChanges();
+                _db.Employe.Add(_newEmployee);
+                _db.SaveChanges();
                 Close();
             }
             catch (Exception exception)

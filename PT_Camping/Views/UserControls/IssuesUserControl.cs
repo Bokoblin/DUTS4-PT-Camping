@@ -1,10 +1,11 @@
-﻿using PT_Camping.Model;
-using System;
+﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using PT_Camping.Model;
+using PT_Camping.Properties;
+using PT_Camping.Views.Forms;
 
-
-namespace PT_Camping
+namespace PT_Camping.Views.UserControls
 {
     /// <summary>
     /// The IssuesUserControl inherits from ManagementHomeControl.
@@ -15,11 +16,11 @@ namespace PT_Camping
     /// Since : 08/02/17
     public partial class IssuesUserControl : ManagementUserControl
     {
-        public IssuesUserControl(HomeUserControl homeUC) : base(homeUC)
+        public IssuesUserControl(HomeUserControl homeUc) : base(homeUc)
         {
             InitializeComponent();
-            appBarTitle.Text = "Gestion des incidents";
-            db = new DataBase();
+            appBarTitle.Text = Resources.issues_management;
+            Db = new DataBase();
 
             issuesListView.View = View.Details;
             issuesListView.Columns.Add("Type d'incident");
@@ -30,11 +31,11 @@ namespace PT_Camping
             HandleResize();
         }
 
-        public IssuesUserControl(HomeUserControl homeUC, int issueCode) : base(homeUC)
+        public IssuesUserControl(HomeUserControl homeUc, int issueCode) : base(homeUc)
         {
             InitializeComponent();
-            appBarTitle.Text = "Gestion des incidents";
-            db = new DataBase();
+            appBarTitle.Text = Resources.issues_management;
+            Db = new DataBase();
 
             issuesListView.View = View.Details;
             issuesListView.Columns.Add("Type d'incident");
@@ -46,10 +47,7 @@ namespace PT_Camping
 
             foreach (ListViewItem item in issuesListView.Items)
             {
-                if (item.Name == issueCode.ToString())
-                    item.Selected = true;
-                else
-                    item.Selected = false;
+                item.Selected = item.Name == issueCode.ToString();
             }
         }
 
@@ -58,7 +56,7 @@ namespace PT_Camping
         {
             issuesListView.Items.Clear();
 
-            foreach (var issue in db.Incident)
+            foreach (var issue in Db.Incident)
             {
                 string issueType = issue.Type_Incident.Type_Incident1;
                 string issueDescription = issue.Description_Incident;
@@ -93,21 +91,21 @@ namespace PT_Camping
             if (issuesListView.SelectedItems.Count != 0)
             {
                 int code = int.Parse(issuesListView.SelectedItems[0].Name);
-                var issue = db.Incident.Find(code);
+                var issue = Db.Incident.Find(code);
 
-                idTextBox.Text = "#" + issue.Code_Incident.ToString();
-                locationTextBox.Text = issue.Emplacement.Nom_Emplacement;
-                issueTypeTextBox.Text = issue.Type_Incident.Type_Incident1;
-                creationDateTextBox.Text = issue.Date_Incident.ToShortDateString();
-                if (issue.Date_Resolution != null)
-                    resolutionDateTextBox.Text = ((DateTime)issue.Date_Resolution).ToShortDateString();
-                else
-                    resolutionDateTextBox.Text = "";
-                criticalityComboBox.Text = issue.Criticite_Incident.ToString() + "/5";
-                statusTextBox.Text = issue.Avancement_Incident;
-                descriptionTextBox.Text = issue.Description_Incident;
+                if (issue != null)
+                {
+                    idTextBox.Text = Resources.hash_symbol + issue.Code_Incident;
+                    locationTextBox.Text = issue.Emplacement.Nom_Emplacement;
+                    issueTypeTextBox.Text = issue.Type_Incident.Type_Incident1;
+                    creationDateTextBox.Text = issue.Date_Incident.ToShortDateString();
+                    resolutionDateTextBox.Text = issue.Date_Resolution?.ToShortDateString() ?? "";
+                    criticalityComboBox.Text = issue.Criticite_Incident + Resources.criticality_max;
+                    statusTextBox.Text = issue.Avancement_Incident;
+                    descriptionTextBox.Text = issue.Description_Incident;
 
-                resolveButton.Enabled = (issue.Avancement_Incident != "Terminé");
+                    resolveButton.Enabled = (issue.Avancement_Incident != Resources.done_issue);
+                }
             }
             
         }
@@ -115,7 +113,7 @@ namespace PT_Camping
 
         private void OnAddIssueButtonClick(object sender, EventArgs e)
         {
-            /* TODO ***
+            /* TODO
             
             Expected behaviour after merging this branch + Alex's branch + 1 commit : 
             
@@ -128,7 +126,7 @@ namespace PT_Camping
 
             //TEMPORARY BEHAVIOUR : "AddIssue" dialog called here with Code_Emplacement = 1
 
-            new AddIssue(db, 1).ShowDialog();
+            new AddIssue(Db, 1).ShowDialog();
             UpdateIssuesListView();
         }
 
@@ -136,17 +134,18 @@ namespace PT_Camping
         private void OnDeleteIssueButtonClick(object sender, EventArgs e)
         {
             int code = int.Parse(issuesListView.SelectedItems[0].Name);
-            var issue = db.Incident.Find(code);
+            var issue = Db.Incident.Find(code);
 
-            db.Incident.Remove(issue);
-            db.SaveChanges();
+            if (issue != null)
+                Db.Incident.Remove(issue);
+            Db.SaveChanges();
             UpdateIssuesListView();
         }
 
 
         private void OnEditButtonClick(object sender, EventArgs e)
         {
-            if (resolutionDateTextBox.ReadOnly == true)
+            if (resolutionDateTextBox.ReadOnly)
             {
                 resolutionDateTextBox.ReadOnly = false;
                 criticalityComboBox.Enabled = true;
@@ -164,83 +163,85 @@ namespace PT_Camping
                 int cptModifications = 0;
 
                 int code = int.Parse(issuesListView.SelectedItems[0].Name);
-                var incident = db.Incident.Find(code);
+                var incident = Db.Incident.Find(code);
 
-                #region CHECK & APPLY RESOLUTION DATE CHANGES
-                try
+                if (incident != null)
                 {
-
-                    if (resolutionDateTextBox.Text == "" && incident.Date_Resolution != null)
+                    #region CHECK & APPLY RESOLUTION DATE CHANGES
+                    try
                     {
-                        incident.Date_Resolution = null;
-                        message += "date de résolution\n";
-                        cptModifications++;
-                    }
-                    else if (resolutionDateTextBox.Text != "")
-                    {
-                        incident.Date_Resolution = DateTime.Parse(resolutionDateTextBox.Text);
-
-                        if (incident.Date_Resolution < incident.Date_Incident)
+                        if (resolutionDateTextBox.Text == "" && incident.Date_Resolution != null)
                         {
-                            if (incident.Date_Resolution.Value.Day == incident.Date_Incident.Day)
-                                incident.Date_Resolution = incident.Date_Incident.AddSeconds(1);
-                            else
-                            {
-                                incident.Date_Resolution = null;
-                                throw new Exception();
-                            }
-                                
-                        }
-
-                        if ( ((DateTime)incident.Date_Resolution).ToShortDateString() != resolutionDateTextBox.Text)
-                        {
+                            incident.Date_Resolution = null;
                             message += "date de résolution\n";
                             cptModifications++;
                         }
-                        
+                        else if (resolutionDateTextBox.Text != "")
+                        {
+                            incident.Date_Resolution = DateTime.Parse(resolutionDateTextBox.Text);
+
+                            if (incident.Date_Resolution < incident.Date_Incident)
+                            {
+                                if (incident.Date_Resolution.Value.Day == incident.Date_Incident.Day)
+                                    incident.Date_Resolution = incident.Date_Incident.AddSeconds(1);
+                                else
+                                {
+                                    incident.Date_Resolution = null;
+                                    throw new Exception();
+                                }
+
+                            }
+
+                            if (((DateTime)incident.Date_Resolution).ToShortDateString() != resolutionDateTextBox.Text)
+                            {
+                                message += "date de résolution\n";
+                                cptModifications++;
+                            }
+
+                        }
                     }
-                }
-                catch (Exception)
-                {
-                    resolutionDateTextBox.Text = incident.Date_Resolution.ToString();
-                    MessageBox.Show("La date n'est pas valide. \nVérifier que la date au format YYYY-MM-DD HH:MM:SS \net supérieure à la date de l'incident.");
-                }
-                #endregion
-
-                if (criticalityComboBox.Text != (incident.Criticite_Incident.ToString() + "/5"))
-                {
-                    incident.Criticite_Incident = int.Parse(criticalityComboBox.Text);
-                    message += "criticité\n";
-                    cptModifications++;
-                }
-                
-                if (statusTextBox.Text != incident.Avancement_Incident)
-                {
-                    incident.Avancement_Incident = statusTextBox.Text;
-                    message += "avancement\n";
-                    cptModifications++;
-
-                    if (statusTextBox.Text != "Terminé" && resolutionDateTextBox.Text != null)
+                    catch (Exception)
                     {
-                        incident.Date_Resolution = null;
-                        message += "date de résolution\n";
+                        resolutionDateTextBox.Text = incident.Date_Resolution.ToString();
+                        MessageBox.Show("La date n'est pas valide. \nVérifier que la date au format YYYY-MM-DD HH:MM:SS \net supérieure à la date de l'incident.");
+                    }
+                    #endregion
+
+                    if (criticalityComboBox.Text != (incident.Criticite_Incident + Resources.criticality_max))
+                    {
+                        incident.Criticite_Incident = int.Parse(criticalityComboBox.Text);
+                        message += "criticité\n";
                         cptModifications++;
                     }
+
+                    if (statusTextBox.Text != incident.Avancement_Incident)
+                    {
+                        incident.Avancement_Incident = statusTextBox.Text;
+                        message += "avancement\n";
+                        cptModifications++;
+
+                        if (statusTextBox.Text != Resources.done_issue && resolutionDateTextBox.Text != null)
+                        {
+                            incident.Date_Resolution = null;
+                            message += "date de résolution\n";
+                            cptModifications++;
+                        }
+                    }
+
+                    if (descriptionTextBox.Text != incident.Description_Incident)
+                    {
+                        incident.Description_Incident = descriptionTextBox.Text;
+                        message += "description";
+                        cptModifications++;
+                    }
+
+                    Db.SaveChanges();
+
+                    UpdateIssueDetails();
+
+                    if (cptModifications > 0)
+                        MessageBox.Show(message);
                 }
-
-                if (descriptionTextBox.Text != incident.Description_Incident)
-                {
-                    incident.Description_Incident = descriptionTextBox.Text;
-                    message += "description";
-                    cptModifications++;
-                }
-
-                db.SaveChanges();
-
-                UpdateIssueDetails();
-
-                if (cptModifications > 0)
-                    MessageBox.Show(message);
             }
         }
 
@@ -248,11 +249,15 @@ namespace PT_Camping
         private void OnResolveIssueButtonClick(object sender, EventArgs e)
         {
             int code = int.Parse(issuesListView.SelectedItems[0].Name);
-            var issue = db.Incident.Find(code);
+            var issue = Db.Incident.Find(code);
 
-            issue.Date_Resolution = DateTime.Now;
-            issue.Avancement_Incident = "Terminé";
-            db.SaveChanges();
+            if (issue != null)
+            {
+                issue.Date_Resolution = DateTime.Now;
+                issue.Avancement_Incident = Resources.done_issue;
+            }
+
+            Db.SaveChanges();
 
             UpdateIssueDetails();
         }

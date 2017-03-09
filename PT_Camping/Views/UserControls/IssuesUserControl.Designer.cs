@@ -1,4 +1,4 @@
-﻿namespace PT_Camping
+﻿namespace PT_Camping.Views.UserControls
 {
     partial class IssuesUserControl
     {

@@ -1,9 +1,10 @@
-﻿using PT_Camping.Model;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using PT_Camping.Model;
+using PT_Camping.Views.Forms;
 
-namespace PT_Camping
+namespace PT_Camping.Views.UserControls
 {
     /// <summary>
     /// The ConnectionUserControl is a UserControl handling the application's authentication at launch.
@@ -14,35 +15,34 @@ namespace PT_Camping
     /// Since : 07/02/17
     public partial class ConnectionUserControl : UserControl
     {
-        private AppWindow mWindow;
+        private readonly AppWindow _window;
 
 
         public ConnectionUserControl(AppWindow window)
         {
             InitializeComponent();
-            mWindow = window;
+            _window = window;
             HandleResize();
             errorLabel.Visible = false;
         }
 
         private void TryToConnect()
         {
-            String passwordEntered = this.passwordTextBox.Text;
-            mWindow.UserLoged.Login = this.userTextBox.Text;
-            mWindow.UserLoged.HashedPassword = LoginTools.Sha256_hash(passwordEntered);
+            string passwordEntered = passwordTextBox.Text;
+            _window.UserLoged.Login = userTextBox.Text;
+            _window.UserLoged.HashedPassword = LoginTools.Sha256_hash(passwordEntered);
             try
             {
-                if (mWindow.UserLoged.CheckConnection())
+                if (_window.UserLoged.CheckConnection())
                 {
-                    if (mWindow.UserLoged.Employee.EstLicencie)
+                    if (_window.UserLoged.Employee.EstLicencie)
                         throw new UnauthorizedAccessException("Cet utilisateur n'a pas la permission d'accéder à l'application");
-                    else
-                        mWindow.Login();
+                    _window.Login();
                 }
                 else
                 {
                     errorLabel.Visible = true;
-                    this.passwordTextBox.Text = "";
+                    passwordTextBox.Text = "";
                 }
             }
             catch (UnauthorizedAccessException exception)
@@ -59,8 +59,8 @@ namespace PT_Camping
 
         internal void HandleResize()
         {
-            Size = mWindow.Size;
-            appBar.Size = new Size(mWindow.Size.Width, appBar.Size.Height);
+            Size = _window.Size;
+            appBar.Size = new Size(_window.Size.Width, appBar.Size.Height);
         }
 
         private void PasswordTextBox_KeyDown(object sender, KeyEventArgs e)

@@ -1,4 +1,4 @@
-﻿namespace PT_Camping
+﻿namespace PT_Camping.Views.Forms
 {
     partial class AddIssue
     {

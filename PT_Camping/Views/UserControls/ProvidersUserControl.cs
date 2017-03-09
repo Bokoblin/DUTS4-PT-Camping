@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using PT_Camping.Properties;
 
-namespace PT_Camping
+namespace PT_Camping.Views.UserControls
 {
     /// <summary>
     /// The ProvidersUserControl inherits from ManagementHomeControl.
@@ -22,7 +14,7 @@ namespace PT_Camping
         public ProvidersUserControl(HomeUserControl homeUserControl) : base(homeUserControl)
         {
             InitializeComponent();
-            appBarTitle.Text = "Gestion des fournisseurs";
+            appBarTitle.Text = Resources.provider_management;
             HandleResize();
         }
     }

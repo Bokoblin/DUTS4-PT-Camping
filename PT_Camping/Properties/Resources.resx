@@ -121,4 +121,43 @@
   <data name="contact_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\images\contact_default.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="not_implemented_feature" xml:space="preserve">
+    <value>WARNING : This feature is not implemented yet.</value>
+  </data>
+  <data name="stats_management" xml:space="preserve">
+    <value>Gestion des statistiques</value>
+  </data>
+  <data name="employee_management" xml:space="preserve">
+    <value>Gestion des employés</value>
+  </data>
+  <data name="unrecognized_email" xml:space="preserve">
+    <value>Email n'est pas une adresse mail valide</value>
+  </data>
+  <data name="database_connection_error" xml:space="preserve">
+    <value>Erreur lors de la connexion à la base de données</value>
+  </data>
+  <data name="provider management" xml:space="preserve">
+    <value>Gestion des fournisseurs</value>
+  </data>
+  <data name="stocks_management" xml:space="preserve">
+    <value>Gestion des stocks</value>
+  </data>
+  <data name="done_issue" xml:space="preserve">
+    <value>Terminé</value>
+  </data>
+  <data name="issues_management" xml:space="preserve">
+    <value>Gestion des incidents</value>
+  </data>
+  <data name="hash_symbol" xml:space="preserve">
+    <value>#</value>
+  </data>
+  <data name="criticality_max" xml:space="preserve">
+    <value>/5</value>
+  </data>
+  <data name="clients_management" xml:space="preserve">
+    <value>Gestion des clients</value>
+  </data>
+  <data name="hello_user" xml:space="preserve">
+    <value>Bonjour </value>
+  </data>
 </root>

@@ -1,6 +1,6 @@
-﻿namespace PT_Camping
+﻿namespace PT_Camping.Views.UserControls
 {
-    partial class MapUserControl
+    partial class StocksUserControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,16 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // CardUserControl
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "MapUserControl";
-            this.Size = new System.Drawing.Size(550, 350);
-            this.ResumeLayout(false);
-
         }
 
         #endregion
