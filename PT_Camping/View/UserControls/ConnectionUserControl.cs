@@ -29,20 +29,31 @@ namespace PT_Camping
         {
             String passwordEntered = this.passwordTextBox.Text;
             mWindow.UserLoged.Login = this.userTextBox.Text;
-            mWindow.UserLoged.HashedPassword = LoginTools.sha256_hash(passwordEntered);
-            if (mWindow.UserLoged.checkConnection())
+            mWindow.UserLoged.HashedPassword = LoginTools.Sha256_hash(passwordEntered);
+            try
             {
-                mWindow.Login();
+                if (mWindow.UserLoged.CheckConnection())
+                {
+                    if (mWindow.UserLoged.Employee.EstLicencie)
+                        throw new UnauthorizedAccessException("Cet utilisateur n'a pas la permission d'accéder à l'application");
+                    else
+                        mWindow.Login();
+                }
+                else
+                {
+                    errorLabel.Visible = true;
+                    this.passwordTextBox.Text = "";
+                }
             }
-            else
+            catch (UnauthorizedAccessException exception)
             {
-                errorLabel.Visible = true;
-                this.passwordTextBox.Text = "";
+                MessageBox.Show(exception.Message);
             }
         }
 
         private void ConnectionButton_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             TryToConnect();
         }
 
@@ -56,6 +67,7 @@ namespace PT_Camping
         {
             if (e.KeyCode == Keys.Enter)
             {
+                Cursor.Current = Cursors.WaitCursor;
                 TryToConnect();
             }
         }
@@ -64,6 +76,7 @@ namespace PT_Camping
         {
             if (e.KeyCode == Keys.Enter)
             {
+                Cursor.Current = Cursors.WaitCursor;
                 TryToConnect();
             }
         }

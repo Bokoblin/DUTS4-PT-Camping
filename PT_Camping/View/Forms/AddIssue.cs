@@ -29,6 +29,7 @@ namespace PT_Camping
             };
             var types = db.Type_Incident.Select(t => t.Type_Incident1).ToList();
             issueTypecomboBox.DataSource = types;
+            criticalityComboBox.Text = criticalityComboBox.Items[0].ToString();
         }
 
 
@@ -42,16 +43,10 @@ namespace PT_Camping
         {
             try
             {
-                if (criticalityTextBox.Text == "")
+                if (criticalityComboBox.Text == "")
                     throw new Exception("Criticité est un champs obligatoire (entier compris entre 1 et 5).");
 
-                int criticality;
-                if (int.TryParse(criticalityTextBox.Text, out criticality) && criticality >= 1 && criticality <= 5)
-                {
-                    newIssue.Criticite_Incident = criticality;
-                }
-                else
-                    throw new Exception("Criticité doit être un entier compris entre 1 et 5");
+                newIssue.Criticite_Incident = int.Parse(criticalityComboBox.Text);
 
                 newIssue.Code_Type = db.Type_Incident.Where(t => t.Type_Incident1 == issueTypecomboBox.Text).FirstOrDefault().Code_Type;
                 if (descriptionTextBox.Text != "")

@@ -31,11 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IssuesUserControl));
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.detailsPanel = new System.Windows.Forms.Panel();
+            this.criticalityComboBox = new System.Windows.Forms.ComboBox();
             this.locationTextBox = new System.Windows.Forms.TextBox();
             this.emplacementLabel = new System.Windows.Forms.Label();
             this.descriptionTextBox = new System.Windows.Forms.TextBox();
             this.statusTextBox = new System.Windows.Forms.TextBox();
-            this.criticalityTextBox = new System.Windows.Forms.TextBox();
             this.resolutionDateTextBox = new System.Windows.Forms.TextBox();
             this.creationDateTextBox = new System.Windows.Forms.TextBox();
             this.issueTypeTextBox = new System.Windows.Forms.TextBox();
@@ -96,11 +96,11 @@
             this.detailsPanel.AutoSize = true;
             this.detailsPanel.BackColor = System.Drawing.Color.White;
             this.detailsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.detailsPanel.Controls.Add(this.criticalityComboBox);
             this.detailsPanel.Controls.Add(this.locationTextBox);
             this.detailsPanel.Controls.Add(this.emplacementLabel);
             this.detailsPanel.Controls.Add(this.descriptionTextBox);
             this.detailsPanel.Controls.Add(this.statusTextBox);
-            this.detailsPanel.Controls.Add(this.criticalityTextBox);
             this.detailsPanel.Controls.Add(this.resolutionDateTextBox);
             this.detailsPanel.Controls.Add(this.creationDateTextBox);
             this.detailsPanel.Controls.Add(this.issueTypeTextBox);
@@ -121,6 +121,22 @@
             this.detailsPanel.Name = "detailsPanel";
             this.detailsPanel.Size = new System.Drawing.Size(315, 392);
             this.detailsPanel.TabIndex = 11;
+            // 
+            // criticalityComboBox
+            // 
+            this.criticalityComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.criticalityComboBox.Enabled = false;
+            this.criticalityComboBox.FormattingEnabled = true;
+            this.criticalityComboBox.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"});
+            this.criticalityComboBox.Location = new System.Drawing.Point(161, 229);
+            this.criticalityComboBox.Name = "criticalityComboBox";
+            this.criticalityComboBox.Size = new System.Drawing.Size(120, 21);
+            this.criticalityComboBox.TabIndex = 17;
             // 
             // locationTextBox
             // 
@@ -144,7 +160,7 @@
             // descriptionTextBox
             // 
             this.descriptionTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.descriptionTextBox.Location = new System.Drawing.Point(161, 281);
+            this.descriptionTextBox.Location = new System.Drawing.Point(161, 282);
             this.descriptionTextBox.Multiline = true;
             this.descriptionTextBox.Name = "descriptionTextBox";
             this.descriptionTextBox.ReadOnly = true;
@@ -154,20 +170,11 @@
             // statusTextBox
             // 
             this.statusTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.statusTextBox.Location = new System.Drawing.Point(161, 255);
+            this.statusTextBox.Location = new System.Drawing.Point(161, 256);
             this.statusTextBox.Name = "statusTextBox";
             this.statusTextBox.ReadOnly = true;
             this.statusTextBox.Size = new System.Drawing.Size(120, 20);
             this.statusTextBox.TabIndex = 18;
-            // 
-            // criticalityTextBox
-            // 
-            this.criticalityTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.criticalityTextBox.Location = new System.Drawing.Point(161, 229);
-            this.criticalityTextBox.Name = "criticalityTextBox";
-            this.criticalityTextBox.ReadOnly = true;
-            this.criticalityTextBox.Size = new System.Drawing.Size(120, 20);
-            this.criticalityTextBox.TabIndex = 17;
             // 
             // resolutionDateTextBox
             // 
@@ -267,7 +274,7 @@
             // 
             this.descriptionLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.descriptionLabel.AutoSize = true;
-            this.descriptionLabel.Location = new System.Drawing.Point(29, 284);
+            this.descriptionLabel.Location = new System.Drawing.Point(29, 285);
             this.descriptionLabel.Name = "descriptionLabel";
             this.descriptionLabel.Size = new System.Drawing.Size(60, 13);
             this.descriptionLabel.TabIndex = 7;
@@ -277,7 +284,7 @@
             // 
             this.statusLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.statusLabel.AutoSize = true;
-            this.statusLabel.Location = new System.Drawing.Point(29, 258);
+            this.statusLabel.Location = new System.Drawing.Point(29, 259);
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(67, 13);
             this.statusLabel.TabIndex = 6;
@@ -404,11 +411,11 @@
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.TextBox descriptionTextBox;
         private System.Windows.Forms.TextBox statusTextBox;
-        private System.Windows.Forms.TextBox criticalityTextBox;
         private System.Windows.Forms.TextBox resolutionDateTextBox;
         private System.Windows.Forms.TextBox creationDateTextBox;
         private System.Windows.Forms.TextBox issueTypeTextBox;
         private System.Windows.Forms.TextBox idTextBox;
         private System.Windows.Forms.TextBox locationTextBox;
+        private System.Windows.Forms.ComboBox criticalityComboBox;
     }
 }

@@ -211,10 +211,12 @@
             // 
             this.phoneTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.phoneTextBox.Location = new System.Drawing.Point(159, 257);
+            this.phoneTextBox.MaxLength = 10;
             this.phoneTextBox.Name = "phoneTextBox";
             this.phoneTextBox.ReadOnly = true;
             this.phoneTextBox.Size = new System.Drawing.Size(120, 20);
             this.phoneTextBox.TabIndex = 19;
+            this.phoneTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PhoneTextBox_KeyPress);
             // 
             // addressTextBox
             // 

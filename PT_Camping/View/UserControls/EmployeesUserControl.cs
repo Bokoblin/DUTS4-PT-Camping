@@ -2,6 +2,7 @@
 using System;
 using System.Drawing;
 using System.IO;
+using System.Net.Mail;
 using System.Windows.Forms;
 
 namespace PT_Camping
@@ -129,28 +130,24 @@ namespace PT_Camping
 
                 if (phoneTextBox.Text != "" && phoneTextBox.Text != employee.Personne.Telephone)
                 {
-                    int phone;
-                    if (int.TryParse(phoneTextBox.Text, out phone) && phoneTextBox.Text.Length == 10)
-                    {
-                        employee.Personne.Telephone = phoneTextBox.Text;
-                        message += "téléphone\n";
-                        cptModifications++;
-                    }
-                    else
-                        MessageBox.Show("Téléphone doit être un entier de 10 chiffres");
+                    employee.Personne.Telephone = phoneTextBox.Text;
+                    message += "téléphone\n";
+                    cptModifications++;
                 }
 
                 if (emailTextBox.Text != employee.Personne.Email)
                 {
-                    if ( (emailTextBox.Text.EndsWith(".com") || emailTextBox.Text.EndsWith(".fr")) 
-                        && emailTextBox.Text.Contains("@") )
+                    try
                     {
+                        var test = new MailAddress(emailTextBox.Text);
                         employee.Personne.Email = emailTextBox.Text;
                         message += "email";
                         cptModifications++;
                     }
-                    else
-                        MessageBox.Show("Email doit contenir un @ et se terminer par .com/.fr");
+                    catch (FormatException)
+                    {
+                        MessageBox.Show("Email n'est pas une adresse mail valide");
+                    }
                 }
 
                 if (loginTextBox.Text != employee.Login)
@@ -205,6 +202,18 @@ namespace PT_Camping
             {
                 foreach (ColumnHeader columnHeader in employeesListView.Columns)
                     columnHeader.Width = employeesListView.Width / employeesListView.Columns.Count;
+            }
+        }
+
+
+        /**
+         * Prevent typing non digit values in the phone textbox
+         */
+        private void PhoneTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
             }
         }
     }

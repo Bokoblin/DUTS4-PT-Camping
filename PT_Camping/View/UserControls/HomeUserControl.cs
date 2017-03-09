@@ -29,16 +29,35 @@ namespace PT_Camping
             InitializeComponent();
             mWindow = window;
             HandleResize();
-            Personne personLoged = Window.UserLoged.Person;
-            if (personLoged != null)
+            Employe employeeLoged = Window.UserLoged.Employee;
+            if (employeeLoged != null)
             {
-                userNameLabel.Text = "Bonjour " + personLoged.Prenom_Personne + " " + personLoged.Nom_Personne;
+                userNameLabel.Text = "Bonjour " + employeeLoged.Personne.Prenom_Personne + " " + employeeLoged.Personne.Nom_Personne;
             }
+        }
+
+
+        public void StartLocationsFromStats(int code)
+        {
+            //TODO : open map with location {code} selected
+        }
+
+
+        public void StartProductsFromStats(int code)
+        {
+            //TODO : open products with {code} selected
+        }
+
+
+        public void StartClientsFromStats(int code)
+        {
+            //TODO : open clients with {code} selected
         }
 
 
         public void StartIssuesFromStats(int issueCode)
         {
+            Cursor.Current = Cursors.WaitCursor;
             mIssuesUC = new IssuesUserControl(this, issueCode);
             mWindow.WindowPanel.Controls.Add(mIssuesUC);
             mWindow.WindowPanel.Controls.Remove(this);
@@ -47,6 +66,7 @@ namespace PT_Camping
 
         private void LogoutButton_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             mWindow.Logout();
             mWindow.WindowPanel.Controls.Remove(this);
         }
@@ -54,6 +74,7 @@ namespace PT_Camping
 
         private void ClientsButton_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             mClientsUC = new ClientsUserControl(this);
             mWindow.WindowPanel.Controls.Add(mClientsUC);
             mWindow.WindowPanel.Controls.Remove(this);
@@ -62,6 +83,7 @@ namespace PT_Camping
 
         private void IssuesButton_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             mIssuesUC = new IssuesUserControl(this);
             mWindow.WindowPanel.Controls.Add(mIssuesUC);
             mWindow.WindowPanel.Controls.Remove(this);
@@ -70,6 +92,7 @@ namespace PT_Camping
 
         private void EmployeesButton_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             mEmployeesUC = new EmployeesUserControl(this);
             mWindow.WindowPanel.Controls.Add(mEmployeesUC);
             mWindow.WindowPanel.Controls.Remove(this);
@@ -78,6 +101,7 @@ namespace PT_Camping
 
         private void StocksButton_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             mStocksUC = new StocksUserControl(this);
             mWindow.WindowPanel.Controls.Add(mStocksUC);
             mWindow.WindowPanel.Controls.Remove(this);
@@ -86,6 +110,7 @@ namespace PT_Camping
 
         private void ProvidersButton_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             mProvidersUC = new ProvidersUserControl(this);
             mWindow.WindowPanel.Controls.Add(mProvidersUC);
             mWindow.WindowPanel.Controls.Remove(this);
@@ -94,6 +119,7 @@ namespace PT_Camping
 
         private void StatsButton_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             mStatsUC = new StatsUserControl(this);
             mWindow.WindowPanel.Controls.Add(mStatsUC);
             mWindow.WindowPanel.Controls.Remove(this);
