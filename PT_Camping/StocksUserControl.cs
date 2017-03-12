@@ -1,8 +1,10 @@
 ﻿using PT_Camping.Model;
 using System;
 using System.Data.Entity.Infrastructure;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace PT_Camping
@@ -17,13 +19,19 @@ namespace PT_Camping
     public partial class StocksUserControl : ManagementUserControl
     {
         private DataBase database;
-
+        private String nomPersonne;
+        private String prenomPersonne;
+        private String emailPersonne;
         public StocksUserControl(HomeUserControl homeUserControl) : base(homeUserControl)
         {
             InitializeComponent();
             appBarTitle.Text = "Gestion des stocks";
             database = new DataBase();
-          
+
+            nomPersonne = homeUserControl.Window.userLoged.Person.Nom_Personne;
+            prenomPersonne = homeUserControl.Window.userLoged.Person.Prenom_Personne;
+            emailPersonne = homeUserControl.Window.userLoged.Person.Email;
+
             ProductListView.View = View.Details;
             ProductListView.Columns.Add("Produits",-2);
             ProductListView.Columns.Add("Quantité",-2,HorizontalAlignment.Center);
@@ -31,7 +39,19 @@ namespace PT_Camping
             fillStockListView();
             handleResize();
         }
+        public void fillProviderComboBox()
+        {
+            providerComboBox.Items.Clear();
+            foreach (var provider in database.Fournisseur)
+            {
+                providerComboBox.Items.Add(provider.Nom_Fournisseur);
+            }
+            if (providerComboBox.Items != null)
+            {
+                providerComboBox.Text = providerComboBox.Items[0].ToString();
+            }
 
+        }
         public void fillStockListView()
         {
             ProductListView.Items.Clear();
@@ -72,7 +92,7 @@ namespace PT_Camping
                 productNameTextBox.Text = product.Libelle_Produit.ToString();
                 amountTextBox.Text = product.Quantite_Stock.ToString();
                 priceTextBox.Text = product.Prix.ToString();
-
+                fillProviderComboBox();
             }
              
          }
@@ -102,7 +122,6 @@ namespace PT_Camping
         {
             if(amountTextBox.ReadOnly)
             { 
-                editProductButton.Text = "Valider";
                 resetButton.Visible = true;
                 amountTextBox.ReadOnly = false;
                 priceTextBox.ReadOnly = false;
@@ -110,7 +129,6 @@ namespace PT_Camping
             }
             else
             {
-                editProductButton.Text = "Modifier";
                 amountTextBox.ReadOnly = true;
                 priceTextBox.ReadOnly = true;
                 productNameTextBox.ReadOnly = true;
@@ -154,22 +172,29 @@ namespace PT_Camping
         private void resetButton_Click(object sender, EventArgs e)
         {
             resetButton.Visible = false;
-            editProductButton.Text = "Modifier";
             updateIssueDetails();
-        }
-
-        private void productProviderButton_Click(object sender, EventArgs e)
-        {
-            ProviderChoice providerChoice = new ProviderChoice();
-            providerChoice.ShowDialog();
         }
 
         private void commandButton_Click(object sender, EventArgs e)
         {
-            int code = int.Parse(ProductListView.SelectedItems[0].Name);
-            var product = database.Produit.Find(code);
-            CommandStock commandStock = new CommandStock(productNameTextBox.Text);
-            commandStock.ShowDialog();
+            string subject = "Commande d'un produit";
+            string body = "Dear "+ providerComboBox.SelectedItem.ToString()+ ", <br /> Nous souhaitons vous commander le "
+                + "produit "+ productNameTextBox.Text+" en 42 exemplaires. <br /> Cordialement, <br /> "
+                + prenomPersonne + " " + nomPersonne;
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Dear " + providerComboBox.SelectedItem.ToString() +", ").Append("\r\n\r\n");
+            sb.AppendLine("Nous souhaitons vous commander le "
+                + "produit " + productNameTextBox.Text + " en 42 exemplaires.");
+            body = sb.ToString();
+            string receiver = emailPersonne;
+
+            Process.Start("mailto:" + receiver + "?subject=" + subject + "&body=" + body);
+        }
+
+        private void sellButton_Click(object sender, EventArgs e)
+        {
+            SellStock sellStock = new SellStock(this, ProductListView.SelectedItems[0].Name);
+            sellStock.Show();
         }
     }
 }

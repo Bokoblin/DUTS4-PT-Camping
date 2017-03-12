@@ -84,12 +84,6 @@
     <Compile Include="addStock.Designer.cs">
       <DependentUpon>addStock.cs</DependentUpon>
     </Compile>
-    <Compile Include="CommandStock.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CommandStock.Designer.cs">
-      <DependentUpon>CommandStock.cs</DependentUpon>
-    </Compile>
     <Compile Include="MapUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -211,6 +205,12 @@
     <Compile Include="ProvidersUserControl.Designer.cs">
       <DependentUpon>ProvidersUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="SellStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SellStock.Designer.cs">
+      <DependentUpon>SellStock.cs</DependentUpon>
+    </Compile>
     <Compile Include="StatsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -233,9 +233,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="addStock.resx">
       <DependentUpon>addStock.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CommandStock.resx">
-      <DependentUpon>CommandStock.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MapUserControl.resx">
       <DependentUpon>MapUserControl.cs</DependentUpon>
@@ -266,9 +263,13 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="ProviderChoice.resx">
       <DependentUpon>ProviderChoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SellStock.resx">
+      <DependentUpon>SellStock.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StocksUserControl.resx">
       <DependentUpon>StocksUserControl.cs</DependentUpon>
@@ -336,6 +337,8 @@
     <Content Include="packages\EntityFramework.fr.6.1.3\lib\net45\fr\EntityFramework.resources.dll" />
     <Content Include="packages\EntityFramework.fr.6.1.3\lib\net45\fr\EntityFramework.xml" />
     <Content Include="res\images\ic_arrow_back.png" />
+    <None Include="res\images\ic_delete.png" />
+    <None Include="res\images\ic_edit.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

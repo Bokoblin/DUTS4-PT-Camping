@@ -49,8 +49,16 @@ namespace PT_Camping
             {
                 if (productNameTextBox.Text != "" && productPriceTextBox.Text != "" && productStockTextBox.Text != "")
                 {
-                    dataBase.Produit.Add(product);
-                    dataBase.SaveChanges();
+                    try
+                    {
+                        dataBase.Produit.Add(product);
+                        dataBase.SaveChanges();
+                    }
+                    catch(System.Data.Entity.Validation.DbEntityValidationException)
+                    {
+                       
+                    }
+                    
                 }
                 else
                 {
