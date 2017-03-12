@@ -42,10 +42,11 @@
             this.deleteProductButton = new System.Windows.Forms.Button();
             this.editProductButton = new System.Windows.Forms.Button();
             this.resetButton = new System.Windows.Forms.Button();
-            this.productProviderButton = new System.Windows.Forms.Button();
             this.commandButton = new System.Windows.Forms.Button();
             this.amountTextBox = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.providerComboBox = new System.Windows.Forms.ComboBox();
+            this.sellButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // logoutButton
@@ -146,21 +147,21 @@
             // 
             // deleteProductButton
             // 
-            this.deleteProductButton.Location = new System.Drawing.Point(628, 76);
+            this.deleteProductButton.Image = global::PT_Camping.Properties.Resources.ic_delete;
+            this.deleteProductButton.Location = new System.Drawing.Point(351, 274);
             this.deleteProductButton.Name = "deleteProductButton";
-            this.deleteProductButton.Size = new System.Drawing.Size(124, 23);
+            this.deleteProductButton.Size = new System.Drawing.Size(49, 45);
             this.deleteProductButton.TabIndex = 22;
-            this.deleteProductButton.Text = "Supprimer le produit";
             this.deleteProductButton.UseVisualStyleBackColor = true;
             this.deleteProductButton.Click += new System.EventHandler(this.deleteProductButton_Click);
             // 
             // editProductButton
             // 
-            this.editProductButton.Location = new System.Drawing.Point(351, 297);
+            this.editProductButton.Image = global::PT_Camping.Properties.Resources.ic_edit;
+            this.editProductButton.Location = new System.Drawing.Point(404, 272);
             this.editProductButton.Name = "editProductButton";
-            this.editProductButton.Size = new System.Drawing.Size(75, 23);
+            this.editProductButton.Size = new System.Drawing.Size(48, 48);
             this.editProductButton.TabIndex = 23;
-            this.editProductButton.Text = "Modifier";
             this.editProductButton.UseVisualStyleBackColor = true;
             this.editProductButton.Click += new System.EventHandler(this.editProductButton_Click);
             // 
@@ -174,16 +175,6 @@
             this.resetButton.UseVisualStyleBackColor = true;
             this.resetButton.Visible = false;
             this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
-            // 
-            // productProviderButton
-            // 
-            this.productProviderButton.Location = new System.Drawing.Point(551, 169);
-            this.productProviderButton.Name = "productProviderButton";
-            this.productProviderButton.Size = new System.Drawing.Size(75, 23);
-            this.productProviderButton.TabIndex = 25;
-            this.productProviderButton.Text = "Fournisseur";
-            this.productProviderButton.UseVisualStyleBackColor = true;
-            this.productProviderButton.Click += new System.EventHandler(this.productProviderButton_Click);
             // 
             // commandButton
             // 
@@ -207,13 +198,32 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+            // providerComboBox
+            // 
+            this.providerComboBox.FormattingEnabled = true;
+            this.providerComboBox.Location = new System.Drawing.Point(545, 171);
+            this.providerComboBox.Name = "providerComboBox";
+            this.providerComboBox.Size = new System.Drawing.Size(121, 21);
+            this.providerComboBox.TabIndex = 28;
+            // 
+            // sellButton
+            // 
+            this.sellButton.Location = new System.Drawing.Point(590, 315);
+            this.sellButton.Name = "sellButton";
+            this.sellButton.Size = new System.Drawing.Size(75, 23);
+            this.sellButton.TabIndex = 29;
+            this.sellButton.Text = "Vendre";
+            this.sellButton.UseVisualStyleBackColor = true;
+            this.sellButton.Click += new System.EventHandler(this.sellButton_Click);
+            // 
             // StocksUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.sellButton);
+            this.Controls.Add(this.providerComboBox);
             this.Controls.Add(this.amountTextBox);
             this.Controls.Add(this.commandButton);
-            this.Controls.Add(this.productProviderButton);
             this.Controls.Add(this.resetButton);
             this.Controls.Add(this.editProductButton);
             this.Controls.Add(this.deleteProductButton);
@@ -241,11 +251,12 @@
             this.Controls.SetChildIndex(this.deleteProductButton, 0);
             this.Controls.SetChildIndex(this.editProductButton, 0);
             this.Controls.SetChildIndex(this.resetButton, 0);
-            this.Controls.SetChildIndex(this.appBarTitle, 0);
-            this.Controls.SetChildIndex(this.logoutButton, 0);
-            this.Controls.SetChildIndex(this.productProviderButton, 0);
             this.Controls.SetChildIndex(this.commandButton, 0);
             this.Controls.SetChildIndex(this.amountTextBox, 0);
+            this.Controls.SetChildIndex(this.providerComboBox, 0);
+            this.Controls.SetChildIndex(this.appBarTitle, 0);
+            this.Controls.SetChildIndex(this.logoutButton, 0);
+            this.Controls.SetChildIndex(this.sellButton, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -266,9 +277,10 @@
         private System.Windows.Forms.Button deleteProductButton;
         private System.Windows.Forms.Button editProductButton;
         private System.Windows.Forms.Button resetButton;
-        private System.Windows.Forms.Button productProviderButton;
         private System.Windows.Forms.Button commandButton;
         private System.Windows.Forms.TextBox amountTextBox;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ComboBox providerComboBox;
+        private System.Windows.Forms.Button sellButton;
     }
 }
