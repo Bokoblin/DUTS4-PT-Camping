@@ -29,12 +29,12 @@ namespace PT_Camping
             productListView.Columns.Add("Produits");
             productListView.Columns.Add("Quantité");
 
-            UpdateStockListView();
+            UpdateProductListView();
             HandleResize();
         }
 
 
-        public void UpdateStockListView()
+        public void UpdateProductListView()
         {
             productListView.Items.Clear();
 
@@ -69,7 +69,7 @@ namespace PT_Camping
         }
 
 
-        private void UpdateProductDetails()
+        public void UpdateProductDetails()
          {
              if (productListView.SelectedItems.Count != 0)
              {
@@ -96,8 +96,9 @@ namespace PT_Camping
 
         private void AddStockButton_Click(object sender, MouseEventArgs e)
         {
-            addStock newStock = new addStock(this);
-            newStock.Show();
+            addStock newStock = new addStock();
+            newStock.ShowDialog();
+            UpdateProductListView();
         }
 
         private void DeleteProductButton_Click(object sender, EventArgs e)
@@ -109,7 +110,7 @@ namespace PT_Camping
             {
                 Db.Produit.Remove(product);
                 Db.SaveChanges();
-                UpdateStockListView();
+                UpdateProductListView();
             }
                 
         }
@@ -132,51 +133,38 @@ namespace PT_Camping
                 resetButton.Visible = false;
                 providerComboBox.Enabled = false;
 
-                string message = "Les données suivantes ont été mises à jour : \n";
-                int cptModifications = 0;
-
                 int code = int.Parse(productListView.SelectedItems[0].Name);
                 var product = Db.Produit.Find(code);
 
                 if(product != null)
                 {
-                    //To refactor a lot -- devrait planter en l'état
                     try
                     {
+
+                        if (productNameTextBox.Text == "" || priceTextBox.Text == "" || amountTextBox.Text == "")
+                            throw new Exception("Toutes les champs ne sont pas remplis.");
+
+                        if (productNameTextBox.Text.Any(char.IsDigit))
+                            throw new Exception("Le nom du produit ne peut contenir de valeur numérique.");
+
+                        if (int.Parse(amountTextBox.Text) < 0)
+                            throw new Exception("La quantité doit être positive.");
+                        if(productNameTextBox.Text != (product.Libelle_Produit))
+                        {
+                            product.Libelle_Produit = productNameTextBox.Text;
+                        }
                         product.Quantite_Stock = Convert.ToInt32(amountTextBox.Text);
-                        message += "quantité\n";
-                    }
-                    catch(FormatException)
-                    {
-                        MessageBox.Show("La quantité n'est pas correcte");
-                    }
-
-                    product.Libelle_Produit = productNameTextBox.Text;
-                    try
-                    {
                         product.Prix = Convert.ToDouble(priceTextBox.Text);
-                        message += "prix\n";
+                        Db.Produit.Add(product);
+                        Db.SaveChanges();
+                        UpdateProductListView();
+                        UpdateProductDetails();
                     }
-                    catch (FormatException)
+                    catch (Exception exception)
                     {
-                        MessageBox.Show("Prix incorrect !");
+                        MessageBox.Show(exception.Message);
                     }
-                    /*
-                    try
-                    {
-                        
-                    }
-                    catch(DbUpdateException)
-                    {
-                        MessageBox.Show("Le nom de produit existe déjà !");
-                    }*/
                 }
-
-                Db.SaveChanges();
-                UpdateProductDetails();
-
-                if (cptModifications > 0)
-                    MessageBox.Show(message);
             }
         }
 
@@ -209,8 +197,10 @@ namespace PT_Camping
 
         private void SellButton_Click(object sender, EventArgs e)
         {
-            SellStock sellStock = new SellStock(this, productListView.SelectedItems[0].Name);
-            sellStock.Show();
+            SellStock sellStock = new SellStock(Db, productListView.SelectedItems[0].Name);
+            sellStock.ShowDialog();
+            UpdateProductListView();
+            UpdateProductDetails();
             
         }
 
@@ -232,6 +222,22 @@ namespace PT_Camping
             {
                 foreach (ColumnHeader columnHeader in productListView.Columns)
                     columnHeader.Width = productListView.Width / productListView.Columns.Count;
+            }
+        }
+
+        private void amountTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void priceTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && e.KeyChar != ',' && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
             }
         }
     }
