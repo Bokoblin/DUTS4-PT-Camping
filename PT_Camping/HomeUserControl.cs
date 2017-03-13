@@ -99,17 +99,17 @@ namespace PT_Camping
             appBar.Size = new Size(mWindow.Size.Width, appBar.Size.Height);
             homeTabControl.ItemSize = new Size(mWindow.Size.Width / 2-30, homeTabControl.ItemSize.Height);
             if (mClientsUC != null)
-                mClientsUC.handleResize();
+                mClientsUC.HandleResize();
             if (mIssuesUC != null)
                 mIssuesUC.handleResize();
             if (mEmployeesUC != null)
-                mEmployeesUC.handleResize();
+                mEmployeesUC.HandleResize();
             if (mStocksUC != null)
-                mStocksUC.handleResize();
+                mStocksUC.HandleResize();
             if (mProvidersUC != null)
-                mProvidersUC.handleResize();
+                mProvidersUC.HandleResize();
             if (mStatsUC != null)
-                mStatsUC.handleResize();
+                mStatsUC.HandleResize();
         }
 
 

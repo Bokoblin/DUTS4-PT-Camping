@@ -23,7 +23,7 @@ namespace PT_Camping
         {
             InitializeComponent();
             appBarTitle.Text = "Gestion des employés";
-            handleResize();
+            HandleResize();
         }
     }
 }

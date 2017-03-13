@@ -72,7 +72,7 @@ namespace PT_Camping
                 productPriceTextBox.Text = "";
                 productStockTextBox.Text = "";
             }
-            stockControl.fillStockListView();
+            stockControl.UpdateStockListView();
         }
     }
 }

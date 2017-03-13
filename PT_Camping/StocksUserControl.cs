@@ -14,118 +14,115 @@ namespace PT_Camping
     /// It is used to manage the camping's products stocks.
     /// 
     /// </summary>
-    /// Authors : Arthur
+    /// Authors : Arthur, Yonnel
     /// Since : 08/02/17
     public partial class StocksUserControl : ManagementUserControl
     {
-        private DataBase database;
-        private String nomPersonne;
-        private String prenomPersonne;
-        private String emailPersonne;
-        public StocksUserControl(HomeUserControl homeUserControl) : base(homeUserControl)
+        
+        public StocksUserControl(HomeUserControl home) : base(home)
         {
             InitializeComponent();
             appBarTitle.Text = "Gestion des stocks";
-            database = new DataBase();
+            Db = new DataBase();
 
-            nomPersonne = homeUserControl.Window.userLoged.Person.Nom_Personne;
-            prenomPersonne = homeUserControl.Window.userLoged.Person.Prenom_Personne;
-            emailPersonne = homeUserControl.Window.userLoged.Person.Email;
+            productListView.View = View.Details;
+            productListView.Columns.Add("Produits");
+            productListView.Columns.Add("Quantité");
 
-            ProductListView.View = View.Details;
-            ProductListView.Columns.Add("Produits",-2);
-            ProductListView.Columns.Add("Quantité",-2,HorizontalAlignment.Center);
-
-            fillStockListView();
-            handleResize();
+            UpdateStockListView();
+            HandleResize();
         }
-        public void fillProviderComboBox()
-        {
-            providerComboBox.Items.Clear();
-            foreach (var provider in database.Fournisseur)
-            {
-                providerComboBox.Items.Add(provider.Nom_Fournisseur);
-            }
-            if (providerComboBox.Items != null)
-            {
-                providerComboBox.Text = providerComboBox.Items[0].ToString();
-            }
 
-        }
-        public void fillStockListView()
-        {
-            ProductListView.Items.Clear();
-            foreach (var product in database.Produit)
-            {
-                string product_name = product.Libelle_Produit;
-                string product_stock = product.Quantite_Stock.ToString();
 
-                var item = new ListViewItem(new[] { product_name, product_stock });
-                item.Name = product.Code_Produit.ToString();
-                if(product.Quantite_Stock<=5)
+        public void UpdateStockListView()
+        {
+            productListView.Items.Clear();
+
+            foreach (var product in Db.Produit)
+            {
+                string name = product.Libelle_Produit;
+                string stock = product.Quantite_Stock.ToString();
+
+                var item = new ListViewItem(new[] { name, stock })
+                {
+                    Name = product.Code_Produit.ToString()
+                };
+
+                if(product.Quantite_Stock == 0)
                 {
                     item.BackColor = Color.Red;
                 }
-                else if(product.Quantite_Stock>5 && product.Quantite_Stock<=15)
+                else if(product.Quantite_Stock <= 15)
                 {
                     item.BackColor = Color.Orange;
                 }
-                ProductListView.Items.Add(item);
-
+                productListView.Items.Add(item);
             }
 
-            if (ProductListView.Items.Count > 0)
+            //=== Select the first of the list
+
+            if (productListView.Items.Count > 0)
             {
-                ProductListView.Items[0].Selected = true;
-                ProductListView.Select();
+                productListView.Items[0].Selected = true;
+                productListView.Select();
             }
         }
 
-        private void updateIssueDetails()
+
+        private void UpdateProductDetails()
          {
-             if (ProductListView.SelectedItems.Count != 0)
+             if (productListView.SelectedItems.Count != 0)
              {
-                int code = int.Parse(ProductListView.SelectedItems[0].Name);
-                var product = database.Produit.Find(code);
+                int code = int.Parse(productListView.SelectedItems[0].Name);
+                var product = Db.Produit.Find(code);
+
+                if (product == null) return;
 
                 idTextBox.Text = product.Code_Produit.ToString();
-                productNameTextBox.Text = product.Libelle_Produit.ToString();
+                productNameTextBox.Text = product.Libelle_Produit;
                 amountTextBox.Text = product.Quantite_Stock.ToString();
                 priceTextBox.Text = product.Prix.ToString();
-                fillProviderComboBox();
+                providerComboBox.Items.Clear();
+                foreach (var provider in Db.Fournisseur)
+                {
+                    providerComboBox.Items.Add(provider.Nom_Fournisseur);
+                }
+                if (providerComboBox.Items.Count != 0)
+                    providerComboBox.Text = providerComboBox.Items[0].ToString();
             }
              
          }
 
-        private void addStockButton_MouseClick(object sender, MouseEventArgs e)
+
+        private void AddStockButton_Click(object sender, MouseEventArgs e)
         {
             addStock newStock = new addStock(this);
             newStock.Show();
         }
 
-        private void ProductListView_SelectedIndexChanged(object sender, EventArgs e)
+        private void DeleteProductButton_Click(object sender, EventArgs e)
         {
-            updateIssueDetails();
+            int code = int.Parse(productListView.SelectedItems[0].Name);
+            var product = Db.Produit.Find(code);
+
+            if (product != null)
+            {
+                Db.Produit.Remove(product);
+                Db.SaveChanges();
+                UpdateStockListView();
+            }
+                
         }
 
-        private void deleteProductButton_Click(object sender, EventArgs e)
+        private void EditProductButton_Click(object sender, EventArgs e)
         {
-            int code = int.Parse(ProductListView.SelectedItems[0].Name);
-            var product = database.Produit.Find(code);
-
-            database.Produit.Remove(product);
-            database.SaveChanges();
-            fillStockListView();
-        }
-
-        private void editProductButton_Click(object sender, EventArgs e)
-        {
-            if(amountTextBox.ReadOnly)
+            if(priceTextBox.ReadOnly)
             { 
                 resetButton.Visible = true;
-                amountTextBox.ReadOnly = false;
                 priceTextBox.ReadOnly = false;
+                amountTextBox.ReadOnly = false;
                 productNameTextBox.ReadOnly = false;
+                providerComboBox.Enabled = true;
             }
             else
             {
@@ -133,50 +130,69 @@ namespace PT_Camping
                 priceTextBox.ReadOnly = true;
                 productNameTextBox.ReadOnly = true;
                 resetButton.Visible = false;
+                providerComboBox.Enabled = false;
 
-                int code = int.Parse(ProductListView.SelectedItems[0].Name);
-                var product = database.Produit.Find(code);
+                string message = "Les données suivantes ont été mises à jour : \n";
+                int cptModifications = 0;
 
-                try
+                int code = int.Parse(productListView.SelectedItems[0].Name);
+                var product = Db.Produit.Find(code);
+
+                if(product != null)
                 {
-                    product.Quantite_Stock = Convert.ToInt32(amountTextBox.Text);
-                }
-                catch(FormatException fe)
-                {
-                    MessageBox.Show("La quantité n'est pas correcte");
+                    //To refactor a lot -- devrait planter en l'état
+                    try
+                    {
+                        product.Quantite_Stock = Convert.ToInt32(amountTextBox.Text);
+                        message += "quantité\n";
+                    }
+                    catch(FormatException)
+                    {
+                        MessageBox.Show("La quantité n'est pas correcte");
+                    }
+
+                    product.Libelle_Produit = productNameTextBox.Text;
+                    try
+                    {
+                        product.Prix = Convert.ToDouble(priceTextBox.Text);
+                        message += "prix\n";
+                    }
+                    catch (FormatException)
+                    {
+                        MessageBox.Show("Prix incorrect !");
+                    }
+                    /*
+                    try
+                    {
+                        
+                    }
+                    catch(DbUpdateException)
+                    {
+                        MessageBox.Show("Le nom de produit existe déjà !");
+                    }*/
                 }
 
-                product.Libelle_Produit = productNameTextBox.Text;
-                try
-                {
-                    product.Prix = Convert.ToDouble(priceTextBox.Text);
-                }
-                catch (FormatException fe)
-                {
-                    MessageBox.Show("Prix incorrect !");
-                }
-                try
-                {
-                    database.SaveChanges();
-                }
-                catch(DbUpdateException)
-                {
-                    MessageBox.Show("Le nom de produit existe déjà !");
-                }
-                
-                updateIssueDetails();
-                fillStockListView();
+                Db.SaveChanges();
+                UpdateProductDetails();
+
+                if (cptModifications > 0)
+                    MessageBox.Show(message);
             }
         }
 
         private void resetButton_Click(object sender, EventArgs e)
         {
             resetButton.Visible = false;
-            updateIssueDetails();
+            UpdateProductDetails();
         }
+
 
         private void commandButton_Click(object sender, EventArgs e)
         {
+            string nomPersonne = mHomeUserControl.Window.userLoged.Person.Nom_Personne;
+            string prenomPersonne = mHomeUserControl.Window.userLoged.Person.Prenom_Personne;
+            string emailPersonne = mHomeUserControl.Window.userLoged.Person.Email;
+
             string subject = "Commande d'un produit";
             string body = "Dear "+ providerComboBox.SelectedItem.ToString()+ ", <br /> Nous souhaitons vous commander le "
                 + "produit "+ productNameTextBox.Text+" en 42 exemplaires. <br /> Cordialement, <br /> "
@@ -191,10 +207,32 @@ namespace PT_Camping
             Process.Start("mailto:" + receiver + "?subject=" + subject + "&body=" + body);
         }
 
-        private void sellButton_Click(object sender, EventArgs e)
+        private void SellButton_Click(object sender, EventArgs e)
         {
-            SellStock sellStock = new SellStock(this, ProductListView.SelectedItems[0].Name);
+            SellStock sellStock = new SellStock(this, productListView.SelectedItems[0].Name);
             sellStock.Show();
+            
+        }
+
+
+
+        private void ProductListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            amountTextBox.ReadOnly = true;
+            priceTextBox.ReadOnly = true;
+            productNameTextBox.ReadOnly = true;
+            resetButton.Visible = false;
+            providerComboBox.Enabled = false;
+            UpdateProductDetails();
+        }
+
+        private void productListView_Resize(object sender, EventArgs e)
+        {
+            if( productListView.Columns.Count != 0)
+            {
+                foreach (ColumnHeader columnHeader in productListView.Columns)
+                    columnHeader.Width = productListView.Width / productListView.Columns.Count;
+            }
         }
     }
 }

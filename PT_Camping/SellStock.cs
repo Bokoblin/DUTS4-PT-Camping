@@ -39,7 +39,7 @@ namespace PT_Camping
                 var product = database.Produit.Find(code);
                 product.Quantite_Stock = product.Quantite_Stock - Convert.ToInt32(amountTextBox.Text);
                 database.SaveChanges();
-                stockControl.fillStockListView();
+                stockControl.UpdateStockListView();
                 Close();
             }
         }
