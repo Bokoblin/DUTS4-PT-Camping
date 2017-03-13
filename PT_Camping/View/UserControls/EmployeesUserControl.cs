@@ -1,4 +1,4 @@
-﻿using PT_Camping.Model;
+using PT_Camping.Model;
 using System;
 using System.Drawing;
 using System.IO;
@@ -20,7 +20,7 @@ namespace PT_Camping
             InitializeComponent();
             appBarTitle.Text = "Gestion des employés";
             db = new DataBase();
-
+            
             employeeListView.View = System.Windows.Forms.View.Details;
             employeeListView.Columns.Add("Nom", -2);
             employeeListView.Columns.Add("Prénom", -2);

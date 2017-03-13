@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
@@ -134,7 +134,7 @@
           <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Telephone" Type="varchar" MaxLength="25" />
           <Property Name="Adresse" Type="varchar" MaxLength="250" />
-          <Property Name="Date_Naissance" Type="date" Nullable="false" />
+          <Property Name="Date_Naissance" Type="date" />
         </EntityType>
         <EntityType Name="Possede">
           <Key>
@@ -657,7 +657,7 @@
           <NavigationProperty Name="Loge" Relationship="Self.FK_Loge_Code_Personne" FromRole="Personne" ToRole="Loge" />
           <NavigationProperty Name="Reservation" Relationship="Self.FK_Reservation_Code_Personne" FromRole="Personne" ToRole="Reservation" />
           <NavigationProperty Name="Droit" Relationship="Self.A_le_droit" FromRole="Personne" ToRole="Droit" />
-          <Property Name="Date_Naissance" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="Date_Naissance" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Produit">
           <Key>

@@ -1,29 +1,35 @@
-﻿using System;
+using System;
 using System.Windows.Forms;
 using PT_Camping.Model;
 using PT_Camping.View.Forms;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace PT_Camping
 {
     /// <summary>
     /// The ProvidersUserControl inherits from ManagementHomeControl.
     /// It is used to manage the camping's stocks providers.
-    /// Create a new provider, modify an old one, delete one, ...
+    /// It allows seeing all the providers for the camping products,
+    /// Adding a new provider, modifying, deleting or contacting them.
     /// 
     /// </summary>
-    /// Authors : Claire MARCINIAK
-    /// Since : 13/02/17
-    /// End : ??/03/17
+    /// Authors : Arthur, Claire
+    /// Since : 08/02/17
     public partial class ProvidersUserControl : ManagementUserControl
     {
-
         private String providerMail;
+        
         public ProvidersUserControl(HomeUserControl homeUserControl) : base(homeUserControl)
         {
             InitializeComponent();
             appBarTitle.Text = "Gestion des fournisseurs";
-
             db = new DataBase();
 
             ProvList.View = System.Windows.Forms.View.Details;
@@ -159,4 +165,3 @@ namespace PT_Camping
         }
     }
 }
-
