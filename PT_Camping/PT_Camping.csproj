@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -89,6 +89,12 @@
     </Compile>
     <Compile Include="View\Forms\AddEmployee.Designer.cs">
       <DependentUpon>AddEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Forms\AddProvider.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Forms\AddProvider.Designer.cs">
+      <DependentUpon>AddProvider.cs</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\MapUserControl.cs">
       <SubType>UserControl</SubType>
@@ -237,6 +243,9 @@
     <EmbeddedResource Include="View\Forms\AddEmployee.resx">
       <DependentUpon>AddEmployee.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\Forms\AddProvider.resx">
+      <DependentUpon>AddProvider.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\UserControls\EmployeesUserControl.resx">
       <DependentUpon>EmployeesUserControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -274,6 +283,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\UserControls\ProvidersUserControl.resx">
+      <DependentUpon>ProvidersUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EntityDeploy Include="Model\InfoJoyeuxDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>InfoJoyeuxDB.Designer.cs</LastGenOutput>

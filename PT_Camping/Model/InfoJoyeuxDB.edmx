@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
@@ -88,6 +88,10 @@
           </Key>
           <Property Name="Code_Fournisseur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nom_Fournisseur" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Email_Fournisseur" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Site_web_Fournisseur" Type="varchar" MaxLength="50" />
+          <Property Name="Adresse_Fournisseur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="est_approuvé" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Fournit">
           <Key>
@@ -604,6 +608,10 @@
           <Property Name="Code_Fournisseur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nom_Fournisseur" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Produit" Relationship="Self.Fournit" FromRole="Fournisseur" ToRole="Produit" />
+          <Property Name="Email_Fournisseur" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Site_web_Fournisseur" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Adresse_Fournisseur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="est_approuvé" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Incident">
           <Key>
@@ -1041,6 +1049,10 @@
           <EntitySetMapping Name="Fournisseur">
             <EntityTypeMapping TypeName="InfoJoyeuxDB.Fournisseur">
               <MappingFragment StoreEntitySet="Fournisseur">
+                <ScalarProperty Name="est_approuvé" ColumnName="est_approuvé" />
+                <ScalarProperty Name="Adresse_Fournisseur" ColumnName="Adresse_Fournisseur" />
+                <ScalarProperty Name="Site_web_Fournisseur" ColumnName="Site_web_Fournisseur" />
+                <ScalarProperty Name="Email_Fournisseur" ColumnName="Email_Fournisseur" />
                 <ScalarProperty Name="Code_Fournisseur" ColumnName="Code_Fournisseur" />
                 <ScalarProperty Name="Nom_Fournisseur" ColumnName="Nom_Fournisseur" />
               </MappingFragment>
