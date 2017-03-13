@@ -13,16 +13,14 @@ namespace PT_Camping
 {
     public partial class SellStock : Form
     {
-        String productName;
+        string productName;
         DataBase database;
-        StocksUserControl stockControl;
-        public SellStock(StocksUserControl stockControl, String productName)
+        public SellStock(DataBase db, string productName)
         {
             InitializeComponent();
 
-            database = new DataBase();
+            database = db;
 
-            this.stockControl = stockControl;
             this.productName = productName;
         }
 
@@ -33,14 +31,34 @@ namespace PT_Camping
 
         private void validButton_Click(object sender, EventArgs e)
         {
-            if(amountTextBox.Text != "")
+            int code = int.Parse(productName);
+            var product = database.Produit.Find(code);
+            try
             {
-                int code = int.Parse(productName);
-                var product = database.Produit.Find(code);
+                if (amountTextBox.Text == "")
+                    throw new Exception("La quantité ne peut pas être nulle.");
+
+                if (int.Parse(amountTextBox.Text.ToString()) > product.Quantite_Stock)
+                    throw new Exception("La quantité à vendre doit être inférieure au stock.");
+
+                if (int.Parse(amountTextBox.Text) <= 0)
+                    throw new Exception("La quantité doit être supérieure à 0.");
+
                 product.Quantite_Stock = product.Quantite_Stock - Convert.ToInt32(amountTextBox.Text);
                 database.SaveChanges();
-                stockControl.UpdateStockListView();
                 Close();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        private void amountTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
             }
         }
     }

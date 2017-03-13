@@ -15,64 +15,64 @@ namespace PT_Camping
     public partial class addStock : Form
     {
         DataBase dataBase;
-        StocksUserControl stockControl;
-        public addStock(StocksUserControl stockControl)
+        public addStock()
         {
             InitializeComponent();
             dataBase = new DataBase();
-            this.stockControl = stockControl;
         }
-
-        public object Integer { get; private set; }
 
         private void buttonValid_MouseClick(object sender, MouseEventArgs e)
         {
-            Produit product = new Produit();
-            product.Libelle_Produit = productNameTextBox.Text;
             try
-            {  
+            {
+
+                if (productNameTextBox.Text == "" || productPriceTextBox.Text == "" || productStockTextBox.Text == "")
+                    throw new Exception("Toutes les valeurs marquées d'une étoile doivent être remplies.");
+
+                if (productNameTextBox.Text.Any(char.IsDigit))
+                    throw new Exception("Le nom du produit ne peut contenir de valeur numérique.");
+
+                if (int.Parse(productStockTextBox.Text) < 0)
+                    throw new Exception("La quantité doit être positive.");
+
+
+                if (dataBase.Produit.Count(p => p.Libelle_Produit == productNameTextBox.Text) == 1)
+                    throw new Exception("Un produit du même nom existe déjà.");
+
+                Produit product = new Produit();
+                product.Libelle_Produit = productNameTextBox.Text;
                 product.Quantite_Stock = Convert.ToInt32(productStockTextBox.Text);
-            }
-            catch(FormatException fe)
-            {
-                MessageBox.Show("La quantité n'est pas correcte !");
-            }
-            try
-            {
                 product.Prix = Convert.ToDouble(productPriceTextBox.Text);
+                dataBase.Produit.Add(product);
+                dataBase.SaveChanges();
+                Close();
             }
-            catch(FormatException fe)
+            catch(Exception exception)
             {
-                MessageBox.Show("Prix incorrect !");
+                MessageBox.Show(exception.Message);
             }
-            try
+            
+        }
+
+        private void productStockTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
-                if (productNameTextBox.Text != "" && productPriceTextBox.Text != "" && productStockTextBox.Text != "")
-                {
-                    try
-                    {
-                        dataBase.Produit.Add(product);
-                        dataBase.SaveChanges();
-                    }
-                    catch(System.Data.Entity.Validation.DbEntityValidationException)
-                    {
-                       
-                    }
-                    
-                }
-                else
-                {
-                    MessageBox.Show("Tout les champs ne sont pas remplis !");
-                }
+                e.Handled = true;
             }
-            catch(DbUpdateException)
+        }
+
+        private void productPriceTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ( !char.IsControl(e.KeyChar) && e.KeyChar != ',' && !char.IsDigit(e.KeyChar))
             {
-                MessageBox.Show("Impossible d'insérer le produit : celui-ci existe déjà !");
-                productNameTextBox.Text = "";
-                productPriceTextBox.Text = "";
-                productStockTextBox.Text = "";
+                e.Handled = true;
             }
-            stockControl.UpdateStockListView();
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

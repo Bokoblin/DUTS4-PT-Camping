@@ -104,6 +104,7 @@
             this.priceTextBox.ReadOnly = true;
             this.priceTextBox.Size = new System.Drawing.Size(119, 20);
             this.priceTextBox.TabIndex = 14;
+            this.priceTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.priceTextBox_KeyPress);
             // 
             // informationsLabel
             // 
@@ -216,12 +217,12 @@
             // amountTextBox
             // 
             this.amountTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.amountTextBox.BackColor = System.Drawing.SystemColors.Control;
             this.amountTextBox.Location = new System.Drawing.Point(161, 195);
             this.amountTextBox.Name = "amountTextBox";
             this.amountTextBox.ReadOnly = true;
             this.amountTextBox.Size = new System.Drawing.Size(119, 20);
             this.amountTextBox.TabIndex = 27;
+            this.amountTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.amountTextBox_KeyPress);
             // 
             // contextMenuStrip1
             // 
@@ -231,7 +232,6 @@
             // providerComboBox
             // 
             this.providerComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.providerComboBox.BackColor = System.Drawing.SystemColors.Control;
             this.providerComboBox.Enabled = false;
             this.providerComboBox.FormattingEnabled = true;
             this.providerComboBox.Location = new System.Drawing.Point(161, 247);
