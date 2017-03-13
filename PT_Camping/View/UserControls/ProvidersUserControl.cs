@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PT_Camping.Model;
 using PT_Camping.View.Forms;
@@ -16,10 +9,12 @@ namespace PT_Camping
     /// <summary>
     /// The ProvidersUserControl inherits from ManagementHomeControl.
     /// It is used to manage the camping's stocks providers.
+    /// Create a new provider, modify an old one, delete one, ...
     /// 
     /// </summary>
     /// Authors : Claire MARCINIAK
-    /// Since : 13/02/17  & End : /03/17
+    /// Since : 13/02/17
+    /// End : ??/03/17
     public partial class ProvidersUserControl : ManagementUserControl
     {
 
@@ -36,7 +31,6 @@ namespace PT_Camping
             ProvList.Columns.Add("Adresse mail du fournisseur", -2);
 
             updateProviders();
-
             handleResize();
         }
 
@@ -71,15 +65,13 @@ namespace PT_Camping
 
         private void editButton_Click(object sender, EventArgs e)
         {
-            if (idTextBox.ReadOnly == true)
-            {
+            if (idTextBox.ReadOnly == true){
                 idTextBox.ReadOnly = false;
                 addTextBox.ReadOnly = false;
                 MailTextBox.ReadOnly = false;
                 WebTextBox.ReadOnly = false;
             }
-            else
-            {
+            else{
                 idTextBox.ReadOnly = true;
                 addTextBox.ReadOnly = true;
                 MailTextBox.ReadOnly = true;
@@ -93,29 +85,25 @@ namespace PT_Camping
                 int code = int.Parse(ProvList.SelectedItems[0].Name);
                 var provider = db.Fournisseur.Find(code);
 
-                if (idTextBox.Text != provider.Nom_Fournisseur)
-                {
+                if (idTextBox.Text != provider.Nom_Fournisseur){
                     provider.Nom_Fournisseur = idTextBox.Text;
                     message += "- Nom du Fournisseur \n";
                     cptModifications++;
                 }
 
-                if (addTextBox.Text != provider.Adresse_Fournisseur)
-                {
+                if (addTextBox.Text != provider.Adresse_Fournisseur){
                     provider.Adresse_Fournisseur = addTextBox.Text;
                     message += "- Adresse du Fournisseur \n";
                     cptModifications++;
                 }
 
-                if (MailTextBox.Text != provider.Email_Fournisseur)
-                {
+                if (MailTextBox.Text != provider.Email_Fournisseur){
                     provider.Email_Fournisseur = MailTextBox.Text;
                     message += "- E-mail du Fournisseur \n";
                     cptModifications++;
                 }
 
-                if (WebTextBox.Text != provider.Site_web_Fournisseur && WebTextBox.Text != sWeb)
-                {
+                if (WebTextBox.Text != provider.Site_web_Fournisseur && WebTextBox.Text != sWeb){
                     provider.Site_web_Fournisseur = WebTextBox.Text;
                     message += "- Site web du Fournisseur";
                     cptModifications++;
@@ -127,8 +115,7 @@ namespace PT_Camping
 
                 if (cptModifications > 0)
                     MessageBox.Show(message);
-
-
+                
             }
         }
 

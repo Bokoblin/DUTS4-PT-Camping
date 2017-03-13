@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.criticalityLabel = new System.Windows.Forms.Label();
-            this.nameF = new System.Windows.Forms.TextBox();
-            this.mailF = new System.Windows.Forms.TextBox();
-            this.adresseF = new System.Windows.Forms.TextBox();
+            this.nameP = new System.Windows.Forms.TextBox();
+            this.mailP = new System.Windows.Forms.TextBox();
+            this.adresseP = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.webF = new System.Windows.Forms.TextBox();
+            this.webP = new System.Windows.Forms.TextBox();
             this.cancelButton = new System.Windows.Forms.Button();
             this.OKButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -49,26 +49,26 @@
             this.criticalityLabel.Text = "Nom du fournisseur";
             this.criticalityLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // nameF
+            // nameP
             // 
-            this.nameF.Location = new System.Drawing.Point(57, 32);
-            this.nameF.Name = "nameF";
-            this.nameF.Size = new System.Drawing.Size(156, 20);
-            this.nameF.TabIndex = 39;
+            this.nameP.Location = new System.Drawing.Point(57, 32);
+            this.nameP.Name = "nameP";
+            this.nameP.Size = new System.Drawing.Size(156, 20);
+            this.nameP.TabIndex = 39;
             // 
-            // mailF
+            // mailP
             // 
-            this.mailF.Location = new System.Drawing.Point(57, 78);
-            this.mailF.Name = "mailF";
-            this.mailF.Size = new System.Drawing.Size(156, 20);
-            this.mailF.TabIndex = 40;
+            this.mailP.Location = new System.Drawing.Point(57, 78);
+            this.mailP.Name = "mailP";
+            this.mailP.Size = new System.Drawing.Size(156, 20);
+            this.mailP.TabIndex = 40;
             // 
-            // adresseF
+            // adresseP
             // 
-            this.adresseF.Location = new System.Drawing.Point(57, 124);
-            this.adresseF.Name = "adresseF";
-            this.adresseF.Size = new System.Drawing.Size(156, 20);
-            this.adresseF.TabIndex = 41;
+            this.adresseP.Location = new System.Drawing.Point(57, 124);
+            this.adresseP.Name = "adresseP";
+            this.adresseP.Size = new System.Drawing.Size(156, 20);
+            this.adresseP.TabIndex = 41;
             // 
             // label1
             // 
@@ -98,12 +98,12 @@
             this.label3.Text = "Site web du fournisseur";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // webF
+            // webP
             // 
-            this.webF.Location = new System.Drawing.Point(57, 170);
-            this.webF.Name = "webF";
-            this.webF.Size = new System.Drawing.Size(156, 20);
-            this.webF.TabIndex = 45;
+            this.webP.Location = new System.Drawing.Point(57, 170);
+            this.webP.Name = "webP";
+            this.webP.Size = new System.Drawing.Size(156, 20);
+            this.webP.TabIndex = 45;
             // 
             // cancelButton
             // 
@@ -132,13 +132,13 @@
             this.ClientSize = new System.Drawing.Size(264, 261);
             this.Controls.Add(this.OKButton);
             this.Controls.Add(this.cancelButton);
-            this.Controls.Add(this.webF);
+            this.Controls.Add(this.webP);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.adresseF);
-            this.Controls.Add(this.mailF);
-            this.Controls.Add(this.nameF);
+            this.Controls.Add(this.adresseP);
+            this.Controls.Add(this.mailP);
+            this.Controls.Add(this.nameP);
             this.Controls.Add(this.criticalityLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -153,13 +153,13 @@
 
         #endregion
         private System.Windows.Forms.Label criticalityLabel;
-        private System.Windows.Forms.TextBox nameF;
-        private System.Windows.Forms.TextBox mailF;
-        private System.Windows.Forms.TextBox adresseF;
+        private System.Windows.Forms.TextBox nameP;
+        private System.Windows.Forms.TextBox mailP;
+        private System.Windows.Forms.TextBox adresseP;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox webF;
+        private System.Windows.Forms.TextBox webP;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button OKButton;
     }

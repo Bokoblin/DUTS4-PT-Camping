@@ -19,11 +19,7 @@ namespace PT_Camping.View.Forms
         {
             InitializeComponent();
             this.db = db;
-            newProvider = new Fournisseur();
-
-            //var types = db.Produit.Select(t => t.Libelle_Produit).ToList();
-            //issueTypecomboBox.DataSource = types;
-            
+            newProvider = new Fournisseur();            
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -35,26 +31,26 @@ namespace PT_Camping.View.Forms
         {
             try
             {
-                if (nameF.Text == "")
+                if (nameP.Text == "")
                     throw new Exception("Le nom du fournisseur est obligatoire");
 
                 else
-                    newProvider.Nom_Fournisseur = nameF.Text;
+                    newProvider.Nom_Fournisseur = nameP.Text;
 
-                if (adresseF.Text == "")
+                if (adresseP.Text == "")
                     throw new Exception("L'adresse du fournisseur est obligatoire");
 
                 else
-                    newProvider.Adresse_Fournisseur = adresseF.Text;
+                    newProvider.Adresse_Fournisseur = adresseP.Text;
 
-                if (mailF.Text == "")
+                if (mailP.Text == "")
                     throw new Exception("L'e-mail du fournisseur est obligatoire");
 
                 else
-                    newProvider.Email_Fournisseur = mailF.Text;
+                    newProvider.Email_Fournisseur = mailP.Text;
 
-                if (webF.Text != "")
-                    newProvider.Site_web_Fournisseur = webF.Text;
+                if (webP.Text != "")
+                    newProvider.Site_web_Fournisseur = webP.Text;
                 else
                     newProvider.Site_web_Fournisseur = null;
 
