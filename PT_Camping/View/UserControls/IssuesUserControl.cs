@@ -1,4 +1,4 @@
-﻿using PT_Camping.Model;
+using PT_Camping.Model;
 using System;
 using System.Windows.Forms;
 
@@ -20,7 +20,7 @@ namespace PT_Camping
             appBarTitle.Text = "Gestion des incidents";
             db = new DataBase();
 
-            issuesListView.View = View.Details;
+            issuesListView.View = System.Windows.Forms.View.Details;
             issuesListView.Columns.Add("Type d'incident", -2);
             issuesListView.Columns.Add("Description", -2);
             issuesListView.Columns.Add("Date", -2);
