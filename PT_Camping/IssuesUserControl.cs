@@ -19,7 +19,7 @@ namespace PT_Camping
         {
             InitializeComponent();
             appBarTitle.Text = "Gestion des incidents";
-            db = new DataBase();
+            Db = new DataBase();
 
             issuesListView.View = View.Details;
             issuesListView.Columns.Add("Description", -2);
@@ -34,7 +34,7 @@ namespace PT_Camping
         {
             issuesListView.Items.Clear();
 
-            foreach (var incident in db.Incident)
+            foreach (var incident in Db.Incident)
             {
                 string description_incident = incident.Description_Incident;
                 string date_incident = incident.Date_Incident.ToShortDateString();
@@ -54,7 +54,7 @@ namespace PT_Camping
 
         internal new void handleResize()
         {
-            base.handleResize();
+            base.HandleResize();
 
             issuesListView.Size = new Size(
                 Convert.ToInt32(mHomeUserControl.Size.Width * 0.3),
@@ -68,7 +68,7 @@ namespace PT_Camping
             foreach (ListViewItem item in issuesListView.Items)
             {
                 int code = int.Parse(issuesListView.SelectedItems[0].Name);
-                var incident = db.Incident.Find(code);
+                var incident = Db.Incident.Find(code);
 
                 item.SubItems[0].Text = incident.Description_Incident;
                 item.SubItems[0].Text = incident.Date_Incident.ToShortDateString();
@@ -81,7 +81,7 @@ namespace PT_Camping
             if (issuesListView.SelectedItems.Count != 0)
             {
                 int code = int.Parse(issuesListView.SelectedItems[0].Name);
-                var incident = db.Incident.Find(code);
+                var incident = Db.Incident.Find(code);
 
                 idTextBox.Text = incident.Code_Incident.ToString();
                 emplacementTextBox.Text = incident.Emplacement.Code_Emplacement.ToString();
@@ -111,8 +111,8 @@ namespace PT_Camping
             i.Criticite_Incident = 2;
             i.Date_Incident = DateTime.Now;
             i.Description_Incident = "Sans commentaire";
-            db.Incident.Add(i);
-            db.SaveChanges();
+            Db.Incident.Add(i);
+            Db.SaveChanges();
 
             fillIssuesListView();
 
@@ -124,10 +124,10 @@ namespace PT_Camping
         private void deleteButton_Click(object sender, EventArgs e)
         {
             int code = int.Parse(issuesListView.SelectedItems[0].Name);
-            var incident = db.Incident.Find(code);
+            var incident = Db.Incident.Find(code);
 
-            db.Incident.Remove(incident);
-            db.SaveChanges();
+            Db.Incident.Remove(incident);
+            Db.SaveChanges();
             fillIssuesListView();
         }
 
@@ -152,7 +152,7 @@ namespace PT_Camping
                 int cptModifications = 0;
 
                 int code = int.Parse(issuesListView.SelectedItems[0].Name);
-                var incident = db.Incident.Find(code);
+                var incident = Db.Incident.Find(code);
 
                 try
                 {
@@ -224,7 +224,7 @@ namespace PT_Camping
                     cptModifications++;
                 }
 
-                db.SaveChanges();
+                Db.SaveChanges();
 
                 updateIssueDetails();
 
@@ -237,11 +237,11 @@ namespace PT_Camping
         private void resolveButton_Click(object sender, EventArgs e)
         {
             int code = int.Parse(issuesListView.SelectedItems[0].Name);
-            var incident = db.Incident.Find(code);
+            var incident = Db.Incident.Find(code);
 
             incident.Date_Resolution = DateTime.Now;
             incident.Avancement_Incident = "Terminé";
-            db.SaveChanges();
+            Db.SaveChanges();
 
             updateIssueDetails();
         }
