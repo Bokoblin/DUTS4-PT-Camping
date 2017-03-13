@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PT_Camping.Model;
 using PT_Camping.View.Forms;
+using System.Diagnostics;
 
 namespace PT_Camping
 {
@@ -17,10 +18,12 @@ namespace PT_Camping
     /// It is used to manage the camping's stocks providers.
     /// 
     /// </summary>
-    /// Authors : Arthur
-    /// Since : 08/02/17
+    /// Authors : Claire MARCINIAK
+    /// Since : 13/02/17  & End : /03/17
     public partial class ProvidersUserControl : ManagementUserControl
     {
+
+        private String providerMail;
         public ProvidersUserControl(HomeUserControl homeUserControl) : base(homeUserControl)
         {
             InitializeComponent();
@@ -30,6 +33,7 @@ namespace PT_Camping
 
             ProvList.View = System.Windows.Forms.View.Details;
             ProvList.Columns.Add("Nom du fournisseur", -2);
+            ProvList.Columns.Add("Adresse mail du fournisseur", -2);
 
             updateProviders();
 
@@ -40,12 +44,13 @@ namespace PT_Camping
         {
             ProvList.Items.Clear();
 
-            foreach (var fournisseur in db.Fournisseur)
+            foreach (var provider in db.Fournisseur)
             {
-                string nom_fournisseur = fournisseur.Nom_Fournisseur;
+                string providerEmail = provider.Email_Fournisseur;
+                string providerName = provider.Nom_Fournisseur;
 
-                var item = new ListViewItem(new[] { nom_fournisseur });
-                item.Name = fournisseur.Code_Fournisseur.ToString();
+                var item = new ListViewItem(new[] { providerName, providerEmail });
+                item.Name = provider.Code_Fournisseur.ToString();
                 ProvList.Items.Add(item);
             }
 
@@ -58,7 +63,9 @@ namespace PT_Camping
 
         private void contactButton_Click(object sender, EventArgs e)
         {
+            string receiver = providerMail;
 
+            Process.Start("mailto:" + receiver);
         }
 
 
@@ -84,32 +91,32 @@ namespace PT_Camping
                 int cptModifications = 0;
 
                 int code = int.Parse(ProvList.SelectedItems[0].Name);
-                var fournisseur = db.Fournisseur.Find(code);
+                var provider = db.Fournisseur.Find(code);
 
-                if (idTextBox.Text != fournisseur.Nom_Fournisseur)
+                if (idTextBox.Text != provider.Nom_Fournisseur)
                 {
-                    fournisseur.Nom_Fournisseur = idTextBox.Text;
+                    provider.Nom_Fournisseur = idTextBox.Text;
                     message += "- Nom du Fournisseur \n";
                     cptModifications++;
                 }
 
-                if (addTextBox.Text != fournisseur.Adresse_Fournisseur)
+                if (addTextBox.Text != provider.Adresse_Fournisseur)
                 {
-                    fournisseur.Adresse_Fournisseur = addTextBox.Text;
+                    provider.Adresse_Fournisseur = addTextBox.Text;
                     message += "- Adresse du Fournisseur \n";
                     cptModifications++;
                 }
 
-                if (MailTextBox.Text != fournisseur.Email_Fournisseur)
+                if (MailTextBox.Text != provider.Email_Fournisseur)
                 {
-                    fournisseur.Email_Fournisseur = MailTextBox.Text;
+                    provider.Email_Fournisseur = MailTextBox.Text;
                     message += "- E-mail du Fournisseur \n";
                     cptModifications++;
                 }
 
-                if (WebTextBox.Text != fournisseur.Site_web_Fournisseur && WebTextBox.Text != sWeb)
+                if (WebTextBox.Text != provider.Site_web_Fournisseur && WebTextBox.Text != sWeb)
                 {
-                    fournisseur.Site_web_Fournisseur = WebTextBox.Text;
+                    provider.Site_web_Fournisseur = WebTextBox.Text;
                     message += "- Site web du Fournisseur";
                     cptModifications++;
                 }
@@ -136,18 +143,20 @@ namespace PT_Camping
             if (ProvList.SelectedItems.Count != 0)
             {
                 int code = int.Parse(ProvList.SelectedItems[0].Name);
-                var fournisseur = db.Fournisseur.Find(code);
+                var provider = db.Fournisseur.Find(code);
 
-                idTextBox.Text = fournisseur.Nom_Fournisseur.ToString();
-                addTextBox.Text = fournisseur.Adresse_Fournisseur.ToString();
-                MailTextBox.Text = fournisseur.Email_Fournisseur.ToString();
-                if (fournisseur.Site_web_Fournisseur == null)
+                providerMail = provider.Email_Fournisseur;
+
+                idTextBox.Text = provider.Nom_Fournisseur.ToString();
+                addTextBox.Text = provider.Adresse_Fournisseur.ToString();
+                MailTextBox.Text = provider.Email_Fournisseur.ToString();
+                if (provider.Site_web_Fournisseur == null)
                 {
                     WebTextBox.Text = "Site web inconnu";
                 }
                 else
                 {
-                    WebTextBox.Text = fournisseur.Site_web_Fournisseur.ToString();
+                    WebTextBox.Text = provider.Site_web_Fournisseur.ToString();
                 }
             }
         }

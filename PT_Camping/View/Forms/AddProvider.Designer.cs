@@ -58,21 +58,21 @@
             // 
             // mailF
             // 
-            this.mailF.Location = new System.Drawing.Point(57, 124);
+            this.mailF.Location = new System.Drawing.Point(57, 78);
             this.mailF.Name = "mailF";
             this.mailF.Size = new System.Drawing.Size(156, 20);
             this.mailF.TabIndex = 40;
             // 
             // adresseF
             // 
-            this.adresseF.Location = new System.Drawing.Point(57, 78);
+            this.adresseF.Location = new System.Drawing.Point(57, 124);
             this.adresseF.Name = "adresseF";
             this.adresseF.Size = new System.Drawing.Size(156, 20);
             this.adresseF.TabIndex = 41;
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(12, 101);
+            this.label1.Location = new System.Drawing.Point(12, 55);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(240, 20);
             this.label1.TabIndex = 42;
@@ -81,7 +81,7 @@
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(12, 55);
+            this.label2.Location = new System.Drawing.Point(12, 101);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(240, 20);
             this.label2.TabIndex = 43;
@@ -140,7 +140,11 @@
             this.Controls.Add(this.mailF);
             this.Controls.Add(this.nameF);
             this.Controls.Add(this.criticalityLabel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "AddProvider";
+            this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddProvider";
             this.ResumeLayout(false);
             this.PerformLayout();
