@@ -18,32 +18,36 @@ namespace PT_Camping
         {
             InitializeComponent();
             appBarTitle.Text = "Gestion des incidents";
-            db = new DataBase();
+            Db = new DataBase();
 
             issuesListView.View = System.Windows.Forms.View.Details;
             issuesListView.Columns.Add("Type d'incident", -2);
             issuesListView.Columns.Add("Description", -2);
             issuesListView.Columns.Add("Date", -2);
 
-            updateIssuesListView();
-            handleResize();
+            UpdateIssuesListView();
+            HandleResize();
         }
 
 
-        private void updateIssuesListView()
+        private void UpdateIssuesListView()
         {
             issuesListView.Items.Clear();
 
-            foreach (var incident in db.Incident)
+            foreach (var issue in Db.Incident)
             {
-                string type_incident = incident.Type_Incident.Type_Incident1;
-                string description_incident = incident.Description_Incident;
-                string date_incident = incident.Date_Incident.ToShortDateString();
+                string type_incident = issue.Type_Incident.Type_Incident1;
+                string description_incident = issue.Description_Incident;
+                string date_incident = issue.Date_Incident.ToShortDateString();
 
-                var item = new ListViewItem(new[] { type_incident, description_incident, date_incident });
-                item.Name = incident.Code_Incident.ToString();
+                var item = new ListViewItem(new[] {type_incident, description_incident, date_incident})
+                {
+                    Name = issue.Code_Incident.ToString()
+                };
                 issuesListView.Items.Add(item);
             }
+
+            //=== Select the first of the list
 
             if (issuesListView.Items.Count > 0)
             {
@@ -53,32 +57,31 @@ namespace PT_Camping
         }
 
 
-        private void updateIssueDetails()
+        private void UpdateIssueDetails()
         {
             if (issuesListView.SelectedItems.Count != 0)
             {
                 int code = int.Parse(issuesListView.SelectedItems[0].Name);
-                var incident = db.Incident.Find(code);
+                var issue = Db.Incident.Find(code);
 
-                idTextBox.Text = incident.Code_Incident.ToString();
-                emplacementTextBox.Text = incident.Emplacement.Code_Emplacement.ToString();
-                typeTextBox.Text = incident.Type_Incident.Type_Incident1;
-                creationDateTextBox.Text = incident.Date_Incident.ToShortDateString();
-                if (incident.Date_Resolution != null)
-                    resolutionDateTextBox.Text = ((DateTime)incident.Date_Resolution).ToShortDateString();
-                else
-                    resolutionDateTextBox.Text = "";
-                criticalityTextBox.Text = incident.Criticite_Incident.ToString() + "/5";
-                statusTextBox.Text = incident.Avancement_Incident;
-                descriptionTextBox.Text = incident.Description_Incident;
+                if (issue == null) return;
 
-                resolveButton.Enabled = (incident.Avancement_Incident != "Terminé");
+                idTextBox.Text = issue.Code_Incident.ToString();
+                emplacementTextBox.Text = issue.Emplacement.Code_Emplacement.ToString();
+                typeTextBox.Text = issue.Type_Incident.Type_Incident1;
+                creationDateTextBox.Text = issue.Date_Incident.ToShortDateString();
+                resolutionDateTextBox.Text = issue.Date_Resolution?.ToShortDateString() ?? "";
+                criticalityTextBox.Text = issue.Criticite_Incident + "/5";
+                statusTextBox.Text = issue.Avancement_Incident;
+                descriptionTextBox.Text = issue.Description_Incident;
+
+                resolveButton.Enabled = (issue.Avancement_Incident != "Terminé");
             }
             
         }
 
 
-        private void onAddIssueButtonClick(object sender, EventArgs e)
+        private void OnAddIssueButton_Click(object sender, EventArgs e)
         {
             /* TODO ***
             
@@ -93,43 +96,50 @@ namespace PT_Camping
 
             //TEMPORARY BEHAVIOUR : "AddIssue" dialog called here with Code_Emplacement = 1
 
-            new AddIssue(db, 1).ShowDialog();
-            updateIssuesListView();
+            new AddIssue(Db, 1).ShowDialog();
+            UpdateIssuesListView();
         }
 
 
-        private void onDeleteIssueButtonClick(object sender, EventArgs e)
+        private void OnDeleteIssueButton_Click(object sender, EventArgs e)
         {
             int code = int.Parse(issuesListView.SelectedItems[0].Name);
-            var incident = db.Incident.Find(code);
+            var issue = Db.Incident.Find(code);
 
-            db.Incident.Remove(incident);
-            db.SaveChanges();
-            updateIssuesListView();
+            if (issue != null)
+            {
+                Db.Incident.Remove(issue);
+                Db.SaveChanges();
+                UpdateIssuesListView();
+            }   
         }
 
 
-        private void onEditButtonClick(object sender, EventArgs e)
+        private void OnEditButtonClick(object sender, EventArgs e)
         {
-            if (resolutionDateTextBox.ReadOnly == true)
+            if (resolutionDateTextBox.ReadOnly)
             {
+                resetButton.Visible = true;
                 resolutionDateTextBox.ReadOnly = false;
                 criticalityTextBox.ReadOnly = false;
                 statusTextBox.ReadOnly = false;
                 descriptionTextBox.ReadOnly = false;
+                editButton.BackgroundImage = Properties.Resources.ic_done;
             }
             else
             {
+                resetButton.Visible = false;
                 resolutionDateTextBox.ReadOnly = true;
                 criticalityTextBox.ReadOnly = true;
                 statusTextBox.ReadOnly = true;
                 descriptionTextBox.ReadOnly = true;
+                editButton.BackgroundImage = Properties.Resources.ic_edit;
 
                 string message = "Les données suivantes ont été mises à jour : \n";
                 int cptModifications = 0;
 
                 int code = int.Parse(issuesListView.SelectedItems[0].Name);
-                var incident = db.Incident.Find(code);
+                var incident = Db.Incident.Find(code);
 
                 #region CHECK & APPLY RESOLUTION DATE CHANGES
                 try
@@ -206,9 +216,16 @@ namespace PT_Camping
                     cptModifications++;
                 }
 
-                db.SaveChanges();
+                Db.SaveChanges();
 
-                updateIssueDetails();
+                UpdateIssueDetails();
+                UpdateIssuesListView();
+
+                foreach (ListViewItem item in issuesListView.Items)
+                {
+                    item.Selected = item.Name == code.ToString();
+                }
+                issuesListView.Select();
 
                 if (cptModifications > 0)
                     MessageBox.Show(message);
@@ -216,29 +233,36 @@ namespace PT_Camping
         }
 
 
-        private void onResolveIssueButtonClick(object sender, EventArgs e)
+        private void OnResolveIssueButton_Click(object sender, EventArgs e)
         {
             int code = int.Parse(issuesListView.SelectedItems[0].Name);
-            var incident = db.Incident.Find(code);
+            var issue = Db.Incident.Find(code);
 
-            incident.Date_Resolution = DateTime.Now;
-            incident.Avancement_Incident = "Terminé";
-            db.SaveChanges();
+            issue.Date_Resolution = DateTime.Now;
+            issue.Avancement_Incident = "Terminé";
+            Db.SaveChanges();
 
-            updateIssueDetails();
+            UpdateIssueDetails();
+            UpdateIssuesListView();
+
+            foreach (ListViewItem item in issuesListView.Items)
+            {
+                item.Selected = item.Name == code.ToString();
+            }
+            issuesListView.Select();
         }
 
 
-        private void issuesListView_SelectedIndexChanged(object sender, EventArgs e)
+        private void IssuesListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             resolutionDateTextBox.ReadOnly = true;
             criticalityTextBox.ReadOnly = true;
             statusTextBox.ReadOnly = true;
             descriptionTextBox.ReadOnly = true;
-            updateIssueDetails();
+            UpdateIssueDetails();
         }
 
-        private void issuesListView_Resize(object sender, EventArgs e)
+        private void IssuesListView_Resize(object sender, EventArgs e)
         {
             if ( issuesListView.Columns.Count == 3)
             {
@@ -246,6 +270,17 @@ namespace PT_Camping
                 issuesListView.Columns[1].Width = issuesListView.Width / 3;
                 issuesListView.Columns[2].Width = issuesListView.Width / 3;
             }
+        }
+
+        private void ResetButton_Click(object sender, EventArgs e)
+        {
+            UpdateIssueDetails();
+            resetButton.Visible = false;
+            resolutionDateTextBox.ReadOnly = true;
+            criticalityTextBox.ReadOnly = true;
+            statusTextBox.ReadOnly = true;
+            descriptionTextBox.ReadOnly = true;
+            editButton.BackgroundImage = Properties.Resources.ic_edit;
         }
     }
 }

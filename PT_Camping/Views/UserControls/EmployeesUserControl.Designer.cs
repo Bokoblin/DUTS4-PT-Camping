@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EmployeesUserControl));
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.employeeListView = new System.Windows.Forms.ListView();
+            this.addEmployeeButton = new System.Windows.Forms.Button();
             this.detailsPanel = new System.Windows.Forms.Panel();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.dismissButton = new System.Windows.Forms.Button();
@@ -52,7 +53,7 @@
             this.addressLabel = new System.Windows.Forms.Label();
             this.birthDateLabel = new System.Windows.Forms.Label();
             this.surnameLabel = new System.Windows.Forms.Label();
-            this.addEmployeeButton = new System.Windows.Forms.Button();
+            this.resetButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel.SuspendLayout();
             this.detailsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -100,14 +101,27 @@
             this.employeeListView.TabIndex = 14;
             this.employeeListView.UseCompatibleStateImageBehavior = false;
             this.employeeListView.View = System.Windows.Forms.View.List;
-            this.employeeListView.SelectedIndexChanged += new System.EventHandler(this.employeeListView_SelectedIndexChanged);
-            this.employeeListView.Resize += new System.EventHandler(this.employeeListView_Resize);
+            this.employeeListView.SelectedIndexChanged += new System.EventHandler(this.EmployeeListView_SelectedIndexChanged);
+            this.employeeListView.Resize += new System.EventHandler(this.EmployeeListView_Resize);
+            // 
+            // addEmployeeButton
+            // 
+            this.addEmployeeButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.addEmployeeButton.AutoSize = true;
+            this.addEmployeeButton.Location = new System.Drawing.Point(140, 463);
+            this.addEmployeeButton.Name = "addEmployeeButton";
+            this.addEmployeeButton.Size = new System.Drawing.Size(120, 35);
+            this.addEmployeeButton.TabIndex = 15;
+            this.addEmployeeButton.Text = "Nouvel employé";
+            this.addEmployeeButton.UseVisualStyleBackColor = true;
+            this.addEmployeeButton.Click += new System.EventHandler(this.OnAddEmployeeButtonClick);
             // 
             // detailsPanel
             // 
             this.detailsPanel.AutoSize = true;
             this.detailsPanel.BackColor = System.Drawing.Color.White;
             this.detailsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.detailsPanel.Controls.Add(this.resetButton);
             this.detailsPanel.Controls.Add(this.pictureBox);
             this.detailsPanel.Controls.Add(this.dismissButton);
             this.detailsPanel.Controls.Add(this.nameTextBox);
@@ -156,7 +170,7 @@
             this.dismissButton.TabIndex = 23;
             this.dismissButton.Text = "Licencier";
             this.dismissButton.UseVisualStyleBackColor = true;
-            this.dismissButton.Click += new System.EventHandler(this.onDismissEmployeeButtonClick);
+            this.dismissButton.Click += new System.EventHandler(this.OnDismissEmployeeButtonClick);
             // 
             // nameTextBox
             // 
@@ -242,7 +256,7 @@
             this.editButton.Size = new System.Drawing.Size(30, 30);
             this.editButton.TabIndex = 14;
             this.editButton.UseVisualStyleBackColor = true;
-            this.editButton.Click += new System.EventHandler(this.onEditButtonClick);
+            this.editButton.Click += new System.EventHandler(this.OnEditButtonClick);
             // 
             // detailsTitleBarPanel
             // 
@@ -277,7 +291,7 @@
             this.permissionButton.TabIndex = 22;
             this.permissionButton.Text = "Permissions";
             this.permissionButton.UseVisualStyleBackColor = true;
-            this.permissionButton.Click += new System.EventHandler(this.onPermissionButtonClick);
+            this.permissionButton.Click += new System.EventHandler(this.OnPermissionButtonClick);
             // 
             // loginLabel
             // 
@@ -339,17 +353,18 @@
             this.surnameLabel.TabIndex = 1;
             this.surnameLabel.Text = "Nom";
             // 
-            // addEmployeeButton
+            // resetButton
             // 
-            this.addEmployeeButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.addEmployeeButton.AutoSize = true;
-            this.addEmployeeButton.Location = new System.Drawing.Point(140, 463);
-            this.addEmployeeButton.Name = "addEmployeeButton";
-            this.addEmployeeButton.Size = new System.Drawing.Size(120, 35);
-            this.addEmployeeButton.TabIndex = 15;
-            this.addEmployeeButton.Text = "Nouvel employé";
-            this.addEmployeeButton.UseVisualStyleBackColor = true;
-            this.addEmployeeButton.Click += new System.EventHandler(this.onAddEmployeeButtonClick);
+            this.resetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.resetButton.BackgroundImage = global::PT_Camping.Properties.Resources.ic_undo;
+            this.resetButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.resetButton.Location = new System.Drawing.Point(243, 46);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(30, 30);
+            this.resetButton.TabIndex = 25;
+            this.resetButton.UseVisualStyleBackColor = true;
+            this.resetButton.Visible = false;
+            this.resetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
             // EmployeesUserControl
             // 
@@ -398,5 +413,6 @@
         private System.Windows.Forms.Button dismissButton;
         private System.Windows.Forms.Button addEmployeeButton;
         private System.Windows.Forms.PictureBox pictureBox;
+        private System.Windows.Forms.Button resetButton;
     }
 }

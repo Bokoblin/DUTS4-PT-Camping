@@ -19,23 +19,23 @@ namespace PT_Camping
         {
             InitializeComponent();
             appBarTitle.Text = "Gestion des employés";
-            db = new DataBase();
+            Db = new DataBase();
             
             employeeListView.View = System.Windows.Forms.View.Details;
             employeeListView.Columns.Add("Nom", -2);
             employeeListView.Columns.Add("Prénom", -2);
             employeeListView.Columns.Add("Email", -2);
 
-            updateEmployeesListView();
-            handleResize();
+            UpdateEmployeesListView();
+            HandleResize();
         }
 
 
-        private void updateEmployeesListView()
+        private void UpdateEmployeesListView()
         {
             employeeListView.Items.Clear();
 
-            foreach (var employee in db.Employe)
+            foreach (var employee in Db.Employe)
             {
                 if (!employee.EstLicencie)
                 {
@@ -43,8 +43,10 @@ namespace PT_Camping
                     string name = employee.Personne.Prenom_Personne;
                     string email = employee.Personne.Email;
 
-                    var item = new ListViewItem(new[] { surname, name, email });
-                    item.Name = employee.Code_Personne.ToString();
+                    var item = new ListViewItem(new[] {surname, name, email})
+                    {
+                        Name = employee.Code_Personne.ToString()
+                    };
                     employeeListView.Items.Add(item);
                 }
             }
@@ -57,17 +59,17 @@ namespace PT_Camping
         }
 
 
-        private void updateEmployeeDetails()
+        private void UpdateEmployeeDetails()
         {
             if (employeeListView.SelectedItems.Count != 0)
             {
                 int code = int.Parse(employeeListView.SelectedItems[0].Name);
-                var employee = db.Employe.Find(code);
+                var employee = Db.Employe.Find(code);
 
                 surnameTextBox.Text = employee.Personne.Nom_Personne;
                 nameTextBox.Text = employee.Personne.Prenom_Personne;
                 if (employee.Personne.Date_Naissance != null)
-                    birthDateTextBox.Text = ((DateTime)employee.Personne.Date_Naissance).ToShortDateString();
+                    birthDateTextBox.Text = employee.Personne.Date_Naissance.ToShortDateString();
                 addressTextBox.Text = employee.Personne.Adresse;
                 phoneTextBox.Text = employee.Personne.Telephone;
                 emailTextBox.Text = employee.Personne.Email;
@@ -88,34 +90,38 @@ namespace PT_Camping
         }
 
 
-        private void onAddEmployeeButtonClick(object sender, EventArgs e)
+        private void OnAddEmployeeButtonClick(object sender, EventArgs e)
         {
-            new AddEmployee(db).ShowDialog();
-            updateEmployeesListView();
+            new AddEmployee(Db).ShowDialog();
+            UpdateEmployeesListView();
         }
    
 
-        private void onEditButtonClick(object sender, EventArgs e)
+        private void OnEditButtonClick(object sender, EventArgs e)
         {
-            if (addressTextBox.ReadOnly == true)
+            if (addressTextBox.ReadOnly)
             {
+                resetButton.Visible = true;
                 addressTextBox.ReadOnly = false;
                 phoneTextBox.ReadOnly = false;
                 emailTextBox.ReadOnly = false;
                 loginTextBox.ReadOnly = false;
+                editButton.BackgroundImage = Properties.Resources.ic_done;
             }
             else
             {
+                resetButton.Visible = false;
                 addressTextBox.ReadOnly = true;
                 phoneTextBox.ReadOnly = true;
                 emailTextBox.ReadOnly = true;
                 loginTextBox.ReadOnly = true;
+                editButton.BackgroundImage = Properties.Resources.ic_edit;
 
                 string message = "Les données suivantes ont été mises à jour : \n";
                 int cptModifications = 0;
 
                 int code = int.Parse(employeeListView.SelectedItems[0].Name);
-                var employee = db.Employe.Find(code);
+                var employee = Db.Employe.Find(code);
 
                 if (addressTextBox.Text != employee.Personne.Adresse)
                 {
@@ -157,9 +163,16 @@ namespace PT_Camping
                     cptModifications++;
                 }
 
-                db.SaveChanges();
+                Db.SaveChanges();
 
-                updateEmployeeDetails();
+                UpdateEmployeeDetails();
+                UpdateEmployeesListView();
+
+                foreach (ListViewItem item in employeeListView.Items)
+                {
+                    item.Selected = item.Name == code.ToString();
+                }
+                employeeListView.Select();
 
                 if (cptModifications > 0)
                     MessageBox.Show(message);
@@ -167,35 +180,35 @@ namespace PT_Camping
         }
 
 
-        private void onPermissionButtonClick(object sender, EventArgs e)
+        private void OnPermissionButtonClick(object sender, EventArgs e)
         {
             int code = int.Parse(employeeListView.SelectedItems[0].Name);
-            var employee = db.Employe.Find(code);
-            new Permissions(employee, db).ShowDialog();
-            db.SaveChanges();
+            var employee = Db.Employe.Find(code);
+            new Permissions(employee, Db).ShowDialog();
+            Db.SaveChanges();
         }
 
 
-        private void onDismissEmployeeButtonClick(object sender, EventArgs e)
+        private void OnDismissEmployeeButtonClick(object sender, EventArgs e)
         {
             int code = int.Parse(employeeListView.SelectedItems[0].Name);
-            var employee = db.Employe.Find(code);
+            var employee = Db.Employe.Find(code);
             employee.EstLicencie = true;
-            db.SaveChanges();
-            updateEmployeesListView();
+            Db.SaveChanges();
+            UpdateEmployeesListView();
         }
 
 
-        private void employeeListView_SelectedIndexChanged(object sender, EventArgs e)
+        private void EmployeeListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             addressTextBox.ReadOnly = true;
             phoneTextBox.ReadOnly = true;
             emailTextBox.ReadOnly = true;
             loginTextBox.ReadOnly = true;
-            updateEmployeeDetails();
+            UpdateEmployeeDetails();
         }
 
-        private void employeeListView_Resize(object sender, EventArgs e)
+        private void EmployeeListView_Resize(object sender, EventArgs e)
         {
             if (employeeListView.Columns.Count == 3)
             {
@@ -203,6 +216,17 @@ namespace PT_Camping
                 employeeListView.Columns[1].Width = employeeListView.Width / 3;
                 employeeListView.Columns[2].Width = employeeListView.Width / 3;
             }
+        }
+
+        private void ResetButton_Click(object sender, EventArgs e)
+        {
+            UpdateEmployeeDetails();
+            resetButton.Visible = false;
+            addressTextBox.ReadOnly = true;
+            phoneTextBox.ReadOnly = true;
+            emailTextBox.ReadOnly = true;
+            loginTextBox.ReadOnly = true;
+            editButton.BackgroundImage = Properties.Resources.ic_edit;
         }
     }
 }

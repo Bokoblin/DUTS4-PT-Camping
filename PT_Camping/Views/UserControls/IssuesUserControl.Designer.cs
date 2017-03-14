@@ -30,8 +30,6 @@ namespace PT_Camping
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IssuesUserControl));
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.issuesListView = new System.Windows.Forms.ListView();
-            this.addIssueButton = new System.Windows.Forms.Button();
             this.detailsPanel = new System.Windows.Forms.Panel();
             this.emplacementTextBox = new System.Windows.Forms.TextBox();
             this.emplacementLabel = new System.Windows.Forms.Label();
@@ -54,6 +52,9 @@ namespace PT_Camping
             this.creationDateLabel = new System.Windows.Forms.Label();
             this.TypeLabel = new System.Windows.Forms.Label();
             this.idLabel = new System.Windows.Forms.Label();
+            this.issuesListView = new System.Windows.Forms.ListView();
+            this.addIssueButton = new System.Windows.Forms.Button();
+            this.resetButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel.SuspendLayout();
             this.detailsPanel.SuspendLayout();
             this.detailsTitleBarPanel.SuspendLayout();
@@ -91,40 +92,12 @@ namespace PT_Camping
             this.tableLayoutPanel.Size = new System.Drawing.Size(803, 553);
             this.tableLayoutPanel.TabIndex = 12;
             // 
-            // issuesListView
-            // 
-            this.issuesListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.issuesListView.FullRowSelect = true;
-            this.issuesListView.GridLines = true;
-            this.issuesListView.HideSelection = false;
-            this.issuesListView.Location = new System.Drawing.Point(43, 47);
-            this.issuesListView.MultiSelect = false;
-            this.issuesListView.Name = "issuesListView";
-            this.issuesListView.Scrollable = false;
-            this.issuesListView.Size = new System.Drawing.Size(315, 392);
-            this.issuesListView.TabIndex = 10;
-            this.issuesListView.UseCompatibleStateImageBehavior = false;
-            this.issuesListView.View = System.Windows.Forms.View.List;
-            this.issuesListView.SelectedIndexChanged += new System.EventHandler(this.issuesListView_SelectedIndexChanged);
-            this.issuesListView.Resize += new System.EventHandler(this.issuesListView_Resize);
-            // 
-            // addIssueButton
-            // 
-            this.addIssueButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.addIssueButton.AutoSize = true;
-            this.addIssueButton.Location = new System.Drawing.Point(140, 465);
-            this.addIssueButton.Name = "addIssueButton";
-            this.addIssueButton.Size = new System.Drawing.Size(120, 35);
-            this.addIssueButton.TabIndex = 11;
-            this.addIssueButton.Text = "Nouvel incident";
-            this.addIssueButton.UseVisualStyleBackColor = true;
-            this.addIssueButton.Click += new System.EventHandler(this.onAddIssueButtonClick);
-            // 
             // detailsPanel
             // 
             this.detailsPanel.AutoSize = true;
             this.detailsPanel.BackColor = System.Drawing.Color.White;
             this.detailsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.detailsPanel.Controls.Add(this.resetButton);
             this.detailsPanel.Controls.Add(this.emplacementTextBox);
             this.detailsPanel.Controls.Add(this.emplacementLabel);
             this.detailsPanel.Controls.Add(this.descriptionTextBox);
@@ -244,7 +217,7 @@ namespace PT_Camping
             this.deleteButton.Size = new System.Drawing.Size(30, 30);
             this.deleteButton.TabIndex = 10;
             this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.onDeleteIssueButtonClick);
+            this.deleteButton.Click += new System.EventHandler(this.OnDeleteIssueButton_Click);
             // 
             // editButton
             // 
@@ -256,7 +229,7 @@ namespace PT_Camping
             this.editButton.Size = new System.Drawing.Size(30, 30);
             this.editButton.TabIndex = 11;
             this.editButton.UseVisualStyleBackColor = true;
-            this.editButton.Click += new System.EventHandler(this.onEditButtonClick);
+            this.editButton.Click += new System.EventHandler(this.OnEditButtonClick);
             // 
             // detailsTitleBarPanel
             // 
@@ -290,7 +263,7 @@ namespace PT_Camping
             this.resolveButton.TabIndex = 20;
             this.resolveButton.Text = "Marqué comme résolu";
             this.resolveButton.UseVisualStyleBackColor = true;
-            this.resolveButton.Click += new System.EventHandler(this.onResolveIssueButtonClick);
+            this.resolveButton.Click += new System.EventHandler(this.OnResolveIssueButton_Click);
             // 
             // descriptionLabel
             // 
@@ -362,6 +335,48 @@ namespace PT_Camping
             this.idLabel.TabIndex = 1;
             this.idLabel.Text = "Référence";
             // 
+            // issuesListView
+            // 
+            this.issuesListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.issuesListView.FullRowSelect = true;
+            this.issuesListView.GridLines = true;
+            this.issuesListView.HideSelection = false;
+            this.issuesListView.Location = new System.Drawing.Point(43, 47);
+            this.issuesListView.MultiSelect = false;
+            this.issuesListView.Name = "issuesListView";
+            this.issuesListView.Scrollable = false;
+            this.issuesListView.Size = new System.Drawing.Size(315, 392);
+            this.issuesListView.TabIndex = 10;
+            this.issuesListView.UseCompatibleStateImageBehavior = false;
+            this.issuesListView.View = System.Windows.Forms.View.List;
+            this.issuesListView.SelectedIndexChanged += new System.EventHandler(this.IssuesListView_SelectedIndexChanged);
+            this.issuesListView.Resize += new System.EventHandler(this.IssuesListView_Resize);
+            // 
+            // addIssueButton
+            // 
+            this.addIssueButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.addIssueButton.AutoSize = true;
+            this.addIssueButton.Location = new System.Drawing.Point(140, 465);
+            this.addIssueButton.Name = "addIssueButton";
+            this.addIssueButton.Size = new System.Drawing.Size(120, 35);
+            this.addIssueButton.TabIndex = 11;
+            this.addIssueButton.Text = "Nouvel incident";
+            this.addIssueButton.UseVisualStyleBackColor = true;
+            this.addIssueButton.Click += new System.EventHandler(this.OnAddIssueButton_Click);
+            // 
+            // resetButton
+            // 
+            this.resetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.resetButton.BackgroundImage = global::PT_Camping.Properties.Resources.ic_undo;
+            this.resetButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.resetButton.Location = new System.Drawing.Point(208, 46);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(30, 30);
+            this.resetButton.TabIndex = 25;
+            this.resetButton.UseVisualStyleBackColor = true;
+            this.resetButton.Visible = false;
+            this.resetButton.Click += new System.EventHandler(this.ResetButton_Click);
+            // 
             // IssuesUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -409,5 +424,6 @@ namespace PT_Camping
         private System.Windows.Forms.TextBox typeTextBox;
         private System.Windows.Forms.TextBox idTextBox;
         private System.Windows.Forms.TextBox emplacementTextBox;
+        private System.Windows.Forms.Button resetButton;
     }
 }

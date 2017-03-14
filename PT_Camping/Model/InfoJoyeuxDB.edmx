@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
@@ -21,6 +21,7 @@
           <Property Name="Date_Vente" Type="datetime" Nullable="false" />
           <Property Name="Code_Personne" Type="int" Nullable="false" />
           <Property Name="Code_Produit" Type="int" Nullable="false" />
+          <Property Name="Quantite_Produit" Type="int" />
         </EntityType>
         <EntityType Name="App">
           <Key>
@@ -134,7 +135,7 @@
           <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Telephone" Type="varchar" MaxLength="25" />
           <Property Name="Adresse" Type="varchar" MaxLength="250" />
-          <Property Name="Date_Naissance" Type="date" />
+          <Property Name="Date_Naissance" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Possede">
           <Key>
@@ -149,7 +150,7 @@
             <PropertyRef Name="Code_Produit" />
           </Key>
           <Property Name="Code_Produit" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Libelle_Produit" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Libelle_Produit" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Prix" Type="float" Nullable="false" />
           <Property Name="Quantite_Stock" Type="int" Nullable="false" />
         </EntityType>
@@ -530,6 +531,7 @@
           <Property Name="Code_Produit" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Personne" Relationship="Self.FK_A_vendu_Code_Personne" FromRole="A_vendu" ToRole="Personne" />
           <NavigationProperty Name="Produit" Relationship="Self.FK_A_vendu_Code_Produit" FromRole="A_vendu" ToRole="Produit" />
+          <Property Name="Quantite_Produit" Type="Int32" />
         </EntityType>
         <EntityType Name="App">
           <Key>
@@ -657,14 +659,14 @@
           <NavigationProperty Name="Loge" Relationship="Self.FK_Loge_Code_Personne" FromRole="Personne" ToRole="Loge" />
           <NavigationProperty Name="Reservation" Relationship="Self.FK_Reservation_Code_Personne" FromRole="Personne" ToRole="Reservation" />
           <NavigationProperty Name="Droit" Relationship="Self.A_le_droit" FromRole="Personne" ToRole="Droit" />
-          <Property Name="Date_Naissance" Type="DateTime" Precision="0" />
+          <Property Name="Date_Naissance" Type="DateTime" Precision="0" Nullable="false" />
         </EntityType>
         <EntityType Name="Produit">
           <Key>
             <PropertyRef Name="Code_Produit" />
           </Key>
           <Property Name="Code_Produit" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Libelle_Produit" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Libelle_Produit" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Prix" Type="Double" Nullable="false" />
           <Property Name="Quantite_Stock" Type="Int32" Nullable="false" />
           <NavigationProperty Name="A_vendu" Relationship="Self.FK_A_vendu_Code_Produit" FromRole="Produit" ToRole="A_vendu" />
@@ -973,6 +975,7 @@
           <EntitySetMapping Name="A_vendu">
             <EntityTypeMapping TypeName="InfoJoyeuxDB.A_vendu">
               <MappingFragment StoreEntitySet="A_vendu">
+                <ScalarProperty Name="Quantite_Produit" ColumnName="Quantite_Produit" />
                 <ScalarProperty Name="Date_Vente" ColumnName="Date_Vente" />
                 <ScalarProperty Name="Code_Personne" ColumnName="Code_Personne" />
                 <ScalarProperty Name="Code_Produit" ColumnName="Code_Produit" />

@@ -1,0 +1,330 @@
+﻿using PT_Camping.Model;
+using System;
+using System.Diagnostics;
+using System.Drawing;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace PT_Camping
+{
+    /// <summary>
+    /// The StocksUserControl inherits from ManagementHomeControl.
+    /// It is used to manage the camping's products stocks.
+    /// 
+    /// </summary>
+    /// Authors : Arthur, Yonnel
+    /// Since : 08/02/17
+    public partial class StocksUserControl : ManagementUserControl
+    {
+        
+        public StocksUserControl(HomeUserControl home) : base(home)
+        {
+            InitializeComponent();
+            appBarTitle.Text = "Gestion des stocks";
+            Db = new DataBase();
+
+            productListView.View = System.Windows.Forms.View.Details;
+            productListView.Columns.Add("Produit");
+            productListView.Columns.Add("Quantité");
+
+            UpdateProductListView();
+            HandleResize();
+        }
+
+
+        public void UpdateProductListView()
+        {
+            productListView.Items.Clear();
+
+            foreach (var product in Db.Produit)
+            {
+                string name = product.Libelle_Produit;
+                string stock = product.Quantite_Stock.ToString();
+
+                var item = new ListViewItem(new[] { name, stock })
+                {
+                    Name = product.Code_Produit.ToString()
+                };
+
+                if(product.Quantite_Stock == 0)
+                {
+                    item.BackColor = Color.Red;
+                }
+                else if(product.Quantite_Stock <= 15)
+                {
+                    item.BackColor = Color.Orange;
+                }
+                productListView.Items.Add(item);
+            }
+
+            //=== Select the first of the list
+
+            if (productListView.Items.Count > 0)
+            {
+                productListView.Items[0].Selected = true;
+                productListView.Select();
+            }
+        }
+
+
+        public void UpdateProductDetails()
+        {
+            if (productListView.SelectedItems.Count != 0)
+            {
+                int code = int.Parse(productListView.SelectedItems[0].Name);
+                var product = Db.Produit.Find(code);
+
+                if (product == null) return;
+
+                idTextBox.Text = product.Code_Produit.ToString();
+                productNameTextBox.Text = product.Libelle_Produit;
+                amountTextBox.Text = product.Quantite_Stock.ToString();
+                priceTextBox.Text = product.Prix.ToString("N2") + CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol;
+                providerComboBox.Items.Clear();
+                providerComboBox.Items.Add("Aucun");
+                foreach (var provider in Db.Fournisseur)
+                {
+                    providerComboBox.Items.Add(provider.Nom_Fournisseur);
+                }
+                providerComboBox.Text = product.Fournisseur.Count == 0
+                    ? providerComboBox.Items[0].ToString()
+                    : product.Fournisseur.First().Nom_Fournisseur;
+            }
+        }
+
+
+        private void AddStockButton_Click(object sender, MouseEventArgs e)
+        {
+            addStock newStock = new addStock();
+            newStock.ShowDialog();
+            UpdateProductListView();
+        }
+
+
+        private void DeleteProductButton_Click(object sender, EventArgs e)
+        {
+            int code = int.Parse(productListView.SelectedItems[0].Name);
+            var product = Db.Produit.Find(code);
+
+            if (product != null)
+            {
+                Db.Produit.Remove(product);
+                Db.SaveChanges();
+                UpdateProductListView();
+            }
+        }
+
+
+        private void EditProductButton_Click(object sender, EventArgs e)
+        {
+            if(priceTextBox.ReadOnly)
+            { 
+                resetButton.Visible = true;
+                priceTextBox.ReadOnly = false;
+                amountTextBox.ReadOnly = false;
+                productNameTextBox.ReadOnly = false;
+                providerComboBox.Enabled = true;
+                editButton.BackgroundImage = Properties.Resources.ic_done;
+            }
+            else
+            {
+                amountTextBox.ReadOnly = true;
+                priceTextBox.ReadOnly = true;
+                productNameTextBox.ReadOnly = true;
+                resetButton.Visible = false;
+                providerComboBox.Enabled = false;
+                editButton.BackgroundImage = Properties.Resources.ic_edit;
+
+                string message = "Les données suivantes ont été mises à jour : \n";
+                int cptModifications = 0;
+
+                int code = int.Parse(productListView.SelectedItems[0].Name);
+                var product = Db.Produit.Find(code);
+
+                if(product != null)
+                {
+                    if (productNameTextBox.Text != product.Libelle_Produit)
+                    {
+                        if (productNameTextBox.Text == "")
+                            MessageBox.Show("Le nom de produit ne peut être vide");
+                        else if (productNameTextBox.Text.Any(char.IsDigit))
+                            MessageBox.Show("Le libellé du produit ne peut contenir de valeur numérique.");
+                        else
+                        {
+                            product.Libelle_Produit = productNameTextBox.Text;
+                            message += "libellé, ";
+                            cptModifications++;
+                        }
+                        
+                    }
+
+                    if (amountTextBox.Text != product.Quantite_Stock.ToString())
+                    {
+                        try
+                        {
+                            if (int.Parse(amountTextBox.Text) < 0)
+                                MessageBox.Show("La quantité doit être positive.");
+                            else
+                            {
+                                product.Quantite_Stock = int.Parse(amountTextBox.Text);
+                                message += "quantité, ";
+                                cptModifications++;
+                            }
+                        }
+                        catch (OverflowException)
+                        {
+                            MessageBox.Show("La quantité est trop élévée.");
+                        }
+                    }
+
+                    if (priceTextBox.Text != (product.Prix.ToString("N2") + CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol) )
+                    {
+                        product.Prix = double.Parse(priceTextBox.Text.Replace(CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol, ""));
+                        message += "prix, ";
+                        cptModifications++;
+                    }
+
+                    if ( (product.Fournisseur.Count == 0 && providerComboBox.Text != "Aucun")
+                        || (product.Fournisseur.Count != 0 && providerComboBox.Text != product.Fournisseur.First().Nom_Fournisseur))
+                    {
+                        product.Fournisseur.Clear();
+                        if (providerComboBox.Text != "Aucun")
+                        {
+                            product.Fournisseur.Add(Db.Fournisseur.First(
+                            f => f.Nom_Fournisseur == providerComboBox.Text));
+                        }
+                        message += "fournisseur responsable";
+                        cptModifications++;
+                    }
+
+                    Db.SaveChanges();
+                    UpdateProductDetails();
+                    UpdateProductListView();
+
+                    foreach (ListViewItem item in productListView.Items)
+                    {
+                        item.Selected = item.Name == code.ToString();
+                    }
+                    productListView.Select();
+
+                    if (cptModifications > 0)
+                        MessageBox.Show(message);
+                }
+            }
+        }
+
+
+        private void ResetButton_Click(object sender, EventArgs e)
+        {
+            UpdateProductDetails();
+            resetButton.Visible = false;
+            amountTextBox.ReadOnly = true;
+            priceTextBox.ReadOnly = true;
+            productNameTextBox.ReadOnly = true;
+            providerComboBox.Enabled = false;
+            editButton.BackgroundImage = Properties.Resources.ic_edit;
+        }
+
+
+        private void CommandButton_Click(object sender, EventArgs e)
+        {
+            string employeeSurname = HomeUC.Window.userLoged.Person.Nom_Personne;
+            string employeeName = HomeUC.Window.userLoged.Person.Prenom_Personne;
+
+            const string subject = "Commande d'un produit";
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Dear " + providerComboBox.SelectedItem + ", \n");
+            sb.AppendLine("Nous souhaitons vous commander le produit " + productNameTextBox.Text + " en 42 exemplaires.");
+            sb.AppendLine("Cordialement,");
+            sb.AppendLine(employeeName + " " + employeeSurname);
+            string body = sb.ToString();
+            string receiver = "";
+            if (providerComboBox.SelectedItem != null)
+            {
+                receiver = Db.Fournisseur.Where(f => f.Nom_Fournisseur == providerComboBox.SelectedItem.ToString()).Select(f => f.Email_Fournisseur).First();
+            }
+
+            Process.Start("mailto:" + receiver + "?subject=" + subject + "&body=" + body);
+        }
+
+
+        private void SellButton_Click(object sender, EventArgs e)
+        {
+            int code = int.Parse(productListView.SelectedItems[0].Name);
+            var product = Db.Produit.Find(code);
+            SellStock sellStock = new SellStock(Db, product);
+            sellStock.ShowDialog();
+            UpdateProductListView();
+            UpdateProductDetails();
+
+            foreach (ListViewItem item in productListView.Items)
+            {
+                item.Selected = item.Name == code.ToString();
+            }
+            productListView.Select();
+        }
+
+
+        private void ProductListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            amountTextBox.ReadOnly = true;
+            priceTextBox.ReadOnly = true;
+            productNameTextBox.ReadOnly = true;
+            resetButton.Visible = false;
+            providerComboBox.Enabled = false;
+            UpdateProductDetails();
+        }
+
+
+        private void ProductListView_Resize(object sender, EventArgs e)
+        {
+            if( productListView.Columns.Count != 0)
+            {
+                foreach (ColumnHeader columnHeader in productListView.Columns)
+                    columnHeader.Width = productListView.Width / productListView.Columns.Count;
+            }
+        }
+
+
+        private void ProductNameTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (productNameTextBox.Text.Length > 30)
+                e.Handled = true;
+        }
+
+
+        private void AmountTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+
+        private void PriceTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && e.KeyChar != ',' && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+
+        private void PriceTextBox_Enter(object sender, EventArgs e)
+        {
+            if (!priceTextBox.ReadOnly)
+                priceTextBox.Text = priceTextBox.Text.Replace(CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol, "");
+        }
+
+
+        private void PriceTextBox_Leave(object sender, EventArgs e)
+        {
+            if (!priceTextBox.ReadOnly)
+                priceTextBox.Text = priceTextBox.Text 
+                + CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol;
+        }
+    }
+}
