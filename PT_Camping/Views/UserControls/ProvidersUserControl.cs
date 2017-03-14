@@ -30,21 +30,21 @@ namespace PT_Camping
         {
             InitializeComponent();
             appBarTitle.Text = "Gestion des fournisseurs";
-            db = new DataBase();
+            Db = new DataBase();
 
             ProvList.View = System.Windows.Forms.View.Details;
             ProvList.Columns.Add("Nom du fournisseur", -2);
             ProvList.Columns.Add("Adresse mail du fournisseur", -2);
 
             updateProviders();
-            handleResize();
+            HandleResize();
         }
 
         public void updateProviders()
         {
             ProvList.Items.Clear();
 
-            foreach (var provider in db.Fournisseur)
+            foreach (var provider in Db.Fournisseur)
             {
                 string providerEmail = provider.Email_Fournisseur;
                 string providerName = provider.Nom_Fournisseur;
@@ -89,7 +89,7 @@ namespace PT_Camping
                 int cptModifications = 0;
 
                 int code = int.Parse(ProvList.SelectedItems[0].Name);
-                var provider = db.Fournisseur.Find(code);
+                var provider = Db.Fournisseur.Find(code);
 
                 if (idTextBox.Text != provider.Nom_Fournisseur){
                     provider.Nom_Fournisseur = idTextBox.Text;
@@ -115,7 +115,7 @@ namespace PT_Camping
                     cptModifications++;
                 }
 
-                db.SaveChanges();
+                Db.SaveChanges();
 
                 updateProviders();
 
@@ -127,7 +127,7 @@ namespace PT_Camping
 
         private void newP_Click(object sender, EventArgs e)
         {
-            new AddProvider(db, 1).ShowDialog();
+            new AddProvider(Db, 1).ShowDialog();
             updateProviders();
         }
 
@@ -136,7 +136,7 @@ namespace PT_Camping
             if (ProvList.SelectedItems.Count != 0)
             {
                 int code = int.Parse(ProvList.SelectedItems[0].Name);
-                var provider = db.Fournisseur.Find(code);
+                var provider = Db.Fournisseur.Find(code);
 
                 providerMail = provider.Email_Fournisseur;
 
@@ -157,10 +157,10 @@ namespace PT_Camping
         private void deleteButton_Click(object sender, EventArgs e)
         {
             int code = int.Parse(ProvList.SelectedItems[0].Name);
-            var fournisseur = db.Fournisseur.Find(code);
+            var fournisseur = Db.Fournisseur.Find(code);
 
-            db.Fournisseur.Remove(fournisseur);
-            db.SaveChanges();
+            Db.Fournisseur.Remove(fournisseur);
+            Db.SaveChanges();
             updateProviders();
         }
     }

@@ -17,7 +17,7 @@ namespace PT_Camping
     public partial class ManagementUserControl : UserControl
     {
         protected HomeUserControl mHomeUC;
-        protected DataBase db;
+        protected DataBase Db;
 
         public ManagementUserControl()
         {
@@ -49,7 +49,7 @@ namespace PT_Camping
         }
 
 
-        internal void handleResize()
+        internal void HandleResize()
         {
             Size = mHomeUC.Size;
             appBar.Size = new Size(mHomeUC.Size.Width, appBar.Size.Height);
