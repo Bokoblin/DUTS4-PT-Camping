@@ -102,7 +102,7 @@ namespace PT_Camping
             }
             typeLocationComboBox.DisplayMember = "Libelle_Type";
             typeLocationComboBox.ValueMember = "Code_Type";
-            if (db.App.Where(m => m.Fond_Image != null).Count() < 1)
+            if (!db.App.Any(m => m.Fond_Image != null))
             {
                 mode = MapMode.LOAD_IMAGE;
             }
@@ -150,11 +150,44 @@ namespace PT_Camping
             typePicture.Dock = DockStyle.Fill;
             typePicture.TabIndex = 0;
             typePicture.TabStop = false;
+            typePicture.SizeMode = PictureBoxSizeMode.StretchImage;
             if (type.Icone != null)
             {
-                MemoryStream ms = new MemoryStream(db.App.FirstOrDefault().Fond_Image);
+                MemoryStream ms = new MemoryStream(type.Icone);
                 typePicture.Image = new Bitmap(ms);
                 ms.Close();
+            }
+            else
+            {
+                using (FileDialog fd = new OpenFileDialog())
+                {
+                    fd.Title = "Sélectionnez une image pour le type " + type.Libelle_Type;
+                    fd.Filter = "Image Files |*.png; *.jpg; *.bmp";
+                    if (fd.ShowDialog() == DialogResult.OK)
+                    {
+                        try
+                        {
+                            image = new Bitmap(fd.FileName);
+                            if (image == null)
+                            {
+                                throw new FileLoadException();
+                            }
+                            image.SetResolution(50, 50);
+                            ImageConverter converter = new ImageConverter();
+                            type.Icone = (byte[])converter.ConvertTo(image, typeof(byte[]));
+                            db.SaveChanges();
+                            typePicture.Image = image;
+                        }
+                        catch (FileNotFoundException)
+                        {
+                            MessageBox.Show("Fichier non trouvé ! Veuillez réessayer.");
+                        }
+                        catch (FileLoadException)
+                        {
+                            MessageBox.Show("Erreur lors de l'ouverture du fichier, veuillez réessayer.");
+                        }
+                    }
+                }
             }
             // 
             // label
@@ -181,7 +214,7 @@ namespace PT_Camping
             newLocation.Taille_X = 10;
             newLocation.Taille_Y = 10;
             int i = locationsList.Count();
-            while (db.Emplacement.Where(a => a.Nom_Emplacement.Equals("Emplacement " + i)).Count() > 0)
+            while (db.Emplacement.Any(a => a.Nom_Emplacement.Equals("Emplacement " + i)))
             {
                 i++;
             }
@@ -265,12 +298,12 @@ namespace PT_Camping
                         }
                         MemoryStream jpegStream = new MemoryStream();
                         image.Save(jpegStream, System.Drawing.Imaging.ImageFormat.Jpeg);
-                        app.Fond_Image = jpegStream.ToArray();
-                        db.SaveChanges();
                         if (image == null)
                         {
                             throw new FileLoadException();
                         }
+                        app.Fond_Image = jpegStream.ToArray();
+                        db.SaveChanges();
                         pictureBox.Image = image;
                         mode = MapMode.NORMAL;
                         changeMode(mode);
@@ -373,48 +406,62 @@ namespace PT_Camping
                 {
                     case CursorAction.MOVE:
                         {
-                            Point movePoint = new Point();
-                            movePoint.X = e.Location.X - offsetMoving.X;
-                            movePoint.Y = e.Location.Y - offsetMoving.Y;
+                            Point movePoint = new Point
+                            {
+                                X = e.Location.X - offsetMoving.X,
+                                Y = e.Location.Y - offsetMoving.Y
+                            };
                             selectedLocation.move(movePoint, pictureBox);
                         }
                         break;
                     case CursorAction.RESIZE_E:
                         {
-                            Size newSize = new Size();
-                            newSize.Height = oldSize.Height;
-                            newSize.Width = oldSize.Width + (e.Location.X - startClick.X);
+                            Size newSize = new Size
+                            {
+                                Height = oldSize.Height,
+                                Width = oldSize.Width + (e.Location.X - startClick.X)
+                            };
                             selectedLocation.resize(newSize, pictureBox);
                         }
                         break;
                     case CursorAction.RESIZE_N:
                         {
-                            Point newPosition = new Point();
-                            newPosition.Y = e.Location.Y;
-                            newPosition.X = oldPosition.X;
-                            Size newSize = new Size();
-                            newSize.Height = oldSize.Height - (e.Location.Y - startClick.Y);
-                            newSize.Width = oldSize.Width;
+                            Point newPosition = new Point
+                            {
+                                Y = e.Location.Y,
+                                X = oldPosition.X
+                            };
+                            Size newSize = new Size
+                            {
+                                Height = oldSize.Height - (e.Location.Y - startClick.Y),
+                                Width = oldSize.Width
+                            };
                             selectedLocation.resize(newSize, pictureBox);
                             selectedLocation.move(newPosition, pictureBox);
                         }
                         break;
                     case CursorAction.RESIZE_S:
                         {
-                            Size newSize = new Size();
-                            newSize.Height = oldSize.Height + (e.Location.Y - startClick.Y);
-                            newSize.Width = oldSize.Width;
+                            Size newSize = new Size
+                            {
+                                Height = oldSize.Height + (e.Location.Y - startClick.Y),
+                                Width = oldSize.Width
+                            };
                             selectedLocation.resize(newSize, pictureBox);
                         }
                         break;
                     case CursorAction.RESIZE_W:
                         {
-                            Point newPosition = new Point();
-                            newPosition.Y = oldPosition.Y;
-                            newPosition.X = e.Location.X;
-                            Size newSize = new Size();
-                            newSize.Height = oldSize.Height;
-                            newSize.Width = oldSize.Width - (e.Location.X - startClick.X);
+                            Point newPosition = new Point
+                            {
+                                Y = oldPosition.Y,
+                                X = e.Location.X
+                            };
+                            Size newSize = new Size
+                            {
+                                Height = oldSize.Height,
+                                Width = oldSize.Width - (e.Location.X - startClick.X)
+                            };
                             selectedLocation.resize(newSize, pictureBox);
                             selectedLocation.move(newPosition, pictureBox);
                         }
@@ -516,7 +563,7 @@ namespace PT_Camping
             Panel edit = editLocationPanel;
             string resState = resStateLabel.Text;
             string buttonText = resButton.Text;
-            if (db.Reservation.Where(r => r.Date_Debut < dateTimePicker.Value && dateTimePicker.Value < r.Date_Fin).SelectMany(a => a.Loge).Where(l => l.Code_Emplacement == selectedLocation.Location.Code_Emplacement).Count() >= 1)
+            if (db.Reservation.Where(r => r.Date_Debut < dateTimePicker.Value && dateTimePicker.Value < r.Date_Fin).SelectMany(a => a.Loge).Any(l => l.Code_Emplacement == selectedLocation.Location.Code_Emplacement))
             {
                 resStateLabel.Text = "Reservé";
                 resButton.Text = "Libérer";
