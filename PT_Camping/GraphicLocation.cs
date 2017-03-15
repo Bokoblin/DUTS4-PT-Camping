@@ -46,10 +46,17 @@ namespace PT_Camping
             double coefHeight = (float)e.ClipRectangle.Height / 100f;
             if (Location != null)
             {
-                Color rectangleColor = Color.LightGreen;
-                if (Booked)
+                Color rectangleColor = Color.Gray;
+                if (Location.Type_Emplacement.Est_Reservable)
                 {
-                    rectangleColor = Color.Red;
+                    if (Booked)
+                    {
+                        rectangleColor = Color.Red;
+                    }
+                    else
+                    {
+                        rectangleColor = Color.LightGreen;
+                    }
                 }
                 SizeF size = new Size(50, 50);
                 if (Location.Taille_X > 0)

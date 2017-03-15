@@ -21,6 +21,7 @@
           <Property Name="Date_Vente" Type="datetime" Nullable="false" />
           <Property Name="Code_Personne" Type="int" Nullable="false" />
           <Property Name="Code_Produit" Type="int" Nullable="false" />
+          <Property Name="Quantite_Produit" Type="int" />
         </EntityType>
         <EntityType Name="App">
           <Key>
@@ -88,6 +89,10 @@
           </Key>
           <Property Name="Code_Fournisseur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nom_Fournisseur" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Email_Fournisseur" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Site_web_Fournisseur" Type="varchar" MaxLength="50" />
+          <Property Name="Adresse_Fournisseur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="est_approuvé" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Fournit">
           <Key>
@@ -145,7 +150,7 @@
             <PropertyRef Name="Code_Produit" />
           </Key>
           <Property Name="Code_Produit" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Libelle_Produit" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Libelle_Produit" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Prix" Type="float" Nullable="false" />
           <Property Name="Quantite_Stock" Type="int" Nullable="false" />
         </EntityType>
@@ -178,6 +183,7 @@
           <Property Name="Libelle_Type" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Couleur" Type="int" />
           <Property Name="Icone" Type="image" />
+          <Property Name="Est_Reservable" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Type_Incident">
           <Key>
@@ -526,6 +532,7 @@
           <Property Name="Code_Produit" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Personne" Relationship="Self.FK_A_vendu_Code_Personne" FromRole="A_vendu" ToRole="Personne" />
           <NavigationProperty Name="Produit" Relationship="Self.FK_A_vendu_Code_Produit" FromRole="A_vendu" ToRole="Produit" />
+          <Property Name="Quantite_Produit" Type="Int32" />
         </EntityType>
         <EntityType Name="App">
           <Key>
@@ -604,6 +611,10 @@
           <Property Name="Code_Fournisseur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nom_Fournisseur" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Produit" Relationship="Self.Fournit" FromRole="Fournisseur" ToRole="Produit" />
+          <Property Name="Email_Fournisseur" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Site_web_Fournisseur" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Adresse_Fournisseur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="est_approuvé" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Incident">
           <Key>
@@ -656,7 +667,7 @@
             <PropertyRef Name="Code_Produit" />
           </Key>
           <Property Name="Code_Produit" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Libelle_Produit" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Libelle_Produit" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Prix" Type="Double" Nullable="false" />
           <Property Name="Quantite_Stock" Type="Int32" Nullable="false" />
           <NavigationProperty Name="A_vendu" Relationship="Self.FK_A_vendu_Code_Produit" FromRole="Produit" ToRole="A_vendu" />
@@ -696,6 +707,7 @@
           <NavigationProperty Name="Emplacement" Relationship="Self.FK_Emplacement_Code_Type" FromRole="Type_Emplacement" ToRole="Emplacement" />
           <Property Name="Couleur" Type="Int32" />
           <Property Name="Icone" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Est_Reservable" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Type_Incident">
           <Key>
@@ -969,6 +981,7 @@
           <EntitySetMapping Name="A_vendu">
             <EntityTypeMapping TypeName="InfoJoyeuxDB.A_vendu">
               <MappingFragment StoreEntitySet="A_vendu">
+                <ScalarProperty Name="Quantite_Produit" ColumnName="Quantite_Produit" />
                 <ScalarProperty Name="Date_Vente" ColumnName="Date_Vente" />
                 <ScalarProperty Name="Code_Personne" ColumnName="Code_Personne" />
                 <ScalarProperty Name="Code_Produit" ColumnName="Code_Produit" />
@@ -1045,6 +1058,10 @@
           <EntitySetMapping Name="Fournisseur">
             <EntityTypeMapping TypeName="InfoJoyeuxDB.Fournisseur">
               <MappingFragment StoreEntitySet="Fournisseur">
+                <ScalarProperty Name="est_approuvé" ColumnName="est_approuvé" />
+                <ScalarProperty Name="Adresse_Fournisseur" ColumnName="Adresse_Fournisseur" />
+                <ScalarProperty Name="Site_web_Fournisseur" ColumnName="Site_web_Fournisseur" />
+                <ScalarProperty Name="Email_Fournisseur" ColumnName="Email_Fournisseur" />
                 <ScalarProperty Name="Code_Fournisseur" ColumnName="Code_Fournisseur" />
                 <ScalarProperty Name="Nom_Fournisseur" ColumnName="Nom_Fournisseur" />
               </MappingFragment>
@@ -1122,6 +1139,7 @@
           <EntitySetMapping Name="Type_Emplacement">
             <EntityTypeMapping TypeName="InfoJoyeuxDB.Type_Emplacement">
               <MappingFragment StoreEntitySet="Type_Emplacement">
+                <ScalarProperty Name="Est_Reservable" ColumnName="Est_Reservable" />
                 <ScalarProperty Name="Icone" ColumnName="Icone" />
                 <ScalarProperty Name="Couleur" ColumnName="Couleur" />
                 <ScalarProperty Name="Code_Type" ColumnName="Code_Type" />
