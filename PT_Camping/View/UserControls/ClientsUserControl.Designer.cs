@@ -49,10 +49,10 @@
             this.NameReservLabel = new System.Windows.Forms.Label();
             this.TitleDetailsPanel = new System.Windows.Forms.Panel();
             this.TitleDetailsLabel = new System.Windows.Forms.Label();
-            this.nameLabel = new System.Windows.Forms.Label();
+            this.firstNameLabel = new System.Windows.Forms.Label();
             this.addressTextBox = new System.Windows.Forms.TextBox();
             this.birthDateLabel = new System.Windows.Forms.Label();
-            this.nameTextBox = new System.Windows.Forms.TextBox();
+            this.FirstNameTextBox = new System.Windows.Forms.TextBox();
             this.emailTextBox = new System.Windows.Forms.TextBox();
             this.birthDateTextBox = new System.Windows.Forms.TextBox();
             this.addressLabel = new System.Windows.Forms.Label();
@@ -144,10 +144,10 @@
             this.DetailsPanel.Controls.Add(this.EditButton);
             this.DetailsPanel.Controls.Add(this.NameReservLabel);
             this.DetailsPanel.Controls.Add(this.TitleDetailsPanel);
-            this.DetailsPanel.Controls.Add(this.nameLabel);
+            this.DetailsPanel.Controls.Add(this.firstNameLabel);
             this.DetailsPanel.Controls.Add(this.addressTextBox);
             this.DetailsPanel.Controls.Add(this.birthDateLabel);
-            this.DetailsPanel.Controls.Add(this.nameTextBox);
+            this.DetailsPanel.Controls.Add(this.FirstNameTextBox);
             this.DetailsPanel.Controls.Add(this.emailTextBox);
             this.DetailsPanel.Controls.Add(this.birthDateTextBox);
             this.DetailsPanel.Controls.Add(this.addressLabel);
@@ -319,16 +319,16 @@
             this.TitleDetailsLabel.TabIndex = 0;
             this.TitleDetailsLabel.Text = "Détail client";
             // 
-            // nameLabel
+            // firstNameLabel
             // 
-            this.nameLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.nameLabel.AutoSize = true;
-            this.nameLabel.Location = new System.Drawing.Point(48, 153);
-            this.nameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(57, 17);
-            this.nameLabel.TabIndex = 20;
-            this.nameLabel.Text = "Prénom";
+            this.firstNameLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.firstNameLabel.AutoSize = true;
+            this.firstNameLabel.Location = new System.Drawing.Point(48, 153);
+            this.firstNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.firstNameLabel.Name = "firstNameLabel";
+            this.firstNameLabel.Size = new System.Drawing.Size(57, 17);
+            this.firstNameLabel.TabIndex = 20;
+            this.firstNameLabel.Text = "Prénom";
             // 
             // addressTextBox
             // 
@@ -352,15 +352,15 @@
             this.birthDateLabel.TabIndex = 21;
             this.birthDateLabel.Text = "Date de Naissance";
             // 
-            // nameTextBox
+            // FirstNameTextBox
             // 
-            this.nameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.nameTextBox.Location = new System.Drawing.Point(205, 153);
-            this.nameTextBox.Margin = new System.Windows.Forms.Padding(4);
-            this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.ReadOnly = true;
-            this.nameTextBox.Size = new System.Drawing.Size(159, 22);
-            this.nameTextBox.TabIndex = 26;
+            this.FirstNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.FirstNameTextBox.Location = new System.Drawing.Point(205, 153);
+            this.FirstNameTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.FirstNameTextBox.Name = "FirstNameTextBox";
+            this.FirstNameTextBox.ReadOnly = true;
+            this.FirstNameTextBox.Size = new System.Drawing.Size(159, 22);
+            this.FirstNameTextBox.TabIndex = 26;
             // 
             // emailTextBox
             // 
@@ -458,13 +458,13 @@
         private System.Windows.Forms.Label TitleDetailsLabel;
         private System.Windows.Forms.Button EditButton;
         private System.Windows.Forms.Label surnameLabel;
-        private System.Windows.Forms.Label nameLabel;
+        private System.Windows.Forms.Label firstNameLabel;
         private System.Windows.Forms.Label birthDateLabel;
         private System.Windows.Forms.Label addressLabel;
         private System.Windows.Forms.Label phoneLabel;
         private System.Windows.Forms.Label emailLabel;
         private System.Windows.Forms.TextBox surnameTextBox;
-        private System.Windows.Forms.TextBox nameTextBox;
+        private System.Windows.Forms.TextBox FirstNameTextBox;
         private System.Windows.Forms.TextBox birthDateTextBox;
         private System.Windows.Forms.TextBox addressTextBox;
         private System.Windows.Forms.TextBox emailTextBox;
