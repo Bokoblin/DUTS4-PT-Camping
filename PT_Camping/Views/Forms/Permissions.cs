@@ -1,10 +1,10 @@
-﻿using PT_Camping.Model;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using System.Collections.Generic;
+using PT_Camping.Model;
 
-namespace PT_Camping
+namespace PT_Camping.Views.Forms
 {
     /// <summary>
     /// This dialog allows to select the permission given to each employee
@@ -20,64 +20,63 @@ namespace PT_Camping
     /// Since : 22/02/17
     public partial class Permissions : Form
     {
-        private DataBase db;
-        private Employe mConcernedEmployee;
-        private List<Droit> permissionsList;
+        private readonly DataBase _db;
+        private readonly Employe _concernedEmployee;
+        private readonly List<Droit> _permissionsList;
 
         public Permissions(Employe concernedEmployee, DataBase db)
         {
             InitializeComponent();
-            mConcernedEmployee = concernedEmployee;
-            permissionsList = mConcernedEmployee.Personne.Droit.ToList();
-            this.db = db;
+            _concernedEmployee = concernedEmployee;
+            _permissionsList = _concernedEmployee.Personne.Droit.ToList();
+            _db = db;
 
-            updateCheckBoxes();
+            UpdateCheckBoxes();
         }
 
 
-        private void updateCheckBoxes()
+        private void UpdateCheckBoxes()
         {
-            readClients.Checked = permissionsList.Any(d => d.Libelle_Droit == "readClients");
-            readIssues.Checked = permissionsList.Any(d => d.Libelle_Droit == "readIssues");
-            readEmployees.Checked = permissionsList.Any(d => d.Libelle_Droit == "readEmployees");
-            readProviders.Checked = permissionsList.Any(d => d.Libelle_Droit == "readProviders");
-            readStocks.Checked = permissionsList.Any(d => d.Libelle_Droit == "readStocks");
-            readMap.Checked = permissionsList.Any(d => d.Libelle_Droit == "readMap");
+            readClients.Checked = _permissionsList.Any(d => d.Libelle_Droit == "readClients");
+            readIssues.Checked = _permissionsList.Any(d => d.Libelle_Droit == "readIssues");
+            readEmployees.Checked = _permissionsList.Any(d => d.Libelle_Droit == "readEmployees");
+            readProviders.Checked = _permissionsList.Any(d => d.Libelle_Droit == "readProviders");
+            readStocks.Checked = _permissionsList.Any(d => d.Libelle_Droit == "readStocks");
+            readMap.Checked = _permissionsList.Any(d => d.Libelle_Droit == "readMap");
 
-            writeClients.Checked = permissionsList.Any(d => d.Libelle_Droit == "writeClients");
-            writeIssues.Checked = permissionsList.Any(d => d.Libelle_Droit == "writeIssues");
-            writeEmployees.Checked = permissionsList.Any(d => d.Libelle_Droit == "writeEmployees");
-            writeProviders.Checked = permissionsList.Any(d => d.Libelle_Droit == "writeProviders");
-            writeStocks.Checked = permissionsList.Any(d => d.Libelle_Droit == "writeStocks");
-            writeMap.Checked = permissionsList.Any(d => d.Libelle_Droit == "writeMap");
+            writeClients.Checked = _permissionsList.Any(d => d.Libelle_Droit == "writeClients");
+            writeIssues.Checked = _permissionsList.Any(d => d.Libelle_Droit == "writeIssues");
+            writeEmployees.Checked = _permissionsList.Any(d => d.Libelle_Droit == "writeEmployees");
+            writeProviders.Checked = _permissionsList.Any(d => d.Libelle_Droit == "writeProviders");
+            writeStocks.Checked = _permissionsList.Any(d => d.Libelle_Droit == "writeStocks");
+            writeMap.Checked = _permissionsList.Any(d => d.Libelle_Droit == "writeMap");
         }
 
 
-        private void onCancelButtonClick(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
 
-        private void onOkButtonClick(object sender, EventArgs e)
+        private void OkButton_Click(object sender, EventArgs e)
         {
             #region CLIENTS READ PERMISSION
 
             if (readClients.Checked)
             {
-                if (permissionsList.Find(d => d.Libelle_Droit == "readClients") == null)
+                if (_permissionsList.Find(d => d.Libelle_Droit == "readClients") == null)
                 {
-                    Droit droit = db.Droit.Where(d => d.Libelle_Droit == "readClients").FirstOrDefault();
-                    mConcernedEmployee.Personne.Droit.Add(droit);
+                    Droit droit = _db.Droit.FirstOrDefault(d => d.Libelle_Droit == "readClients");
+                    _concernedEmployee.Personne.Droit.Add(droit);
                 }
             }
             else
             {
-                if (permissionsList.Find(d => d.Libelle_Droit == "readClients") != null)
+                if (_permissionsList.Find(d => d.Libelle_Droit == "readClients") != null)
                 {
-                    mConcernedEmployee.Personne.Droit.Remove(
-                        mConcernedEmployee.Personne.Droit.Where(d => d.Libelle_Droit == "readClients").FirstOrDefault()
-                        );
+                    _concernedEmployee.Personne.Droit.Remove( 
+                        _concernedEmployee.Personne.Droit.FirstOrDefault(d => d.Libelle_Droit == "readClients"));
                 }
             }
             #endregion
@@ -86,18 +85,18 @@ namespace PT_Camping
 
             if (readIssues.Checked)
             {
-                if (permissionsList.Find(d => d.Libelle_Droit == "readIssues") == null)
+                if (_permissionsList.Find(d => d.Libelle_Droit == "readIssues") == null)
                 {
-                    Droit droit = db.Droit.Where(d => d.Libelle_Droit == "readIssues").FirstOrDefault();
-                    mConcernedEmployee.Personne.Droit.Add(droit);
+                    Droit droit = _db.Droit.FirstOrDefault(d => d.Libelle_Droit == "readIssues");
+                    _concernedEmployee.Personne.Droit.Add(droit);
                 }
             }
             else
             {
-                if (permissionsList.Find(d => d.Libelle_Droit == "readIssues") != null)
+                if (_permissionsList.Find(d => d.Libelle_Droit == "readIssues") != null)
                 {
-                    mConcernedEmployee.Personne.Droit.Remove(
-                        mConcernedEmployee.Personne.Droit.Where(d => d.Libelle_Droit == "readIssues").FirstOrDefault()
+                    _concernedEmployee.Personne.Droit.Remove(
+                        _concernedEmployee.Personne.Droit.FirstOrDefault(d => d.Libelle_Droit == "readIssues")
                         );
                 }
             }
@@ -107,18 +106,18 @@ namespace PT_Camping
 
             if (readEmployees.Checked)
             {
-                if (permissionsList.Find(d => d.Libelle_Droit == "readEmployees") == null)
+                if (_permissionsList.Find(d => d.Libelle_Droit == "readEmployees") == null)
                 {
-                    Droit droit = db.Droit.Where(d => d.Libelle_Droit == "readEmployees").FirstOrDefault();
-                    mConcernedEmployee.Personne.Droit.Add(droit);
+                    Droit droit = _db.Droit.FirstOrDefault(d => d.Libelle_Droit == "readEmployees");
+                    _concernedEmployee.Personne.Droit.Add(droit);
                 }
             }
             else
             {
-                if (permissionsList.Find(d => d.Libelle_Droit == "readEmployees") != null)
+                if (_permissionsList.Find(d => d.Libelle_Droit == "readEmployees") != null)
                 {
-                    mConcernedEmployee.Personne.Droit.Remove(
-                        mConcernedEmployee.Personne.Droit.Where(d => d.Libelle_Droit == "readEmployees").FirstOrDefault()
+                    _concernedEmployee.Personne.Droit.Remove(
+                        _concernedEmployee.Personne.Droit.FirstOrDefault(d => d.Libelle_Droit == "readEmployees")
                         );
                 }
             }
@@ -128,18 +127,18 @@ namespace PT_Camping
 
             if (readProviders.Checked)
             {
-                if (permissionsList.Find(d => d.Libelle_Droit == "readProviders") == null)
+                if (_permissionsList.Find(d => d.Libelle_Droit == "readProviders") == null)
                 {
-                    Droit droit = db.Droit.Where(d => d.Libelle_Droit == "readProviders").FirstOrDefault();
-                    mConcernedEmployee.Personne.Droit.Add(droit);
+                    Droit droit = _db.Droit.FirstOrDefault(d => d.Libelle_Droit == "readProviders");
+                    _concernedEmployee.Personne.Droit.Add(droit);
                 }
             }
             else
             {
-                if (permissionsList.Find(d => d.Libelle_Droit == "readProviders") != null)
+                if (_permissionsList.Find(d => d.Libelle_Droit == "readProviders") != null)
                 {
-                    mConcernedEmployee.Personne.Droit.Remove(
-                        mConcernedEmployee.Personne.Droit.Where(d => d.Libelle_Droit == "readProviders").FirstOrDefault()
+                    _concernedEmployee.Personne.Droit.Remove(
+                        _concernedEmployee.Personne.Droit.FirstOrDefault(d => d.Libelle_Droit == "readProviders")
                         );
                 }
             }
@@ -149,18 +148,18 @@ namespace PT_Camping
 
             if (readStocks.Checked)
             {
-                if (permissionsList.Find(d => d.Libelle_Droit == "readStocks") == null)
+                if (_permissionsList.Find(d => d.Libelle_Droit == "readStocks") == null)
                 {
-                    Droit droit = db.Droit.Where(d => d.Libelle_Droit == "readStocks").FirstOrDefault();
-                    mConcernedEmployee.Personne.Droit.Add(droit);
+                    Droit droit = _db.Droit.FirstOrDefault(d => d.Libelle_Droit == "readStocks");
+                    _concernedEmployee.Personne.Droit.Add(droit);
                 }
             }
             else
             {
-                if (permissionsList.Find(d => d.Libelle_Droit == "readStocks") != null)
+                if (_permissionsList.Find(d => d.Libelle_Droit == "readStocks") != null)
                 {
-                    mConcernedEmployee.Personne.Droit.Remove(
-                        mConcernedEmployee.Personne.Droit.Where(d => d.Libelle_Droit == "readStocks").FirstOrDefault()
+                    _concernedEmployee.Personne.Droit.Remove(
+                        _concernedEmployee.Personne.Droit.FirstOrDefault(d => d.Libelle_Droit == "readStocks")
                         );
                 }
             }
@@ -170,18 +169,18 @@ namespace PT_Camping
 
             if (readMap.Checked)
             {
-                if (permissionsList.Find(d => d.Libelle_Droit == "readMap") == null)
+                if (_permissionsList.Find(d => d.Libelle_Droit == "readMap") == null)
                 {
-                    Droit droit = db.Droit.Where(d => d.Libelle_Droit == "readMap").FirstOrDefault();
-                    mConcernedEmployee.Personne.Droit.Add(droit);
+                    Droit droit = _db.Droit.FirstOrDefault(d => d.Libelle_Droit == "readMap");
+                    _concernedEmployee.Personne.Droit.Add(droit);
                 }
             }
             else
             {
-                if (permissionsList.Find(d => d.Libelle_Droit == "readMap") != null)
+                if (_permissionsList.Find(d => d.Libelle_Droit == "readMap") != null)
                 {
-                    mConcernedEmployee.Personne.Droit.Remove(
-                        mConcernedEmployee.Personne.Droit.Where(d => d.Libelle_Droit == "readMap").FirstOrDefault()
+                    _concernedEmployee.Personne.Droit.Remove(
+                        _concernedEmployee.Personne.Droit.FirstOrDefault(d => d.Libelle_Droit == "readMap")
                         );
                 }
             }
@@ -192,18 +191,18 @@ namespace PT_Camping
 
             if (writeClients.Checked)
             {
-                if (permissionsList.Find(d => d.Libelle_Droit == "writeClients") == null)
+                if (_permissionsList.Find(d => d.Libelle_Droit == "writeClients") == null)
                 {
-                    Droit droit = db.Droit.Where(d => d.Libelle_Droit == "writeClients").FirstOrDefault();
-                    mConcernedEmployee.Personne.Droit.Add(droit);
+                    Droit droit = _db.Droit.FirstOrDefault(d => d.Libelle_Droit == "writeClients");
+                    _concernedEmployee.Personne.Droit.Add(droit);
                 }
             }
             else
             {
-                if (permissionsList.Find(d => d.Libelle_Droit == "writeClients") != null)
+                if (_permissionsList.Find(d => d.Libelle_Droit == "writeClients") != null)
                 {
-                    mConcernedEmployee.Personne.Droit.Remove(
-                        mConcernedEmployee.Personne.Droit.Where(d => d.Libelle_Droit == "writeClients").FirstOrDefault()
+                    _concernedEmployee.Personne.Droit.Remove(
+                        _concernedEmployee.Personne.Droit.FirstOrDefault(d => d.Libelle_Droit == "writeClients")
                         );
                 }
             }
@@ -213,18 +212,18 @@ namespace PT_Camping
 
             if (writeIssues.Checked)
             {
-                if (permissionsList.Find(d => d.Libelle_Droit == "writeIssues") == null)
+                if (_permissionsList.Find(d => d.Libelle_Droit == "writeIssues") == null)
                 {
-                    Droit droit = db.Droit.Where(d => d.Libelle_Droit == "writeIssues").FirstOrDefault();
-                    mConcernedEmployee.Personne.Droit.Add(droit);
+                    Droit droit = _db.Droit.FirstOrDefault(d => d.Libelle_Droit == "writeIssues");
+                    _concernedEmployee.Personne.Droit.Add(droit);
                 }
             }
             else
             {
-                if (permissionsList.Find(d => d.Libelle_Droit == "writeIssues") != null)
+                if (_permissionsList.Find(d => d.Libelle_Droit == "writeIssues") != null)
                 {
-                    mConcernedEmployee.Personne.Droit.Remove(
-                        mConcernedEmployee.Personne.Droit.Where(d => d.Libelle_Droit == "writeIssues").FirstOrDefault()
+                    _concernedEmployee.Personne.Droit.Remove(
+                        _concernedEmployee.Personne.Droit.FirstOrDefault(d => d.Libelle_Droit == "writeIssues")
                         );
                 }
             }
@@ -234,18 +233,18 @@ namespace PT_Camping
 
             if (writeEmployees.Checked)
             {
-                if (permissionsList.Find(d => d.Libelle_Droit == "writeEmployees") == null)
+                if (_permissionsList.Find(d => d.Libelle_Droit == "writeEmployees") == null)
                 {
-                    Droit droit = db.Droit.Where(d => d.Libelle_Droit == "writeEmployees").FirstOrDefault();
-                    mConcernedEmployee.Personne.Droit.Add(droit);
+                    Droit droit = _db.Droit.FirstOrDefault(d => d.Libelle_Droit == "writeEmployees");
+                    _concernedEmployee.Personne.Droit.Add(droit);
                 }
             }
             else
             {
-                if (permissionsList.Find(d => d.Libelle_Droit == "writeEmployees") != null)
+                if (_permissionsList.Find(d => d.Libelle_Droit == "writeEmployees") != null)
                 {
-                    mConcernedEmployee.Personne.Droit.Remove(
-                        mConcernedEmployee.Personne.Droit.Where(d => d.Libelle_Droit == "writeEmployees").FirstOrDefault()
+                    _concernedEmployee.Personne.Droit.Remove(
+                        _concernedEmployee.Personne.Droit.FirstOrDefault(d => d.Libelle_Droit == "writeEmployees")
                         );
                 }
             }
@@ -255,18 +254,18 @@ namespace PT_Camping
 
             if (writeProviders.Checked)
             {
-                if (permissionsList.Find(d => d.Libelle_Droit == "writeProviders") == null)
+                if (_permissionsList.Find(d => d.Libelle_Droit == "writeProviders") == null)
                 {
-                    Droit droit = db.Droit.Where(d => d.Libelle_Droit == "writeProviders").FirstOrDefault();
-                    mConcernedEmployee.Personne.Droit.Add(droit);
+                    Droit droit = _db.Droit.FirstOrDefault(d => d.Libelle_Droit == "writeProviders");
+                    _concernedEmployee.Personne.Droit.Add(droit);
                 }
             }
             else
             {
-                if (permissionsList.Find(d => d.Libelle_Droit == "writeProviders") != null)
+                if (_permissionsList.Find(d => d.Libelle_Droit == "writeProviders") != null)
                 {
-                    mConcernedEmployee.Personne.Droit.Remove(
-                        mConcernedEmployee.Personne.Droit.Where(d => d.Libelle_Droit == "writeProviders").FirstOrDefault()
+                    _concernedEmployee.Personne.Droit.Remove(
+                        _concernedEmployee.Personne.Droit.FirstOrDefault(d => d.Libelle_Droit == "writeProviders")
                         );
                 }
             }
@@ -276,18 +275,18 @@ namespace PT_Camping
 
             if (writeStocks.Checked)
             {
-                if (permissionsList.Find(d => d.Libelle_Droit == "writeStocks") == null)
+                if (_permissionsList.Find(d => d.Libelle_Droit == "writeStocks") == null)
                 {
-                    Droit droit = db.Droit.Where(d => d.Libelle_Droit == "writeStocks").FirstOrDefault();
-                    mConcernedEmployee.Personne.Droit.Add(droit);
+                    Droit droit = _db.Droit.FirstOrDefault(d => d.Libelle_Droit == "writeStocks");
+                    _concernedEmployee.Personne.Droit.Add(droit);
                 }
             }
             else
             {
-                if (permissionsList.Find(d => d.Libelle_Droit == "writeStocks") != null)
+                if (_permissionsList.Find(d => d.Libelle_Droit == "writeStocks") != null)
                 {
-                    mConcernedEmployee.Personne.Droit.Remove(
-                        mConcernedEmployee.Personne.Droit.Where(d => d.Libelle_Droit == "writeStocks").FirstOrDefault()
+                    _concernedEmployee.Personne.Droit.Remove(
+                        _concernedEmployee.Personne.Droit.FirstOrDefault(d => d.Libelle_Droit == "writeStocks")
                         );
                 }
             }
@@ -297,93 +296,93 @@ namespace PT_Camping
 
             if (writeMap.Checked)
             {
-                if (permissionsList.Find(d => d.Libelle_Droit == "writeMap") == null)
+                if (_permissionsList.Find(d => d.Libelle_Droit == "writeMap") == null)
                 {
-                    Droit droit = db.Droit.Where(d => d.Libelle_Droit == "writeMap").FirstOrDefault();
-                    mConcernedEmployee.Personne.Droit.Add(droit);
+                    Droit droit = _db.Droit.FirstOrDefault(d => d.Libelle_Droit == "writeMap");
+                    _concernedEmployee.Personne.Droit.Add(droit);
                 }
             }
             else
             {
-                if (permissionsList.Find(d => d.Libelle_Droit == "writeMap") != null)
+                if (_permissionsList.Find(d => d.Libelle_Droit == "writeMap") != null)
                 {
-                    mConcernedEmployee.Personne.Droit.Remove(
-                        mConcernedEmployee.Personne.Droit.Where(d => d.Libelle_Droit == "writeMap").FirstOrDefault()
+                    _concernedEmployee.Personne.Droit.Remove(
+                        _concernedEmployee.Personne.Droit.FirstOrDefault(d => d.Libelle_Droit == "writeMap")
                         );
                 }
             }
             #endregion
 
-            this.Close();
+            Close();
         }
 
-        private void readClients_CheckedChanged(object sender, EventArgs e)
+        private void ReadClients_CheckedChanged(object sender, EventArgs e)
         {
             if (!readClients.Checked)
                 writeClients.Checked = false;
         }
 
-        private void readIssues_CheckedChanged(object sender, EventArgs e)
+        private void ReadIssues_CheckedChanged(object sender, EventArgs e)
         {
             if (!readIssues.Checked)
                 writeIssues.Checked = false;
         }
 
-        private void readEmployees_CheckedChanged(object sender, EventArgs e)
+        private void ReadEmployees_CheckedChanged(object sender, EventArgs e)
         {
             if (!readEmployees.Checked)
                 writeEmployees.Checked = false;
         }
 
-        private void readProviders_CheckedChanged(object sender, EventArgs e)
+        private void ReadProviders_CheckedChanged(object sender, EventArgs e)
         {
             if (!readProviders.Checked)
                 writeProviders.Checked = false;
         }
 
-        private void readStocks_CheckedChanged(object sender, EventArgs e)
+        private void ReadStocks_CheckedChanged(object sender, EventArgs e)
         {
             if (!readStocks.Checked)
                 writeStocks.Checked = false;
         }
 
-        private void readMap_CheckedChanged(object sender, EventArgs e)
+        private void ReadMap_CheckedChanged(object sender, EventArgs e)
         {
             if (!readMap.Checked)
                 writeMap.Checked = false;
         }
 
-        private void writeClients_CheckedChanged(object sender, EventArgs e)
+        private void WriteClients_CheckedChanged(object sender, EventArgs e)
         {
             if (writeClients.Checked)
                 readClients.Checked = true;
         }
 
-        private void writeIssues_CheckedChanged(object sender, EventArgs e)
+        private void WriteIssues_CheckedChanged(object sender, EventArgs e)
         {
             if (writeIssues.Checked)
                 readIssues.Checked = true;
         }
 
-        private void writeEmployees_CheckedChanged(object sender, EventArgs e)
+        private void WriteEmployees_CheckedChanged(object sender, EventArgs e)
         {
             if (writeEmployees.Checked)
                 readEmployees.Checked = true;
         }
 
-        private void writeProviders_CheckedChanged(object sender, EventArgs e)
+        private void WriteProviders_CheckedChanged(object sender, EventArgs e)
         {
             if (writeProviders.Checked)
                 readProviders.Checked = true;
         }
 
-        private void writeStocks_CheckedChanged(object sender, EventArgs e)
+        private void WriteStocks_CheckedChanged(object sender, EventArgs e)
         {
             if (writeStocks.Checked)
                 readStocks.Checked = true;
         }
 
-        private void writeMap_CheckedChanged(object sender, EventArgs e)
+        private void WriteMap_CheckedChanged(object sender, EventArgs e)
         {
             if (writeMap.Checked)
                 readMap.Checked = true;

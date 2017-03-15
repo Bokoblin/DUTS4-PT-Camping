@@ -1,4 +1,4 @@
-namespace PT_Camping
+﻿namespace PT_Camping.Views.UserControls
 {
     partial class ProvidersUserControl
     {
@@ -28,27 +28,27 @@ namespace PT_Camping
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProvidersUserControl));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.ProvList = new System.Windows.Forms.ListView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.addTextBox = new System.Windows.Forms.TextBox();
+            this.providerListView = new System.Windows.Forms.ListView();
+            this.detailPanel = new System.Windows.Forms.Panel();
+            this.resetButton = new System.Windows.Forms.Button();
+            this.addressTextBox = new System.Windows.Forms.TextBox();
             this.contactButton = new System.Windows.Forms.Button();
-            this.MailTextBox = new System.Windows.Forms.TextBox();
-            this.WebTextBox = new System.Windows.Forms.TextBox();
-            this.idTextBox = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.idLabel = new System.Windows.Forms.Label();
+            this.emailTextBox = new System.Windows.Forms.TextBox();
+            this.websiteTextBox = new System.Windows.Forms.TextBox();
+            this.nameTextBox = new System.Windows.Forms.TextBox();
+            this.websiteLabel = new System.Windows.Forms.Label();
+            this.emailLabel = new System.Windows.Forms.Label();
+            this.addressLabel = new System.Windows.Forms.Label();
+            this.nameLabel = new System.Windows.Forms.Label();
             this.editButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.newP = new System.Windows.Forms.Button();
+            this.detailTitlePanel = new System.Windows.Forms.Panel();
+            this.detailTitleLabel = new System.Windows.Forms.Label();
+            this.addProviderButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.detailPanel.SuspendLayout();
+            this.detailTitlePanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // logoutButton
@@ -64,9 +64,9 @@ namespace PT_Camping
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel1.Controls.Add(this.ProvList, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.newP, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.providerListView, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.detailPanel, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.addProviderButton, 1, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 50);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -78,50 +78,65 @@ namespace PT_Camping
             this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 550);
             this.tableLayoutPanel1.TabIndex = 22;
             // 
-            // ProvList
+            // providerListView
             // 
-            this.ProvList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ProvList.FullRowSelect = true;
-            this.ProvList.GridLines = true;
-            this.ProvList.Location = new System.Drawing.Point(43, 47);
-            this.ProvList.Name = "ProvList";
-            this.ProvList.Scrollable = false;
-            this.ProvList.Size = new System.Drawing.Size(314, 390);
-            this.ProvList.TabIndex = 0;
-            this.ProvList.UseCompatibleStateImageBehavior = false;
-            this.ProvList.SelectedIndexChanged += new System.EventHandler(this.ProvList_SelectedIndexChanged_1);
+            this.providerListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.providerListView.FullRowSelect = true;
+            this.providerListView.GridLines = true;
+            this.providerListView.Location = new System.Drawing.Point(43, 47);
+            this.providerListView.Name = "providerListView";
+            this.providerListView.Scrollable = false;
+            this.providerListView.Size = new System.Drawing.Size(314, 390);
+            this.providerListView.TabIndex = 0;
+            this.providerListView.UseCompatibleStateImageBehavior = false;
+            this.providerListView.SelectedIndexChanged += new System.EventHandler(this.ProviderListView_SelectedIndexChanged);
+            this.providerListView.Resize += new System.EventHandler(this.ProviderListView_Resize);
             // 
-            // panel1
+            // detailPanel
             // 
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.addTextBox);
-            this.panel1.Controls.Add(this.contactButton);
-            this.panel1.Controls.Add(this.MailTextBox);
-            this.panel1.Controls.Add(this.WebTextBox);
-            this.panel1.Controls.Add(this.idTextBox);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.idLabel);
-            this.panel1.Controls.Add(this.editButton);
-            this.panel1.Controls.Add(this.deleteButton);
-            this.panel1.Controls.Add(this.panel2);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(443, 47);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(314, 390);
-            this.panel1.TabIndex = 1;
+            this.detailPanel.BackColor = System.Drawing.Color.White;
+            this.detailPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.detailPanel.Controls.Add(this.resetButton);
+            this.detailPanel.Controls.Add(this.addressTextBox);
+            this.detailPanel.Controls.Add(this.contactButton);
+            this.detailPanel.Controls.Add(this.emailTextBox);
+            this.detailPanel.Controls.Add(this.websiteTextBox);
+            this.detailPanel.Controls.Add(this.nameTextBox);
+            this.detailPanel.Controls.Add(this.websiteLabel);
+            this.detailPanel.Controls.Add(this.emailLabel);
+            this.detailPanel.Controls.Add(this.addressLabel);
+            this.detailPanel.Controls.Add(this.nameLabel);
+            this.detailPanel.Controls.Add(this.editButton);
+            this.detailPanel.Controls.Add(this.deleteButton);
+            this.detailPanel.Controls.Add(this.detailTitlePanel);
+            this.detailPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.detailPanel.Location = new System.Drawing.Point(443, 47);
+            this.detailPanel.Name = "detailPanel";
+            this.detailPanel.Size = new System.Drawing.Size(314, 390);
+            this.detailPanel.TabIndex = 1;
             // 
-            // addTextBox
+            // resetButton
             // 
-            this.addTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.addTextBox.Location = new System.Drawing.Point(160, 157);
-            this.addTextBox.Multiline = true;
-            this.addTextBox.Name = "addTextBox";
-            this.addTextBox.ReadOnly = true;
-            this.addTextBox.Size = new System.Drawing.Size(120, 40);
-            this.addTextBox.TabIndex = 22;
+            this.resetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.resetButton.BackgroundImage = global::PT_Camping.Properties.Resources.ic_undo;
+            this.resetButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.resetButton.Location = new System.Drawing.Point(206, 46);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(30, 30);
+            this.resetButton.TabIndex = 25;
+            this.resetButton.UseVisualStyleBackColor = true;
+            this.resetButton.Visible = false;
+            this.resetButton.Click += new System.EventHandler(this.ResetButton_Click);
+            // 
+            // addressTextBox
+            // 
+            this.addressTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.addressTextBox.Location = new System.Drawing.Point(160, 157);
+            this.addressTextBox.Multiline = true;
+            this.addressTextBox.Name = "addressTextBox";
+            this.addressTextBox.ReadOnly = true;
+            this.addressTextBox.Size = new System.Drawing.Size(120, 40);
+            this.addressTextBox.TabIndex = 22;
             // 
             // contactButton
             // 
@@ -133,131 +148,131 @@ namespace PT_Camping
             this.contactButton.TabIndex = 21;
             this.contactButton.Text = "Contacter";
             this.contactButton.UseVisualStyleBackColor = true;
-            this.contactButton.Click += new System.EventHandler(this.contactButton_Click);
+            this.contactButton.Click += new System.EventHandler(this.ContactButton_Click);
             // 
-            // MailTextBox
+            // emailTextBox
             // 
-            this.MailTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.MailTextBox.Location = new System.Drawing.Point(160, 203);
-            this.MailTextBox.Name = "MailTextBox";
-            this.MailTextBox.ReadOnly = true;
-            this.MailTextBox.Size = new System.Drawing.Size(120, 20);
-            this.MailTextBox.TabIndex = 20;
+            this.emailTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.emailTextBox.Location = new System.Drawing.Point(160, 203);
+            this.emailTextBox.Name = "emailTextBox";
+            this.emailTextBox.ReadOnly = true;
+            this.emailTextBox.Size = new System.Drawing.Size(120, 20);
+            this.emailTextBox.TabIndex = 20;
             // 
-            // WebTextBox
+            // websiteTextBox
             // 
-            this.WebTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.WebTextBox.Location = new System.Drawing.Point(160, 229);
-            this.WebTextBox.Name = "WebTextBox";
-            this.WebTextBox.ReadOnly = true;
-            this.WebTextBox.Size = new System.Drawing.Size(120, 20);
-            this.WebTextBox.TabIndex = 19;
+            this.websiteTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.websiteTextBox.Location = new System.Drawing.Point(160, 229);
+            this.websiteTextBox.Name = "websiteTextBox";
+            this.websiteTextBox.ReadOnly = true;
+            this.websiteTextBox.Size = new System.Drawing.Size(120, 20);
+            this.websiteTextBox.TabIndex = 19;
             // 
-            // idTextBox
+            // nameTextBox
             // 
-            this.idTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.idTextBox.Location = new System.Drawing.Point(160, 128);
-            this.idTextBox.Name = "idTextBox";
-            this.idTextBox.ReadOnly = true;
-            this.idTextBox.Size = new System.Drawing.Size(120, 20);
-            this.idTextBox.TabIndex = 17;
+            this.nameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.nameTextBox.Location = new System.Drawing.Point(160, 128);
+            this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.ReadOnly = true;
+            this.nameTextBox.Size = new System.Drawing.Size(120, 20);
+            this.nameTextBox.TabIndex = 17;
             // 
-            // label4
+            // websiteLabel
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(28, 232);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(120, 13);
-            this.label4.TabIndex = 16;
-            this.label4.Text = "Site Web du fournisseur";
+            this.websiteLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.websiteLabel.AutoSize = true;
+            this.websiteLabel.Location = new System.Drawing.Point(28, 232);
+            this.websiteLabel.Name = "websiteLabel";
+            this.websiteLabel.Size = new System.Drawing.Size(120, 13);
+            this.websiteLabel.TabIndex = 16;
+            this.websiteLabel.Text = "Site Web du fournisseur";
             // 
-            // label3
+            // emailLabel
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 206);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(104, 13);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "E-mail du fournisseur";
+            this.emailLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.emailLabel.AutoSize = true;
+            this.emailLabel.Location = new System.Drawing.Point(28, 206);
+            this.emailLabel.Name = "emailLabel";
+            this.emailLabel.Size = new System.Drawing.Size(104, 13);
+            this.emailLabel.TabIndex = 15;
+            this.emailLabel.Text = "E-mail du fournisseur";
             // 
-            // label2
+            // addressLabel
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(28, 160);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(114, 13);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "Adresse du fournisseur";
+            this.addressLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.addressLabel.AutoSize = true;
+            this.addressLabel.Location = new System.Drawing.Point(28, 160);
+            this.addressLabel.Name = "addressLabel";
+            this.addressLabel.Size = new System.Drawing.Size(114, 13);
+            this.addressLabel.TabIndex = 14;
+            this.addressLabel.Text = "Adresse du fournisseur";
             // 
-            // idLabel
+            // nameLabel
             // 
-            this.idLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.idLabel.AutoSize = true;
-            this.idLabel.Location = new System.Drawing.Point(28, 131);
-            this.idLabel.Name = "idLabel";
-            this.idLabel.Size = new System.Drawing.Size(98, 13);
-            this.idLabel.TabIndex = 13;
-            this.idLabel.Text = "Nom du fournisseur";
+            this.nameLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.nameLabel.AutoSize = true;
+            this.nameLabel.Location = new System.Drawing.Point(28, 131);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(98, 13);
+            this.nameLabel.TabIndex = 13;
+            this.nameLabel.Text = "Nom du fournisseur";
             // 
             // editButton
             // 
             this.editButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.editButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("editButton.BackgroundImage")));
+            this.editButton.BackgroundImage = global::PT_Camping.Properties.Resources.ic_edit;
             this.editButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.editButton.Location = new System.Drawing.Point(278, 46);
             this.editButton.Name = "editButton";
             this.editButton.Size = new System.Drawing.Size(30, 30);
             this.editButton.TabIndex = 12;
             this.editButton.UseVisualStyleBackColor = true;
-            this.editButton.Click += new System.EventHandler(this.editButton_Click);
+            this.editButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // deleteButton
             // 
             this.deleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.deleteButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("deleteButton.BackgroundImage")));
+            this.deleteButton.BackgroundImage = global::PT_Camping.Properties.Resources.ic_delete;
             this.deleteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.deleteButton.Location = new System.Drawing.Point(242, 46);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(30, 30);
             this.deleteButton.TabIndex = 11;
             this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
-            // panel2
+            // detailTitlePanel
             // 
-            this.panel2.BackColor = System.Drawing.Color.RoyalBlue;
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(312, 40);
-            this.panel2.TabIndex = 0;
+            this.detailTitlePanel.BackColor = System.Drawing.Color.RoyalBlue;
+            this.detailTitlePanel.Controls.Add(this.detailTitleLabel);
+            this.detailTitlePanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.detailTitlePanel.Location = new System.Drawing.Point(0, 0);
+            this.detailTitlePanel.Name = "detailTitlePanel";
+            this.detailTitlePanel.Size = new System.Drawing.Size(312, 40);
+            this.detailTitlePanel.TabIndex = 0;
             // 
-            // label1
+            // detailTitleLabel
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(79, 10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(149, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Détails fournisseurs";
+            this.detailTitleLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.detailTitleLabel.AutoSize = true;
+            this.detailTitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.detailTitleLabel.ForeColor = System.Drawing.Color.White;
+            this.detailTitleLabel.Location = new System.Drawing.Point(79, 10);
+            this.detailTitleLabel.Name = "detailTitleLabel";
+            this.detailTitleLabel.Size = new System.Drawing.Size(149, 20);
+            this.detailTitleLabel.TabIndex = 0;
+            this.detailTitleLabel.Text = "Détails fournisseurs";
             // 
-            // newP
+            // addProviderButton
             // 
-            this.newP.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.newP.Location = new System.Drawing.Point(140, 461);
-            this.newP.Name = "newP";
-            this.newP.Size = new System.Drawing.Size(120, 40);
-            this.newP.TabIndex = 2;
-            this.newP.Text = "Nouveau founisseur";
-            this.newP.UseVisualStyleBackColor = true;
-            this.newP.Click += new System.EventHandler(this.newP_Click);
+            this.addProviderButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.addProviderButton.Location = new System.Drawing.Point(140, 461);
+            this.addProviderButton.Name = "addProviderButton";
+            this.addProviderButton.Size = new System.Drawing.Size(120, 40);
+            this.addProviderButton.TabIndex = 2;
+            this.addProviderButton.Text = "Nouveau founisseur";
+            this.addProviderButton.UseVisualStyleBackColor = true;
+            this.addProviderButton.Click += new System.EventHandler(this.AddProvider_Click);
             // 
             // ProvidersUserControl
             // 
@@ -269,10 +284,10 @@ namespace PT_Camping
             this.Controls.SetChildIndex(this.appBarTitle, 0);
             this.Controls.SetChildIndex(this.logoutButton, 0);
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.detailPanel.ResumeLayout(false);
+            this.detailPanel.PerformLayout();
+            this.detailTitlePanel.ResumeLayout(false);
+            this.detailTitlePanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -280,21 +295,22 @@ namespace PT_Camping
 
         #endregion
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.ListView ProvList;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ListView providerListView;
+        private System.Windows.Forms.Panel detailPanel;
+        private System.Windows.Forms.Panel detailTitlePanel;
+        private System.Windows.Forms.Label detailTitleLabel;
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.Button editButton;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label idLabel;
-        private System.Windows.Forms.TextBox idTextBox;
-        private System.Windows.Forms.TextBox MailTextBox;
-        private System.Windows.Forms.TextBox WebTextBox;
+        private System.Windows.Forms.Label websiteLabel;
+        private System.Windows.Forms.Label emailLabel;
+        private System.Windows.Forms.Label addressLabel;
+        private System.Windows.Forms.Label nameLabel;
+        private System.Windows.Forms.TextBox nameTextBox;
+        private System.Windows.Forms.TextBox emailTextBox;
+        private System.Windows.Forms.TextBox websiteTextBox;
         private System.Windows.Forms.Button contactButton;
-        private System.Windows.Forms.TextBox addTextBox;
-        private System.Windows.Forms.Button newP;
+        private System.Windows.Forms.TextBox addressTextBox;
+        private System.Windows.Forms.Button addProviderButton;
+        private System.Windows.Forms.Button resetButton;
     }
 }

@@ -1,9 +1,11 @@
-﻿using PT_Camping.Model;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using PT_Camping.Model;
+using PT_Camping.Properties;
+using PT_Camping.Views.Forms;
 
-namespace PT_Camping
+namespace PT_Camping.Views.UserControls
 {
     /// <summary>
     /// The HomeUserControl is a UserControl handling the application's home screen.
@@ -14,119 +16,147 @@ namespace PT_Camping
     /// Since : 08/02/17
     public partial class HomeUserControl : UserControl
     {
-        private AppWindow mWindow;
-        private ClientsUserControl mClientsUC;
-        private IssuesUserControl mIssuesUC;
-        private EmployeesUserControl mEmployeesUC;
-        private StocksUserControl mStocksUC;
-        private ProvidersUserControl mProvidersUC;
-        private StatsUserControl mStatsUC;
-        private MapUserControl mMapUC;
+        private ClientsUserControl _clientsUserControl;
+        private IssuesUserControl _issuesUserControl;
+        private EmployeesUserControl _employeesUserControl;
+        private StocksUserControl _stocksUserControl;
+        private ProvidersUserControl _providersUserControl;
+        private StatsUserControl _statsUserControl;
+        private MapUserControl _mapUserControl;
 
 
         public HomeUserControl(AppWindow window)
         {
             InitializeComponent();
-            mWindow = window;
-            handleResize();
-            Personne personLoged = Window.userLoged.Person;
-            if (personLoged != null)
+            Window = window;
+            HandleResize();
+            Employe employeeLoged = Window.UserLoged.Employee;
+            if (employeeLoged != null)
             {
-                userNameLabel.Text = "Bonjour " + personLoged.Prenom_Personne + " " + personLoged.Nom_Personne;
+                userNameLabel.Text = Resources.hello_user 
+                    + employeeLoged.Personne.Prenom_Personne 
+                    + Resources.one_space + employeeLoged.Personne.Nom_Personne;
             }
         }
 
 
-        private void logoutButton_Click(object sender, EventArgs e)
+        public void StartLocationsFromStats(int code)
         {
-            mWindow.logout();
-            mWindow.WindowPanel.Controls.Remove(this);
+            //TODO : open map with location {code} selected
         }
 
 
-        private void clientsButton_Click(object sender, EventArgs e)
+        public void StartProductsFromStats(int code)
         {
-            mClientsUC = new ClientsUserControl(this);
-            mWindow.WindowPanel.Controls.Add(mClientsUC);
-            mWindow.WindowPanel.Controls.Remove(this);
+            Cursor.Current = Cursors.WaitCursor;
+            _stocksUserControl = new StocksUserControl(this, code);
+            Window.WindowPanel.Controls.Add(_stocksUserControl);
+            Window.WindowPanel.Controls.Remove(this);
         }
 
 
-        private void issuesButton_Click(object sender, EventArgs e)
+        public void StartClientsFromStats(int code)
         {
-            mIssuesUC = new IssuesUserControl(this);
-            mWindow.WindowPanel.Controls.Add(mIssuesUC);
-            mWindow.WindowPanel.Controls.Remove(this);
+            //TODO : open clients with {code} selected
         }
 
 
-        private void employeesButton_Click(object sender, EventArgs e)
+        public void StartIssuesFromStats(int issueCode)
         {
-            mEmployeesUC = new EmployeesUserControl(this);
-            mWindow.WindowPanel.Controls.Add(mEmployeesUC);
-            mWindow.WindowPanel.Controls.Remove(this);
+            Cursor.Current = Cursors.WaitCursor;
+            _issuesUserControl = new IssuesUserControl(this, issueCode);
+            Window.WindowPanel.Controls.Add(_issuesUserControl);
+            Window.WindowPanel.Controls.Remove(this);
         }
 
 
-        private void stocksButton_Click(object sender, EventArgs e)
+        private void LogoutButton_Click(object sender, EventArgs e)
         {
-            mStocksUC = new StocksUserControl(this);
-            mWindow.WindowPanel.Controls.Add(mStocksUC);
-            mWindow.WindowPanel.Controls.Remove(this);
+            Cursor.Current = Cursors.WaitCursor;
+            Window.Logout();
+            Window.WindowPanel.Controls.Remove(this);
         }
 
 
-        private void providersButton_Click(object sender, EventArgs e)
+        private void ClientsButton_Click(object sender, EventArgs e)
         {
-            mProvidersUC = new ProvidersUserControl(this);
-            mWindow.WindowPanel.Controls.Add(mProvidersUC);
-            mWindow.WindowPanel.Controls.Remove(this);
+            Cursor.Current = Cursors.WaitCursor;
+            _clientsUserControl = new ClientsUserControl(this);
+            Window.WindowPanel.Controls.Add(_clientsUserControl);
+            Window.WindowPanel.Controls.Remove(this);
         }
 
 
-        private void statsButton_Click(object sender, EventArgs e)
+        private void IssuesButton_Click(object sender, EventArgs e)
         {
-            mStatsUC = new StatsUserControl(this);
-            mWindow.WindowPanel.Controls.Add(mStatsUC);
-            mWindow.WindowPanel.Controls.Remove(this);
+            Cursor.Current = Cursors.WaitCursor;
+            _issuesUserControl = new IssuesUserControl(this);
+            Window.WindowPanel.Controls.Add(_issuesUserControl);
+            Window.WindowPanel.Controls.Remove(this);
         }
 
 
-        internal void handleResize()
+        private void EmployeesButton_Click(object sender, EventArgs e)
         {
-            Size = mWindow.Size;
-            managementTab.Size = mWindow.Size;
-            appBar.Size = new Size(mWindow.Size.Width, appBar.Size.Height);
-            homeTabControl.ItemSize = new Size(mWindow.Size.Width / 2-30, homeTabControl.ItemSize.Height);
-            if (mClientsUC != null)
-                mClientsUC.HandleResize();
-            if (mIssuesUC != null)
-                mIssuesUC.HandleResize();
-            if (mEmployeesUC != null)
-                mEmployeesUC.HandleResize();
-            if (mStocksUC != null)
-                mStocksUC.HandleResize();
-            if (mProvidersUC != null)
-                mProvidersUC.HandleResize();
-            if (mStatsUC != null)
-                mStatsUC.HandleResize();
+            Cursor.Current = Cursors.WaitCursor;
+            _employeesUserControl = new EmployeesUserControl(this);
+            Window.WindowPanel.Controls.Add(_employeesUserControl);
+            Window.WindowPanel.Controls.Remove(this);
         }
 
 
-        private void homeTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        private void StocksButton_Click(object sender, EventArgs e)
         {
-            switch ((sender as TabControl).SelectedIndex)
+            Cursor.Current = Cursors.WaitCursor;
+            _stocksUserControl = new StocksUserControl(this);
+            Window.WindowPanel.Controls.Add(_stocksUserControl);
+            Window.WindowPanel.Controls.Remove(this);
+        }
+
+
+        private void ProvidersButton_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            _providersUserControl = new ProvidersUserControl(this);
+            Window.WindowPanel.Controls.Add(_providersUserControl);
+            Window.WindowPanel.Controls.Remove(this);
+        }
+
+
+        private void StatsButton_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            _statsUserControl = new StatsUserControl(this);
+            Window.WindowPanel.Controls.Add(_statsUserControl);
+            Window.WindowPanel.Controls.Remove(this);
+        }
+
+
+        internal void HandleResize()
+        {
+            Size = Window.Size;
+            managementTab.Size = Window.Size;
+            appBar.Size = new Size(Window.Size.Width, appBar.Size.Height);
+            homeTabControl.ItemSize = new Size(Window.Size.Width / 2 - 30, 
+                homeTabControl.ItemSize.Height);
+            _clientsUserControl?.HandleResize();
+            _issuesUserControl?.HandleResize();
+            _employeesUserControl?.HandleResize();
+            _stocksUserControl?.HandleResize();
+            _providersUserControl?.HandleResize();
+            _statsUserControl?.HandleResize();
+        }
+
+
+        private void HomeTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (((TabControl)sender).SelectedIndex == 1)
             {
-                case 0:
-                    // Do nothing here
-                    break;
-                case 1:
-                    if (mMapUC == null)
-                    {
-                        mMapUC = new MapUserControl(this);
-                        mapTab.Controls.Add(mMapUC);
-                    }
-                    break;
+                if (_mapUserControl == null)
+                {
+                    _mapUserControl = new MapUserControl(this);
+                    mapTab.Controls.Add(_mapUserControl);
+                }
             }
         }
 
@@ -135,6 +165,6 @@ namespace PT_Camping
         /// Properties (Getters & Setters)
         /// </summary>
 
-        public AppWindow Window { get { return mWindow; } set { mWindow = value; } }
+        public AppWindow Window { get; set; }
     }
 }

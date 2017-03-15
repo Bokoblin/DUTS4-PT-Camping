@@ -117,10 +117,46 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="contact_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\res\images\contact_default.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="not_implemented_feature" xml:space="preserve">
+    <value>WARNING : This feature is not implemented yet.</value>
   </data>
+  <data name="stats_management" xml:space="preserve">
+    <value>Gestion des statistiques</value>
+  </data>
+  <data name="employee_management" xml:space="preserve">
+    <value>Gestion des employés</value>
+  </data>
+  <data name="unrecognized_email" xml:space="preserve">
+    <value>Email n'est pas une adresse mail valide</value>
+  </data>
+  <data name="database_connection_error" xml:space="preserve">
+    <value>Erreur lors de la connexion à la base de données</value>
+  </data>
+  <data name="provider_management" xml:space="preserve">
+    <value>Gestion des fournisseurs</value>
+  </data>
+  <data name="stocks_management" xml:space="preserve">
+    <value>Gestion des stocks</value>
+  </data>
+  <data name="done_issue" xml:space="preserve">
+    <value>Terminé</value>
+  </data>
+  <data name="issues_management" xml:space="preserve">
+    <value>Gestion des incidents</value>
+  </data>
+  <data name="hash_symbol" xml:space="preserve">
+    <value>#</value>
+  </data>
+  <data name="criticality_max" xml:space="preserve">
+    <value>/5</value>
+  </data>
+  <data name="clients_management" xml:space="preserve">
+    <value>Gestion des clients</value>
+  </data>
+  <data name="hello_user" xml:space="preserve">
+    <value>Bonjour </value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ic_arrow_back" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\images\ic_arrow_back.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -135,5 +171,46 @@
   </data>
   <data name="ic_undo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\images\ic_undo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ic_contact_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\images\ic_contact_default.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="phone_char_exception" xml:space="preserve">
+    <value>Téléphone doit être un entier de 10 chiffres</value>
+  </data>
+  <data name="invalid_date_exception" xml:space="preserve">
+    <value>La date n'est pas valide. 
+Vérifier que la date au format YYYY-MM-DD HH:MM:SS 
+et supérieure à la date de l'incident.</value>
+  </data>
+  <data name="unknown_site" xml:space="preserve">
+    <value>Site web inconnu</value>
+  </data>
+  <data name="high_quantity_exception" xml:space="preserve">
+    <value>La quantité est trop élévée.</value>
+  </data>
+  <data name="none" xml:space="preserve">
+    <value>Aucun</value>
+  </data>
+  <data name="null_product_name_exception" xml:space="preserve">
+    <value>Le nom de produit ne peut être vide</value>
+  </data>
+  <data name="novalue_product_name_exception" xml:space="preserve">
+    <value>Le libellé du produit ne peut contenir de valeur numérique.</value>
+  </data>
+  <data name="non_positive_quantity_exception" xml:space="preserve">
+    <value>La quantité doit être positive.</value>
+  </data>
+  <data name="product_management" xml:space="preserve">
+    <value>Gestion des stocks</value>
+  </data>
+  <data name="unrecognized_website" xml:space="preserve">
+    <value>Site web n'est pas un site web valide</value>
+  </data>
+  <data name="no_issue_corresponding" xml:space="preserve">
+    <value>Aucun incident ne correspond à ce type pour cette période</value>
+  </data>
+  <data name="one_space" xml:space="preserve">
+    <value> </value>
   </data>
 </root>

@@ -1,63 +1,55 @@
-﻿using PT_Camping.Model;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Mail;
 using System.Windows.Forms;
+using PT_Camping.Model;
 
-namespace PT_Camping.View.Forms
+namespace PT_Camping.Views.Forms
 {
     public partial class AddProvider : Form
     {
-        private DataBase db;
-        private Fournisseur newProvider;
-        public AddProvider(DataBase db, int code)
+        private readonly DataBase _db;
+        private readonly Fournisseur _newProvider;
+        public AddProvider(DataBase db)
         {
             InitializeComponent();
-            this.db = db;
-            newProvider = new Fournisseur();            
+            _db = db;
+            _newProvider = new Fournisseur();            
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void OKButton_Click(object sender, EventArgs e)
         {
             try
             {
-                if (nameP.Text == "")
-                    throw new Exception("Le nom du fournisseur est obligatoire");
+                if (nameTextBox.Text == "" || addressTextBox.Text == "" || emailTextBox.Text == "")
+                    throw new Exception("Toutes les valeurs marquées d'une étoile doivent être remplies.");
 
-                else
-                    newProvider.Nom_Fournisseur = nameP.Text;
+                if (nameTextBox.Text.Any(char.IsDigit))
+                    throw new Exception("Le nom ne peut contenir de valeur numérique.");
 
-                if (adresseP.Text == "")
-                    throw new Exception("L'adresse du fournisseur est obligatoire");
+                try
+                {
+                    _newProvider.Email_Fournisseur = new MailAddress(emailTextBox.Text).ToString();
+                }
+                catch (FormatException)
+                {
+                    throw new Exception("Email n'est pas une adresse mail valide");
+                }
 
-                else
-                    newProvider.Adresse_Fournisseur = adresseP.Text;
+                _newProvider.Nom_Fournisseur = nameTextBox.Text;
+                _newProvider.Adresse_Fournisseur = addressTextBox.Text;
+                _newProvider.Email_Fournisseur = emailTextBox.Text;
+                _newProvider.Site_web_Fournisseur = websiteTextBox.Text != "" ? websiteTextBox.Text : null;
+                _newProvider.est_approuvé = false;
 
-                if (mailP.Text == "")
-                    throw new Exception("L'e-mail du fournisseur est obligatoire");
-
-                else
-                    newProvider.Email_Fournisseur = mailP.Text;
-
-                if (webP.Text != "")
-                    newProvider.Site_web_Fournisseur = webP.Text;
-                else
-                    newProvider.Site_web_Fournisseur = null;
-
-                newProvider.est_approuvé = false;
-                db.Fournisseur.Add(newProvider);
-                db.SaveChanges();
-                this.Close();
+                _db.Fournisseur.Add(_newProvider);
+                _db.SaveChanges();
+                Close();
             }
             catch (Exception exception)
             {

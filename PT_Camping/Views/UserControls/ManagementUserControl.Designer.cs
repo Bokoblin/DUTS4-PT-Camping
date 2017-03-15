@@ -1,4 +1,4 @@
-﻿namespace PT_Camping
+﻿namespace PT_Camping.Views.UserControls
 {
     partial class ManagementUserControl
     {
@@ -62,7 +62,7 @@
             this.backArrow.ShortcutKeys = System.Windows.Forms.Keys.Delete;
             this.backArrow.Size = new System.Drawing.Size(25, 25);
             this.backArrow.Text = "back";
-            this.backArrow.Click += new System.EventHandler(this.backArrow_Click);
+            this.backArrow.Click += new System.EventHandler(this.BackArrow_Click);
             // 
             // appBarTitle
             // 
@@ -92,7 +92,7 @@
             this.logoutButton.TabIndex = 9;
             this.logoutButton.Text = "Déconnexion";
             this.logoutButton.UseVisualStyleBackColor = false;
-            this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
+            this.logoutButton.Click += new System.EventHandler(this.LogoutButton_Click);
             // 
             // userNameLabel
             // 

@@ -1,9 +1,9 @@
-﻿using PT_Camping.Model;
-using System;
+﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using PT_Camping.Model;
 
-namespace PT_Camping
+namespace PT_Camping.Views.Forms
 {
     /// <summary>
     /// This dialog allows to add a new issue
@@ -15,58 +15,53 @@ namespace PT_Camping
     /// Since : 25/02/17
     public partial class AddIssue : Form
     {
-        private DataBase db;
-        private Incident newIssue;
+        private readonly DataBase _db;
+        private readonly Incident _newIssue;
 
         public AddIssue(DataBase db, int code)
         {
             InitializeComponent();
-            this.db = db;
-            newIssue = new Incident();
-            newIssue.Code_Emplacement = code;
+            _db = db;
+            _newIssue = new Incident()
+            {
+                Code_Emplacement = code,
+                Avancement_Incident = "Nouveau",
+                Description_Incident = "Sans commentaire"
+            };
 
             var types = db.Type_Incident.Select(t => t.Type_Incident1).ToList();
             issueTypecomboBox.DataSource = types;
+
+            criticalityComboBox.Text = criticalityComboBox.Items[0].ToString();
         }
 
 
-        private void onCancelButtonClick(object sender, EventArgs e)
+        private void OkButton_Click(object sender, EventArgs e)
         {
-            this.Close();
-        }
+            Type_Incident issueType = _db.Type_Incident.First(
+                t => t.Type_Incident1 == issueTypecomboBox.Text);
 
-
-        private void onOkButtonClick(object sender, EventArgs e)
-        {
-            try
+            if (issueType != null)
             {
-                if (criticalityTextBox.Text == "")
-                    throw new Exception("Criticité est un champs obligatoire (entier compris entre 1 et 5).");
-
-                int criticality;
-                if (int.TryParse(criticalityTextBox.Text, out criticality) && criticality >= 1 && criticality <= 5)
-                {
-                        newIssue.Criticite_Incident = criticality;
-                }
-                else
-                    throw new Exception("Criticité doit être un entier compris entre 1 et 5");
-
-                newIssue.Code_Type = db.Type_Incident.Where(t => t.Type_Incident1 == issueTypecomboBox.Text).FirstOrDefault().Code_Type;
+                _newIssue.Code_Type = issueType.Code_Type;
+                _newIssue.Date_Incident = DateTime.Now;
+                _newIssue.Criticite_Incident = int.Parse(criticalityComboBox.Text);
                 if (descriptionTextBox.Text != "")
-                    newIssue.Description_Incident = descriptionTextBox.Text;
-                else
-                    newIssue.Description_Incident = "Sans commentaire";
-                newIssue.Date_Incident = DateTime.Now;
-                newIssue.Avancement_Incident = "Nouveau";
+                {
+                    _newIssue.Description_Incident = descriptionTextBox.Text;
+                }
 
-                db.Incident.Add(newIssue);
-                db.SaveChanges();
-                this.Close();
+                _db.Incident.Add(_newIssue);
+                _db.SaveChanges();
             }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message);
-            }
+
+            Close();
+        }
+
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

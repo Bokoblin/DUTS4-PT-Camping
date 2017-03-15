@@ -3,6 +3,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
+using PT_Camping.Properties;
 
 namespace PT_Camping.Model
 {
@@ -15,48 +16,50 @@ namespace PT_Camping.Model
     /// Since : 15/02/17
     public class LoginTools
     {
-        public String Login { get; set; }
+        public string Login { get; set; }
 
-        public String HashedPassword { get; set; }
+        public string HashedPassword { get; set; }
 
-        public Personne Person { get; set; }
+        public Employe Employee { get; set; }
 
-        public bool checkConnection()
+        public bool CheckConnection()
         {
             try
             {
                 DataBase db = new DataBase();
-                bool exist = (db.Employe.Where(u => u.Login == Login && u.Password == HashedPassword).Count() >= 1);
+                bool exist = (db.Employe.Any(u => u.Login == Login && u.Password == HashedPassword));
                 if (exist)
                 {
-                    Person = db.Personne.FirstOrDefault(p => p.Code_Personne == db.Employe.FirstOrDefault(l => l.Login == this.Login).Code_Personne);
+                    Employee = db.Employe.FirstOrDefault(e => e.Code_Personne == db.Employe.FirstOrDefault(l => l.Login == Login).Code_Personne);
+                    if (Employee != null)
+                        Employee.Personne = db.Personne.FirstOrDefault(p => p.Code_Personne == db.Employe.FirstOrDefault(l => l.Login == Login).Code_Personne);
                 }
                 db.Dispose();
                 return exist;
             } catch (Exception)
             {
-                MessageBox.Show("Erreur lors de la connexion à la base de données");
+                MessageBox.Show(Resources.database_connection_error);
                 Application.Exit();
             }
             return false;
         }
 
-        public static String sha256_hash(String value)
+        public static string Sha256_hash(string value)
         {
-            StringBuilder Sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
 
-            using (SHA256 hash = SHA256Managed.Create())
+            using (SHA256 hash = SHA256.Create())
             {
                 Encoding enc = Encoding.UTF8;
-                Byte[] result = hash.ComputeHash(enc.GetBytes(value));
+                var result = hash.ComputeHash(enc.GetBytes(value));
 
-                foreach (Byte b in result)
+                foreach (byte b in result)
                 {
-                    Sb.Append(b.ToString("x2"));
+                    sb.Append(b.ToString("x2"));
                 }
             }
 
-            return Sb.ToString();
+            return sb.ToString();
         }
     }
 }

@@ -1,17 +1,12 @@
 using System;
+using System.Diagnostics;
+using System.Net.Mail;
 using System.Windows.Forms;
 using PT_Camping.Model;
-using PT_Camping.View.Forms;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using PT_Camping.Properties;
+using PT_Camping.Views.Forms;
 
-namespace PT_Camping
+namespace PT_Camping.Views.UserControls
 {
     /// <summary>
     /// The ProvidersUserControl inherits from ManagementHomeControl.
@@ -24,144 +19,198 @@ namespace PT_Camping
     /// Since : 08/02/17
     public partial class ProvidersUserControl : ManagementUserControl
     {
-        private String providerMail;
-        
+        private string _providerMail;
+
         public ProvidersUserControl(HomeUserControl homeUserControl) : base(homeUserControl)
         {
             InitializeComponent();
-            appBarTitle.Text = "Gestion des fournisseurs";
+            appBarTitle.Text = Resources.provider_management;
             Db = new DataBase();
 
-            ProvList.View = System.Windows.Forms.View.Details;
-            ProvList.Columns.Add("Nom du fournisseur", -2);
-            ProvList.Columns.Add("Adresse mail du fournisseur", -2);
+            providerListView.View = View.Details;
+            providerListView.Columns.Add("Nom du fournisseur", -2);
+            providerListView.Columns.Add("Adresse mail du fournisseur", -2);
 
-            updateProviders();
+            UpdateProvidersListView();
             HandleResize();
         }
 
-        public void updateProviders()
+        public void UpdateProvidersListView()
         {
-            ProvList.Items.Clear();
+            providerListView.Items.Clear();
 
             foreach (var provider in Db.Fournisseur)
             {
                 string providerEmail = provider.Email_Fournisseur;
                 string providerName = provider.Nom_Fournisseur;
 
-                var item = new ListViewItem(new[] { providerName, providerEmail });
-                item.Name = provider.Code_Fournisseur.ToString();
-                ProvList.Items.Add(item);
+                var item = new ListViewItem(new[] { providerName, providerEmail })
+                {
+                    Name = provider.Code_Fournisseur.ToString()
+                };
+                providerListView.Items.Add(item);
             }
 
-            if (ProvList.Items.Count > 0)
+            if (providerListView.Items.Count > 0)
             {
-                ProvList.Items[0].Selected = true;
-                ProvList.Select();
+                providerListView.Items[0].Selected = true;
+                providerListView.Select();
             }
         }
 
-        private void contactButton_Click(object sender, EventArgs e)
+        private void ContactButton_Click(object sender, EventArgs e)
         {
-            string receiver = providerMail;
+            string receiver = _providerMail;
 
             Process.Start("mailto:" + receiver);
         }
 
 
-        private void editButton_Click(object sender, EventArgs e)
+        private void EditButton_Click(object sender, EventArgs e)
         {
-            if (idTextBox.ReadOnly == true){
-                idTextBox.ReadOnly = false;
-                addTextBox.ReadOnly = false;
-                MailTextBox.ReadOnly = false;
-                WebTextBox.ReadOnly = false;
+            if (nameTextBox.ReadOnly)
+            {
+                resetButton.Visible = true;
+                nameTextBox.ReadOnly = false;
+                addressTextBox.ReadOnly = false;
+                emailTextBox.ReadOnly = false;
+                websiteTextBox.ReadOnly = false;
+                editButton.BackgroundImage = Resources.ic_done;
             }
-            else{
-                idTextBox.ReadOnly = true;
-                addTextBox.ReadOnly = true;
-                MailTextBox.ReadOnly = true;
-                WebTextBox.ReadOnly = true;
-                string sWeb = WebTextBox.Text;
+            else
+            {
+                resetButton.Visible = false;
+                nameTextBox.ReadOnly = true;
+                addressTextBox.ReadOnly = true;
+                emailTextBox.ReadOnly = true;
+                websiteTextBox.ReadOnly = true;
+                editButton.BackgroundImage = Resources.ic_edit;
 
 
                 string message = "Les données suivantes ont été mises à jour : \n";
                 int cptModifications = 0;
 
-                int code = int.Parse(ProvList.SelectedItems[0].Name);
+                int code = int.Parse(providerListView.SelectedItems[0].Name);
                 var provider = Db.Fournisseur.Find(code);
 
-                if (idTextBox.Text != provider.Nom_Fournisseur){
-                    provider.Nom_Fournisseur = idTextBox.Text;
-                    message += "- Nom du Fournisseur \n";
-                    cptModifications++;
+                if (provider != null)
+                {
+                    if (nameTextBox.Text != provider.Nom_Fournisseur)
+                    {
+                        provider.Nom_Fournisseur = nameTextBox.Text;
+                        message += "nom,\n";
+                        cptModifications++;
+                    }
+
+                    if (addressTextBox.Text != provider.Adresse_Fournisseur)
+                    {
+                        provider.Adresse_Fournisseur = addressTextBox.Text;
+                        message += "address,\n";
+                        cptModifications++;
+                    }
+
+                    if (emailTextBox.Text != provider.Email_Fournisseur)
+                    {
+                        try
+                        {
+                            provider.Email_Fournisseur = new MailAddress(emailTextBox.Text).ToString();
+                            message += "email,\n";
+                            cptModifications++;
+                        }
+                        catch (FormatException)
+                        {
+                            MessageBox.Show(Resources.unrecognized_email);
+                        }
+                    }
+
+                    if (websiteTextBox.Text != provider.Site_web_Fournisseur)
+                    {
+                        if (websiteTextBox.Text != "")
+                        {
+                            Uri uriResult;
+                            if (Uri.TryCreate(websiteTextBox.Text, UriKind.Absolute, out uriResult)
+                                && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps))
+                            {
+                                provider.Site_web_Fournisseur = websiteTextBox.Text;
+                                message += "site web";
+                                cptModifications++;
+                            }
+                            else
+                                MessageBox.Show(Resources.unrecognized_website);
+                        }
+                        else
+                            provider.Site_web_Fournisseur = null;
+                    }
+
+                    Db.SaveChanges();
+
+                    UpdateProvidersListView();
+
+                    if (cptModifications > 0)
+                        MessageBox.Show(message);
                 }
-
-                if (addTextBox.Text != provider.Adresse_Fournisseur){
-                    provider.Adresse_Fournisseur = addTextBox.Text;
-                    message += "- Adresse du Fournisseur \n";
-                    cptModifications++;
-                }
-
-                if (MailTextBox.Text != provider.Email_Fournisseur){
-                    provider.Email_Fournisseur = MailTextBox.Text;
-                    message += "- E-mail du Fournisseur \n";
-                    cptModifications++;
-                }
-
-                if (WebTextBox.Text != provider.Site_web_Fournisseur && WebTextBox.Text != sWeb){
-                    provider.Site_web_Fournisseur = WebTextBox.Text;
-                    message += "- Site web du Fournisseur";
-                    cptModifications++;
-                }
-
-                Db.SaveChanges();
-
-                updateProviders();
-
-                if (cptModifications > 0)
-                    MessageBox.Show(message);
-                
             }
         }
 
-        private void newP_Click(object sender, EventArgs e)
+
+        private void ResetButton_Click(object sender, EventArgs e)
         {
-            new AddProvider(Db, 1).ShowDialog();
-            updateProviders();
+            UpdateProvidersListView();
+            resetButton.Visible = false;
+            nameTextBox.ReadOnly = true;
+            addressTextBox.ReadOnly = true;
+            emailTextBox.ReadOnly = true;
+            websiteTextBox.ReadOnly = true;
+            editButton.BackgroundImage = Resources.ic_edit;
         }
 
-        private void ProvList_SelectedIndexChanged_1(object sender, EventArgs e)
+
+        private void AddProvider_Click(object sender, EventArgs e)
         {
-            if (ProvList.SelectedItems.Count != 0)
+            new AddProvider(Db).ShowDialog();
+            UpdateProvidersListView();
+        }
+
+
+        private void ProviderListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (providerListView.SelectedItems.Count != 0)
             {
-                int code = int.Parse(ProvList.SelectedItems[0].Name);
+                int code = int.Parse(providerListView.SelectedItems[0].Name);
                 var provider = Db.Fournisseur.Find(code);
 
-                providerMail = provider.Email_Fournisseur;
+                if (provider != null)
+                {
+                    _providerMail = provider.Email_Fournisseur;
 
-                idTextBox.Text = provider.Nom_Fournisseur.ToString();
-                addTextBox.Text = provider.Adresse_Fournisseur.ToString();
-                MailTextBox.Text = provider.Email_Fournisseur.ToString();
-                if (provider.Site_web_Fournisseur == null)
-                {
-                    WebTextBox.Text = "Site web inconnu";
-                }
-                else
-                {
-                    WebTextBox.Text = provider.Site_web_Fournisseur.ToString();
+                    nameTextBox.Text = provider.Nom_Fournisseur;
+                    addressTextBox.Text = provider.Adresse_Fournisseur;
+                    emailTextBox.Text = provider.Email_Fournisseur;
+                    websiteTextBox.Text = provider.Site_web_Fournisseur ?? Resources.unknown_site;
                 }
             }
         }
 
-        private void deleteButton_Click(object sender, EventArgs e)
+        private void DeleteButton_Click(object sender, EventArgs e)
         {
-            int code = int.Parse(ProvList.SelectedItems[0].Name);
+            int code = int.Parse(providerListView.SelectedItems[0].Name);
             var fournisseur = Db.Fournisseur.Find(code);
 
-            Db.Fournisseur.Remove(fournisseur);
-            Db.SaveChanges();
-            updateProviders();
+            if (fournisseur != null)
+            {
+                Db.Fournisseur.Remove(fournisseur);
+                Db.SaveChanges();
+                UpdateProvidersListView();
+            }
+        }
+
+        private void ProviderListView_Resize(object sender, EventArgs e)
+        {
+            if (providerListView.Columns.Count != 0)
+            {
+                foreach (ColumnHeader columnHeader in providerListView.Columns)
+                    columnHeader.Width = providerListView.Width / providerListView.Columns.Count;
+            }
         }
     }
 }

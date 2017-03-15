@@ -1,4 +1,4 @@
-﻿namespace PT_Camping
+﻿namespace PT_Camping.Views.UserControls
 {
     partial class EmployeesUserControl
     {
@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EmployeesUserControl));
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.employeeListView = new System.Windows.Forms.ListView();
+            this.employeesListView = new System.Windows.Forms.ListView();
             this.addEmployeeButton = new System.Windows.Forms.Button();
             this.detailsPanel = new System.Windows.Forms.Panel();
             this.pictureBox = new System.Windows.Forms.PictureBox();
@@ -73,7 +73,7 @@
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel.Controls.Add(this.employeeListView, 1, 1);
+            this.tableLayoutPanel.Controls.Add(this.employeesListView, 1, 1);
             this.tableLayoutPanel.Controls.Add(this.addEmployeeButton, 1, 2);
             this.tableLayoutPanel.Controls.Add(this.detailsPanel, 3, 1);
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -87,22 +87,22 @@
             this.tableLayoutPanel.Size = new System.Drawing.Size(800, 550);
             this.tableLayoutPanel.TabIndex = 11;
             // 
-            // employeeListView
+            // employeesListView
             // 
-            this.employeeListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.employeeListView.FullRowSelect = true;
-            this.employeeListView.GridLines = true;
-            this.employeeListView.HideSelection = false;
-            this.employeeListView.Location = new System.Drawing.Point(43, 47);
-            this.employeeListView.MultiSelect = false;
-            this.employeeListView.Name = "employeeListView";
-            this.employeeListView.Scrollable = false;
-            this.employeeListView.Size = new System.Drawing.Size(314, 390);
-            this.employeeListView.TabIndex = 14;
-            this.employeeListView.UseCompatibleStateImageBehavior = false;
-            this.employeeListView.View = System.Windows.Forms.View.List;
-            this.employeeListView.SelectedIndexChanged += new System.EventHandler(this.EmployeeListView_SelectedIndexChanged);
-            this.employeeListView.Resize += new System.EventHandler(this.EmployeeListView_Resize);
+            this.employeesListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.employeesListView.FullRowSelect = true;
+            this.employeesListView.GridLines = true;
+            this.employeesListView.HideSelection = false;
+            this.employeesListView.Location = new System.Drawing.Point(43, 47);
+            this.employeesListView.MultiSelect = false;
+            this.employeesListView.Name = "employeesListView";
+            this.employeesListView.Scrollable = false;
+            this.employeesListView.Size = new System.Drawing.Size(314, 390);
+            this.employeesListView.TabIndex = 14;
+            this.employeesListView.UseCompatibleStateImageBehavior = false;
+            this.employeesListView.View = System.Windows.Forms.View.List;
+            this.employeesListView.SelectedIndexChanged += new System.EventHandler(this.EmployeeListView_SelectedIndexChanged);
+            this.employeesListView.Resize += new System.EventHandler(this.EmployeeListView_Resize);
             // 
             // addEmployeeButton
             // 
@@ -114,14 +114,13 @@
             this.addEmployeeButton.TabIndex = 15;
             this.addEmployeeButton.Text = "Nouvel employé";
             this.addEmployeeButton.UseVisualStyleBackColor = true;
-            this.addEmployeeButton.Click += new System.EventHandler(this.OnAddEmployeeButtonClick);
+            this.addEmployeeButton.Click += new System.EventHandler(this.AddEmployeeButton_Click);
             // 
             // detailsPanel
             // 
             this.detailsPanel.AutoSize = true;
             this.detailsPanel.BackColor = System.Drawing.Color.White;
             this.detailsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.detailsPanel.Controls.Add(this.resetButton);
             this.detailsPanel.Controls.Add(this.pictureBox);
             this.detailsPanel.Controls.Add(this.dismissButton);
             this.detailsPanel.Controls.Add(this.nameTextBox);
@@ -140,6 +139,7 @@
             this.detailsPanel.Controls.Add(this.phoneLabel);
             this.detailsPanel.Controls.Add(this.addressLabel);
             this.detailsPanel.Controls.Add(this.birthDateLabel);
+            this.detailsPanel.Controls.Add(this.resetButton);
             this.detailsPanel.Controls.Add(this.surnameLabel);
             this.detailsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.detailsPanel.Location = new System.Drawing.Point(443, 47);
@@ -151,9 +151,9 @@
             // 
             this.pictureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox.ErrorImage = global::PT_Camping.Properties.Resources.contact_default;
-            this.pictureBox.Image = global::PT_Camping.Properties.Resources.contact_default;
-            this.pictureBox.Location = new System.Drawing.Point(124, 43);
+            this.pictureBox.ErrorImage = global::PT_Camping.Properties.Resources.ic_contact_default;
+            this.pictureBox.Image = global::PT_Camping.Properties.Resources.ic_contact_default;
+            this.pictureBox.Location = new System.Drawing.Point(124, 25);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(60, 70);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -164,18 +164,18 @@
             // 
             this.dismissButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.dismissButton.AutoSize = true;
-            this.dismissButton.Location = new System.Drawing.Point(171, 357);
+            this.dismissButton.Location = new System.Drawing.Point(171, 339);
             this.dismissButton.Name = "dismissButton";
             this.dismissButton.Size = new System.Drawing.Size(120, 30);
             this.dismissButton.TabIndex = 23;
             this.dismissButton.Text = "Licencier";
             this.dismissButton.UseVisualStyleBackColor = true;
-            this.dismissButton.Click += new System.EventHandler(this.OnDismissEmployeeButtonClick);
+            this.dismissButton.Click += new System.EventHandler(this.DismissEmployeeButton_Click);
             // 
             // nameTextBox
             // 
             this.nameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.nameTextBox.Location = new System.Drawing.Point(159, 159);
+            this.nameTextBox.Location = new System.Drawing.Point(159, 141);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.ReadOnly = true;
             this.nameTextBox.Size = new System.Drawing.Size(120, 20);
@@ -185,7 +185,7 @@
             // 
             this.nameLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.nameLabel.AutoSize = true;
-            this.nameLabel.Location = new System.Drawing.Point(36, 162);
+            this.nameLabel.Location = new System.Drawing.Point(36, 144);
             this.nameLabel.Name = "nameLabel";
             this.nameLabel.Size = new System.Drawing.Size(43, 13);
             this.nameLabel.TabIndex = 19;
@@ -194,7 +194,7 @@
             // loginTextBox
             // 
             this.loginTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.loginTextBox.Location = new System.Drawing.Point(159, 309);
+            this.loginTextBox.Location = new System.Drawing.Point(159, 291);
             this.loginTextBox.Name = "loginTextBox";
             this.loginTextBox.ReadOnly = true;
             this.loginTextBox.Size = new System.Drawing.Size(120, 20);
@@ -203,7 +203,7 @@
             // emailTextBox
             // 
             this.emailTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.emailTextBox.Location = new System.Drawing.Point(159, 283);
+            this.emailTextBox.Location = new System.Drawing.Point(159, 265);
             this.emailTextBox.Name = "emailTextBox";
             this.emailTextBox.ReadOnly = true;
             this.emailTextBox.Size = new System.Drawing.Size(120, 20);
@@ -212,16 +212,18 @@
             // phoneTextBox
             // 
             this.phoneTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.phoneTextBox.Location = new System.Drawing.Point(159, 257);
+            this.phoneTextBox.Location = new System.Drawing.Point(159, 239);
+            this.phoneTextBox.MaxLength = 10;
             this.phoneTextBox.Name = "phoneTextBox";
             this.phoneTextBox.ReadOnly = true;
             this.phoneTextBox.Size = new System.Drawing.Size(120, 20);
             this.phoneTextBox.TabIndex = 19;
+            this.phoneTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PhoneTextBox_KeyPress);
             // 
             // addressTextBox
             // 
             this.addressTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.addressTextBox.Location = new System.Drawing.Point(159, 211);
+            this.addressTextBox.Location = new System.Drawing.Point(159, 193);
             this.addressTextBox.Multiline = true;
             this.addressTextBox.Name = "addressTextBox";
             this.addressTextBox.ReadOnly = true;
@@ -231,7 +233,7 @@
             // birthDateTextBox
             // 
             this.birthDateTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.birthDateTextBox.Location = new System.Drawing.Point(159, 185);
+            this.birthDateTextBox.Location = new System.Drawing.Point(159, 167);
             this.birthDateTextBox.Name = "birthDateTextBox";
             this.birthDateTextBox.ReadOnly = true;
             this.birthDateTextBox.Size = new System.Drawing.Size(120, 20);
@@ -240,7 +242,7 @@
             // surnameTextBox
             // 
             this.surnameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.surnameTextBox.Location = new System.Drawing.Point(159, 133);
+            this.surnameTextBox.Location = new System.Drawing.Point(159, 115);
             this.surnameTextBox.Name = "surnameTextBox";
             this.surnameTextBox.ReadOnly = true;
             this.surnameTextBox.Size = new System.Drawing.Size(120, 20);
@@ -256,7 +258,7 @@
             this.editButton.Size = new System.Drawing.Size(30, 30);
             this.editButton.TabIndex = 14;
             this.editButton.UseVisualStyleBackColor = true;
-            this.editButton.Click += new System.EventHandler(this.OnEditButtonClick);
+            this.editButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // detailsTitleBarPanel
             // 
@@ -270,34 +272,33 @@
             // 
             // detailsTitle
             // 
-            this.detailsTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.detailsTitle.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.detailsTitle.AutoSize = true;
             this.detailsTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.detailsTitle.ForeColor = System.Drawing.Color.White;
             this.detailsTitle.Location = new System.Drawing.Point(104, 10);
             this.detailsTitle.Name = "detailsTitle";
-            this.detailsTitle.Size = new System.Drawing.Size(121, 20);
+            this.detailsTitle.Size = new System.Drawing.Size(113, 20);
             this.detailsTitle.TabIndex = 0;
-            this.detailsTitle.Text = "Détail employés";
+            this.detailsTitle.Text = "Détail employé";
             // 
             // permissionButton
             // 
             this.permissionButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.permissionButton.AutoSize = true;
-            this.permissionButton.Location = new System.Drawing.Point(21, 357);
+            this.permissionButton.Location = new System.Drawing.Point(21, 339);
             this.permissionButton.Name = "permissionButton";
             this.permissionButton.Size = new System.Drawing.Size(120, 30);
             this.permissionButton.TabIndex = 22;
             this.permissionButton.Text = "Permissions";
             this.permissionButton.UseVisualStyleBackColor = true;
-            this.permissionButton.Click += new System.EventHandler(this.OnPermissionButtonClick);
+            this.permissionButton.Click += new System.EventHandler(this.PermissionButton_Click);
             // 
             // loginLabel
             // 
             this.loginLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.loginLabel.AutoSize = true;
-            this.loginLabel.Location = new System.Drawing.Point(36, 312);
+            this.loginLabel.Location = new System.Drawing.Point(36, 294);
             this.loginLabel.Name = "loginLabel";
             this.loginLabel.Size = new System.Drawing.Size(33, 13);
             this.loginLabel.TabIndex = 6;
@@ -307,7 +308,7 @@
             // 
             this.emailLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.emailLabel.AutoSize = true;
-            this.emailLabel.Location = new System.Drawing.Point(36, 286);
+            this.emailLabel.Location = new System.Drawing.Point(36, 268);
             this.emailLabel.Name = "emailLabel";
             this.emailLabel.Size = new System.Drawing.Size(32, 13);
             this.emailLabel.TabIndex = 5;
@@ -317,7 +318,7 @@
             // 
             this.phoneLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.phoneLabel.AutoSize = true;
-            this.phoneLabel.Location = new System.Drawing.Point(36, 260);
+            this.phoneLabel.Location = new System.Drawing.Point(36, 242);
             this.phoneLabel.Name = "phoneLabel";
             this.phoneLabel.Size = new System.Drawing.Size(58, 13);
             this.phoneLabel.TabIndex = 4;
@@ -327,7 +328,7 @@
             // 
             this.addressLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.addressLabel.AutoSize = true;
-            this.addressLabel.Location = new System.Drawing.Point(36, 214);
+            this.addressLabel.Location = new System.Drawing.Point(36, 196);
             this.addressLabel.Name = "addressLabel";
             this.addressLabel.Size = new System.Drawing.Size(45, 13);
             this.addressLabel.TabIndex = 3;
@@ -337,7 +338,7 @@
             // 
             this.birthDateLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.birthDateLabel.AutoSize = true;
-            this.birthDateLabel.Location = new System.Drawing.Point(36, 188);
+            this.birthDateLabel.Location = new System.Drawing.Point(36, 170);
             this.birthDateLabel.Name = "birthDateLabel";
             this.birthDateLabel.Size = new System.Drawing.Size(98, 13);
             this.birthDateLabel.TabIndex = 2;
@@ -347,7 +348,7 @@
             // 
             this.surnameLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.surnameLabel.AutoSize = true;
-            this.surnameLabel.Location = new System.Drawing.Point(36, 136);
+            this.surnameLabel.Location = new System.Drawing.Point(36, 118);
             this.surnameLabel.Name = "surnameLabel";
             this.surnameLabel.Size = new System.Drawing.Size(29, 13);
             this.surnameLabel.TabIndex = 1;
@@ -361,7 +362,7 @@
             this.resetButton.Location = new System.Drawing.Point(243, 46);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(30, 30);
-            this.resetButton.TabIndex = 25;
+            this.resetButton.TabIndex = 26;
             this.resetButton.UseVisualStyleBackColor = true;
             this.resetButton.Visible = false;
             this.resetButton.Click += new System.EventHandler(this.ResetButton_Click);
@@ -390,7 +391,7 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
-        private System.Windows.Forms.ListView employeeListView;
+        private System.Windows.Forms.ListView employeesListView;
         private System.Windows.Forms.Panel detailsPanel;
         private System.Windows.Forms.TextBox nameTextBox;
         private System.Windows.Forms.Label nameLabel;
@@ -400,6 +401,7 @@
         private System.Windows.Forms.TextBox addressTextBox;
         private System.Windows.Forms.TextBox birthDateTextBox;
         private System.Windows.Forms.TextBox surnameTextBox;
+        private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.Button editButton;
         private System.Windows.Forms.Panel detailsTitleBarPanel;
         private System.Windows.Forms.Label detailsTitle;
@@ -413,6 +415,5 @@
         private System.Windows.Forms.Button dismissButton;
         private System.Windows.Forms.Button addEmployeeButton;
         private System.Windows.Forms.PictureBox pictureBox;
-        private System.Windows.Forms.Button resetButton;
     }
 }
