@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PT_Camping.Model;
 using PT_Camping.View.Forms;
+using System.Text.RegularExpressions;
 
 namespace PT_Camping
 {
@@ -21,6 +22,7 @@ namespace PT_Camping
     /// Since : 08/02/17
     public partial class ClientsUserControl : ManagementUserControl
     {
+        private Client client;
         public ClientsUserControl(HomeUserControl home) : base(home)
         {
             InitializeComponent();
@@ -62,10 +64,10 @@ namespace PT_Camping
             if (ClientlistView.SelectedItems.Count != 0)
             {
                 int code = int.Parse(ClientlistView.SelectedItems[0].Name);
-                var client = db.Client.Find(code);
+                client = db.Client.Find(code);
                 dateInscripTextBox.Text = client.Date_Inscription.ToShortDateString();
                 surnameTextBox.Text =client.Personne.Nom_Personne;
-                nameTextBox.Text = client.Personne.Prenom_Personne;
+                FirstNameTextBox.Text = client.Personne.Prenom_Personne;
                 if (client.Personne.Date_Naissance != null)
                     birthDateTextBox.Text = ((DateTime)client.Personne.Date_Naissance).ToShortDateString();
                 addressTextBox.Text = client.Personne.Adresse;
@@ -86,11 +88,11 @@ namespace PT_Camping
         {
             if (addressTextBox.ReadOnly == true)
             {
-                //surnameTextBox.ReadOnly = false;
+                surnameTextBox.ReadOnly = false;
                 addressTextBox.ReadOnly = false;
                 phoneTextBox.ReadOnly = false;
                 emailTextBox.ReadOnly = false;
-                //resaTextBox.ReadOnly = false;
+               
                
             }
             else
@@ -99,7 +101,7 @@ namespace PT_Camping
                 addressTextBox.ReadOnly = true;
                 phoneTextBox.ReadOnly = true;
                 emailTextBox.ReadOnly = true;
-                //resaTextBox.ReadOnly = true;
+            
 
                 string message = "Les données suivantes ont été mises à jour : \n";
                 int cptModifications = 0;
@@ -109,6 +111,7 @@ namespace PT_Camping
 
                 if (addressTextBox.Text != client.Personne.Adresse)
                 {
+                    //verifier si le nom ne contient pas de nombre
                     client.Personne.Adresse = addressTextBox.Text;
                     message += "adresse";
                     cptModifications++;
@@ -127,18 +130,14 @@ namespace PT_Camping
                         MessageBox.Show("Téléphone doit être un entier de 10 chiffres");
                 }
 
-               /* if (surnameTextBox.Text != "" && phoneTextBox.Text != client.Personne.Telephone)
+                if (surnameTextBox.Text != "" && surnameTextBox.Text != client.Personne.Nom_Personne)
                 {
-                    int phone;
-                    if (int.TryParse(phoneTextBox.Text, out phone) && phoneTextBox.Text.Length == 10)
-                    {
-                        client.Personne.Telephone = phoneTextBox.Text;
-                        message += "téléphone\n";
+                
+                        client.Personne.Nom_Personne = surnameTextBox.Text;
+                        message += "Nom\n";
                         cptModifications++;
-                    }
-                    else
-                        MessageBox.Show("Téléphone doit être un entier de 10 chiffres");
-                }*/
+                
+                }
 
                 if (emailTextBox.Text != client.Personne.Email)
                 {
@@ -153,13 +152,6 @@ namespace PT_Camping
                         MessageBox.Show("Email doit contenir un @ et se terminer par .com/.fr");
                 }
 
-                /*if (resaTextBox.Text != )
-                {
-                    client.Login = loginTextBox.Text;
-                    message += "login";
-                    cptModifications++;
-                }*/
-
                 db.SaveChanges();
 
                 updateClientDetails();
@@ -171,8 +163,6 @@ namespace PT_Camping
 
         private void DismissClientButton_Click(object sender, EventArgs e)
         {
-            int code = int.Parse(ClientlistView.SelectedItems[0].Name);
-            var client = db.Client.Find(code);
             db.Client.Remove(client);
             db.SaveChanges();
             updateClientlistView();
@@ -199,7 +189,8 @@ namespace PT_Camping
 
         private void ReducClient_Click(object sender, EventArgs e)
         {
-
+            new Reductions(client).ShowDialog();
+            updateClientlistView();
         }
     }
 }

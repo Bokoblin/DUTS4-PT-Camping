@@ -28,49 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.reducCheckedListBox = new System.Windows.Forms.CheckedListBox();
             this.seniority = new System.Windows.Forms.Label();
             this.ValidReducbutton = new System.Windows.Forms.Button();
             this.percentageSeniorLabel = new System.Windows.Forms.Label();
+            this.ReducBox = new System.Windows.Forms.GroupBox();
+            this.radioEtudiantButton = new System.Windows.Forms.RadioButton();
+            this.radioFamilyButton = new System.Windows.Forms.RadioButton();
+            this.radioGroupButton = new System.Windows.Forms.RadioButton();
+            this.radioSeniorButton = new System.Windows.Forms.RadioButton();
+            this.ReducBox.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // reducCheckedListBox
-            // 
-            this.reducCheckedListBox.AllowDrop = true;
-            this.reducCheckedListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.reducCheckedListBox.BackColor = System.Drawing.SystemColors.Control;
-            this.reducCheckedListBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.reducCheckedListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.reducCheckedListBox.FormattingEnabled = true;
-            this.reducCheckedListBox.Items.AddRange(new object[] {
-            "Etudiant",
-            "Senior",
-            "Famille",
-            "Groupe"});
-            this.reducCheckedListBox.Location = new System.Drawing.Point(42, 31);
-            this.reducCheckedListBox.Margin = new System.Windows.Forms.Padding(10);
-            this.reducCheckedListBox.Name = "reducCheckedListBox";
-            this.reducCheckedListBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.reducCheckedListBox.Size = new System.Drawing.Size(179, 129);
-            this.reducCheckedListBox.TabIndex = 6;
-            this.reducCheckedListBox.TabStop = false;
-            this.reducCheckedListBox.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged);
             // 
             // seniority
             // 
             this.seniority.AutoSize = true;
-            this.seniority.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.seniority.Location = new System.Drawing.Point(81, 157);
+            this.seniority.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.seniority.Location = new System.Drawing.Point(59, 213);
             this.seniority.Name = "seniority";
-            this.seniority.Size = new System.Drawing.Size(140, 29);
+            this.seniority.Size = new System.Drawing.Size(111, 25);
             this.seniority.TabIndex = 8;
             this.seniority.Text = "Ancienneté";
             // 
             // ValidReducbutton
             // 
-            this.ValidReducbutton.Location = new System.Drawing.Point(108, 205);
+            this.ValidReducbutton.Location = new System.Drawing.Point(108, 267);
             this.ValidReducbutton.Name = "ValidReducbutton";
             this.ValidReducbutton.Size = new System.Drawing.Size(123, 36);
             this.ValidReducbutton.TabIndex = 9;
@@ -82,33 +63,112 @@
             this.percentageSeniorLabel.BackColor = System.Drawing.Color.White;
             this.percentageSeniorLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.percentageSeniorLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.percentageSeniorLabel.Location = new System.Drawing.Point(243, 164);
+            this.percentageSeniorLabel.Location = new System.Drawing.Point(228, 218);
             this.percentageSeniorLabel.Name = "percentageSeniorLabel";
             this.percentageSeniorLabel.Size = new System.Drawing.Size(36, 20);
             this.percentageSeniorLabel.TabIndex = 10;
+            //
+            // ReducBox
+            // 
+            this.ReducBox.Controls.Add(this.radioSeniorButton);
+            this.ReducBox.Controls.Add(this.radioGroupButton);
+            this.ReducBox.Controls.Add(this.radioFamilyButton);
+            this.ReducBox.Controls.Add(this.radioEtudiantButton);
+            this.ReducBox.Location = new System.Drawing.Point(64, 24);
+            this.ReducBox.Name = "ReducBox";
+            this.ReducBox.Size = new System.Drawing.Size(200, 167);
+            this.ReducBox.TabIndex = 11;
+            this.ReducBox.TabStop = false;
+            this.ReducBox.MouseCaptureChanged += new System.EventHandler(this.ReducButtonSelected);
+            // 
+            // radioEtudiantButton
+            // 
+            this.radioEtudiantButton.AutoSize = true;
+            this.radioEtudiantButton.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.radioEtudiantButton.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.radioEtudiantButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioEtudiantButton.Location = new System.Drawing.Point(44, 21);
+            this.radioEtudiantButton.Name = "radioEtudiantButton";
+            this.radioEtudiantButton.Size = new System.Drawing.Size(104, 29);
+            this.radioEtudiantButton.TabIndex = 0;
+            this.radioEtudiantButton.TabStop = true;
+            this.radioEtudiantButton.Text = "Etudiant";
+            this.radioEtudiantButton.UseVisualStyleBackColor = true;
+            // 
+            // radioFamilyButton
+            // 
+            this.radioFamilyButton.AutoSize = true;
+            this.radioFamilyButton.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.radioFamilyButton.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.radioFamilyButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioFamilyButton.Location = new System.Drawing.Point(53, 91);
+            this.radioFamilyButton.Name = "radioFamilyButton";
+            this.radioFamilyButton.Size = new System.Drawing.Size(95, 29);
+            this.radioFamilyButton.TabIndex = 1;
+            this.radioFamilyButton.TabStop = true;
+            this.radioFamilyButton.Text = "Famille";
+            this.radioFamilyButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioFamilyButton.UseVisualStyleBackColor = true;
+            // 
+            // radioGroupButton
+            // 
+            this.radioGroupButton.AutoSize = true;
+            this.radioGroupButton.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.radioGroupButton.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.radioGroupButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioGroupButton.Location = new System.Drawing.Point(50, 126);
+            this.radioGroupButton.Name = "radioGroupButton";
+            this.radioGroupButton.Size = new System.Drawing.Size(98, 29);
+            this.radioGroupButton.TabIndex = 2;
+            this.radioGroupButton.TabStop = true;
+            this.radioGroupButton.Text = "Groupe";
+            this.radioGroupButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioGroupButton.UseVisualStyleBackColor = true;
+            // 
+            // radioSeniorButton
+            // 
+            this.radioSeniorButton.AutoSize = true;
+            this.radioSeniorButton.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.radioSeniorButton.FlatAppearance.BorderSize = 5;
+            this.radioSeniorButton.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.radioSeniorButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioSeniorButton.Location = new System.Drawing.Point(59, 56);
+            this.radioSeniorButton.Name = "radioSeniorButton";
+            this.radioSeniorButton.Size = new System.Drawing.Size(90, 29);
+            this.radioSeniorButton.TabIndex = 4;
+            this.radioSeniorButton.TabStop = true;
+            this.radioSeniorButton.Text = "Senior";
+            this.radioSeniorButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.radioSeniorButton.UseVisualStyleBackColor = true;
             // 
             // Reductions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(327, 253);
+            this.ClientSize = new System.Drawing.Size(327, 324);
+            this.Controls.Add(this.ReducBox);
             this.Controls.Add(this.percentageSeniorLabel);
             this.Controls.Add(this.ValidReducbutton);
             this.Controls.Add(this.seniority);
-            this.Controls.Add(this.reducCheckedListBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Reductions";
             this.ShowIcon = false;
             this.Text = "Reductions applicables";
+            this.ReducBox.ResumeLayout(false);
+            this.ReducBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.CheckedListBox reducCheckedListBox;
         private System.Windows.Forms.Label seniority;
         private System.Windows.Forms.Button ValidReducbutton;
         private System.Windows.Forms.Label percentageSeniorLabel;
+        private System.Windows.Forms.GroupBox ReducBox;
+        private System.Windows.Forms.RadioButton radioSeniorButton;
+        private System.Windows.Forms.RadioButton radioGroupButton;
+        private System.Windows.Forms.RadioButton radioFamilyButton;
+        private System.Windows.Forms.RadioButton radioEtudiantButton;
     }
 }
