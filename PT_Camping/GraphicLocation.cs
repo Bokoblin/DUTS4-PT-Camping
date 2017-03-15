@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,10 +15,12 @@ namespace PT_Camping
     {
         public Emplacement Location { get; set; }
         public Rectangle Position { get; set; }
+        public bool Booked { get; set; }
 
         public GraphicLocation(Emplacement location)
         {
             this.Location = location;
+            Booked = false;
             Position = new Rectangle();
         }
 
@@ -43,10 +46,10 @@ namespace PT_Camping
             double coefHeight = (float)e.ClipRectangle.Height / 100f;
             if (Location != null)
             {
-                Color color = Color.Red;
-                if (Location.Type_Emplacement.Couleur != null)
+                Color rectangleColor = Color.LightGreen;
+                if (Booked)
                 {
-                    color = Color.FromArgb(Location.Type_Emplacement.Couleur.Value);
+                    rectangleColor = Color.Red;
                 }
                 Size size = new Size(50, 50);
                 if (Location.Taille_X > 0)
@@ -60,15 +63,32 @@ namespace PT_Camping
                 Point position = new Point();
                 position.X = (int)(Location.Cordonnee_X * coefWidth);
                 position.Y = (int)(Location.Coordonnee_Y * coefHeight);
-                SolidBrush brush = new SolidBrush(Color.Red);
+                SolidBrush brush = new SolidBrush(rectangleColor);
                 Position = new Rectangle(position.X, position.Y, size.Width, size.Height);
                 e.Graphics.FillRectangle(brush, Position);
                 brush.Dispose();
+                if (Location.Type_Emplacement.Icone != null)
+                {
+                    MemoryStream ms = new MemoryStream(Location.Type_Emplacement.Icone);
+                    Bitmap icon = new Bitmap(ms);
+                    Rectangle iconPos = Position;
+                    if (Position.Width > Position.Height)
+                    {
+                        iconPos.Width = iconPos.Height;
+                        iconPos.X = iconPos.X + (Position.Width - Position.Height) / 2;
+                    }
+                    else
+                    {
+                        iconPos.Height = iconPos.Width;
+                        iconPos.Y = iconPos.Y + (Position.Height - Position.Width) / 2;
+                    }
+                    ms.Close();
+                    e.Graphics.DrawImage(icon, iconPos);
+                }
                 if (check)
                 {
                     float[] dashValues = { 2, 2 };
-                    Pen blackPen = new Pen(Color.Black, 1);
-                    blackPen.DashPattern = dashValues;
+                    Pen blackPen = new Pen(Color.Black, 1) {DashPattern = dashValues};
                     e.Graphics.DrawRectangle(blackPen, new Rectangle(position.X - 1, position.Y - 1, size.Width + 2, size.Height + 2));
                     blackPen.Dispose();
                 }
