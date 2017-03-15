@@ -1,27 +1,20 @@
-﻿using PT_Camping.Model;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.Entity.Infrastructure;
-using System.Drawing;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using PT_Camping.Model;
 
-namespace PT_Camping
+namespace PT_Camping.Views.Forms
 {
-    public partial class addStock : Form
+    public partial class AddStock : Form
     {
-        DataBase dataBase;
-        public addStock()
+        private readonly DataBase _db;
+        public AddStock()
         {
             InitializeComponent();
-            dataBase = new DataBase();
+            _db = new DataBase();
         }
 
-        private void buttonValid_MouseClick(object sender, MouseEventArgs e)
+        private void ButtonValid_MouseClick(object sender, MouseEventArgs e)
         {
             try
             {
@@ -36,15 +29,17 @@ namespace PT_Camping
                     throw new Exception("La quantité doit être positive.");
 
 
-                if (dataBase.Produit.Count(p => p.Libelle_Produit == productNameTextBox.Text) == 1)
+                if (_db.Produit.Count(p => p.Libelle_Produit == productNameTextBox.Text) == 1)
                     throw new Exception("Un produit du même nom existe déjà.");
 
-                Produit product = new Produit();
-                product.Libelle_Produit = productNameTextBox.Text;
-                product.Quantite_Stock = Convert.ToInt32(productStockTextBox.Text);
-                product.Prix = Convert.ToDouble(productPriceTextBox.Text);
-                dataBase.Produit.Add(product);
-                dataBase.SaveChanges();
+                Produit product = new Produit
+                {
+                    Libelle_Produit = productNameTextBox.Text,
+                    Quantite_Stock = Convert.ToInt32(productStockTextBox.Text),
+                    Prix = Convert.ToDouble(productPriceTextBox.Text)
+                };
+                _db.Produit.Add(product);
+                _db.SaveChanges();
                 Close();
             }
             catch(Exception exception)

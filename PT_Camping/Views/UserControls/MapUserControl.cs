@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
-namespace PT_Camping
+namespace PT_Camping.Views.UserControls
 {
     /// <summary>
     /// The MapUserControl is a UserControl handling the campground's map.
@@ -20,20 +12,20 @@ namespace PT_Camping
     /// Since : 09/02/17
     public partial class MapUserControl : UserControl
     {
-        private HomeUserControl mHomeUserControl;
+        private readonly HomeUserControl _homeUserControl;
 
 
         public MapUserControl(HomeUserControl homeUserControl)
         {
             InitializeComponent();
-            mHomeUserControl = homeUserControl;
-            handleResize();
+            _homeUserControl = homeUserControl;
+            HandleResize();
         }
 
 
-        internal void handleResize()
+        internal void HandleResize()
         {
-            Size = mHomeUserControl.Size;
+            Size = _homeUserControl.Size;
         }
     }
 }

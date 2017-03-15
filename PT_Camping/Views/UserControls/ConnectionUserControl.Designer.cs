@@ -1,4 +1,4 @@
-﻿namespace PT_Camping
+﻿namespace PT_Camping.Views.UserControls
 {
     partial class ConnectionUserControl
     {
@@ -70,7 +70,7 @@
             this.passwordTextBox.Size = new System.Drawing.Size(160, 21);
             this.passwordTextBox.TabIndex = 12;
             this.passwordTextBox.UseSystemPasswordChar = true;
-            this.passwordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.passwordTextBox_KeyDown);
+            this.passwordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PasswordTextBox_KeyDown);
             // 
             // userTextBox
             // 
@@ -81,7 +81,7 @@
             this.userTextBox.Name = "userTextBox";
             this.userTextBox.Size = new System.Drawing.Size(160, 21);
             this.userTextBox.TabIndex = 11;
-            this.userTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.userTextBox_KeyDown);
+            this.userTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UserTextBox_KeyDown);
             // 
             // labelMenuStrip
             // 
@@ -104,7 +104,7 @@
             this.connectionButton.TabIndex = 8;
             this.connectionButton.Text = "Entrer";
             this.connectionButton.UseVisualStyleBackColor = true;
-            this.connectionButton.Click += new System.EventHandler(this.connectionButton_Click);
+            this.connectionButton.Click += new System.EventHandler(this.ConnectionButton_Click);
             // 
             // appBar
             // 

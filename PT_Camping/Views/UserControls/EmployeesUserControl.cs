@@ -1,10 +1,13 @@
-using PT_Camping.Model;
 using System;
 using System.Drawing;
 using System.IO;
+using System.Net.Mail;
 using System.Windows.Forms;
+using PT_Camping.Model;
+using PT_Camping.Properties;
+using PT_Camping.Views.Forms;
 
-namespace PT_Camping
+namespace PT_Camping.Views.UserControls
 {
     /// <summary>
     /// The EmployeesUserControl inherits from ManagementHomeControl.
@@ -18,13 +21,13 @@ namespace PT_Camping
         public EmployeesUserControl(HomeUserControl home) : base(home)
         {
             InitializeComponent();
-            appBarTitle.Text = "Gestion des employés";
+            appBarTitle.Text = Resources.employee_management;
             Db = new DataBase();
-            
-            employeeListView.View = System.Windows.Forms.View.Details;
-            employeeListView.Columns.Add("Nom", -2);
-            employeeListView.Columns.Add("Prénom", -2);
-            employeeListView.Columns.Add("Email", -2);
+
+            employeesListView.View = View.Details;
+            employeesListView.Columns.Add("Nom");
+            employeesListView.Columns.Add("Prénom");
+            employeesListView.Columns.Add("Email");
 
             UpdateEmployeesListView();
             HandleResize();
@@ -33,7 +36,7 @@ namespace PT_Camping
 
         private void UpdateEmployeesListView()
         {
-            employeeListView.Items.Clear();
+            employeesListView.Items.Clear();
 
             foreach (var employee in Db.Employe)
             {
@@ -43,33 +46,36 @@ namespace PT_Camping
                     string name = employee.Personne.Prenom_Personne;
                     string email = employee.Personne.Email;
 
-                    var item = new ListViewItem(new[] {surname, name, email})
+                    var item = new ListViewItem(new[] { surname, name, email })
                     {
                         Name = employee.Code_Personne.ToString()
                     };
-                    employeeListView.Items.Add(item);
+                    employeesListView.Items.Add(item);
                 }
             }
 
-            if (employeeListView.Items.Count > 0)
+            //=== Select the first of the list
+
+            if (employeesListView.Items.Count > 0)
             {
-                employeeListView.Items[0].Selected = true;
-                employeeListView.Select();
+                employeesListView.Items[0].Selected = true;
+                employeesListView.Select();
             }
         }
 
 
         private void UpdateEmployeeDetails()
         {
-            if (employeeListView.SelectedItems.Count != 0)
+            if (employeesListView.SelectedItems.Count != 0)
             {
-                int code = int.Parse(employeeListView.SelectedItems[0].Name);
+                int code = int.Parse(employeesListView.SelectedItems[0].Name);
                 var employee = Db.Employe.Find(code);
+
+                if (employee == null) return;
 
                 surnameTextBox.Text = employee.Personne.Nom_Personne;
                 nameTextBox.Text = employee.Personne.Prenom_Personne;
-                if (employee.Personne.Date_Naissance != null)
-                    birthDateTextBox.Text = employee.Personne.Date_Naissance.ToShortDateString();
+                birthDateTextBox.Text = employee.Personne.Date_Naissance.ToShortDateString();
                 addressTextBox.Text = employee.Personne.Adresse;
                 phoneTextBox.Text = employee.Personne.Telephone;
                 emailTextBox.Text = employee.Personne.Email;
@@ -83,21 +89,21 @@ namespace PT_Camping
                     ms.Close();
                 }
                 else
-                    pictureBox.Image = new Bitmap(Properties.Resources.contact_default);
+                    pictureBox.Image = new Bitmap(Resources.ic_contact_default);
 
                 dismissButton.Enabled = (employee.Personne.Code_Personne != 1); //You can't dismiss Mr Campo
             }
         }
 
 
-        private void OnAddEmployeeButtonClick(object sender, EventArgs e)
+        private void AddEmployeeButton_Click(object sender, EventArgs e)
         {
             new AddEmployee(Db).ShowDialog();
             UpdateEmployeesListView();
         }
    
 
-        private void OnEditButtonClick(object sender, EventArgs e)
+        private void EditButton_Click(object sender, EventArgs e)
         {
             if (addressTextBox.ReadOnly)
             {
@@ -106,7 +112,7 @@ namespace PT_Camping
                 phoneTextBox.ReadOnly = false;
                 emailTextBox.ReadOnly = false;
                 loginTextBox.ReadOnly = false;
-                editButton.BackgroundImage = Properties.Resources.ic_done;
+                editButton.BackgroundImage = Resources.ic_done;
             }
             else
             {
@@ -115,64 +121,62 @@ namespace PT_Camping
                 phoneTextBox.ReadOnly = true;
                 emailTextBox.ReadOnly = true;
                 loginTextBox.ReadOnly = true;
-                editButton.BackgroundImage = Properties.Resources.ic_edit;
+                editButton.BackgroundImage = Resources.ic_edit;
 
                 string message = "Les données suivantes ont été mises à jour : \n";
                 int cptModifications = 0;
 
-                int code = int.Parse(employeeListView.SelectedItems[0].Name);
+                int code = int.Parse(employeesListView.SelectedItems[0].Name);
                 var employee = Db.Employe.Find(code);
 
-                if (addressTextBox.Text != employee.Personne.Adresse)
+                if (employee != null)
                 {
-                    employee.Personne.Adresse = addressTextBox.Text;
-                    message += "adresse";
-                    cptModifications++;
-                }
-
-                if (phoneTextBox.Text != "" && phoneTextBox.Text != employee.Personne.Telephone)
-                {
-                    int phone;
-                    if (int.TryParse(phoneTextBox.Text, out phone) && phoneTextBox.Text.Length == 10)
+                    if (addressTextBox.Text != employee.Personne.Adresse)
                     {
-                        employee.Personne.Telephone = phoneTextBox.Text;
+                        employee.Personne.Adresse = addressTextBox.Text;
+                        message += "adresse";
+                        cptModifications++;
+                    }
+
+                    if (phoneTextBox.Text != "" && phoneTextBox.Text != employee.Personne.Telephone)
+                    {
+                        if (phoneTextBox.Text.Length == 10)
+                        {
+                            employee.Personne.Telephone = phoneTextBox.Text;
                         message += "téléphone\n";
                         cptModifications++;
-                    }
-                    else
-                        MessageBox.Show("Téléphone doit être un entier de 10 chiffres");
-                }
+                        }
+                        else
+                            MessageBox.Show(Resources.phone_char_exception);
 
-                if (emailTextBox.Text != employee.Personne.Email)
-                {
-                    if ( (emailTextBox.Text.EndsWith(".com") || emailTextBox.Text.EndsWith(".fr")) 
-                        && emailTextBox.Text.Contains("@") )
+                    }
+
+                    if (emailTextBox.Text != employee.Personne.Email)
                     {
-                        employee.Personne.Email = emailTextBox.Text;
-                        message += "email";
+                        try
+                        {
+                            employee.Personne.Email = new MailAddress(emailTextBox.Text).ToString();
+                            message += "email";
+                            cptModifications++;
+                        }
+                        catch (FormatException)
+                        {
+                            MessageBox.Show(Resources.unrecognized_email);
+                        }
+                    }
+
+                    if (loginTextBox.Text != employee.Login)
+                    {
+                        employee.Login = loginTextBox.Text;
+                        message += "login";
                         cptModifications++;
                     }
-                    else
-                        MessageBox.Show("Email doit contenir un @ et se terminer par .com/.fr");
                 }
-
-                if (loginTextBox.Text != employee.Login)
-                {
-                    employee.Login = loginTextBox.Text;
-                    message += "login";
-                    cptModifications++;
-                }
+                
 
                 Db.SaveChanges();
 
                 UpdateEmployeeDetails();
-                UpdateEmployeesListView();
-
-                foreach (ListViewItem item in employeeListView.Items)
-                {
-                    item.Selected = item.Name == code.ToString();
-                }
-                employeeListView.Select();
 
                 if (cptModifications > 0)
                     MessageBox.Show(message);
@@ -180,20 +184,21 @@ namespace PT_Camping
         }
 
 
-        private void OnPermissionButtonClick(object sender, EventArgs e)
+        private void PermissionButton_Click(object sender, EventArgs e)
         {
-            int code = int.Parse(employeeListView.SelectedItems[0].Name);
+            int code = int.Parse(employeesListView.SelectedItems[0].Name);
             var employee = Db.Employe.Find(code);
             new Permissions(employee, Db).ShowDialog();
             Db.SaveChanges();
         }
 
 
-        private void OnDismissEmployeeButtonClick(object sender, EventArgs e)
+        private void DismissEmployeeButton_Click(object sender, EventArgs e)
         {
-            int code = int.Parse(employeeListView.SelectedItems[0].Name);
+            int code = int.Parse(employeesListView.SelectedItems[0].Name);
             var employee = Db.Employe.Find(code);
-            employee.EstLicencie = true;
+            if (employee != null)
+                employee.EstLicencie = true;
             Db.SaveChanges();
             UpdateEmployeesListView();
         }
@@ -208,15 +213,28 @@ namespace PT_Camping
             UpdateEmployeeDetails();
         }
 
+
         private void EmployeeListView_Resize(object sender, EventArgs e)
         {
-            if (employeeListView.Columns.Count == 3)
+            if (employeesListView.Columns.Count != 0)
             {
-                employeeListView.Columns[0].Width = employeeListView.Width / 3;
-                employeeListView.Columns[1].Width = employeeListView.Width / 3;
-                employeeListView.Columns[2].Width = employeeListView.Width / 3;
+                foreach (ColumnHeader columnHeader in employeesListView.Columns)
+                    columnHeader.Width = employeesListView.Width / employeesListView.Columns.Count;
             }
         }
+
+
+        /**
+         * Prevent typing non digit values in the phone textbox
+         */
+        private void PhoneTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
 
         private void ResetButton_Click(object sender, EventArgs e)
         {
@@ -226,7 +244,7 @@ namespace PT_Camping
             phoneTextBox.ReadOnly = true;
             emailTextBox.ReadOnly = true;
             loginTextBox.ReadOnly = true;
-            editButton.BackgroundImage = Properties.Resources.ic_edit;
+            editButton.BackgroundImage = Resources.ic_edit;
         }
     }
 }

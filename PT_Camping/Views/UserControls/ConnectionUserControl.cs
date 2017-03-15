@@ -1,9 +1,10 @@
-﻿using PT_Camping.Model;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using PT_Camping.Model;
+using PT_Camping.Views.Forms;
 
-namespace PT_Camping
+namespace PT_Camping.Views.UserControls
 {
     /// <summary>
     /// The ConnectionUserControl is a UserControl handling the application's authentication at launch.
@@ -14,57 +15,69 @@ namespace PT_Camping
     /// Since : 07/02/17
     public partial class ConnectionUserControl : UserControl
     {
-        private AppWindow mWindow;
+        private readonly AppWindow _appWindow;
 
 
         public ConnectionUserControl(AppWindow window)
         {
             InitializeComponent();
-            mWindow = window;
-            handleResize();
+            _appWindow = window;
+            HandleResize();
             errorLabel.Visible = false;
         }
 
-        private void tryToConnect()
+        private void TryToConnect()
         {
-            String passwordEntered = this.passwordTextBox.Text;
-            mWindow.userLoged.Login = this.userTextBox.Text;
-            mWindow.userLoged.HashedPassword = LoginTools.sha256_hash(passwordEntered);
-            if (mWindow.userLoged.checkConnection())
+            string passwordEntered = passwordTextBox.Text;
+            _appWindow.UserLoged.Login = userTextBox.Text;
+            _appWindow.UserLoged.HashedPassword = LoginTools.Sha256_hash(passwordEntered);
+            try
             {
-                mWindow.login();
+                if (_appWindow.UserLoged.CheckConnection())
+                {
+                    if (_appWindow.UserLoged.Employee.EstLicencie)
+                        throw new UnauthorizedAccessException("Cet utilisateur n'a pas la permission d'accéder à l'application");
+                    _appWindow.Login();
+                }
+                else
+                {
+                    errorLabel.Visible = true;
+                    passwordTextBox.Text = "";
+                }
             }
-            else
+            catch (UnauthorizedAccessException exception)
             {
-                errorLabel.Visible = true;
-                this.passwordTextBox.Text = "";
+                MessageBox.Show(exception.Message);
             }
         }
 
-        private void connectionButton_Click(object sender, EventArgs e)
+        private void ConnectionButton_Click(object sender, EventArgs e)
         {
-            tryToConnect();
+            Cursor.Current = Cursors.WaitCursor;
+            TryToConnect();
         }
 
-        internal void handleResize()
+        internal void HandleResize()
         {
-            Size = mWindow.Size;
-            appBar.Size = new Size(mWindow.Size.Width, appBar.Size.Height);
+            Size = _appWindow.Size;
+            appBar.Size = new Size(_appWindow.Size.Width, appBar.Size.Height);
         }
 
-        private void passwordTextBox_KeyDown(object sender, KeyEventArgs e)
+        private void PasswordTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                tryToConnect();
+                Cursor.Current = Cursors.WaitCursor;
+                TryToConnect();
             }
         }
 
-        private void userTextBox_KeyDown(object sender, KeyEventArgs e)
+        private void UserTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                tryToConnect();
+                Cursor.Current = Cursors.WaitCursor;
+                TryToConnect();
             }
         }
     }

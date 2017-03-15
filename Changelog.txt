@@ -9,6 +9,7 @@ v0.3.0 - TEMP
 
 - Added employees
 - Added issues
+- Added stats
 - Added stocks
 
 
