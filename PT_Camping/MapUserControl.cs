@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PT_Camping.Model;
 using System.IO;
+using PT_Camping.Properties;
 
 namespace PT_Camping
 {
@@ -162,8 +163,8 @@ namespace PT_Camping
             {
                 using (FileDialog fd = new OpenFileDialog())
                 {
-                    fd.Title = "Sélectionnez une image pour le type " + type.Libelle_Type;
-                    fd.Filter = "Image Files |*.png; *.jpg; *.bmp";
+                    fd.Title = Resources.select_image_for_the_type + type.Libelle_Type;
+                    fd.Filter = Resources.images_files_formats;
                     if (fd.ShowDialog() == DialogResult.OK)
                     {
                         try
@@ -181,11 +182,11 @@ namespace PT_Camping
                         }
                         catch (FileNotFoundException)
                         {
-                            MessageBox.Show("Fichier non trouvé ! Veuillez réessayer.");
+                            MessageBox.Show(Resources.file_not_found_please_retry);
                         }
                         catch (FileLoadException)
                         {
-                            MessageBox.Show("Erreur lors de l'ouverture du fichier, veuillez réessayer.");
+                            MessageBox.Show(Resources.error_when_opening_the_file_please_retry);
                         }
                     }
                 }
@@ -297,8 +298,8 @@ namespace PT_Camping
         {
             using (FileDialog fd = new OpenFileDialog())
             {
-                fd.Title = "Sélectionnez une image de fond";
-                fd.Filter = "Image Files |*.png; *.jpg; *.bmp";
+                fd.Title = Resources.select_background_image;
+                fd.Filter = Resources.images_files_formats;
                 if (fd.ShowDialog() == DialogResult.OK)
                 {
                     try
@@ -327,11 +328,11 @@ namespace PT_Camping
                     }
                     catch (FileNotFoundException)
                     {
-                        MessageBox.Show("Fichier non trouvé ! Veuillez réessayer.");
+                        MessageBox.Show(Resources.file_not_found_please_retry);
                     }
                     catch (FileLoadException)
                     {
-                        MessageBox.Show("Erreur lors de l'ouverture du fichier, veuillez réessayer.");
+                        MessageBox.Show(Resources.error_when_opening_the_file_please_retry);
                     }
                 }
             }
@@ -606,16 +607,30 @@ namespace PT_Camping
             Panel edit = editLocationPanel;
             string resState = resStateLabel.Text;
             string buttonText = resButton.Text;
-            if (db.Reservation.Where(r => r.Date_Debut < dateTimePicker.Value && dateTimePicker.Value < r.Date_Fin).SelectMany(a => a.Loge).Any(l => l.Code_Emplacement == selectedLocation.Location.Code_Emplacement))
+            if (selectedLocation.Location.Type_Emplacement.Est_Reservable)
             {
-                resStateLabel.Text = "Reservé";
-                resButton.Text = "Libérer";
+                resButton.Enabled = true;
+                if (
+                    db.Reservation.Where(r => r.Date_Debut < dateTimePicker.Value && dateTimePicker.Value < r.Date_Fin)
+                        .SelectMany(a => a.Loge)
+                        .Any(l => l.Code_Emplacement == selectedLocation.Location.Code_Emplacement))
+                {
+                    resStateLabel.Text = Resources.booked;
+                    resButton.Text = Resources.unbook;
+                }
+                else
+                {
+                    resStateLabel.Text = Resources.free;
+                    resButton.Text = Resources.book;
+                }
             }
             else
             {
-                resStateLabel.Text = "Libre";
-                resButton.Text = "Réserver";
+                resButton.Enabled = false;
+                resButton.Text = Resources.book;
+                resStateLabel.Text = Resources.not_bookable;
             }
+            
             locationNameLabel.Text = selectedLocation.Location.Nom_Emplacement;
             catLocationLabel.Text = selectedLocation.Location.Type_Emplacement.Libelle_Type;
             catLocationListView.Items.Clear();
