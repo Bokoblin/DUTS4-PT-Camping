@@ -24,7 +24,7 @@ namespace PT_Camping
             Position = new Rectangle();
         }
 
-        public void move(PointF position, Control control)
+        public void Move(PointF position, Control control)
         {
             double coefWidth = (float)control.Width / 100f;
             double coefHeight = (float)control.Height / 100f;
@@ -32,7 +32,7 @@ namespace PT_Camping
             Location.Coordonnee_Y = position.Y / coefHeight;
         }
 
-        public void resize(SizeF size, Control control)
+        public void Resize(SizeF size, Control control)
         {
             double coefWidth = (float)control.Width / 100f;
             double coefHeight = (float)control.Height / 100f;
@@ -40,7 +40,7 @@ namespace PT_Camping
             Location.Taille_Y = size.Height / coefHeight;
         }
         
-        public void draw (PaintEventArgs e, bool check)
+        public void Draw (PaintEventArgs e, bool check)
         {
             double coefWidth = (float)e.ClipRectangle.Width / 100f;
             double coefHeight = (float)e.ClipRectangle.Height / 100f;

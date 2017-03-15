@@ -95,7 +95,7 @@ namespace PT_Camping
             {
                 typeLocationComboBox.Items.Add(type);
 
-                TableLayoutPanel panelType = createInsertLocationButton(type);
+                TableLayoutPanel panelType = CreateInsertLocationButton(type);
                 addLocationPanel.Controls.Add(panelType);
                 i++;
 
@@ -116,10 +116,10 @@ namespace PT_Camping
                 pictureBox.Image = image;
                 mode = MapMode.NORMAL;
             }
-            changeMode(mode);
+            ChangeMode(mode);
         }
 
-        private TableLayoutPanel createInsertLocationButton(Type_Emplacement type)
+        private TableLayoutPanel CreateInsertLocationButton(Type_Emplacement type)
         {
             TableLayoutPanel typePanel = new TableLayoutPanel();
             PictureBox typePicture = new PictureBox();
@@ -141,11 +141,17 @@ namespace PT_Camping
             typePanel.Anchor = AnchorStyles.Top | AnchorStyles.Left;
             typePanel.Margin = new Padding(5);
             typePanel.BackColor = Color.Gray;
+
             typePanel.MouseEnter += PanelType_MouseEnter;
             typePanel.MouseLeave += PanelType_MouseLeave;
-            typePanel.Click += TypePanel_Click;
             typePanel.MouseDown += TypePanel_MouseDown;
-            typePanel.DragLeave += TypePanel_DragLeave;
+
+            foreach (Control control in typePanel.Controls)
+            {
+                control.MouseEnter += PanelType_MouseEnter;
+                control.MouseDown += TypePanel_MouseDown;
+                control.MouseLeave += PanelType_MouseLeave;
+            }
             // 
             // pictureBox
             // 
@@ -206,24 +212,21 @@ namespace PT_Camping
 
         private void TypePanel_MouseDown(object sender, MouseEventArgs e)
         {
-            ((Panel)sender).DoDragDrop(sender, DragDropEffects.Move);
+            Panel panel = getParentTypePanel(sender);
+            if (e.Clicks == 2)
+            {
+                LoginTools.checkConnection();
+                Label typeLabel = (Label) panel.Controls.Find("typeLabel", true).First();
+                Type_Emplacement typeLocation = db.Type_Emplacement.FirstOrDefault(a => a.Libelle_Type.Equals(typeLabel.Text));
+                CreateNewLocation(typeLocation);
+            }
+            else
+            {
+                panel.DoDragDrop(panel, DragDropEffects.Move);
+            }
         }
-
-        private void TypePanel_DragLeave(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void TypePanel_Click(object sender, EventArgs e)
-        {
-            LoginTools.checkConnection();
-            Panel panel = (Panel)sender;
-            Label typeLabel = (Label)panel.Controls.Find("typeLabel", true).First();
-            Type_Emplacement typeLocation = db.Type_Emplacement.FirstOrDefault(a => a.Libelle_Type.Equals(typeLabel.Text));
-            createNewLocation(typeLocation);
-        }
-
-        private void createNewLocation(Type_Emplacement type, int x = 30, int y = 30)
+        
+        private void CreateNewLocation(Type_Emplacement type, int x = 30, int y = 30)
         {
             LoginTools.checkConnection();
             Emplacement newLocation = new Emplacement();
@@ -245,28 +248,42 @@ namespace PT_Camping
             newLocation.Nom_Emplacement = "Emplacement " + i;
             newLocation.Type_Emplacement = type;
             GraphicLocation newGraphicLocation = new GraphicLocation(newLocation);
-            newGraphicLocation.move(new Point(x, y), pictureBox);
+            newGraphicLocation.Move(new Point(x, y), pictureBox);
             locationsList.Add(newGraphicLocation);
             selectedLocation = newGraphicLocation;
             Refresh();
         }
 
+        private Panel getParentTypePanel(object control)
+        {
+            Panel panel;
+            if (control.GetType() == typeof(TableLayoutPanel))
+            {
+                panel = (Panel)control;
+            }
+            else
+            {
+                panel = (Panel)((Control)control).Parent;
+            }
+            return panel;
+        }
+
         private void PanelType_MouseEnter(object sender, EventArgs e)
         {
-            Panel panel = (Panel)sender;
+            Panel panel = getParentTypePanel(sender);
             panel.BackColor = Color.DimGray;
         }
 
         private void PanelType_MouseLeave(object sender, EventArgs e)
         {
-            Panel panel = (Panel)sender;
+            Panel panel = getParentTypePanel(sender);
             if (!panel.ClientRectangle.Contains(panel.PointToClient(Cursor.Position)))
             {
                 panel.BackColor = Color.Gray;
             }
         }
 
-        private void changeMode(MapMode mode)
+        private void ChangeMode(MapMode mode)
         {
             mapTablePanel.Visible = false;
             importMapPanel.Visible = false;
@@ -324,7 +341,7 @@ namespace PT_Camping
                         db.SaveChanges();
                         pictureBox.Image = image;
                         mode = MapMode.NORMAL;
-                        changeMode(mode);
+                        ChangeMode(mode);
                     }
                     catch (FileNotFoundException)
                     {
@@ -348,7 +365,7 @@ namespace PT_Camping
             {
                 mode = MapMode.NORMAL;
             }
-            changeMode(mode);
+            ChangeMode(mode);
         }
 
         private void pictureBox_Paint(object sender, PaintEventArgs e)
@@ -359,11 +376,11 @@ namespace PT_Camping
                 {
                     if (selectedLocation != null)
                     {
-                        location.draw(e, selectedLocation.Equals(location));
+                        location.Draw(e, selectedLocation.Equals(location));
                     }
                     else
                     {
-                        location.draw(e, false);
+                        location.Draw(e, false);
                     }
                 }
             }
@@ -447,7 +464,7 @@ namespace PT_Camping
                             {
                                 movePoint.Y = pictureBox.Height - selectedLocation.Position.Height;
                             }
-                            selectedLocation.move(movePoint, pictureBox);
+                            selectedLocation.Move(movePoint, pictureBox);
                         }
                         break;
                     case CursorAction.RESIZE_E:
@@ -457,7 +474,7 @@ namespace PT_Camping
                                 Height = oldSize.Height,
                                 Width = oldSize.Width + (e.Location.X - startClick.X)
                             };
-                            selectedLocation.resize(newSize, pictureBox);
+                            selectedLocation.Resize(newSize, pictureBox);
                         }
                         break;
                     case CursorAction.RESIZE_N:
@@ -469,7 +486,7 @@ namespace PT_Camping
                                 Height = oldSize.Height - (e.Location.Y - startClick.Y),
                                 Width = oldSize.Width
                             };
-                            selectedLocation.resize(newSize, pictureBox);
+                            selectedLocation.Resize(newSize, pictureBox);
                             move = true;
                         }
                         break;
@@ -480,7 +497,7 @@ namespace PT_Camping
                                 Height = oldSize.Height + (e.Location.Y - startClick.Y),
                                 Width = oldSize.Width
                             };
-                            selectedLocation.resize(newSize, pictureBox);
+                            selectedLocation.Resize(newSize, pictureBox);
                         }
                         break;
                     case CursorAction.RESIZE_W:
@@ -492,7 +509,7 @@ namespace PT_Camping
                                 Height = oldSize.Height,
                                 Width = oldSize.Width - (e.Location.X - startClick.X)
                             };
-                            selectedLocation.resize(newSize, pictureBox);
+                            selectedLocation.Resize(newSize, pictureBox);
                             move = true;
                         }
                         break;
@@ -511,7 +528,7 @@ namespace PT_Camping
                 }
                 if (move)
                 {
-                    selectedLocation.move(newPosition, pictureBox);
+                    selectedLocation.Move(newPosition, pictureBox);
                 }
                 pictureBox.Refresh();
             }
@@ -579,15 +596,7 @@ namespace PT_Camping
             List<int> toDelete = new List<int>();
             foreach (Emplacement location in db.Emplacement)
             {
-                bool exist = false;
-                foreach (GraphicLocation graphicLocation in locationsList)
-                {
-                    if (location.Code_Emplacement == graphicLocation.Location.Code_Emplacement)
-                    {
-                        exist = true;
-                        break;
-                    }
-                }
+                bool exist = locationsList.Any(graphicLocation => location.Code_Emplacement == graphicLocation.Location.Code_Emplacement);
                 if (!exist)
                 {
                     toDelete.Add(location.Code_Emplacement);
@@ -698,19 +707,19 @@ namespace PT_Camping
         {
             if (e.Data.GetDataPresent(typeof(TableLayoutPanel).FullName, false))
             {
-                Type_Emplacement typeLocation;
                 TableLayoutPanel panel = (TableLayoutPanel)e.Data.GetData(typeof(TableLayoutPanel).FullName, false);
+                panel.BackColor = Color.Gray;
                 Label typeLabel = (Label)panel.Controls.Find("typeLabel", true).First();
                 if (typeLabel != null)
                 {
-                    typeLocation = db.Type_Emplacement.FirstOrDefault(a => a.Libelle_Type.Equals(typeLabel.Text));
+                    Type_Emplacement typeLocation = db.Type_Emplacement.FirstOrDefault(a => a.Libelle_Type.Equals(typeLabel.Text));
                     if (typeLocation != null)
                     {
                         Point controlCoordinate = pictureBox.PointToClient(new Point(e.X, e.Y));
                         Rectangle validRectangle = new Rectangle(0, 0, pictureBox.Width - 30, pictureBox.Height - 30);
                         if (validRectangle.Contains(controlCoordinate))
                         {
-                            createNewLocation(typeLocation, controlCoordinate.X, controlCoordinate.Y);
+                            CreateNewLocation(typeLocation, controlCoordinate.X, controlCoordinate.Y);
                         }
                     }
                 }
