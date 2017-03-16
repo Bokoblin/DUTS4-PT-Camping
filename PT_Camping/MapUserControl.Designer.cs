@@ -1,4 +1,6 @@
-﻿namespace PT_Camping
+﻿using System.Windows.Forms;
+
+namespace PT_Camping
 {
     partial class MapUserControl
     {
@@ -39,8 +41,9 @@
             this.leftPanel = new System.Windows.Forms.Panel();
             this.categoriesCheckedListBox = new System.Windows.Forms.CheckedListBox();
             this.addLocationPanel = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.rightPanel = new System.Windows.Forms.Panel();
             this.detailsLocationPanel = new System.Windows.Forms.Panel();
+            this.detailsIncidentButton = new System.Windows.Forms.Button();
             this.incidentsListBox = new System.Windows.Forms.ListBox();
             this.label7 = new System.Windows.Forms.Label();
             this.catLocationListView = new System.Windows.Forms.ListView();
@@ -64,7 +67,7 @@
             this.mapTablePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.leftPanel.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.rightPanel.SuspendLayout();
             this.detailsLocationPanel.SuspendLayout();
             this.editLocationPanel.SuspendLayout();
             this.SuspendLayout();
@@ -116,7 +119,7 @@
             this.mapTablePanel.Controls.Add(this.validateChangesButton, 2, 0);
             this.mapTablePanel.Controls.Add(this.pictureBox, 1, 1);
             this.mapTablePanel.Controls.Add(this.leftPanel, 0, 1);
-            this.mapTablePanel.Controls.Add(this.panel1, 2, 1);
+            this.mapTablePanel.Controls.Add(this.rightPanel, 2, 1);
             this.mapTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mapTablePanel.Location = new System.Drawing.Point(0, 0);
             this.mapTablePanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -212,19 +215,20 @@
             this.addLocationPanel.Size = new System.Drawing.Size(195, 604);
             this.addLocationPanel.TabIndex = 0;
             // 
-            // panel1
+            // rightPanel
             // 
-            this.panel1.Controls.Add(this.detailsLocationPanel);
-            this.panel1.Controls.Add(this.editLocationPanel);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(807, 38);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(262, 604);
-            this.panel1.TabIndex = 7;
+            this.rightPanel.Controls.Add(this.detailsLocationPanel);
+            this.rightPanel.Controls.Add(this.editLocationPanel);
+            this.rightPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rightPanel.Location = new System.Drawing.Point(807, 38);
+            this.rightPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.rightPanel.Name = "rightPanel";
+            this.rightPanel.Size = new System.Drawing.Size(262, 604);
+            this.rightPanel.TabIndex = 7;
             // 
             // detailsLocationPanel
             // 
+            this.detailsLocationPanel.Controls.Add(this.detailsIncidentButton);
             this.detailsLocationPanel.Controls.Add(this.incidentsListBox);
             this.detailsLocationPanel.Controls.Add(this.label7);
             this.detailsLocationPanel.Controls.Add(this.catLocationListView);
@@ -243,6 +247,16 @@
             this.detailsLocationPanel.Size = new System.Drawing.Size(262, 604);
             this.detailsLocationPanel.TabIndex = 5;
             this.detailsLocationPanel.Visible = false;
+            // 
+            // detailsIncidentButton
+            // 
+            this.detailsIncidentButton.Location = new System.Drawing.Point(73, 453);
+            this.detailsIncidentButton.Name = "detailsIncidentButton";
+            this.detailsIncidentButton.Size = new System.Drawing.Size(121, 23);
+            this.detailsIncidentButton.TabIndex = 12;
+            this.detailsIncidentButton.Text = "Details Incident";
+            this.detailsIncidentButton.UseVisualStyleBackColor = true;
+            this.detailsIncidentButton.Click += new System.EventHandler(this.detailsIncidentButton_Click);
             // 
             // incidentsListBox
             // 
@@ -411,6 +425,7 @@
             // typeLocationComboBox
             // 
             this.typeLocationComboBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.typeLocationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.typeLocationComboBox.FormattingEnabled = true;
             this.typeLocationComboBox.Location = new System.Drawing.Point(21, 94);
             this.typeLocationComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -464,7 +479,7 @@
             this.mapTablePanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.leftPanel.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
+            this.rightPanel.ResumeLayout(false);
             this.detailsLocationPanel.ResumeLayout(false);
             this.detailsLocationPanel.PerformLayout();
             this.editLocationPanel.ResumeLayout(false);
@@ -504,8 +519,9 @@
         private System.Windows.Forms.ListView catLocationListView;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ListBox incidentsListBox;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel rightPanel;
         private System.Windows.Forms.Panel addLocationPanel;
         private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.Button detailsIncidentButton;
     }
 }

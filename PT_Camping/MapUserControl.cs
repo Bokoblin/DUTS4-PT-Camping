@@ -24,19 +24,19 @@ namespace PT_Camping
     /// 
     public enum MapMode
     {
-        LOAD_IMAGE,
-        NORMAL,
-        EDIT
+        LoadImage,
+        Normal,
+        Edit
     };
 
     public enum CursorAction
     {
-        DEFAULT,
-        MOVE,
+        Default,
+        Move,
         RESIZE_N,
-        RESIZE_E,
-        RESIZE_S,
-        RESIZE_W
+        ResizeE,
+        ResizeS,
+        ResizeW
     };
 
     public partial class MapUserControl : UserControl
@@ -54,7 +54,7 @@ namespace PT_Camping
                 _selectedLocation = value;
                 if (_selectedLocation != null)
                 {
-                    updateRightMenu();
+                    UpdateRightMenu();
                 }
             }
             get
@@ -72,13 +72,14 @@ namespace PT_Camping
         public MapUserControl(HomeUserControl homeUserControl)
         {
             InitializeComponent();
-            cursorAction = CursorAction.DEFAULT;
+            cursorAction = CursorAction.Default;
             moving = false;
             offsetMoving = new Point();
             mHomeUserControl = homeUserControl;
             Dock = DockStyle.Fill;
             LoginTools.checkConnection();
             db = new DataBase();
+            incidentsListBox.DisplayMember = "Description_Incident";
             foreach (Caracteristique_Emplacement car in db.Caracteristique_Emplacement)
             {
                 carCheckedListBox.Items.Add(car);
@@ -103,9 +104,10 @@ namespace PT_Camping
             }
             typeLocationComboBox.DisplayMember = "Libelle_Type";
             typeLocationComboBox.ValueMember = "Code_Type";
+            typeLocationComboBox.SelectionChangeCommitted += (sender, args) => pictureBox.Refresh();
             if (!db.App.Any(m => m.Fond_Image != null))
             {
-                mode = MapMode.LOAD_IMAGE;
+                mode = MapMode.LoadImage;
             }
             else
             {
@@ -114,7 +116,7 @@ namespace PT_Camping
                 image = new Bitmap(imageJpeg);
                 ms.Close();
                 pictureBox.Image = image;
-                mode = MapMode.NORMAL;
+                mode = MapMode.Normal;
             }
             ChangeMode(mode);
         }
@@ -293,15 +295,15 @@ namespace PT_Camping
             detailsLocationPanel.Visible = false;
             switch (mode)
             {
-                case MapMode.LOAD_IMAGE:
+                case MapMode.LoadImage:
                     importMapPanel.Visible = true;
                     break;
-                case MapMode.NORMAL:
+                case MapMode.Normal:
                     mapTablePanel.Visible = true;
                     categoriesCheckedListBox.Visible = true;
                     detailsLocationPanel.Visible = true;
                     break;
-                case MapMode.EDIT:
+                case MapMode.Edit:
                     mapTablePanel.Visible = true;
                     addLocationPanel.Visible = true;
                     editLocationPanel.Visible = true;
@@ -340,7 +342,7 @@ namespace PT_Camping
                         app.Fond_Image = jpegStream.ToArray();
                         db.SaveChanges();
                         pictureBox.Image = image;
-                        mode = MapMode.NORMAL;
+                        mode = MapMode.Normal;
                         ChangeMode(mode);
                     }
                     catch (FileNotFoundException)
@@ -359,13 +361,14 @@ namespace PT_Camping
         {
             if (((CheckBox)sender).Checked)
             {
-                mode = MapMode.EDIT;
+                mode = MapMode.Edit;
             }
             else
             {
-                mode = MapMode.NORMAL;
+                mode = MapMode.Normal;
             }
             ChangeMode(mode);
+            UpdateRightMenu();
         }
 
         private void pictureBox_Paint(object sender, PaintEventArgs e)
@@ -391,19 +394,19 @@ namespace PT_Camping
             if (selectedLocation != null)
             {
                 RectangleF position = selectedLocation.Position;
-                if (mode == MapMode.EDIT)
+                if (mode == MapMode.Edit)
                 {
                     if (!moving)
                     {
                         if (new RectangleF(position.X - 2, position.Y, 4, position.Height).Contains(e.Location))
                         {
                             Cursor = Cursors.SizeWE;
-                            cursorAction = CursorAction.RESIZE_W;
+                            cursorAction = CursorAction.ResizeW;
                         }
                         else if (new RectangleF(position.X + position.Width, position.Y, 4, position.Height).Contains(e.Location))
                         {
                             Cursor = Cursors.SizeWE;
-                            cursorAction = CursorAction.RESIZE_E;
+                            cursorAction = CursorAction.ResizeE;
                         }
                         else if (new RectangleF(position.X, position.Y - 2, position.Width, 4).Contains(e.Location))
                         {
@@ -413,12 +416,12 @@ namespace PT_Camping
                         else if (new RectangleF(position.X, position.Y + position.Height, position.Width, 4).Contains(e.Location))
                         {
                             Cursor = Cursors.SizeNS;
-                            cursorAction = CursorAction.RESIZE_S;
+                            cursorAction = CursorAction.ResizeS;
                         }
                         else if (position.Contains(e.Location))
                         {
                             Cursor = Cursors.SizeAll;
-                            cursorAction = CursorAction.MOVE;
+                            cursorAction = CursorAction.Move;
                         }
                         else
                         {
@@ -441,7 +444,7 @@ namespace PT_Camping
                 bool move = false;
                 switch (cursorAction)
                 {
-                    case CursorAction.MOVE:
+                    case CursorAction.Move:
                         {
                             PointF movePoint = new PointF
                             {
@@ -467,7 +470,7 @@ namespace PT_Camping
                             selectedLocation.Move(movePoint, pictureBox);
                         }
                         break;
-                    case CursorAction.RESIZE_E:
+                    case CursorAction.ResizeE:
                         {
                             SizeF newSize = new SizeF
                             {
@@ -490,7 +493,7 @@ namespace PT_Camping
                             move = true;
                         }
                         break;
-                    case CursorAction.RESIZE_S:
+                    case CursorAction.ResizeS:
                         {
                             SizeF newSize = new SizeF
                             {
@@ -500,7 +503,7 @@ namespace PT_Camping
                             selectedLocation.Resize(newSize, pictureBox);
                         }
                         break;
-                    case CursorAction.RESIZE_W:
+                    case CursorAction.ResizeW:
                         {
                             newPosition.Y = oldPosition.Y;
                             newPosition.X = e.Location.X;
@@ -555,7 +558,7 @@ namespace PT_Camping
 
         private void categoriesCheckedListBox_MouseUp(object sender, MouseEventArgs e)
         {
-            cursorAction = CursorAction.DEFAULT;
+            cursorAction = CursorAction.Default;
             Refresh();
         }
 
@@ -563,7 +566,7 @@ namespace PT_Camping
         {
             if (selectedLocation != null)
             {
-                if (cursorAction != CursorAction.DEFAULT && mode == MapMode.EDIT && !moving)
+                if (cursorAction != CursorAction.Default && mode == MapMode.Edit && !moving)
                 {
                     moving = true;
                     startClick = e.Location;
@@ -609,8 +612,12 @@ namespace PT_Camping
             db.SaveChanges();
         }
 
-        private void updateRightMenu()
+        private void UpdateRightMenu()
         {
+            if (selectedLocation == null)
+            {
+                return;
+            }
             LoginTools.checkConnection();
             Panel details = detailsLocationPanel;
             Panel edit = editLocationPanel;
@@ -641,9 +648,9 @@ namespace PT_Camping
             }
             
             locationNameLabel.Text = selectedLocation.Location.Nom_Emplacement;
+
             catLocationLabel.Text = selectedLocation.Location.Type_Emplacement.Libelle_Type;
             catLocationListView.Items.Clear();
-
             foreach (int i in carCheckedListBox.CheckedIndices)
             {
                 carCheckedListBox.SetItemCheckState(i, CheckState.Unchecked);
@@ -655,12 +662,23 @@ namespace PT_Camping
                 carCheckedListBox.SetItemChecked(carCheckedListBox.Items.IndexOf(car), true);
             }
 
+            incidentsListBox.Items.Clear();
+            foreach (Incident incident in db.Incident.Where(a => a.Code_Emplacement == selectedLocation.Location.Code_Emplacement && a.Date_Resolution == null))
+            {
+                incidentsListBox.Items.Add(incident);
+            }
+
             locationNameTextBox.DataBindings.Clear();
             locationNameTextBox.DataBindings.Add("Text", selectedLocation.Location, "Nom_Emplacement", false, DataSourceUpdateMode.OnPropertyChanged);
 
             typeLocationComboBox.DataBindings.Clear();
             typeLocationComboBox.DataBindings.Add("SelectedItem", selectedLocation.Location, "Type_Emplacement", false, DataSourceUpdateMode.OnPropertyChanged);
+            rightPanel.Refresh();
+        }
 
+        private void TypeLocationComboBox_SelectedValueChanged(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void dateTimePicker_ValueChanged(object sender, EventArgs e)
@@ -671,7 +689,7 @@ namespace PT_Camping
                     .SelectMany(a => a.Loge)
                     .Any(l => l.Code_Emplacement == location.Location.Code_Emplacement);
             }
-            updateRightMenu();
+            UpdateRightMenu();
         }
 
         private void carCheckedListBox_Check(object sender, ItemCheckEventArgs e)
@@ -729,6 +747,14 @@ namespace PT_Camping
         private void mapTablePanel_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Move;
+        }
+
+        private void detailsIncidentButton_Click(object sender, EventArgs e)
+        {
+            if (incidentsListBox.SelectedItem != null)
+            {
+                //TODO open new incident window
+            }
         }
     }
 }
