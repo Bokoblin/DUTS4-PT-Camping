@@ -213,4 +213,10 @@ et supérieure à la date de l'incident.</value>
   <data name="one_space" xml:space="preserve">
     <value> </value>
   </data>
+  <data name="compulsary_values_exception" xml:space="preserve">
+    <value>Toutes les valeurs marquées d'une étoile doivent être remplies.</value>
+  </data>
+  <data name="percent_symbol" xml:space="preserve">
+    <value>%</value>
+  </data>
 </root>

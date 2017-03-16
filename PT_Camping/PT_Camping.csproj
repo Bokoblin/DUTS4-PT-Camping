@@ -87,6 +87,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Views\Forms\AddClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Forms\AddClient.Designer.cs">
+      <DependentUpon>AddClient.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -103,6 +109,12 @@
     </Compile>
     <Compile Include="Views\Forms\AddEmployee.Designer.cs">
       <DependentUpon>AddEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Forms\Reductions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Forms\Reductions.Designer.cs">
+      <DependentUpon>Reductions.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Forms\AddProvider.cs">
       <SubType>Form</SubType>
@@ -263,11 +275,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Views\Forms\AddClient.resx">
+      <DependentUpon>AddClient.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Forms\AddIssue.resx">
       <DependentUpon>AddIssue.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Forms\AddEmployee.resx">
       <DependentUpon>AddEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Forms\Reductions.resx">
+      <DependentUpon>Reductions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Forms\AddProvider.resx">
       <DependentUpon>AddProvider.cs</DependentUpon>

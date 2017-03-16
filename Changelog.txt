@@ -1,12 +1,13 @@
 Project Name : PT4-Camping
 Developers   : Yonnel BERWIT, Alexandre JACQUOT, Arthur JOLIVET, Claire MARCINIAK, Valentine RENAUD
 
-Current version : v0.3.0 - TEMP
+Current version : v0.3.0
 
 ==================================================================================================
 
-v0.3.0 - TEMP
+v0.3.0 (16/03/2017)
 
+- Added clients
 - Added employees
 - Added issues
 - Added stats

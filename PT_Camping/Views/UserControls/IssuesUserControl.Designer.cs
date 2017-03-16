@@ -48,9 +48,9 @@ namespace PT_Camping.Views.UserControls
             this.descriptionLabel = new System.Windows.Forms.Label();
             this.statusLabel = new System.Windows.Forms.Label();
             this.criticalityLabel = new System.Windows.Forms.Label();
-            this.ResolutionDateLabel = new System.Windows.Forms.Label();
+            this.resolutionDateLabel = new System.Windows.Forms.Label();
             this.creationDateLabel = new System.Windows.Forms.Label();
-            this.TypeLabel = new System.Windows.Forms.Label();
+            this.issueTypeLabel = new System.Windows.Forms.Label();
             this.idLabel = new System.Windows.Forms.Label();
             this.issuesListView = new System.Windows.Forms.ListView();
             this.addIssueButton = new System.Windows.Forms.Button();
@@ -63,12 +63,6 @@ namespace PT_Camping.Views.UserControls
             // appBarTitle
             // 
             this.appBarTitle.TabIndex = 0;
-            // 
-            // logoutButton
-            // 
-            this.logoutButton.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.logoutButton.FlatAppearance.BorderSize = 0;
-            this.logoutButton.TabIndex = 7;
             // 
             // tableLayoutPanel
             // 
@@ -89,7 +83,7 @@ namespace PT_Camping.Views.UserControls
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 72F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(803, 553);
+            this.tableLayoutPanel.Size = new System.Drawing.Size(800, 550);
             this.tableLayoutPanel.TabIndex = 12;
             // 
             // detailsPanel
@@ -114,9 +108,9 @@ namespace PT_Camping.Views.UserControls
             this.detailsPanel.Controls.Add(this.descriptionLabel);
             this.detailsPanel.Controls.Add(this.statusLabel);
             this.detailsPanel.Controls.Add(this.criticalityLabel);
-            this.detailsPanel.Controls.Add(this.ResolutionDateLabel);
+            this.detailsPanel.Controls.Add(this.resolutionDateLabel);
             this.detailsPanel.Controls.Add(this.creationDateLabel);
-            this.detailsPanel.Controls.Add(this.TypeLabel);
+            this.detailsPanel.Controls.Add(this.issueTypeLabel);
             this.detailsPanel.Controls.Add(this.idLabel);
             this.detailsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.detailsPanel.Location = new System.Drawing.Point(444, 47);
@@ -302,15 +296,15 @@ namespace PT_Camping.Views.UserControls
             this.criticalityLabel.TabIndex = 5;
             this.criticalityLabel.Text = "Criticité";
             // 
-            // ResolutionDateLabel
+            // resolutionDateLabel
             // 
-            this.ResolutionDateLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.ResolutionDateLabel.AutoSize = true;
-            this.ResolutionDateLabel.Location = new System.Drawing.Point(29, 206);
-            this.ResolutionDateLabel.Name = "ResolutionDateLabel";
-            this.ResolutionDateLabel.Size = new System.Drawing.Size(93, 13);
-            this.ResolutionDateLabel.TabIndex = 4;
-            this.ResolutionDateLabel.Text = "Date de résolution";
+            this.resolutionDateLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.resolutionDateLabel.AutoSize = true;
+            this.resolutionDateLabel.Location = new System.Drawing.Point(29, 206);
+            this.resolutionDateLabel.Name = "resolutionDateLabel";
+            this.resolutionDateLabel.Size = new System.Drawing.Size(93, 13);
+            this.resolutionDateLabel.TabIndex = 4;
+            this.resolutionDateLabel.Text = "Date de résolution";
             // 
             // creationDateLabel
             // 
@@ -322,15 +316,15 @@ namespace PT_Camping.Views.UserControls
             this.creationDateLabel.TabIndex = 3;
             this.creationDateLabel.Text = "Date de création";
             // 
-            // TypeLabel
+            // issueTypeLabel
             // 
-            this.TypeLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.TypeLabel.AutoSize = true;
-            this.TypeLabel.Location = new System.Drawing.Point(29, 154);
-            this.TypeLabel.Name = "TypeLabel";
-            this.TypeLabel.Size = new System.Drawing.Size(31, 13);
-            this.TypeLabel.TabIndex = 2;
-            this.TypeLabel.Text = "Type";
+            this.issueTypeLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.issueTypeLabel.AutoSize = true;
+            this.issueTypeLabel.Location = new System.Drawing.Point(29, 154);
+            this.issueTypeLabel.Name = "issueTypeLabel";
+            this.issueTypeLabel.Size = new System.Drawing.Size(31, 13);
+            this.issueTypeLabel.TabIndex = 2;
+            this.issueTypeLabel.Text = "Type";
             // 
             // idLabel
             // 
@@ -391,10 +385,8 @@ namespace PT_Camping.Views.UserControls
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel);
             this.Name = "IssuesUserControl";
-            this.Size = new System.Drawing.Size(803, 603);
             this.Controls.SetChildIndex(this.tableLayoutPanel, 0);
             this.Controls.SetChildIndex(this.appBarTitle, 0);
-            this.Controls.SetChildIndex(this.logoutButton, 0);
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();
             this.detailsPanel.ResumeLayout(false);
@@ -419,9 +411,9 @@ namespace PT_Camping.Views.UserControls
         private System.Windows.Forms.Label descriptionLabel;
         private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.Label criticalityLabel;
-        private System.Windows.Forms.Label ResolutionDateLabel;
+        private System.Windows.Forms.Label resolutionDateLabel;
         private System.Windows.Forms.Label creationDateLabel;
-        private System.Windows.Forms.Label TypeLabel;
+        private System.Windows.Forms.Label issueTypeLabel;
         private System.Windows.Forms.Label idLabel;
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.TextBox descriptionTextBox;

@@ -52,18 +52,13 @@
             this.phoneLabel = new System.Windows.Forms.Label();
             this.addressLabel = new System.Windows.Forms.Label();
             this.birthDateLabel = new System.Windows.Forms.Label();
-            this.surnameLabel = new System.Windows.Forms.Label();
             this.resetButton = new System.Windows.Forms.Button();
+            this.surnameLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel.SuspendLayout();
             this.detailsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.detailsTitleBarPanel.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // logoutButton
-            // 
-            this.logoutButton.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.logoutButton.FlatAppearance.BorderSize = 0;
             // 
             // tableLayoutPanel
             // 
@@ -251,7 +246,7 @@
             // editButton
             // 
             this.editButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.editButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("editButton.BackgroundImage")));
+            this.editButton.BackgroundImage = global::PT_Camping.Properties.Resources.ic_edit;
             this.editButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.editButton.Location = new System.Drawing.Point(279, 46);
             this.editButton.Name = "editButton";
@@ -344,16 +339,6 @@
             this.birthDateLabel.TabIndex = 2;
             this.birthDateLabel.Text = "Date de Naissance";
             // 
-            // surnameLabel
-            // 
-            this.surnameLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.surnameLabel.AutoSize = true;
-            this.surnameLabel.Location = new System.Drawing.Point(36, 118);
-            this.surnameLabel.Name = "surnameLabel";
-            this.surnameLabel.Size = new System.Drawing.Size(29, 13);
-            this.surnameLabel.TabIndex = 1;
-            this.surnameLabel.Text = "Nom";
-            // 
             // resetButton
             // 
             this.resetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -367,6 +352,16 @@
             this.resetButton.Visible = false;
             this.resetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
+            // surnameLabel
+            // 
+            this.surnameLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.surnameLabel.AutoSize = true;
+            this.surnameLabel.Location = new System.Drawing.Point(36, 118);
+            this.surnameLabel.Name = "surnameLabel";
+            this.surnameLabel.Size = new System.Drawing.Size(29, 13);
+            this.surnameLabel.TabIndex = 1;
+            this.surnameLabel.Text = "Nom";
+            // 
             // EmployeesUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -375,7 +370,6 @@
             this.Name = "EmployeesUserControl";
             this.Controls.SetChildIndex(this.tableLayoutPanel, 0);
             this.Controls.SetChildIndex(this.appBarTitle, 0);
-            this.Controls.SetChildIndex(this.logoutButton, 0);
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();
             this.detailsPanel.ResumeLayout(false);

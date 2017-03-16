@@ -49,17 +49,12 @@
             this.sellButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.detailsPanel = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.providerLabel = new System.Windows.Forms.Label();
+            this.detailsTitlePanel = new System.Windows.Forms.Panel();
             this.tableLayoutPanel.SuspendLayout();
             this.detailsPanel.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.detailsTitlePanel.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // logoutButton
-            // 
-            this.logoutButton.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.logoutButton.FlatAppearance.BorderSize = 0;
             // 
             // productListView
             // 
@@ -284,8 +279,8 @@
             // 
             this.detailsPanel.BackColor = System.Drawing.Color.White;
             this.detailsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.detailsPanel.Controls.Add(this.label1);
-            this.detailsPanel.Controls.Add(this.panel1);
+            this.detailsPanel.Controls.Add(this.providerLabel);
+            this.detailsPanel.Controls.Add(this.detailsTitlePanel);
             this.detailsPanel.Controls.Add(this.sellButton);
             this.detailsPanel.Controls.Add(this.productCodeLabel);
             this.detailsPanel.Controls.Add(this.ProductNameLabel);
@@ -306,25 +301,25 @@
             this.detailsPanel.Size = new System.Drawing.Size(314, 390);
             this.detailsPanel.TabIndex = 13;
             // 
-            // label1
+            // providerLabel
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 250);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 13);
-            this.label1.TabIndex = 31;
-            this.label1.Text = "Responsable";
+            this.providerLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.providerLabel.AutoSize = true;
+            this.providerLabel.Location = new System.Drawing.Point(28, 250);
+            this.providerLabel.Name = "providerLabel";
+            this.providerLabel.Size = new System.Drawing.Size(69, 13);
+            this.providerLabel.TabIndex = 31;
+            this.providerLabel.Text = "Fournisseur";
             // 
-            // panel1
+            // detailsTitlePanel
             // 
-            this.panel1.BackColor = System.Drawing.Color.RoyalBlue;
-            this.panel1.Controls.Add(this.informationsLabel);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(312, 40);
-            this.panel1.TabIndex = 30;
+            this.detailsTitlePanel.BackColor = System.Drawing.Color.RoyalBlue;
+            this.detailsTitlePanel.Controls.Add(this.informationsLabel);
+            this.detailsTitlePanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.detailsTitlePanel.Location = new System.Drawing.Point(0, 0);
+            this.detailsTitlePanel.Name = "detailsTitlePanel";
+            this.detailsTitlePanel.Size = new System.Drawing.Size(312, 40);
+            this.detailsTitlePanel.TabIndex = 30;
             // 
             // StocksUserControl
             // 
@@ -334,13 +329,12 @@
             this.Name = "StocksUserControl";
             this.Controls.SetChildIndex(this.tableLayoutPanel, 0);
             this.Controls.SetChildIndex(this.appBarTitle, 0);
-            this.Controls.SetChildIndex(this.logoutButton, 0);
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();
             this.detailsPanel.ResumeLayout(false);
             this.detailsPanel.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.detailsTitlePanel.ResumeLayout(false);
+            this.detailsTitlePanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -368,7 +362,7 @@
         private System.Windows.Forms.Button sellButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
         private System.Windows.Forms.Panel detailsPanel;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label providerLabel;
+        private System.Windows.Forms.Panel detailsTitlePanel;
     }
 }

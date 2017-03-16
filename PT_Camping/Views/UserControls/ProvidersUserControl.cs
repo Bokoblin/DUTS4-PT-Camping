@@ -19,8 +19,6 @@ namespace PT_Camping.Views.UserControls
     /// Since : 08/02/17
     public partial class ProvidersUserControl : ManagementUserControl
     {
-        private string _providerMail;
-
         public ProvidersUserControl(HomeUserControl homeUserControl) : base(homeUserControl)
         {
             InitializeComponent();
@@ -51,6 +49,8 @@ namespace PT_Camping.Views.UserControls
                 providerListView.Items.Add(item);
             }
 
+            //=== Select the first of the list
+
             if (providerListView.Items.Count > 0)
             {
                 providerListView.Items[0].Selected = true;
@@ -58,11 +58,30 @@ namespace PT_Camping.Views.UserControls
             }
         }
 
+
+        public void UpdateProviderDetails()
+        {
+            if (providerListView.SelectedItems.Count != 0)
+            {
+                int code = int.Parse(providerListView.SelectedItems[0].Name);
+                var provider = Db.Fournisseur.Find(code);
+
+                if (provider != null)
+                {
+                    nameTextBox.Text = provider.Nom_Fournisseur;
+                    addressTextBox.Text = provider.Adresse_Fournisseur;
+                    emailTextBox.Text = provider.Email_Fournisseur;
+                    websiteTextBox.Text = provider.Site_web_Fournisseur ?? Resources.unknown_site;
+                }
+            }
+        }
+
         private void ContactButton_Click(object sender, EventArgs e)
         {
-            string receiver = _providerMail;
-
-            Process.Start("mailto:" + receiver);
+            int code = int.Parse(providerListView.SelectedItems[0].Name);
+            var provider = Db.Fournisseur.Find(code);
+            if (provider != null)
+                Process.Start("mailto:" + provider.Email_Fournisseur);
         }
 
 
@@ -144,7 +163,14 @@ namespace PT_Camping.Views.UserControls
 
                     Db.SaveChanges();
 
+                    UpdateProviderDetails();
                     UpdateProvidersListView();
+
+                    foreach (ListViewItem item in providerListView.Items)
+                    {
+                        item.Selected = item.Name == code.ToString();
+                    }
+                    providerListView.Select();
 
                     if (cptModifications > 0)
                         MessageBox.Show(message);
@@ -155,13 +181,13 @@ namespace PT_Camping.Views.UserControls
 
         private void ResetButton_Click(object sender, EventArgs e)
         {
-            UpdateProvidersListView();
             resetButton.Visible = false;
             nameTextBox.ReadOnly = true;
             addressTextBox.ReadOnly = true;
             emailTextBox.ReadOnly = true;
             websiteTextBox.ReadOnly = true;
             editButton.BackgroundImage = Resources.ic_edit;
+            UpdateProvidersListView();
         }
 
 
@@ -174,21 +200,13 @@ namespace PT_Camping.Views.UserControls
 
         private void ProviderListView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (providerListView.SelectedItems.Count != 0)
-            {
-                int code = int.Parse(providerListView.SelectedItems[0].Name);
-                var provider = Db.Fournisseur.Find(code);
-
-                if (provider != null)
-                {
-                    _providerMail = provider.Email_Fournisseur;
-
-                    nameTextBox.Text = provider.Nom_Fournisseur;
-                    addressTextBox.Text = provider.Adresse_Fournisseur;
-                    emailTextBox.Text = provider.Email_Fournisseur;
-                    websiteTextBox.Text = provider.Site_web_Fournisseur ?? Resources.unknown_site;
-                }
-            }
+            resetButton.Visible = false;
+            nameTextBox.ReadOnly = true;
+            addressTextBox.ReadOnly = true;
+            emailTextBox.ReadOnly = true;
+            websiteTextBox.ReadOnly = true;
+            editButton.BackgroundImage = Resources.ic_edit;
+            UpdateProviderDetails();
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)

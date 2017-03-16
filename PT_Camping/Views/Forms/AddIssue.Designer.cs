@@ -34,7 +34,6 @@
             this.surnameLabel = new System.Windows.Forms.Label();
             this.cancelButton = new System.Windows.Forms.Button();
             this.OKButton = new System.Windows.Forms.Button();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.criticalityLabel = new System.Windows.Forms.Label();
             this.issueTypecomboBox = new System.Windows.Forms.ComboBox();
             this.criticalityComboBox = new System.Windows.Forms.ComboBox();
@@ -148,7 +147,6 @@
         private System.Windows.Forms.Label surnameLabel;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button OKButton;
-        private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label criticalityLabel;
         private System.Windows.Forms.ComboBox issueTypecomboBox;
         private System.Windows.Forms.ComboBox criticalityComboBox;

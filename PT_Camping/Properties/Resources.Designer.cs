@@ -70,6 +70,15 @@ namespace PT_Camping.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Toutes les valeurs marquées d&apos;une étoile doivent être remplies..
+        /// </summary>
+        internal static string compulsary_values_exception {
+            get {
+                return ResourceManager.GetString("compulsary_values_exception", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à /5.
         /// </summary>
         internal static string criticality_max {
@@ -272,6 +281,15 @@ namespace PT_Camping.Properties {
         internal static string one_space {
             get {
                 return ResourceManager.GetString("one_space", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à %.
+        /// </summary>
+        internal static string percent_symbol {
+            get {
+                return ResourceManager.GetString("percent_symbol", resourceCulture);
             }
         }
         

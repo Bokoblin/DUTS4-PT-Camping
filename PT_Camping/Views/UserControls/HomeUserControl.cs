@@ -46,18 +46,21 @@ namespace PT_Camping.Views.UserControls
         }
 
 
-        public void StartProductsFromStats(int code)
+        public void StartProductsFromStats(int productCode)
         {
             Cursor.Current = Cursors.WaitCursor;
-            _stocksUserControl = new StocksUserControl(this, code);
+            _stocksUserControl = new StocksUserControl(this, productCode);
             Window.WindowPanel.Controls.Add(_stocksUserControl);
             Window.WindowPanel.Controls.Remove(this);
         }
 
 
-        public void StartClientsFromStats(int code)
+        public void StartClientsFromStats(int clientCode)
         {
-            //TODO : open clients with {code} selected
+            Cursor.Current = Cursors.WaitCursor;
+            _clientsUserControl = new ClientsUserControl(this, clientCode);
+            Window.WindowPanel.Controls.Add(_clientsUserControl);
+            Window.WindowPanel.Controls.Remove(this);
         }
 
 

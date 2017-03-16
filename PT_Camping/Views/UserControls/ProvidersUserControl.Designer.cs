@@ -51,11 +51,6 @@
             this.detailTitlePanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // logoutButton
-            // 
-            this.logoutButton.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.logoutButton.FlatAppearance.BorderSize = 0;
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 5;
@@ -282,7 +277,6 @@
             this.Name = "ProvidersUserControl";
             this.Controls.SetChildIndex(this.tableLayoutPanel1, 0);
             this.Controls.SetChildIndex(this.appBarTitle, 0);
-            this.Controls.SetChildIndex(this.logoutButton, 0);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.detailPanel.ResumeLayout(false);
             this.detailPanel.PerformLayout();

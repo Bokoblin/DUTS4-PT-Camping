@@ -16,7 +16,7 @@ namespace PT_Camping.Views.UserControls
     /// Since : 08/02/17
     public partial class IssuesUserControl : ManagementUserControl
     {
-        public IssuesUserControl(HomeUserControl homeUc) : base(homeUc)
+        public IssuesUserControl(HomeUserControl home) : base(home)
         {
             InitializeComponent();
             appBarTitle.Text = Resources.issues_management;
@@ -31,20 +31,8 @@ namespace PT_Camping.Views.UserControls
             HandleResize();
         }
 
-        public IssuesUserControl(HomeUserControl homeUc, int issueCode) : base(homeUc)
+        public IssuesUserControl(HomeUserControl home, int issueCode) : this(home)
         {
-            InitializeComponent();
-            appBarTitle.Text = Resources.issues_management;
-            Db = new DataBase();
-
-            issuesListView.View = View.Details;
-            issuesListView.Columns.Add("Type d'incident");
-            issuesListView.Columns.Add("Description");
-            issuesListView.Columns.Add("Date");
-
-            UpdateIssuesListView();
-            HandleResize();
-
             foreach (ListViewItem item in issuesListView.Items)
             {
                 item.Selected = item.Name == issueCode.ToString();
@@ -278,6 +266,8 @@ namespace PT_Camping.Views.UserControls
 
         private void IssuesListView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            resetButton.Visible = false;
+            editButton.BackgroundImage = Resources.ic_edit;
             resolutionDateTextBox.ReadOnly = true;
             criticalityComboBox.Enabled = false;
             statusTextBox.ReadOnly = true;

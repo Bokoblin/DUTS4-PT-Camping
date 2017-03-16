@@ -206,6 +206,8 @@ namespace PT_Camping.Views.UserControls
 
         private void EmployeeListView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            resetButton.Visible = false;
+            editButton.BackgroundImage = Resources.ic_edit;
             addressTextBox.ReadOnly = true;
             phoneTextBox.ReadOnly = true;
             emailTextBox.ReadOnly = true;
