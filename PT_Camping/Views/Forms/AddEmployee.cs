@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Windows.Forms;
 using PT_Camping.Model;
+using PT_Camping.Properties;
 
 namespace PT_Camping.Views.Forms
 {
@@ -50,7 +51,7 @@ namespace PT_Camping.Views.Forms
             {
                 if (surnameTextBox.Text == "" || nameTextBox.Text == "" || emailTextBox.Text == "" 
                     || phoneTextBox.Text == "" || loginTextBox.Text == "" || passwordTextBox.Text == "")
-                    throw new Exception("Toutes les valeurs marquées d'une étoile doivent être remplies.");
+                    throw new Exception(Resources.compulsary_values_exception);
 
                 if (surnameTextBox.Text.Any(char.IsDigit))
                     throw new Exception("Le prénom ne peut contenir de valeur numérique.");
@@ -64,7 +65,7 @@ namespace PT_Camping.Views.Forms
                 }
                 catch (FormatException)
                 {
-                    throw new Exception("Email n'est pas une adresse mail valide");
+                    throw new Exception(Resources.unrecognized_email);
                 }
 
 

@@ -55,7 +55,6 @@ namespace PT_Camping.Views.Forms
         /// Properties (Getters & Setters)
         /// </summary>
 
-        public Panel WindowPanel { get; set; }
         public LoginTools UserLoged { get; set; }
     }
 }

@@ -36,19 +36,8 @@ namespace PT_Camping.Views.UserControls
         }
 
 
-        public StocksUserControl(HomeUserControl home, int code) : base(home)
+        public StocksUserControl(HomeUserControl home, int code) : this(home)
         {
-            InitializeComponent();
-            appBarTitle.Text = Resources.product_management;
-            Db = new DataBase();
-
-            productListView.View = View.Details;
-            productListView.Columns.Add("Produit");
-            productListView.Columns.Add("Quantité");
-
-            UpdateProductListView();
-            HandleResize();
-
             foreach (ListViewItem item in productListView.Items)
             {
                 item.Selected = item.Name == code.ToString();
@@ -291,6 +280,7 @@ namespace PT_Camping.Views.UserControls
 
         private void ProductListView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            editButton.BackgroundImage = Resources.ic_edit;
             amountTextBox.ReadOnly = true;
             priceTextBox.ReadOnly = true;
             productNameTextBox.ReadOnly = true;

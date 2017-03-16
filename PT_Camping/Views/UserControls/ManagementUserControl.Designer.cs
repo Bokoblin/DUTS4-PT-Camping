@@ -46,8 +46,7 @@
             this.backArrow});
             this.appBar.Location = new System.Drawing.Point(0, 0);
             this.appBar.Name = "appBar";
-            this.appBar.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.appBar.Size = new System.Drawing.Size(1067, 62);
+            this.appBar.Size = new System.Drawing.Size(900, 50);
             this.appBar.TabIndex = 5;
             this.appBar.Text = "appBar";
             // 
@@ -59,7 +58,6 @@
             this.backArrow.Image = ((System.Drawing.Image)(resources.GetObject("backArrow.Image")));
             this.backArrow.Name = "backArrow";
             this.backArrow.Padding = new System.Windows.Forms.Padding(0);
-            this.backArrow.ShortcutKeys = System.Windows.Forms.Keys.Delete;
             this.backArrow.Size = new System.Drawing.Size(25, 25);
             this.backArrow.Text = "back";
             this.backArrow.Click += new System.EventHandler(this.BackArrow_Click);
@@ -70,10 +68,9 @@
             this.appBarTitle.BackColor = System.Drawing.Color.RoyalBlue;
             this.appBarTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.appBarTitle.ForeColor = System.Drawing.Color.White;
-            this.appBarTitle.Location = new System.Drawing.Point(53, 18);
-            this.appBarTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.appBarTitle.Location = new System.Drawing.Point(40, 15);
             this.appBarTitle.Name = "appBarTitle";
-            this.appBarTitle.Size = new System.Drawing.Size(136, 25);
+            this.appBarTitle.Size = new System.Drawing.Size(107, 20);
             this.appBarTitle.TabIndex = 6;
             this.appBarTitle.Text = "TITLE_NAME";
             // 
@@ -81,14 +78,14 @@
             // 
             this.logoutButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.logoutButton.BackColor = System.Drawing.Color.RoyalBlue;
+            this.logoutButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.logoutButton.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
             this.logoutButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.logoutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logoutButton.ForeColor = System.Drawing.Color.White;
-            this.logoutButton.Location = new System.Drawing.Point(882, 8);
-            this.logoutButton.Margin = new System.Windows.Forms.Padding(4);
+            this.logoutButton.Location = new System.Drawing.Point(750, 6);
             this.logoutButton.Name = "logoutButton";
-            this.logoutButton.Size = new System.Drawing.Size(160, 44);
+            this.logoutButton.Size = new System.Drawing.Size(120, 36);
             this.logoutButton.TabIndex = 9;
             this.logoutButton.Text = "Déconnexion";
             this.logoutButton.UseVisualStyleBackColor = false;
@@ -100,25 +97,25 @@
             this.userNameLabel.BackColor = System.Drawing.Color.RoyalBlue;
             this.userNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userNameLabel.ForeColor = System.Drawing.Color.White;
-            this.userNameLabel.Location = new System.Drawing.Point(557, -1);
+            this.userNameLabel.Location = new System.Drawing.Point(500, -1);
+            this.userNameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.userNameLabel.Name = "userNameLabel";
-            this.userNameLabel.Size = new System.Drawing.Size(305, 62);
+            this.userNameLabel.Size = new System.Drawing.Size(229, 50);
             this.userNameLabel.TabIndex = 10;
             this.userNameLabel.Text = "User Name";
             this.userNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // ManagementUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.Controls.Add(this.userNameLabel);
             this.Controls.Add(this.logoutButton);
             this.Controls.Add(this.appBarTitle);
             this.Controls.Add(this.appBar);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ManagementUserControl";
-            this.Size = new System.Drawing.Size(1067, 738);
+            this.Size = new System.Drawing.Size(900, 600);
             this.appBar.ResumeLayout(false);
             this.appBar.PerformLayout();
             this.ResumeLayout(false);
@@ -127,11 +124,10 @@
         }
 
         #endregion
-
-        protected System.Windows.Forms.MenuStrip appBar;
-        protected System.Windows.Forms.ToolStripMenuItem backArrow;
-        protected System.Windows.Forms.Label appBarTitle;
-        protected System.Windows.Forms.Button logoutButton;
+        private System.Windows.Forms.MenuStrip appBar;
+        private System.Windows.Forms.ToolStripMenuItem backArrow;
         private System.Windows.Forms.Label userNameLabel;
+        private System.Windows.Forms.Button logoutButton;
+        protected System.Windows.Forms.Label appBarTitle;
     }
 }

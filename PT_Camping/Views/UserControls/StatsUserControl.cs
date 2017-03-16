@@ -55,15 +55,11 @@ namespace PT_Camping.Views.UserControls
             mostAskedlocationsListView.Columns.Add("Type d'emplacement");
             mostAskedlocationsListView.Columns.Add("Réservations");
 
-            var statsClients = new Dictionary<int, int>();
-
-            foreach (Emplacement location in Db.Emplacement)
-            {
-                statsClients.Add(location.Code_Emplacement,
-                    Db.Reservation.Count(
-                        res => res.Code_Personne == location.Code_Emplacement
-                        && (res.Date_Debut.Year == _currentYear || res.Date_Debut.Year == _currentYear)));
-            }
+            var statsClients = Db.Emplacement.ToDictionary(
+                location => location.Code_Emplacement, 
+                location => Db.Reservation.Count(
+                    res => res.Code_Personne == location.Code_Emplacement 
+                    && (res.Date_Debut.Year == _currentYear || res.Date_Debut.Year == _currentYear)));
 
             foreach (Emplacement location in Db.Emplacement)
             {
@@ -231,13 +227,11 @@ namespace PT_Camping.Views.UserControls
 
             if (mostAskedlocationsListView.Columns.Count != 0)
             {
-                foreach (ColumnHeader columnHeader in mostAskedlocationsListView.Columns)
-                    columnHeader.Width = mostAskedlocationsListView.Width / mostAskedlocationsListView.Columns.Count;
+                mostAskedlocationsListView.Columns[0].Width = 30;
+                mostAskedlocationsListView.Columns[1].Width = mostAskedlocationsListView.Width / 3 - 10;
+                mostAskedlocationsListView.Columns[2].Width = mostAskedlocationsListView.Width / 3 - 10;
+                mostAskedlocationsListView.Columns[3].Width = mostAskedlocationsListView.Width / 3 - 10;
             }
-            mostAskedlocationsListView.Columns[0].Width = 30;
-            mostAskedlocationsListView.Columns[1].Width = mostAskedlocationsListView.Width / 3 - 10;
-            mostAskedlocationsListView.Columns[2].Width = mostAskedlocationsListView.Width / 3 - 10;
-            mostAskedlocationsListView.Columns[3].Width = mostAskedlocationsListView.Width / 3 - 10;
         }
 
 
@@ -245,12 +239,10 @@ namespace PT_Camping.Views.UserControls
         {
             if (mostAskedProductsListView.Columns.Count != 0)
             {
-                foreach (ColumnHeader columnHeader in mostAskedProductsListView.Columns)
-                    columnHeader.Width = mostAskedProductsListView.Width / mostAskedProductsListView.Columns.Count;
+                mostAskedProductsListView.Columns[0].Width = 30;
+                mostAskedProductsListView.Columns[1].Width = mostAskedProductsListView.Width / 2 - 15;
+                mostAskedProductsListView.Columns[2].Width = mostAskedProductsListView.Width / 2 - 15;
             }
-            mostAskedProductsListView.Columns[0].Width = 30;
-            mostAskedProductsListView.Columns[1].Width = mostAskedProductsListView.Width / 2 - 15;
-            mostAskedProductsListView.Columns[2].Width = mostAskedProductsListView.Width / 2 - 15;
         }
 
 
@@ -258,12 +250,10 @@ namespace PT_Camping.Views.UserControls
         {
             if (mostCommonIssueslistView.Columns.Count != 0)
             {
-                foreach (ColumnHeader columnHeader in mostCommonIssueslistView.Columns)
-                    columnHeader.Width = mostCommonIssueslistView.Width / mostCommonIssueslistView.Columns.Count;
+                mostCommonIssueslistView.Columns[0].Width = 30;
+                mostCommonIssueslistView.Columns[1].Width = mostCommonIssueslistView.Width / 2 - 15;
+                mostCommonIssueslistView.Columns[2].Width = mostCommonIssueslistView.Width / 2 - 15;
             }
-            mostCommonIssueslistView.Columns[0].Width = 30;
-            mostCommonIssueslistView.Columns[1].Width = mostCommonIssueslistView.Width / 2 - 15;
-            mostCommonIssueslistView.Columns[2].Width = mostCommonIssueslistView.Width / 2 - 15;
         }
 
 
@@ -271,13 +261,11 @@ namespace PT_Camping.Views.UserControls
         {
             if (bestClientsListView.Columns.Count != 0)
             {
-                foreach (ColumnHeader columnHeader in bestClientsListView.Columns)
-                    columnHeader.Width = bestClientsListView.Width / bestClientsListView.Columns.Count;
+                bestClientsListView.Columns[0].Width = 30;
+                bestClientsListView.Columns[1].Width = bestClientsListView.Width / 3 - 10;
+                bestClientsListView.Columns[2].Width = bestClientsListView.Width / 3 - 10;
+                bestClientsListView.Columns[3].Width = bestClientsListView.Width / 3 - 10;
             }
-            bestClientsListView.Columns[0].Width = 30;
-            bestClientsListView.Columns[1].Width = bestClientsListView.Width / 3 - 10;
-            bestClientsListView.Columns[2].Width = bestClientsListView.Width / 3 - 10;
-            bestClientsListView.Columns[3].Width = bestClientsListView.Width / 3 - 10;
         }
 
 
@@ -285,10 +273,11 @@ namespace PT_Camping.Views.UserControls
         {
             if (mostAskedlocationsListView.SelectedItems.Count > 0)
             {
-                int code = int.Parse(mostAskedlocationsListView.SelectedItems[0].Name);
-                //HomeUC.Window.WindowPanel.Controls.Remove(this);
+                //TODO with Map feature
+                //int code = int.Parse(mostAskedlocationsListView.SelectedItems[0].Name);
+                //HomeUserControl.Window.WindowPanel.Controls.Remove(this);
+                //HomeUserControl.StartLocationsFromStats(code);
                 MessageBox.Show(Resources.not_implemented_feature);
-                HomeUserControl.StartLocationsFromStats(code);
             }
         }
 
@@ -328,8 +317,8 @@ namespace PT_Camping.Views.UserControls
             if (bestClientsListView.SelectedItems.Count > 0)
             {
                 int code = int.Parse(bestClientsListView.SelectedItems[0].Name);
-                //HomeUC.Window.WindowPanel.Controls.Remove(this);
-                MessageBox.Show(Resources.not_implemented_feature);
+                code = Db.Client.First(i => i.Code_Personne == code).Code_Personne;
+                HomeUserControl.Window.WindowPanel.Controls.Remove(this);
                 HomeUserControl.StartClientsFromStats(code);
             }
         }

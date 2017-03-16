@@ -98,6 +98,7 @@
             // connectionButton
             // 
             this.connectionButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.connectionButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.connectionButton.Location = new System.Drawing.Point(350, 472);
             this.connectionButton.Name = "connectionButton";
             this.connectionButton.Size = new System.Drawing.Size(90, 30);

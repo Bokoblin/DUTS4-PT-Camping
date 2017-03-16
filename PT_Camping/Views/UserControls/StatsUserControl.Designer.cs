@@ -41,11 +41,6 @@
             this.tableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // logoutButton
-            // 
-            this.logoutButton.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.logoutButton.FlatAppearance.BorderSize = 0;
-            // 
             // tableLayoutPanel
             // 
             this.tableLayoutPanel.ColumnCount = 5;
@@ -210,7 +205,6 @@
             this.Name = "StatsUserControl";
             this.Controls.SetChildIndex(this.tableLayoutPanel, 0);
             this.Controls.SetChildIndex(this.appBarTitle, 0);
-            this.Controls.SetChildIndex(this.logoutButton, 0);
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();
             this.ResumeLayout(false);

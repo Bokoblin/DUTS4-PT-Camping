@@ -31,7 +31,7 @@
             this.WindowPanel = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // windowPanel
+            // WindowPanel
             // 
             this.WindowPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -43,7 +43,7 @@
             this.WindowPanel.Size = new System.Drawing.Size(900, 600);
             this.WindowPanel.TabIndex = 0;
             // 
-            // AppWindow
+            // Window
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -64,6 +64,8 @@
         }
 
         #endregion
+
+        public System.Windows.Forms.Panel WindowPanel;
     }
 }
 
