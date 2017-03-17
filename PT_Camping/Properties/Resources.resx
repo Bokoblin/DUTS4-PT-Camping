@@ -144,4 +144,8 @@
   <data name="select_image_for_the_type" xml:space="preserve">
     <value>Sélectionnez une image pour le type </value>
   </data>
+  <data name="db_save_error" xml:space="preserve">
+    <value>Erreur lors de la sauvegarde dans la base de données : 
+</value>
+  </data>
 </root>
