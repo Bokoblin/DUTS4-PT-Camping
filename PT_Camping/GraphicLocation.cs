@@ -40,10 +40,10 @@ namespace PT_Camping
             Location.Taille_Y = size.Height / coefHeight;
         }
         
-        public void Draw (PaintEventArgs e, bool check)
+        public void Draw (PaintEventArgs e, bool check, Control control)
         {
-            double coefWidth = (float)e.ClipRectangle.Width / 100f;
-            double coefHeight = (float)e.ClipRectangle.Height / 100f;
+            double coefWidth = (float)control.Width / 100f;
+            double coefHeight = (float)control.Height / 100f;
             if (Location != null)
             {
                 Color rectangleColor = Color.Gray;
