@@ -28,8 +28,15 @@ namespace PT_Camping.Views.UserControls
             Db = new DataBase();
 
             productListView.View = View.Details;
+            productListView.Columns.Add("Etat");
             productListView.Columns.Add("Produit");
             productListView.Columns.Add("Quantité");
+
+            var imageList = new ImageList();
+            imageList.Images.Add("low", Resources.ic_stock_low);
+            imageList.Images.Add("empty", Resources.ic_stock_empty);
+            imageList.ImageSize = new Size(20, 20);
+            productListView.SmallImageList = imageList;
 
             UpdateProductListView();
             HandleResize();
@@ -54,19 +61,14 @@ namespace PT_Camping.Views.UserControls
                 string name = product.Libelle_Produit;
                 string stock = product.Quantite_Stock.ToString();
 
-                var item = new ListViewItem(new[] { name, stock })
+                var item = new ListViewItem(new[] { "", name, stock })
                 {
-                    Name = product.Code_Produit.ToString()
+                    Name = product.Code_Produit.ToString(),
+                    ImageKey = (product.Quantite_Stock <= 15) 
+                                ? (product.Quantite_Stock == 0)
+                                ? "empty" : "low" : ""
                 };
 
-                if (product.Quantite_Stock == 0)
-                {
-                    item.BackColor = Color.Red;
-                }
-                else if (product.Quantite_Stock <= 15)
-                {
-                    item.BackColor = Color.Orange;
-                }
                 productListView.Items.Add(item);
             }
 
@@ -294,8 +296,9 @@ namespace PT_Camping.Views.UserControls
         {
             if (productListView.Columns.Count != 0)
             {
-                foreach (ColumnHeader columnHeader in productListView.Columns)
-                    columnHeader.Width = productListView.Width / productListView.Columns.Count;
+                productListView.Columns[0].Width = 34;
+                productListView.Columns[1].Width = productListView.Width / 2 - 17;
+                productListView.Columns[2].Width = productListView.Width / 2 - 17;
             }
         }
 
