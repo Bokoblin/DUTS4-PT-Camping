@@ -23,7 +23,6 @@ namespace PT_Camping.Views.Forms
             InitializeComponent();
             _connectionUserControl = new ConnectionUserControl(this);
             WindowPanel.Controls.Add(_connectionUserControl);
-            UserLoged = new LoginTools();
         }
 
         internal void Login()
@@ -36,8 +35,8 @@ namespace PT_Camping.Views.Forms
 
         internal void Logout()
         {
-            UserLoged.Login = "";
-            UserLoged.HashedPassword = "";
+            LoginTools.Login = "";
+            LoginTools.HashedPassword = "";
             _connectionUserControl = new ConnectionUserControl(this);
             WindowPanel.Controls.Add(_connectionUserControl);
         }
@@ -49,12 +48,5 @@ namespace PT_Camping.Views.Forms
             _connectionUserControl?.HandleResize();
             _homeUserControl?.HandleResize();
         }
-
-
-        /// <summary>
-        /// Properties (Getters & Setters)
-        /// </summary>
-
-        public LoginTools UserLoged { get; set; }
     }
 }

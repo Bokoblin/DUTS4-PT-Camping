@@ -30,7 +30,7 @@ namespace PT_Camping.Views.UserControls
             InitializeComponent();
             Window = window;
             HandleResize();
-            Employe employeeLoged = Window.UserLoged.Employee;
+            Employe employeeLoged = LoginTools.Employee;
             if (employeeLoged != null)
             {
                 userNameLabel.Text = Resources.hello_user 

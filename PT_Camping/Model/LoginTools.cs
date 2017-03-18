@@ -14,15 +14,15 @@ namespace PT_Camping.Model
     /// </summary>
     /// Authors : Alexandre
     /// Since : 15/02/17
-    public class LoginTools
+    public static class LoginTools
     {
-        public string Login { get; set; }
+        public static string Login { get; set; }
 
-        public string HashedPassword { get; set; }
+        public static string HashedPassword { get; set; }
 
-        public Employe Employee { get; set; }
+        public static Employe Employee { get; set; }
 
-        public bool CheckConnection()
+        public static bool CheckConnection()
         {
             try
             {
