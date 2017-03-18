@@ -23,9 +23,16 @@ namespace PT_Camping.Views.UserControls
             Db = new DataBase();
 
             issuesListView.View = View.Details;
+            issuesListView.Columns.Add("Etat");
             issuesListView.Columns.Add("Type d'incident");
             issuesListView.Columns.Add("Description");
             issuesListView.Columns.Add("Date");
+
+            var imageList = new ImageList();
+            imageList.Images.Add("pending", Resources.ic_issue_pending);
+            imageList.Images.Add("done", Resources.ic_issue_done);
+            imageList.ImageSize = new System.Drawing.Size(20,20);
+            issuesListView.SmallImageList = imageList;
 
             UpdateIssuesListView();
             HandleResize();
@@ -50,9 +57,10 @@ namespace PT_Camping.Views.UserControls
                 string issueDescription = issue.Description_Incident;
                 string issueDate = issue.Date_Incident.ToShortDateString();
 
-                var item = new ListViewItem(new[] { issueType, issueDescription, issueDate })
+                var item = new ListViewItem(new[] { "", issueType, issueDescription, issueDate })
                 {
-                    Name = issue.Code_Incident.ToString()
+                    Name = issue.Code_Incident.ToString(),
+                    ImageKey = (issue.Date_Resolution == null)? "pending":"done"
                 };
                 issuesListView.Items.Add(item);
             }
@@ -68,7 +76,7 @@ namespace PT_Camping.Views.UserControls
             //=== Order list items by date
 
             var orderedList = issuesListView.Items.Cast<ListViewItem>().Select(x => x)
-                .OrderBy(x => DateTime.Parse(x.SubItems[2].Text)).ToList();
+                .OrderBy(x => DateTime.Parse(x.SubItems[3].Text)).ToList();
             issuesListView.Items.Clear();
             issuesListView.Items.AddRange(orderedList.ToArray());
         }
@@ -220,6 +228,12 @@ namespace PT_Camping.Views.UserControls
                             message += "date de résolution\n";
                             cptModifications++;
                         }
+                        else if (statusTextBox.Text == Resources.done_issue)
+                        {
+                            message += "date de résolution\n";
+                            cptModifications++;
+                            OnResolveIssueButtonClick(null, null);
+                        }
                     }
 
                     if (descriptionTextBox.Text != incident.Description_Incident)
@@ -288,8 +302,10 @@ namespace PT_Camping.Views.UserControls
         {
             if (issuesListView.Columns.Count != 0)
             {
-                foreach (ColumnHeader columnHeader in issuesListView.Columns)
-                    columnHeader.Width = issuesListView.Width / issuesListView.Columns.Count;
+                issuesListView.Columns[0].Width = 33;
+                issuesListView.Columns[1].Width = issuesListView.Width / 3 - 11;
+                issuesListView.Columns[2].Width = issuesListView.Width / 3 - 11;
+                issuesListView.Columns[3].Width = issuesListView.Width / 3 - 11;
             }
         }
 
