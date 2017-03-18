@@ -253,4 +253,8 @@ et supérieure à la date de l'incident.</value>
     <value>Erreur lors de la sauvegarde dans la base de données : 
 </value>
   </data>
+<data name="denied_access" xml:space="preserve">
+    <value>Accès refusé. 
+Veuillez contacter votre administrateur.</value>
+  </data>
 </root>

@@ -18,6 +18,7 @@ namespace PT_Camping.Views.UserControls
     public partial class ManagementUserControl : UserControl
     {
         protected DataBase Db;
+        protected Employe AuthenticatedEmployee;
 
         public ManagementUserControl()
         {
@@ -29,15 +30,18 @@ namespace PT_Camping.Views.UserControls
         {
             InitializeComponent();
             HomeUserControl = homeUserControl;
-            Employe personLoged = LoginTools.Employee;
-            if (personLoged != null)
+            AuthenticatedEmployee = LoginTools.Employee;
+            if (AuthenticatedEmployee != null)
             {
-                userNameLabel.Text = Resources.hello_user + personLoged.Personne.Prenom_Personne + Resources.one_space + personLoged.Personne.Nom_Personne;
+                userNameLabel.Text = Resources.hello_user 
+                    + AuthenticatedEmployee.Personne.Prenom_Personne 
+                    + Resources.one_space + AuthenticatedEmployee.Personne.Nom_Personne;
             }
         }
 
         private void BackArrow_Click(object sender, EventArgs e)
         {
+            HomeUserControl.InitPermissions();
             HomeUserControl.Window.WindowPanel.Controls.Add(HomeUserControl);
             HomeUserControl.Window.WindowPanel.Controls.Remove(this);
         }

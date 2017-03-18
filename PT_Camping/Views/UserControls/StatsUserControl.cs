@@ -273,9 +273,19 @@ namespace PT_Camping.Views.UserControls
         {
             if (mostAskedlocationsListView.SelectedItems.Count > 0)
             {
-                int code = int.Parse(mostAskedlocationsListView.SelectedItems[0].Name);
-                HomeUserControl.Window.WindowPanel.Controls.Remove(this);
-                HomeUserControl.StartLocationsFromStats(code);
+                var userRights = Db.Personne.First(
+                    a => a.Code_Personne == AuthenticatedEmployee.Personne.Code_Personne).Droit.ToList();
+
+                if (userRights.Any(d => d.Libelle_Droit == "readMap"))
+                {
+                    int code = int.Parse(mostAskedlocationsListView.SelectedItems[0].Name);
+                    HomeUserControl.Window.WindowPanel.Controls.Remove(this);
+                    HomeUserControl.StartLocationsFromStats(code);
+                }
+                else
+                {
+                    MessageBox.Show(Resources.denied_access);
+                }
             }
         }
 
@@ -284,10 +294,20 @@ namespace PT_Camping.Views.UserControls
         {
             if (mostAskedProductsListView.SelectedItems.Count > 0)
             {
-                var code = int.Parse(mostAskedProductsListView.SelectedItems[0].Name);
-                code = Db.Produit.First(i => i.Code_Produit == code).Code_Produit;
-                HomeUserControl.Window.WindowPanel.Controls.Remove(this);
-                HomeUserControl.StartProductsFromStats(code);
+                var userRights = Db.Personne.First(
+                    a => a.Code_Personne == AuthenticatedEmployee.Personne.Code_Personne).Droit.ToList();
+
+                if (userRights.Any(d => d.Libelle_Droit == "readProducts"))
+                {
+                    var code = int.Parse(mostAskedProductsListView.SelectedItems[0].Name);
+                    code = Db.Produit.First(i => i.Code_Produit == code).Code_Produit;
+                    HomeUserControl.Window.WindowPanel.Controls.Remove(this);
+                    HomeUserControl.StartProductsFromStats(code);
+                }
+                else
+                {
+                    MessageBox.Show(Resources.denied_access);
+                }
             }
         }
 
@@ -296,16 +316,25 @@ namespace PT_Camping.Views.UserControls
         {
             if (mostCommonIssueslistView.SelectedItems.Count > 0)
             {
-                if (mostCommonIssueslistView.SelectedItems[0].SubItems[2].Text != 0.ToString())
+                var userRights = Db.Personne.First(
+                    a => a.Code_Personne == AuthenticatedEmployee.Personne.Code_Personne).Droit.ToList();
+
+                if (userRights.Any(d => d.Libelle_Droit == "readIssues"))
                 {
-                    int codeType = int.Parse(mostCommonIssueslistView.SelectedItems[0].Name);
-                    int code = Db.Incident.First(i => i.Code_Type == codeType).Code_Incident;
-                    HomeUserControl.Window.WindowPanel.Controls.Remove(this);
-                    HomeUserControl.StartIssuesFromStats(code);
+                    if (mostCommonIssueslistView.SelectedItems[0].SubItems[2].Text != 0.ToString())
+                    {
+                        int codeType = int.Parse(mostCommonIssueslistView.SelectedItems[0].Name);
+                        int code = Db.Incident.First(i => i.Code_Type == codeType).Code_Incident;
+                        HomeUserControl.Window.WindowPanel.Controls.Remove(this);
+                        HomeUserControl.StartIssuesFromStats(code);
+                    }
+                    else
+                        MessageBox.Show(Resources.no_issue_corresponding);
                 }
                 else
-                    MessageBox.Show(Resources.no_issue_corresponding);
-
+                {
+                    MessageBox.Show(Resources.denied_access);
+                }
             }
         }
 
@@ -314,10 +343,20 @@ namespace PT_Camping.Views.UserControls
         {
             if (bestClientsListView.SelectedItems.Count > 0)
             {
-                int code = int.Parse(bestClientsListView.SelectedItems[0].Name);
-                code = Db.Client.First(i => i.Code_Personne == code).Code_Personne;
-                HomeUserControl.Window.WindowPanel.Controls.Remove(this);
-                HomeUserControl.StartClientsFromStats(code);
+                var userRights = Db.Personne.First(
+                    a => a.Code_Personne == AuthenticatedEmployee.Personne.Code_Personne).Droit.ToList();
+
+                if (userRights.Any(d => d.Libelle_Droit == "readClients"))
+                {
+                    int code = int.Parse(bestClientsListView.SelectedItems[0].Name);
+                    code = Db.Client.First(i => i.Code_Personne == code).Code_Personne;
+                    HomeUserControl.Window.WindowPanel.Controls.Remove(this);
+                    HomeUserControl.StartClientsFromStats(code);
+                }
+                else
+                {
+                    MessageBox.Show(Resources.denied_access);
+                }
             }
         }
 

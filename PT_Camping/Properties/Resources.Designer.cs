@@ -95,7 +95,19 @@ namespace PT_Camping.Properties {
                 return ResourceManager.GetString("database_connection_error", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Accès refusé. 
+        ///Veuillez contacter votre administrateur..
+        /// </summary>
+        internal static string denied_access
+        {
+            get
+            {
+                return ResourceManager.GetString("denied_access", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Terminé.
         /// </summary>
