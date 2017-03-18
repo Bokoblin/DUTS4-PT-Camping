@@ -92,7 +92,7 @@ namespace PT_Camping.Views.UserControls
                     statusTextBox.Text = issue.Avancement_Incident;
                     descriptionTextBox.Text = issue.Description_Incident;
 
-                    resolveButton.Enabled = (issue.Avancement_Incident != Resources.done_issue);
+                    resolveButton.Enabled = (issue.Date_Resolution == null);
                 }
             }
             
@@ -256,11 +256,19 @@ namespace PT_Camping.Views.UserControls
             {
                 issue.Date_Resolution = DateTime.Now;
                 issue.Avancement_Incident = Resources.done_issue;
+
+
+                Db.SaveChanges();
+
+                UpdateIssueDetails();
+                UpdateIssuesListView();
+
+                foreach (ListViewItem item in issuesListView.Items)
+                {
+                    item.Selected = item.Name == code.ToString();
+                }
+                issuesListView.Select();
             }
-
-            Db.SaveChanges();
-
-            UpdateIssueDetails();
         }
 
 
