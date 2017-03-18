@@ -40,9 +40,17 @@ namespace PT_Camping.Views.UserControls
         }
 
 
-        public void StartLocationsFromStats(int code)
+        public void StartLocationsFromStats(int locationCode)
         {
-            //TODO : open map with location {code} selected
+            Cursor.Current = Cursors.WaitCursor;
+            if (_mapUserControl == null)
+                _mapUserControl = new MapUserControl(this, locationCode);
+            else
+                _mapUserControl.SelectFromStats(locationCode);
+            HandleResize();
+            homeTabControl.SelectedIndex = 1;
+            Window.WindowPanel.Controls.Add(this);
+            mapTab.Controls.Add(_mapUserControl);
         }
 
 
@@ -148,6 +156,7 @@ namespace PT_Camping.Views.UserControls
             _stocksUserControl?.HandleResize();
             _providersUserControl?.HandleResize();
             _statsUserControl?.HandleResize();
+            _mapUserControl?.HandleResize(mapTab.Size);
         }
 
 
@@ -159,6 +168,7 @@ namespace PT_Camping.Views.UserControls
                 {
                     _mapUserControl = new MapUserControl(this);
                     mapTab.Controls.Add(_mapUserControl);
+                    _mapUserControl?.HandleResize(mapTab.Size);
                 }
             }
         }

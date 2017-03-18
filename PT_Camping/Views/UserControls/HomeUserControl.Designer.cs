@@ -69,17 +69,15 @@
             // 
             // homeTabControl
             // 
-            this.homeTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.homeTabControl.Controls.Add(this.managementTab);
             this.homeTabControl.Controls.Add(this.mapTab);
+            this.homeTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.homeTabControl.ItemSize = new System.Drawing.Size(360, 30);
-            this.homeTabControl.Location = new System.Drawing.Point(0, 52);
+            this.homeTabControl.Location = new System.Drawing.Point(0, 50);
             this.homeTabControl.Name = "homeTabControl";
             this.homeTabControl.Padding = new System.Drawing.Point(50, 3);
             this.homeTabControl.SelectedIndex = 0;
-            this.homeTabControl.Size = new System.Drawing.Size(897, 540);
+            this.homeTabControl.Size = new System.Drawing.Size(900, 550);
             this.homeTabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.homeTabControl.TabIndex = 2;
             this.homeTabControl.SelectedIndexChanged += new System.EventHandler(this.HomeTabControl_SelectedIndexChanged);
@@ -183,7 +181,8 @@
             this.mapTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mapTab.Location = new System.Drawing.Point(4, 34);
             this.mapTab.Name = "mapTab";
-            this.mapTab.Size = new System.Drawing.Size(889, 502);
+            this.mapTab.Padding = new System.Windows.Forms.Padding(0, 0, 0, 20);
+            this.mapTab.Size = new System.Drawing.Size(892, 512);
             this.mapTab.TabIndex = 1;
             this.mapTab.Text = "CARTE";
             this.mapTab.UseVisualStyleBackColor = true;

@@ -87,7 +87,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GraphicLocation.cs" />
+    <Compile Include="Model\GraphicLocation.cs" />
     <Compile Include="Views\Forms\AddClient.cs">
       <SubType>Form</SubType>
     </Compile>
