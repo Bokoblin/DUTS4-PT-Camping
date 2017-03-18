@@ -101,9 +101,9 @@ namespace PT_Camping.Views.UserControls
 
         private void OnAddIssueButtonClick(object sender, EventArgs e)
         {
-            /* TODO : New issue in map
+            /* TODO : New issue in map or via combobox
             
-            Expected behaviour after merging this branch + Alex's branch + 1 commit : 
+            Proposed expected behaviour : 
             
             This method opens Map's issue section with aside a card with a drag & drop issue icon
             By dragging this icon on a campground and dropping it, it opens a dialog 
@@ -112,9 +112,9 @@ namespace PT_Camping.Views.UserControls
 
             */
 
-            //TEMPORARY BEHAVIOUR : "AddIssue" dialog called here with Code_Emplacement = 1
+            //TEMPORARY BEHAVIOUR : "AddIssue" dialog called here with Code_Emplacement = 25
 
-            new AddIssue(Db, 1).ShowDialog();
+            new AddIssue(Db, 25).ShowDialog();
             UpdateIssuesListView();
         }
 

@@ -273,11 +273,9 @@ namespace PT_Camping.Views.UserControls
         {
             if (mostAskedlocationsListView.SelectedItems.Count > 0)
             {
-                //TODO with Map feature
-                //int code = int.Parse(mostAskedlocationsListView.SelectedItems[0].Name);
-                //HomeUserControl.Window.WindowPanel.Controls.Remove(this);
-                //HomeUserControl.StartLocationsFromStats(code);
-                MessageBox.Show(Resources.not_implemented_feature);
+                int code = int.Parse(mostAskedlocationsListView.SelectedItems[0].Name);
+                HomeUserControl.Window.WindowPanel.Controls.Remove(this);
+                HomeUserControl.StartLocationsFromStats(code);
             }
         }
 

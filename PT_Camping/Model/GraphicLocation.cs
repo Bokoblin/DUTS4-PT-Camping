@@ -1,17 +1,10 @@
-﻿using PT_Camping.Model;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Drawing;
+﻿using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PT_Camping
+namespace PT_Camping.Model
 {
-    class GraphicLocation
+    internal class GraphicLocation
     {
         public Emplacement Location { get; set; }
         public RectangleF Position { get; set; }
@@ -19,7 +12,7 @@ namespace PT_Camping
 
         public GraphicLocation(Emplacement location)
         {
-            this.Location = location;
+            Location = location;
             Booked = false;
             Position = new Rectangle();
         }
@@ -49,14 +42,7 @@ namespace PT_Camping
                 Color rectangleColor = Color.Gray;
                 if (Location.Type_Emplacement.Est_Reservable)
                 {
-                    if (Booked)
-                    {
-                        rectangleColor = Color.Red;
-                    }
-                    else
-                    {
-                        rectangleColor = Color.LightGreen;
-                    }
+                    rectangleColor = Booked ? Color.Red : Color.LightGreen;
                 }
                 SizeF size = new Size(50, 50);
                 if (Location.Taille_X > 0)
@@ -67,10 +53,11 @@ namespace PT_Camping
                 {
                     size.Height = (float)(Location.Taille_Y * coefHeight);
                 }
-                PointF position = new Point();
-                position.X = (float)(Location.Cordonnee_X * coefWidth);
-                position.Y = (float)(Location.Coordonnee_Y * coefHeight);
-
+                PointF position = new PointF()
+                {
+                    X = (float)(Location.Cordonnee_X * coefWidth),
+                    Y = (float)(Location.Coordonnee_Y * coefHeight)
+                };
                 SolidBrush brush = new SolidBrush(rectangleColor);
                 Position = new RectangleF(position.X, position.Y, size.Width, size.Height);
                 e.Graphics.FillRectangle(brush, Position);

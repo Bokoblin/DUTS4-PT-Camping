@@ -40,18 +40,18 @@
             this.WindowPanel.Location = new System.Drawing.Point(0, 0);
             this.WindowPanel.MinimumSize = new System.Drawing.Size(900, 600);
             this.WindowPanel.Name = "WindowPanel";
-            this.WindowPanel.Size = new System.Drawing.Size(900, 600);
+            this.WindowPanel.Size = new System.Drawing.Size(984, 600);
             this.WindowPanel.TabIndex = 0;
             // 
-            // Window
+            // AppWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(900, 561);
+            this.ClientSize = new System.Drawing.Size(984, 561);
             this.Controls.Add(this.WindowPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MinimumSize = new System.Drawing.Size(900, 600);
+            this.MinimumSize = new System.Drawing.Size(1000, 600);
             this.Name = "AppWindow";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
