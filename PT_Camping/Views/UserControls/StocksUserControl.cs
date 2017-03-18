@@ -241,8 +241,8 @@ namespace PT_Camping.Views.UserControls
 
         private void CommandButton_Click(object sender, EventArgs e)
         {
-            string employeeSurname = HomeUserControl.Window.UserLoged.Employee.Personne.Nom_Personne;
-            string employeeName = HomeUserControl.Window.UserLoged.Employee.Personne.Prenom_Personne;
+            string employeeSurname = LoginTools.Employee.Personne.Nom_Personne;
+            string employeeName = LoginTools.Employee.Personne.Prenom_Personne;
 
             const string subject = "Commande d'un produit";
             StringBuilder sb = new StringBuilder();

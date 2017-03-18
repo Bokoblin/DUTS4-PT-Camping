@@ -29,19 +29,19 @@ namespace PT_Camping.Views.UserControls
         private void TryToConnect()
         {
             string passwordEntered = passwordTextBox.Text;
-            _appWindow.UserLoged.Login = userTextBox.Text;
-            _appWindow.UserLoged.HashedPassword = LoginTools.Sha256_hash(passwordEntered);
+            LoginTools.Login = userTextBox.Text;
+            LoginTools.HashedPassword = LoginTools.Sha256_hash(passwordEntered);
             try
             {
-                if (_appWindow.UserLoged.CheckConnection())
+                if (LoginTools.CheckConnection())
                 {
-                    if (_appWindow.UserLoged.Employee.EstLicencie)
+                    if (LoginTools.Employee.EstLicencie)
                         throw new UnauthorizedAccessException("Cet utilisateur n'a pas la permission d'accéder à l'application");
                     _appWindow.Login();
-                }
-                else
-                {
-                    errorLabel.Visible = true;
+            }
+            else
+            {
+                errorLabel.Visible = true;
                     passwordTextBox.Text = "";
                 }
             }

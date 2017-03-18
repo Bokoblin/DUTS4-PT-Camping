@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="InfoJoyeuxDB.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="InfoJoyeuxDB.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="A_le_droit">
           <Key>
             <PropertyRef Name="Code_Personne" />
@@ -183,6 +183,7 @@
           <Property Name="Libelle_Type" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Couleur" Type="int" />
           <Property Name="Icone" Type="image" />
+          <Property Name="Est_Reservable" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Type_Incident">
           <Key>
@@ -659,7 +660,7 @@
           <NavigationProperty Name="Loge" Relationship="Self.FK_Loge_Code_Personne" FromRole="Personne" ToRole="Loge" />
           <NavigationProperty Name="Reservation" Relationship="Self.FK_Reservation_Code_Personne" FromRole="Personne" ToRole="Reservation" />
           <NavigationProperty Name="Droit" Relationship="Self.A_le_droit" FromRole="Personne" ToRole="Droit" />
-          <Property Name="Date_Naissance" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="Date_Naissance" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="Produit">
           <Key>
@@ -706,6 +707,7 @@
           <NavigationProperty Name="Emplacement" Relationship="Self.FK_Emplacement_Code_Type" FromRole="Type_Emplacement" ToRole="Emplacement" />
           <Property Name="Couleur" Type="Int32" />
           <Property Name="Icone" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Est_Reservable" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Type_Incident">
           <Key>
@@ -764,7 +766,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Incident_Code_Emplacement">
-          <End Role="Emplacement" Type="Self.Emplacement" Multiplicity="1" />
+          <End Role="Emplacement" Type="Self.Emplacement" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Incident" Type="Self.Incident" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Emplacement">
@@ -776,7 +780,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Loge_Code_Emplacement">
-          <End Role="Emplacement" Type="Self.Emplacement" Multiplicity="1" />
+          <End Role="Emplacement" Type="Self.Emplacement" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Loge" Type="Self.Loge" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Emplacement">
@@ -881,7 +887,7 @@
         </Association>
         <Association Name="Possede">
           <End Role="Caracteristique_Emplacement" Type="Self.Caracteristique_Emplacement" Multiplicity="*" />
-          <End Role="Emplacement" Type="Self.Emplacement" Multiplicity="*" />
+          <End Role="Emplacement" Type="Self.Emplacement" Multiplicity="*" ></End>
         </Association>
         <EntityContainer Name="DataBase" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="A_vendu" EntityType="Self.A_vendu" />
@@ -1133,6 +1139,7 @@
           <EntitySetMapping Name="Type_Emplacement">
             <EntityTypeMapping TypeName="InfoJoyeuxDB.Type_Emplacement">
               <MappingFragment StoreEntitySet="Type_Emplacement">
+                <ScalarProperty Name="Est_Reservable" ColumnName="Est_Reservable" />
                 <ScalarProperty Name="Icone" ColumnName="Icone" />
                 <ScalarProperty Name="Couleur" ColumnName="Couleur" />
                 <ScalarProperty Name="Code_Type" ColumnName="Code_Type" />

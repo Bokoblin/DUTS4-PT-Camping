@@ -29,7 +29,7 @@ namespace PT_Camping.Views.UserControls
         {
             InitializeComponent();
             HomeUserControl = homeUserControl;
-            Employe personLoged = HomeUserControl.Window.UserLoged.Employee;
+            Employe personLoged = LoginTools.Employee;
             if (personLoged != null)
             {
                 userNameLabel.Text = Resources.hello_user + personLoged.Personne.Prenom_Personne + Resources.one_space + personLoged.Personne.Nom_Personne;

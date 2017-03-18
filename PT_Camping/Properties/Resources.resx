@@ -219,4 +219,38 @@ et supérieure à la date de l'incident.</value>
   <data name="percent_symbol" xml:space="preserve">
     <value>%</value>
   </data>
+  <data name="booked" xml:space="preserve">
+    <value>Reservé</value>
+  </data>
+  <data name="unbook" xml:space="preserve">
+    <value>Libérer</value>
+  </data>
+  <data name="free" xml:space="preserve">
+    <value>Libre</value>
+  </data>
+  <data name="book" xml:space="preserve">
+    <value>Réserver</value>
+  </data>
+  <data name="not_bookable" xml:space="preserve">
+    <value>Non réservable</value>
+  </data>
+  <data name="file_not_found_please_retry" xml:space="preserve">
+    <value>Fichier non trouvé ! Veuillez réessayer.</value>
+  </data>
+  <data name="error_when_opening_the_file_please_retry" xml:space="preserve">
+    <value>Erreur lors de l'ouverture du fichier, veuillez réessayer.</value>
+  </data>
+  <data name="select_background_image" xml:space="preserve">
+    <value>Sélectionnez une image de fond</value>
+  </data>
+  <data name="images_files_formats" xml:space="preserve">
+    <value>Image Files |*.png; *.jpg; *.bmp</value>
+  </data>
+  <data name="select_image_for_the_type" xml:space="preserve">
+    <value>Sélectionnez une image pour le type </value>
+  </data>
+  <data name="db_save_error" xml:space="preserve">
+    <value>Erreur lors de la sauvegarde dans la base de données : 
+</value>
+  </data>
 </root>
