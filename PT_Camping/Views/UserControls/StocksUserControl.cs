@@ -25,6 +25,7 @@ namespace PT_Camping.Views.UserControls
         {
             InitializeComponent();
             appBarTitle.Text = Resources.product_management;
+            appBarTitle.Text = Resources.product_management;
             Db = new DataBase();
 
             productListView.View = View.Details;
@@ -112,20 +113,26 @@ namespace PT_Camping.Views.UserControls
         {
             AddStock newStock = new AddStock();
             newStock.ShowDialog();
+            Cursor.Current = Cursors.Default;
             UpdateProductListView();
         }
 
 
         private void DeleteProductButton_Click(object sender, EventArgs e)
         {
-            int code = int.Parse(productListView.SelectedItems[0].Name);
-            var product = Db.Produit.Find(code);
-
-            if (product != null)
+            var confirmResult = MessageBox.Show(Resources.delete_item_confirm_message,
+                                        "", MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
             {
-                Db.Produit.Remove(product);
-                Db.SaveChanges();
-                UpdateProductListView();
+                int code = int.Parse(productListView.SelectedItems[0].Name);
+                var product = Db.Produit.Find(code);
+
+                if (product != null)
+                {
+                    Db.Produit.Remove(product);
+                    Db.SaveChanges();
+                    UpdateProductListView();
+                }
             }
         }
 

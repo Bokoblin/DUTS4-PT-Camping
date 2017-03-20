@@ -99,6 +99,7 @@ namespace PT_Camping.Views.UserControls
         private void AddEmployeeButton_Click(object sender, EventArgs e)
         {
             new AddEmployee(Db).ShowDialog();
+            Cursor.Current = Cursors.WaitCursor;
             UpdateEmployeesListView();
         }
    

@@ -96,6 +96,7 @@ namespace PT_Camping.Views.UserControls
         private void AddClientButton_Click(object sender, EventArgs e)
         {
             new AddClient(Db).ShowDialog();
+            Cursor.Current = Cursors.Default;
             UpdateClientListView();
         }
 
@@ -187,14 +188,19 @@ namespace PT_Camping.Views.UserControls
 
         private void DeleteClientButton_Click(object sender, EventArgs e)
         {
-            int code = int.Parse(clientListView.SelectedItems[0].Name);
-            var client = Db.Client.Find(code);
-
-            if (client != null)
+            var confirmResult = MessageBox.Show(Resources.delete_item_confirm_message,
+                                     "", MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
             {
-                Db.Client.Remove(client);
-                Db.SaveChanges();
-                UpdateClientListView();
+                int code = int.Parse(clientListView.SelectedItems[0].Name);
+                var client = Db.Client.Find(code);
+
+                if (client != null)
+                {
+                    Db.Client.Remove(client);
+                    Db.SaveChanges();
+                    UpdateClientListView();
+                }
             }
         }
 

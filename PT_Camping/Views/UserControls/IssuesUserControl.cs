@@ -123,20 +123,26 @@ namespace PT_Camping.Views.UserControls
             //TEMPORARY BEHAVIOUR : "AddIssue" dialog called here with Code_Emplacement = 25
 
             new AddIssue(Db, 25).ShowDialog();
+            Cursor.Current = Cursors.Default;
             UpdateIssuesListView();
         }
 
 
         private void OnDeleteIssueButtonClick(object sender, EventArgs e)
         {
-            int code = int.Parse(issuesListView.SelectedItems[0].Name);
-            var issue = Db.Incident.Find(code);
-
-            if (issue != null)
+            var confirmResult = MessageBox.Show(Resources.delete_item_confirm_message,
+                                     "", MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
             {
-                Db.Incident.Remove(issue);
-                Db.SaveChanges();
-                UpdateIssuesListView();
+                int code = int.Parse(issuesListView.SelectedItems[0].Name);
+                var issue = Db.Incident.Find(code);
+
+                if (issue != null)
+                {
+                    Db.Incident.Remove(issue);
+                    Db.SaveChanges();
+                    UpdateIssuesListView();
+                }
             }
         }
 
