@@ -194,6 +194,7 @@ namespace PT_Camping.Views.UserControls
         private void AddProvider_Click(object sender, EventArgs e)
         {
             new AddProvider(Db).ShowDialog();
+            Cursor.Current = Cursors.Default;
             UpdateProvidersListView();
         }
 
@@ -211,14 +212,19 @@ namespace PT_Camping.Views.UserControls
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            int code = int.Parse(providerListView.SelectedItems[0].Name);
-            var fournisseur = Db.Fournisseur.Find(code);
-
-            if (fournisseur != null)
+            var confirmResult = MessageBox.Show(Resources.delete_item_confirm_message,
+                                     "", MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
             {
-                Db.Fournisseur.Remove(fournisseur);
-                Db.SaveChanges();
-                UpdateProvidersListView();
+                int code = int.Parse(providerListView.SelectedItems[0].Name);
+                var fournisseur = Db.Fournisseur.Find(code);
+
+                if (fournisseur != null)
+                {
+                    Db.Fournisseur.Remove(fournisseur);
+                    Db.SaveChanges();
+                    UpdateProvidersListView();
+                }
             }
         }
 

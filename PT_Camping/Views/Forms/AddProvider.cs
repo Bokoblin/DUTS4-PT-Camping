@@ -17,13 +17,15 @@ namespace PT_Camping.Views.Forms
             _newProvider = new Fournisseur();            
         }
 
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             Close();
         }
 
         private void OKButton_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
+
             try
             {
                 if (nameTextBox.Text == "" || addressTextBox.Text == "" || emailTextBox.Text == "")

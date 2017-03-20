@@ -51,7 +51,7 @@
             this.productStockTextBox.Name = "productStockTextBox";
             this.productStockTextBox.Size = new System.Drawing.Size(100, 20);
             this.productStockTextBox.TabIndex = 1;
-            this.productStockTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.productStockTextBox_KeyPress);
+            this.productStockTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ProductStockTextBox_KeyPress);
             // 
             // productPriceTextBox
             // 
@@ -59,7 +59,7 @@
             this.productPriceTextBox.Name = "productPriceTextBox";
             this.productPriceTextBox.Size = new System.Drawing.Size(100, 20);
             this.productPriceTextBox.TabIndex = 3;
-            this.productPriceTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.productPriceTextBox_KeyPress);
+            this.productPriceTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ProductPriceTextBox_KeyPress);
             // 
             // label1
             // 
@@ -106,7 +106,7 @@
             this.cancelButton.TabIndex = 8;
             this.cancelButton.Text = "Annuler";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // AddStock
             // 

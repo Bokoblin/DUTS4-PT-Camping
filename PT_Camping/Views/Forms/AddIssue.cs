@@ -38,24 +38,33 @@ namespace PT_Camping.Views.Forms
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            Type_Incident issueType = _db.Type_Incident.First(
-                t => t.Type_Incident1 == issueTypecomboBox.Text);
+            Cursor.Current = Cursors.WaitCursor;
 
-            if (issueType != null)
+            try
             {
-                _newIssue.Code_Type = issueType.Code_Type;
-                _newIssue.Date_Incident = DateTime.Now;
-                _newIssue.Criticite_Incident = int.Parse(criticalityComboBox.Text);
-                if (descriptionTextBox.Text != "")
-                {
-                    _newIssue.Description_Incident = descriptionTextBox.Text;
-                }
+                Type_Incident issueType = _db.Type_Incident.First(
+                    t => t.Type_Incident1 == issueTypecomboBox.Text);
 
-                _db.Incident.Add(_newIssue);
-                _db.SaveChanges();
+                if (issueType != null)
+                {
+                    _newIssue.Code_Type = issueType.Code_Type;
+                    _newIssue.Date_Incident = DateTime.Now;
+                    _newIssue.Criticite_Incident = int.Parse(criticalityComboBox.Text);
+                    if (descriptionTextBox.Text != "")
+                    {
+                        _newIssue.Description_Incident = descriptionTextBox.Text;
+                    }
+
+                    _db.Incident.Add(_newIssue);
+                    _db.SaveChanges();
+                    Close();
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
             }
 
-            Close();
         }
 
 
