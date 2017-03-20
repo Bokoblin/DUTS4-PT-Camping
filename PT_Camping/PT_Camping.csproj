@@ -129,6 +129,12 @@
     <Compile Include="Views\Forms\AddStock.Designer.cs">
       <DependentUpon>AddStock.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Forms\Reservations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Forms\Reservations.Designer.cs">
+      <DependentUpon>Reservations.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\MapUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -290,6 +296,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Forms\AddProvider.resx">
       <DependentUpon>AddProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Forms\Reservations.resx">
+      <DependentUpon>Reservations.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\EmployeesUserControl.resx">
       <DependentUpon>EmployeesUserControl.cs</DependentUpon>
