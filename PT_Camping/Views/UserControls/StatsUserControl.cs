@@ -21,7 +21,6 @@ namespace PT_Camping.Views.UserControls
         {
             InitializeComponent();
             appBarTitle.Text = Resources.stats_management;
-            Db = new DataBase();
 
             UpdateListViews();
             HandleResize();
@@ -273,10 +272,7 @@ namespace PT_Camping.Views.UserControls
         {
             if (mostAskedlocationsListView.SelectedItems.Count > 0)
             {
-                var userRights = Db.Personne.First(
-                    a => a.Code_Personne == AuthenticatedEmployee.Personne.Code_Personne).Droit.ToList();
-
-                if (userRights.Any(d => d.Libelle_Droit == "readMap"))
+                if (UserRights.Any(d => d.Libelle_Droit == "readMap"))
                 {
                     int code = int.Parse(mostAskedlocationsListView.SelectedItems[0].Name);
                     HomeUserControl.Window.WindowPanel.Controls.Remove(this);
@@ -294,10 +290,7 @@ namespace PT_Camping.Views.UserControls
         {
             if (mostAskedProductsListView.SelectedItems.Count > 0)
             {
-                var userRights = Db.Personne.First(
-                    a => a.Code_Personne == AuthenticatedEmployee.Personne.Code_Personne).Droit.ToList();
-
-                if (userRights.Any(d => d.Libelle_Droit == "readProducts"))
+                if (UserRights.Any(d => d.Libelle_Droit == "readProducts"))
                 {
                     var code = int.Parse(mostAskedProductsListView.SelectedItems[0].Name);
                     code = Db.Produit.First(i => i.Code_Produit == code).Code_Produit;
@@ -316,10 +309,7 @@ namespace PT_Camping.Views.UserControls
         {
             if (mostCommonIssueslistView.SelectedItems.Count > 0)
             {
-                var userRights = Db.Personne.First(
-                    a => a.Code_Personne == AuthenticatedEmployee.Personne.Code_Personne).Droit.ToList();
-
-                if (userRights.Any(d => d.Libelle_Droit == "readIssues"))
+                if (UserRights.Any(d => d.Libelle_Droit == "readIssues"))
                 {
                     if (mostCommonIssueslistView.SelectedItems[0].SubItems[2].Text != 0.ToString())
                     {
@@ -343,10 +333,7 @@ namespace PT_Camping.Views.UserControls
         {
             if (bestClientsListView.SelectedItems.Count > 0)
             {
-                var userRights = Db.Personne.First(
-                    a => a.Code_Personne == AuthenticatedEmployee.Personne.Code_Personne).Droit.ToList();
-
-                if (userRights.Any(d => d.Libelle_Droit == "readClients"))
+                if (UserRights.Any(d => d.Libelle_Droit == "readClients"))
                 {
                     int code = int.Parse(bestClientsListView.SelectedItems[0].Name);
                     code = Db.Client.First(i => i.Code_Personne == code).Code_Personne;

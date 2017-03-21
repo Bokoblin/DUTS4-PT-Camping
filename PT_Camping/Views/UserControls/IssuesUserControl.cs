@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Windows.Forms;
-using PT_Camping.Model;
 using PT_Camping.Properties;
 using PT_Camping.Views.Forms;
 
@@ -20,7 +19,6 @@ namespace PT_Camping.Views.UserControls
         {
             InitializeComponent();
             appBarTitle.Text = Resources.issues_management;
-            Db = new DataBase();
 
             issuesListView.View = View.Details;
             issuesListView.Columns.Add("Etat");
@@ -36,6 +34,15 @@ namespace PT_Camping.Views.UserControls
 
             UpdateIssuesListView();
             HandleResize();
+            InitPermissions();
+        }
+
+        public void InitPermissions()
+        {
+            addIssueButton.Enabled = UserRights.Any(d => d.Libelle_Droit == "writeIssues");
+            deleteButton.Visible = UserRights.Any(d => d.Libelle_Droit == "writeIssues");
+            editButton.Visible = UserRights.Any(d => d.Libelle_Droit == "writeIssues");
+            resolveButton.Enabled = UserRights.Any(d => d.Libelle_Droit == "writeIssues");
         }
 
         public IssuesUserControl(HomeUserControl home, int issueCode) : this(home)
@@ -99,8 +106,9 @@ namespace PT_Camping.Views.UserControls
                     criticalityComboBox.Text = issue.Criticite_Incident + Resources.criticality_max;
                     statusTextBox.Text = issue.Avancement_Incident;
                     descriptionTextBox.Text = issue.Description_Incident;
-
-                    resolveButton.Enabled = (issue.Date_Resolution == null);
+                    
+                    resolveButton.Enabled = (issue.Date_Resolution == null)
+                        && UserRights.Any(d => d.Libelle_Droit == "writeIssues");
                 }
             }
             

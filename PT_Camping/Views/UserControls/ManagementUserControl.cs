@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using PT_Camping.Model;
 using PT_Camping.Properties;
@@ -18,7 +20,7 @@ namespace PT_Camping.Views.UserControls
     public partial class ManagementUserControl : UserControl
     {
         protected DataBase Db;
-        protected Employe AuthenticatedEmployee;
+        protected List<Droit> UserRights;
 
         public ManagementUserControl()
         {
@@ -30,12 +32,14 @@ namespace PT_Camping.Views.UserControls
         {
             InitializeComponent();
             HomeUserControl = homeUserControl;
-            AuthenticatedEmployee = LoginTools.Employee;
-            if (AuthenticatedEmployee != null)
+            Db = new DataBase();
+            UserRights = Db.Personne.First(
+                    a => a.Code_Personne == LoginTools.Employee.Personne.Code_Personne).Droit.ToList();
+            if (LoginTools.Employee != null)
             {
                 userNameLabel.Text = Resources.hello_user 
-                    + AuthenticatedEmployee.Personne.Prenom_Personne 
-                    + Resources.one_space + AuthenticatedEmployee.Personne.Nom_Personne;
+                    + LoginTools.Employee.Personne.Prenom_Personne 
+                    + Resources.one_space + LoginTools.Employee.Personne.Nom_Personne;
             }
         }
 
