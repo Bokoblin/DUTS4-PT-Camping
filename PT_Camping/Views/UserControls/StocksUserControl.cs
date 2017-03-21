@@ -26,7 +26,6 @@ namespace PT_Camping.Views.UserControls
             InitializeComponent();
             appBarTitle.Text = Resources.product_management;
             appBarTitle.Text = Resources.product_management;
-            Db = new DataBase();
 
             productListView.View = View.Details;
             productListView.Columns.Add("Etat");
@@ -41,6 +40,15 @@ namespace PT_Camping.Views.UserControls
 
             UpdateProductListView();
             HandleResize();
+            InitPermissions();
+        }
+
+        public void InitPermissions()
+        {
+            addStockButton.Enabled = UserRights.Any(d => d.Libelle_Droit == "writeStocks");
+            deleteProductButton.Visible = UserRights.Any(d => d.Libelle_Droit == "writeStocks");
+            editButton.Visible = UserRights.Any(d => d.Libelle_Droit == "writeStocks");
+            sellButton.Enabled = UserRights.Any(d => d.Libelle_Droit == "writeStocks");
         }
 
 

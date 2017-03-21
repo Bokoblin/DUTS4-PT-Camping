@@ -32,6 +32,7 @@ namespace PT_Camping.Views.UserControls
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.detailsPanel = new System.Windows.Forms.Panel();
             this.criticalityComboBox = new System.Windows.Forms.ComboBox();
+            this.resetButton = new System.Windows.Forms.Button();
             this.locationTextBox = new System.Windows.Forms.TextBox();
             this.emplacementLabel = new System.Windows.Forms.Label();
             this.descriptionTextBox = new System.Windows.Forms.TextBox();
@@ -54,7 +55,6 @@ namespace PT_Camping.Views.UserControls
             this.idLabel = new System.Windows.Forms.Label();
             this.issuesListView = new System.Windows.Forms.ListView();
             this.addIssueButton = new System.Windows.Forms.Button();
-            this.resetButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel.SuspendLayout();
             this.detailsPanel.SuspendLayout();
             this.detailsTitleBarPanel.SuspendLayout();
@@ -83,7 +83,7 @@ namespace PT_Camping.Views.UserControls
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 72F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(800, 550);
+            this.tableLayoutPanel.Size = new System.Drawing.Size(900, 550);
             this.tableLayoutPanel.TabIndex = 12;
             // 
             // detailsPanel
@@ -113,9 +113,9 @@ namespace PT_Camping.Views.UserControls
             this.detailsPanel.Controls.Add(this.issueTypeLabel);
             this.detailsPanel.Controls.Add(this.idLabel);
             this.detailsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.detailsPanel.Location = new System.Drawing.Point(444, 47);
+            this.detailsPanel.Location = new System.Drawing.Point(498, 47);
             this.detailsPanel.Name = "detailsPanel";
-            this.detailsPanel.Size = new System.Drawing.Size(315, 392);
+            this.detailsPanel.Size = new System.Drawing.Size(354, 390);
             this.detailsPanel.TabIndex = 11;
             // 
             // criticalityComboBox
@@ -129,15 +129,29 @@ namespace PT_Camping.Views.UserControls
             "3",
             "4",
             "5"});
-            this.criticalityComboBox.Location = new System.Drawing.Point(161, 229);
+            this.criticalityComboBox.Location = new System.Drawing.Point(181, 228);
             this.criticalityComboBox.Name = "criticalityComboBox";
             this.criticalityComboBox.Size = new System.Drawing.Size(120, 21);
             this.criticalityComboBox.TabIndex = 17;
             // 
+            // resetButton
+            // 
+            this.resetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.resetButton.BackgroundImage = global::PT_Camping.Properties.Resources.ic_undo;
+            this.resetButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.resetButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.resetButton.Location = new System.Drawing.Point(247, 46);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(30, 30);
+            this.resetButton.TabIndex = 25;
+            this.resetButton.UseVisualStyleBackColor = true;
+            this.resetButton.Visible = false;
+            this.resetButton.Click += new System.EventHandler(this.ResetButton_Click);
+            // 
             // locationTextBox
             // 
             this.locationTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.locationTextBox.Location = new System.Drawing.Point(161, 125);
+            this.locationTextBox.Location = new System.Drawing.Point(181, 124);
             this.locationTextBox.Name = "locationTextBox";
             this.locationTextBox.ReadOnly = true;
             this.locationTextBox.Size = new System.Drawing.Size(120, 20);
@@ -147,7 +161,7 @@ namespace PT_Camping.Views.UserControls
             // 
             this.emplacementLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.emplacementLabel.AutoSize = true;
-            this.emplacementLabel.Location = new System.Drawing.Point(29, 128);
+            this.emplacementLabel.Location = new System.Drawing.Point(49, 127);
             this.emplacementLabel.Name = "emplacementLabel";
             this.emplacementLabel.Size = new System.Drawing.Size(71, 13);
             this.emplacementLabel.TabIndex = 19;
@@ -156,7 +170,7 @@ namespace PT_Camping.Views.UserControls
             // descriptionTextBox
             // 
             this.descriptionTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.descriptionTextBox.Location = new System.Drawing.Point(161, 282);
+            this.descriptionTextBox.Location = new System.Drawing.Point(181, 281);
             this.descriptionTextBox.Multiline = true;
             this.descriptionTextBox.Name = "descriptionTextBox";
             this.descriptionTextBox.ReadOnly = true;
@@ -166,7 +180,7 @@ namespace PT_Camping.Views.UserControls
             // statusTextBox
             // 
             this.statusTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.statusTextBox.Location = new System.Drawing.Point(161, 256);
+            this.statusTextBox.Location = new System.Drawing.Point(181, 255);
             this.statusTextBox.Name = "statusTextBox";
             this.statusTextBox.ReadOnly = true;
             this.statusTextBox.Size = new System.Drawing.Size(120, 20);
@@ -175,7 +189,7 @@ namespace PT_Camping.Views.UserControls
             // resolutionDateTextBox
             // 
             this.resolutionDateTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.resolutionDateTextBox.Location = new System.Drawing.Point(161, 203);
+            this.resolutionDateTextBox.Location = new System.Drawing.Point(181, 202);
             this.resolutionDateTextBox.Name = "resolutionDateTextBox";
             this.resolutionDateTextBox.ReadOnly = true;
             this.resolutionDateTextBox.Size = new System.Drawing.Size(120, 20);
@@ -184,7 +198,7 @@ namespace PT_Camping.Views.UserControls
             // creationDateTextBox
             // 
             this.creationDateTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.creationDateTextBox.Location = new System.Drawing.Point(161, 177);
+            this.creationDateTextBox.Location = new System.Drawing.Point(181, 176);
             this.creationDateTextBox.Name = "creationDateTextBox";
             this.creationDateTextBox.ReadOnly = true;
             this.creationDateTextBox.Size = new System.Drawing.Size(120, 20);
@@ -193,7 +207,7 @@ namespace PT_Camping.Views.UserControls
             // issueTypeTextBox
             // 
             this.issueTypeTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.issueTypeTextBox.Location = new System.Drawing.Point(161, 151);
+            this.issueTypeTextBox.Location = new System.Drawing.Point(181, 150);
             this.issueTypeTextBox.Name = "issueTypeTextBox";
             this.issueTypeTextBox.ReadOnly = true;
             this.issueTypeTextBox.Size = new System.Drawing.Size(120, 20);
@@ -202,7 +216,7 @@ namespace PT_Camping.Views.UserControls
             // idTextBox
             // 
             this.idTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.idTextBox.Location = new System.Drawing.Point(161, 99);
+            this.idTextBox.Location = new System.Drawing.Point(181, 98);
             this.idTextBox.Name = "idTextBox";
             this.idTextBox.ReadOnly = true;
             this.idTextBox.Size = new System.Drawing.Size(120, 20);
@@ -213,7 +227,8 @@ namespace PT_Camping.Views.UserControls
             this.deleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.deleteButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("deleteButton.BackgroundImage")));
             this.deleteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.deleteButton.Location = new System.Drawing.Point(244, 46);
+            this.deleteButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.deleteButton.Location = new System.Drawing.Point(283, 46);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(30, 30);
             this.deleteButton.TabIndex = 10;
@@ -225,7 +240,8 @@ namespace PT_Camping.Views.UserControls
             this.editButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.editButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("editButton.BackgroundImage")));
             this.editButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.editButton.Location = new System.Drawing.Point(280, 46);
+            this.editButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.editButton.Location = new System.Drawing.Point(319, 46);
             this.editButton.Name = "editButton";
             this.editButton.Size = new System.Drawing.Size(30, 30);
             this.editButton.TabIndex = 11;
@@ -239,7 +255,7 @@ namespace PT_Camping.Views.UserControls
             this.detailsTitleBarPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.detailsTitleBarPanel.Location = new System.Drawing.Point(0, 0);
             this.detailsTitleBarPanel.Name = "detailsTitleBarPanel";
-            this.detailsTitleBarPanel.Size = new System.Drawing.Size(313, 40);
+            this.detailsTitleBarPanel.Size = new System.Drawing.Size(352, 40);
             this.detailsTitleBarPanel.TabIndex = 9;
             // 
             // detailsTitle
@@ -248,7 +264,7 @@ namespace PT_Camping.Views.UserControls
             this.detailsTitle.AutoSize = true;
             this.detailsTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.detailsTitle.ForeColor = System.Drawing.Color.White;
-            this.detailsTitle.Location = new System.Drawing.Point(104, 10);
+            this.detailsTitle.Location = new System.Drawing.Point(124, 10);
             this.detailsTitle.Name = "detailsTitle";
             this.detailsTitle.Size = new System.Drawing.Size(109, 20);
             this.detailsTitle.TabIndex = 0;
@@ -258,7 +274,8 @@ namespace PT_Camping.Views.UserControls
             // 
             this.resolveButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.resolveButton.AutoSize = true;
-            this.resolveButton.Location = new System.Drawing.Point(95, 343);
+            this.resolveButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.resolveButton.Location = new System.Drawing.Point(115, 342);
             this.resolveButton.Name = "resolveButton";
             this.resolveButton.Size = new System.Drawing.Size(130, 30);
             this.resolveButton.TabIndex = 20;
@@ -270,7 +287,7 @@ namespace PT_Camping.Views.UserControls
             // 
             this.descriptionLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.descriptionLabel.AutoSize = true;
-            this.descriptionLabel.Location = new System.Drawing.Point(29, 285);
+            this.descriptionLabel.Location = new System.Drawing.Point(49, 284);
             this.descriptionLabel.Name = "descriptionLabel";
             this.descriptionLabel.Size = new System.Drawing.Size(60, 13);
             this.descriptionLabel.TabIndex = 7;
@@ -280,7 +297,7 @@ namespace PT_Camping.Views.UserControls
             // 
             this.statusLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.statusLabel.AutoSize = true;
-            this.statusLabel.Location = new System.Drawing.Point(29, 259);
+            this.statusLabel.Location = new System.Drawing.Point(49, 258);
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(67, 13);
             this.statusLabel.TabIndex = 6;
@@ -290,7 +307,7 @@ namespace PT_Camping.Views.UserControls
             // 
             this.criticalityLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.criticalityLabel.AutoSize = true;
-            this.criticalityLabel.Location = new System.Drawing.Point(29, 232);
+            this.criticalityLabel.Location = new System.Drawing.Point(49, 231);
             this.criticalityLabel.Name = "criticalityLabel";
             this.criticalityLabel.Size = new System.Drawing.Size(41, 13);
             this.criticalityLabel.TabIndex = 5;
@@ -300,7 +317,7 @@ namespace PT_Camping.Views.UserControls
             // 
             this.resolutionDateLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.resolutionDateLabel.AutoSize = true;
-            this.resolutionDateLabel.Location = new System.Drawing.Point(29, 206);
+            this.resolutionDateLabel.Location = new System.Drawing.Point(49, 205);
             this.resolutionDateLabel.Name = "resolutionDateLabel";
             this.resolutionDateLabel.Size = new System.Drawing.Size(93, 13);
             this.resolutionDateLabel.TabIndex = 4;
@@ -310,7 +327,7 @@ namespace PT_Camping.Views.UserControls
             // 
             this.creationDateLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.creationDateLabel.AutoSize = true;
-            this.creationDateLabel.Location = new System.Drawing.Point(29, 180);
+            this.creationDateLabel.Location = new System.Drawing.Point(49, 179);
             this.creationDateLabel.Name = "creationDateLabel";
             this.creationDateLabel.Size = new System.Drawing.Size(86, 13);
             this.creationDateLabel.TabIndex = 3;
@@ -320,7 +337,7 @@ namespace PT_Camping.Views.UserControls
             // 
             this.issueTypeLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.issueTypeLabel.AutoSize = true;
-            this.issueTypeLabel.Location = new System.Drawing.Point(29, 154);
+            this.issueTypeLabel.Location = new System.Drawing.Point(49, 153);
             this.issueTypeLabel.Name = "issueTypeLabel";
             this.issueTypeLabel.Size = new System.Drawing.Size(31, 13);
             this.issueTypeLabel.TabIndex = 2;
@@ -330,7 +347,7 @@ namespace PT_Camping.Views.UserControls
             // 
             this.idLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.idLabel.AutoSize = true;
-            this.idLabel.Location = new System.Drawing.Point(29, 102);
+            this.idLabel.Location = new System.Drawing.Point(49, 101);
             this.idLabel.Name = "idLabel";
             this.idLabel.Size = new System.Drawing.Size(57, 13);
             this.idLabel.TabIndex = 1;
@@ -343,11 +360,11 @@ namespace PT_Camping.Views.UserControls
             this.issuesListView.GridLines = true;
             this.issuesListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.issuesListView.HideSelection = false;
-            this.issuesListView.Location = new System.Drawing.Point(43, 47);
+            this.issuesListView.Location = new System.Drawing.Point(48, 47);
             this.issuesListView.MultiSelect = false;
             this.issuesListView.Name = "issuesListView";
             this.issuesListView.Scrollable = false;
-            this.issuesListView.Size = new System.Drawing.Size(315, 392);
+            this.issuesListView.Size = new System.Drawing.Size(354, 390);
             this.issuesListView.TabIndex = 10;
             this.issuesListView.UseCompatibleStateImageBehavior = false;
             this.issuesListView.View = System.Windows.Forms.View.List;
@@ -358,26 +375,14 @@ namespace PT_Camping.Views.UserControls
             // 
             this.addIssueButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.addIssueButton.AutoSize = true;
-            this.addIssueButton.Location = new System.Drawing.Point(140, 465);
+            this.addIssueButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addIssueButton.Location = new System.Drawing.Point(165, 463);
             this.addIssueButton.Name = "addIssueButton";
             this.addIssueButton.Size = new System.Drawing.Size(120, 35);
             this.addIssueButton.TabIndex = 11;
             this.addIssueButton.Text = "Nouvel incident";
             this.addIssueButton.UseVisualStyleBackColor = true;
             this.addIssueButton.Click += new System.EventHandler(this.OnAddIssueButtonClick);
-            // 
-            // resetButton
-            // 
-            this.resetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.resetButton.BackgroundImage = global::PT_Camping.Properties.Resources.ic_undo;
-            this.resetButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.resetButton.Location = new System.Drawing.Point(208, 46);
-            this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(30, 30);
-            this.resetButton.TabIndex = 25;
-            this.resetButton.UseVisualStyleBackColor = true;
-            this.resetButton.Visible = false;
-            this.resetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
             // IssuesUserControl
             // 

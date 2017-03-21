@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Net.Mail;
 using System.Windows.Forms;
-using PT_Camping.Model;
 using PT_Camping.Properties;
 using PT_Camping.Views.Forms;
 
@@ -21,7 +20,6 @@ namespace PT_Camping.Views.UserControls
         {
             InitializeComponent();
             appBarTitle.Text = Resources.clients_management;
-            Db = new DataBase();
 
             clientListView.View = View.Details;
             clientListView.Columns.Add("Nom");
@@ -30,6 +28,15 @@ namespace PT_Camping.Views.UserControls
 
             UpdateClientListView();
             HandleResize();
+            InitPermissions();
+        }
+
+        public void InitPermissions()
+        {
+            addClientButton.Enabled = UserRights.Any(d => d.Libelle_Droit == "writeClients");
+            deleteButton.Visible = UserRights.Any(d => d.Libelle_Droit == "writeClients");
+            editButton.Visible = UserRights.Any(d => d.Libelle_Droit == "writeClients");
+            reductionButton.Enabled = UserRights.Any(d => d.Libelle_Droit == "writeClients");
         }
 
 
