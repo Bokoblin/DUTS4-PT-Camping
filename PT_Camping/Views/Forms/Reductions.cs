@@ -45,7 +45,6 @@ namespace PT_Camping.Views.Forms
 
         private void CalculateFidelityPercent()
         {
-            //TODO : unit tests
             int nbYearsFidelity = DateTime.Now.Year - _client.Date_Inscription.Year;
             for (int i = 0; i < nbYearsFidelity; i++)
             {
@@ -60,7 +59,6 @@ namespace PT_Camping.Views.Forms
         
         private void CalculateTotalReduction()
         {
-            //TODO : unit tests
             _totalReduction = _reductionPercent + _fidelityReduction;
         }
 

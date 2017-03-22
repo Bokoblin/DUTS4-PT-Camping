@@ -43,6 +43,7 @@ namespace PT_Camping.Views.Forms
             readProviders.Checked = _permissionsList.Any(d => d.Libelle_Droit == "readProviders");
             readStocks.Checked = _permissionsList.Any(d => d.Libelle_Droit == "readStocks");
             readMap.Checked = _permissionsList.Any(d => d.Libelle_Droit == "readMap");
+            readStats.Checked = _permissionsList.Any(d => d.Libelle_Droit == "readStats");
 
             writeClients.Checked = _permissionsList.Any(d => d.Libelle_Droit == "writeClients");
             writeIssues.Checked = _permissionsList.Any(d => d.Libelle_Droit == "writeIssues");
@@ -186,7 +187,28 @@ namespace PT_Camping.Views.Forms
             }
 
             #endregion
-            
+
+            #region STATS READ PERMISSION
+
+            if (readStats.Checked)
+            {
+                if (_permissionsList.Find(d => d.Libelle_Droit == "readStats") == null)
+                {
+                    Droit droit = _db.Droit.FirstOrDefault(d => d.Libelle_Droit == "readStats");
+                    _concernedEmployee.Personne.Droit.Add(droit);
+                }
+            }
+            else
+            {
+                if (_permissionsList.Find(d => d.Libelle_Droit == "readStats") != null)
+                {
+                    _concernedEmployee.Personne.Droit.Remove(
+                        _concernedEmployee.Personne.Droit.FirstOrDefault(d => d.Libelle_Droit == "readStats")
+                        );
+                }
+            }
+            #endregion
+
             #region CLIENTS WRITE PERMISSION
 
             if (writeClients.Checked)

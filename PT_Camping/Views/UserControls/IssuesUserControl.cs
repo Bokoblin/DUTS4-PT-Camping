@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Windows.Forms;
-using PT_Camping.Model;
 using PT_Camping.Properties;
 using PT_Camping.Views.Forms;
 
@@ -20,15 +19,30 @@ namespace PT_Camping.Views.UserControls
         {
             InitializeComponent();
             appBarTitle.Text = Resources.issues_management;
-            Db = new DataBase();
 
             issuesListView.View = View.Details;
+            issuesListView.Columns.Add("Etat");
             issuesListView.Columns.Add("Type d'incident");
             issuesListView.Columns.Add("Description");
             issuesListView.Columns.Add("Date");
 
+            var imageList = new ImageList();
+            imageList.Images.Add("pending", Resources.ic_issue_pending);
+            imageList.Images.Add("done", Resources.ic_issue_done);
+            imageList.ImageSize = new System.Drawing.Size(20,20);
+            issuesListView.SmallImageList = imageList;
+
             UpdateIssuesListView();
             HandleResize();
+            InitPermissions();
+        }
+
+        public void InitPermissions()
+        {
+            addIssueButton.Enabled = UserRights.Any(d => d.Libelle_Droit == "writeIssues");
+            deleteButton.Visible = UserRights.Any(d => d.Libelle_Droit == "writeIssues");
+            editButton.Visible = UserRights.Any(d => d.Libelle_Droit == "writeIssues");
+            resolveButton.Enabled = UserRights.Any(d => d.Libelle_Droit == "writeIssues");
         }
 
         public IssuesUserControl(HomeUserControl home, int issueCode) : this(home)
@@ -50,9 +64,10 @@ namespace PT_Camping.Views.UserControls
                 string issueDescription = issue.Description_Incident;
                 string issueDate = issue.Date_Incident.ToShortDateString();
 
-                var item = new ListViewItem(new[] { issueType, issueDescription, issueDate })
+                var item = new ListViewItem(new[] { "", issueType, issueDescription, issueDate })
                 {
-                    Name = issue.Code_Incident.ToString()
+                    Name = issue.Code_Incident.ToString(),
+                    ImageKey = (issue.Date_Resolution == null)? "pending":"done"
                 };
                 issuesListView.Items.Add(item);
             }
@@ -68,7 +83,7 @@ namespace PT_Camping.Views.UserControls
             //=== Order list items by date
 
             var orderedList = issuesListView.Items.Cast<ListViewItem>().Select(x => x)
-                .OrderBy(x => DateTime.Parse(x.SubItems[2].Text)).ToList();
+                .OrderBy(x => DateTime.Parse(x.SubItems[3].Text)).ToList();
             issuesListView.Items.Clear();
             issuesListView.Items.AddRange(orderedList.ToArray());
         }
@@ -91,8 +106,9 @@ namespace PT_Camping.Views.UserControls
                     criticalityComboBox.Text = issue.Criticite_Incident + Resources.criticality_max;
                     statusTextBox.Text = issue.Avancement_Incident;
                     descriptionTextBox.Text = issue.Description_Incident;
-
-                    resolveButton.Enabled = (issue.Avancement_Incident != Resources.done_issue);
+                    
+                    resolveButton.Enabled = (issue.Date_Resolution == null)
+                        && UserRights.Any(d => d.Libelle_Droit == "writeIssues");
                 }
             }
             
@@ -101,34 +117,27 @@ namespace PT_Camping.Views.UserControls
 
         private void OnAddIssueButtonClick(object sender, EventArgs e)
         {
-            /* TODO : New issue in map or via combobox
-            
-            Proposed expected behaviour : 
-            
-            This method opens Map's issue section with aside a card with a drag & drop issue icon
-            By dragging this icon on a campground and dropping it, it opens a dialog 
-            where you have to add issue type, description and criticality. 
-            Automactic DateTime.now() is set at OkButton event with status "Nouveau" and the issue is now added.
-
-            */
-
-            //TEMPORARY BEHAVIOUR : "AddIssue" dialog called here with Code_Emplacement = 25
-
-            new AddIssue(Db, 25).ShowDialog();
+            new AddIssue(Db).ShowDialog();
+            Cursor.Current = Cursors.Default;
             UpdateIssuesListView();
         }
 
 
         private void OnDeleteIssueButtonClick(object sender, EventArgs e)
         {
-            int code = int.Parse(issuesListView.SelectedItems[0].Name);
-            var issue = Db.Incident.Find(code);
-
-            if (issue != null)
+            var confirmResult = MessageBox.Show(Resources.delete_item_confirm_message,
+                                     "", MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
             {
-                Db.Incident.Remove(issue);
-                Db.SaveChanges();
-                UpdateIssuesListView();
+                int code = int.Parse(issuesListView.SelectedItems[0].Name);
+                var issue = Db.Incident.Find(code);
+
+                if (issue != null)
+                {
+                    Db.Incident.Remove(issue);
+                    Db.SaveChanges();
+                    UpdateIssuesListView();
+                }
             }
         }
 
@@ -220,6 +229,12 @@ namespace PT_Camping.Views.UserControls
                             message += "date de résolution\n";
                             cptModifications++;
                         }
+                        else if (statusTextBox.Text == Resources.done_issue)
+                        {
+                            message += "date de résolution\n";
+                            cptModifications++;
+                            OnResolveIssueButtonClick(null, null);
+                        }
                     }
 
                     if (descriptionTextBox.Text != incident.Description_Incident)
@@ -256,11 +271,19 @@ namespace PT_Camping.Views.UserControls
             {
                 issue.Date_Resolution = DateTime.Now;
                 issue.Avancement_Incident = Resources.done_issue;
+
+
+                Db.SaveChanges();
+
+                UpdateIssueDetails();
+                UpdateIssuesListView();
+
+                foreach (ListViewItem item in issuesListView.Items)
+                {
+                    item.Selected = item.Name == code.ToString();
+                }
+                issuesListView.Select();
             }
-
-            Db.SaveChanges();
-
-            UpdateIssueDetails();
         }
 
 
@@ -280,8 +303,10 @@ namespace PT_Camping.Views.UserControls
         {
             if (issuesListView.Columns.Count != 0)
             {
-                foreach (ColumnHeader columnHeader in issuesListView.Columns)
-                    columnHeader.Width = issuesListView.Width / issuesListView.Columns.Count;
+                issuesListView.Columns[0].Width = 33;
+                issuesListView.Columns[1].Width = issuesListView.Width / 3 - 11;
+                issuesListView.Columns[2].Width = issuesListView.Width / 3 - 11;
+                issuesListView.Columns[3].Width = issuesListView.Width / 3 - 11;
             }
         }
 

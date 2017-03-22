@@ -37,6 +37,8 @@ namespace PT_Camping.Views.Forms
 
         private void OkButton_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
+
             try
             {
                 if (surnameTextBox.Text == "" || nameTextBox.Text == "" || emailTextBox.Text == ""

@@ -49,7 +49,7 @@
             this.categoryLabel = new System.Windows.Forms.Label();
             this.locationNameLabel = new System.Windows.Forms.Label();
             this.nameLabel = new System.Windows.Forms.Label();
-            this.resButton = new System.Windows.Forms.Button();
+            this.reserveButton = new System.Windows.Forms.Button();
             this.resStateLabel = new System.Windows.Forms.Label();
             this.stateLabel = new System.Windows.Forms.Label();
             this.editLocationPanel = new System.Windows.Forms.Panel();
@@ -115,10 +115,10 @@
             this.mapTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.mapTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.mapTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.mapTablePanel.Controls.Add(this.pictureBox, 1, 1);
             this.mapTablePanel.Controls.Add(this.modeCheckBox, 0, 0);
             this.mapTablePanel.Controls.Add(this.dateTimePicker, 1, 0);
             this.mapTablePanel.Controls.Add(this.validateChangesButton, 2, 0);
-            this.mapTablePanel.Controls.Add(this.pictureBox, 1, 1);
             this.mapTablePanel.Controls.Add(this.leftPanel, 0, 1);
             this.mapTablePanel.Controls.Add(this.rightPanel, 2, 1);
             this.mapTablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -161,6 +161,7 @@
             // validateChangesButton
             // 
             this.validateChangesButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.validateChangesButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.validateChangesButton.Location = new System.Drawing.Point(648, 6);
             this.validateChangesButton.Margin = new System.Windows.Forms.Padding(2);
             this.validateChangesButton.Name = "validateChangesButton";
@@ -240,7 +241,7 @@
             this.detailsLocationPanel.Controls.Add(this.categoryLabel);
             this.detailsLocationPanel.Controls.Add(this.locationNameLabel);
             this.detailsLocationPanel.Controls.Add(this.nameLabel);
-            this.detailsLocationPanel.Controls.Add(this.resButton);
+            this.detailsLocationPanel.Controls.Add(this.reserveButton);
             this.detailsLocationPanel.Controls.Add(this.resStateLabel);
             this.detailsLocationPanel.Controls.Add(this.stateLabel);
             this.detailsLocationPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -343,16 +344,17 @@
             this.nameLabel.TabIndex = 4;
             this.nameLabel.Text = "Nom :";
             // 
-            // resButton
+            // reserveButton
             // 
-            this.resButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.resButton.Location = new System.Drawing.Point(64, 85);
-            this.resButton.Margin = new System.Windows.Forms.Padding(2);
-            this.resButton.Name = "resButton";
-            this.resButton.Size = new System.Drawing.Size(65, 22);
-            this.resButton.TabIndex = 2;
-            this.resButton.Text = "Réserver";
-            this.resButton.UseVisualStyleBackColor = true;
+            this.reserveButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.reserveButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.reserveButton.Location = new System.Drawing.Point(64, 85);
+            this.reserveButton.Margin = new System.Windows.Forms.Padding(2);
+            this.reserveButton.Name = "reserveButton";
+            this.reserveButton.Size = new System.Drawing.Size(65, 22);
+            this.reserveButton.TabIndex = 2;
+            this.reserveButton.Text = "Réserver";
+            this.reserveButton.UseVisualStyleBackColor = true;
             // 
             // resStateLabel
             // 
@@ -532,7 +534,7 @@
         private System.Windows.Forms.Panel detailsLocationPanel;
         private System.Windows.Forms.Label resStateLabel;
         private System.Windows.Forms.Label stateLabel;
-        private System.Windows.Forms.Button resButton;
+        private System.Windows.Forms.Button reserveButton;
         private System.Windows.Forms.Panel leftPanel;
         private System.Windows.Forms.Panel editLocationPanel;
         private System.Windows.Forms.TextBox locationNameTextBox;
