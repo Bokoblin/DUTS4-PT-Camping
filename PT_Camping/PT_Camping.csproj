@@ -123,11 +123,11 @@
     <Compile Include="Views\Forms\AddProvider.Designer.cs">
       <DependentUpon>AddProvider.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Forms\AddStock.cs">
+    <Compile Include="Views\Forms\AddProduct.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Forms\AddStock.Designer.cs">
-      <DependentUpon>AddStock.cs</DependentUpon>
+    <Compile Include="Views\Forms\AddProduct.Designer.cs">
+      <DependentUpon>AddProduct.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\MapUserControl.cs">
       <SubType>UserControl</SubType>
@@ -250,11 +250,11 @@
     <Compile Include="Views\UserControls\ProvidersUserControl.Designer.cs">
       <DependentUpon>ProvidersUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Forms\SellStock.cs">
+    <Compile Include="Views\Forms\SellProduct.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Forms\SellStock.Designer.cs">
-      <DependentUpon>SellStock.cs</DependentUpon>
+    <Compile Include="Views\Forms\SellProduct.Designer.cs">
+      <DependentUpon>SellProduct.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\StatsUserControl.cs">
       <SubType>UserControl</SubType>
@@ -294,8 +294,8 @@
     <EmbeddedResource Include="Views\UserControls\EmployeesUserControl.resx">
       <DependentUpon>EmployeesUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Forms\AddStock.resx">
-      <DependentUpon>AddStock.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Forms\AddProduct.resx">
+      <DependentUpon>AddProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\ClientsUserControl.resx">
       <DependentUpon>ClientsUserControl.cs</DependentUpon>
@@ -326,8 +326,8 @@
     <EmbeddedResource Include="Views\UserControls\StatsUserControl.resx">
       <DependentUpon>StatsUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Forms\SellStock.resx">
-      <DependentUpon>SellStock.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Forms\SellProduct.resx">
+      <DependentUpon>SellProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\ProvidersUserControl.resx">
       <DependentUpon>ProvidersUserControl.cs</DependentUpon>
