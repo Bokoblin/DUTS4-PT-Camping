@@ -33,6 +33,7 @@
             this.addEmployeeButton = new System.Windows.Forms.Button();
             this.detailsPanel = new System.Windows.Forms.Panel();
             this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.addEmployeePhotoPictureBox = new System.Windows.Forms.PictureBox();
             this.dismissButton = new System.Windows.Forms.Button();
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.nameLabel = new System.Windows.Forms.Label();
@@ -56,6 +57,8 @@
             this.tableLayoutPanel.SuspendLayout();
             this.detailsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            this.pictureBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.addEmployeePhotoPictureBox)).BeginInit();
             this.detailsTitleBarPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -146,21 +149,36 @@
             // 
             this.pictureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox.Controls.Add(this.addEmployeePhotoPictureBox);
             this.pictureBox.ErrorImage = global::PT_Camping.Properties.Resources.ic_contact_default;
             this.pictureBox.Image = global::PT_Camping.Properties.Resources.ic_contact_default;
-            this.pictureBox.Location = new System.Drawing.Point(144, 25);
+            this.pictureBox.Location = new System.Drawing.Point(144, 30);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(60, 70);
+            this.pictureBox.Size = new System.Drawing.Size(70, 80);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox.TabIndex = 22;
             this.pictureBox.TabStop = false;
+            // 
+            // addEmployeePhotoPictureBox
+            // 
+            this.addEmployeePhotoPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.addEmployeePhotoPictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addEmployeePhotoPictureBox.ErrorImage = global::PT_Camping.Properties.Resources.ic_contact_default;
+            this.addEmployeePhotoPictureBox.Image = global::PT_Camping.Properties.Resources.ic_add_a_photo;
+            this.addEmployeePhotoPictureBox.Location = new System.Drawing.Point(2, 58);
+            this.addEmployeePhotoPictureBox.Name = "addEmployeePhotoPictureBox";
+            this.addEmployeePhotoPictureBox.Size = new System.Drawing.Size(20, 20);
+            this.addEmployeePhotoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.addEmployeePhotoPictureBox.TabIndex = 27;
+            this.addEmployeePhotoPictureBox.TabStop = false;
+            this.addEmployeePhotoPictureBox.Click += new System.EventHandler(this.AddEmployeePhotoPictureBox_Click);
             // 
             // dismissButton
             // 
             this.dismissButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.dismissButton.AutoSize = true;
             this.dismissButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dismissButton.Location = new System.Drawing.Point(191, 339);
+            this.dismissButton.Location = new System.Drawing.Point(191, 352);
             this.dismissButton.Name = "dismissButton";
             this.dismissButton.Size = new System.Drawing.Size(120, 30);
             this.dismissButton.TabIndex = 23;
@@ -171,7 +189,7 @@
             // nameTextBox
             // 
             this.nameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.nameTextBox.Location = new System.Drawing.Point(179, 141);
+            this.nameTextBox.Location = new System.Drawing.Point(179, 154);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.ReadOnly = true;
             this.nameTextBox.Size = new System.Drawing.Size(120, 20);
@@ -181,7 +199,7 @@
             // 
             this.nameLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.nameLabel.AutoSize = true;
-            this.nameLabel.Location = new System.Drawing.Point(56, 144);
+            this.nameLabel.Location = new System.Drawing.Point(56, 157);
             this.nameLabel.Name = "nameLabel";
             this.nameLabel.Size = new System.Drawing.Size(43, 13);
             this.nameLabel.TabIndex = 19;
@@ -190,7 +208,7 @@
             // loginTextBox
             // 
             this.loginTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.loginTextBox.Location = new System.Drawing.Point(179, 291);
+            this.loginTextBox.Location = new System.Drawing.Point(179, 304);
             this.loginTextBox.Name = "loginTextBox";
             this.loginTextBox.ReadOnly = true;
             this.loginTextBox.Size = new System.Drawing.Size(120, 20);
@@ -199,7 +217,7 @@
             // emailTextBox
             // 
             this.emailTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.emailTextBox.Location = new System.Drawing.Point(179, 265);
+            this.emailTextBox.Location = new System.Drawing.Point(179, 278);
             this.emailTextBox.Name = "emailTextBox";
             this.emailTextBox.ReadOnly = true;
             this.emailTextBox.Size = new System.Drawing.Size(120, 20);
@@ -208,7 +226,7 @@
             // phoneTextBox
             // 
             this.phoneTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.phoneTextBox.Location = new System.Drawing.Point(179, 239);
+            this.phoneTextBox.Location = new System.Drawing.Point(179, 252);
             this.phoneTextBox.MaxLength = 10;
             this.phoneTextBox.Name = "phoneTextBox";
             this.phoneTextBox.ReadOnly = true;
@@ -219,7 +237,7 @@
             // addressTextBox
             // 
             this.addressTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.addressTextBox.Location = new System.Drawing.Point(179, 193);
+            this.addressTextBox.Location = new System.Drawing.Point(179, 206);
             this.addressTextBox.Multiline = true;
             this.addressTextBox.Name = "addressTextBox";
             this.addressTextBox.ReadOnly = true;
@@ -229,7 +247,7 @@
             // birthDateTextBox
             // 
             this.birthDateTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.birthDateTextBox.Location = new System.Drawing.Point(179, 167);
+            this.birthDateTextBox.Location = new System.Drawing.Point(179, 180);
             this.birthDateTextBox.Name = "birthDateTextBox";
             this.birthDateTextBox.ReadOnly = true;
             this.birthDateTextBox.Size = new System.Drawing.Size(120, 20);
@@ -238,7 +256,7 @@
             // surnameTextBox
             // 
             this.surnameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.surnameTextBox.Location = new System.Drawing.Point(179, 115);
+            this.surnameTextBox.Location = new System.Drawing.Point(179, 128);
             this.surnameTextBox.Name = "surnameTextBox";
             this.surnameTextBox.ReadOnly = true;
             this.surnameTextBox.Size = new System.Drawing.Size(120, 20);
@@ -284,7 +302,7 @@
             this.permissionButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.permissionButton.AutoSize = true;
             this.permissionButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.permissionButton.Location = new System.Drawing.Point(41, 339);
+            this.permissionButton.Location = new System.Drawing.Point(41, 352);
             this.permissionButton.Name = "permissionButton";
             this.permissionButton.Size = new System.Drawing.Size(120, 30);
             this.permissionButton.TabIndex = 22;
@@ -296,7 +314,7 @@
             // 
             this.loginLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.loginLabel.AutoSize = true;
-            this.loginLabel.Location = new System.Drawing.Point(56, 294);
+            this.loginLabel.Location = new System.Drawing.Point(56, 307);
             this.loginLabel.Name = "loginLabel";
             this.loginLabel.Size = new System.Drawing.Size(33, 13);
             this.loginLabel.TabIndex = 6;
@@ -306,7 +324,7 @@
             // 
             this.emailLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.emailLabel.AutoSize = true;
-            this.emailLabel.Location = new System.Drawing.Point(56, 268);
+            this.emailLabel.Location = new System.Drawing.Point(56, 281);
             this.emailLabel.Name = "emailLabel";
             this.emailLabel.Size = new System.Drawing.Size(32, 13);
             this.emailLabel.TabIndex = 5;
@@ -316,7 +334,7 @@
             // 
             this.phoneLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.phoneLabel.AutoSize = true;
-            this.phoneLabel.Location = new System.Drawing.Point(56, 242);
+            this.phoneLabel.Location = new System.Drawing.Point(56, 255);
             this.phoneLabel.Name = "phoneLabel";
             this.phoneLabel.Size = new System.Drawing.Size(58, 13);
             this.phoneLabel.TabIndex = 4;
@@ -326,7 +344,7 @@
             // 
             this.addressLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.addressLabel.AutoSize = true;
-            this.addressLabel.Location = new System.Drawing.Point(56, 196);
+            this.addressLabel.Location = new System.Drawing.Point(56, 209);
             this.addressLabel.Name = "addressLabel";
             this.addressLabel.Size = new System.Drawing.Size(45, 13);
             this.addressLabel.TabIndex = 3;
@@ -336,7 +354,7 @@
             // 
             this.birthDateLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.birthDateLabel.AutoSize = true;
-            this.birthDateLabel.Location = new System.Drawing.Point(56, 170);
+            this.birthDateLabel.Location = new System.Drawing.Point(56, 183);
             this.birthDateLabel.Name = "birthDateLabel";
             this.birthDateLabel.Size = new System.Drawing.Size(98, 13);
             this.birthDateLabel.TabIndex = 2;
@@ -360,7 +378,7 @@
             // 
             this.surnameLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.surnameLabel.AutoSize = true;
-            this.surnameLabel.Location = new System.Drawing.Point(56, 118);
+            this.surnameLabel.Location = new System.Drawing.Point(56, 131);
             this.surnameLabel.Name = "surnameLabel";
             this.surnameLabel.Size = new System.Drawing.Size(29, 13);
             this.surnameLabel.TabIndex = 1;
@@ -379,6 +397,8 @@
             this.detailsPanel.ResumeLayout(false);
             this.detailsPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            this.pictureBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.addEmployeePhotoPictureBox)).EndInit();
             this.detailsTitleBarPanel.ResumeLayout(false);
             this.detailsTitleBarPanel.PerformLayout();
             this.ResumeLayout(false);
@@ -413,5 +433,6 @@
         private System.Windows.Forms.Button dismissButton;
         private System.Windows.Forms.Button addEmployeeButton;
         private System.Windows.Forms.PictureBox pictureBox;
+        private System.Windows.Forms.PictureBox addEmployeePhotoPictureBox;
     }
 }
