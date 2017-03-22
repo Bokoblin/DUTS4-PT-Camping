@@ -1,8 +1,8 @@
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Net.Mail;
 using System.Windows.Forms;
-using PT_Camping.Model;
 using PT_Camping.Properties;
 using PT_Camping.Views.Forms;
 
@@ -23,7 +23,6 @@ namespace PT_Camping.Views.UserControls
         {
             InitializeComponent();
             appBarTitle.Text = Resources.provider_management;
-            Db = new DataBase();
 
             providerListView.View = View.Details;
             providerListView.Columns.Add("Nom du fournisseur", -2);
@@ -31,6 +30,14 @@ namespace PT_Camping.Views.UserControls
 
             UpdateProvidersListView();
             HandleResize();
+            InitPermissions();
+        }
+
+        public void InitPermissions()
+        {
+            addProviderButton.Enabled = UserRights.Any(d => d.Libelle_Droit == "writeProviders");
+            deleteButton.Visible = UserRights.Any(d => d.Libelle_Droit == "writeProviders");
+            editButton.Visible = UserRights.Any(d => d.Libelle_Droit == "writeProviders");
         }
 
         public void UpdateProvidersListView()
@@ -194,6 +201,7 @@ namespace PT_Camping.Views.UserControls
         private void AddProvider_Click(object sender, EventArgs e)
         {
             new AddProvider(Db).ShowDialog();
+            Cursor.Current = Cursors.Default;
             UpdateProvidersListView();
         }
 
@@ -211,14 +219,19 @@ namespace PT_Camping.Views.UserControls
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            int code = int.Parse(providerListView.SelectedItems[0].Name);
-            var fournisseur = Db.Fournisseur.Find(code);
-
-            if (fournisseur != null)
+            var confirmResult = MessageBox.Show(Resources.delete_item_confirm_message,
+                                     "", MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
             {
-                Db.Fournisseur.Remove(fournisseur);
-                Db.SaveChanges();
-                UpdateProvidersListView();
+                int code = int.Parse(providerListView.SelectedItems[0].Name);
+                var fournisseur = Db.Fournisseur.Find(code);
+
+                if (fournisseur != null)
+                {
+                    Db.Fournisseur.Remove(fournisseur);
+                    Db.SaveChanges();
+                    UpdateProvidersListView();
+                }
             }
         }
 
