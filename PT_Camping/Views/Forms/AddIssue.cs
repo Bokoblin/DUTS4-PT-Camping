@@ -18,20 +18,22 @@ namespace PT_Camping.Views.Forms
         private readonly DataBase _db;
         private readonly Incident _newIssue;
 
-        public AddIssue(DataBase db, int code)
+        public AddIssue(DataBase db)
         {
             InitializeComponent();
             _db = db;
             _newIssue = new Incident()
             {
-                Code_Emplacement = code,
                 Avancement_Incident = "Nouveau",
                 Description_Incident = "Sans commentaire"
             };
 
+            var locations = db.Emplacement.Select(l => l.Nom_Emplacement).ToList();
+            locationComboBox.DataSource = locations;
+            locationComboBox.Text = locationComboBox.Items[0].ToString();
+
             var types = db.Type_Incident.Select(t => t.Type_Incident1).ToList();
             issueTypecomboBox.DataSource = types;
-
             criticalityComboBox.Text = criticalityComboBox.Items[0].ToString();
         }
 
@@ -42,23 +44,24 @@ namespace PT_Camping.Views.Forms
 
             try
             {
-                Type_Incident issueType = _db.Type_Incident.First(
-                    t => t.Type_Incident1 == issueTypecomboBox.Text);
+                int locationId = _db.Emplacement.First(
+                   l => l.Nom_Emplacement == locationComboBox.Text).Code_Emplacement;
 
-                if (issueType != null)
+                int issueTypeId = _db.Type_Incident.First(
+                    t => t.Type_Incident1 == issueTypecomboBox.Text).Code_Type;
+
+                _newIssue.Code_Type = issueTypeId;
+                _newIssue.Code_Emplacement = locationId;
+                _newIssue.Date_Incident = DateTime.Now;
+                _newIssue.Criticite_Incident = int.Parse(criticalityComboBox.Text);
+                if (descriptionTextBox.Text != "")
                 {
-                    _newIssue.Code_Type = issueType.Code_Type;
-                    _newIssue.Date_Incident = DateTime.Now;
-                    _newIssue.Criticite_Incident = int.Parse(criticalityComboBox.Text);
-                    if (descriptionTextBox.Text != "")
-                    {
-                        _newIssue.Description_Incident = descriptionTextBox.Text;
-                    }
-
-                    _db.Incident.Add(_newIssue);
-                    _db.SaveChanges();
-                    Close();
+                    _newIssue.Description_Incident = descriptionTextBox.Text;
                 }
+
+                _db.Incident.Add(_newIssue);
+                _db.SaveChanges();
+                Close();
             }
             catch (Exception exception)
             {

@@ -117,20 +117,7 @@ namespace PT_Camping.Views.UserControls
 
         private void OnAddIssueButtonClick(object sender, EventArgs e)
         {
-            /* TODO : New issue in map or via combobox
-            
-            Proposed expected behaviour : 
-            
-            This method opens Map's issue section with aside a card with a drag & drop issue icon
-            By dragging this icon on a campground and dropping it, it opens a dialog 
-            where you have to add issue type, description and criticality. 
-            Automactic DateTime.now() is set at OkButton event with status "Nouveau" and the issue is now added.
-
-            */
-
-            //TEMPORARY BEHAVIOUR : "AddIssue" dialog called here with Code_Emplacement = 25
-
-            new AddIssue(Db, 25).ShowDialog();
+            new AddIssue(Db).ShowDialog();
             Cursor.Current = Cursors.Default;
             UpdateIssuesListView();
         }
