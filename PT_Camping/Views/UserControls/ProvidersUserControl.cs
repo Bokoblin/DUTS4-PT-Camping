@@ -15,7 +15,8 @@ namespace PT_Camping.Views.UserControls
     /// Adding a new provider, modifying, deleting or contacting them.
     /// 
     /// </summary>
-    /// Authors : Arthur, Claire
+    /// Author : Arthur (File creation + UI)
+    /// Author : Claire (provider feature)
     /// Since : 08/02/17
     public partial class ProvidersUserControl : ManagementUserControl
     {

@@ -5,10 +5,17 @@ using PT_Camping.Model;
 
 namespace PT_Camping.Views.Forms
 {
-    public partial class AddStock : Form
+    /// <summary>
+    /// This dialog allows to add a new product
+    /// by choosing a name, a quantity and a price
+    /// 
+    /// </summary>
+    /// Authors : Yonnel
+    /// Since : 09/03/17
+    public partial class AddProduct : Form
     {
         private readonly DataBase _db;
-        public AddStock()
+        public AddProduct()
         {
             InitializeComponent();
             _db = new DataBase();

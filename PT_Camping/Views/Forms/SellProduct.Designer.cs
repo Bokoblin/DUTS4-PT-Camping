@@ -1,6 +1,6 @@
 ﻿namespace PT_Camping.Views.Forms
 {
-    partial class SellStock
+    partial class SellProduct
     {
         /// <summary>
         /// Required designer variable.

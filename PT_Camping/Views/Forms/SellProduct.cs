@@ -4,11 +4,18 @@ using PT_Camping.Model;
 
 namespace PT_Camping.Views.Forms
 {
-    public partial class SellStock : Form
+    /// <summary>
+    /// This dialog allows to sell a product
+    /// by indicating a quantity
+    /// 
+    /// </summary>
+    /// Authors : Yonnel
+    /// Since : 11/03/17
+    public partial class SellProduct : Form
     {
         readonly Produit _product;
         readonly DataBase _db;
-        public SellStock(DataBase db, Produit product)
+        public SellProduct(DataBase db, Produit product)
         {
             InitializeComponent();
             _db = db;

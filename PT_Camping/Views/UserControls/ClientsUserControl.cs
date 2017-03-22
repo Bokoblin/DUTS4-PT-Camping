@@ -12,7 +12,8 @@ namespace PT_Camping.Views.UserControls
     /// It is used to manage the camping's clients.
     /// 
     /// </summary>
-    /// Authors : Arthur, Valentine
+    /// Author : Arthur (File creation + UI)
+    /// Author : Valentine (Client feature)
     /// Since : 08/02/17
     public partial class ClientsUserControl : ManagementUserControl
     {
