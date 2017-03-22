@@ -33,8 +33,7 @@ namespace PT_Camping.Views.UserControls
     /// adding, removing, modifying a camping accommodation.
     /// 
     /// </summary>
-    /// Author : Arthur (File creation + UI)
-    /// Author : Alexandre (Map feature)
+    /// Author : Alexandre
     /// Since : 09/02/17
     /// 
     public partial class MapUserControl : UserControl
