@@ -218,6 +218,16 @@ namespace PT_Camping.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ic_add_a_photo {
+            get {
+                object obj = ResourceManager.GetObject("ic_add_a_photo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ic_arrow_back {
             get {
                 object obj = ResourceManager.GetObject("ic_arrow_back", resourceCulture);
