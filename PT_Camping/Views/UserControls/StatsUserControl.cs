@@ -275,7 +275,6 @@ namespace PT_Camping.Views.UserControls
                 if (UserRights.Any(d => d.Libelle_Droit == "readMap"))
                 {
                     int code = int.Parse(mostAskedlocationsListView.SelectedItems[0].Name);
-                    HomeUserControl.Window.WindowPanel.Controls.Remove(this);
                     HomeUserControl.StartLocationsFromStats(code);
                 }
                 else
@@ -290,11 +289,10 @@ namespace PT_Camping.Views.UserControls
         {
             if (mostAskedProductsListView.SelectedItems.Count > 0)
             {
-                if (UserRights.Any(d => d.Libelle_Droit == "readProducts"))
+                if (UserRights.Any(d => d.Libelle_Droit == "readStocks"))
                 {
                     var code = int.Parse(mostAskedProductsListView.SelectedItems[0].Name);
                     code = Db.Produit.First(i => i.Code_Produit == code).Code_Produit;
-                    HomeUserControl.Window.WindowPanel.Controls.Remove(this);
                     HomeUserControl.StartProductsFromStats(code);
                 }
                 else
@@ -315,7 +313,6 @@ namespace PT_Camping.Views.UserControls
                     {
                         int codeType = int.Parse(mostCommonIssueslistView.SelectedItems[0].Name);
                         int code = Db.Incident.First(i => i.Code_Type == codeType).Code_Incident;
-                        HomeUserControl.Window.WindowPanel.Controls.Remove(this);
                         HomeUserControl.StartIssuesFromStats(code);
                     }
                     else
@@ -337,7 +334,6 @@ namespace PT_Camping.Views.UserControls
                 {
                     int code = int.Parse(bestClientsListView.SelectedItems[0].Name);
                     code = Db.Client.First(i => i.Code_Personne == code).Code_Personne;
-                    HomeUserControl.Window.WindowPanel.Controls.Remove(this);
                     HomeUserControl.StartClientsFromStats(code);
                 }
                 else

@@ -59,14 +59,20 @@ namespace PT_Camping.Views.UserControls
         public void StartLocationsFromStats(int locationCode)
         {
             Cursor.Current = Cursors.WaitCursor;
-            if (_mapUserControl == null)
-                _mapUserControl = new MapUserControl(this, locationCode);
-            else
-                _mapUserControl.SelectFromStats(locationCode);
-            HandleResize();
-            homeTabControl.SelectedIndex = 1;
             Window.WindowPanel.Controls.Add(this);
+            homeTabControl.SelectedIndex = 1;
+            if (_mapUserControl == null)
+            {
+                _mapUserControl = new MapUserControl(this, locationCode);
+            }
+            else
+            {
+                _mapUserControl.SelectFromStats(locationCode);
+            }
+                
             mapTab.Controls.Add(_mapUserControl);
+            _mapUserControl?.HandleResize(managementTab.Size);
+            Window.WindowPanel.Controls.Remove(_statsUserControl);
         }
 
 
@@ -75,7 +81,7 @@ namespace PT_Camping.Views.UserControls
             Cursor.Current = Cursors.WaitCursor;
             _stocksUserControl = new StocksUserControl(this, productCode);
             Window.WindowPanel.Controls.Add(_stocksUserControl);
-            Window.WindowPanel.Controls.Remove(this);
+            Window.WindowPanel.Controls.Remove(_statsUserControl);
         }
 
 
@@ -84,7 +90,7 @@ namespace PT_Camping.Views.UserControls
             Cursor.Current = Cursors.WaitCursor;
             _clientsUserControl = new ClientsUserControl(this, clientCode);
             Window.WindowPanel.Controls.Add(_clientsUserControl);
-            Window.WindowPanel.Controls.Remove(this);
+            Window.WindowPanel.Controls.Remove(_statsUserControl);
         }
 
 
@@ -93,7 +99,7 @@ namespace PT_Camping.Views.UserControls
             Cursor.Current = Cursors.WaitCursor;
             _issuesUserControl = new IssuesUserControl(this, issueCode);
             Window.WindowPanel.Controls.Add(_issuesUserControl);
-            Window.WindowPanel.Controls.Remove(this);
+            Window.WindowPanel.Controls.Remove(_statsUserControl);
         }
 
 
@@ -189,7 +195,7 @@ namespace PT_Camping.Views.UserControls
                     {
                         _mapUserControl = new MapUserControl(this);
                         mapTab.Controls.Add(_mapUserControl);
-                    _mapUserControl?.HandleResize(mapTab.Size);
+                        _mapUserControl?.HandleResize(managementTab.Size);
                     }
                 }
                 else

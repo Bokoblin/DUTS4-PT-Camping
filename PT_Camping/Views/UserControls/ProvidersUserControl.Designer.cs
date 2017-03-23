@@ -128,9 +128,11 @@
             // 
             this.addressTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.addressTextBox.Location = new System.Drawing.Point(180, 157);
+            this.addressTextBox.MaxLength = 50;
             this.addressTextBox.Multiline = true;
             this.addressTextBox.Name = "addressTextBox";
             this.addressTextBox.ReadOnly = true;
+            this.addressTextBox.ShortcutsEnabled = false;
             this.addressTextBox.Size = new System.Drawing.Size(120, 40);
             this.addressTextBox.TabIndex = 22;
             // 
@@ -151,8 +153,10 @@
             // 
             this.emailTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.emailTextBox.Location = new System.Drawing.Point(180, 203);
+            this.emailTextBox.MaxLength = 30;
             this.emailTextBox.Name = "emailTextBox";
             this.emailTextBox.ReadOnly = true;
+            this.emailTextBox.ShortcutsEnabled = false;
             this.emailTextBox.Size = new System.Drawing.Size(120, 20);
             this.emailTextBox.TabIndex = 20;
             // 
@@ -160,8 +164,10 @@
             // 
             this.websiteTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.websiteTextBox.Location = new System.Drawing.Point(180, 229);
+            this.websiteTextBox.MaxLength = 50;
             this.websiteTextBox.Name = "websiteTextBox";
             this.websiteTextBox.ReadOnly = true;
+            this.websiteTextBox.ShortcutsEnabled = false;
             this.websiteTextBox.Size = new System.Drawing.Size(120, 20);
             this.websiteTextBox.TabIndex = 19;
             // 
@@ -169,8 +175,10 @@
             // 
             this.nameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.nameTextBox.Location = new System.Drawing.Point(180, 128);
+            this.nameTextBox.MaxLength = 25;
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.ReadOnly = true;
+            this.nameTextBox.ShortcutsEnabled = false;
             this.nameTextBox.Size = new System.Drawing.Size(120, 20);
             this.nameTextBox.TabIndex = 17;
             // 
