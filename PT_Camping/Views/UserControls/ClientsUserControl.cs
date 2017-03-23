@@ -223,18 +223,6 @@ namespace PT_Camping.Views.UserControls
         }
 
 
-        private void ReducClient_Click(object sender, EventArgs e)
-        {
-            //TODO : To use in reservation screen
-
-            int code = int.Parse(clientListView.SelectedItems[0].Name);
-            var client = Db.Client.Find(code);
-
-            new ApplyReduction(client).ShowDialog();
-            UpdateClientListView();
-        }
-
-
         private void ResetButton_Click(object sender, EventArgs e)
         {
             UpdateClientDetails();
@@ -282,6 +270,21 @@ namespace PT_Camping.Views.UserControls
         {
             //TODO reservations feature
             MessageBox.Show(Resources.not_implemented_feature);
+        }
+
+
+        private void ReducClient_Click(object sender, EventArgs e)
+        {
+            //TODO : Move to reservation feature
+
+            MessageBox.Show("WARNING : This dialog will be used in reservation " +
+                            "feature to apply a reduction on a client's facturation");
+
+            int code = int.Parse(clientListView.SelectedItems[0].Name);
+            var client = Db.Client.Find(code);
+
+            new ApplyReduction(client).ShowDialog();
+            UpdateClientListView();
         }
     }
 }

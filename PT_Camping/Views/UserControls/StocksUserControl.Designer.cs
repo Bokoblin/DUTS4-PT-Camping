@@ -97,8 +97,10 @@
             // 
             this.priceTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.priceTextBox.Location = new System.Drawing.Point(181, 221);
+            this.priceTextBox.MaxLength = 7;
             this.priceTextBox.Name = "priceTextBox";
             this.priceTextBox.ReadOnly = true;
+            this.priceTextBox.ShortcutsEnabled = false;
             this.priceTextBox.Size = new System.Drawing.Size(119, 20);
             this.priceTextBox.TabIndex = 14;
             this.priceTextBox.Enter += new System.EventHandler(this.PriceTextBox_Enter);
@@ -165,6 +167,7 @@
             this.productNameTextBox.MaxLength = 30;
             this.productNameTextBox.Name = "productNameTextBox";
             this.productNameTextBox.ReadOnly = true;
+            this.productNameTextBox.ShortcutsEnabled = false;
             this.productNameTextBox.Size = new System.Drawing.Size(119, 20);
             this.productNameTextBox.TabIndex = 21;
             this.productNameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ProductNameTextBox_KeyPress);
@@ -225,9 +228,10 @@
             // 
             this.amountTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.amountTextBox.Location = new System.Drawing.Point(181, 195);
-            this.amountTextBox.MaxLength = 9999;
+            this.amountTextBox.MaxLength = 4;
             this.amountTextBox.Name = "amountTextBox";
             this.amountTextBox.ReadOnly = true;
+            this.amountTextBox.ShortcutsEnabled = false;
             this.amountTextBox.Size = new System.Drawing.Size(119, 20);
             this.amountTextBox.TabIndex = 27;
             this.amountTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AmountTextBox_KeyPress);
@@ -240,6 +244,7 @@
             // providerComboBox
             // 
             this.providerComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.providerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.providerComboBox.Enabled = false;
             this.providerComboBox.FormattingEnabled = true;
             this.providerComboBox.Location = new System.Drawing.Point(181, 247);

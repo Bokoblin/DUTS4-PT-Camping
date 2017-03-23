@@ -164,6 +164,7 @@
             // 
             this.currentReservationsComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.currentReservationsComboBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.currentReservationsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.currentReservationsComboBox.FormattingEnabled = true;
             this.currentReservationsComboBox.Location = new System.Drawing.Point(174, 300);
             this.currentReservationsComboBox.Name = "currentReservationsComboBox";
@@ -209,8 +210,10 @@
             this.surnameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.surnameTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.surnameTextBox.Location = new System.Drawing.Point(174, 101);
+            this.surnameTextBox.MaxLength = 25;
             this.surnameTextBox.Name = "surnameTextBox";
             this.surnameTextBox.ReadOnly = true;
+            this.surnameTextBox.ShortcutsEnabled = false;
             this.surnameTextBox.Size = new System.Drawing.Size(120, 20);
             this.surnameTextBox.TabIndex = 25;
             this.surnameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SurnameTextBox_KeyPress);
@@ -299,9 +302,11 @@
             this.addressTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.addressTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.addressTextBox.Location = new System.Drawing.Point(174, 173);
+            this.addressTextBox.MaxLength = 250;
             this.addressTextBox.Multiline = true;
             this.addressTextBox.Name = "addressTextBox";
             this.addressTextBox.ReadOnly = true;
+            this.addressTextBox.ShortcutsEnabled = false;
             this.addressTextBox.Size = new System.Drawing.Size(120, 40);
             this.addressTextBox.TabIndex = 28;
             // 
@@ -320,8 +325,10 @@
             this.nameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.nameTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.nameTextBox.Location = new System.Drawing.Point(174, 124);
+            this.nameTextBox.MaxLength = 25;
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.ReadOnly = true;
+            this.nameTextBox.ShortcutsEnabled = false;
             this.nameTextBox.Size = new System.Drawing.Size(120, 20);
             this.nameTextBox.TabIndex = 26;
             // 
@@ -330,8 +337,10 @@
             this.emailTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.emailTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.emailTextBox.Location = new System.Drawing.Point(174, 247);
+            this.emailTextBox.MaxLength = 50;
             this.emailTextBox.Name = "emailTextBox";
             this.emailTextBox.ReadOnly = true;
+            this.emailTextBox.ShortcutsEnabled = false;
             this.emailTextBox.Size = new System.Drawing.Size(120, 20);
             this.emailTextBox.TabIndex = 30;
             // 
@@ -370,8 +379,10 @@
             this.phoneTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.phoneTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.phoneTextBox.Location = new System.Drawing.Point(174, 219);
+            this.phoneTextBox.MaxLength = 10;
             this.phoneTextBox.Name = "phoneTextBox";
             this.phoneTextBox.ReadOnly = true;
+            this.phoneTextBox.ShortcutsEnabled = false;
             this.phoneTextBox.Size = new System.Drawing.Size(120, 20);
             this.phoneTextBox.TabIndex = 29;
             this.phoneTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PhoneTextBox_KeyPress);

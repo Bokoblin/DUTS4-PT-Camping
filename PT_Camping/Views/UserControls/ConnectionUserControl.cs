@@ -38,10 +38,10 @@ namespace PT_Camping.Views.UserControls
                     if (LoginTools.Employee.EstLicencie)
                         throw new UnauthorizedAccessException("Cet utilisateur n'a pas la permission d'accéder à l'application");
                     _appWindow.Login();
-            }
-            else
-            {
-                errorLabel.Visible = true;
+                }
+                else
+                {
+                    errorLabel.Visible = true;
                     passwordTextBox.Text = "";
                 }
             }
@@ -53,8 +53,16 @@ namespace PT_Camping.Views.UserControls
 
         private void ConnectionButton_Click(object sender, EventArgs e)
         {
-            Cursor.Current = Cursors.WaitCursor;
-            TryToConnect();
+            if (userTextBox.Text != "" && passwordTextBox.Text != "")
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                TryToConnect();
+            }
+            else
+            {
+                errorLabel.Visible = true;
+                passwordTextBox.Text = "";
+            }
         }
 
         internal void HandleResize()
@@ -65,20 +73,43 @@ namespace PT_Camping.Views.UserControls
 
         private void PasswordTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter
+                && userTextBox.Text != "" && passwordTextBox.Text != "")
             {
                 Cursor.Current = Cursors.WaitCursor;
                 TryToConnect();
             }
+            else
+                errorLabel.Visible = false;
         }
 
         private void UserTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter 
+                && userTextBox.Text != "" && passwordTextBox.Text != "")
             {
                 Cursor.Current = Cursors.WaitCursor;
                 TryToConnect();
             }
+            else
+                errorLabel.Visible = false;
+        }
+
+
+        private void ShowPasswordCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            passwordTextBox.UseSystemPasswordChar = !showPasswordCheckBox.Checked;
+            showPasswordCheckBox.Text = showPasswordCheckBox.Checked ? "Masquer" : "Afficher";
+        }
+
+
+        private void ConnectionUserControl_Paint(object sender, PaintEventArgs e)
+        {
+            var buttonPath = new System.Drawing.Drawing2D.GraphicsPath();
+            Rectangle newRectangle = panel1.ClientRectangle;
+            newRectangle.Inflate(76,78);
+            buttonPath.AddEllipse(newRectangle);
+            panel1.Region = new Region(buttonPath);
         }
     }
 }

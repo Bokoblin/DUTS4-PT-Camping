@@ -101,5 +101,12 @@ namespace PT_Camping.Views.Forms
                 e.Handled = true;
             }
         }
+
+
+        private void ShowPasswordCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            passwordTextBox.UseSystemPasswordChar = !showPasswordCheckBox.Checked;
+            showPasswordCheckBox.Text = showPasswordCheckBox.Checked ? "Masquer" : "Afficher";
+        }
     }
 }

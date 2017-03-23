@@ -37,7 +37,7 @@
             // textLabel
             // 
             this.textLabel.AutoSize = true;
-            this.textLabel.Location = new System.Drawing.Point(52, 53);
+            this.textLabel.Location = new System.Drawing.Point(52, 33);
             this.textLabel.Name = "textLabel";
             this.textLabel.Size = new System.Drawing.Size(132, 13);
             this.textLabel.TabIndex = 0;
@@ -45,15 +45,17 @@
             // 
             // amountTextBox
             // 
-            this.amountTextBox.Location = new System.Drawing.Point(65, 85);
+            this.amountTextBox.Location = new System.Drawing.Point(85, 63);
+            this.amountTextBox.MaxLength = 4;
             this.amountTextBox.Name = "amountTextBox";
-            this.amountTextBox.Size = new System.Drawing.Size(100, 20);
+            this.amountTextBox.ShortcutsEnabled = false;
+            this.amountTextBox.Size = new System.Drawing.Size(60, 20);
             this.amountTextBox.TabIndex = 1;
             this.amountTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AmountTextBox_KeyPress);
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(29, 163);
+            this.cancelButton.Location = new System.Drawing.Point(27, 121);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 2;
@@ -63,7 +65,7 @@
             // 
             // validButton
             // 
-            this.validButton.Location = new System.Drawing.Point(134, 163);
+            this.validButton.Location = new System.Drawing.Point(132, 121);
             this.validButton.Name = "validButton";
             this.validButton.Size = new System.Drawing.Size(75, 23);
             this.validButton.TabIndex = 3;
@@ -75,15 +77,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(234, 211);
+            this.ClientSize = new System.Drawing.Size(234, 161);
             this.Controls.Add(this.validButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.amountTextBox);
             this.Controls.Add(this.textLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(250, 250);
-            this.MinimumSize = new System.Drawing.Size(250, 250);
+            this.MaximumSize = new System.Drawing.Size(250, 200);
+            this.MinimumSize = new System.Drawing.Size(250, 200);
             this.Name = "SellStock";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

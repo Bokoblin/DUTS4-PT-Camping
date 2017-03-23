@@ -41,14 +41,18 @@
             // productNameTextBox
             // 
             this.productNameTextBox.Location = new System.Drawing.Point(92, 41);
+            this.productNameTextBox.MaxLength = 30;
             this.productNameTextBox.Name = "productNameTextBox";
+            this.productNameTextBox.ShortcutsEnabled = false;
             this.productNameTextBox.Size = new System.Drawing.Size(100, 20);
             this.productNameTextBox.TabIndex = 0;
             // 
             // productStockTextBox
             // 
             this.productStockTextBox.Location = new System.Drawing.Point(92, 87);
+            this.productStockTextBox.MaxLength = 4;
             this.productStockTextBox.Name = "productStockTextBox";
+            this.productStockTextBox.ShortcutsEnabled = false;
             this.productStockTextBox.Size = new System.Drawing.Size(100, 20);
             this.productStockTextBox.TabIndex = 1;
             this.productStockTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ProductStockTextBox_KeyPress);
@@ -56,7 +60,9 @@
             // productPriceTextBox
             // 
             this.productPriceTextBox.Location = new System.Drawing.Point(92, 131);
+            this.productPriceTextBox.MaxLength = 7;
             this.productPriceTextBox.Name = "productPriceTextBox";
+            this.productPriceTextBox.ShortcutsEnabled = false;
             this.productPriceTextBox.Size = new System.Drawing.Size(100, 20);
             this.productPriceTextBox.TabIndex = 3;
             this.productPriceTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ProductPriceTextBox_KeyPress);

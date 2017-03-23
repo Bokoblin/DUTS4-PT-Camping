@@ -52,21 +52,27 @@
             // nameTextBox
             // 
             this.nameTextBox.Location = new System.Drawing.Point(57, 32);
+            this.nameTextBox.MaxLength = 25;
             this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.ShortcutsEnabled = false;
             this.nameTextBox.Size = new System.Drawing.Size(156, 20);
             this.nameTextBox.TabIndex = 39;
             // 
             // emailTextBox
             // 
             this.emailTextBox.Location = new System.Drawing.Point(57, 78);
+            this.emailTextBox.MaxLength = 30;
             this.emailTextBox.Name = "emailTextBox";
+            this.emailTextBox.ShortcutsEnabled = false;
             this.emailTextBox.Size = new System.Drawing.Size(156, 20);
             this.emailTextBox.TabIndex = 40;
             // 
             // addressTextBox
             // 
             this.addressTextBox.Location = new System.Drawing.Point(57, 124);
+            this.addressTextBox.MaxLength = 50;
             this.addressTextBox.Name = "addressTextBox";
+            this.addressTextBox.ShortcutsEnabled = false;
             this.addressTextBox.Size = new System.Drawing.Size(156, 20);
             this.addressTextBox.TabIndex = 41;
             // 
@@ -101,7 +107,9 @@
             // websiteTextBox
             // 
             this.websiteTextBox.Location = new System.Drawing.Point(57, 170);
+            this.websiteTextBox.MaxLength = 50;
             this.websiteTextBox.Name = "websiteTextBox";
+            this.websiteTextBox.ShortcutsEnabled = false;
             this.websiteTextBox.Size = new System.Drawing.Size(156, 20);
             this.websiteTextBox.TabIndex = 45;
             // 

@@ -42,7 +42,7 @@ namespace PT_Camping.Views.Forms
             try
             {
                 if (surnameTextBox.Text == "" || nameTextBox.Text == "" || emailTextBox.Text == ""
-                    || phoneTextBox.Text == "" || birthDateTextBox.Text == "")
+                    || phoneTextBox.Text == "")
                     throw new Exception(Resources.compulsary_values_exception);
 
                 if (surnameTextBox.Text.Any(char.IsDigit) || nameTextBox.Text.Any(char.IsDigit))
@@ -62,7 +62,7 @@ namespace PT_Camping.Views.Forms
 
                 _newClient.Personne.Nom_Personne = surnameTextBox.Text;
                 _newClient.Personne.Prenom_Personne = nameTextBox.Text;
-                _newClient.Personne.Date_Naissance = DateTime.Parse(birthDateTextBox.Text);
+                _newClient.Personne.Date_Naissance = birthDateTimePicker.Value.Date;
                 _newClient.Personne.Telephone = phoneTextBox.Text;
                 _newClient.Personne.Adresse = addressTextBox.Text;
                 _newClient.Personne.Email = emailTextBox.Text;

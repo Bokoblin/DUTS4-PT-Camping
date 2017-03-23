@@ -190,8 +190,10 @@
             // 
             this.nameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.nameTextBox.Location = new System.Drawing.Point(179, 154);
+            this.nameTextBox.MaxLength = 25;
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.ReadOnly = true;
+            this.nameTextBox.ShortcutsEnabled = false;
             this.nameTextBox.Size = new System.Drawing.Size(120, 20);
             this.nameTextBox.TabIndex = 16;
             // 
@@ -209,8 +211,10 @@
             // 
             this.loginTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.loginTextBox.Location = new System.Drawing.Point(179, 304);
+            this.loginTextBox.MaxLength = 40;
             this.loginTextBox.Name = "loginTextBox";
             this.loginTextBox.ReadOnly = true;
+            this.loginTextBox.ShortcutsEnabled = false;
             this.loginTextBox.Size = new System.Drawing.Size(120, 20);
             this.loginTextBox.TabIndex = 21;
             // 
@@ -218,8 +222,10 @@
             // 
             this.emailTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.emailTextBox.Location = new System.Drawing.Point(179, 278);
+            this.emailTextBox.MaxLength = 50;
             this.emailTextBox.Name = "emailTextBox";
             this.emailTextBox.ReadOnly = true;
+            this.emailTextBox.ShortcutsEnabled = false;
             this.emailTextBox.Size = new System.Drawing.Size(120, 20);
             this.emailTextBox.TabIndex = 20;
             // 
@@ -230,6 +236,7 @@
             this.phoneTextBox.MaxLength = 10;
             this.phoneTextBox.Name = "phoneTextBox";
             this.phoneTextBox.ReadOnly = true;
+            this.phoneTextBox.ShortcutsEnabled = false;
             this.phoneTextBox.Size = new System.Drawing.Size(120, 20);
             this.phoneTextBox.TabIndex = 19;
             this.phoneTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PhoneTextBox_KeyPress);
@@ -238,9 +245,11 @@
             // 
             this.addressTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.addressTextBox.Location = new System.Drawing.Point(179, 206);
+            this.addressTextBox.MaxLength = 250;
             this.addressTextBox.Multiline = true;
             this.addressTextBox.Name = "addressTextBox";
             this.addressTextBox.ReadOnly = true;
+            this.addressTextBox.ShortcutsEnabled = false;
             this.addressTextBox.Size = new System.Drawing.Size(120, 40);
             this.addressTextBox.TabIndex = 18;
             // 
@@ -250,6 +259,7 @@
             this.birthDateTextBox.Location = new System.Drawing.Point(179, 180);
             this.birthDateTextBox.Name = "birthDateTextBox";
             this.birthDateTextBox.ReadOnly = true;
+            this.birthDateTextBox.ShortcutsEnabled = false;
             this.birthDateTextBox.Size = new System.Drawing.Size(120, 20);
             this.birthDateTextBox.TabIndex = 17;
             // 
@@ -257,8 +267,10 @@
             // 
             this.surnameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.surnameTextBox.Location = new System.Drawing.Point(179, 128);
+            this.surnameTextBox.MaxLength = 25;
             this.surnameTextBox.Name = "surnameTextBox";
             this.surnameTextBox.ReadOnly = true;
+            this.surnameTextBox.ShortcutsEnabled = false;
             this.surnameTextBox.Size = new System.Drawing.Size(120, 20);
             this.surnameTextBox.TabIndex = 15;
             // 

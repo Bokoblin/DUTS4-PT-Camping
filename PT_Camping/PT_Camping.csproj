@@ -323,6 +323,9 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\MapUserControl.resx">
+      <DependentUpon>MapUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\StatsUserControl.resx">
       <DependentUpon>StatsUserControl.cs</DependentUpon>
     </EmbeddedResource>
