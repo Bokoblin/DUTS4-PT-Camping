@@ -323,6 +323,9 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\MapUserControl.resx">
+      <DependentUpon>MapUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\StatsUserControl.resx">
       <DependentUpon>StatsUserControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -397,6 +400,7 @@
     <Content Include="packages\EntityFramework.fr.6.1.3\lib\net40\fr\EntityFramework.xml" />
     <Content Include="packages\EntityFramework.fr.6.1.3\lib\net45\fr\EntityFramework.resources.dll" />
     <Content Include="packages\EntityFramework.fr.6.1.3\lib\net45\fr\EntityFramework.xml" />
+    <None Include="res\images\ic_add_a_photo.png" />
     <None Include="res\images\ic_stock_empty.png" />
     <None Include="res\images\ic_stock_low.png" />
     <None Include="res\images\ic_issue_done.png" />

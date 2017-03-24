@@ -73,10 +73,10 @@ namespace PT_Camping.Views.UserControls
                 mostAskedlocationsListView.Items.Add(item);
             }
 
-            //=== Sorting by incident number
+            //=== Sorting by number of reservations
 
-            var orderedList = mostAskedlocationsListView.Items.Cast<ListViewItem>()
-                .Select(x => x).OrderByDescending(x => x.SubItems[2].Text).Take(10).ToList();
+            var orderedList = mostAskedlocationsListView.Items.Cast<ListViewItem>().Select(x => x)
+                .OrderByDescending(x => int.Parse(x.SubItems[3].Text)).Take(10).ToList();
             mostAskedlocationsListView.Items.Clear();
             mostAskedlocationsListView.Items.AddRange(orderedList.ToArray());
 
@@ -106,8 +106,7 @@ namespace PT_Camping.Views.UserControls
 
                 int count = 0;
                 soldPerProduct.ForEach(s => {
-                    if (s.Quantite_Produit != null)
-                        count += s.Quantite_Produit.Value;
+                        count += s.Quantite_Produit;
                 });
 
                 statsItem.Add(product.Code_Produit, count);
@@ -124,8 +123,8 @@ namespace PT_Camping.Views.UserControls
 
             //=== Sorting by number of sold products
 
-            var orderedList = mostAskedProductsListView.Items.Cast<ListViewItem>()
-                .Select(x => x).OrderByDescending(x => x.SubItems[2].Text).Take(10).ToList();
+            var orderedList = mostAskedProductsListView.Items.Cast<ListViewItem>().Select(x => x)
+                .OrderByDescending(x => int.Parse(x.SubItems[2].Text)).Take(10).ToList();
             mostAskedProductsListView.Items.Clear();
             mostAskedProductsListView.Items.AddRange(orderedList.ToArray());
 
@@ -161,10 +160,10 @@ namespace PT_Camping.Views.UserControls
                 mostCommonIssueslistView.Items.Add(item);
             }
 
-            //=== Sorting by incident number
+            //=== Sorting by number of issues
 
-            var orderedList = mostCommonIssueslistView.Items.Cast<ListViewItem>()
-                .Select(x => x).OrderByDescending(x => x.SubItems[2].Text).Take(10).ToList();
+            var orderedList = mostCommonIssueslistView.Items.Cast<ListViewItem>().Select(x => x)
+                .OrderByDescending(x => int.Parse(x.SubItems[2].Text)).Take(10).ToList();
             mostCommonIssueslistView.Items.Clear();
             mostCommonIssueslistView.Items.AddRange(orderedList.ToArray());
 
@@ -205,10 +204,10 @@ namespace PT_Camping.Views.UserControls
                 bestClientsListView.Items.Add(item);
             }
 
-            //=== Sorting by incident number
+            //=== Sorting by number of reservations
 
-            var orderedList = bestClientsListView.Items.Cast<ListViewItem>()
-                .Select(x => x).OrderByDescending(x => x.SubItems[3].Text).Take(10).ToList();
+            var orderedList = bestClientsListView.Items.Cast<ListViewItem>().Select(x => x)
+                .OrderByDescending(x => int.Parse(x.SubItems[3].Text)).Take(10).ToList();
             bestClientsListView.Items.Clear();
             bestClientsListView.Items.AddRange(orderedList.ToArray());
 
@@ -275,7 +274,6 @@ namespace PT_Camping.Views.UserControls
                 if (UserRights.Any(d => d.Libelle_Droit == "readMap"))
                 {
                     int code = int.Parse(mostAskedlocationsListView.SelectedItems[0].Name);
-                    HomeUserControl.Window.WindowPanel.Controls.Remove(this);
                     HomeUserControl.StartLocationsFromStats(code);
                 }
                 else
@@ -290,11 +288,10 @@ namespace PT_Camping.Views.UserControls
         {
             if (mostAskedProductsListView.SelectedItems.Count > 0)
             {
-                if (UserRights.Any(d => d.Libelle_Droit == "readProducts"))
+                if (UserRights.Any(d => d.Libelle_Droit == "readStocks"))
                 {
                     var code = int.Parse(mostAskedProductsListView.SelectedItems[0].Name);
                     code = Db.Produit.First(i => i.Code_Produit == code).Code_Produit;
-                    HomeUserControl.Window.WindowPanel.Controls.Remove(this);
                     HomeUserControl.StartProductsFromStats(code);
                 }
                 else
@@ -315,7 +312,6 @@ namespace PT_Camping.Views.UserControls
                     {
                         int codeType = int.Parse(mostCommonIssueslistView.SelectedItems[0].Name);
                         int code = Db.Incident.First(i => i.Code_Type == codeType).Code_Incident;
-                        HomeUserControl.Window.WindowPanel.Controls.Remove(this);
                         HomeUserControl.StartIssuesFromStats(code);
                     }
                     else
@@ -337,7 +333,6 @@ namespace PT_Camping.Views.UserControls
                 {
                     int code = int.Parse(bestClientsListView.SelectedItems[0].Name);
                     code = Db.Client.First(i => i.Code_Personne == code).Code_Personne;
-                    HomeUserControl.Window.WindowPanel.Controls.Remove(this);
                     HomeUserControl.StartClientsFromStats(code);
                 }
                 else
