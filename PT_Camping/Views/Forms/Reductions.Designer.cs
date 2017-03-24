@@ -31,12 +31,12 @@
             this.seniority = new System.Windows.Forms.Label();
             this.ValidReducbutton = new System.Windows.Forms.Button();
             this.percentageSeniorLabel = new System.Windows.Forms.Label();
-            this.ReducBox = new System.Windows.Forms.GroupBox();
+            this.ReductionTypeRadioBox = new System.Windows.Forms.GroupBox();
             this.seniorRadioButton = new System.Windows.Forms.RadioButton();
             this.groupRadioButton = new System.Windows.Forms.RadioButton();
             this.familyRadioButton = new System.Windows.Forms.RadioButton();
             this.studentRadioButton = new System.Windows.Forms.RadioButton();
-            this.ReducBox.SuspendLayout();
+            this.ReductionTypeRadioBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // seniority
@@ -66,27 +66,28 @@
             this.percentageSeniorLabel.BackColor = System.Drawing.Color.White;
             this.percentageSeniorLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.percentageSeniorLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.percentageSeniorLabel.Location = new System.Drawing.Point(164, 178);
+            this.percentageSeniorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.percentageSeniorLabel.Location = new System.Drawing.Point(164, 180);
             this.percentageSeniorLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.percentageSeniorLabel.Name = "percentageSeniorLabel";
             this.percentageSeniorLabel.Size = new System.Drawing.Size(30, 20);
             this.percentageSeniorLabel.TabIndex = 10;
             // 
-            // ReducBox
+            // ReductionTypeRadioBox
             // 
-            this.ReducBox.Controls.Add(this.seniorRadioButton);
-            this.ReducBox.Controls.Add(this.groupRadioButton);
-            this.ReducBox.Controls.Add(this.familyRadioButton);
-            this.ReducBox.Controls.Add(this.studentRadioButton);
-            this.ReducBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ReducBox.Location = new System.Drawing.Point(11, 20);
-            this.ReducBox.Margin = new System.Windows.Forms.Padding(2);
-            this.ReducBox.Name = "ReducBox";
-            this.ReducBox.Padding = new System.Windows.Forms.Padding(2);
-            this.ReducBox.Size = new System.Drawing.Size(242, 136);
-            this.ReducBox.TabIndex = 11;
-            this.ReducBox.TabStop = false;
-            this.ReducBox.MouseCaptureChanged += new System.EventHandler(this.ReducButtonSelected);
+            this.ReductionTypeRadioBox.Controls.Add(this.seniorRadioButton);
+            this.ReductionTypeRadioBox.Controls.Add(this.groupRadioButton);
+            this.ReductionTypeRadioBox.Controls.Add(this.familyRadioButton);
+            this.ReductionTypeRadioBox.Controls.Add(this.studentRadioButton);
+            this.ReductionTypeRadioBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ReductionTypeRadioBox.Location = new System.Drawing.Point(11, 20);
+            this.ReductionTypeRadioBox.Margin = new System.Windows.Forms.Padding(2);
+            this.ReductionTypeRadioBox.Name = "ReductionTypeRadioBox";
+            this.ReductionTypeRadioBox.Padding = new System.Windows.Forms.Padding(2);
+            this.ReductionTypeRadioBox.Size = new System.Drawing.Size(242, 136);
+            this.ReductionTypeRadioBox.TabIndex = 11;
+            this.ReductionTypeRadioBox.TabStop = false;
+            this.ReductionTypeRadioBox.MouseCaptureChanged += new System.EventHandler(this.ReducButtonSelected);
             // 
             // seniorRadioButton
             // 
@@ -153,7 +154,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(264, 261);
-            this.Controls.Add(this.ReducBox);
+            this.Controls.Add(this.ReductionTypeRadioBox);
             this.Controls.Add(this.percentageSeniorLabel);
             this.Controls.Add(this.ValidReducbutton);
             this.Controls.Add(this.seniority);
@@ -163,8 +164,8 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Réductions applicables";
-            this.ReducBox.ResumeLayout(false);
-            this.ReducBox.PerformLayout();
+            this.ReductionTypeRadioBox.ResumeLayout(false);
+            this.ReductionTypeRadioBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -174,7 +175,7 @@
         private System.Windows.Forms.Label seniority;
         private System.Windows.Forms.Button ValidReducbutton;
         private System.Windows.Forms.Label percentageSeniorLabel;
-        private System.Windows.Forms.GroupBox ReducBox;
+        private System.Windows.Forms.GroupBox ReductionTypeRadioBox;
         private System.Windows.Forms.RadioButton seniorRadioButton;
         private System.Windows.Forms.RadioButton groupRadioButton;
         private System.Windows.Forms.RadioButton familyRadioButton;

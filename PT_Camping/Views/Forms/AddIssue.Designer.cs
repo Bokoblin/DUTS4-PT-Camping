@@ -52,8 +52,10 @@
             // descriptionTextBox
             // 
             this.descriptionTextBox.Location = new System.Drawing.Point(56, 189);
+            this.descriptionTextBox.MaxLength = 300;
             this.descriptionTextBox.Multiline = true;
             this.descriptionTextBox.Name = "descriptionTextBox";
+            this.descriptionTextBox.ShortcutsEnabled = false;
             this.descriptionTextBox.Size = new System.Drawing.Size(156, 40);
             this.descriptionTextBox.TabIndex = 5;
             // 
@@ -98,6 +100,7 @@
             // 
             // issueTypecomboBox
             // 
+            this.issueTypecomboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.issueTypecomboBox.FormattingEnabled = true;
             this.issueTypecomboBox.Location = new System.Drawing.Point(56, 48);
             this.issueTypecomboBox.Name = "issueTypecomboBox";
@@ -106,6 +109,7 @@
             // 
             // criticalityComboBox
             // 
+            this.criticalityComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.criticalityComboBox.FormattingEnabled = true;
             this.criticalityComboBox.Items.AddRange(new object[] {
             "1",
@@ -130,6 +134,7 @@
             // 
             // locationComboBox
             // 
+            this.locationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.locationComboBox.FormattingEnabled = true;
             this.locationComboBox.Location = new System.Drawing.Point(56, 95);
             this.locationComboBox.Name = "locationComboBox";

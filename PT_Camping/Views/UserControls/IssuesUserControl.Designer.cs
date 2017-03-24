@@ -121,14 +121,15 @@ namespace PT_Camping.Views.UserControls
             // criticalityComboBox
             // 
             this.criticalityComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.criticalityComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.criticalityComboBox.Enabled = false;
             this.criticalityComboBox.FormattingEnabled = true;
             this.criticalityComboBox.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5"});
+            "1/5",
+            "2/5",
+            "3/5",
+            "4/5",
+            "5/5"});
             this.criticalityComboBox.Location = new System.Drawing.Point(181, 228);
             this.criticalityComboBox.Name = "criticalityComboBox";
             this.criticalityComboBox.Size = new System.Drawing.Size(120, 21);
@@ -171,9 +172,11 @@ namespace PT_Camping.Views.UserControls
             // 
             this.descriptionTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.descriptionTextBox.Location = new System.Drawing.Point(181, 281);
+            this.descriptionTextBox.MaxLength = 300;
             this.descriptionTextBox.Multiline = true;
             this.descriptionTextBox.Name = "descriptionTextBox";
             this.descriptionTextBox.ReadOnly = true;
+            this.descriptionTextBox.ShortcutsEnabled = false;
             this.descriptionTextBox.Size = new System.Drawing.Size(120, 40);
             this.descriptionTextBox.TabIndex = 19;
             // 
@@ -181,8 +184,10 @@ namespace PT_Camping.Views.UserControls
             // 
             this.statusTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.statusTextBox.Location = new System.Drawing.Point(181, 255);
+            this.statusTextBox.MaxLength = 50;
             this.statusTextBox.Name = "statusTextBox";
             this.statusTextBox.ReadOnly = true;
+            this.statusTextBox.ShortcutsEnabled = false;
             this.statusTextBox.Size = new System.Drawing.Size(120, 20);
             this.statusTextBox.TabIndex = 18;
             // 
@@ -192,6 +197,7 @@ namespace PT_Camping.Views.UserControls
             this.resolutionDateTextBox.Location = new System.Drawing.Point(181, 202);
             this.resolutionDateTextBox.Name = "resolutionDateTextBox";
             this.resolutionDateTextBox.ReadOnly = true;
+            this.resolutionDateTextBox.ShortcutsEnabled = false;
             this.resolutionDateTextBox.Size = new System.Drawing.Size(120, 20);
             this.resolutionDateTextBox.TabIndex = 16;
             // 

@@ -261,5 +261,46 @@ namespace PT_Camping.Views.UserControls
             loginTextBox.ReadOnly = true;
             editButton.BackgroundImage = Resources.ic_edit;
         }
-    }
+
+
+        private void AddEmployeePhotoPictureBox_Click(object sender, EventArgs e)
+        {
+            using (FileDialog fd = new OpenFileDialog())
+            {
+                fd.Title = Resources.select_background_image;
+                fd.Filter = Resources.images_files_formats;
+                if (fd.ShowDialog() == DialogResult.OK)
+                {
+                    Cursor.Current = Cursors.WaitCursor;
+                    try
+                    {
+                        Bitmap image = new Bitmap(fd.FileName);
+                        image.SetResolution(50, 70);
+                        LoginTools.CheckConnection();
+
+                        int code = int.Parse(employeesListView.SelectedItems[0].Name);
+                        var employee = Db.Employe.Find(code);
+
+                        if (employee != null)
+                        {
+                            MemoryStream jpegStream = new MemoryStream();
+                            image.Save(jpegStream, System.Drawing.Imaging.ImageFormat.Jpeg);
+                            employee.Photo = jpegStream.ToArray();
+                            Db.SaveChanges();
+                            pictureBox.Image = image;
+                        }
+                    }
+                    catch (FileNotFoundException)
+                    {
+                        MessageBox.Show(Resources.file_not_found_please_retry);
+                    }
+                    catch (FileLoadException)
+                    {
+                        MessageBox.Show(Resources.error_when_opening_the_file_please_retry);
+                    }
+                    Cursor.Current = Cursors.Default;
+                }
+            }
+        }
+    }      
 }
