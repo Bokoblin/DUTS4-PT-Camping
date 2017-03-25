@@ -17,8 +17,8 @@ namespace PT_Camping.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Produit()
         {
-            this.A_vendu = new HashSet<A_vendu>();
             this.Fournisseur = new HashSet<Fournisseur>();
+            this.A_vendu = new HashSet<A_vendu>();
         }
     
         public int Code_Produit { get; set; }
@@ -27,8 +27,8 @@ namespace PT_Camping.Model
         public int Quantite_Stock { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<A_vendu> A_vendu { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Fournisseur> Fournisseur { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<A_vendu> A_vendu { get; set; }
     }
 }

@@ -6,6 +6,13 @@ using PT_Camping.Model;
 
 namespace PT_Camping.Views.Forms
 {
+    /// <summary>
+    /// This dialog allows to add a new provider
+    /// by choosing a name, an email, an address, and optionally a website
+    /// 
+    /// </summary>
+    /// Authors : Claire
+    /// Since : 02/03/17
     public partial class AddProvider : Form
     {
         private readonly DataBase _db;

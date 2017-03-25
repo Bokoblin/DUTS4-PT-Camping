@@ -4,11 +4,18 @@ using PT_Camping.Model;
 
 namespace PT_Camping.Views.Forms
 {
-    public partial class SellStock : Form
+    /// <summary>
+    /// This dialog allows to sell a product
+    /// by indicating a quantity
+    /// 
+    /// </summary>
+    /// Authors : Yonnel
+    /// Since : 11/03/17
+    public partial class SellProduct : Form
     {
         readonly Produit _product;
         readonly DataBase _db;
-        public SellStock(DataBase db, Produit product)
+        public SellProduct(DataBase db, Produit product)
         {
             InitializeComponent();
             _db = db;
@@ -34,6 +41,17 @@ namespace PT_Camping.Views.Forms
                     throw new Exception("La quantité doit être supérieure à 0.");
 
                 _product.Quantite_Stock = _product.Quantite_Stock - Convert.ToInt32(amountTextBox.Text);
+
+                var sale = new A_vendu
+                {
+                    Code_Personne = LoginTools.Employee.Code_Personne,
+                    Code_Produit = _product.Code_Produit,
+                    Date_Vente = DateTime.Now,
+                    Quantite_Produit = Convert.ToInt32(amountTextBox.Text)
+                };
+
+                _db.A_vendu.Add(sale);
+
                 _db.SaveChanges();
                 Close();
             }

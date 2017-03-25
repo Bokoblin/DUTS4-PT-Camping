@@ -16,7 +16,8 @@ namespace PT_Camping.Views.UserControls
     /// It is used to manage the camping's products stocks.
     /// 
     /// </summary>
-    /// Authors : Arthur, Yonnel
+    /// Author : Arthur (File creation + UI)
+    /// Author : Yonnel (Product stocks feature)
     /// Since : 08/02/17
     public partial class StocksUserControl : ManagementUserControl
     {
@@ -119,7 +120,7 @@ namespace PT_Camping.Views.UserControls
 
         private void AddStockButton_Click(object sender, MouseEventArgs e)
         {
-            AddStock newStock = new AddStock();
+            AddProduct newStock = new AddProduct();
             newStock.ShowDialog();
             Cursor.Current = Cursors.Default;
             UpdateProductListView();
@@ -282,7 +283,7 @@ namespace PT_Camping.Views.UserControls
         {
             int code = int.Parse(productListView.SelectedItems[0].Name);
             var product = Db.Produit.Find(code);
-            SellStock sellStock = new SellStock(Db, product);
+            SellProduct sellStock = new SellProduct(Db, product);
             sellStock.ShowDialog();
             UpdateProductListView();
             UpdateProductDetails();

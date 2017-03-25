@@ -17,10 +17,10 @@ namespace PT_Camping.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Personne()
         {
-            this.A_vendu = new HashSet<A_vendu>();
             this.Loge = new HashSet<Loge>();
             this.Reservation = new HashSet<Reservation>();
             this.Droit = new HashSet<Droit>();
+            this.A_vendu = new HashSet<A_vendu>();
         }
     
         public int Code_Personne { get; set; }
@@ -31,8 +31,6 @@ namespace PT_Camping.Model
         public string Adresse { get; set; }
         public System.DateTime Date_Naissance { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<A_vendu> A_vendu { get; set; }
         public virtual Client Client { get; set; }
         public virtual Employe Employe { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -41,5 +39,7 @@ namespace PT_Camping.Model
         public virtual ICollection<Reservation> Reservation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Droit> Droit { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<A_vendu> A_vendu { get; set; }
     }
 }

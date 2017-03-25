@@ -22,7 +22,7 @@ his camping (manually managed currently) by enhancing different management units
 
 ### Authors ###
 
-* Arthur Jolivet - Repository owner
+* Arthur Jolivet
 * Alexandre Jacquot - Project manager
 * Yonnel Berwit
 * Claire Marciniak
