@@ -7,27 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UnitTestProject
+namespace UnitTestProject.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Fournisseur
+    public partial class Type_Incident
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Fournisseur()
+        public Type_Incident()
         {
-            this.Produit = new HashSet<Produit>();
+            this.Incident = new HashSet<Incident>();
         }
     
-        public int Code_Fournisseur { get; set; }
-        public string Nom_Fournisseur { get; set; }
-        public string Email_Fournisseur { get; set; }
-        public string Site_web_Fournisseur { get; set; }
-        public string Adresse_Fournisseur { get; set; }
-        public bool est_approuvé { get; set; }
+        public int Code_Type { get; set; }
+        public string Type_Incident1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Produit> Produit { get; set; }
+        public virtual ICollection<Incident> Incident { get; set; }
     }
 }

@@ -7,26 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UnitTestProject
+namespace UnitTestProject.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Facture
+    public partial class Produit
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Facture()
+        public Produit()
         {
-            this.Reservation1 = new HashSet<Reservation>();
+            this.A_vendu = new HashSet<A_vendu>();
+            this.Fournisseur = new HashSet<Fournisseur>();
         }
     
-        public int Code_Facture { get; set; }
-        public double Montant { get; set; }
-        public Nullable<System.DateTime> Date_Emission { get; set; }
-        public int Code_Reservation { get; set; }
+        public int Code_Produit { get; set; }
+        public string Libelle_Produit { get; set; }
+        public double Prix { get; set; }
+        public int Quantite_Stock { get; set; }
     
-        public virtual Reservation Reservation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Reservation> Reservation1 { get; set; }
+        public virtual ICollection<A_vendu> A_vendu { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Fournisseur> Fournisseur { get; set; }
     }
 }

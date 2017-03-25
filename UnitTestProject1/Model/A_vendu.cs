@@ -7,19 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UnitTestProject
+namespace UnitTestProject.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Employe
+    public partial class A_vendu
     {
-        public string Login { get; set; }
-        public string Password { get; set; }
+        public System.DateTime Date_Vente { get; set; }
         public int Code_Personne { get; set; }
-        public bool EstLicencie { get; set; }
-        public byte[] Photo { get; set; }
+        public int Code_Produit { get; set; }
+        public Nullable<int> Quantite_Produit { get; set; }
     
         public virtual Personne Personne { get; set; }
+        public virtual Produit Produit { get; set; }
     }
 }

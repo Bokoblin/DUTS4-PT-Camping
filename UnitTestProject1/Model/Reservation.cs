@@ -7,23 +7,32 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UnitTestProject
+namespace UnitTestProject.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Caracteristique_Emplacement
+    public partial class Reservation
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Caracteristique_Emplacement()
+        public Reservation()
         {
-            this.Emplacement = new HashSet<Emplacement>();
+            this.Facture = new HashSet<Facture>();
+            this.Loge = new HashSet<Loge>();
         }
     
-        public int Code_Caracteristique { get; set; }
-        public string Description { get; set; }
+        public int Code_Reservation { get; set; }
+        public System.DateTime Date_Debut { get; set; }
+        public System.DateTime Date_Fin { get; set; }
+        public bool Est_Paye { get; set; }
+        public int Code_Personne { get; set; }
+        public int Code_Facture { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Emplacement> Emplacement { get; set; }
+        public virtual ICollection<Facture> Facture { get; set; }
+        public virtual Facture Facture1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Loge> Loge { get; set; }
+        public virtual Personne Personne { get; set; }
     }
 }
