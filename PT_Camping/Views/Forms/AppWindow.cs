@@ -1,8 +1,9 @@
-﻿using PT_Camping.Model;
-using System;
+﻿using System;
 using System.Windows.Forms;
+using PT_Camping.Model;
+using PT_Camping.Views.UserControls;
 
-namespace PT_Camping
+namespace PT_Camping.Views.Forms
 {
     /// <summary>
     /// The windows form Window is the application's window.
@@ -13,50 +14,39 @@ namespace PT_Camping
     /// Since : 06/02/17
     public partial class AppWindow : Form
     {
-        private ConnectionUserControl mConnectionUC;
-        private HomeUserControl mHomeUC;
+        private ConnectionUserControl _connectionUserControl;
+        private HomeUserControl _homeUserControl;
 
         public AppWindow()
         {
             StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
-            mConnectionUC = new ConnectionUserControl(this);
-            windowPanel.Controls.Add(mConnectionUC);
-            userLoged = new LoginTools();
+            _connectionUserControl = new ConnectionUserControl(this);
+            WindowPanel.Controls.Add(_connectionUserControl);
         }
 
-        internal void login()
+        internal void Login()
         {
-            mHomeUC = new HomeUserControl(this);
-            windowPanel.Controls.Add(mHomeUC);
-            windowPanel.Controls.Remove(mConnectionUC);
+            _homeUserControl = new HomeUserControl(this);
+            WindowPanel.Controls.Add(_homeUserControl);
+            WindowPanel.Controls.Remove(_connectionUserControl);
         }
 
 
-        internal void logout()
+        internal void Logout()
         {
-            userLoged.Login = "";
-            userLoged.HashedPassword = "";
-            mConnectionUC = new ConnectionUserControl(this);
-            windowPanel.Controls.Add(mConnectionUC);
+            LoginTools.Login = "";
+            LoginTools.HashedPassword = "";
+            _connectionUserControl = new ConnectionUserControl(this);
+            WindowPanel.Controls.Add(_connectionUserControl);
         }
 
 
         private void Window_Resize(object sender, EventArgs e)
         {
-            windowPanel.Size = this.Size;
-            if (mConnectionUC != null)
-                mConnectionUC.handleResize();
-            if (mHomeUC != null)
-                mHomeUC.handleResize();
+            WindowPanel.Size = Size;
+            _connectionUserControl?.HandleResize();
+            _homeUserControl?.HandleResize();
         }
-
-
-        /// <summary>
-        /// Properties (Getters & Setters)
-        /// </summary>
-
-        public Panel WindowPanel { get { return windowPanel; } set { windowPanel = value; } }
-        public LoginTools userLoged { get; set; }
     }
 }

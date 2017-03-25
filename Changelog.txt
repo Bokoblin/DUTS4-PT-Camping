@@ -1,14 +1,37 @@
 Project Name : PT4-Camping
 Developers   : Yonnel BERWIT, Alexandre JACQUOT, Arthur JOLIVET, Claire MARCINIAK, Valentine RENAUD
 
-Current version : v0.3.0 - TEMP
+Current version : v0.4.1
 
 ==================================================================================================
 
-v0.3.0 - TEMP
+v0.4.1 (18/03/2017)
 
+- Added opening map location detail from stats
+- Added opening issue details from a map's location
+- Added travis and code climate badges to readme
+- Bug fixes and improvements
+
+KNOWN ISSUES:
+- Resize triggered (whereas it shouldn't) by opening a screen from stats (list item doubleclick)
+
+
+--------------------------------------------------------------------------
+
+v0.4.0 (17/03/2017)
+
+- Added location map feature
+
+
+--------------------------------------------------------------------------
+
+
+v0.3.0 (16/03/2017)
+
+- Added clients
 - Added employees
 - Added issues
+- Added stats
 - Added stocks
 
 

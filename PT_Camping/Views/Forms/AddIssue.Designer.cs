@@ -1,4 +1,4 @@
-﻿namespace PT_Camping
+﻿namespace PT_Camping.Views.Forms
 {
     partial class AddIssue
     {
@@ -34,10 +34,9 @@
             this.surnameLabel = new System.Windows.Forms.Label();
             this.cancelButton = new System.Windows.Forms.Button();
             this.OKButton = new System.Windows.Forms.Button();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.criticalityLabel = new System.Windows.Forms.Label();
-            this.criticalityTextBox = new System.Windows.Forms.TextBox();
             this.issueTypecomboBox = new System.Windows.Forms.ComboBox();
+            this.criticalityComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // nameLabel
@@ -75,7 +74,7 @@
             this.cancelButton.TabIndex = 10;
             this.cancelButton.Text = "Annuler";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.onCancelButtonClick);
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // OKButton
             // 
@@ -85,7 +84,7 @@
             this.OKButton.TabIndex = 11;
             this.OKButton.Text = "Valider";
             this.OKButton.UseVisualStyleBackColor = true;
-            this.OKButton.Click += new System.EventHandler(this.onOkButtonClick);
+            this.OKButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
             // criticalityLabel
             // 
@@ -96,13 +95,6 @@
             this.criticalityLabel.Text = "Criticité";
             this.criticalityLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // criticalityTextBox
-            // 
-            this.criticalityTextBox.Location = new System.Drawing.Point(56, 93);
-            this.criticalityTextBox.Name = "criticalityTextBox";
-            this.criticalityTextBox.Size = new System.Drawing.Size(156, 20);
-            this.criticalityTextBox.TabIndex = 35;
-            // 
             // issueTypecomboBox
             // 
             this.issueTypecomboBox.FormattingEnabled = true;
@@ -111,13 +103,27 @@
             this.issueTypecomboBox.Size = new System.Drawing.Size(156, 21);
             this.issueTypecomboBox.TabIndex = 36;
             // 
+            // criticalityComboBox
+            // 
+            this.criticalityComboBox.FormattingEnabled = true;
+            this.criticalityComboBox.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"});
+            this.criticalityComboBox.Location = new System.Drawing.Point(56, 93);
+            this.criticalityComboBox.Name = "criticalityComboBox";
+            this.criticalityComboBox.Size = new System.Drawing.Size(156, 21);
+            this.criticalityComboBox.TabIndex = 37;
+            //
             // AddIssue
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(264, 261);
+            this.Controls.Add(this.criticalityComboBox);
             this.Controls.Add(this.issueTypecomboBox);
-            this.Controls.Add(this.criticalityTextBox);
             this.Controls.Add(this.criticalityLabel);
             this.Controls.Add(this.OKButton);
             this.Controls.Add(this.cancelButton);
@@ -141,9 +147,8 @@
         private System.Windows.Forms.Label surnameLabel;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button OKButton;
-        private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label criticalityLabel;
-        private System.Windows.Forms.TextBox criticalityTextBox;
         private System.Windows.Forms.ComboBox issueTypecomboBox;
+        private System.Windows.Forms.ComboBox criticalityComboBox;
     }
 }

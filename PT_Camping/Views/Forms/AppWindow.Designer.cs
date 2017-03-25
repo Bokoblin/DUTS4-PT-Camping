@@ -1,4 +1,4 @@
-﻿namespace PT_Camping
+﻿namespace PT_Camping.Views.Forms
 {
     partial class AppWindow
     {
@@ -28,30 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.windowPanel = new System.Windows.Forms.Panel();
+            this.WindowPanel = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // windowPanel
+            // WindowPanel
             // 
-            this.windowPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.WindowPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.windowPanel.AutoSize = true;
-            this.windowPanel.Location = new System.Drawing.Point(0, 0);
-            this.windowPanel.MinimumSize = new System.Drawing.Size(900, 600);
-            this.windowPanel.Name = "windowPanel";
-            this.windowPanel.Size = new System.Drawing.Size(900, 600);
-            this.windowPanel.TabIndex = 0;
+            this.WindowPanel.AutoSize = true;
+            this.WindowPanel.Location = new System.Drawing.Point(0, 0);
+            this.WindowPanel.MinimumSize = new System.Drawing.Size(900, 600);
+            this.WindowPanel.Name = "WindowPanel";
+            this.WindowPanel.Size = new System.Drawing.Size(984, 600);
+            this.WindowPanel.TabIndex = 0;
             // 
             // AppWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(900, 561);
-            this.Controls.Add(this.windowPanel);
+            this.ClientSize = new System.Drawing.Size(984, 561);
+            this.Controls.Add(this.WindowPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MinimumSize = new System.Drawing.Size(900, 600);
+            this.MinimumSize = new System.Drawing.Size(1000, 600);
             this.Name = "AppWindow";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -65,7 +65,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel windowPanel;
+        public System.Windows.Forms.Panel WindowPanel;
     }
 }
 
