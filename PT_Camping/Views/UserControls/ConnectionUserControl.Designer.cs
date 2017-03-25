@@ -45,7 +45,7 @@
             // 
             this.passLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.passLabel.AutoSize = true;
-            this.passLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.passLabel.BackColor = System.Drawing.Color.White;
             this.passLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passLabel.Location = new System.Drawing.Point(49, 176);
             this.passLabel.Name = "passLabel";
@@ -57,7 +57,7 @@
             // 
             this.userLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.userLabel.AutoSize = true;
-            this.userLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.userLabel.BackColor = System.Drawing.Color.White;
             this.userLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userLabel.Location = new System.Drawing.Point(49, 111);
             this.userLabel.Name = "userLabel";
@@ -68,6 +68,7 @@
             // passwordTextBox
             // 
             this.passwordTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.passwordTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.passwordTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passwordTextBox.Location = new System.Drawing.Point(153, 173);
             this.passwordTextBox.MaxLength = 64;
@@ -133,7 +134,7 @@
             // 
             this.errorLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.errorLabel.AutoSize = true;
-            this.errorLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.errorLabel.BackColor = System.Drawing.Color.White;
             this.errorLabel.ForeColor = System.Drawing.Color.Red;
             this.errorLabel.Location = new System.Drawing.Point(134, 209);
             this.errorLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -147,7 +148,7 @@
             // 
             this.showPasswordCheckBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.showPasswordCheckBox.AutoSize = true;
-            this.showPasswordCheckBox.BackColor = System.Drawing.SystemColors.Control;
+            this.showPasswordCheckBox.BackColor = System.Drawing.Color.White;
             this.showPasswordCheckBox.Location = new System.Drawing.Point(305, 179);
             this.showPasswordCheckBox.Name = "showPasswordCheckBox";
             this.showPasswordCheckBox.Size = new System.Drawing.Size(62, 17);
@@ -159,7 +160,7 @@
             // panel1
             // 
             this.panel1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.showPasswordCheckBox);
             this.panel1.Controls.Add(this.connectionButton);
             this.panel1.Controls.Add(this.passLabel);
@@ -177,7 +178,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.labelMenuStrip);
             this.Controls.Add(this.appBar);
             this.Controls.Add(this.panel1);

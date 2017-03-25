@@ -103,7 +103,7 @@ namespace PT_Camping.Views.UserControls
                     issueTypeTextBox.Text = issue.Type_Incident.Type_Incident1;
                     creationDateTextBox.Text = issue.Date_Incident.ToShortDateString();
                     resolutionDateTextBox.Text = issue.Date_Resolution?.ToShortDateString() ?? "";
-                    criticalityComboBox.Text = issue.Criticite_Incident + Resources.criticality_max;
+                    criticalityComboBox.SelectedIndex = issue.Criticite_Incident-1;
                     statusTextBox.Text = issue.Avancement_Incident;
                     descriptionTextBox.Text = issue.Description_Incident;
                     
@@ -166,36 +166,36 @@ namespace PT_Camping.Views.UserControls
                 int cptModifications = 0;
 
                 int code = int.Parse(issuesListView.SelectedItems[0].Name);
-                var incident = Db.Incident.Find(code);
+                var issue = Db.Incident.Find(code);
 
-                if (incident != null)
+                if (issue != null)
                 {
                     #region CHECK & APPLY RESOLUTION DATE CHANGES
                     try
                     {
-                        if (resolutionDateTextBox.Text == "" && incident.Date_Resolution != null)
+                        if (resolutionDateTextBox.Text == "" && issue.Date_Resolution != null)
                         {
-                            incident.Date_Resolution = null;
+                            issue.Date_Resolution = null;
                             message += "date de résolution\n";
                             cptModifications++;
                         }
                         else if (resolutionDateTextBox.Text != "")
                         {
-                            incident.Date_Resolution = DateTime.Parse(resolutionDateTextBox.Text);
+                            issue.Date_Resolution = DateTime.Parse(resolutionDateTextBox.Text);
 
-                            if (incident.Date_Resolution < incident.Date_Incident)
+                            if (issue.Date_Resolution < issue.Date_Incident)
                             {
-                                if (incident.Date_Resolution.Value.Day == incident.Date_Incident.Day)
-                                    incident.Date_Resolution = incident.Date_Incident.AddSeconds(1);
+                                if (issue.Date_Resolution.Value.Day == issue.Date_Incident.Day)
+                                    issue.Date_Resolution = issue.Date_Incident.AddSeconds(1);
                                 else
                                 {
-                                    incident.Date_Resolution = null;
+                                    issue.Date_Resolution = null;
                                     throw new Exception();
                                 }
 
                             }
 
-                            if (((DateTime)incident.Date_Resolution).ToShortDateString() != resolutionDateTextBox.Text)
+                            if (((DateTime)issue.Date_Resolution).ToShortDateString() != resolutionDateTextBox.Text)
                             {
                                 message += "date de résolution\n";
                                 cptModifications++;
@@ -205,27 +205,27 @@ namespace PT_Camping.Views.UserControls
                     }
                     catch (Exception)
                     {
-                        resolutionDateTextBox.Text = incident.Date_Resolution.ToString();
+                        resolutionDateTextBox.Text = issue.Date_Resolution.ToString();
                         MessageBox.Show(Resources.invalid_date_exception);
                     }
                     #endregion
 
-                    if (criticalityComboBox.Text != (incident.Criticite_Incident + Resources.criticality_max))
+                    if (criticalityComboBox.SelectedIndex != issue.Criticite_Incident - 1)
                     {
-                        incident.Criticite_Incident = int.Parse(criticalityComboBox.Text);
+                        issue.Criticite_Incident = criticalityComboBox.SelectedIndex+1;
                         message += "criticité\n";
                         cptModifications++;
                     }
 
-                    if (statusTextBox.Text != incident.Avancement_Incident)
+                    if (statusTextBox.Text != issue.Avancement_Incident)
                     {
-                        incident.Avancement_Incident = statusTextBox.Text;
+                        issue.Avancement_Incident = statusTextBox.Text;
                         message += "avancement\n";
                         cptModifications++;
 
                         if (statusTextBox.Text != Resources.done_issue && resolutionDateTextBox.Text != null)
                         {
-                            incident.Date_Resolution = null;
+                            issue.Date_Resolution = null;
                             message += "date de résolution\n";
                             cptModifications++;
                         }
@@ -237,9 +237,9 @@ namespace PT_Camping.Views.UserControls
                         }
                     }
 
-                    if (descriptionTextBox.Text != incident.Description_Incident)
+                    if (descriptionTextBox.Text != issue.Description_Incident)
                     {
-                        incident.Description_Incident = descriptionTextBox.Text;
+                        issue.Description_Incident = descriptionTextBox.Text;
                         message += "description";
                         cptModifications++;
                     }

@@ -73,10 +73,10 @@ namespace PT_Camping.Views.UserControls
                 mostAskedlocationsListView.Items.Add(item);
             }
 
-            //=== Sorting by incident number
+            //=== Sorting by number of reservations
 
-            var orderedList = mostAskedlocationsListView.Items.Cast<ListViewItem>()
-                .Select(x => x).OrderByDescending(x => x.SubItems[2].Text).Take(10).ToList();
+            var orderedList = mostAskedlocationsListView.Items.Cast<ListViewItem>().Select(x => x)
+                .OrderByDescending(x => int.Parse(x.SubItems[3].Text)).Take(10).ToList();
             mostAskedlocationsListView.Items.Clear();
             mostAskedlocationsListView.Items.AddRange(orderedList.ToArray());
 
@@ -106,8 +106,7 @@ namespace PT_Camping.Views.UserControls
 
                 int count = 0;
                 soldPerProduct.ForEach(s => {
-                    if (s.Quantite_Produit != null)
-                        count += s.Quantite_Produit.Value;
+                        count += s.Quantite_Produit;
                 });
 
                 statsItem.Add(product.Code_Produit, count);
@@ -124,8 +123,8 @@ namespace PT_Camping.Views.UserControls
 
             //=== Sorting by number of sold products
 
-            var orderedList = mostAskedProductsListView.Items.Cast<ListViewItem>()
-                .Select(x => x).OrderByDescending(x => x.SubItems[2].Text).Take(10).ToList();
+            var orderedList = mostAskedProductsListView.Items.Cast<ListViewItem>().Select(x => x)
+                .OrderByDescending(x => int.Parse(x.SubItems[2].Text)).Take(10).ToList();
             mostAskedProductsListView.Items.Clear();
             mostAskedProductsListView.Items.AddRange(orderedList.ToArray());
 
@@ -161,10 +160,10 @@ namespace PT_Camping.Views.UserControls
                 mostCommonIssueslistView.Items.Add(item);
             }
 
-            //=== Sorting by incident number
+            //=== Sorting by number of issues
 
-            var orderedList = mostCommonIssueslistView.Items.Cast<ListViewItem>()
-                .Select(x => x).OrderByDescending(x => x.SubItems[2].Text).Take(10).ToList();
+            var orderedList = mostCommonIssueslistView.Items.Cast<ListViewItem>().Select(x => x)
+                .OrderByDescending(x => int.Parse(x.SubItems[2].Text)).Take(10).ToList();
             mostCommonIssueslistView.Items.Clear();
             mostCommonIssueslistView.Items.AddRange(orderedList.ToArray());
 
@@ -205,10 +204,10 @@ namespace PT_Camping.Views.UserControls
                 bestClientsListView.Items.Add(item);
             }
 
-            //=== Sorting by incident number
+            //=== Sorting by number of reservations
 
-            var orderedList = bestClientsListView.Items.Cast<ListViewItem>()
-                .Select(x => x).OrderByDescending(x => x.SubItems[3].Text).Take(10).ToList();
+            var orderedList = bestClientsListView.Items.Cast<ListViewItem>().Select(x => x)
+                .OrderByDescending(x => int.Parse(x.SubItems[3].Text)).Take(10).ToList();
             bestClientsListView.Items.Clear();
             bestClientsListView.Items.AddRange(orderedList.ToArray());
 

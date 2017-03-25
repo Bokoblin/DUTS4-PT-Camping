@@ -15,13 +15,14 @@
         </EntityType>
         <EntityType Name="A_vendu">
           <Key>
+            <PropertyRef Name="Date_Vente" />
             <PropertyRef Name="Code_Personne" />
             <PropertyRef Name="Code_Produit" />
           </Key>
           <Property Name="Date_Vente" Type="datetime" Nullable="false" />
           <Property Name="Code_Personne" Type="int" Nullable="false" />
           <Property Name="Code_Produit" Type="int" Nullable="false" />
-          <Property Name="Quantite_Produit" Type="int" />
+          <Property Name="Quantite_Produit" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="App">
           <Key>
@@ -522,18 +523,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="InfoJoyeuxDB" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="A_vendu">
-          <Key>
-            <PropertyRef Name="Code_Personne" />
-            <PropertyRef Name="Code_Produit" />
-          </Key>
-          <Property Name="Date_Vente" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Code_Personne" Type="Int32" Nullable="false" />
-          <Property Name="Code_Produit" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Personne" Relationship="Self.FK_A_vendu_Code_Personne" FromRole="A_vendu" ToRole="Personne" />
-          <NavigationProperty Name="Produit" Relationship="Self.FK_A_vendu_Code_Produit" FromRole="A_vendu" ToRole="Produit" />
-          <Property Name="Quantite_Produit" Type="Int32" />
-        </EntityType>
         <EntityType Name="App">
           <Key>
             <PropertyRef Name="Code_App" />
@@ -654,13 +643,13 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Telephone" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="Adresse" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="A_vendu" Relationship="Self.FK_A_vendu_Code_Personne" FromRole="Personne" ToRole="A_vendu" />
           <NavigationProperty Name="Client" Relationship="Self.FK_Client_Code_Personne" FromRole="Personne" ToRole="Client" />
           <NavigationProperty Name="Employe" Relationship="Self.FK_Employe_Code_Personne" FromRole="Personne" ToRole="Employe" />
           <NavigationProperty Name="Loge" Relationship="Self.FK_Loge_Code_Personne" FromRole="Personne" ToRole="Loge" />
           <NavigationProperty Name="Reservation" Relationship="Self.FK_Reservation_Code_Personne" FromRole="Personne" ToRole="Reservation" />
           <NavigationProperty Name="Droit" Relationship="Self.A_le_droit" FromRole="Personne" ToRole="Droit" />
           <Property Name="Date_Naissance" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="A_vendu" Relationship="InfoJoyeuxDB.FK_A_vendu_Code_Personne" FromRole="Personne" ToRole="A_vendu" />
         </EntityType>
         <EntityType Name="Produit">
           <Key>
@@ -670,8 +659,8 @@
           <Property Name="Libelle_Produit" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Prix" Type="Double" Nullable="false" />
           <Property Name="Quantite_Stock" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="A_vendu" Relationship="Self.FK_A_vendu_Code_Produit" FromRole="Produit" ToRole="A_vendu" />
           <NavigationProperty Name="Fournisseur" Relationship="Self.Fournit" FromRole="Produit" ToRole="Fournisseur" />
+          <NavigationProperty Name="A_vendu" Relationship="InfoJoyeuxDB.FK_A_vendu_Code_Produit" FromRole="Produit" ToRole="A_vendu" />
         </EntityType>
         <EntityType Name="Reservation">
           <Key>
@@ -717,30 +706,6 @@
           <Property Name="Type_Incident1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Incident" Relationship="Self.FK_Incident_Code_Type" FromRole="Type_Incident" ToRole="Incident" />
         </EntityType>
-        <Association Name="FK_A_vendu_Code_Personne">
-          <End Role="Personne" Type="Self.Personne" Multiplicity="1" />
-          <End Role="A_vendu" Type="Self.A_vendu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Personne">
-              <PropertyRef Name="Code_Personne" />
-            </Principal>
-            <Dependent Role="A_vendu">
-              <PropertyRef Name="Code_Personne" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_A_vendu_Code_Produit">
-          <End Role="Produit" Type="Self.Produit" Multiplicity="1" />
-          <End Role="A_vendu" Type="Self.A_vendu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Produit">
-              <PropertyRef Name="Code_Produit" />
-            </Principal>
-            <Dependent Role="A_vendu">
-              <PropertyRef Name="Code_Produit" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Client_Code_Personne">
           <End Role="Personne" Type="Self.Personne" Multiplicity="1" />
           <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
@@ -890,7 +855,6 @@
           <End Role="Emplacement" Type="Self.Emplacement" Multiplicity="*" ></End>
         </Association>
         <EntityContainer Name="DataBase" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="A_vendu" EntityType="Self.A_vendu" />
           <EntitySet Name="App" EntityType="Self.App" />
           <EntitySet Name="Caracteristique_Emplacement" EntityType="Self.Caracteristique_Emplacement" />
           <EntitySet Name="Client" EntityType="Self.Client" />
@@ -907,14 +871,6 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Type_Emplacement" EntityType="Self.Type_Emplacement" />
           <EntitySet Name="Type_Incident" EntityType="Self.Type_Incident" />
-          <AssociationSet Name="FK_A_vendu_Code_Personne" Association="Self.FK_A_vendu_Code_Personne">
-            <End Role="Personne" EntitySet="Personne" />
-            <End Role="A_vendu" EntitySet="A_vendu" />
-          </AssociationSet>
-          <AssociationSet Name="FK_A_vendu_Code_Produit" Association="Self.FK_A_vendu_Code_Produit">
-            <End Role="Produit" EntitySet="Produit" />
-            <End Role="A_vendu" EntitySet="A_vendu" />
-          </AssociationSet>
           <AssociationSet Name="FK_Client_Code_Personne" Association="Self.FK_Client_Code_Personne">
             <End Role="Personne" EntitySet="Personne" />
             <End Role="Client" EntitySet="Client" />
@@ -971,23 +927,59 @@
             <End Role="Caracteristique_Emplacement" EntitySet="Caracteristique_Emplacement" />
             <End Role="Emplacement" EntitySet="Emplacement" />
           </AssociationSet>
+          <EntitySet Name="A_vendu" EntityType="InfoJoyeuxDB.A_vendu" />
+          <AssociationSet Name="FK_A_vendu_Code_Personne" Association="InfoJoyeuxDB.FK_A_vendu_Code_Personne">
+            <End Role="Personne" EntitySet="Personne" />
+            <End Role="A_vendu" EntitySet="A_vendu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_vendu_Code_Produit" Association="InfoJoyeuxDB.FK_A_vendu_Code_Produit">
+            <End Role="Produit" EntitySet="Produit" />
+            <End Role="A_vendu" EntitySet="A_vendu" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="A_vendu">
+          <Key>
+            <PropertyRef Name="Date_Vente" />
+            <PropertyRef Name="Code_Personne" />
+            <PropertyRef Name="Code_Produit" />
+          </Key>
+          <Property Name="Date_Vente" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Code_Personne" Type="Int32" Nullable="false" />
+          <Property Name="Code_Produit" Type="Int32" Nullable="false" />
+          <Property Name="Quantite_Produit" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Personne" Relationship="InfoJoyeuxDB.FK_A_vendu_Code_Personne" FromRole="A_vendu" ToRole="Personne" />
+          <NavigationProperty Name="Produit" Relationship="InfoJoyeuxDB.FK_A_vendu_Code_Produit" FromRole="A_vendu" ToRole="Produit" />
+        </EntityType>
+        <Association Name="FK_A_vendu_Code_Personne">
+          <End Type="InfoJoyeuxDB.Personne" Role="Personne" Multiplicity="1" />
+          <End Type="InfoJoyeuxDB.A_vendu" Role="A_vendu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personne">
+              <PropertyRef Name="Code_Personne" />
+            </Principal>
+            <Dependent Role="A_vendu">
+              <PropertyRef Name="Code_Personne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_vendu_Code_Produit">
+          <End Type="InfoJoyeuxDB.Produit" Role="Produit" Multiplicity="1" />
+          <End Type="InfoJoyeuxDB.A_vendu" Role="A_vendu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produit">
+              <PropertyRef Name="Code_Produit" />
+            </Principal>
+            <Dependent Role="A_vendu">
+              <PropertyRef Name="Code_Produit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="InfoJoyeuxDBStoreContainer" CdmEntityContainer="DataBase">
-          <EntitySetMapping Name="A_vendu">
-            <EntityTypeMapping TypeName="InfoJoyeuxDB.A_vendu">
-              <MappingFragment StoreEntitySet="A_vendu">
-                <ScalarProperty Name="Quantite_Produit" ColumnName="Quantite_Produit" />
-                <ScalarProperty Name="Date_Vente" ColumnName="Date_Vente" />
-                <ScalarProperty Name="Code_Personne" ColumnName="Code_Personne" />
-                <ScalarProperty Name="Code_Produit" ColumnName="Code_Produit" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="App">
             <EntityTypeMapping TypeName="InfoJoyeuxDB.App">
               <MappingFragment StoreEntitySet="App">
@@ -1179,6 +1171,16 @@
               <ScalarProperty Name="Code_Emplacement" ColumnName="Code_Emplacement" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="A_vendu">
+            <EntityTypeMapping TypeName="InfoJoyeuxDB.A_vendu">
+              <MappingFragment StoreEntitySet="A_vendu">
+                <ScalarProperty Name="Quantite_Produit" ColumnName="Quantite_Produit" />
+                <ScalarProperty Name="Code_Produit" ColumnName="Code_Produit" />
+                <ScalarProperty Name="Code_Personne" ColumnName="Code_Personne" />
+                <ScalarProperty Name="Date_Vente" ColumnName="Date_Vente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

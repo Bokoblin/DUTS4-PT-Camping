@@ -125,11 +125,11 @@ namespace PT_Camping.Views.UserControls
             this.criticalityComboBox.Enabled = false;
             this.criticalityComboBox.FormattingEnabled = true;
             this.criticalityComboBox.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5"});
+            "1/5",
+            "2/5",
+            "3/5",
+            "4/5",
+            "5/5"});
             this.criticalityComboBox.Location = new System.Drawing.Point(181, 228);
             this.criticalityComboBox.Name = "criticalityComboBox";
             this.criticalityComboBox.Size = new System.Drawing.Size(120, 21);
