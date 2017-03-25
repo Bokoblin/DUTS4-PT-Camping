@@ -1,18 +1,18 @@
-﻿using PT_Camping.Model;
-using System;
+﻿using System;
 using System.Windows.Forms;
+using PT_Camping.Model;
 
-namespace PT_Camping
+namespace PT_Camping.Views.Forms
 {
     public partial class SellStock : Form
     {
-        Produit product;
-        DataBase database;
+        readonly Produit _product;
+        readonly DataBase _db;
         public SellStock(DataBase db, Produit product)
         {
             InitializeComponent();
-            database = db;
-            this.product = product;
+            _db = db;
+            _product = product;
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -27,14 +27,14 @@ namespace PT_Camping
                 if (amountTextBox.Text == "")
                     throw new Exception("La quantité ne peut pas être nulle.");
 
-                if (int.Parse(amountTextBox.Text) > product.Quantite_Stock)
+                if (int.Parse(amountTextBox.Text) > _product.Quantite_Stock)
                     throw new Exception("La quantité à vendre doit être inférieure au stock.");
 
                 if (int.Parse(amountTextBox.Text) <= 0)
                     throw new Exception("La quantité doit être supérieure à 0.");
 
-                product.Quantite_Stock = product.Quantite_Stock - Convert.ToInt32(amountTextBox.Text);
-                database.SaveChanges();
+                _product.Quantite_Stock = _product.Quantite_Stock - Convert.ToInt32(amountTextBox.Text);
+                _db.SaveChanges();
                 Close();
             }
             catch (Exception exception)

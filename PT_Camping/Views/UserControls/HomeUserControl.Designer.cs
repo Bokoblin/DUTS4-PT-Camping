@@ -1,4 +1,4 @@
-﻿namespace PT_Camping
+﻿namespace PT_Camping.Views.UserControls
 {
     partial class HomeUserControl
     {
@@ -52,7 +52,7 @@
             this.appBar.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.appBar.Location = new System.Drawing.Point(0, 0);
             this.appBar.Name = "appBar";
-            this.appBar.Size = new System.Drawing.Size(803, 50);
+            this.appBar.Size = new System.Drawing.Size(900, 50);
             this.appBar.TabIndex = 3;
             // 
             // homeTitle
@@ -69,20 +69,18 @@
             // 
             // homeTabControl
             // 
-            this.homeTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.homeTabControl.Controls.Add(this.managementTab);
             this.homeTabControl.Controls.Add(this.mapTab);
+            this.homeTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.homeTabControl.ItemSize = new System.Drawing.Size(360, 30);
-            this.homeTabControl.Location = new System.Drawing.Point(0, 52);
+            this.homeTabControl.Location = new System.Drawing.Point(0, 50);
             this.homeTabControl.Name = "homeTabControl";
             this.homeTabControl.Padding = new System.Drawing.Point(50, 3);
             this.homeTabControl.SelectedIndex = 0;
-            this.homeTabControl.Size = new System.Drawing.Size(800, 540);
+            this.homeTabControl.Size = new System.Drawing.Size(900, 550);
             this.homeTabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.homeTabControl.TabIndex = 2;
-            this.homeTabControl.SelectedIndexChanged += new System.EventHandler(this.homeTabControl_SelectedIndexChanged);
+            this.homeTabControl.SelectedIndexChanged += new System.EventHandler(this.HomeTabControl_SelectedIndexChanged);
             // 
             // managementTab
             // 
@@ -95,7 +93,7 @@
             this.managementTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.managementTab.Location = new System.Drawing.Point(4, 34);
             this.managementTab.Name = "managementTab";
-            this.managementTab.Size = new System.Drawing.Size(792, 502);
+            this.managementTab.Size = new System.Drawing.Size(889, 502);
             this.managementTab.TabIndex = 0;
             this.managementTab.Text = "GESTION";
             this.managementTab.UseVisualStyleBackColor = true;
@@ -103,81 +101,88 @@
             // providerButton
             // 
             this.providerButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.providerButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.providerButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.providerButton.Location = new System.Drawing.Point(113, 362);
+            this.providerButton.Location = new System.Drawing.Point(161, 362);
             this.providerButton.Name = "providerButton";
             this.providerButton.Size = new System.Drawing.Size(169, 64);
             this.providerButton.TabIndex = 10;
             this.providerButton.Text = "FOURNISSEURS";
             this.providerButton.UseVisualStyleBackColor = true;
-            this.providerButton.Click += new System.EventHandler(this.providersButton_Click);
+            this.providerButton.Click += new System.EventHandler(this.ProvidersButton_Click);
             // 
             // statsButton
             // 
             this.statsButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.statsButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.statsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statsButton.Location = new System.Drawing.Point(468, 362);
+            this.statsButton.Location = new System.Drawing.Point(516, 362);
             this.statsButton.Name = "statsButton";
             this.statsButton.Size = new System.Drawing.Size(169, 64);
             this.statsButton.TabIndex = 11;
             this.statsButton.Text = "STATS";
             this.statsButton.UseVisualStyleBackColor = true;
-            this.statsButton.Click += new System.EventHandler(this.statsButton_Click);
+            this.statsButton.Click += new System.EventHandler(this.StatsButton_Click);
             // 
             // stocksButton
             // 
             this.stocksButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.stocksButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.stocksButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stocksButton.Location = new System.Drawing.Point(468, 225);
+            this.stocksButton.Location = new System.Drawing.Point(516, 225);
             this.stocksButton.Name = "stocksButton";
             this.stocksButton.Size = new System.Drawing.Size(169, 64);
             this.stocksButton.TabIndex = 9;
             this.stocksButton.Text = "STOCKS";
             this.stocksButton.UseVisualStyleBackColor = true;
-            this.stocksButton.Click += new System.EventHandler(this.stocksButton_Click);
+            this.stocksButton.Click += new System.EventHandler(this.StocksButton_Click);
             // 
             // employeeButton
             // 
             this.employeeButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.employeeButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.employeeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.employeeButton.Location = new System.Drawing.Point(113, 225);
+            this.employeeButton.Location = new System.Drawing.Point(161, 225);
             this.employeeButton.Name = "employeeButton";
             this.employeeButton.Size = new System.Drawing.Size(169, 64);
             this.employeeButton.TabIndex = 8;
             this.employeeButton.Text = "EMPLOYÉS";
             this.employeeButton.UseVisualStyleBackColor = true;
-            this.employeeButton.Click += new System.EventHandler(this.employeesButton_Click);
+            this.employeeButton.Click += new System.EventHandler(this.EmployeesButton_Click);
             // 
             // issuesButton
             // 
             this.issuesButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.issuesButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.issuesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.issuesButton.Location = new System.Drawing.Point(468, 83);
+            this.issuesButton.Location = new System.Drawing.Point(516, 83);
             this.issuesButton.Name = "issuesButton";
             this.issuesButton.Size = new System.Drawing.Size(169, 64);
             this.issuesButton.TabIndex = 7;
             this.issuesButton.Text = "INCIDENTS";
             this.issuesButton.UseVisualStyleBackColor = true;
-            this.issuesButton.Click += new System.EventHandler(this.issuesButton_Click);
+            this.issuesButton.Click += new System.EventHandler(this.IssuesButton_Click);
             // 
             // clientButton
             // 
             this.clientButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.clientButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.clientButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clientButton.Location = new System.Drawing.Point(113, 83);
+            this.clientButton.Location = new System.Drawing.Point(161, 83);
             this.clientButton.Name = "clientButton";
             this.clientButton.Size = new System.Drawing.Size(169, 64);
             this.clientButton.TabIndex = 6;
             this.clientButton.Text = "CLIENTS";
             this.clientButton.UseVisualStyleBackColor = true;
-            this.clientButton.Click += new System.EventHandler(this.clientsButton_Click);
+            this.clientButton.Click += new System.EventHandler(this.ClientsButton_Click);
             // 
             // mapTab
             // 
             this.mapTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mapTab.Location = new System.Drawing.Point(4, 34);
             this.mapTab.Name = "mapTab";
-            this.mapTab.Size = new System.Drawing.Size(792, 502);
+            this.mapTab.Padding = new System.Windows.Forms.Padding(0, 0, 0, 20);
+            this.mapTab.Size = new System.Drawing.Size(892, 512);
             this.mapTab.TabIndex = 1;
             this.mapTab.Text = "CARTE";
             this.mapTab.UseVisualStyleBackColor = true;
@@ -186,17 +191,18 @@
             // 
             this.logoutButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.logoutButton.BackColor = System.Drawing.Color.RoyalBlue;
+            this.logoutButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.logoutButton.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
             this.logoutButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.logoutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logoutButton.ForeColor = System.Drawing.Color.White;
-            this.logoutButton.Location = new System.Drawing.Point(663, 6);
+            this.logoutButton.Location = new System.Drawing.Point(750, 6);
             this.logoutButton.Name = "logoutButton";
             this.logoutButton.Size = new System.Drawing.Size(120, 36);
             this.logoutButton.TabIndex = 1;
             this.logoutButton.Text = "Déconnexion";
             this.logoutButton.UseVisualStyleBackColor = false;
-            this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
+            this.logoutButton.Click += new System.EventHandler(this.LogoutButton_Click);
             // 
             // userNameLabel
             // 
@@ -204,7 +210,7 @@
             this.userNameLabel.BackColor = System.Drawing.Color.RoyalBlue;
             this.userNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userNameLabel.ForeColor = System.Drawing.Color.White;
-            this.userNameLabel.Location = new System.Drawing.Point(429, -1);
+            this.userNameLabel.Location = new System.Drawing.Point(500, -1);
             this.userNameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.userNameLabel.Name = "userNameLabel";
             this.userNameLabel.Size = new System.Drawing.Size(229, 50);
@@ -223,7 +229,7 @@
             this.Controls.Add(this.homeTitle);
             this.Controls.Add(this.appBar);
             this.Name = "HomeUserControl";
-            this.Size = new System.Drawing.Size(803, 600);
+            this.Size = new System.Drawing.Size(900, 600);
             this.homeTabControl.ResumeLayout(false);
             this.managementTab.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -245,6 +251,6 @@
         private System.Windows.Forms.Button clientButton;
         private System.Windows.Forms.TabPage mapTab;
         protected System.Windows.Forms.Button logoutButton;
-        private System.Windows.Forms.Label userNameLabel;
+        protected System.Windows.Forms.Label userNameLabel;
     }
 }

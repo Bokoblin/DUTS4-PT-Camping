@@ -1,4 +1,4 @@
-﻿namespace PT_Camping
+﻿namespace PT_Camping.Views.UserControls
 {
     partial class ConnectionUserControl
     {
@@ -43,7 +43,7 @@
             this.passLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.passLabel.AutoSize = true;
             this.passLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passLabel.Location = new System.Drawing.Point(185, 277);
+            this.passLabel.Location = new System.Drawing.Point(208, 277);
             this.passLabel.Name = "passLabel";
             this.passLabel.Size = new System.Drawing.Size(105, 20);
             this.passLabel.TabIndex = 14;
@@ -54,7 +54,7 @@
             this.userLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.userLabel.AutoSize = true;
             this.userLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userLabel.Location = new System.Drawing.Point(185, 207);
+            this.userLabel.Location = new System.Drawing.Point(208, 207);
             this.userLabel.Name = "userLabel";
             this.userLabel.Size = new System.Drawing.Size(80, 20);
             this.userLabel.TabIndex = 13;
@@ -64,24 +64,24 @@
             // 
             this.passwordTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.passwordTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordTextBox.Location = new System.Drawing.Point(315, 272);
+            this.passwordTextBox.Location = new System.Drawing.Point(338, 272);
             this.passwordTextBox.MinimumSize = new System.Drawing.Size(4, 30);
             this.passwordTextBox.Name = "passwordTextBox";
-            this.passwordTextBox.Size = new System.Drawing.Size(160, 21);
+            this.passwordTextBox.Size = new System.Drawing.Size(160, 30);
             this.passwordTextBox.TabIndex = 12;
             this.passwordTextBox.UseSystemPasswordChar = true;
-            this.passwordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.passwordTextBox_KeyDown);
+            this.passwordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PasswordTextBox_KeyDown);
             // 
             // userTextBox
             // 
             this.userTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.userTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userTextBox.Location = new System.Drawing.Point(315, 202);
+            this.userTextBox.Location = new System.Drawing.Point(338, 202);
             this.userTextBox.MinimumSize = new System.Drawing.Size(4, 30);
             this.userTextBox.Name = "userTextBox";
-            this.userTextBox.Size = new System.Drawing.Size(160, 21);
+            this.userTextBox.Size = new System.Drawing.Size(160, 30);
             this.userTextBox.TabIndex = 11;
-            this.userTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.userTextBox_KeyDown);
+            this.userTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UserTextBox_KeyDown);
             // 
             // labelMenuStrip
             // 
@@ -98,13 +98,14 @@
             // connectionButton
             // 
             this.connectionButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.connectionButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.connectionButton.Location = new System.Drawing.Point(350, 472);
             this.connectionButton.Name = "connectionButton";
             this.connectionButton.Size = new System.Drawing.Size(90, 30);
             this.connectionButton.TabIndex = 8;
             this.connectionButton.Text = "Entrer";
             this.connectionButton.UseVisualStyleBackColor = true;
-            this.connectionButton.Click += new System.EventHandler(this.connectionButton_Click);
+            this.connectionButton.Click += new System.EventHandler(this.ConnectionButton_Click);
             // 
             // appBar
             // 
@@ -122,7 +123,7 @@
             this.errorLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.errorLabel.AutoSize = true;
             this.errorLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorLabel.Location = new System.Drawing.Point(312, 310);
+            this.errorLabel.Location = new System.Drawing.Point(335, 310);
             this.errorLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.errorLabel.Name = "errorLabel";
             this.errorLabel.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);

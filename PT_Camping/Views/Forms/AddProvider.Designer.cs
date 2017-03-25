@@ -1,4 +1,4 @@
-﻿namespace PT_Camping.View.Forms
+﻿namespace PT_Camping.Views.Forms
 {
     partial class AddProvider
     {
@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.criticalityLabel = new System.Windows.Forms.Label();
-            this.nameP = new System.Windows.Forms.TextBox();
-            this.mailP = new System.Windows.Forms.TextBox();
-            this.adresseP = new System.Windows.Forms.TextBox();
+            this.nameTextBox = new System.Windows.Forms.TextBox();
+            this.emailTextBox = new System.Windows.Forms.TextBox();
+            this.addressTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.webP = new System.Windows.Forms.TextBox();
+            this.websiteTextBox = new System.Windows.Forms.TextBox();
             this.cancelButton = new System.Windows.Forms.Button();
             this.OKButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -46,29 +46,29 @@
             this.criticalityLabel.Name = "criticalityLabel";
             this.criticalityLabel.Size = new System.Drawing.Size(240, 20);
             this.criticalityLabel.TabIndex = 38;
-            this.criticalityLabel.Text = "Nom du fournisseur";
+            this.criticalityLabel.Text = "Nom*";
             this.criticalityLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // nameP
+            // nameTextBox
             // 
-            this.nameP.Location = new System.Drawing.Point(57, 32);
-            this.nameP.Name = "nameP";
-            this.nameP.Size = new System.Drawing.Size(156, 20);
-            this.nameP.TabIndex = 39;
+            this.nameTextBox.Location = new System.Drawing.Point(57, 32);
+            this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.Size = new System.Drawing.Size(156, 20);
+            this.nameTextBox.TabIndex = 39;
             // 
-            // mailP
+            // emailTextBox
             // 
-            this.mailP.Location = new System.Drawing.Point(57, 78);
-            this.mailP.Name = "mailP";
-            this.mailP.Size = new System.Drawing.Size(156, 20);
-            this.mailP.TabIndex = 40;
+            this.emailTextBox.Location = new System.Drawing.Point(57, 78);
+            this.emailTextBox.Name = "emailTextBox";
+            this.emailTextBox.Size = new System.Drawing.Size(156, 20);
+            this.emailTextBox.TabIndex = 40;
             // 
-            // adresseP
+            // addressTextBox
             // 
-            this.adresseP.Location = new System.Drawing.Point(57, 124);
-            this.adresseP.Name = "adresseP";
-            this.adresseP.Size = new System.Drawing.Size(156, 20);
-            this.adresseP.TabIndex = 41;
+            this.addressTextBox.Location = new System.Drawing.Point(57, 124);
+            this.addressTextBox.Name = "addressTextBox";
+            this.addressTextBox.Size = new System.Drawing.Size(156, 20);
+            this.addressTextBox.TabIndex = 41;
             // 
             // label1
             // 
@@ -76,7 +76,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(240, 20);
             this.label1.TabIndex = 42;
-            this.label1.Text = "E-mail du fournisseur";
+            this.label1.Text = "E-mail*";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
@@ -85,7 +85,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(240, 20);
             this.label2.TabIndex = 43;
-            this.label2.Text = "Adresse du fournisseur";
+            this.label2.Text = "Adresse*";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label3
@@ -95,15 +95,15 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(240, 20);
             this.label3.TabIndex = 44;
-            this.label3.Text = "Site web du fournisseur";
+            this.label3.Text = "Site web";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // webP
+            // websiteTextBox
             // 
-            this.webP.Location = new System.Drawing.Point(57, 170);
-            this.webP.Name = "webP";
-            this.webP.Size = new System.Drawing.Size(156, 20);
-            this.webP.TabIndex = 45;
+            this.websiteTextBox.Location = new System.Drawing.Point(57, 170);
+            this.websiteTextBox.Name = "websiteTextBox";
+            this.websiteTextBox.Size = new System.Drawing.Size(156, 20);
+            this.websiteTextBox.TabIndex = 45;
             // 
             // cancelButton
             // 
@@ -132,20 +132,20 @@
             this.ClientSize = new System.Drawing.Size(264, 261);
             this.Controls.Add(this.OKButton);
             this.Controls.Add(this.cancelButton);
-            this.Controls.Add(this.webP);
+            this.Controls.Add(this.websiteTextBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.adresseP);
-            this.Controls.Add(this.mailP);
-            this.Controls.Add(this.nameP);
+            this.Controls.Add(this.addressTextBox);
+            this.Controls.Add(this.emailTextBox);
+            this.Controls.Add(this.nameTextBox);
             this.Controls.Add(this.criticalityLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "AddProvider";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AddProvider";
+            this.Text = "Nouveau fournisseur";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -153,13 +153,13 @@
 
         #endregion
         private System.Windows.Forms.Label criticalityLabel;
-        private System.Windows.Forms.TextBox nameP;
-        private System.Windows.Forms.TextBox mailP;
-        private System.Windows.Forms.TextBox adresseP;
+        private System.Windows.Forms.TextBox nameTextBox;
+        private System.Windows.Forms.TextBox emailTextBox;
+        private System.Windows.Forms.TextBox addressTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox webP;
+        private System.Windows.Forms.TextBox websiteTextBox;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button OKButton;
     }

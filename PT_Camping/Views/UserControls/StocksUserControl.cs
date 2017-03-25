@@ -1,13 +1,15 @@
-﻿using PT_Camping.Model;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using PT_Camping.Model;
+using PT_Camping.Properties;
+using PT_Camping.Views.Forms;
 
-namespace PT_Camping
+namespace PT_Camping.Views.UserControls
 {
     /// <summary>
     /// The StocksUserControl inherits from ManagementHomeControl.
@@ -18,19 +20,28 @@ namespace PT_Camping
     /// Since : 08/02/17
     public partial class StocksUserControl : ManagementUserControl
     {
-        
+
         public StocksUserControl(HomeUserControl home) : base(home)
         {
             InitializeComponent();
-            appBarTitle.Text = "Gestion des stocks";
+            appBarTitle.Text = Resources.product_management;
             Db = new DataBase();
 
-            productListView.View = System.Windows.Forms.View.Details;
+            productListView.View = View.Details;
             productListView.Columns.Add("Produit");
             productListView.Columns.Add("Quantité");
 
             UpdateProductListView();
             HandleResize();
+        }
+
+
+        public StocksUserControl(HomeUserControl home, int code) : this(home)
+        {
+            foreach (ListViewItem item in productListView.Items)
+            {
+                item.Selected = item.Name == code.ToString();
+            }
         }
 
 
@@ -48,11 +59,11 @@ namespace PT_Camping
                     Name = product.Code_Produit.ToString()
                 };
 
-                if(product.Quantite_Stock == 0)
+                if (product.Quantite_Stock == 0)
                 {
                     item.BackColor = Color.Red;
                 }
-                else if(product.Quantite_Stock <= 15)
+                else if (product.Quantite_Stock <= 15)
                 {
                     item.BackColor = Color.Orange;
                 }
@@ -97,7 +108,7 @@ namespace PT_Camping
 
         private void AddStockButton_Click(object sender, MouseEventArgs e)
         {
-            addStock newStock = new addStock();
+            AddStock newStock = new AddStock();
             newStock.ShowDialog();
             UpdateProductListView();
         }
@@ -119,14 +130,14 @@ namespace PT_Camping
 
         private void EditProductButton_Click(object sender, EventArgs e)
         {
-            if(priceTextBox.ReadOnly)
-            { 
+            if (priceTextBox.ReadOnly)
+            {
                 resetButton.Visible = true;
                 priceTextBox.ReadOnly = false;
                 amountTextBox.ReadOnly = false;
                 productNameTextBox.ReadOnly = false;
                 providerComboBox.Enabled = true;
-                editButton.BackgroundImage = Properties.Resources.ic_done;
+                editButton.BackgroundImage = Resources.ic_done;
             }
             else
             {
@@ -135,7 +146,7 @@ namespace PT_Camping
                 productNameTextBox.ReadOnly = true;
                 resetButton.Visible = false;
                 providerComboBox.Enabled = false;
-                editButton.BackgroundImage = Properties.Resources.ic_edit;
+                editButton.BackgroundImage = Resources.ic_edit;
 
                 string message = "Les données suivantes ont été mises à jour : \n";
                 int cptModifications = 0;
@@ -143,21 +154,21 @@ namespace PT_Camping
                 int code = int.Parse(productListView.SelectedItems[0].Name);
                 var product = Db.Produit.Find(code);
 
-                if(product != null)
+                if (product != null)
                 {
                     if (productNameTextBox.Text != product.Libelle_Produit)
                     {
                         if (productNameTextBox.Text == "")
-                            MessageBox.Show("Le nom de produit ne peut être vide");
+                            MessageBox.Show(Resources.null_product_name_exception);
                         else if (productNameTextBox.Text.Any(char.IsDigit))
-                            MessageBox.Show("Le libellé du produit ne peut contenir de valeur numérique.");
+                            MessageBox.Show(Resources.novalue_product_name_exception);
                         else
                         {
                             product.Libelle_Produit = productNameTextBox.Text;
                             message += "libellé, ";
                             cptModifications++;
                         }
-                        
+
                     }
 
                     if (amountTextBox.Text != product.Quantite_Stock.ToString())
@@ -165,7 +176,7 @@ namespace PT_Camping
                         try
                         {
                             if (int.Parse(amountTextBox.Text) < 0)
-                                MessageBox.Show("La quantité doit être positive.");
+                                MessageBox.Show(Resources.non_positive_quantity_exception);
                             else
                             {
                                 product.Quantite_Stock = int.Parse(amountTextBox.Text);
@@ -175,22 +186,22 @@ namespace PT_Camping
                         }
                         catch (OverflowException)
                         {
-                            MessageBox.Show("La quantité est trop élévée.");
+                            MessageBox.Show(Resources.high_quantity_exception);
                         }
                     }
 
-                    if (priceTextBox.Text != (product.Prix.ToString("N2") + CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol) )
+                    if (priceTextBox.Text != (product.Prix.ToString("N2") + CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol))
                     {
                         product.Prix = double.Parse(priceTextBox.Text.Replace(CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol, ""));
                         message += "prix, ";
                         cptModifications++;
                     }
 
-                    if ( (product.Fournisseur.Count == 0 && providerComboBox.Text != "Aucun")
+                    if ((product.Fournisseur.Count == 0 && providerComboBox.Text != Resources.none)
                         || (product.Fournisseur.Count != 0 && providerComboBox.Text != product.Fournisseur.First().Nom_Fournisseur))
                     {
                         product.Fournisseur.Clear();
-                        if (providerComboBox.Text != "Aucun")
+                        if (providerComboBox.Text != Resources.none)
                         {
                             product.Fournisseur.Add(Db.Fournisseur.First(
                             f => f.Nom_Fournisseur == providerComboBox.Text));
@@ -224,19 +235,19 @@ namespace PT_Camping
             priceTextBox.ReadOnly = true;
             productNameTextBox.ReadOnly = true;
             providerComboBox.Enabled = false;
-            editButton.BackgroundImage = Properties.Resources.ic_edit;
+            editButton.BackgroundImage = Resources.ic_edit;
         }
 
 
         private void CommandButton_Click(object sender, EventArgs e)
         {
-            string employeeSurname = HomeUC.Window.userLoged.Person.Nom_Personne;
-            string employeeName = HomeUC.Window.userLoged.Person.Prenom_Personne;
+            string employeeSurname = LoginTools.Employee.Personne.Nom_Personne;
+            string employeeName = LoginTools.Employee.Personne.Prenom_Personne;
 
             const string subject = "Commande d'un produit";
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("Dear " + providerComboBox.SelectedItem + ", \n");
-            sb.AppendLine("Nous souhaitons vous commander le produit " + productNameTextBox.Text + " en 42 exemplaires.");
+            sb.AppendLine("Nous souhaitons vous commander le produit " + productNameTextBox.Text + " en XXXX exemplaires.");
             sb.AppendLine("Cordialement,");
             sb.AppendLine(employeeName + " " + employeeSurname);
             string body = sb.ToString();
@@ -269,6 +280,7 @@ namespace PT_Camping
 
         private void ProductListView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            editButton.BackgroundImage = Resources.ic_edit;
             amountTextBox.ReadOnly = true;
             priceTextBox.ReadOnly = true;
             productNameTextBox.ReadOnly = true;
@@ -280,7 +292,7 @@ namespace PT_Camping
 
         private void ProductListView_Resize(object sender, EventArgs e)
         {
-            if( productListView.Columns.Count != 0)
+            if (productListView.Columns.Count != 0)
             {
                 foreach (ColumnHeader columnHeader in productListView.Columns)
                     columnHeader.Width = productListView.Width / productListView.Columns.Count;
@@ -323,7 +335,7 @@ namespace PT_Camping
         private void PriceTextBox_Leave(object sender, EventArgs e)
         {
             if (!priceTextBox.ReadOnly)
-                priceTextBox.Text = priceTextBox.Text 
+                priceTextBox.Text = priceTextBox.Text
                 + CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol;
         }
     }

@@ -1,6 +1,6 @@
-﻿namespace PT_Camping
+﻿namespace PT_Camping.Views.Forms
 {
-    partial class addStock
+    partial class AddStock
     {
         /// <summary>
         /// Required designer variable.
@@ -96,7 +96,7 @@
             this.buttonValid.TabIndex = 7;
             this.buttonValid.Text = "Valider";
             this.buttonValid.UseVisualStyleBackColor = true;
-            this.buttonValid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.buttonValid_MouseClick);
+            this.buttonValid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ButtonValid_MouseClick);
             // 
             // cancelButton
             // 
@@ -108,7 +108,7 @@
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
-            // addStock
+            // AddStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -125,10 +125,10 @@
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(300, 300);
             this.MinimumSize = new System.Drawing.Size(300, 300);
-            this.Name = "addStock";
+            this.Name = "AddStock";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Ajouter un produit";
+            this.Text = "Nouveau produit";
             this.ResumeLayout(false);
             this.PerformLayout();
 
