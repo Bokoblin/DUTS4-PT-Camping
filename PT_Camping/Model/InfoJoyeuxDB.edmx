@@ -154,6 +154,7 @@
           <Property Name="Libelle_Produit" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Prix" Type="float" Nullable="false" />
           <Property Name="Quantite_Stock" Type="int" Nullable="false" />
+          <Property Name="Quantite_Critique" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Reservation">
           <Key>
@@ -661,6 +662,7 @@
           <Property Name="Quantite_Stock" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Fournisseur" Relationship="Self.Fournit" FromRole="Produit" ToRole="Fournisseur" />
           <NavigationProperty Name="A_vendu" Relationship="InfoJoyeuxDB.FK_A_vendu_Code_Produit" FromRole="Produit" ToRole="A_vendu" />
+          <Property Name="Quantite_Critique" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Reservation">
           <Key>
@@ -1098,6 +1100,7 @@
           <EntitySetMapping Name="Produit">
             <EntityTypeMapping TypeName="InfoJoyeuxDB.Produit">
               <MappingFragment StoreEntitySet="Produit">
+                <ScalarProperty Name="Quantite_Critique" ColumnName="Quantite_Critique" />
                 <ScalarProperty Name="Code_Produit" ColumnName="Code_Produit" />
                 <ScalarProperty Name="Libelle_Produit" ColumnName="Libelle_Produit" />
                 <ScalarProperty Name="Prix" ColumnName="Prix" />
