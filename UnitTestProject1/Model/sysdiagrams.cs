@@ -7,19 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UnitTestProject
+namespace UnitTestProject.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class A_vendu
+    public partial class sysdiagrams
     {
-        public System.DateTime Date_Vente { get; set; }
-        public int Code_Personne { get; set; }
-        public int Code_Produit { get; set; }
-        public Nullable<int> Quantite_Produit { get; set; }
-    
-        public virtual Personne Personne { get; set; }
-        public virtual Produit Produit { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

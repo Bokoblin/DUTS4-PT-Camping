@@ -61,103 +61,99 @@
         <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
       </ItemGroup>
     </When>
-    <Otherwise>
-      <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
-      </ItemGroup>
-    </Otherwise>
+    <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="App.cs">
+    <Compile Include="Model\App.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="A_vendu.cs">
+    <Compile Include="Model\A_vendu.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Caracteristique_Emplacement.cs">
+    <Compile Include="Model\Caracteristique_Emplacement.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Client.cs">
+    <Compile Include="Model\Client.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database.Context.cs">
+    <Compile Include="Model\Database.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Database.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database.cs">
+    <Compile Include="Model\Database.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database.Designer.cs">
+    <Compile Include="Model\Database.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Database.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Droit.cs">
+    <Compile Include="Model\Droit.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Emplacement.cs">
+    <Compile Include="Model\Emplacement.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Employe.cs">
+    <Compile Include="Model\Employe.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Facture.cs">
+    <Compile Include="Model\Facture.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Fournisseur.cs">
+    <Compile Include="Model\Fournisseur.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="GraphicLocationTest.cs" />
-    <Compile Include="Incident.cs">
+    <Compile Include="Model\Incident.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Loge.cs">
+    <Compile Include="Model\Loge.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Personne.cs">
+    <Compile Include="Model\Personne.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Produit.cs">
+    <Compile Include="Model\Produit.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Reservation.cs">
+    <Compile Include="Model\Reservation.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagrams.cs">
+    <Compile Include="Model\sysdiagrams.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Type_Emplacement.cs">
+    <Compile Include="Model\Type_Emplacement.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Type_Incident.cs">
+    <Compile Include="Model\Type_Incident.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="LoginToolsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Database.edmx">
+    <EntityDeploy Include="Model\Database.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Database.Designer.cs</LastGenOutput>
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <None Include="Database.edmx.diagram">
+    <None Include="Model\Database.edmx.diagram">
       <DependentUpon>Database.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Database.Context.tt">
+    <Content Include="Model\Database.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Database.edmx</DependentUpon>
       <LastGenOutput>Database.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Database.tt">
+    <Content Include="Model\Database.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Database.edmx</DependentUpon>
       <LastGenOutput>Database.cs</LastGenOutput>

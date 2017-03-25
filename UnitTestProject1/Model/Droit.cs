@@ -7,23 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UnitTestProject
+namespace UnitTestProject.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Type_Incident
+    public partial class Droit
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Type_Incident()
+        public Droit()
         {
-            this.Incident = new HashSet<Incident>();
+            this.Personne = new HashSet<Personne>();
         }
     
-        public int Code_Type { get; set; }
-        public string Type_Incident1 { get; set; }
+        public int Code_Droit { get; set; }
+        public string Libelle_Droit { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Incident> Incident { get; set; }
+        public virtual ICollection<Personne> Personne { get; set; }
     }
 }

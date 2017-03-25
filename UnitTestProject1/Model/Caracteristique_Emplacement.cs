@@ -7,28 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UnitTestProject
+namespace UnitTestProject.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Produit
+    public partial class Caracteristique_Emplacement
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Produit()
+        public Caracteristique_Emplacement()
         {
-            this.A_vendu = new HashSet<A_vendu>();
-            this.Fournisseur = new HashSet<Fournisseur>();
+            this.Emplacement = new HashSet<Emplacement>();
         }
     
-        public int Code_Produit { get; set; }
-        public string Libelle_Produit { get; set; }
-        public double Prix { get; set; }
-        public int Quantite_Stock { get; set; }
+        public int Code_Caracteristique { get; set; }
+        public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<A_vendu> A_vendu { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Fournisseur> Fournisseur { get; set; }
+        public virtual ICollection<Emplacement> Emplacement { get; set; }
     }
 }
