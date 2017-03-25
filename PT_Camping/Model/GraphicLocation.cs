@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace PT_Camping.Model
 {
-    internal class GraphicLocation
+    public class GraphicLocation
     {
         public Emplacement Location { get; set; }
         public RectangleF Position { get; set; }
