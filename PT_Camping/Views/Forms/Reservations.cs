@@ -12,6 +12,14 @@ using PT_Camping.Model;
 
 namespace PT_Camping.Views.Forms
 {
+    /// <summary>
+    /// The Reservation is a Form that show all the 
+    /// reservations for a specific client
+    /// 
+    /// </summary>
+    /// Authors : Alexandre
+    /// Since : 20/03/17
+    /// 
     public partial class Reservations : Form
     {
         private DataBase _db;
@@ -29,12 +37,14 @@ namespace PT_Camping.Views.Forms
                     String[] itemArr = new string[5];
                     itemArr[0] = res.Date_Debut.ToString(CultureInfo.InvariantCulture);
                     itemArr[1] = res.Date_Fin.ToString(CultureInfo.InvariantCulture);
-                    itemArr[2] = _db.Loge.First(a => a.Code_Reservation == res.Code_Reservation);
-                    itemArr[3] =
-                        _db.Loge.Where(a => a.Code_Personne == res.Code_Personne).SelectMany(a => a.Emplacement)
-                        .Count().ToString();
-                    itemArr[4] = res.Est_Paye.ToString();
+                    itemArr[2] =
+                        _db.Loge.Where(a => a.Code_Reservation == res.Code_Reservation)
+                            .Select(a => a.Emplacement)
+                            .Count().ToString();
+                    itemArr[3] = res.Est_Paye.ToString();
+                    itemArr[4] = res.Code_Reservation.ToString();
                     ListViewItem item = new ListViewItem(itemArr);
+                    
                     reservationsList.Items.Add(item);
                 }
             }
@@ -50,9 +60,34 @@ namespace PT_Camping.Views.Forms
 
         }
 
+        private void reservationsList_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            locationsList.Items.Clear();
+            lodgerList.Items.Clear();
+            Reservation res = _db.Reservation.First(a => a.Code_Reservation == int.Parse(e.Item.SubItems[4].Text));
+            foreach (Emplacement location in res.Loge.Select(a => a.Emplacement))
+            {
+                locationsList.Items.Add(location.Nom_Emplacement);
+            }
+        }
+
         private void newReservationButton_Click(object sender, EventArgs e)
         {
+            new NewReservation(_codePerson).ShowDialog();
+        }
 
+        private void locationsList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Reservation res =
+                _db.Reservation.First(
+                    a => a.Code_Reservation == int.Parse((locationsList.SelectedItem as ListViewItem).SubItems[4].Text));
+            Emplacement loc = _db.Emplacement.First(a => a.Nom_Emplacement == (string)(sender as ListBox).SelectedItem);
+            lodgerList.Items.Clear();
+            foreach (Personne lodger in _db.Loge.Where(a => a.Code_Reservation == res.Code_Reservation && a.Code_Emplacement == loc.Code_Emplacement).
+                Select(a => a.Personne))
+            {
+                lodgerList.Items.Add(lodger.Nom_Personne + lodger.Prenom_Personne);
+            }
         }
     }
 }
