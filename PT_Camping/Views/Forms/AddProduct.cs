@@ -27,13 +27,14 @@ namespace PT_Camping.Views.Forms
 
             try
             {
-                if (productNameTextBox.Text == "" || productPriceTextBox.Text == "" || productStockTextBox.Text == "")
+                if (productNameTextBox.Text == "" || productPriceTextBox.Text == "" 
+                    || productStockTextBox.Text == "" || productCriticStockTextBox.Text == "")
                     throw new Exception("Toutes les valeurs marquées d'une étoile doivent être remplies.");
 
                 if (productNameTextBox.Text.Any(char.IsDigit))
                     throw new Exception("Le nom du produit ne peut contenir de valeur numérique.");
 
-                if (int.Parse(productStockTextBox.Text) < 0)
+                if (int.Parse(productStockTextBox.Text) < 0 || int.Parse(productCriticStockTextBox.Text) < 0)
                     throw new Exception("La quantité doit être positive.");
 
 
@@ -44,6 +45,7 @@ namespace PT_Camping.Views.Forms
                 {
                     Libelle_Produit = productNameTextBox.Text,
                     Quantite_Stock = Convert.ToInt32(productStockTextBox.Text),
+                    Quantite_Critique = Convert.ToInt32(productCriticStockTextBox.Text),
                     Prix = Convert.ToDouble(productPriceTextBox.Text)
                 };
                 _db.Produit.Add(product);
@@ -64,6 +66,16 @@ namespace PT_Camping.Views.Forms
             }
         }
 
+
+        private void ProductCriticStockTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+
         private void ProductPriceTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ( !char.IsControl(e.KeyChar) && e.KeyChar != ',' && !char.IsDigit(e.KeyChar))
@@ -76,5 +88,6 @@ namespace PT_Camping.Views.Forms
         {
             Close();
         }
+
     }
 }
