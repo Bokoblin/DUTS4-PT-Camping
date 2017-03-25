@@ -1,5 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PT_Camping.Model;
+﻿using PT_Camping.Model;
+using TestClass = NUnit.Framework.TestFixtureAttribute;
+using TestMethod = NUnit.Framework.TestAttribute;
+using Assert = NUnit.Framework.Assert;
+
 
 namespace UnitTestProject
 {
