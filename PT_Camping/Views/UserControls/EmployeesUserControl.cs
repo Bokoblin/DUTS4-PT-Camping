@@ -34,12 +34,23 @@ namespace PT_Camping.Views.UserControls
             InitPermissions();
         }
 
+
+        public EmployeesUserControl(HomeUserControl home, int employeeCode) : this(home)
+        {
+            foreach (ListViewItem item in employeesListView.Items)
+            {
+                item.Selected = item.Name == employeeCode.ToString();
+            }
+        }
+
+
         public void InitPermissions()
         {
             addEmployeeButton.Enabled = UserRights.Any(d => d.Libelle_Droit == "writeEmployees");
             dismissButton.Enabled = UserRights.Any(d => d.Libelle_Droit == "writeEmployees");
             editButton.Visible = UserRights.Any(d => d.Libelle_Droit == "writeEmployees");
             permissionButton.Enabled = UserRights.Any(d => d.Libelle_Droit == "writeEmployees");
+            addEmployeePhotoPictureBox.Visible = UserRights.Any(d => d.Libelle_Droit == "writeEmployees");
         }
 
 
@@ -92,10 +103,18 @@ namespace PT_Camping.Views.UserControls
 
                 if (employee.Photo != null)
                 {
-                    MemoryStream ms = new MemoryStream(employee.Photo);
-                    Bitmap bitmap = new Bitmap(ms);
-                    pictureBox.Image = bitmap;
-                    ms.Close();
+                    try
+                    {
+                        MemoryStream ms = new MemoryStream(employee.Photo);
+                        Bitmap bitmap = new Bitmap(ms);
+                        pictureBox.Image = bitmap;
+                        ms.Close();
+                    }
+                    catch (ArgumentException)
+                    {
+                        //Crashes may occur if file is corrupted or convertion to bitmap fails
+                        pictureBox.Image = new Bitmap(Resources.ic_contact_default);
+                    }    
                 }
                 else
                     pictureBox.Image = new Bitmap(Resources.ic_contact_default);
