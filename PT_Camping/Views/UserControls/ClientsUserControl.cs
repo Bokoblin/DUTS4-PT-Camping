@@ -268,7 +268,7 @@ namespace PT_Camping.Views.UserControls
         private void ReservationsButton_Click(object sender, EventArgs e)
         {
             int code = int.Parse(clientListView.SelectedItems[0].Name);
-            new Reservations(code).ShowDialog();
+            new Reservations(HomeUserControl, code).Show();
         }
     }
 }

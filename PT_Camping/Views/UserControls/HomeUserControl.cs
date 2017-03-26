@@ -24,7 +24,6 @@ namespace PT_Camping.Views.UserControls
         private StatsUserControl _statsUserControl;
         private MapUserControl _mapUserControl;
 
-
         public HomeUserControl(AppWindow window)
         {
             InitializeComponent();
@@ -170,6 +169,7 @@ namespace PT_Camping.Views.UserControls
                     mapTab.Controls.Add(_mapUserControl);
                     _mapUserControl?.HandleResize(mapTab.Size);
                 }
+                _mapUserControl.ResetMode();
             }
         }
 
@@ -179,5 +179,16 @@ namespace PT_Camping.Views.UserControls
         /// </summary>
 
         public AppWindow Window { get; set; }
+
+        public MapUserControl MapUserControl
+        {
+            get { return _mapUserControl; }
+            set { _mapUserControl = value; }
+        }
+
+        public TabControl HomeTabControl
+        {
+            get { return homeTabControl; }
+        }
     }
 }

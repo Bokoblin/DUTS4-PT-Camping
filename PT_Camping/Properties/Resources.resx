@@ -253,4 +253,13 @@ et supérieure à la date de l'incident.</value>
     <value>Erreur lors de la sauvegarde dans la base de données : 
 </value>
   </data>
+  <data name="reservationTitleLabel" xml:space="preserve">
+    <value>Liste des réservations de : </value>
+  </data>
+  <data name="client_not_found" xml:space="preserve">
+    <value>Client introuvable. Merci de l'écrire sous la forme Nom + Prénom</value>
+  </data>
+  <data name="client_already_added" xml:space="preserve">
+    <value>Ce client est déjà présent dans cette réservation.</value>
+  </data>
 </root>

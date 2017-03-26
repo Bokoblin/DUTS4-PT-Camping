@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PT_Camping.Model;
+using PT_Camping.Properties;
+using PT_Camping.Views.UserControls;
 
 namespace PT_Camping.Views.Forms
 {
@@ -24,13 +26,17 @@ namespace PT_Camping.Views.Forms
     {
         private DataBase _db;
         private int _codePerson;
+        private HomeUserControl _homeUserControl;
 
-        public Reservations(int codeClient)
+        public Reservations(HomeUserControl homeUserControl, int codeClient)
         {
             InitializeComponent();
+            _homeUserControl = homeUserControl;
             _db = new DataBase();
             if (_db.Client.Any(c => c.Code_Personne == codeClient))
             {
+                Personne person = _db.Client.First(a => a.Code_Personne == codeClient).Personne;
+                titleLabel.Text = Resources.reservationTitleLabel + person.Nom_Personne + Resources.one_space + person.Prenom_Personne;
                 _codePerson = codeClient;
                 foreach (Reservation res in _db.Reservation.Where(a => a.Code_Personne == _codePerson))
                 {
@@ -52,12 +58,21 @@ namespace PT_Camping.Views.Forms
 
         private void deleteReservationButton_Click(object sender, EventArgs e)
         {
-
+            if (reservationsList.SelectedItems[0] != null)
+            {
+                int codeRes = (int) reservationsList.SelectedItems[0].SubItems[4].Tag;
+                foreach (Loge loge in _db.Loge.Where(a => a.Code_Reservation == codeRes))
+                {
+                    _db.Loge.Remove(loge);
+                }
+                _db.Reservation.Remove(
+                    _db.Reservation.First(a => a.Code_Reservation == codeRes));
+            }
         }
 
         private void factureButton_Click(object sender, EventArgs e)
         {
-
+            //TODO Facture
         }
 
         private void reservationsList_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
@@ -73,7 +88,7 @@ namespace PT_Camping.Views.Forms
 
         private void newReservationButton_Click(object sender, EventArgs e)
         {
-            new NewReservation(_codePerson).ShowDialog();
+            new NewReservation(_homeUserControl, _codePerson).Show();
         }
 
         private void locationsList_SelectedIndexChanged(object sender, EventArgs e)
