@@ -43,14 +43,16 @@
             this.deleteLocationButton = new System.Windows.Forms.Button();
             this.removeLodgerButton = new System.Windows.Forms.Button();
             this.addLodgerButton = new System.Windows.Forms.Button();
+            this.addLodgerComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(9, 7);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(169, 17);
+            this.label1.Size = new System.Drawing.Size(125, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Titulaire de la reservation";
             // 
@@ -59,85 +61,97 @@
             this.reservationHolderComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.reservationHolderComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.reservationHolderComboBox.FormattingEnabled = true;
-            this.reservationHolderComboBox.Location = new System.Drawing.Point(15, 29);
+            this.reservationHolderComboBox.Location = new System.Drawing.Point(11, 24);
+            this.reservationHolderComboBox.Margin = new System.Windows.Forms.Padding(2);
             this.reservationHolderComboBox.Name = "reservationHolderComboBox";
-            this.reservationHolderComboBox.Size = new System.Drawing.Size(200, 24);
+            this.reservationHolderComboBox.Size = new System.Drawing.Size(187, 21);
             this.reservationHolderComboBox.TabIndex = 1;
-            this.reservationHolderComboBox.TextChanged += new System.EventHandler(this.reservationHolderComboBox_TextChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 56);
+            this.label2.Location = new System.Drawing.Point(9, 46);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 17);
+            this.label2.Size = new System.Drawing.Size(60, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Date début";
             // 
             // beginDateTimePicker
             // 
-            this.beginDateTimePicker.Location = new System.Drawing.Point(15, 76);
+            this.beginDateTimePicker.CustomFormat = "dd-MM-yyyy HH:mm";
+            this.beginDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.beginDateTimePicker.Location = new System.Drawing.Point(11, 62);
+            this.beginDateTimePicker.Margin = new System.Windows.Forms.Padding(2);
             this.beginDateTimePicker.Name = "beginDateTimePicker";
-            this.beginDateTimePicker.Size = new System.Drawing.Size(200, 22);
+            this.beginDateTimePicker.Size = new System.Drawing.Size(123, 20);
             this.beginDateTimePicker.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 101);
+            this.label3.Location = new System.Drawing.Point(9, 82);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(57, 17);
+            this.label3.Size = new System.Drawing.Size(44, 13);
             this.label3.TabIndex = 4;
             this.label3.Text = "Date fin";
             // 
             // endDateTimePicker
             // 
-            this.endDateTimePicker.Location = new System.Drawing.Point(15, 121);
+            this.endDateTimePicker.CustomFormat = "dd-MM-yyyy HH:mm";
+            this.endDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.endDateTimePicker.Location = new System.Drawing.Point(11, 98);
+            this.endDateTimePicker.Margin = new System.Windows.Forms.Padding(2);
             this.endDateTimePicker.Name = "endDateTimePicker";
-            this.endDateTimePicker.Size = new System.Drawing.Size(200, 22);
+            this.endDateTimePicker.Size = new System.Drawing.Size(123, 20);
             this.endDateTimePicker.TabIndex = 5;
             // 
             // locationsListBox
             // 
             this.locationsListBox.FormattingEnabled = true;
-            this.locationsListBox.ItemHeight = 16;
-            this.locationsListBox.Location = new System.Drawing.Point(15, 166);
+            this.locationsListBox.Location = new System.Drawing.Point(11, 135);
+            this.locationsListBox.Margin = new System.Windows.Forms.Padding(2);
             this.locationsListBox.Name = "locationsListBox";
-            this.locationsListBox.Size = new System.Drawing.Size(252, 212);
+            this.locationsListBox.Size = new System.Drawing.Size(187, 173);
             this.locationsListBox.TabIndex = 6;
+            this.locationsListBox.SelectedValueChanged += new System.EventHandler(this.locationsListBox_SelectedValueChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 146);
+            this.label4.Location = new System.Drawing.Point(9, 119);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(255, 17);
+            this.label4.Size = new System.Drawing.Size(189, 13);
             this.label4.TabIndex = 7;
             this.label4.Text = "Emplacements pris par ette réservation";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(308, 146);
+            this.label5.Location = new System.Drawing.Point(254, 118);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(202, 17);
+            this.label5.Size = new System.Drawing.Size(153, 13);
             this.label5.TabIndex = 8;
             this.label5.Text = "Résidents de cet emplacement";
             // 
             // lodgersListBox
             // 
             this.lodgersListBox.FormattingEnabled = true;
-            this.lodgersListBox.ItemHeight = 16;
-            this.lodgersListBox.Location = new System.Drawing.Point(311, 167);
+            this.lodgersListBox.Location = new System.Drawing.Point(256, 135);
+            this.lodgersListBox.Margin = new System.Windows.Forms.Padding(2);
             this.lodgersListBox.Name = "lodgersListBox";
-            this.lodgersListBox.Size = new System.Drawing.Size(266, 212);
+            this.lodgersListBox.Size = new System.Drawing.Size(262, 173);
             this.lodgersListBox.TabIndex = 9;
             // 
             // addReservationButton
             // 
-            this.addReservationButton.Location = new System.Drawing.Point(219, 418);
+            this.addReservationButton.Location = new System.Drawing.Point(227, 373);
+            this.addReservationButton.Margin = new System.Windows.Forms.Padding(2);
             this.addReservationButton.Name = "addReservationButton";
-            this.addReservationButton.Size = new System.Drawing.Size(143, 33);
+            this.addReservationButton.Size = new System.Drawing.Size(107, 27);
             this.addReservationButton.TabIndex = 10;
             this.addReservationButton.Text = "Ajouter Réservation";
             this.addReservationButton.UseVisualStyleBackColor = true;
@@ -145,9 +159,10 @@
             // 
             // addLocationButton
             // 
-            this.addLocationButton.Location = new System.Drawing.Point(15, 385);
+            this.addLocationButton.Location = new System.Drawing.Point(11, 313);
+            this.addLocationButton.Margin = new System.Windows.Forms.Padding(2);
             this.addLocationButton.Name = "addLocationButton";
-            this.addLocationButton.Size = new System.Drawing.Size(37, 23);
+            this.addLocationButton.Size = new System.Drawing.Size(28, 19);
             this.addLocationButton.TabIndex = 11;
             this.addLocationButton.Text = "+";
             this.addLocationButton.UseVisualStyleBackColor = true;
@@ -155,9 +170,10 @@
             // 
             // deleteLocationButton
             // 
-            this.deleteLocationButton.Location = new System.Drawing.Point(58, 385);
+            this.deleteLocationButton.Location = new System.Drawing.Point(44, 313);
+            this.deleteLocationButton.Margin = new System.Windows.Forms.Padding(2);
             this.deleteLocationButton.Name = "deleteLocationButton";
-            this.deleteLocationButton.Size = new System.Drawing.Size(38, 23);
+            this.deleteLocationButton.Size = new System.Drawing.Size(28, 19);
             this.deleteLocationButton.TabIndex = 12;
             this.deleteLocationButton.Text = "-";
             this.deleteLocationButton.UseVisualStyleBackColor = true;
@@ -165,9 +181,10 @@
             // 
             // removeLodgerButton
             // 
-            this.removeLodgerButton.Location = new System.Drawing.Point(355, 385);
+            this.removeLodgerButton.Location = new System.Drawing.Point(490, 310);
+            this.removeLodgerButton.Margin = new System.Windows.Forms.Padding(2);
             this.removeLodgerButton.Name = "removeLodgerButton";
-            this.removeLodgerButton.Size = new System.Drawing.Size(38, 23);
+            this.removeLodgerButton.Size = new System.Drawing.Size(28, 19);
             this.removeLodgerButton.TabIndex = 14;
             this.removeLodgerButton.Text = "-";
             this.removeLodgerButton.UseVisualStyleBackColor = true;
@@ -175,19 +192,32 @@
             // 
             // addLodgerButton
             // 
-            this.addLodgerButton.Location = new System.Drawing.Point(312, 385);
+            this.addLodgerButton.Location = new System.Drawing.Point(458, 310);
+            this.addLodgerButton.Margin = new System.Windows.Forms.Padding(2);
             this.addLodgerButton.Name = "addLodgerButton";
-            this.addLodgerButton.Size = new System.Drawing.Size(37, 23);
+            this.addLodgerButton.Size = new System.Drawing.Size(28, 19);
             this.addLodgerButton.TabIndex = 13;
             this.addLodgerButton.Text = "+";
             this.addLodgerButton.UseVisualStyleBackColor = true;
             this.addLodgerButton.Click += new System.EventHandler(this.addLodgerButton_Click);
             // 
+            // addLodgerComboBox
+            // 
+            this.addLodgerComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.addLodgerComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.addLodgerComboBox.FormattingEnabled = true;
+            this.addLodgerComboBox.Location = new System.Drawing.Point(257, 310);
+            this.addLodgerComboBox.Margin = new System.Windows.Forms.Padding(2);
+            this.addLodgerComboBox.Name = "addLodgerComboBox";
+            this.addLodgerComboBox.Size = new System.Drawing.Size(197, 21);
+            this.addLodgerComboBox.TabIndex = 15;
+            // 
             // NewReservation
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(589, 463);
+            this.ClientSize = new System.Drawing.Size(535, 411);
+            this.Controls.Add(this.addLodgerComboBox);
             this.Controls.Add(this.removeLodgerButton);
             this.Controls.Add(this.addLodgerButton);
             this.Controls.Add(this.deleteLocationButton);
@@ -203,6 +233,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.reservationHolderComboBox);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "NewReservation";
             this.Text = "NewReservation";
             this.ResumeLayout(false);
@@ -227,5 +258,6 @@
         private System.Windows.Forms.Button deleteLocationButton;
         private System.Windows.Forms.Button removeLodgerButton;
         private System.Windows.Forms.Button addLodgerButton;
+        private System.Windows.Forms.ComboBox addLodgerComboBox;
     }
 }
