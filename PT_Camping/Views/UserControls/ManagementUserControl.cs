@@ -37,7 +37,7 @@ namespace PT_Camping.Views.UserControls
                     a => a.Code_Personne == LoginTools.Employee.Personne.Code_Personne).Droit.ToList();
             if (LoginTools.Employee != null)
             {
-                userNameLabel.Text = Resources.hello_user 
+                userNameButton.Text = Resources.hello_user 
                     + LoginTools.Employee.Personne.Prenom_Personne 
                     + Resources.one_space + LoginTools.Employee.Personne.Nom_Personne;
             }
@@ -56,6 +56,10 @@ namespace PT_Camping.Views.UserControls
             HomeUserControl.Window.WindowPanel.Controls.Remove(this);
         }
 
+        private void UserNameButton_Click(object sender, EventArgs e)
+        {
+            HomeUserControl.StartEmployeesFromTitleBar(this);
+        }
 
         internal void HandleResize()
         {
