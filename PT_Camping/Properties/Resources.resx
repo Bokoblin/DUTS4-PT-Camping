@@ -262,4 +262,13 @@ et supérieure à la date de l'incident.</value>
   <data name="client_already_added" xml:space="preserve">
     <value>Ce client est déjà présent dans cette réservation.</value>
   </data>
+  <data name="beginDate_superior_endDate" xml:space="preserve">
+    <value>La date de fin doit être suprérieure à la date de début</value>
+  </data>
+  <data name="reservation_need_at_least_1_location" xml:space="preserve">
+    <value>La réservation doit contenir au moins un emplacement</value>
+  </data>
+  <data name="reservation_done" xml:space="preserve">
+    <value>Réservation effectuée !</value>
+  </data>
 </root>
