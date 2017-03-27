@@ -60,6 +60,24 @@ namespace PT_Camping.Views.Forms
             lodgersListBox.DisplayMember = "ClientFullName";
         }
 
+        public NewReservation(HomeUserControl homeUserControl, int codePerson) : this(homeUserControl)
+        {
+            Personne client = _db.Personne.Find(codePerson);
+            if (client != null)
+            {
+                reservationHolderComboBox.Text = client.Nom_Personne + Resources.one_space + client.Prenom_Personne;
+            }
+        }
+
+        public NewReservation(HomeUserControl homeUserControl, Emplacement emplacement): this(homeUserControl)
+        {
+            locationsListBox.Items.Add(new LocationItem
+            {
+                Location = _db.Emplacement.First(a => a.Code_Emplacement == emplacement.Code_Emplacement),
+                Lodgers = new HashSet<Lodger>()
+            });
+        }
+
         private List<Personne> GetAllLodgersAdded()
         {
             List<Personne> lodgers = new List<Personne>();
@@ -71,15 +89,6 @@ namespace PT_Camping.Views.Forms
                 }
             }
             return lodgers;
-        }
-
-        public NewReservation(HomeUserControl homeUserControl, int codePerson): this(homeUserControl)
-        {
-            Personne client = _db.Personne.Find(codePerson);
-            if (client != null)
-            {
-                reservationHolderComboBox.SelectedText = client.Nom_Personne + " " + client.Prenom_Personne;
-            }
         }
 
         private void addLocationButton_Click(object sender, EventArgs e)
@@ -121,7 +130,7 @@ namespace PT_Camping.Views.Forms
         {
             String text = addLodgerComboBox.Text;
             Client client =
-                _db.Client.First(a => text.Equals(a.Personne.Nom_Personne + " " + a.Personne.Prenom_Personne));
+                _db.Client.FirstOrDefault(a => text.Equals(a.Personne.Nom_Personne + " " + a.Personne.Prenom_Personne));
             if (client?.Personne == null)
             {
                 MessageBox.Show(Resources.client_not_found);
@@ -137,7 +146,7 @@ namespace PT_Camping.Views.Forms
             {
                 Client = client
             });
-            refreshLodgers();
+            RefreshLodgers();
         }
 
         private void removeLodgerButton_Click(object sender, EventArgs e)
@@ -147,14 +156,14 @@ namespace PT_Camping.Views.Forms
             {
                 locationItem?.Lodgers.Remove((Lodger)lodgersListBox.SelectedItem);
             }
-            refreshLodgers();
+            RefreshLodgers();
         }
 
         private void addReservationButton_Click(object sender, EventArgs e)
         {
             String reservationHolderName = reservationHolderComboBox.Text;
             Client client =
-                _db.Client.First(a => reservationHolderName.Equals(a.Personne.Nom_Personne + " " + a.Personne.Prenom_Personne));
+                _db.Client.FirstOrDefault(a => reservationHolderName.Equals(a.Personne.Nom_Personne + " " + a.Personne.Prenom_Personne));
             if (client?.Personne == null)
             {
                 MessageBox.Show(Resources.client_not_found);
@@ -226,7 +235,7 @@ namespace PT_Camping.Views.Forms
             }
         }
 
-        private void refreshLodgers()
+        private void RefreshLodgers()
         {
             LocationItem locationItem = locationsListBox.SelectedItem as LocationItem;
             if (locationItem != null)
@@ -249,7 +258,7 @@ namespace PT_Camping.Views.Forms
 
         private void locationsListBox_SelectedValueChanged(object sender, EventArgs e)
         {
-            refreshLodgers();
+            RefreshLodgers();
         }
     }
 }

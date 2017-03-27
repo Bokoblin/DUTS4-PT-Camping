@@ -61,8 +61,15 @@ namespace PT_Camping.Views.UserControls
                 _selectedLocation = value;
                 if (_mode == MapMode.PickLocation && value != null)
                 {
-                    HomeUserControl.HomeTabControl.SelectTab(0);
-                    _pickCallBackAction(value.Location.Code_Emplacement);
+                    if (!value.Location.Type_Emplacement.Est_Reservable)
+                    {
+                        MessageBox.Show(Resources.not_reservable_emplacement);
+                    }
+                    else
+                    {
+                        HomeUserControl.HomeTabControl.SelectTab(0);
+                        _pickCallBackAction(value.Location.Code_Emplacement);
+                    }
                 }
                 else
                 {
@@ -876,6 +883,14 @@ namespace PT_Camping.Views.UserControls
                 code = _db.Incident.First(i => i.Code_Incident == code).Code_Incident;
                 HomeUserControl.Window.WindowPanel.Controls.Remove(this);
                 HomeUserControl.StartIssuesFromStats(code);
+            }
+        }
+
+        private void resButton_Click(object sender, EventArgs e)
+        {
+            if (_selectedLocation != null)
+            {
+                new NewReservation(HomeUserControl, _selectedLocation.Location).Show();
             }
         }
     }

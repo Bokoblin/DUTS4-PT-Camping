@@ -271,4 +271,7 @@ et supérieure à la date de l'incident.</value>
   <data name="reservation_done" xml:space="preserve">
     <value>Réservation effectuée !</value>
   </data>
+  <data name="not_reservable_emplacement" xml:space="preserve">
+    <value>Cet emplacement n'est pas réservable</value>
+  </data>
 </root>

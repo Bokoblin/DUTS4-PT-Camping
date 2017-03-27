@@ -358,6 +358,15 @@ namespace PT_Camping.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cet emplacement n&apos;est pas réservable.
+        /// </summary>
+        internal static string not_reservable_emplacement {
+            get {
+                return ResourceManager.GetString("not_reservable_emplacement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Le libellé du produit ne peut contenir de valeur numérique..
         /// </summary>
         internal static string novalue_product_name_exception {
