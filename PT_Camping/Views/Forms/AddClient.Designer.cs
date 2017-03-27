@@ -34,7 +34,6 @@
             this.emailTextBox = new System.Windows.Forms.TextBox();
             this.phoneTextBox = new System.Windows.Forms.TextBox();
             this.addressTextBox = new System.Windows.Forms.TextBox();
-            this.birthDateTextBox = new System.Windows.Forms.TextBox();
             this.surnameTextBox = new System.Windows.Forms.TextBox();
             this.emailLabel = new System.Windows.Forms.Label();
             this.phoneLabel = new System.Windows.Forms.Label();
@@ -43,6 +42,7 @@
             this.infoLabel = new System.Windows.Forms.Label();
             this.OKButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.birthDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // surnameLabel
@@ -58,7 +58,9 @@
             // nameTextBox
             // 
             this.nameTextBox.Location = new System.Drawing.Point(58, 91);
+            this.nameTextBox.MaxLength = 25;
             this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.ShortcutsEnabled = false;
             this.nameTextBox.Size = new System.Drawing.Size(156, 20);
             this.nameTextBox.TabIndex = 35;
             // 
@@ -74,14 +76,18 @@
             // emailTextBox
             // 
             this.emailTextBox.Location = new System.Drawing.Point(58, 295);
+            this.emailTextBox.MaxLength = 30;
             this.emailTextBox.Name = "emailTextBox";
+            this.emailTextBox.ShortcutsEnabled = false;
             this.emailTextBox.Size = new System.Drawing.Size(156, 20);
             this.emailTextBox.TabIndex = 39;
             // 
             // phoneTextBox
             // 
             this.phoneTextBox.Location = new System.Drawing.Point(58, 183);
+            this.phoneTextBox.MaxLength = 10;
             this.phoneTextBox.Name = "phoneTextBox";
+            this.phoneTextBox.ShortcutsEnabled = false;
             this.phoneTextBox.Size = new System.Drawing.Size(156, 20);
             this.phoneTextBox.TabIndex = 37;
             this.phoneTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PhoneTextBox_KeyPress);
@@ -89,22 +95,19 @@
             // addressTextBox
             // 
             this.addressTextBox.Location = new System.Drawing.Point(58, 229);
+            this.addressTextBox.MaxLength = 250;
             this.addressTextBox.Multiline = true;
             this.addressTextBox.Name = "addressTextBox";
+            this.addressTextBox.ShortcutsEnabled = false;
             this.addressTextBox.Size = new System.Drawing.Size(156, 40);
             this.addressTextBox.TabIndex = 38;
-            // 
-            // birthDateTextBox
-            // 
-            this.birthDateTextBox.Location = new System.Drawing.Point(58, 136);
-            this.birthDateTextBox.Name = "birthDateTextBox";
-            this.birthDateTextBox.Size = new System.Drawing.Size(156, 20);
-            this.birthDateTextBox.TabIndex = 36;
             // 
             // surnameTextBox
             // 
             this.surnameTextBox.Location = new System.Drawing.Point(58, 46);
+            this.surnameTextBox.MaxLength = 25;
             this.surnameTextBox.Name = "surnameTextBox";
+            this.surnameTextBox.ShortcutsEnabled = false;
             this.surnameTextBox.Size = new System.Drawing.Size(156, 20);
             this.surnameTextBox.TabIndex = 34;
             // 
@@ -175,11 +178,21 @@
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
+            // birthDateTimePicker
+            // 
+            this.birthDateTimePicker.CustomFormat = "dd MMMM yyyy";
+            this.birthDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.birthDateTimePicker.Location = new System.Drawing.Point(58, 137);
+            this.birthDateTimePicker.Name = "birthDateTimePicker";
+            this.birthDateTimePicker.Size = new System.Drawing.Size(156, 20);
+            this.birthDateTimePicker.TabIndex = 51;
+            // 
             // AddClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(264, 415);
+            this.Controls.Add(this.birthDateTimePicker);
             this.Controls.Add(this.OKButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.infoLabel);
@@ -189,7 +202,6 @@
             this.Controls.Add(this.emailTextBox);
             this.Controls.Add(this.phoneTextBox);
             this.Controls.Add(this.addressTextBox);
-            this.Controls.Add(this.birthDateTextBox);
             this.Controls.Add(this.surnameTextBox);
             this.Controls.Add(this.emailLabel);
             this.Controls.Add(this.phoneLabel);
@@ -215,7 +227,6 @@
         private System.Windows.Forms.TextBox emailTextBox;
         private System.Windows.Forms.TextBox phoneTextBox;
         private System.Windows.Forms.TextBox addressTextBox;
-        private System.Windows.Forms.TextBox birthDateTextBox;
         private System.Windows.Forms.TextBox surnameTextBox;
         private System.Windows.Forms.Label emailLabel;
         private System.Windows.Forms.Label phoneLabel;
@@ -224,5 +235,6 @@
         private System.Windows.Forms.Label infoLabel;
         private System.Windows.Forms.Button OKButton;
         private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.DateTimePicker birthDateTimePicker;
     }
 }

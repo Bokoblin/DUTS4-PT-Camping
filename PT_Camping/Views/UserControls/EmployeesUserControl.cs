@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Net.Mail;
 using System.Windows.Forms;
 using PT_Camping.Model;
@@ -22,7 +23,6 @@ namespace PT_Camping.Views.UserControls
         {
             InitializeComponent();
             appBarTitle.Text = Resources.employee_management;
-            Db = new DataBase();
 
             employeesListView.View = View.Details;
             employeesListView.Columns.Add("Nom");
@@ -31,6 +31,15 @@ namespace PT_Camping.Views.UserControls
 
             UpdateEmployeesListView();
             HandleResize();
+            InitPermissions();
+        }
+
+        public void InitPermissions()
+        {
+            addEmployeeButton.Enabled = UserRights.Any(d => d.Libelle_Droit == "writeEmployees");
+            dismissButton.Enabled = UserRights.Any(d => d.Libelle_Droit == "writeEmployees");
+            editButton.Visible = UserRights.Any(d => d.Libelle_Droit == "writeEmployees");
+            permissionButton.Enabled = UserRights.Any(d => d.Libelle_Droit == "writeEmployees");
         }
 
 
@@ -90,8 +99,11 @@ namespace PT_Camping.Views.UserControls
                 }
                 else
                     pictureBox.Image = new Bitmap(Resources.ic_contact_default);
-
-                dismissButton.Enabled = (employee.Personne.Code_Personne != 1); //You can't dismiss Mr Campo
+                
+                dismissButton.Enabled = (employee.Personne.Code_Personne != 1) 
+                    && UserRights.Any(d => d.Libelle_Droit == "writeEmployees"); //Mr Campo can't be dismissed
+                editButton.Visible = (employee.Personne.Code_Personne == LoginTools.Employee.Code_Personne) 
+                    || UserRights.Any(d => d.Libelle_Droit == "writeEmployees");
             }
         }
 
@@ -99,6 +111,7 @@ namespace PT_Camping.Views.UserControls
         private void AddEmployeeButton_Click(object sender, EventArgs e)
         {
             new AddEmployee(Db).ShowDialog();
+            Cursor.Current = Cursors.WaitCursor;
             UpdateEmployeesListView();
         }
    
@@ -248,5 +261,46 @@ namespace PT_Camping.Views.UserControls
             loginTextBox.ReadOnly = true;
             editButton.BackgroundImage = Resources.ic_edit;
         }
-    }
+
+
+        private void AddEmployeePhotoPictureBox_Click(object sender, EventArgs e)
+        {
+            using (FileDialog fd = new OpenFileDialog())
+            {
+                fd.Title = Resources.select_background_image;
+                fd.Filter = Resources.images_files_formats;
+                if (fd.ShowDialog() == DialogResult.OK)
+                {
+                    Cursor.Current = Cursors.WaitCursor;
+                    try
+                    {
+                        Bitmap image = new Bitmap(fd.FileName);
+                        image.SetResolution(50, 70);
+                        LoginTools.CheckConnection();
+
+                        int code = int.Parse(employeesListView.SelectedItems[0].Name);
+                        var employee = Db.Employe.Find(code);
+
+                        if (employee != null)
+                        {
+                            MemoryStream jpegStream = new MemoryStream();
+                            image.Save(jpegStream, System.Drawing.Imaging.ImageFormat.Jpeg);
+                            employee.Photo = jpegStream.ToArray();
+                            Db.SaveChanges();
+                            pictureBox.Image = image;
+                        }
+                    }
+                    catch (FileNotFoundException)
+                    {
+                        MessageBox.Show(Resources.file_not_found_please_retry);
+                    }
+                    catch (FileLoadException)
+                    {
+                        MessageBox.Show(Resources.error_when_opening_the_file_please_retry);
+                    }
+                    Cursor.Current = Cursors.Default;
+                }
+            }
+        }
+    }      
 }

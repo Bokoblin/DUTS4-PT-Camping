@@ -1,9 +1,46 @@
 Project Name : PT4-Camping
 Developers   : Yonnel BERWIT, Alexandre JACQUOT, Arthur JOLIVET, Claire MARCINIAK, Valentine RENAUD
 
-Current version : v0.4.1
+Current version : v0.6.0
 
 ==================================================================================================
+v0.6.0 (27/03/2017)
+
+- Added unit tests
+
+--------------------------------------------------------------------------
+
+v0.5.2 (25/03/2017)
+
+- Finished Textboxes protection against bad entries and copy/paste
+- Added option to change an employee photo
+- Enhanced Sign-in screen
+- Added checkboxes in "Add Employee" and "Connection" to show/hide password
+- Replaced date textbox in "Add client" by a DateTimePicker
+- Fixed graphical issues when launching a management screen or the map from Stats
+- Fixed sell product that wasn't retained in DB
+- Fixed stats sorting relying until then to string comparison instead of int
+- Other minor improvements and fixes
+
+
+--------------------------------------------------------------------------
+
+v0.5.1 (22/03/2017)
+
+- Updated documentation
+
+
+--------------------------------------------------------------------------
+
+v0.5.0 (22/03/2017)
+
+- Added support for permissions
+- Added state list icons in issues and stocks
+- Added confirm delete dialogs
+- Adding issue now allows to choose the location linked
+
+
+--------------------------------------------------------------------------
 
 v0.4.1 (18/03/2017)
 
@@ -24,7 +61,6 @@ v0.4.0 (17/03/2017)
 
 
 --------------------------------------------------------------------------
-
 
 v0.3.0 (16/03/2017)
 
@@ -73,4 +109,4 @@ v0.1 (04/02/2017)
 - Added stub Connexion and Home winforms
 
 
---------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------

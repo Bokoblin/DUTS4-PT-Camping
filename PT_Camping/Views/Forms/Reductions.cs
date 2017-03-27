@@ -13,10 +13,10 @@ namespace PT_Camping.Views.Forms
     /// Since : 15/03/17
     public partial class ApplyReduction : Form
     {
-        private int _reductionPercent { get; set; }
-        private int _fidelityReduction { get; set; }
+        private int _reductionPercent;
+        private int _fidelityReduction;
         private readonly Client _client;
-        private int _totalReduction { get; set; }
+        private int _totalReduction;
 
 
         public ApplyReduction(Client client)
