@@ -54,7 +54,6 @@
             this.emailLabel = new System.Windows.Forms.Label();
             this.phoneTextBox = new System.Windows.Forms.TextBox();
             this.phoneLabel = new System.Windows.Forms.Label();
-            this.reductionButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel.SuspendLayout();
             this.detailsPanel.SuspendLayout();
             this.detailsTitlePanel.SuspendLayout();
@@ -71,7 +70,6 @@
             this.tableLayoutPanel.Controls.Add(this.addClientButton, 1, 2);
             this.tableLayoutPanel.Controls.Add(this.clientListView, 1, 1);
             this.tableLayoutPanel.Controls.Add(this.detailsPanel, 3, 1);
-            this.tableLayoutPanel.Controls.Add(this.reductionButton, 3, 2);
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel.Location = new System.Drawing.Point(0, 50);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
@@ -397,18 +395,6 @@
             this.phoneLabel.TabIndex = 23;
             this.phoneLabel.Text = "Téléphone";
             // 
-            // reductionButton
-            // 
-            this.reductionButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.reductionButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.reductionButton.Location = new System.Drawing.Point(584, 467);
-            this.reductionButton.Name = "reductionButton";
-            this.reductionButton.Size = new System.Drawing.Size(181, 28);
-            this.reductionButton.TabIndex = 35;
-            this.reductionButton.Text = "TEMP_APPLY_REDUCTION";
-            this.reductionButton.UseVisualStyleBackColor = true;
-            this.reductionButton.Click += new System.EventHandler(this.ReducClient_Click);
-            // 
             // ClientsUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -450,7 +436,6 @@
         private System.Windows.Forms.TextBox phoneTextBox;
         private System.Windows.Forms.Label currentReservationsLabel;
         private System.Windows.Forms.Button deleteButton;
-        private System.Windows.Forms.Button reductionButton;
         private System.Windows.Forms.Label dateInscripLabel;
         private System.Windows.Forms.TextBox dateInscripTextBox;
         private System.Windows.Forms.Button resetButton;

@@ -49,6 +49,8 @@
             this.sellButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.detailsPanel = new System.Windows.Forms.Panel();
+            this.criticQuantityLabel = new System.Windows.Forms.Label();
+            this.criticAmountTextBox = new System.Windows.Forms.TextBox();
             this.providerLabel = new System.Windows.Forms.Label();
             this.detailsTitlePanel = new System.Windows.Forms.Panel();
             this.tableLayoutPanel.SuspendLayout();
@@ -66,7 +68,7 @@
             this.productListView.Name = "productListView";
             this.productListView.Scrollable = false;
             this.productListView.Size = new System.Drawing.Size(354, 390);
-            this.productListView.TabIndex = 11;
+            this.productListView.TabIndex = 9;
             this.productListView.UseCompatibleStateImageBehavior = false;
             this.productListView.View = System.Windows.Forms.View.List;
             this.productListView.SelectedIndexChanged += new System.EventHandler(this.ProductListView_SelectedIndexChanged);
@@ -87,7 +89,7 @@
             // idTextBox
             // 
             this.idTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.idTextBox.Location = new System.Drawing.Point(180, 143);
+            this.idTextBox.Location = new System.Drawing.Point(180, 130);
             this.idTextBox.Name = "idTextBox";
             this.idTextBox.ReadOnly = true;
             this.idTextBox.Size = new System.Drawing.Size(120, 20);
@@ -96,13 +98,13 @@
             // priceTextBox
             // 
             this.priceTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.priceTextBox.Location = new System.Drawing.Point(181, 221);
+            this.priceTextBox.Location = new System.Drawing.Point(181, 235);
             this.priceTextBox.MaxLength = 7;
             this.priceTextBox.Name = "priceTextBox";
             this.priceTextBox.ReadOnly = true;
             this.priceTextBox.ShortcutsEnabled = false;
             this.priceTextBox.Size = new System.Drawing.Size(119, 20);
-            this.priceTextBox.TabIndex = 14;
+            this.priceTextBox.TabIndex = 17;
             this.priceTextBox.Enter += new System.EventHandler(this.PriceTextBox_Enter);
             this.priceTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PriceTextBox_KeyPress);
             this.priceTextBox.Leave += new System.EventHandler(this.PriceTextBox_Leave);
@@ -124,7 +126,7 @@
             // 
             this.productCodeLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.productCodeLabel.AutoSize = true;
-            this.productCodeLabel.Location = new System.Drawing.Point(48, 146);
+            this.productCodeLabel.Location = new System.Drawing.Point(48, 133);
             this.productCodeLabel.Name = "productCodeLabel";
             this.productCodeLabel.Size = new System.Drawing.Size(57, 13);
             this.productCodeLabel.TabIndex = 17;
@@ -134,7 +136,7 @@
             // 
             this.amountProductLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.amountProductLabel.AutoSize = true;
-            this.amountProductLabel.Location = new System.Drawing.Point(48, 198);
+            this.amountProductLabel.Location = new System.Drawing.Point(48, 185);
             this.amountProductLabel.Name = "amountProductLabel";
             this.amountProductLabel.Size = new System.Drawing.Size(47, 13);
             this.amountProductLabel.TabIndex = 18;
@@ -144,7 +146,7 @@
             // 
             this.priceLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.priceLabel.AutoSize = true;
-            this.priceLabel.Location = new System.Drawing.Point(48, 224);
+            this.priceLabel.Location = new System.Drawing.Point(48, 238);
             this.priceLabel.Name = "priceLabel";
             this.priceLabel.Size = new System.Drawing.Size(24, 13);
             this.priceLabel.TabIndex = 19;
@@ -154,7 +156,7 @@
             // 
             this.ProductNameLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.ProductNameLabel.AutoSize = true;
-            this.ProductNameLabel.Location = new System.Drawing.Point(48, 172);
+            this.ProductNameLabel.Location = new System.Drawing.Point(48, 159);
             this.ProductNameLabel.Name = "ProductNameLabel";
             this.ProductNameLabel.Size = new System.Drawing.Size(37, 13);
             this.ProductNameLabel.TabIndex = 20;
@@ -163,13 +165,13 @@
             // productNameTextBox
             // 
             this.productNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.productNameTextBox.Location = new System.Drawing.Point(181, 169);
+            this.productNameTextBox.Location = new System.Drawing.Point(181, 156);
             this.productNameTextBox.MaxLength = 30;
             this.productNameTextBox.Name = "productNameTextBox";
             this.productNameTextBox.ReadOnly = true;
             this.productNameTextBox.ShortcutsEnabled = false;
             this.productNameTextBox.Size = new System.Drawing.Size(119, 20);
-            this.productNameTextBox.TabIndex = 21;
+            this.productNameTextBox.TabIndex = 14;
             this.productNameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ProductNameTextBox_KeyPress);
             // 
             // deleteProductButton
@@ -181,7 +183,7 @@
             this.deleteProductButton.Location = new System.Drawing.Point(283, 46);
             this.deleteProductButton.Name = "deleteProductButton";
             this.deleteProductButton.Size = new System.Drawing.Size(30, 30);
-            this.deleteProductButton.TabIndex = 22;
+            this.deleteProductButton.TabIndex = 11;
             this.deleteProductButton.UseVisualStyleBackColor = true;
             this.deleteProductButton.Click += new System.EventHandler(this.DeleteProductButton_Click);
             // 
@@ -194,7 +196,7 @@
             this.editButton.Location = new System.Drawing.Point(319, 46);
             this.editButton.Name = "editButton";
             this.editButton.Size = new System.Drawing.Size(30, 30);
-            this.editButton.TabIndex = 23;
+            this.editButton.TabIndex = 12;
             this.editButton.UseVisualStyleBackColor = true;
             this.editButton.Click += new System.EventHandler(this.EditProductButton_Click);
             // 
@@ -207,7 +209,7 @@
             this.resetButton.Location = new System.Drawing.Point(247, 46);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(30, 30);
-            this.resetButton.TabIndex = 24;
+            this.resetButton.TabIndex = 10;
             this.resetButton.UseVisualStyleBackColor = true;
             this.resetButton.Visible = false;
             this.resetButton.Click += new System.EventHandler(this.ResetButton_Click);
@@ -219,7 +221,7 @@
             this.commandButton.Location = new System.Drawing.Point(188, 340);
             this.commandButton.Name = "commandButton";
             this.commandButton.Size = new System.Drawing.Size(120, 30);
-            this.commandButton.TabIndex = 26;
+            this.commandButton.TabIndex = 20;
             this.commandButton.Text = "Commander";
             this.commandButton.UseVisualStyleBackColor = true;
             this.commandButton.Click += new System.EventHandler(this.CommandButton_Click);
@@ -227,13 +229,13 @@
             // amountTextBox
             // 
             this.amountTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.amountTextBox.Location = new System.Drawing.Point(181, 195);
+            this.amountTextBox.Location = new System.Drawing.Point(181, 182);
             this.amountTextBox.MaxLength = 4;
             this.amountTextBox.Name = "amountTextBox";
             this.amountTextBox.ReadOnly = true;
             this.amountTextBox.ShortcutsEnabled = false;
             this.amountTextBox.Size = new System.Drawing.Size(119, 20);
-            this.amountTextBox.TabIndex = 27;
+            this.amountTextBox.TabIndex = 15;
             this.amountTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AmountTextBox_KeyPress);
             // 
             // contextMenuStrip1
@@ -247,10 +249,10 @@
             this.providerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.providerComboBox.Enabled = false;
             this.providerComboBox.FormattingEnabled = true;
-            this.providerComboBox.Location = new System.Drawing.Point(181, 247);
+            this.providerComboBox.Location = new System.Drawing.Point(181, 261);
             this.providerComboBox.Name = "providerComboBox";
             this.providerComboBox.Size = new System.Drawing.Size(120, 21);
-            this.providerComboBox.TabIndex = 28;
+            this.providerComboBox.TabIndex = 18;
             // 
             // sellButton
             // 
@@ -259,7 +261,7 @@
             this.sellButton.Location = new System.Drawing.Point(44, 340);
             this.sellButton.Name = "sellButton";
             this.sellButton.Size = new System.Drawing.Size(120, 30);
-            this.sellButton.TabIndex = 29;
+            this.sellButton.TabIndex = 19;
             this.sellButton.Text = "Vendre";
             this.sellButton.UseVisualStyleBackColor = true;
             this.sellButton.Click += new System.EventHandler(this.SellButton_Click);
@@ -290,6 +292,8 @@
             // 
             this.detailsPanel.BackColor = System.Drawing.Color.White;
             this.detailsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.detailsPanel.Controls.Add(this.criticQuantityLabel);
+            this.detailsPanel.Controls.Add(this.criticAmountTextBox);
             this.detailsPanel.Controls.Add(this.providerLabel);
             this.detailsPanel.Controls.Add(this.detailsTitlePanel);
             this.detailsPanel.Controls.Add(this.sellButton);
@@ -313,11 +317,33 @@
             this.detailsPanel.Size = new System.Drawing.Size(354, 390);
             this.detailsPanel.TabIndex = 13;
             // 
+            // criticQuantityLabel
+            // 
+            this.criticQuantityLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.criticQuantityLabel.AutoSize = true;
+            this.criticQuantityLabel.Location = new System.Drawing.Point(48, 211);
+            this.criticQuantityLabel.Name = "criticQuantityLabel";
+            this.criticQuantityLabel.Size = new System.Drawing.Size(84, 13);
+            this.criticQuantityLabel.TabIndex = 33;
+            this.criticQuantityLabel.Text = "Quantité critique";
+            // 
+            // criticAmountTextBox
+            // 
+            this.criticAmountTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.criticAmountTextBox.Location = new System.Drawing.Point(181, 208);
+            this.criticAmountTextBox.MaxLength = 4;
+            this.criticAmountTextBox.Name = "criticAmountTextBox";
+            this.criticAmountTextBox.ReadOnly = true;
+            this.criticAmountTextBox.ShortcutsEnabled = false;
+            this.criticAmountTextBox.Size = new System.Drawing.Size(119, 20);
+            this.criticAmountTextBox.TabIndex = 16;
+            this.criticAmountTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CriticAmountTextBox_KeyPress);
+            // 
             // providerLabel
             // 
             this.providerLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.providerLabel.AutoSize = true;
-            this.providerLabel.Location = new System.Drawing.Point(48, 250);
+            this.providerLabel.Location = new System.Drawing.Point(48, 264);
             this.providerLabel.Name = "providerLabel";
             this.providerLabel.Size = new System.Drawing.Size(61, 13);
             this.providerLabel.TabIndex = 31;
@@ -375,5 +401,7 @@
         private System.Windows.Forms.Panel detailsPanel;
         private System.Windows.Forms.Label providerLabel;
         private System.Windows.Forms.Panel detailsTitlePanel;
+        private System.Windows.Forms.Label criticQuantityLabel;
+        private System.Windows.Forms.TextBox criticAmountTextBox;
     }
 }

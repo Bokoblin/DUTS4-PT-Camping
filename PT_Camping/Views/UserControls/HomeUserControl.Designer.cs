@@ -40,7 +40,7 @@
             this.clientButton = new System.Windows.Forms.Button();
             this.mapTab = new System.Windows.Forms.TabPage();
             this.logoutButton = new System.Windows.Forms.Button();
-            this.userNameLabel = new System.Windows.Forms.Label();
+            this.userNameButton = new System.Windows.Forms.Button();
             this.homeTabControl.SuspendLayout();
             this.managementTab.SuspendLayout();
             this.SuspendLayout();
@@ -93,7 +93,7 @@
             this.managementTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.managementTab.Location = new System.Drawing.Point(4, 34);
             this.managementTab.Name = "managementTab";
-            this.managementTab.Size = new System.Drawing.Size(889, 502);
+            this.managementTab.Size = new System.Drawing.Size(892, 512);
             this.managementTab.TabIndex = 0;
             this.managementTab.Text = "GESTION";
             this.managementTab.UseVisualStyleBackColor = true;
@@ -199,31 +199,37 @@
             this.logoutButton.Location = new System.Drawing.Point(750, 6);
             this.logoutButton.Name = "logoutButton";
             this.logoutButton.Size = new System.Drawing.Size(120, 36);
-            this.logoutButton.TabIndex = 1;
+            this.logoutButton.TabIndex = 2;
             this.logoutButton.Text = "Déconnexion";
             this.logoutButton.UseVisualStyleBackColor = false;
             this.logoutButton.Click += new System.EventHandler(this.LogoutButton_Click);
             // 
-            // userNameLabel
+            // userNameButton
             // 
-            this.userNameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.userNameLabel.BackColor = System.Drawing.Color.RoyalBlue;
-            this.userNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userNameLabel.ForeColor = System.Drawing.Color.White;
-            this.userNameLabel.Location = new System.Drawing.Point(500, -1);
-            this.userNameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.userNameLabel.Name = "userNameLabel";
-            this.userNameLabel.Size = new System.Drawing.Size(229, 50);
-            this.userNameLabel.TabIndex = 12;
-            this.userNameLabel.Text = "User Name";
-            this.userNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.userNameButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.userNameButton.AutoSize = true;
+            this.userNameButton.BackColor = System.Drawing.Color.RoyalBlue;
+            this.userNameButton.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.userNameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.userNameButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userNameButton.ForeColor = System.Drawing.Color.White;
+            this.userNameButton.Location = new System.Drawing.Point(580, 6);
+            this.userNameButton.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.userNameButton.Name = "userNameButton";
+            this.userNameButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.userNameButton.Size = new System.Drawing.Size(150, 36);
+            this.userNameButton.TabIndex = 1;
+            this.userNameButton.Text = "User Name";
+            this.userNameButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.userNameButton.UseVisualStyleBackColor = false;
+            this.userNameButton.Click += new System.EventHandler(this.UserNameButton_Click);
             // 
             // HomeUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.Controls.Add(this.userNameLabel);
+            this.Controls.Add(this.userNameButton);
             this.Controls.Add(this.logoutButton);
             this.Controls.Add(this.homeTabControl);
             this.Controls.Add(this.homeTitle);
@@ -251,6 +257,6 @@
         private System.Windows.Forms.Button clientButton;
         private System.Windows.Forms.TabPage mapTab;
         protected System.Windows.Forms.Button logoutButton;
-        protected System.Windows.Forms.Label userNameLabel;
+        protected System.Windows.Forms.Button userNameButton;
     }
 }
