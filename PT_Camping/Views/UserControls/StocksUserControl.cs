@@ -74,7 +74,7 @@ namespace PT_Camping.Views.UserControls
                 var item = new ListViewItem(new[] { "", name, stock })
                 {
                     Name = product.Code_Produit.ToString(),
-                    ImageKey = (product.Quantite_Stock <= 15) 
+                    ImageKey = (product.Quantite_Stock <= product.Quantite_Critique) 
                                 ? (product.Quantite_Stock == 0)
                                 ? "empty" : "low" : ""
                 };
@@ -104,6 +104,7 @@ namespace PT_Camping.Views.UserControls
                 idTextBox.Text = product.Code_Produit.ToString();
                 productNameTextBox.Text = product.Libelle_Produit;
                 amountTextBox.Text = product.Quantite_Stock.ToString();
+                criticAmountTextBox.Text = product.Quantite_Critique.ToString();
                 priceTextBox.Text = product.Prix.ToString("N2") + CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol;
                 providerComboBox.Items.Clear();
                 providerComboBox.Items.Add("Aucun");
@@ -153,14 +154,16 @@ namespace PT_Camping.Views.UserControls
                 resetButton.Visible = true;
                 priceTextBox.ReadOnly = false;
                 amountTextBox.ReadOnly = false;
+                criticAmountTextBox.ReadOnly = false;
                 productNameTextBox.ReadOnly = false;
                 providerComboBox.Enabled = true;
                 editButton.BackgroundImage = Resources.ic_done;
             }
             else
             {
-                amountTextBox.ReadOnly = true;
                 priceTextBox.ReadOnly = true;
+                amountTextBox.ReadOnly = true;
+                criticAmountTextBox.ReadOnly = true;
                 productNameTextBox.ReadOnly = true;
                 resetButton.Visible = false;
                 providerComboBox.Enabled = false;
@@ -199,6 +202,25 @@ namespace PT_Camping.Views.UserControls
                             {
                                 product.Quantite_Stock = int.Parse(amountTextBox.Text);
                                 message += "quantité, ";
+                                cptModifications++;
+                            }
+                        }
+                        catch (OverflowException)
+                        {
+                            MessageBox.Show(Resources.high_quantity_exception);
+                        }
+                    }
+
+                    if (criticAmountTextBox.Text != product.Quantite_Critique.ToString())
+                    {
+                        try
+                        {
+                            if (int.Parse(criticAmountTextBox.Text) < 0)
+                                MessageBox.Show(Resources.non_positive_quantity_exception);
+                            else
+                            {
+                                product.Quantite_Stock = int.Parse(criticAmountTextBox.Text);
+                                message += "quantité critique, ";
                                 cptModifications++;
                             }
                         }
@@ -327,6 +349,15 @@ namespace PT_Camping.Views.UserControls
 
 
         private void AmountTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+
+        private void CriticAmountTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {

@@ -62,6 +62,7 @@
             this.reserveButton = new System.Windows.Forms.Button();
             this.resStateLabel = new System.Windows.Forms.Label();
             this.stateLabel = new System.Windows.Forms.Label();
+            this.importMapRightPanel = new System.Windows.Forms.Button();
             this.importMapPanel.SuspendLayout();
             this.mapTablePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -221,9 +222,9 @@
             // 
             // rightPanel
             // 
-            this.rightPanel.Controls.Add(this.editLocationPanel);
             this.rightPanel.Controls.Add(this.nullSelectionPanel);
             this.rightPanel.Controls.Add(this.detailsLocationPanel);
+            this.rightPanel.Controls.Add(this.editLocationPanel);
             this.rightPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rightPanel.Location = new System.Drawing.Point(669, 41);
             this.rightPanel.Margin = new System.Windows.Forms.Padding(2);
@@ -329,6 +330,7 @@
             // 
             // nullSelectionPanel
             // 
+            this.nullSelectionPanel.Controls.Add(this.importMapRightPanel);
             this.nullSelectionPanel.Controls.Add(this.infoLabel);
             this.nullSelectionPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.nullSelectionPanel.Location = new System.Drawing.Point(0, 0);
@@ -494,6 +496,18 @@
             this.stateLabel.TabIndex = 0;
             this.stateLabel.Text = "Etat :";
             // 
+            // importMapRightPanel
+            // 
+            this.importMapRightPanel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.importMapRightPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.importMapRightPanel.Location = new System.Drawing.Point(49, 289);
+            this.importMapRightPanel.Name = "importMapRightPanel";
+            this.importMapRightPanel.Size = new System.Drawing.Size(120, 30);
+            this.importMapRightPanel.TabIndex = 19;
+            this.importMapRightPanel.Text = "Importer une carte";
+            this.importMapRightPanel.UseVisualStyleBackColor = true;
+            this.importMapRightPanel.Click += new System.EventHandler(this.ImportMapButton_Click);
+            // 
             // MapUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -558,5 +572,6 @@
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.Panel nullSelectionPanel;
         private System.Windows.Forms.Label infoLabel;
+        private System.Windows.Forms.Button importMapRightPanel;
     }
 }

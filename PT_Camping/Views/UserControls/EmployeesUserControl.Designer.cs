@@ -54,6 +54,7 @@
             this.birthDateLabel = new System.Windows.Forms.Label();
             this.resetButton = new System.Windows.Forms.Button();
             this.surnameLabel = new System.Windows.Forms.Label();
+            this.passButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel.SuspendLayout();
             this.detailsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -119,6 +120,7 @@
             this.detailsPanel.AutoSize = true;
             this.detailsPanel.BackColor = System.Drawing.Color.White;
             this.detailsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.detailsPanel.Controls.Add(this.passButton);
             this.detailsPanel.Controls.Add(this.pictureBox);
             this.detailsPanel.Controls.Add(this.dismissButton);
             this.detailsPanel.Controls.Add(this.nameTextBox);
@@ -178,9 +180,9 @@
             this.dismissButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.dismissButton.AutoSize = true;
             this.dismissButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dismissButton.Location = new System.Drawing.Point(191, 352);
+            this.dismissButton.Location = new System.Drawing.Point(235, 350);
             this.dismissButton.Name = "dismissButton";
-            this.dismissButton.Size = new System.Drawing.Size(120, 30);
+            this.dismissButton.Size = new System.Drawing.Size(90, 30);
             this.dismissButton.TabIndex = 23;
             this.dismissButton.Text = "Licencier";
             this.dismissButton.UseVisualStyleBackColor = true;
@@ -314,9 +316,9 @@
             this.permissionButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.permissionButton.AutoSize = true;
             this.permissionButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.permissionButton.Location = new System.Drawing.Point(41, 352);
+            this.permissionButton.Location = new System.Drawing.Point(30, 350);
             this.permissionButton.Name = "permissionButton";
-            this.permissionButton.Size = new System.Drawing.Size(120, 30);
+            this.permissionButton.Size = new System.Drawing.Size(90, 30);
             this.permissionButton.TabIndex = 22;
             this.permissionButton.Text = "Permissions";
             this.permissionButton.UseVisualStyleBackColor = true;
@@ -396,6 +398,19 @@
             this.surnameLabel.TabIndex = 1;
             this.surnameLabel.Text = "Nom";
             // 
+            // passButton
+            // 
+            this.passButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.passButton.AutoSize = true;
+            this.passButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.passButton.Location = new System.Drawing.Point(133, 350);
+            this.passButton.Name = "passButton";
+            this.passButton.Size = new System.Drawing.Size(90, 30);
+            this.passButton.TabIndex = 27;
+            this.passButton.Text = "Mot de passe";
+            this.passButton.UseVisualStyleBackColor = true;
+            this.passButton.Click += new System.EventHandler(this.PassButton_Click);
+            // 
             // EmployeesUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -446,5 +461,6 @@
         private System.Windows.Forms.Button addEmployeeButton;
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.PictureBox addEmployeePhotoPictureBox;
+        private System.Windows.Forms.Button passButton;
     }
 }

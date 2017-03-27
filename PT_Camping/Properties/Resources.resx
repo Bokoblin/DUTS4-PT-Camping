@@ -275,4 +275,13 @@ Veuillez contacter votre administrateur.</value>
   <data name="ic_add_a_photo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\images\ic_add_a_photo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="some_not_filled" xml:space="preserve">
+    <value>Certains champs ne sont pas remplis.</value>
+  </data>
+  <data name="old_pass_incorrect" xml:space="preserve">
+    <value>L'ancien mot de passe n'est pas correct.</value>
+  </data>
+  <data name="not_corresponding_messages" xml:space="preserve">
+    <value>Les mots de passe ne correspondent pas.</value>
+  </data>
 </root>

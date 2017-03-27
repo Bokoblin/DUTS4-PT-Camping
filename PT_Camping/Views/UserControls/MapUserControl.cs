@@ -356,6 +356,7 @@ namespace PT_Camping.Views.UserControls
             importMapButton.Enabled = userRights.Any(d => d.Libelle_Droit == "writeMap");
             modeCheckBox.Visible = userRights.Any(d => d.Libelle_Droit == "writeMap");
             validateChangesButton.Visible = userRights.Any(d => d.Libelle_Droit == "writeMap");
+            importMapRightPanel.Enabled = modeCheckBox.Checked;
         }
 
 
