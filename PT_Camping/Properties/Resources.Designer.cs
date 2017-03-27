@@ -391,6 +391,15 @@ namespace PT_Camping.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Les mots de passe ne correspondent pas..
+        /// </summary>
+        internal static string not_corresponding_messages {
+            get {
+                return ResourceManager.GetString("not_corresponding_messages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à WARNING : This feature is not implemented yet..
         /// </summary>
         internal static string not_implemented_feature {
@@ -414,6 +423,15 @@ namespace PT_Camping.Properties {
         internal static string null_product_name_exception {
             get {
                 return ResourceManager.GetString("null_product_name_exception", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à L&apos;ancien mot de passe n&apos;est pas correct..
+        /// </summary>
+        internal static string old_pass_incorrect {
+            get {
+                return ResourceManager.GetString("old_pass_incorrect", resourceCulture);
             }
         }
         
@@ -477,6 +495,15 @@ namespace PT_Camping.Properties {
         internal static string select_image_for_the_type {
             get {
                 return ResourceManager.GetString("select_image_for_the_type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Certains champs ne sont pas remplis..
+        /// </summary>
+        internal static string some_not_filled {
+            get {
+                return ResourceManager.GetString("some_not_filled", resourceCulture);
             }
         }
         
