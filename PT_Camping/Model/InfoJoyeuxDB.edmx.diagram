@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="7c554ddb574640c68f9ede79c4760fff" Name="Diagram1" DisplayType="false">
-        <EntityTypeShape EntityType="InfoJoyeuxDB.A_vendu" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
         <EntityTypeShape EntityType="InfoJoyeuxDB.App" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="InfoJoyeuxDB.Caracteristique_Emplacement" Width="1.5" PointX="3.75" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="InfoJoyeuxDB.Client" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
@@ -22,8 +21,6 @@
         <EntityTypeShape EntityType="InfoJoyeuxDB.sysdiagrams" Width="1.5" PointX="0.75" PointY="12.875" IsExpanded="true" />
         <EntityTypeShape EntityType="InfoJoyeuxDB.Type_Emplacement" Width="1.5" PointX="3.75" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="InfoJoyeuxDB.Type_Incident" Width="1.5" PointX="10.625" PointY="1.875" IsExpanded="true" />
-        <AssociationConnector Association="InfoJoyeuxDB.FK_A_vendu_Code_Personne" ManuallyRouted="false" />
-        <AssociationConnector Association="InfoJoyeuxDB.FK_A_vendu_Code_Produit" ManuallyRouted="false" />
         <AssociationConnector Association="InfoJoyeuxDB.FK_Client_Code_Personne" ManuallyRouted="false" />
         <AssociationConnector Association="InfoJoyeuxDB.FK_Emplacement_Code_Type" ManuallyRouted="false" />
         <AssociationConnector Association="InfoJoyeuxDB.FK_Incident_Code_Emplacement" ManuallyRouted="false" />
@@ -38,6 +35,9 @@
         <AssociationConnector Association="InfoJoyeuxDB.A_le_droit" ManuallyRouted="false" />
         <AssociationConnector Association="InfoJoyeuxDB.Fournit" ManuallyRouted="false" />
         <AssociationConnector Association="InfoJoyeuxDB.Possede" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.A_vendu" Width="1.5" PointX="5.25" PointY="7.75" />
+        <AssociationConnector Association="InfoJoyeuxDB.FK_A_vendu_Code_Personne" />
+        <AssociationConnector Association="InfoJoyeuxDB.FK_A_vendu_Code_Produit" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

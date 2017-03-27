@@ -33,7 +33,7 @@ namespace PT_Camping.Views.UserControls
     /// adding, removing, modifying a camping accommodation.
     /// 
     /// </summary>
-    /// Authors : Arthur, Alexandre
+    /// Author : Alexandre
     /// Since : 09/02/17
     /// 
     public partial class MapUserControl : UserControl
@@ -347,6 +347,15 @@ namespace PT_Camping.Views.UserControls
                 default:
                     throw new ArgumentOutOfRangeException(nameof(mode), mode, null);
             }
+            InitPermissions();
+        }
+
+        public void InitPermissions()
+        {
+            var userRights = _db.Personne.First(a => a.Code_Personne == LoginTools.Employee.Code_Personne).Droit.ToList();
+            importMapButton.Enabled = userRights.Any(d => d.Libelle_Droit == "writeMap");
+            modeCheckBox.Visible = userRights.Any(d => d.Libelle_Droit == "writeMap");
+            validateChangesButton.Visible = userRights.Any(d => d.Libelle_Droit == "writeMap");
         }
 
 
@@ -680,25 +689,25 @@ namespace PT_Camping.Views.UserControls
             LoginTools.CheckConnection();
             if (SelectedLocation.Location.Type_Emplacement.Est_Reservable)
             {
-                resButton.Enabled = true;
+                reserveButton.Enabled = true;
                 if (
                     _db.Reservation.Where(r => r.Date_Debut < dateTimePicker.Value && dateTimePicker.Value < r.Date_Fin)
                         .SelectMany(a => a.Loge)
                         .Any(l => l.Code_Emplacement == SelectedLocation.Location.Code_Emplacement))
                 {
                     resStateLabel.Text = Resources.booked;
-                    resButton.Text = Resources.unbook;
+                    reserveButton.Text = Resources.unbook;
                 }
                 else
                 {
                     resStateLabel.Text = Resources.free;
-                    resButton.Text = Resources.book;
+                    reserveButton.Text = Resources.book;
                 }
             }
             else
             {
-                resButton.Enabled = false;
-                resButton.Text = Resources.book;
+                reserveButton.Enabled = false;
+                reserveButton.Text = Resources.book;
                 resStateLabel.Text = Resources.not_bookable;
             }
             
@@ -819,12 +828,20 @@ namespace PT_Camping.Views.UserControls
 
         private void LocationIssuesListBox_DoubleClick(object sender, EventArgs e)
         {
-            if (locationIssuesListBox.SelectedItems.Count > 0)
+            var userRights = _db.Personne.First(a => a.Code_Personne == LoginTools.Employee.Code_Personne).Droit.ToList();
+            if(userRights.Any(d => d.Libelle_Droit == "readIssues") )
             {
-                var code = int.Parse(locationIssuesListBox.SelectedItems[0].Name);
-                code = _db.Incident.First(i => i.Code_Incident == code).Code_Incident;
-                HomeUserControl.Window.WindowPanel.Controls.Remove(this);
-                HomeUserControl.StartIssuesFromStats(code);
+                if (locationIssuesListBox.SelectedItems.Count > 0)
+                {
+                    var code = int.Parse(locationIssuesListBox.SelectedItems[0].Name);
+                    code = _db.Incident.First(i => i.Code_Incident == code).Code_Incident;
+                    HomeUserControl.Window.WindowPanel.Controls.Remove(this);
+                    HomeUserControl.StartIssuesFromStats(code);
+                }
+            }
+            else
+            {
+                MessageBox.Show(Resources.denied_access);
             }
         }
 

@@ -1,6 +1,6 @@
 ﻿namespace PT_Camping.Views.Forms
 {
-    partial class AddStock
+    partial class AddProduct
     {
         /// <summary>
         /// Required designer variable.
@@ -41,25 +41,31 @@
             // productNameTextBox
             // 
             this.productNameTextBox.Location = new System.Drawing.Point(92, 41);
+            this.productNameTextBox.MaxLength = 30;
             this.productNameTextBox.Name = "productNameTextBox";
+            this.productNameTextBox.ShortcutsEnabled = false;
             this.productNameTextBox.Size = new System.Drawing.Size(100, 20);
             this.productNameTextBox.TabIndex = 0;
             // 
             // productStockTextBox
             // 
             this.productStockTextBox.Location = new System.Drawing.Point(92, 87);
+            this.productStockTextBox.MaxLength = 4;
             this.productStockTextBox.Name = "productStockTextBox";
+            this.productStockTextBox.ShortcutsEnabled = false;
             this.productStockTextBox.Size = new System.Drawing.Size(100, 20);
             this.productStockTextBox.TabIndex = 1;
-            this.productStockTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.productStockTextBox_KeyPress);
+            this.productStockTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ProductStockTextBox_KeyPress);
             // 
             // productPriceTextBox
             // 
             this.productPriceTextBox.Location = new System.Drawing.Point(92, 131);
+            this.productPriceTextBox.MaxLength = 7;
             this.productPriceTextBox.Name = "productPriceTextBox";
+            this.productPriceTextBox.ShortcutsEnabled = false;
             this.productPriceTextBox.Size = new System.Drawing.Size(100, 20);
             this.productPriceTextBox.TabIndex = 3;
-            this.productPriceTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.productPriceTextBox_KeyPress);
+            this.productPriceTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ProductPriceTextBox_KeyPress);
             // 
             // label1
             // 
@@ -106,7 +112,7 @@
             this.cancelButton.TabIndex = 8;
             this.cancelButton.Text = "Annuler";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // AddStock
             // 

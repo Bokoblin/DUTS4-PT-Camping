@@ -5,10 +5,17 @@ using PT_Camping.Model;
 
 namespace PT_Camping.Views.Forms
 {
-    public partial class AddStock : Form
+    /// <summary>
+    /// This dialog allows to add a new product
+    /// by choosing a name, a quantity and a price
+    /// 
+    /// </summary>
+    /// Authors : Yonnel
+    /// Since : 09/03/17
+    public partial class AddProduct : Form
     {
         private readonly DataBase _db;
-        public AddStock()
+        public AddProduct()
         {
             InitializeComponent();
             _db = new DataBase();
@@ -16,9 +23,10 @@ namespace PT_Camping.Views.Forms
 
         private void ButtonValid_MouseClick(object sender, MouseEventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
+
             try
             {
-
                 if (productNameTextBox.Text == "" || productPriceTextBox.Text == "" || productStockTextBox.Text == "")
                     throw new Exception("Toutes les valeurs marquées d'une étoile doivent être remplies.");
 
@@ -45,11 +53,10 @@ namespace PT_Camping.Views.Forms
             catch(Exception exception)
             {
                 MessageBox.Show(exception.Message);
-            }
-            
+            } 
         }
 
-        private void productStockTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        private void ProductStockTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if(!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
@@ -57,7 +64,7 @@ namespace PT_Camping.Views.Forms
             }
         }
 
-        private void productPriceTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        private void ProductPriceTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ( !char.IsControl(e.KeyChar) && e.KeyChar != ',' && !char.IsDigit(e.KeyChar))
             {
@@ -65,7 +72,7 @@ namespace PT_Camping.Views.Forms
             }
         }
 
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             Close();
         }

@@ -87,6 +87,7 @@
             // 
             this.addClientButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.addClientButton.AutoSize = true;
+            this.addClientButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.addClientButton.Location = new System.Drawing.Point(165, 463);
             this.addClientButton.Name = "addClientButton";
             this.addClientButton.Size = new System.Drawing.Size(120, 35);
@@ -100,6 +101,7 @@
             this.clientListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.clientListView.Cursor = System.Windows.Forms.Cursors.Default;
             this.clientListView.FullRowSelect = true;
             this.clientListView.GridLines = true;
             this.clientListView.HideSelection = false;
@@ -149,6 +151,7 @@
             // reservationButton
             // 
             this.reservationButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.reservationButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.reservationButton.Location = new System.Drawing.Point(123, 344);
             this.reservationButton.Name = "reservationButton";
             this.reservationButton.Size = new System.Drawing.Size(120, 30);
@@ -160,6 +163,8 @@
             // currentReservationsComboBox
             // 
             this.currentReservationsComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.currentReservationsComboBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.currentReservationsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.currentReservationsComboBox.FormattingEnabled = true;
             this.currentReservationsComboBox.Location = new System.Drawing.Point(174, 300);
             this.currentReservationsComboBox.Name = "currentReservationsComboBox";
@@ -171,6 +176,7 @@
             this.resetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.resetButton.BackgroundImage = global::PT_Camping.Properties.Resources.ic_undo;
             this.resetButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.resetButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.resetButton.Location = new System.Drawing.Point(247, 45);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(30, 30);
@@ -192,6 +198,7 @@
             // dateInscripTextBox
             // 
             this.dateInscripTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.dateInscripTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.dateInscripTextBox.Location = new System.Drawing.Point(174, 274);
             this.dateInscripTextBox.Name = "dateInscripTextBox";
             this.dateInscripTextBox.ReadOnly = true;
@@ -201,9 +208,12 @@
             // surnameTextBox
             // 
             this.surnameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.surnameTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.surnameTextBox.Location = new System.Drawing.Point(174, 101);
+            this.surnameTextBox.MaxLength = 25;
             this.surnameTextBox.Name = "surnameTextBox";
             this.surnameTextBox.ReadOnly = true;
+            this.surnameTextBox.ShortcutsEnabled = false;
             this.surnameTextBox.Size = new System.Drawing.Size(120, 20);
             this.surnameTextBox.TabIndex = 25;
             this.surnameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SurnameTextBox_KeyPress);
@@ -213,6 +223,7 @@
             this.deleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.deleteButton.BackgroundImage = global::PT_Camping.Properties.Resources.ic_delete;
             this.deleteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.deleteButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.deleteButton.Location = new System.Drawing.Point(283, 45);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(30, 30);
@@ -235,6 +246,7 @@
             this.editButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.editButton.BackgroundImage = global::PT_Camping.Properties.Resources.ic_edit;
             this.editButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.editButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.editButton.Location = new System.Drawing.Point(319, 45);
             this.editButton.Name = "editButton";
             this.editButton.Size = new System.Drawing.Size(30, 30);
@@ -288,10 +300,13 @@
             // addressTextBox
             // 
             this.addressTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.addressTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.addressTextBox.Location = new System.Drawing.Point(174, 173);
+            this.addressTextBox.MaxLength = 250;
             this.addressTextBox.Multiline = true;
             this.addressTextBox.Name = "addressTextBox";
             this.addressTextBox.ReadOnly = true;
+            this.addressTextBox.ShortcutsEnabled = false;
             this.addressTextBox.Size = new System.Drawing.Size(120, 40);
             this.addressTextBox.TabIndex = 28;
             // 
@@ -308,24 +323,31 @@
             // nameTextBox
             // 
             this.nameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.nameTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.nameTextBox.Location = new System.Drawing.Point(174, 124);
+            this.nameTextBox.MaxLength = 25;
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.ReadOnly = true;
+            this.nameTextBox.ShortcutsEnabled = false;
             this.nameTextBox.Size = new System.Drawing.Size(120, 20);
             this.nameTextBox.TabIndex = 26;
             // 
             // emailTextBox
             // 
             this.emailTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.emailTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.emailTextBox.Location = new System.Drawing.Point(174, 247);
+            this.emailTextBox.MaxLength = 50;
             this.emailTextBox.Name = "emailTextBox";
             this.emailTextBox.ReadOnly = true;
+            this.emailTextBox.ShortcutsEnabled = false;
             this.emailTextBox.Size = new System.Drawing.Size(120, 20);
             this.emailTextBox.TabIndex = 30;
             // 
             // birthDateTextBox
             // 
             this.birthDateTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.birthDateTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.birthDateTextBox.Location = new System.Drawing.Point(174, 149);
             this.birthDateTextBox.Name = "birthDateTextBox";
             this.birthDateTextBox.ReadOnly = true;
@@ -355,9 +377,12 @@
             // phoneTextBox
             // 
             this.phoneTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.phoneTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.phoneTextBox.Location = new System.Drawing.Point(174, 219);
+            this.phoneTextBox.MaxLength = 10;
             this.phoneTextBox.Name = "phoneTextBox";
             this.phoneTextBox.ReadOnly = true;
+            this.phoneTextBox.ShortcutsEnabled = false;
             this.phoneTextBox.Size = new System.Drawing.Size(120, 20);
             this.phoneTextBox.TabIndex = 29;
             this.phoneTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PhoneTextBox_KeyPress);
@@ -375,11 +400,12 @@
             // reductionButton
             // 
             this.reductionButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.reductionButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.reductionButton.Location = new System.Drawing.Point(584, 467);
             this.reductionButton.Name = "reductionButton";
             this.reductionButton.Size = new System.Drawing.Size(181, 28);
             this.reductionButton.TabIndex = 35;
-            this.reductionButton.Text = "TEMP reduction button";
+            this.reductionButton.Text = "TEMP_APPLY_REDUCTION";
             this.reductionButton.UseVisualStyleBackColor = true;
             this.reductionButton.Click += new System.EventHandler(this.ReducClient_Click);
             // 

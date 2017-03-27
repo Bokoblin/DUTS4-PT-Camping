@@ -21,7 +21,6 @@ namespace PT_Camping.Views.UserControls
         {
             InitializeComponent();
             appBarTitle.Text = Resources.stats_management;
-            Db = new DataBase();
 
             UpdateListViews();
             HandleResize();
@@ -74,10 +73,10 @@ namespace PT_Camping.Views.UserControls
                 mostAskedlocationsListView.Items.Add(item);
             }
 
-            //=== Sorting by incident number
+            //=== Sorting by number of reservations
 
-            var orderedList = mostAskedlocationsListView.Items.Cast<ListViewItem>()
-                .Select(x => x).OrderByDescending(x => x.SubItems[2].Text).Take(10).ToList();
+            var orderedList = mostAskedlocationsListView.Items.Cast<ListViewItem>().Select(x => x)
+                .OrderByDescending(x => int.Parse(x.SubItems[3].Text)).Take(10).ToList();
             mostAskedlocationsListView.Items.Clear();
             mostAskedlocationsListView.Items.AddRange(orderedList.ToArray());
 
@@ -107,8 +106,7 @@ namespace PT_Camping.Views.UserControls
 
                 int count = 0;
                 soldPerProduct.ForEach(s => {
-                    if (s.Quantite_Produit != null)
-                        count += s.Quantite_Produit.Value;
+                        count += s.Quantite_Produit;
                 });
 
                 statsItem.Add(product.Code_Produit, count);
@@ -125,8 +123,8 @@ namespace PT_Camping.Views.UserControls
 
             //=== Sorting by number of sold products
 
-            var orderedList = mostAskedProductsListView.Items.Cast<ListViewItem>()
-                .Select(x => x).OrderByDescending(x => x.SubItems[2].Text).Take(10).ToList();
+            var orderedList = mostAskedProductsListView.Items.Cast<ListViewItem>().Select(x => x)
+                .OrderByDescending(x => int.Parse(x.SubItems[2].Text)).Take(10).ToList();
             mostAskedProductsListView.Items.Clear();
             mostAskedProductsListView.Items.AddRange(orderedList.ToArray());
 
@@ -162,10 +160,10 @@ namespace PT_Camping.Views.UserControls
                 mostCommonIssueslistView.Items.Add(item);
             }
 
-            //=== Sorting by incident number
+            //=== Sorting by number of issues
 
-            var orderedList = mostCommonIssueslistView.Items.Cast<ListViewItem>()
-                .Select(x => x).OrderByDescending(x => x.SubItems[2].Text).Take(10).ToList();
+            var orderedList = mostCommonIssueslistView.Items.Cast<ListViewItem>().Select(x => x)
+                .OrderByDescending(x => int.Parse(x.SubItems[2].Text)).Take(10).ToList();
             mostCommonIssueslistView.Items.Clear();
             mostCommonIssueslistView.Items.AddRange(orderedList.ToArray());
 
@@ -206,10 +204,10 @@ namespace PT_Camping.Views.UserControls
                 bestClientsListView.Items.Add(item);
             }
 
-            //=== Sorting by incident number
+            //=== Sorting by number of reservations
 
-            var orderedList = bestClientsListView.Items.Cast<ListViewItem>()
-                .Select(x => x).OrderByDescending(x => x.SubItems[3].Text).Take(10).ToList();
+            var orderedList = bestClientsListView.Items.Cast<ListViewItem>().Select(x => x)
+                .OrderByDescending(x => int.Parse(x.SubItems[3].Text)).Take(10).ToList();
             bestClientsListView.Items.Clear();
             bestClientsListView.Items.AddRange(orderedList.ToArray());
 
@@ -273,9 +271,15 @@ namespace PT_Camping.Views.UserControls
         {
             if (mostAskedlocationsListView.SelectedItems.Count > 0)
             {
-                int code = int.Parse(mostAskedlocationsListView.SelectedItems[0].Name);
-                HomeUserControl.Window.WindowPanel.Controls.Remove(this);
-                HomeUserControl.StartLocationsFromStats(code);
+                if (UserRights.Any(d => d.Libelle_Droit == "readMap"))
+                {
+                    int code = int.Parse(mostAskedlocationsListView.SelectedItems[0].Name);
+                    HomeUserControl.StartLocationsFromStats(code);
+                }
+                else
+                {
+                    MessageBox.Show(Resources.denied_access);
+                }
             }
         }
 
@@ -284,10 +288,16 @@ namespace PT_Camping.Views.UserControls
         {
             if (mostAskedProductsListView.SelectedItems.Count > 0)
             {
-                var code = int.Parse(mostAskedProductsListView.SelectedItems[0].Name);
-                code = Db.Produit.First(i => i.Code_Produit == code).Code_Produit;
-                HomeUserControl.Window.WindowPanel.Controls.Remove(this);
-                HomeUserControl.StartProductsFromStats(code);
+                if (UserRights.Any(d => d.Libelle_Droit == "readStocks"))
+                {
+                    var code = int.Parse(mostAskedProductsListView.SelectedItems[0].Name);
+                    code = Db.Produit.First(i => i.Code_Produit == code).Code_Produit;
+                    HomeUserControl.StartProductsFromStats(code);
+                }
+                else
+                {
+                    MessageBox.Show(Resources.denied_access);
+                }
             }
         }
 
@@ -296,16 +306,21 @@ namespace PT_Camping.Views.UserControls
         {
             if (mostCommonIssueslistView.SelectedItems.Count > 0)
             {
-                if (mostCommonIssueslistView.SelectedItems[0].SubItems[2].Text != 0.ToString())
+                if (UserRights.Any(d => d.Libelle_Droit == "readIssues"))
                 {
-                    int codeType = int.Parse(mostCommonIssueslistView.SelectedItems[0].Name);
-                    int code = Db.Incident.First(i => i.Code_Type == codeType).Code_Incident;
-                    HomeUserControl.Window.WindowPanel.Controls.Remove(this);
-                    HomeUserControl.StartIssuesFromStats(code);
+                    if (mostCommonIssueslistView.SelectedItems[0].SubItems[2].Text != 0.ToString())
+                    {
+                        int codeType = int.Parse(mostCommonIssueslistView.SelectedItems[0].Name);
+                        int code = Db.Incident.First(i => i.Code_Type == codeType).Code_Incident;
+                        HomeUserControl.StartIssuesFromStats(code);
+                    }
+                    else
+                        MessageBox.Show(Resources.no_issue_corresponding);
                 }
                 else
-                    MessageBox.Show(Resources.no_issue_corresponding);
-
+                {
+                    MessageBox.Show(Resources.denied_access);
+                }
             }
         }
 
@@ -314,10 +329,16 @@ namespace PT_Camping.Views.UserControls
         {
             if (bestClientsListView.SelectedItems.Count > 0)
             {
-                int code = int.Parse(bestClientsListView.SelectedItems[0].Name);
-                code = Db.Client.First(i => i.Code_Personne == code).Code_Personne;
-                HomeUserControl.Window.WindowPanel.Controls.Remove(this);
-                HomeUserControl.StartClientsFromStats(code);
+                if (UserRights.Any(d => d.Libelle_Droit == "readClients"))
+                {
+                    int code = int.Parse(bestClientsListView.SelectedItems[0].Name);
+                    code = Db.Client.First(i => i.Code_Personne == code).Code_Personne;
+                    HomeUserControl.StartClientsFromStats(code);
+                }
+                else
+                {
+                    MessageBox.Show(Resources.denied_access);
+                }
             }
         }
 

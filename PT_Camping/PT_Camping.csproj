@@ -123,11 +123,11 @@
     <Compile Include="Views\Forms\AddProvider.Designer.cs">
       <DependentUpon>AddProvider.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Forms\AddStock.cs">
+    <Compile Include="Views\Forms\AddProduct.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Forms\AddStock.Designer.cs">
-      <DependentUpon>AddStock.cs</DependentUpon>
+    <Compile Include="Views\Forms\AddProduct.Designer.cs">
+      <DependentUpon>AddProduct.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\MapUserControl.cs">
       <SubType>UserControl</SubType>
@@ -250,11 +250,11 @@
     <Compile Include="Views\UserControls\ProvidersUserControl.Designer.cs">
       <DependentUpon>ProvidersUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Forms\SellStock.cs">
+    <Compile Include="Views\Forms\SellProduct.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Forms\SellStock.Designer.cs">
-      <DependentUpon>SellStock.cs</DependentUpon>
+    <Compile Include="Views\Forms\SellProduct.Designer.cs">
+      <DependentUpon>SellProduct.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\StatsUserControl.cs">
       <SubType>UserControl</SubType>
@@ -294,8 +294,8 @@
     <EmbeddedResource Include="Views\UserControls\EmployeesUserControl.resx">
       <DependentUpon>EmployeesUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Forms\AddStock.resx">
-      <DependentUpon>AddStock.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Forms\AddProduct.resx">
+      <DependentUpon>AddProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\ClientsUserControl.resx">
       <DependentUpon>ClientsUserControl.cs</DependentUpon>
@@ -323,11 +323,14 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\MapUserControl.resx">
+      <DependentUpon>MapUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\StatsUserControl.resx">
       <DependentUpon>StatsUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Forms\SellStock.resx">
-      <DependentUpon>SellStock.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Forms\SellProduct.resx">
+      <DependentUpon>SellProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\ProvidersUserControl.resx">
       <DependentUpon>ProvidersUserControl.cs</DependentUpon>
@@ -397,6 +400,11 @@
     <Content Include="packages\EntityFramework.fr.6.1.3\lib\net40\fr\EntityFramework.xml" />
     <Content Include="packages\EntityFramework.fr.6.1.3\lib\net45\fr\EntityFramework.resources.dll" />
     <Content Include="packages\EntityFramework.fr.6.1.3\lib\net45\fr\EntityFramework.xml" />
+    <None Include="res\images\ic_add_a_photo.png" />
+    <None Include="res\images\ic_stock_empty.png" />
+    <None Include="res\images\ic_stock_low.png" />
+    <None Include="res\images\ic_issue_done.png" />
+    <None Include="res\images\ic_issue_pending.png" />
     <None Include="res\images\ic_done.png" />
     <None Include="res\images\ic_undo.png" />
     <None Include="res\images\ic_delete.png" />
