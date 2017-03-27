@@ -123,6 +123,7 @@ namespace PT_Camping.Views.UserControls
                     && UserRights.Any(d => d.Libelle_Droit == "writeEmployees"); //Mr Campo can't be dismissed
                 editButton.Visible = (employee.Personne.Code_Personne == LoginTools.Employee.Code_Personne) 
                     || UserRights.Any(d => d.Libelle_Droit == "writeEmployees");
+                passButton.Enabled = (employee.Personne.Code_Personne == LoginTools.Employee.Code_Personne);
             }
         }
 
@@ -221,6 +222,15 @@ namespace PT_Camping.Views.UserControls
             int code = int.Parse(employeesListView.SelectedItems[0].Name);
             var employee = Db.Employe.Find(code);
             new Permissions(employee, Db).ShowDialog();
+            Db.SaveChanges();
+        }
+
+
+        private void PassButton_Click(object sender, EventArgs e)
+        {
+            int code = int.Parse(employeesListView.SelectedItems[0].Name);
+            var employee = Db.Employe.Find(code);
+            new ModifyPassword(employee).ShowDialog();
             Db.SaveChanges();
         }
 
