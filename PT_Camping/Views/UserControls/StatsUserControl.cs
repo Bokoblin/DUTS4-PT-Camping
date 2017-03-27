@@ -107,8 +107,7 @@ namespace PT_Camping.Views.UserControls
 
                 int count = 0;
                 soldPerProduct.ForEach(s => {
-                    if (s.Quantite_Produit != null)
-                        count += s.Quantite_Produit.Value;
+                    count += s.Quantite_Produit;
                 });
 
                 statsItem.Add(product.Code_Produit, count);
