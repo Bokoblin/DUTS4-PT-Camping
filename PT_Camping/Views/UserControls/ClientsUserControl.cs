@@ -268,8 +268,8 @@ namespace PT_Camping.Views.UserControls
 
         private void ReservationsButton_Click(object sender, EventArgs e)
         {
-            //TODO reservations feature
-            MessageBox.Show(Resources.not_implemented_feature);
+            int code = int.Parse(clientListView.SelectedItems[0].Name);
+            new Reservations(HomeUserControl, code).Show();
         }
     }
 }
