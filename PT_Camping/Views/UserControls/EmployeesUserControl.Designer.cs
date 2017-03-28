@@ -291,7 +291,7 @@
             // 
             // detailsTitleBarPanel
             // 
-            this.detailsTitleBarPanel.BackColor = System.Drawing.Color.RoyalBlue;
+            this.detailsTitleBarPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(81)))), ((int)(((byte)(181)))));
             this.detailsTitleBarPanel.Controls.Add(this.detailsTitle);
             this.detailsTitleBarPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.detailsTitleBarPanel.Location = new System.Drawing.Point(0, 0);

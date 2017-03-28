@@ -70,6 +70,30 @@ namespace PT_Camping.Views.UserControls
         }
 
 
+        public void StartLocationsFromClients()
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            Window.WindowPanel.Controls.Add(this);
+            homeTabControl.SelectedIndex = 1;
+            if (_mapUserControl == null)
+            {
+                _mapUserControl = new MapUserControl(this);
+            }
+
+            mapTab.Controls.Add(_mapUserControl);
+            _mapUserControl?.HandleResize(managementTab.Size);
+            Window.WindowPanel.Controls.Remove(_clientsUserControl);
+            Window.BringToFront();
+        }
+
+        public void StartClientsFromLocations()
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            _clientsUserControl = new ClientsUserControl(this);
+            Window.WindowPanel.Controls.Add(_clientsUserControl);
+            Window.WindowPanel.Controls.Remove(_mapUserControl);
+        }
+
         public void StartLocationsFromStats(int locationCode)
         {
             Cursor.Current = Cursors.WaitCursor;

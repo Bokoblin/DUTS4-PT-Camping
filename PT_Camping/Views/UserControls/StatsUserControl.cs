@@ -54,17 +54,20 @@ namespace PT_Camping.Views.UserControls
             mostAskedlocationsListView.Columns.Add("Type d'emplacement");
             mostAskedlocationsListView.Columns.Add("Réservations");
 
-            var statsClients = Db.Emplacement.ToDictionary(
+            var statsLocations = /*Db.Loge.
+                Where(a => a.Reservation.Date_Debut.Year == _currentYear || a.Reservation.Date_Fin.Year == _currentYear)
+                .GroupBy(a => a.Code_Emplacement)*/
+                Db.Emplacement.ToDictionary(
                 location => location.Code_Emplacement, 
                 location => Db.Reservation.Count(
                     res => res.Code_Personne == location.Code_Emplacement 
-                    && (res.Date_Debut.Year == _currentYear || res.Date_Debut.Year == _currentYear)));
+                    && (res.Date_Debut.Year == _currentYear || res.Date_Fin.Year == _currentYear)));
 
             foreach (Emplacement location in Db.Emplacement)
             {
                 string name = location.Nom_Emplacement;
                 string type = location.Type_Emplacement.Libelle_Type;
-                string nbReservations = statsClients[location.Code_Emplacement].ToString();
+                string nbReservations = statsLocations[location.Code_Emplacement].ToString();
 
                 var item = new ListViewItem(new[] { "", name, type, nbReservations })
                 {

@@ -38,11 +38,11 @@ namespace PT_Camping.Views.Forms
                 Personne person = _db.Client.First(a => a.Code_Personne == codeClient).Personne;
                 titleLabel.Text = Resources.reservationTitleLabel + person.Nom_Personne + Resources.one_space + person.Prenom_Personne;
                 _codePerson = codeClient;
-                refreshReservations();
+                RefreshReservations();
             }
         }
 
-        private void refreshReservations()
+        private void RefreshReservations()
         {
             reservationsList.Items.Clear();
             foreach (Reservation res in _db.Reservation.Where(a => a.Code_Personne == _codePerson))
@@ -64,7 +64,7 @@ namespace PT_Camping.Views.Forms
 
         private void deleteReservationButton_Click(object sender, EventArgs e)
         {
-            if (reservationsList.SelectedItems[0] != null)
+            if (reservationsList.SelectedItems.Count > 0 && reservationsList.SelectedItems[0] != null)
             {
                 int codeRes = int.Parse(reservationsList.SelectedItems[0].SubItems[4].Text);
                 foreach (Loge loge in _db.Loge.Where(a => a.Code_Reservation == codeRes))
@@ -74,59 +74,82 @@ namespace PT_Camping.Views.Forms
                 Reservation res = _db.Reservation.FirstOrDefault(a => a.Code_Reservation == codeRes);
                 if (res != null)
                 {
-                    _db.Facture.Remove(res.Facture.First());
                     _db.Reservation.Remove(res);
                     _db.SaveChanges();
-                    refreshReservations();
+                    RefreshReservations();
                 }
             }
         }
 
         private void factureButton_Click(object sender, EventArgs e)
         {
-            //TODO Facture
+            
         }
 
         private void reservationsList_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             locationsList.Items.Clear();
             lodgerList.Items.Clear();
-            int resId = int.Parse(e.Item.SubItems[4].Text);
+            int resId = -1;
+            if (reservationsList.SelectedItems.Count > 0)
+            {
+                resId = int.Parse(e.Item.SubItems[4].Text);
+            }
             Reservation res = _db.Reservation.FirstOrDefault(a => a.Code_Reservation == resId);
             if (res != null)
+            {
                 foreach (Emplacement location in res.Loge.Select(a => a.Emplacement).Distinct())
                 {
                     locationsList.Items.Add(location.Nom_Emplacement);
                 }
+            }
         }
 
         private void newReservationButton_Click(object sender, EventArgs e)
         {
-            new NewReservation(_homeUserControl, _codePerson).Show();
+            new NewReservation(_homeUserControl, _db, _codePerson).Show();
         }
 
         private void locationsList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (reservationsList.SelectedItems.Count > 0)
+            {
+                ListViewItem listViewItem = reservationsList.SelectedItems[0] as ListViewItem;
+                if (listViewItem != null)
+                {
+                    int resId = int.Parse(listViewItem.SubItems[4].Text);
+                    Reservation res =
+                        _db.Reservation.FirstOrDefault(
+                            a => a.Code_Reservation == resId);
+                    ListBox listBox = sender as ListBox;
+                    if (listBox?.SelectedItem != null)
+                    {
+                        String locationName = (string)listBox.SelectedItem;
+                        Emplacement loc = _db.Emplacement.FirstOrDefault(a => a.Nom_Emplacement == locationName);
+                        lodgerList.Items.Clear();
+                        foreach (Personne lodger in _db.Loge.Where(a => a.Code_Reservation == res.Code_Reservation && a.Code_Emplacement == loc.Code_Emplacement).
+                            Select(a => a.Personne))
+                        {
+                            lodgerList.Items.Add(lodger.Nom_Personne + " " + lodger.Prenom_Personne);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void editButton_Click(object sender, EventArgs e)
         {
             ListViewItem listViewItem = reservationsList.SelectedItems[0] as ListViewItem;
             if (listViewItem != null)
             {
                 int resId = int.Parse(listViewItem.SubItems[4].Text);
-                Reservation res =
-                    _db.Reservation.FirstOrDefault(
-                        a => a.Code_Reservation == resId);
-                ListBox listBox = sender as ListBox;
-                if (listBox != null)
-                {
-                    String locationName = (string) listBox.SelectedItem;
-                    Emplacement loc = _db.Emplacement.FirstOrDefault(a => a.Nom_Emplacement == locationName);
-                    lodgerList.Items.Clear();
-                    foreach (Personne lodger in _db.Loge.Where(a => a.Code_Reservation == res.Code_Reservation && a.Code_Emplacement == loc.Code_Emplacement).
-                        Select(a => a.Personne))
-                    {
-                        lodgerList.Items.Add(lodger.Nom_Personne + " " + lodger.Prenom_Personne);
-                    }
-                }
+                new NewReservation(_homeUserControl, _db, _codePerson, NewReservation.Mode.Edit, resId).Show();
             }
+        }
+
+        private void refreshButton_Click(object sender, EventArgs e)
+        {
+            RefreshReservations();
         }
     }
 }

@@ -44,6 +44,7 @@
             this.removeLodgerButton = new System.Windows.Forms.Button();
             this.addLodgerButton = new System.Windows.Forms.Button();
             this.addLodgerComboBox = new System.Windows.Forms.ComboBox();
+            this.PayedCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -212,11 +213,22 @@
             this.addLodgerComboBox.Size = new System.Drawing.Size(197, 21);
             this.addLodgerComboBox.TabIndex = 15;
             // 
+            // PayedCheckBox
+            // 
+            this.PayedCheckBox.AutoSize = true;
+            this.PayedCheckBox.Location = new System.Drawing.Point(254, 24);
+            this.PayedCheckBox.Name = "PayedCheckBox";
+            this.PayedCheckBox.Size = new System.Drawing.Size(50, 17);
+            this.PayedCheckBox.TabIndex = 17;
+            this.PayedCheckBox.Text = "Payé";
+            this.PayedCheckBox.UseVisualStyleBackColor = true;
+            // 
             // NewReservation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(535, 411);
+            this.Controls.Add(this.PayedCheckBox);
             this.Controls.Add(this.addLodgerComboBox);
             this.Controls.Add(this.removeLodgerButton);
             this.Controls.Add(this.addLodgerButton);
@@ -259,5 +271,6 @@
         private System.Windows.Forms.Button removeLodgerButton;
         private System.Windows.Forms.Button addLodgerButton;
         private System.Windows.Forms.ComboBox addLodgerComboBox;
+        private System.Windows.Forms.CheckBox PayedCheckBox;
     }
 }

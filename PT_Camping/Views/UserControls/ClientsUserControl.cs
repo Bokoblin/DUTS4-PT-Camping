@@ -94,8 +94,7 @@ namespace PT_Camping.Views.UserControls
                 phoneTextBox.Text = client.Personne.Telephone;
                 emailTextBox.Text = client.Personne.Email;
 
-                var currentReservations = Db.Reservation.Where(r => r.Date_Fin <= DateTime.Now).Select(r => r.Code_Reservation).ToList();
-                currentReservationsComboBox.DataSource = currentReservations;
+                nbReservationsLabel.Text = Db.Reservation.Count(a => a.Code_Personne == code).ToString();
             }
         }
 
