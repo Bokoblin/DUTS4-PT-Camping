@@ -27,7 +27,6 @@ namespace PT_Camping.Views.UserControls
         private MapUserControl _mapUserControl;
         protected List<Droit> UserRights;
 
-
         public HomeUserControl(AppWindow window)
         {
             InitializeComponent();
@@ -228,6 +227,7 @@ namespace PT_Camping.Views.UserControls
                     MessageBox.Show(Resources.denied_access);
                     ((TabControl) sender).SelectedIndex = 0;
                 }
+                _mapUserControl.ResetMode();
             }
         }
 
@@ -237,5 +237,16 @@ namespace PT_Camping.Views.UserControls
         /// </summary>
 
         public AppWindow Window { get; set; }
+
+        public MapUserControl MapUserControl
+        {
+            get { return _mapUserControl; }
+            set { _mapUserControl = value; }
+        }
+
+        public TabControl HomeTabControl
+        {
+            get { return homeTabControl; }
+        }
     }
 }

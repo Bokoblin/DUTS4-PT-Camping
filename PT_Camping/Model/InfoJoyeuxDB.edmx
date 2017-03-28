@@ -398,18 +398,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Reservation_Code_Facture">
-          <End Role="Facture" Type="Self.Facture" Multiplicity="1" />
-          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Facture">
-              <PropertyRef Name="Code_Facture" />
-            </Principal>
-            <Dependent Role="Reservation">
-              <PropertyRef Name="Code_Facture" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Reservation_Code_Personne">
           <End Role="Personne" Type="Self.Personne" Multiplicity="1" />
           <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
@@ -511,10 +499,6 @@
             <End Role="Emplacement" EntitySet="Emplacement" />
             <End Role="Possede" EntitySet="Possede" />
           </AssociationSet>
-          <AssociationSet Name="FK_Reservation_Code_Facture" Association="Self.FK_Reservation_Code_Facture">
-            <End Role="Facture" EntitySet="Facture" />
-            <End Role="Reservation" EntitySet="Reservation" />
-          </AssociationSet>
           <AssociationSet Name="FK_Reservation_Code_Personne" Association="Self.FK_Reservation_Code_Personne">
             <End Role="Personne" EntitySet="Personne" />
             <End Role="Reservation" EntitySet="Reservation" />
@@ -528,8 +512,8 @@
           <Key>
             <PropertyRef Name="Code_App" />
           </Key>
-          <Property Name="Fond_Image" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="Code_App" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fond_Image" Nullable="false" MaxLength="Max" FixedLength="false" Type="Binary" />
+          <Property Name="Code_App" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
         </EntityType>
         <EntityType Name="Caracteristique_Emplacement">
           <Key>
@@ -582,17 +566,6 @@
           <NavigationProperty Name="Personne" Relationship="Self.FK_Employe_Code_Personne" FromRole="Employe" ToRole="Personne" />
           <Property Name="EstLicencie" Type="Boolean" Nullable="false" />
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="Facture">
-          <Key>
-            <PropertyRef Name="Code_Facture" />
-          </Key>
-          <Property Name="Code_Facture" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Montant" Type="Double" Nullable="false" />
-          <Property Name="Date_Emission" Type="DateTime" Precision="3" />
-          <Property Name="Code_Reservation" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Reservation" Relationship="Self.FK_Facture_Code_Reservation" FromRole="Facture" ToRole="Reservation" />
-          <NavigationProperty Name="Reservation1" Relationship="Self.FK_Reservation_Code_Facture" FromRole="Facture" ToRole="Reservation" />
         </EntityType>
         <EntityType Name="Fournisseur">
           <Key>
@@ -661,8 +634,8 @@
           <Property Name="Prix" Type="Double" Nullable="false" />
           <Property Name="Quantite_Stock" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Fournisseur" Relationship="Self.Fournit" FromRole="Produit" ToRole="Fournisseur" />
-          <NavigationProperty Name="A_vendu" Relationship="InfoJoyeuxDB.FK_A_vendu_Code_Produit" FromRole="Produit" ToRole="A_vendu" />
           <Property Name="Quantite_Critique" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="A_vendu" Relationship="InfoJoyeuxDB.FK_A_vendu_Code_Produit" FromRole="Produit" ToRole="A_vendu" />
         </EntityType>
         <EntityType Name="Reservation">
           <Key>
@@ -674,10 +647,9 @@
           <Property Name="Est_Paye" Type="Boolean" Nullable="false" />
           <Property Name="Code_Personne" Type="Int32" Nullable="false" />
           <Property Name="Code_Facture" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Facture" Relationship="Self.FK_Facture_Code_Reservation" FromRole="Reservation" ToRole="Facture" />
-          <NavigationProperty Name="Facture1" Relationship="Self.FK_Reservation_Code_Facture" FromRole="Reservation" ToRole="Facture" />
           <NavigationProperty Name="Loge" Relationship="Self.FK_Loge_Code_Reservation" FromRole="Reservation" ToRole="Loge" />
           <NavigationProperty Name="Personne" Relationship="Self.FK_Reservation_Code_Personne" FromRole="Reservation" ToRole="Personne" />
+          <NavigationProperty Name="Facture" Relationship="InfoJoyeuxDB.FK_Facture_Code_Reservation" FromRole="Reservation" ToRole="Facture" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -772,30 +744,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Facture_Code_Reservation">
-          <End Role="Reservation" Type="Self.Reservation" Multiplicity="1" />
-          <End Role="Facture" Type="Self.Facture" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Reservation">
-              <PropertyRef Name="Code_Reservation" />
-            </Principal>
-            <Dependent Role="Facture">
-              <PropertyRef Name="Code_Reservation" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Reservation_Code_Facture">
-          <End Role="Facture" Type="Self.Facture" Multiplicity="1" />
-          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Facture">
-              <PropertyRef Name="Code_Facture" />
-            </Principal>
-            <Dependent Role="Reservation">
-              <PropertyRef Name="Code_Facture" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Incident_Code_Type">
           <End Role="Type_Incident" Type="Self.Type_Incident" Multiplicity="1" />
           <End Role="Incident" Type="Self.Incident" Multiplicity="*" />
@@ -863,7 +811,6 @@
           <EntitySet Name="Droit" EntityType="Self.Droit" />
           <EntitySet Name="Emplacement" EntityType="Self.Emplacement" />
           <EntitySet Name="Employe" EntityType="Self.Employe" />
-          <EntitySet Name="Facture" EntityType="Self.Facture" />
           <EntitySet Name="Fournisseur" EntityType="Self.Fournisseur" />
           <EntitySet Name="Incident" EntityType="Self.Incident" />
           <EntitySet Name="Loge" EntityType="Self.Loge" />
@@ -893,14 +840,6 @@
             <End Role="Personne" EntitySet="Personne" />
             <End Role="Employe" EntitySet="Employe" />
           </AssociationSet>
-          <AssociationSet Name="FK_Facture_Code_Reservation" Association="Self.FK_Facture_Code_Reservation">
-            <End Role="Reservation" EntitySet="Reservation" />
-            <End Role="Facture" EntitySet="Facture" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Reservation_Code_Facture" Association="Self.FK_Reservation_Code_Facture">
-            <End Role="Facture" EntitySet="Facture" />
-            <End Role="Reservation" EntitySet="Reservation" />
-          </AssociationSet>
           <AssociationSet Name="FK_Incident_Code_Type" Association="Self.FK_Incident_Code_Type">
             <End Role="Type_Incident" EntitySet="Type_Incident" />
             <End Role="Incident" EntitySet="Incident" />
@@ -929,6 +868,11 @@
             <End Role="Caracteristique_Emplacement" EntitySet="Caracteristique_Emplacement" />
             <End Role="Emplacement" EntitySet="Emplacement" />
           </AssociationSet>
+          <EntitySet Name="Facture" EntityType="InfoJoyeuxDB.Facture" />
+          <AssociationSet Name="FK_Facture_Code_Reservation" Association="InfoJoyeuxDB.FK_Facture_Code_Reservation">
+            <End Role="Reservation" EntitySet="Reservation" />
+            <End Role="Facture" EntitySet="Facture" />
+          </AssociationSet>
           <EntitySet Name="A_vendu" EntityType="InfoJoyeuxDB.A_vendu" />
           <AssociationSet Name="FK_A_vendu_Code_Personne" Association="InfoJoyeuxDB.FK_A_vendu_Code_Personne">
             <End Role="Personne" EntitySet="Personne" />
@@ -939,6 +883,28 @@
             <End Role="A_vendu" EntitySet="A_vendu" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Facture">
+          <Key>
+            <PropertyRef Name="Code_Facture" />
+          </Key>
+          <Property Name="Code_Facture" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Montant" Type="Double" Nullable="false" />
+          <Property Name="Date_Emission" Type="DateTime" Precision="3" />
+          <Property Name="Code_Reservation" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Reservation" Relationship="InfoJoyeuxDB.FK_Facture_Code_Reservation" FromRole="Facture" ToRole="Reservation" />
+        </EntityType>
+        <Association Name="FK_Facture_Code_Reservation">
+          <End Type="InfoJoyeuxDB.Reservation" Role="Reservation" Multiplicity="1" />
+          <End Type="InfoJoyeuxDB.Facture" Role="Facture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="Code_Reservation" />
+            </Principal>
+            <Dependent Role="Facture">
+              <PropertyRef Name="Code_Reservation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="A_vendu">
           <Key>
             <PropertyRef Name="Date_Vente" />
@@ -1036,16 +1002,6 @@
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Code_Personne" ColumnName="Code_Personne" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Facture">
-            <EntityTypeMapping TypeName="InfoJoyeuxDB.Facture">
-              <MappingFragment StoreEntitySet="Facture">
-                <ScalarProperty Name="Code_Facture" ColumnName="Code_Facture" />
-                <ScalarProperty Name="Montant" ColumnName="Montant" />
-                <ScalarProperty Name="Date_Emission" ColumnName="Date_Emission" />
-                <ScalarProperty Name="Code_Reservation" ColumnName="Code_Reservation" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1174,6 +1130,16 @@
               <ScalarProperty Name="Code_Emplacement" ColumnName="Code_Emplacement" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Facture">
+            <EntityTypeMapping TypeName="InfoJoyeuxDB.Facture">
+              <MappingFragment StoreEntitySet="Facture">
+                <ScalarProperty Name="Code_Reservation" ColumnName="Code_Reservation" />
+                <ScalarProperty Name="Date_Emission" ColumnName="Date_Emission" />
+                <ScalarProperty Name="Montant" ColumnName="Montant" />
+                <ScalarProperty Name="Code_Facture" ColumnName="Code_Facture" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="A_vendu">
             <EntityTypeMapping TypeName="InfoJoyeuxDB.A_vendu">
               <MappingFragment StoreEntitySet="A_vendu">
