@@ -250,7 +250,7 @@
             // 
             // detailTitlePanel
             // 
-            this.detailTitlePanel.BackColor = System.Drawing.Color.RoyalBlue;
+            this.detailTitlePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(81)))), ((int)(((byte)(181)))));
             this.detailTitlePanel.Controls.Add(this.detailTitleLabel);
             this.detailTitlePanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.detailTitlePanel.Location = new System.Drawing.Point(0, 0);

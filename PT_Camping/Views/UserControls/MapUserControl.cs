@@ -908,7 +908,7 @@ namespace PT_Camping.Views.UserControls
         {
             if (_selectedLocation != null)
             {
-                new NewReservation(HomeUserControl, _selectedLocation.Location).Show();
+                new NewReservation(HomeUserControl, _db, _selectedLocation.Location).Show();
             }
         }
     }

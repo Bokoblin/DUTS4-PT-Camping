@@ -41,14 +41,16 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lodgerList = new System.Windows.Forms.ListBox();
             this.titleLabel = new System.Windows.Forms.Label();
+            this.editButton = new System.Windows.Forms.Button();
+            this.refreshButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // newReservationButton
             // 
-            this.newReservationButton.Location = new System.Drawing.Point(280, 376);
-            this.newReservationButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.newReservationButton.Location = new System.Drawing.Point(163, 307);
+            this.newReservationButton.Margin = new System.Windows.Forms.Padding(2);
             this.newReservationButton.Name = "newReservationButton";
-            this.newReservationButton.Size = new System.Drawing.Size(163, 32);
+            this.newReservationButton.Size = new System.Drawing.Size(122, 26);
             this.newReservationButton.TabIndex = 1;
             this.newReservationButton.Text = "Nouvelle Réservation";
             this.newReservationButton.UseVisualStyleBackColor = true;
@@ -56,10 +58,10 @@
             // 
             // deleteReservationButton
             // 
-            this.deleteReservationButton.Location = new System.Drawing.Point(16, 376);
-            this.deleteReservationButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.deleteReservationButton.Location = new System.Drawing.Point(12, 306);
+            this.deleteReservationButton.Margin = new System.Windows.Forms.Padding(2);
             this.deleteReservationButton.Name = "deleteReservationButton";
-            this.deleteReservationButton.Size = new System.Drawing.Size(88, 32);
+            this.deleteReservationButton.Size = new System.Drawing.Size(66, 26);
             this.deleteReservationButton.TabIndex = 2;
             this.deleteReservationButton.Text = "Supprimer";
             this.deleteReservationButton.UseVisualStyleBackColor = true;
@@ -67,10 +69,10 @@
             // 
             // factureButton
             // 
-            this.factureButton.Location = new System.Drawing.Point(583, 376);
-            this.factureButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.factureButton.Location = new System.Drawing.Point(289, 306);
+            this.factureButton.Margin = new System.Windows.Forms.Padding(2);
             this.factureButton.Name = "factureButton";
-            this.factureButton.Size = new System.Drawing.Size(171, 32);
+            this.factureButton.Size = new System.Drawing.Size(128, 26);
             this.factureButton.TabIndex = 3;
             this.factureButton.Text = "Télécharger la facture";
             this.factureButton.UseVisualStyleBackColor = true;
@@ -85,11 +87,11 @@
             this.ispayedColumnHeader});
             this.reservationsList.FullRowSelect = true;
             this.reservationsList.GridLines = true;
-            this.reservationsList.Location = new System.Drawing.Point(13, 34);
-            this.reservationsList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.reservationsList.Location = new System.Drawing.Point(10, 28);
+            this.reservationsList.Margin = new System.Windows.Forms.Padding(2);
             this.reservationsList.MultiSelect = false;
             this.reservationsList.Name = "reservationsList";
-            this.reservationsList.Size = new System.Drawing.Size(532, 321);
+            this.reservationsList.Size = new System.Drawing.Size(400, 262);
             this.reservationsList.TabIndex = 4;
             this.reservationsList.UseCompatibleStateImageBehavior = false;
             this.reservationsList.View = System.Windows.Forms.View.Details;
@@ -120,56 +122,79 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(556, 11);
+            this.label1.Location = new System.Drawing.Point(417, 9);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(168, 17);
+            this.label1.Size = new System.Drawing.Size(126, 13);
             this.label1.TabIndex = 5;
             this.label1.Text = "Liste des emplacements :";
             // 
             // locationsList
             // 
             this.locationsList.FormattingEnabled = true;
-            this.locationsList.ItemHeight = 16;
-            this.locationsList.Location = new System.Drawing.Point(556, 31);
-            this.locationsList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.locationsList.Location = new System.Drawing.Point(417, 25);
+            this.locationsList.Margin = new System.Windows.Forms.Padding(2);
             this.locationsList.Name = "locationsList";
-            this.locationsList.Size = new System.Drawing.Size(203, 148);
+            this.locationsList.Size = new System.Drawing.Size(153, 121);
             this.locationsList.TabIndex = 6;
             this.locationsList.SelectedIndexChanged += new System.EventHandler(this.locationsList_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(556, 180);
+            this.label2.Location = new System.Drawing.Point(417, 146);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(138, 17);
+            this.label2.Size = new System.Drawing.Size(103, 13);
             this.label2.TabIndex = 7;
             this.label2.Text = "Liste des locataires :";
             // 
             // lodgerList
             // 
             this.lodgerList.FormattingEnabled = true;
-            this.lodgerList.ItemHeight = 16;
-            this.lodgerList.Location = new System.Drawing.Point(556, 207);
-            this.lodgerList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.lodgerList.Location = new System.Drawing.Point(417, 168);
+            this.lodgerList.Margin = new System.Windows.Forms.Padding(2);
             this.lodgerList.Name = "lodgerList";
-            this.lodgerList.Size = new System.Drawing.Size(203, 148);
+            this.lodgerList.Size = new System.Drawing.Size(153, 121);
             this.lodgerList.TabIndex = 8;
             // 
             // titleLabel
             // 
             this.titleLabel.AutoSize = true;
-            this.titleLabel.Location = new System.Drawing.Point(13, 11);
+            this.titleLabel.Location = new System.Drawing.Point(10, 9);
+            this.titleLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(171, 17);
+            this.titleLabel.Size = new System.Drawing.Size(127, 13);
             this.titleLabel.TabIndex = 9;
             this.titleLabel.Text = "Liste des réservations de ";
             // 
+            // editButton
+            // 
+            this.editButton.Location = new System.Drawing.Point(83, 306);
+            this.editButton.Name = "editButton";
+            this.editButton.Size = new System.Drawing.Size(75, 27);
+            this.editButton.TabIndex = 10;
+            this.editButton.Text = "Modifier";
+            this.editButton.UseVisualStyleBackColor = true;
+            this.editButton.Click += new System.EventHandler(this.editButton_Click);
+            // 
+            // refreshButton
+            // 
+            this.refreshButton.Location = new System.Drawing.Point(491, 306);
+            this.refreshButton.Name = "refreshButton";
+            this.refreshButton.Size = new System.Drawing.Size(75, 27);
+            this.refreshButton.TabIndex = 11;
+            this.refreshButton.Text = "Actualiser";
+            this.refreshButton.UseVisualStyleBackColor = true;
+            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
+            // 
             // Reservations
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(771, 419);
+            this.ClientSize = new System.Drawing.Size(578, 340);
+            this.Controls.Add(this.refreshButton);
+            this.Controls.Add(this.editButton);
             this.Controls.Add(this.titleLabel);
             this.Controls.Add(this.lodgerList);
             this.Controls.Add(this.label2);
@@ -179,7 +204,7 @@
             this.Controls.Add(this.factureButton);
             this.Controls.Add(this.deleteReservationButton);
             this.Controls.Add(this.newReservationButton);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "Reservations";
             this.Text = "Reservations";
@@ -202,5 +227,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox lodgerList;
         private System.Windows.Forms.Label titleLabel;
+        private System.Windows.Forms.Button editButton;
+        private System.Windows.Forms.Button refreshButton;
     }
 }

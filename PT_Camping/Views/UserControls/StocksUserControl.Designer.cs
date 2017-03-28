@@ -113,7 +113,7 @@
             // 
             this.informationsLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.informationsLabel.AutoSize = true;
-            this.informationsLabel.BackColor = System.Drawing.Color.RoyalBlue;
+            this.informationsLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(81)))), ((int)(((byte)(181)))));
             this.informationsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.informationsLabel.ForeColor = System.Drawing.Color.White;
             this.informationsLabel.Location = new System.Drawing.Point(120, 10);
@@ -351,7 +351,7 @@
             // 
             // detailsTitlePanel
             // 
-            this.detailsTitlePanel.BackColor = System.Drawing.Color.RoyalBlue;
+            this.detailsTitlePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(81)))), ((int)(((byte)(181)))));
             this.detailsTitlePanel.Controls.Add(this.informationsLabel);
             this.detailsTitlePanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.detailsTitlePanel.Location = new System.Drawing.Point(0, 0);

@@ -49,6 +49,7 @@
             this.locationNameTextBox = new System.Windows.Forms.TextBox();
             this.nameEditLabel = new System.Windows.Forms.Label();
             this.nullSelectionPanel = new System.Windows.Forms.Panel();
+            this.importMapRightPanel = new System.Windows.Forms.Button();
             this.infoLabel = new System.Windows.Forms.Label();
             this.detailsLocationPanel = new System.Windows.Forms.Panel();
             this.locationIssuesListBox = new System.Windows.Forms.ListView();
@@ -62,7 +63,6 @@
             this.reserveButton = new System.Windows.Forms.Button();
             this.resStateLabel = new System.Windows.Forms.Label();
             this.stateLabel = new System.Windows.Forms.Label();
-            this.importMapRightPanel = new System.Windows.Forms.Button();
             this.importMapPanel.SuspendLayout();
             this.mapTablePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -81,7 +81,7 @@
             this.importMapPanel.Location = new System.Drawing.Point(0, 0);
             this.importMapPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.importMapPanel.Name = "importMapPanel";
-            this.importMapPanel.Size = new System.Drawing.Size(1054, 578);
+            this.importMapPanel.Size = new System.Drawing.Size(890, 570);
             this.importMapPanel.TabIndex = 0;
             this.importMapPanel.Visible = false;
             // 
@@ -89,7 +89,7 @@
             // 
             this.importLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.importLabel.AutoSize = true;
-            this.importLabel.Location = new System.Drawing.Point(285, 206);
+            this.importLabel.Location = new System.Drawing.Point(203, 202);
             this.importLabel.Name = "importLabel";
             this.importLabel.Size = new System.Drawing.Size(457, 17);
             this.importLabel.TabIndex = 1;
@@ -99,7 +99,7 @@
             // 
             this.importMapButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.importMapButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.importMapButton.Location = new System.Drawing.Point(417, 316);
+            this.importMapButton.Location = new System.Drawing.Point(335, 312);
             this.importMapButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.importMapButton.Name = "importMapButton";
             this.importMapButton.Size = new System.Drawing.Size(189, 53);
@@ -156,7 +156,7 @@
             // 
             this.modeCheckBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.modeCheckBox.AutoSize = true;
-            this.modeCheckBox.Location = new System.Drawing.Point(22, 11);
+            this.modeCheckBox.Location = new System.Drawing.Point(10, 9);
             this.modeCheckBox.Margin = new System.Windows.Forms.Padding(2);
             this.modeCheckBox.Name = "modeCheckBox";
             this.modeCheckBox.Size = new System.Drawing.Size(112, 21);
@@ -170,7 +170,7 @@
             this.dateTimePicker.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.dateTimePicker.CustomFormat = "dd-MM-yyyy HH:mm";
             this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker.Location = new System.Drawing.Point(393, 9);
+            this.dateTimePicker.Location = new System.Drawing.Point(319, 8);
             this.dateTimePicker.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.Size = new System.Drawing.Size(161, 22);
@@ -181,7 +181,7 @@
             // 
             this.validateChangesButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.validateChangesButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.validateChangesButton.Location = new System.Drawing.Point(736, 10);
+            this.validateChangesButton.Location = new System.Drawing.Point(722, 8);
             this.validateChangesButton.Margin = new System.Windows.Forms.Padding(2);
             this.validateChangesButton.Name = "validateChangesButton";
             this.validateChangesButton.Size = new System.Drawing.Size(113, 23);
@@ -223,8 +223,8 @@
             // 
             // rightPanel
             // 
-            this.rightPanel.Controls.Add(this.nullSelectionPanel);
             this.rightPanel.Controls.Add(this.detailsLocationPanel);
+            this.rightPanel.Controls.Add(this.nullSelectionPanel);
             this.rightPanel.Controls.Add(this.editLocationPanel);
             this.rightPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rightPanel.Location = new System.Drawing.Point(669, 41);
@@ -255,9 +255,10 @@
             this.deleteButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.deleteButton.BackColor = System.Drawing.Color.Red;
             this.deleteButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.deleteButton.Location = new System.Drawing.Point(71, 276);
+            this.deleteButton.Location = new System.Drawing.Point(79, 340);
+            this.deleteButton.Margin = new System.Windows.Forms.Padding(4);
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(80, 25);
+            this.deleteButton.Size = new System.Drawing.Size(107, 31);
             this.deleteButton.TabIndex = 6;
             this.deleteButton.Text = "Supprimer";
             this.deleteButton.UseVisualStyleBackColor = false;
@@ -267,10 +268,10 @@
             // 
             this.carCheckedListBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.carCheckedListBox.FormattingEnabled = true;
-            this.carCheckedListBox.Location = new System.Drawing.Point(38, 126);
-            this.carCheckedListBox.Margin = new System.Windows.Forms.Padding(2);
+            this.carCheckedListBox.Location = new System.Drawing.Point(20, 148);
+            this.carCheckedListBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.carCheckedListBox.Name = "carCheckedListBox";
-            this.carCheckedListBox.Size = new System.Drawing.Size(148, 109);
+            this.carCheckedListBox.Size = new System.Drawing.Size(196, 123);
             this.carCheckedListBox.TabIndex = 5;
             this.carCheckedListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.CarCheckedListBox_Check);
             // 
@@ -278,10 +279,10 @@
             // 
             this.caractEditLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.caractEditLabel.AutoSize = true;
-            this.caractEditLabel.Location = new System.Drawing.Point(35, 109);
+            this.caractEditLabel.Location = new System.Drawing.Point(16, 127);
             this.caractEditLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.caractEditLabel.Name = "caractEditLabel";
-            this.caractEditLabel.Size = new System.Drawing.Size(88, 13);
+            this.caractEditLabel.Size = new System.Drawing.Size(118, 17);
             this.caractEditLabel.TabIndex = 4;
             this.caractEditLabel.Text = "Caractéristiques :";
             // 
@@ -290,42 +291,42 @@
             this.typeLocationComboBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.typeLocationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.typeLocationComboBox.FormattingEnabled = true;
-            this.typeLocationComboBox.Location = new System.Drawing.Point(68, 58);
-            this.typeLocationComboBox.Margin = new System.Windows.Forms.Padding(2);
+            this.typeLocationComboBox.Location = new System.Drawing.Point(60, 64);
+            this.typeLocationComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.typeLocationComboBox.Name = "typeLocationComboBox";
-            this.typeLocationComboBox.Size = new System.Drawing.Size(118, 21);
+            this.typeLocationComboBox.Size = new System.Drawing.Size(156, 24);
             this.typeLocationComboBox.TabIndex = 3;
             // 
             // typeEditLabel
             // 
             this.typeEditLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.typeEditLabel.AutoSize = true;
-            this.typeEditLabel.Location = new System.Drawing.Point(33, 61);
+            this.typeEditLabel.Location = new System.Drawing.Point(13, 68);
             this.typeEditLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.typeEditLabel.Name = "typeEditLabel";
-            this.typeEditLabel.Size = new System.Drawing.Size(31, 13);
+            this.typeEditLabel.Size = new System.Drawing.Size(40, 17);
             this.typeEditLabel.TabIndex = 2;
             this.typeEditLabel.Text = "Type";
             // 
             // locationNameTextBox
             // 
             this.locationNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.locationNameTextBox.Location = new System.Drawing.Point(68, 24);
-            this.locationNameTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.locationNameTextBox.Location = new System.Drawing.Point(60, 23);
+            this.locationNameTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.locationNameTextBox.MaxLength = 50;
             this.locationNameTextBox.Name = "locationNameTextBox";
             this.locationNameTextBox.ShortcutsEnabled = false;
-            this.locationNameTextBox.Size = new System.Drawing.Size(118, 20);
+            this.locationNameTextBox.Size = new System.Drawing.Size(156, 22);
             this.locationNameTextBox.TabIndex = 1;
             // 
             // nameEditLabel
             // 
             this.nameEditLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.nameEditLabel.AutoSize = true;
-            this.nameEditLabel.Location = new System.Drawing.Point(35, 27);
+            this.nameEditLabel.Location = new System.Drawing.Point(16, 26);
             this.nameEditLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.nameEditLabel.Name = "nameEditLabel";
-            this.nameEditLabel.Size = new System.Drawing.Size(29, 13);
+            this.nameEditLabel.Size = new System.Drawing.Size(37, 17);
             this.nameEditLabel.TabIndex = 0;
             this.nameEditLabel.Text = "Nom";
             // 
@@ -335,18 +336,32 @@
             this.nullSelectionPanel.Controls.Add(this.infoLabel);
             this.nullSelectionPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.nullSelectionPanel.Location = new System.Drawing.Point(0, 0);
+            this.nullSelectionPanel.Margin = new System.Windows.Forms.Padding(4);
             this.nullSelectionPanel.Name = "nullSelectionPanel";
             this.nullSelectionPanel.Size = new System.Drawing.Size(219, 527);
             this.nullSelectionPanel.TabIndex = 8;
             this.nullSelectionPanel.Visible = false;
             // 
+            // importMapRightPanel
+            // 
+            this.importMapRightPanel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.importMapRightPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.importMapRightPanel.Location = new System.Drawing.Point(29, 289);
+            this.importMapRightPanel.Name = "importMapRightPanel";
+            this.importMapRightPanel.Size = new System.Drawing.Size(134, 30);
+            this.importMapRightPanel.TabIndex = 19;
+            this.importMapRightPanel.Text = "Importer une carte";
+            this.importMapRightPanel.UseVisualStyleBackColor = true;
+            this.importMapRightPanel.Click += new System.EventHandler(this.ImportMapButton_Click);
+            // 
             // infoLabel
             // 
             this.infoLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.infoLabel.AutoSize = true;
-            this.infoLabel.Location = new System.Drawing.Point(28, 21);
+            this.infoLabel.Location = new System.Drawing.Point(1, 26);
+            this.infoLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.infoLabel.Name = "infoLabel";
-            this.infoLabel.Size = new System.Drawing.Size(161, 13);
+            this.infoLabel.Size = new System.Drawing.Size(212, 17);
             this.infoLabel.TabIndex = 0;
             this.infoLabel.Text = "Aucun emplacement sélectionné";
             // 
@@ -377,7 +392,7 @@
             this.locationIssuesListBox.FullRowSelect = true;
             this.locationIssuesListBox.GridLines = true;
             this.locationIssuesListBox.HideSelection = false;
-            this.locationIssuesListBox.Location = new System.Drawing.Point(35, 250);
+            this.locationIssuesListBox.Location = new System.Drawing.Point(17, 250);
             this.locationIssuesListBox.MultiSelect = false;
             this.locationIssuesListBox.Name = "locationIssuesListBox";
             this.locationIssuesListBox.Size = new System.Drawing.Size(200, 84);
@@ -390,7 +405,7 @@
             // 
             this.pendingIssuesLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.pendingIssuesLabel.AutoSize = true;
-            this.pendingIssuesLabel.Location = new System.Drawing.Point(32, 235);
+            this.pendingIssuesLabel.Location = new System.Drawing.Point(14, 235);
             this.pendingIssuesLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.pendingIssuesLabel.Name = "pendingIssuesLabel";
             this.pendingIssuesLabel.Size = new System.Drawing.Size(131, 17);
@@ -400,7 +415,7 @@
             // catLocationListView
             // 
             this.catLocationListView.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.catLocationListView.Location = new System.Drawing.Point(35, 155);
+            this.catLocationListView.Location = new System.Drawing.Point(17, 155);
             this.catLocationListView.Margin = new System.Windows.Forms.Padding(2);
             this.catLocationListView.Name = "catLocationListView";
             this.catLocationListView.Size = new System.Drawing.Size(200, 73);
@@ -412,7 +427,7 @@
             // 
             this.detailsLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.detailsLabel.AutoSize = true;
-            this.detailsLabel.Location = new System.Drawing.Point(33, 140);
+            this.detailsLabel.Location = new System.Drawing.Point(15, 140);
             this.detailsLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.detailsLabel.Name = "detailsLabel";
             this.detailsLabel.Size = new System.Drawing.Size(118, 17);
@@ -423,7 +438,7 @@
             // 
             this.catLocationLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.catLocationLabel.AutoSize = true;
-            this.catLocationLabel.Location = new System.Drawing.Point(94, 35);
+            this.catLocationLabel.Location = new System.Drawing.Point(106, 35);
             this.catLocationLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.catLocationLabel.Name = "catLocationLabel";
             this.catLocationLabel.Size = new System.Drawing.Size(85, 17);
@@ -497,113 +512,6 @@
             this.stateLabel.TabIndex = 0;
             this.stateLabel.Text = "Etat :";
             // 
-            // importMapRightPanel
-            // 
-            this.importMapRightPanel.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.importMapRightPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.importMapRightPanel.Location = new System.Drawing.Point(49, 289);
-            this.importMapRightPanel.Name = "importMapRightPanel";
-            this.importMapRightPanel.Size = new System.Drawing.Size(120, 30);
-            this.importMapRightPanel.TabIndex = 19;
-            this.importMapRightPanel.Text = "Importer une carte";
-            this.importMapRightPanel.UseVisualStyleBackColor = true;
-            this.importMapRightPanel.Click += new System.EventHandler(this.ImportMapButton_Click);
-            // 
-            this.deleteButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.deleteButton.BackColor = System.Drawing.Color.Red;
-            this.deleteButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.deleteButton.Location = new System.Drawing.Point(79, 340);
-            this.deleteButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(107, 31);
-            this.deleteButton.TabIndex = 6;
-            this.deleteButton.Text = "Supprimer";
-            this.deleteButton.UseVisualStyleBackColor = false;
-            this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
-            // 
-            // carCheckedListBox
-            // 
-            this.carCheckedListBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.carCheckedListBox.FormattingEnabled = true;
-            this.carCheckedListBox.Location = new System.Drawing.Point(35, 155);
-            this.carCheckedListBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.carCheckedListBox.Name = "carCheckedListBox";
-            this.carCheckedListBox.Size = new System.Drawing.Size(196, 123);
-            this.carCheckedListBox.TabIndex = 5;
-            this.carCheckedListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.CarCheckedListBox_Check);
-            // 
-            // caractEditLabel
-            // 
-            this.caractEditLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.caractEditLabel.AutoSize = true;
-            this.caractEditLabel.Location = new System.Drawing.Point(31, 134);
-            this.caractEditLabel.Name = "caractEditLabel";
-            this.caractEditLabel.Size = new System.Drawing.Size(118, 17);
-            this.caractEditLabel.TabIndex = 4;
-            this.caractEditLabel.Text = "Caractéristiques :";
-            // 
-            // typeLocationComboBox
-            // 
-            this.typeLocationComboBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.typeLocationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.typeLocationComboBox.FormattingEnabled = true;
-            this.typeLocationComboBox.Location = new System.Drawing.Point(75, 71);
-            this.typeLocationComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.typeLocationComboBox.Name = "typeLocationComboBox";
-            this.typeLocationComboBox.Size = new System.Drawing.Size(156, 24);
-            this.typeLocationComboBox.TabIndex = 3;
-            // 
-            // typeEditLabel
-            // 
-            this.typeEditLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.typeEditLabel.AutoSize = true;
-            this.typeEditLabel.Location = new System.Drawing.Point(28, 75);
-            this.typeEditLabel.Name = "typeEditLabel";
-            this.typeEditLabel.Size = new System.Drawing.Size(40, 17);
-            this.typeEditLabel.TabIndex = 2;
-            this.typeEditLabel.Text = "Type";
-            // 
-            // locationNameTextBox
-            // 
-            this.locationNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.locationNameTextBox.Location = new System.Drawing.Point(75, 30);
-            this.locationNameTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.locationNameTextBox.Name = "locationNameTextBox";
-            this.locationNameTextBox.Size = new System.Drawing.Size(156, 22);
-            this.locationNameTextBox.TabIndex = 1;
-            // 
-            // nameEditLabel
-            // 
-            this.nameEditLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.nameEditLabel.AutoSize = true;
-            this.nameEditLabel.Location = new System.Drawing.Point(31, 33);
-            this.nameEditLabel.Name = "nameEditLabel";
-            this.nameEditLabel.Size = new System.Drawing.Size(37, 17);
-            this.nameEditLabel.TabIndex = 0;
-            this.nameEditLabel.Text = "Nom";
-            // 
-            // nullSelectionPanel
-            // 
-            this.nullSelectionPanel.Controls.Add(this.infoLabel);
-            this.nullSelectionPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nullSelectionPanel.Location = new System.Drawing.Point(0, 0);
-            this.nullSelectionPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.nullSelectionPanel.Name = "nullSelectionPanel";
-            this.nullSelectionPanel.Size = new System.Drawing.Size(258, 534);
-            this.nullSelectionPanel.TabIndex = 8;
-            this.nullSelectionPanel.Visible = false;
-            // 
-            // infoLabel
-            // 
-            this.infoLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.infoLabel.AutoSize = true;
-            this.infoLabel.Location = new System.Drawing.Point(21, 26);
-            this.infoLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.infoLabel.Name = "infoLabel";
-            this.infoLabel.Size = new System.Drawing.Size(212, 17);
-            this.infoLabel.TabIndex = 0;
-            this.infoLabel.Text = "Aucun emplacement sélectionné";
-            // 
             // MapUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -612,7 +520,7 @@
             this.Controls.Add(this.mapTablePanel);
             this.Controls.Add(this.importMapPanel);
             this.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MapUserControl";
             this.Padding = new System.Windows.Forms.Padding(0, 0, 10, 30);
             this.Size = new System.Drawing.Size(900, 600);

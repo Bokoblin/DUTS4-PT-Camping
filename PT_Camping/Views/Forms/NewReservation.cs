@@ -41,16 +41,32 @@ namespace PT_Camping.Views.Forms
             }
         }
 
+        public enum Mode
+        {
+            Add,
+            Edit
+        }
+
         private DataBase _db;
         private HomeUserControl _homeUserControl;
+        private Mode _mode;
+        private int _resToEditCode;
 
         public delegate void LocationSelectedDelegate(int locationId);
 
-        public NewReservation(HomeUserControl homeUserControl)
+        public NewReservation(HomeUserControl homeUserControl, DataBase context, Mode mode = Mode.Add, int resCode = -1)
         {
             InitializeComponent();
             _homeUserControl = homeUserControl;
-            _db = new DataBase();
+            if (context == null)
+            {
+                _db = new DataBase();
+            }
+            else
+            {
+                _db = context;
+            }
+            
             foreach (Client person in _db.Client)
             {
                 reservationHolderComboBox.Items.Add(person.Personne.Nom_Personne + " " + person.Personne.Prenom_Personne);
@@ -58,9 +74,46 @@ namespace PT_Camping.Views.Forms
             }
             locationsListBox.DisplayMember = "LocationName";
             lodgersListBox.DisplayMember = "ClientFullName";
+            _mode = mode;
+            Text = Resources.add_a_reservation;
+
+            _resToEditCode = resCode;
+            if (_mode == Mode.Edit)
+            {
+                reservationHolderComboBox.Enabled = false;
+                addReservationButton.Text = Resources.edit;
+                Text = Resources.edit_a_reservation;
+                Reservation reservation = _db.Reservation.FirstOrDefault(a => a.Code_Reservation == resCode);
+                if (reservation != null)
+                {
+                    beginDateTimePicker.Value = reservation.Date_Debut;
+                    endDateTimePicker.Value = reservation.Date_Fin;
+                    PayedCheckBox.Checked = reservation.Est_Paye;
+                }
+                foreach (Emplacement location in _db.Loge.Where(a => a.Code_Reservation == resCode).Select(a => a.Emplacement).Distinct())
+                {
+                    LocationItem locationItem = new LocationItem
+                    {
+                        Lodgers = new HashSet<Lodger>(),
+                        Location = location
+                    };
+                    locationsListBox.Items.Add(locationItem);
+                    foreach (Personne lodger in _db.Loge.Where(a => a.Code_Emplacement == location.Code_Emplacement).Select(a => a.Personne).Distinct())
+                    {
+                        if (lodger.Client != null)
+                        {
+                            locationItem.Lodgers.Add(new Lodger
+                            {
+                                Client = lodger.Client
+                            });
+                        }
+                    }
+                }
+            }
         }
 
-        public NewReservation(HomeUserControl homeUserControl, int codePerson) : this(homeUserControl)
+        public NewReservation(HomeUserControl homeUserControl, DataBase context,  int codePerson, Mode mode = Mode.Add, int resCode = -1) 
+            : this(homeUserControl, context, mode, resCode)
         {
             Personne client = _db.Personne.Find(codePerson);
             if (client != null)
@@ -69,7 +122,8 @@ namespace PT_Camping.Views.Forms
             }
         }
 
-        public NewReservation(HomeUserControl homeUserControl, Emplacement emplacement): this(homeUserControl)
+        public NewReservation(HomeUserControl homeUserControl, DataBase context, Emplacement emplacement, Mode mode = Mode.Add, int resCode = -1): 
+            this(homeUserControl, context, mode, resCode)
         {
             locationsListBox.Items.Add(new LocationItem
             {
@@ -94,17 +148,13 @@ namespace PT_Camping.Views.Forms
         private void addLocationButton_Click(object sender, EventArgs e)
         {
             LocationSelectedDelegate caller = LocationPicked;
-            _homeUserControl.Window.WindowPanel.Controls.Clear();
-            _homeUserControl.Window.WindowPanel.Controls.Add(_homeUserControl);
-            _homeUserControl.HomeTabControl.SelectTab(1);
-            _homeUserControl.Window.BringToFront();
+            _homeUserControl.StartLocationsFromClients();
             _homeUserControl.MapUserControl.StartPickLocation(caller, beginDateTimePicker.Value);
         }
 
         private void LocationPicked(int locationId)
         {
-            _homeUserControl.Window.WindowPanel.Controls.Clear();
-            _homeUserControl.Window.WindowPanel.Controls.Add(new ClientsUserControl(_homeUserControl));
+            _homeUserControl.StartClientsFromLocations();
             BringToFront();
             Emplacement locationToAdd = _db.Emplacement.First(a => a.Code_Emplacement == locationId);
             if (locationsListBox.Items.Cast<LocationItem>().Any(locationItem => locationItem.Location.Code_Emplacement == locationToAdd.Code_Emplacement))
@@ -161,16 +211,19 @@ namespace PT_Camping.Views.Forms
 
         private void addReservationButton_Click(object sender, EventArgs e)
         {
+            Reservation newReservation;
+            DateTime beginDate = beginDateTimePicker.Value;
+            DateTime endDate = endDateTimePicker.Value;
             String reservationHolderName = reservationHolderComboBox.Text;
             Client client =
                 _db.Client.FirstOrDefault(a => reservationHolderName.Equals(a.Personne.Nom_Personne + " " + a.Personne.Prenom_Personne));
+
             if (client?.Personne == null)
             {
                 MessageBox.Show(Resources.client_not_found);
                 return;
             }
-            DateTime beginDate = beginDateTimePicker.Value;
-            DateTime endDate = endDateTimePicker.Value;
+            
             if (endDate < beginDate)
             {
                 MessageBox.Show(Resources.beginDate_superior_endDate);
@@ -181,15 +234,15 @@ namespace PT_Camping.Views.Forms
                 MessageBox.Show(Resources.reservation_need_at_least_1_location);
                 return;
             }
-            foreach (LocationItem locationItem  in locationsListBox.Items)
+            foreach (LocationItem locationItem in locationsListBox.Items)
             {
                 if (!locationItem.Lodgers.Any())
                 {
                     MessageBox.Show("L'emplacement " + locationItem.LocationName + " ne contient aucun résident");
                     return;
                 }
-                if (_db.Reservation.Where(a => (beginDate >= a.Date_Debut && beginDate <= a.Date_Fin) ||
-                                               (endDate >= a.Date_Debut && endDate <= a.Date_Fin))
+                if (_db.Reservation.Where(a => ((beginDate >= a.Date_Debut && beginDate <= a.Date_Fin) ||
+                                               (endDate >= a.Date_Debut && endDate <= a.Date_Fin)) && a.Code_Reservation != _resToEditCode)
                     .SelectMany(a => a.Loge)
                     .Any(a => a.Code_Emplacement == locationItem.Location.Code_Emplacement))
                 {
@@ -198,40 +251,62 @@ namespace PT_Camping.Views.Forms
                     return;
                 }
             }
-            Reservation newReservation = new Reservation
+
+            if (_mode == Mode.Add)
             {
-                Date_Debut = beginDate,
-                Date_Fin = endDate,
-                Est_Paye = false,
-                Personne = client.Personne
-            };
-            _db.Reservation.Add(newReservation);
-            newReservation.Facture.Add(new Facture
-            {
-                Montant = 0,
-                Date_Emission = DateTime.Now
-            });
-            foreach (LocationItem locationItem in locationsListBox.Items)
-            {
-                foreach (Lodger lodger in locationItem.Lodgers)
+                newReservation = new Reservation
                 {
-                    Loge loge = new Loge
+                    Personne = client.Personne
+                };
+                _db.Reservation.Add(newReservation);
+            }
+            else
+            {
+                newReservation = _db.Reservation.FirstOrDefault(a => a.Code_Reservation == _resToEditCode);
+                if (newReservation != null)
+                {
+                    foreach (Loge loge in _db.Loge.Where(a => a.Code_Reservation == _resToEditCode))
                     {
-                        Emplacement = locationItem.Location,
-                        Personne = lodger.Client.Personne,
-                        Reservation = newReservation
-                    };
-                    newReservation.Loge.Add(loge);
+                        _db.Loge.Remove(loge);
+                    }
                 }
             }
-            try
+
+            if (newReservation != null)
             {
-                _db.SaveChanges();
-                MessageBox.Show(Resources.reservation_done);
-            }
-            catch (DbUpdateException ex)
-            {
-                MessageBox.Show(Resources.db_save_error + "\n" + ex.InnerException?.InnerException?.ToString());
+                foreach (LocationItem locationItem in locationsListBox.Items)
+                {
+                    foreach (Lodger lodger in locationItem.Lodgers)
+                    {
+                        Loge loge = new Loge
+                        {
+                            Emplacement = locationItem.Location,
+                            Personne = lodger.Client.Personne,
+                            Reservation = newReservation
+                        };
+                        newReservation.Loge.Add(loge);
+                    }
+                }
+                newReservation.Date_Debut = beginDate;
+                newReservation.Date_Fin = endDate;
+                newReservation.Est_Paye = PayedCheckBox.Checked;
+
+                try
+                {
+                    _db.SaveChanges();
+                    if (_mode == Mode.Add)
+                    {
+                        MessageBox.Show(Resources.reservation_done);
+                    }
+                    else
+                    {
+                        MessageBox.Show(Resources.reservation_edited);
+                    }
+                }
+                catch (DbUpdateException ex)
+                {
+                    MessageBox.Show(Resources.db_save_error + "\n" + ex.InnerException?.InnerException?.ToString());
+                }
             }
         }
 

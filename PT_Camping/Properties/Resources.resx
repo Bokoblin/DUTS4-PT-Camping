@@ -302,6 +302,18 @@ Veuillez contacter votre administrateur.</value>
   <data name="not_reservable_emplacement" xml:space="preserve">
     <value>Cet emplacement n'est pas réservable</value>
   </data>
+  <data name="edit" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="reservation_edited" xml:space="preserve">
+    <value>Reservation modifiée</value>
+  </data>
+  <data name="add_a_reservation" xml:space="preserve">
+    <value>Ajout d'une réservation</value>
+  </data>
+  <data name="edit_a_reservation" xml:space="preserve">
+    <value>Modification d'une réservation</value>
+  </data>
   <data name="select_image_for_the_type" xml:space="preserve">
     <value>Sélectionnez une image pour le type</value>
   </data>
