@@ -246,11 +246,75 @@ et supérieure à la date de l'incident.</value>
   <data name="images_files_formats" xml:space="preserve">
     <value>Image Files |*.png; *.jpg; *.bmp</value>
   </data>
-  <data name="select_image_for_the_type" xml:space="preserve">
-    <value>Sélectionnez une image pour le type </value>
-  </data>
   <data name="db_save_error" xml:space="preserve">
     <value>Erreur lors de la sauvegarde dans la base de données : 
 </value>
+  </data>
+  <data name="denied_access" xml:space="preserve">
+    <value>Accès refusé. 
+Veuillez contacter votre administrateur.</value>
+  </data>
+  <data name="ic_issue_done" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\images\ic_issue_done.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ic_issue_pending" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\images\ic_issue_pending.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ic_stock_empty" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\images\ic_stock_empty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ic_stock_low" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\images\ic_stock_low.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="delete_item_confirm_message" xml:space="preserve">
+    <value>Voulez-vous vraiment supprimer cet élément ?</value>
+  </data>
+  <data name="ic_add_a_photo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\images\ic_add_a_photo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="some_not_filled" xml:space="preserve">
+    <value>Certains champs ne sont pas remplis.</value>
+  </data>
+  <data name="old_pass_incorrect" xml:space="preserve">
+    <value>L'ancien mot de passe n'est pas correct.</value>
+  </data>
+  <data name="not_corresponding_messages" xml:space="preserve">
+    <value>Les mots de passe ne correspondent pas.</value>
+  </data>
+  <data name="reservationTitleLabel" xml:space="preserve">
+    <value>Liste des réservations de : </value>
+  </data>
+  <data name="client_not_found" xml:space="preserve">
+    <value>Client introuvable. Merci de l'écrire sous la forme Nom + Prénom</value>
+  </data>
+  <data name="client_already_added" xml:space="preserve">
+    <value>Ce client est déjà présent dans cette réservation.</value>
+  </data>
+  <data name="beginDate_superior_endDate" xml:space="preserve">
+    <value>La date de fin doit être suprérieure à la date de début</value>
+  </data>
+  <data name="reservation_need_at_least_1_location" xml:space="preserve">
+    <value>La réservation doit contenir au moins un emplacement</value>
+  </data>
+  <data name="reservation_done" xml:space="preserve">
+    <value>Réservation effectuée !</value>
+  </data>
+  <data name="not_reservable_emplacement" xml:space="preserve">
+    <value>Cet emplacement n'est pas réservable</value>
+  </data>
+  <data name="edit" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="reservation_edited" xml:space="preserve">
+    <value>Reservation modifiée</value>
+  </data>
+  <data name="add_a_reservation" xml:space="preserve">
+    <value>Ajout d'une réservation</value>
+  </data>
+  <data name="edit_a_reservation" xml:space="preserve">
+    <value>Modification d'une réservation</value>
+  </data>
+  <data name="select_image_for_the_type" xml:space="preserve">
+    <value>Sélectionnez une image pour le type</value>
   </data>
 </root>

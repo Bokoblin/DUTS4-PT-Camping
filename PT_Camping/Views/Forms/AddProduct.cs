@@ -5,10 +5,17 @@ using PT_Camping.Model;
 
 namespace PT_Camping.Views.Forms
 {
-    public partial class AddStock : Form
+    /// <summary>
+    /// This dialog allows to add a new product
+    /// by choosing a name, a quantity and a price
+    /// 
+    /// </summary>
+    /// Authors : Yonnel
+    /// Since : 09/03/17
+    public partial class AddProduct : Form
     {
         private readonly DataBase _db;
-        public AddStock()
+        public AddProduct()
         {
             InitializeComponent();
             _db = new DataBase();
@@ -16,16 +23,18 @@ namespace PT_Camping.Views.Forms
 
         private void ButtonValid_MouseClick(object sender, MouseEventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
+
             try
             {
-
-                if (productNameTextBox.Text == "" || productPriceTextBox.Text == "" || productStockTextBox.Text == "")
+                if (productNameTextBox.Text == "" || productPriceTextBox.Text == "" 
+                    || productStockTextBox.Text == "" || productCriticStockTextBox.Text == "")
                     throw new Exception("Toutes les valeurs marquées d'une étoile doivent être remplies.");
 
                 if (productNameTextBox.Text.Any(char.IsDigit))
                     throw new Exception("Le nom du produit ne peut contenir de valeur numérique.");
 
-                if (int.Parse(productStockTextBox.Text) < 0)
+                if (int.Parse(productStockTextBox.Text) < 0 || int.Parse(productCriticStockTextBox.Text) < 0)
                     throw new Exception("La quantité doit être positive.");
 
 
@@ -36,6 +45,7 @@ namespace PT_Camping.Views.Forms
                 {
                     Libelle_Produit = productNameTextBox.Text,
                     Quantite_Stock = Convert.ToInt32(productStockTextBox.Text),
+                    Quantite_Critique = Convert.ToInt32(productCriticStockTextBox.Text),
                     Prix = Convert.ToDouble(productPriceTextBox.Text)
                 };
                 _db.Produit.Add(product);
@@ -45,11 +55,10 @@ namespace PT_Camping.Views.Forms
             catch(Exception exception)
             {
                 MessageBox.Show(exception.Message);
-            }
-            
+            } 
         }
 
-        private void productStockTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        private void ProductStockTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if(!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
@@ -57,7 +66,17 @@ namespace PT_Camping.Views.Forms
             }
         }
 
-        private void productPriceTextBox_KeyPress(object sender, KeyPressEventArgs e)
+
+        private void ProductCriticStockTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+
+        private void ProductPriceTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ( !char.IsControl(e.KeyChar) && e.KeyChar != ',' && !char.IsDigit(e.KeyChar))
             {
@@ -65,9 +84,10 @@ namespace PT_Camping.Views.Forms
             }
         }
 
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             Close();
         }
+
     }
 }

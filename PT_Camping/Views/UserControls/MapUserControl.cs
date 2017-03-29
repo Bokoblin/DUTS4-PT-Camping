@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using PT_Camping.Views.Forms;
 
 namespace PT_Camping.Views.UserControls
 {
@@ -14,7 +15,8 @@ namespace PT_Camping.Views.UserControls
     {
         LoadImage,
         Normal,
-        Edit
+        Edit,
+        PickLocation
     };
 
     public enum CursorAction
@@ -50,6 +52,36 @@ namespace PT_Camping.Views.UserControls
         private PointF _oldPosition;
         private CursorAction _cursorAction;
         private bool _updatingRightMenu;
+        private NewReservation.LocationSelectedDelegate _pickCallBackAction;
+
+        private GraphicLocation SelectedLocation
+        {
+            set
+            {
+                _selectedLocation = value;
+                if (_mode == MapMode.PickLocation && value != null)
+                {
+                    if (!value.Location.Type_Emplacement.Est_Reservable)
+                    {
+                        MessageBox.Show(Resources.not_reservable_emplacement);
+                    }
+                    else
+                    {
+                        HomeUserControl.HomeTabControl.SelectTab(0);
+                        _pickCallBackAction(value.Location.Code_Emplacement);
+                    }
+                }
+                else
+                {
+                    UpdateRightMenu();
+                }
+            }
+            get
+            {
+                return _selectedLocation;
+            }
+        }
+        public HomeUserControl HomeUserControl { get; set; }
 
         public MapUserControl(HomeUserControl home)
         {
@@ -88,6 +120,26 @@ namespace PT_Camping.Views.UserControls
             SelectFromStats(locationCode);
         }
 
+        public void StartPickLocation(NewReservation.LocationSelectedDelegate pickLocationSelectedDelegate, DateTime date)
+        {
+            _mode = MapMode.PickLocation;
+            dateTimePicker.Value = date;
+            _pickCallBackAction = pickLocationSelectedDelegate;
+            ChangeMode(_mode);
+        }
+
+        public void ResetMode()
+        {
+            if (!_db.App.Any(m => m.Fond_Image != null))
+            {
+                _mode = MapMode.LoadImage;
+            }
+            else
+            {
+                _mode = MapMode.Normal;
+            }
+            ChangeMode(_mode);
+        }
 
         public void SelectFromStats(int locationCode)
         {
@@ -103,12 +155,10 @@ namespace PT_Camping.Views.UserControls
             ChangeMode(_mode);
         }
 
-
         internal void HandleResize(Size mapTabSize)
         {
             Size = mapTabSize;
         }
-
 
         private void LoadLocationsFromDb()
         {
@@ -328,6 +378,10 @@ namespace PT_Camping.Views.UserControls
             addLocationPanel.Visible = false;
             editLocationPanel.Visible = false;
             detailsLocationPanel.Visible = false;
+            modeCheckBox.Visible = true;
+            mapTablePanel.Visible = true;
+            mapTablePanel.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 60F);
+            mapTablePanel.ColumnStyles[2] = new ColumnStyle(SizeType.Percent, 25F);
             switch (mode)
             {
                 case MapMode.LoadImage:
@@ -335,18 +389,32 @@ namespace PT_Camping.Views.UserControls
                     importMapPanel.Visible = true;
                     break;
                 case MapMode.Normal:
-                    mapTablePanel.Visible = true;
                     categoriesCheckedListBox.Visible = true;
                     detailsLocationPanel.Visible = true;
                     break;
                 case MapMode.Edit:
-                    mapTablePanel.Visible = true;
                     addLocationPanel.Visible = true;
                     editLocationPanel.Visible = true;
+                    break;
+                case MapMode.PickLocation:
+                    modeCheckBox.Visible = false;
+                    categoriesCheckedListBox.Visible = true;
+                    mapTablePanel.ColumnStyles[1] = new ColumnStyle(SizeType.Percent, 85F);
+                    mapTablePanel.ColumnStyles[2] = new ColumnStyle(SizeType.Percent, 0F);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(mode), mode, null);
             }
+            InitPermissions();
+        }
+
+        public void InitPermissions()
+        {
+            var userRights = _db.Personne.First(a => a.Code_Personne == LoginTools.Employee.Code_Personne).Droit.ToList();
+            importMapButton.Enabled = userRights.Any(d => d.Libelle_Droit == "writeMap");
+            modeCheckBox.Visible = userRights.Any(d => d.Libelle_Droit == "writeMap");
+            validateChangesButton.Visible = userRights.Any(d => d.Libelle_Droit == "writeMap");
+            importMapRightPanel.Enabled = modeCheckBox.Checked;
         }
 
 
@@ -680,25 +748,25 @@ namespace PT_Camping.Views.UserControls
             LoginTools.CheckConnection();
             if (SelectedLocation.Location.Type_Emplacement.Est_Reservable)
             {
-                resButton.Enabled = true;
+                reserveButton.Enabled = true;
                 if (
                     _db.Reservation.Where(r => r.Date_Debut < dateTimePicker.Value && dateTimePicker.Value < r.Date_Fin)
                         .SelectMany(a => a.Loge)
                         .Any(l => l.Code_Emplacement == SelectedLocation.Location.Code_Emplacement))
                 {
                     resStateLabel.Text = Resources.booked;
-                    resButton.Text = Resources.unbook;
+                    reserveButton.Text = Resources.unbook;
                 }
                 else
                 {
                     resStateLabel.Text = Resources.free;
-                    resButton.Text = Resources.book;
+                    reserveButton.Text = Resources.book;
                 }
             }
             else
             {
-                resButton.Enabled = false;
-                resButton.Text = Resources.book;
+                reserveButton.Enabled = false;
+                reserveButton.Text = Resources.book;
                 resStateLabel.Text = Resources.not_bookable;
             }
             
@@ -819,32 +887,29 @@ namespace PT_Camping.Views.UserControls
 
         private void LocationIssuesListBox_DoubleClick(object sender, EventArgs e)
         {
-            if (locationIssuesListBox.SelectedItems.Count > 0)
+            var userRights = _db.Personne.First(a => a.Code_Personne == LoginTools.Employee.Code_Personne).Droit.ToList();
+            if(userRights.Any(d => d.Libelle_Droit == "readIssues") )
             {
-                var code = int.Parse(locationIssuesListBox.SelectedItems[0].Name);
-                code = _db.Incident.First(i => i.Code_Incident == code).Code_Incident;
-                HomeUserControl.Window.WindowPanel.Controls.Remove(this);
-                HomeUserControl.StartIssuesFromStats(code);
+                if (locationIssuesListBox.SelectedItems.Count > 0)
+                {
+                    var code = int.Parse(locationIssuesListBox.SelectedItems[0].Name);
+                    code = _db.Incident.First(i => i.Code_Incident == code).Code_Incident;
+                    HomeUserControl.Window.WindowPanel.Controls.Remove(this);
+                    HomeUserControl.StartIssuesFromStats(code);
+                }
+            }
+            else
+            {
+                MessageBox.Show(Resources.denied_access);
             }
         }
 
-
-        /// <summary>
-        /// Properties (Getters & Setters)
-        /// </summary>
-
-        private GraphicLocation SelectedLocation
+        private void resButton_Click(object sender, EventArgs e)
         {
-            set
+            if (_selectedLocation != null)
             {
-                _selectedLocation = value;
-                UpdateRightMenu();
-            }
-            get
-            {
-                return _selectedLocation;
+                new NewReservation(HomeUserControl, _db, _selectedLocation.Location).Show();
             }
         }
-        public HomeUserControl HomeUserControl { get; set; }
     }
 }
