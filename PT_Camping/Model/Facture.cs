@@ -14,11 +14,17 @@ namespace PT_Camping.Model
     
     public partial class Facture
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Facture()
+        {
+            this.Reservation = new HashSet<Reservation>();
+        }
+    
         public int Code_Facture { get; set; }
         public double Montant { get; set; }
         public Nullable<System.DateTime> Date_Emission { get; set; }
-        public int Code_Reservation { get; set; }
     
-        public virtual Reservation Reservation { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Reservation> Reservation { get; set; }
     }
 }

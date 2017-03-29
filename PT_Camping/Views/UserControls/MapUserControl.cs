@@ -112,6 +112,7 @@ namespace PT_Camping.Views.UserControls
                 _mode = MapMode.Normal;
             }
             ChangeMode(_mode);    
+            RefreshLocations();
         }
 
 
@@ -814,12 +815,18 @@ namespace PT_Camping.Views.UserControls
 
         private void DateTimePicker_ValueChanged(object sender, EventArgs e)
         {
+            RefreshLocations();
+        }
+
+        public void RefreshLocations()
+        {
             foreach (var location in _locationsList)
             {
-                location.Booked = _db.Reservation.Where(r => r.Date_Debut < dateTimePicker.Value && dateTimePicker.Value < r.Date_Fin)
+                location.Booked = _db.Reservation.Where(r => r.Date_Debut <= dateTimePicker.Value && dateTimePicker.Value <= r.Date_Fin)
                     .SelectMany(a => a.Loge)
                     .Any(l => l.Code_Emplacement == location.Location.Code_Emplacement);
             }
+            pictureBox.Refresh();
             UpdateRightMenu();
         }
 
@@ -904,11 +911,29 @@ namespace PT_Camping.Views.UserControls
             }
         }
 
-        private void resButton_Click(object sender, EventArgs e)
+        private void reserveButton_Click(object sender, EventArgs e)
         {
+            Button button = (Button) sender;
             if (_selectedLocation != null)
             {
-                new NewReservation(HomeUserControl, _db, _selectedLocation.Location).Show();
+                if (button.Text == Resources.book)
+                {
+                    new NewReservation(HomeUserControl, _db, _selectedLocation.Location).Show();
+                } else if (button.Text == Resources.unbook)
+                {
+                    foreach (Reservation res in _db.Loge.Where(a => a.Code_Emplacement == _selectedLocation.Location.Code_Emplacement)
+                        .Select(a => a.Reservation).Where(a => a.Date_Debut <= dateTimePicker.Value && a.Date_Fin >= dateTimePicker.Value))
+                    {
+                        foreach (Loge loge in _db.Loge.Where(a => a.Code_Reservation == res.Code_Reservation))
+                        {
+                            _db.Loge.Remove(loge);
+                        }
+                        _db.Facture.Remove(res.Facture);
+                        _db.Reservation.Remove(res);
+                    }
+                    _db.SaveChanges();
+                    RefreshLocations();
+                }
             }
         }
     }
