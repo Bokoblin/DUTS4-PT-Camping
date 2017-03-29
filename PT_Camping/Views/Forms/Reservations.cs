@@ -74,16 +74,34 @@ namespace PT_Camping.Views.Forms
                 Reservation res = _db.Reservation.FirstOrDefault(a => a.Code_Reservation == codeRes);
                 if (res != null)
                 {
+                    _db.Facture.Remove(res.Facture);
                     _db.Reservation.Remove(res);
                     _db.SaveChanges();
-                    RefreshReservations();
                 }
+                RefreshReservations();
             }
         }
 
         private void factureButton_Click(object sender, EventArgs e)
         {
-            
+            if (reservationsList.SelectedItems.Count > 0 && reservationsList.SelectedItems[0] != null)
+            {
+                int codeRes = int.Parse(reservationsList.SelectedItems[0].SubItems[4].Text);
+                Reservation reservation = _db.Reservation.FirstOrDefault(a => a.Code_Reservation == codeRes);
+                Client client = null;
+                Facture facture = null;
+                if (reservation != null)
+                {
+                    client = reservation.Personne.Client;
+                    facture = reservation.Facture;
+                }
+                if (reservation != null && client != null && facture != null)
+                {
+                    //TODO Ecrire le code de generation de facture ici et modifier l'entité facture avec le prix
+                    _db.SaveChanges();
+                }
+            }
+
         }
 
         private void reservationsList_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
