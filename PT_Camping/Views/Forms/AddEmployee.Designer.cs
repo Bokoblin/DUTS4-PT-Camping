@@ -48,12 +48,15 @@ namespace PT_Camping.Views.Forms
             this.OKButton = new System.Windows.Forms.Button();
             this.mandatoryValuesTip = new System.Windows.Forms.Label();
             this.birthDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.showPasswordCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // nameTextBox
             // 
-            this.nameTextBox.Location = new System.Drawing.Point(56, 77);
+            this.nameTextBox.Location = new System.Drawing.Point(60, 77);
+            this.nameTextBox.MaxLength = 25;
             this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.ShortcutsEnabled = false;
             this.nameTextBox.Size = new System.Drawing.Size(156, 20);
             this.nameTextBox.TabIndex = 2;
             // 
@@ -61,46 +64,55 @@ namespace PT_Camping.Views.Forms
             // 
             this.nameLabel.Location = new System.Drawing.Point(12, 54);
             this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(240, 20);
+            this.nameLabel.Size = new System.Drawing.Size(260, 20);
             this.nameLabel.TabIndex = 33;
             this.nameLabel.Text = "Prénom*";
             this.nameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // loginTextBox
             // 
-            this.loginTextBox.Location = new System.Drawing.Point(56, 327);
+            this.loginTextBox.Location = new System.Drawing.Point(60, 327);
+            this.loginTextBox.MaxLength = 40;
             this.loginTextBox.Name = "loginTextBox";
+            this.loginTextBox.ShortcutsEnabled = false;
             this.loginTextBox.Size = new System.Drawing.Size(156, 20);
             this.loginTextBox.TabIndex = 7;
             // 
             // emailTextBox
             // 
-            this.emailTextBox.Location = new System.Drawing.Point(56, 281);
+            this.emailTextBox.Location = new System.Drawing.Point(60, 281);
+            this.emailTextBox.MaxLength = 50;
             this.emailTextBox.Name = "emailTextBox";
+            this.emailTextBox.ShortcutsEnabled = false;
             this.emailTextBox.Size = new System.Drawing.Size(156, 20);
             this.emailTextBox.TabIndex = 6;
             // 
             // phoneTextBox
             // 
-            this.phoneTextBox.Location = new System.Drawing.Point(56, 169);
+            this.phoneTextBox.Location = new System.Drawing.Point(60, 169);
             this.phoneTextBox.MaxLength = 10;
             this.phoneTextBox.Name = "phoneTextBox";
+            this.phoneTextBox.ShortcutsEnabled = false;
             this.phoneTextBox.Size = new System.Drawing.Size(156, 20);
             this.phoneTextBox.TabIndex = 4;
             this.phoneTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PhoneTextBox_KeyPress);
             // 
             // addressTextBox
             // 
-            this.addressTextBox.Location = new System.Drawing.Point(56, 215);
+            this.addressTextBox.Location = new System.Drawing.Point(60, 215);
+            this.addressTextBox.MaxLength = 250;
             this.addressTextBox.Multiline = true;
             this.addressTextBox.Name = "addressTextBox";
+            this.addressTextBox.ShortcutsEnabled = false;
             this.addressTextBox.Size = new System.Drawing.Size(156, 40);
             this.addressTextBox.TabIndex = 5;
             // 
             // surnameTextBox
             // 
-            this.surnameTextBox.Location = new System.Drawing.Point(56, 32);
+            this.surnameTextBox.Location = new System.Drawing.Point(60, 32);
+            this.surnameTextBox.MaxLength = 25;
             this.surnameTextBox.Name = "surnameTextBox";
+            this.surnameTextBox.ShortcutsEnabled = false;
             this.surnameTextBox.Size = new System.Drawing.Size(156, 20);
             this.surnameTextBox.TabIndex = 1;
             // 
@@ -108,7 +120,7 @@ namespace PT_Camping.Views.Forms
             // 
             this.loginLabel.Location = new System.Drawing.Point(12, 304);
             this.loginLabel.Name = "loginLabel";
-            this.loginLabel.Size = new System.Drawing.Size(240, 20);
+            this.loginLabel.Size = new System.Drawing.Size(260, 20);
             this.loginLabel.TabIndex = 26;
             this.loginLabel.Text = "Login*";
             this.loginLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -117,7 +129,7 @@ namespace PT_Camping.Views.Forms
             // 
             this.emailLabel.Location = new System.Drawing.Point(12, 258);
             this.emailLabel.Name = "emailLabel";
-            this.emailLabel.Size = new System.Drawing.Size(240, 20);
+            this.emailLabel.Size = new System.Drawing.Size(260, 20);
             this.emailLabel.TabIndex = 25;
             this.emailLabel.Text = "Email*";
             this.emailLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -126,7 +138,7 @@ namespace PT_Camping.Views.Forms
             // 
             this.phoneLabel.Location = new System.Drawing.Point(12, 146);
             this.phoneLabel.Name = "phoneLabel";
-            this.phoneLabel.Size = new System.Drawing.Size(240, 20);
+            this.phoneLabel.Size = new System.Drawing.Size(260, 20);
             this.phoneLabel.TabIndex = 24;
             this.phoneLabel.Text = "Téléphone*";
             this.phoneLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -137,7 +149,7 @@ namespace PT_Camping.Views.Forms
             | System.Windows.Forms.AnchorStyles.Right)));
             this.addressLabel.Location = new System.Drawing.Point(12, 192);
             this.addressLabel.Name = "addressLabel";
-            this.addressLabel.Size = new System.Drawing.Size(240, 20);
+            this.addressLabel.Size = new System.Drawing.Size(260, 20);
             this.addressLabel.TabIndex = 23;
             this.addressLabel.Text = "Adresse";
             this.addressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -146,7 +158,7 @@ namespace PT_Camping.Views.Forms
             // 
             this.birthDateLabel.Location = new System.Drawing.Point(12, 100);
             this.birthDateLabel.Name = "birthDateLabel";
-            this.birthDateLabel.Size = new System.Drawing.Size(240, 20);
+            this.birthDateLabel.Size = new System.Drawing.Size(260, 20);
             this.birthDateLabel.TabIndex = 22;
             this.birthDateLabel.Text = "Date de Naissance*";
             this.birthDateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -156,7 +168,7 @@ namespace PT_Camping.Views.Forms
             this.surnameLabel.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.surnameLabel.Location = new System.Drawing.Point(12, 9);
             this.surnameLabel.Name = "surnameLabel";
-            this.surnameLabel.Size = new System.Drawing.Size(240, 20);
+            this.surnameLabel.Size = new System.Drawing.Size(260, 20);
             this.surnameLabel.TabIndex = 21;
             this.surnameLabel.Text = "Nom*";
             this.surnameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -165,15 +177,17 @@ namespace PT_Camping.Views.Forms
             // 
             this.passwordLabel.Location = new System.Drawing.Point(12, 350);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(240, 20);
+            this.passwordLabel.Size = new System.Drawing.Size(260, 20);
             this.passwordLabel.TabIndex = 35;
             this.passwordLabel.Text = "Mot de passe*";
             this.passwordLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // passwordTextBox
             // 
-            this.passwordTextBox.Location = new System.Drawing.Point(56, 373);
+            this.passwordTextBox.Location = new System.Drawing.Point(60, 373);
+            this.passwordTextBox.MaxLength = 64;
             this.passwordTextBox.Name = "passwordTextBox";
+            this.passwordTextBox.ShortcutsEnabled = false;
             this.passwordTextBox.Size = new System.Drawing.Size(156, 20);
             this.passwordTextBox.TabIndex = 8;
             this.passwordTextBox.UseSystemPasswordChar = true;
@@ -181,7 +195,7 @@ namespace PT_Camping.Views.Forms
             // permissionButton
             // 
             this.permissionButton.AutoSize = true;
-            this.permissionButton.Location = new System.Drawing.Point(72, 438);
+            this.permissionButton.Location = new System.Drawing.Point(83, 438);
             this.permissionButton.Name = "permissionButton";
             this.permissionButton.Size = new System.Drawing.Size(120, 30);
             this.permissionButton.TabIndex = 9;
@@ -191,7 +205,7 @@ namespace PT_Camping.Views.Forms
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(27, 474);
+            this.cancelButton.Location = new System.Drawing.Point(33, 474);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(80, 25);
             this.cancelButton.TabIndex = 10;
@@ -201,7 +215,7 @@ namespace PT_Camping.Views.Forms
             // 
             // OKButton
             // 
-            this.OKButton.Location = new System.Drawing.Point(157, 474);
+            this.OKButton.Location = new System.Drawing.Point(172, 474);
             this.OKButton.Name = "OKButton";
             this.OKButton.Size = new System.Drawing.Size(80, 25);
             this.OKButton.TabIndex = 11;
@@ -212,7 +226,7 @@ namespace PT_Camping.Views.Forms
             // mandatoryValuesTip
             // 
             this.mandatoryValuesTip.AutoSize = true;
-            this.mandatoryValuesTip.Location = new System.Drawing.Point(20, 410);
+            this.mandatoryValuesTip.Location = new System.Drawing.Point(30, 410);
             this.mandatoryValuesTip.Name = "mandatoryValuesTip";
             this.mandatoryValuesTip.Size = new System.Drawing.Size(225, 13);
             this.mandatoryValuesTip.TabIndex = 40;
@@ -222,16 +236,28 @@ namespace PT_Camping.Views.Forms
             // 
             this.birthDateTimePicker.CustomFormat = "dd MMMM yyyy";
             this.birthDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.birthDateTimePicker.Location = new System.Drawing.Point(56, 123);
+            this.birthDateTimePicker.Location = new System.Drawing.Point(60, 123);
             this.birthDateTimePicker.Name = "birthDateTimePicker";
             this.birthDateTimePicker.Size = new System.Drawing.Size(156, 20);
             this.birthDateTimePicker.TabIndex = 3;
+            // 
+            // showPasswordCheckBox
+            // 
+            this.showPasswordCheckBox.AutoSize = true;
+            this.showPasswordCheckBox.Location = new System.Drawing.Point(222, 375);
+            this.showPasswordCheckBox.Name = "showPasswordCheckBox";
+            this.showPasswordCheckBox.Size = new System.Drawing.Size(62, 17);
+            this.showPasswordCheckBox.TabIndex = 41;
+            this.showPasswordCheckBox.Text = "Afficher";
+            this.showPasswordCheckBox.UseVisualStyleBackColor = true;
+            this.showPasswordCheckBox.CheckedChanged += new System.EventHandler(this.ShowPasswordCheckBox_CheckedChanged);
             // 
             // AddEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(264, 511);
+            this.ClientSize = new System.Drawing.Size(284, 511);
+            this.Controls.Add(this.showPasswordCheckBox);
             this.Controls.Add(this.birthDateTimePicker);
             this.Controls.Add(this.mandatoryValuesTip);
             this.Controls.Add(this.OKButton);
@@ -285,5 +311,6 @@ namespace PT_Camping.Views.Forms
         private System.Windows.Forms.Button OKButton;
         private System.Windows.Forms.Label mandatoryValuesTip;
         private System.Windows.Forms.DateTimePicker birthDateTimePicker;
+        private System.Windows.Forms.CheckBox showPasswordCheckBox;
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using PT_Camping.Model;
 using PT_Camping.Properties;
@@ -23,7 +25,7 @@ namespace PT_Camping.Views.UserControls
         private ProvidersUserControl _providersUserControl;
         private StatsUserControl _statsUserControl;
         private MapUserControl _mapUserControl;
-
+        protected List<Droit> UserRights;
 
         public HomeUserControl(AppWindow window)
         {
@@ -33,24 +35,82 @@ namespace PT_Camping.Views.UserControls
             Employe employeeLoged = LoginTools.Employee;
             if (employeeLoged != null)
             {
-                userNameLabel.Text = Resources.hello_user 
+                userNameButton.Text = Resources.hello_user 
                     + employeeLoged.Personne.Prenom_Personne 
                     + Resources.one_space + employeeLoged.Personne.Nom_Personne;
             }
+            DataBase db = new DataBase();
+            UserRights = db.Personne.First(
+                    a => a.Code_Personne == LoginTools.Employee.Personne.Code_Personne).Droit.ToList();
+            db.Dispose();
+
+            InitPermissions();
         }
 
+        public void InitPermissions()
+        {
+            DataBase db = new DataBase();
+            var userRights = db.Personne.First(a => a.Code_Personne == LoginTools.Employee.Code_Personne).Droit.ToList();
+            clientButton.Enabled = userRights.Any(d => d.Libelle_Droit == "readClients");
+            issuesButton.Enabled = userRights.Any(d => d.Libelle_Droit == "readIssues");
+            employeeButton.Enabled = userRights.Any(d => d.Libelle_Droit == "readEmployees");
+            stocksButton.Enabled = userRights.Any(d => d.Libelle_Droit == "readStocks");
+            providerButton.Enabled = userRights.Any(d => d.Libelle_Droit == "readProviders");
+            statsButton.Enabled = userRights.Any(d => d.Libelle_Droit == "readStats");
+            db.Dispose();
+        }
+
+
+        public void StartEmployeesFromTitleBar(UserControl sender)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            _employeesUserControl = new EmployeesUserControl(this, LoginTools.Employee.Code_Personne);
+            Window.WindowPanel.Controls.Add(_employeesUserControl);
+            Window.WindowPanel.Controls.Remove(sender);
+        }
+
+
+        public void StartLocationsFromClients()
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            Window.WindowPanel.Controls.Add(this);
+            homeTabControl.SelectedIndex = 1;
+            if (_mapUserControl == null)
+            {
+                _mapUserControl = new MapUserControl(this);
+            }
+
+            mapTab.Controls.Add(_mapUserControl);
+            _mapUserControl?.HandleResize(managementTab.Size);
+            Window.WindowPanel.Controls.Remove(_clientsUserControl);
+            Window.BringToFront();
+        }
+
+        public void StartClientsFromLocations()
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            _clientsUserControl = new ClientsUserControl(this);
+            Window.WindowPanel.Controls.Add(_clientsUserControl);
+            Window.WindowPanel.Controls.Remove(_mapUserControl);
+        }
 
         public void StartLocationsFromStats(int locationCode)
         {
             Cursor.Current = Cursors.WaitCursor;
-            if (_mapUserControl == null)
-                _mapUserControl = new MapUserControl(this, locationCode);
-            else
-                _mapUserControl.SelectFromStats(locationCode);
-            HandleResize();
-            homeTabControl.SelectedIndex = 1;
             Window.WindowPanel.Controls.Add(this);
+            homeTabControl.SelectedIndex = 1;
+            if (_mapUserControl == null)
+            {
+                _mapUserControl = new MapUserControl(this, locationCode);
+            }
+            else
+            {
+                _mapUserControl.SelectFromStats(locationCode);
+            }
+                
             mapTab.Controls.Add(_mapUserControl);
+            _mapUserControl?.HandleResize(managementTab.Size);
+            Window.WindowPanel.Controls.Remove(_statsUserControl);
         }
 
 
@@ -59,7 +119,7 @@ namespace PT_Camping.Views.UserControls
             Cursor.Current = Cursors.WaitCursor;
             _stocksUserControl = new StocksUserControl(this, productCode);
             Window.WindowPanel.Controls.Add(_stocksUserControl);
-            Window.WindowPanel.Controls.Remove(this);
+            Window.WindowPanel.Controls.Remove(_statsUserControl);
         }
 
 
@@ -68,7 +128,7 @@ namespace PT_Camping.Views.UserControls
             Cursor.Current = Cursors.WaitCursor;
             _clientsUserControl = new ClientsUserControl(this, clientCode);
             Window.WindowPanel.Controls.Add(_clientsUserControl);
-            Window.WindowPanel.Controls.Remove(this);
+            Window.WindowPanel.Controls.Remove(_statsUserControl);
         }
 
 
@@ -77,7 +137,7 @@ namespace PT_Camping.Views.UserControls
             Cursor.Current = Cursors.WaitCursor;
             _issuesUserControl = new IssuesUserControl(this, issueCode);
             Window.WindowPanel.Controls.Add(_issuesUserControl);
-            Window.WindowPanel.Controls.Remove(this);
+            Window.WindowPanel.Controls.Remove(_statsUserControl);
         }
 
 
@@ -86,6 +146,19 @@ namespace PT_Camping.Views.UserControls
             Cursor.Current = Cursors.WaitCursor;
             Window.Logout();
             Window.WindowPanel.Controls.Remove(this);
+        }
+
+
+        private void UserNameButton_Click(object sender, EventArgs e)
+        {
+            if (UserRights.Any(d => d.Libelle_Droit == "readEmployees"))
+            {
+                StartEmployeesFromTitleBar(this);
+            }
+            else
+            {
+                MessageBox.Show(Resources.denied_access);
+            }
         }
 
 
@@ -164,12 +237,21 @@ namespace PT_Camping.Views.UserControls
         {
             if (((TabControl)sender).SelectedIndex == 1)
             {
-                if (_mapUserControl == null)
+                if (UserRights.Any(d => d.Libelle_Droit == "readMap"))
                 {
-                    _mapUserControl = new MapUserControl(this);
-                    mapTab.Controls.Add(_mapUserControl);
-                    _mapUserControl?.HandleResize(mapTab.Size);
+                    if (_mapUserControl == null)
+                    {
+                        _mapUserControl = new MapUserControl(this);
+                        mapTab.Controls.Add(_mapUserControl);
+                        _mapUserControl?.HandleResize(managementTab.Size);
+                    }
                 }
+                else
+                {
+                    MessageBox.Show(Resources.denied_access);
+                    ((TabControl) sender).SelectedIndex = 0;
+                }
+                _mapUserControl.ResetMode();
             }
         }
 
@@ -179,5 +261,16 @@ namespace PT_Camping.Views.UserControls
         /// </summary>
 
         public AppWindow Window { get; set; }
+
+        public MapUserControl MapUserControl
+        {
+            get { return _mapUserControl; }
+            set { _mapUserControl = value; }
+        }
+
+        public TabControl HomeTabControl
+        {
+            get { return homeTabControl; }
+        }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using PT_Camping.Model;
 using PT_Camping.Properties;
@@ -18,6 +20,7 @@ namespace PT_Camping.Views.UserControls
     public partial class ManagementUserControl : UserControl
     {
         protected DataBase Db;
+        protected List<Droit> UserRights;
 
         public ManagementUserControl()
         {
@@ -29,15 +32,20 @@ namespace PT_Camping.Views.UserControls
         {
             InitializeComponent();
             HomeUserControl = homeUserControl;
-            Employe personLoged = LoginTools.Employee;
-            if (personLoged != null)
+            Db = new DataBase();
+            UserRights = Db.Personne.First(
+                    a => a.Code_Personne == LoginTools.Employee.Personne.Code_Personne).Droit.ToList();
+            if (LoginTools.Employee != null)
             {
-                userNameLabel.Text = Resources.hello_user + personLoged.Personne.Prenom_Personne + Resources.one_space + personLoged.Personne.Nom_Personne;
+                userNameButton.Text = Resources.hello_user 
+                    + LoginTools.Employee.Personne.Prenom_Personne 
+                    + Resources.one_space + LoginTools.Employee.Personne.Nom_Personne;
             }
         }
 
         private void BackArrow_Click(object sender, EventArgs e)
         {
+            HomeUserControl.InitPermissions();
             HomeUserControl.Window.WindowPanel.Controls.Add(HomeUserControl);
             HomeUserControl.Window.WindowPanel.Controls.Remove(this);
         }
@@ -48,6 +56,10 @@ namespace PT_Camping.Views.UserControls
             HomeUserControl.Window.WindowPanel.Controls.Remove(this);
         }
 
+        private void UserNameButton_Click(object sender, EventArgs e)
+        {
+            HomeUserControl.StartEmployeesFromTitleBar(this);
+        }
 
         internal void HandleResize()
         {

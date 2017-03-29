@@ -16,7 +16,8 @@ namespace PT_Camping.Views.UserControls
     /// It is used to manage the camping's products stocks.
     /// 
     /// </summary>
-    /// Authors : Arthur, Yonnel
+    /// Author : Arthur (File creation + UI)
+    /// Author : Yonnel (Product stocks feature)
     /// Since : 08/02/17
     public partial class StocksUserControl : ManagementUserControl
     {
@@ -25,14 +26,30 @@ namespace PT_Camping.Views.UserControls
         {
             InitializeComponent();
             appBarTitle.Text = Resources.product_management;
-            Db = new DataBase();
+            appBarTitle.Text = Resources.product_management;
 
             productListView.View = View.Details;
+            productListView.Columns.Add("Etat");
             productListView.Columns.Add("Produit");
             productListView.Columns.Add("Quantité");
 
+            var imageList = new ImageList();
+            imageList.Images.Add("low", Resources.ic_stock_low);
+            imageList.Images.Add("empty", Resources.ic_stock_empty);
+            imageList.ImageSize = new Size(20, 20);
+            productListView.SmallImageList = imageList;
+
             UpdateProductListView();
             HandleResize();
+            InitPermissions();
+        }
+
+        public void InitPermissions()
+        {
+            addStockButton.Enabled = UserRights.Any(d => d.Libelle_Droit == "writeStocks");
+            deleteProductButton.Visible = UserRights.Any(d => d.Libelle_Droit == "writeStocks");
+            editButton.Visible = UserRights.Any(d => d.Libelle_Droit == "writeStocks");
+            sellButton.Enabled = UserRights.Any(d => d.Libelle_Droit == "writeStocks");
         }
 
 
@@ -54,19 +71,14 @@ namespace PT_Camping.Views.UserControls
                 string name = product.Libelle_Produit;
                 string stock = product.Quantite_Stock.ToString();
 
-                var item = new ListViewItem(new[] { name, stock })
+                var item = new ListViewItem(new[] { "", name, stock })
                 {
-                    Name = product.Code_Produit.ToString()
+                    Name = product.Code_Produit.ToString(),
+                    ImageKey = (product.Quantite_Stock <= product.Quantite_Critique) 
+                                ? (product.Quantite_Stock == 0)
+                                ? "empty" : "low" : ""
                 };
 
-                if (product.Quantite_Stock == 0)
-                {
-                    item.BackColor = Color.Red;
-                }
-                else if (product.Quantite_Stock <= 15)
-                {
-                    item.BackColor = Color.Orange;
-                }
                 productListView.Items.Add(item);
             }
 
@@ -92,6 +104,7 @@ namespace PT_Camping.Views.UserControls
                 idTextBox.Text = product.Code_Produit.ToString();
                 productNameTextBox.Text = product.Libelle_Produit;
                 amountTextBox.Text = product.Quantite_Stock.ToString();
+                criticAmountTextBox.Text = product.Quantite_Critique.ToString();
                 priceTextBox.Text = product.Prix.ToString("N2") + CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol;
                 providerComboBox.Items.Clear();
                 providerComboBox.Items.Add("Aucun");
@@ -108,22 +121,28 @@ namespace PT_Camping.Views.UserControls
 
         private void AddStockButton_Click(object sender, MouseEventArgs e)
         {
-            AddStock newStock = new AddStock();
+            AddProduct newStock = new AddProduct();
             newStock.ShowDialog();
+            Cursor.Current = Cursors.Default;
             UpdateProductListView();
         }
 
 
         private void DeleteProductButton_Click(object sender, EventArgs e)
         {
-            int code = int.Parse(productListView.SelectedItems[0].Name);
-            var product = Db.Produit.Find(code);
-
-            if (product != null)
+            var confirmResult = MessageBox.Show(Resources.delete_item_confirm_message,
+                                        "", MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
             {
-                Db.Produit.Remove(product);
-                Db.SaveChanges();
-                UpdateProductListView();
+                int code = int.Parse(productListView.SelectedItems[0].Name);
+                var product = Db.Produit.Find(code);
+
+                if (product != null)
+                {
+                    Db.Produit.Remove(product);
+                    Db.SaveChanges();
+                    UpdateProductListView();
+                }
             }
         }
 
@@ -135,14 +154,16 @@ namespace PT_Camping.Views.UserControls
                 resetButton.Visible = true;
                 priceTextBox.ReadOnly = false;
                 amountTextBox.ReadOnly = false;
+                criticAmountTextBox.ReadOnly = false;
                 productNameTextBox.ReadOnly = false;
                 providerComboBox.Enabled = true;
                 editButton.BackgroundImage = Resources.ic_done;
             }
             else
             {
-                amountTextBox.ReadOnly = true;
                 priceTextBox.ReadOnly = true;
+                amountTextBox.ReadOnly = true;
+                criticAmountTextBox.ReadOnly = true;
                 productNameTextBox.ReadOnly = true;
                 resetButton.Visible = false;
                 providerComboBox.Enabled = false;
@@ -181,6 +202,25 @@ namespace PT_Camping.Views.UserControls
                             {
                                 product.Quantite_Stock = int.Parse(amountTextBox.Text);
                                 message += "quantité, ";
+                                cptModifications++;
+                            }
+                        }
+                        catch (OverflowException)
+                        {
+                            MessageBox.Show(Resources.high_quantity_exception);
+                        }
+                    }
+
+                    if (criticAmountTextBox.Text != product.Quantite_Critique.ToString())
+                    {
+                        try
+                        {
+                            if (int.Parse(criticAmountTextBox.Text) < 0)
+                                MessageBox.Show(Resources.non_positive_quantity_exception);
+                            else
+                            {
+                                product.Quantite_Stock = int.Parse(criticAmountTextBox.Text);
+                                message += "quantité critique, ";
                                 cptModifications++;
                             }
                         }
@@ -265,7 +305,7 @@ namespace PT_Camping.Views.UserControls
         {
             int code = int.Parse(productListView.SelectedItems[0].Name);
             var product = Db.Produit.Find(code);
-            SellStock sellStock = new SellStock(Db, product);
+            SellProduct sellStock = new SellProduct(Db, product);
             sellStock.ShowDialog();
             UpdateProductListView();
             UpdateProductDetails();
@@ -294,8 +334,9 @@ namespace PT_Camping.Views.UserControls
         {
             if (productListView.Columns.Count != 0)
             {
-                foreach (ColumnHeader columnHeader in productListView.Columns)
-                    columnHeader.Width = productListView.Width / productListView.Columns.Count;
+                productListView.Columns[0].Width = 34;
+                productListView.Columns[1].Width = productListView.Width / 2 - 17;
+                productListView.Columns[2].Width = productListView.Width / 2 - 17;
             }
         }
 
@@ -308,6 +349,15 @@ namespace PT_Camping.Views.UserControls
 
 
         private void AmountTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+
+        private void CriticAmountTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {

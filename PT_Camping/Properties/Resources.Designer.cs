@@ -10,8 +10,8 @@
 
 namespace PT_Camping.Properties {
     using System;
-
-
+    
+    
     /// <summary>
     ///   Une classe de ressource fortement typée destinée, entre autres, à la consultation des chaînes localisées.
     /// </summary>
@@ -23,15 +23,15 @@ namespace PT_Camping.Properties {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
-
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal Resources() {
         }
-
+        
         /// <summary>
         ///   Retourne l'instance ResourceManager mise en cache utilisée par cette classe.
         /// </summary>
@@ -45,7 +45,7 @@ namespace PT_Camping.Properties {
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   Remplace la propriété CurrentUICulture du thread actuel pour toutes
         ///   les recherches de ressources à l'aide de cette classe de ressource fortement typée.
@@ -57,6 +57,60 @@ namespace PT_Camping.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Ajout d&apos;une réservation.
+        /// </summary>
+        internal static string add_a_reservation {
+            get {
+                return ResourceManager.GetString("add_a_reservation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à La date de fin doit être suprérieure à la date de début.
+        /// </summary>
+        internal static string beginDate_superior_endDate {
+            get {
+                return ResourceManager.GetString("beginDate_superior_endDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Réserver.
+        /// </summary>
+        internal static string book {
+            get {
+                return ResourceManager.GetString("book", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Reservé.
+        /// </summary>
+        internal static string booked {
+            get {
+                return ResourceManager.GetString("booked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Ce client est déjà présent dans cette réservation..
+        /// </summary>
+        internal static string client_already_added {
+            get {
+                return ResourceManager.GetString("client_already_added", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Client introuvable. Merci de l&apos;écrire sous la forme Nom + Prénom.
+        /// </summary>
+        internal static string client_not_found {
+            get {
+                return ResourceManager.GetString("client_not_found", resourceCulture);
             }
         }
         
@@ -97,11 +151,58 @@ namespace PT_Camping.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Terminé.
+        ///   Recherche une chaîne localisée semblable à Erreur lors de la sauvegarde dans la base de données : 
+        ///.
+        /// </summary>
+        internal static string db_save_error {
+            get {
+                return ResourceManager.GetString("db_save_error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Voulez-vous vraiment supprimer cet élément ?.
+        /// </summary>
+        internal static string delete_item_confirm_message {
+            get {
+                return ResourceManager.GetString("delete_item_confirm_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accès refusé. 
+        ///Veuillez contacter votre administrateur..
+        /// </summary>
+        internal static string denied_access {
+            get {
+                return ResourceManager.GetString("denied_access", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Terminé.
         /// </summary>
         internal static string done_issue {
             get {
                 return ResourceManager.GetString("done_issue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Modifier.
+        /// </summary>
+        internal static string edit {
+            get {
+                return ResourceManager.GetString("edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Modification d&apos;une réservation.
+        /// </summary>
+        internal static string edit_a_reservation {
+            get {
+                return ResourceManager.GetString("edit_a_reservation", resourceCulture);
             }
         }
         
@@ -111,6 +212,33 @@ namespace PT_Camping.Properties {
         internal static string employee_management {
             get {
                 return ResourceManager.GetString("employee_management", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Erreur lors de l&apos;ouverture du fichier, veuillez réessayer..
+        /// </summary>
+        internal static string error_when_opening_the_file_please_retry {
+            get {
+                return ResourceManager.GetString("error_when_opening_the_file_please_retry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Fichier non trouvé ! Veuillez réessayer..
+        /// </summary>
+        internal static string file_not_found_please_retry {
+            get {
+                return ResourceManager.GetString("file_not_found_please_retry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Libre.
+        /// </summary>
+        internal static string free {
+            get {
+                return ResourceManager.GetString("free", resourceCulture);
             }
         }
         
@@ -143,6 +271,16 @@ namespace PT_Camping.Properties {
         
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ic_add_a_photo {
+            get {
+                object obj = ResourceManager.GetObject("ic_add_a_photo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap ic_arrow_back {
             get {
@@ -194,10 +332,59 @@ namespace PT_Camping.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ic_issue_done {
+            get {
+                object obj = ResourceManager.GetObject("ic_issue_done", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ic_issue_pending {
+            get {
+                object obj = ResourceManager.GetObject("ic_issue_pending", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ic_stock_empty {
+            get {
+                object obj = ResourceManager.GetObject("ic_stock_empty", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ic_stock_low {
+            get {
+                object obj = ResourceManager.GetObject("ic_stock_low", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ic_undo {
             get {
                 object obj = ResourceManager.GetObject("ic_undo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Image Files |*.png; *.jpg; *.bmp.
+        /// </summary>
+        internal static string images_files_formats {
+            get {
+                return ResourceManager.GetString("images_files_formats", resourceCulture);
             }
         }
         
@@ -249,11 +436,38 @@ namespace PT_Camping.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à WARNING : This feature is not implemented yet..
+        ///   Recherche une chaîne localisée semblable à Non réservable.
+        /// </summary>
+        internal static string not_bookable {
+            get {
+                return ResourceManager.GetString("not_bookable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Les mots de passe ne correspondent pas..
+        /// </summary>
+        internal static string not_corresponding_messages {
+            get {
+                return ResourceManager.GetString("not_corresponding_messages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WARNING : This feature is not implemented yet..
         /// </summary>
         internal static string not_implemented_feature {
             get {
                 return ResourceManager.GetString("not_implemented_feature", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Cet emplacement n&apos;est pas réservable.
+        /// </summary>
+        internal static string not_reservable_emplacement {
+            get {
+                return ResourceManager.GetString("not_reservable_emplacement", resourceCulture);
             }
         }
         
@@ -276,7 +490,16 @@ namespace PT_Camping.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à  .
+        ///   Looks up a localized string similar to L&apos;ancien mot de passe n&apos;est pas correct..
+        /// </summary>
+        internal static string old_pass_incorrect {
+            get {
+                return ResourceManager.GetString("old_pass_incorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  .
         /// </summary>
         internal static string one_space {
             get {
@@ -321,7 +544,70 @@ namespace PT_Camping.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Gestion des statistiques.
+        ///   Recherche une chaîne localisée semblable à Réservation effectuée !.
+        /// </summary>
+        internal static string reservation_done {
+            get {
+                return ResourceManager.GetString("reservation_done", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Reservation modifiée.
+        /// </summary>
+        internal static string reservation_edited {
+            get {
+                return ResourceManager.GetString("reservation_edited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à La réservation doit contenir au moins un emplacement.
+        /// </summary>
+        internal static string reservation_need_at_least_1_location {
+            get {
+                return ResourceManager.GetString("reservation_need_at_least_1_location", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Liste des réservations de : .
+        /// </summary>
+        internal static string reservationTitleLabel {
+            get {
+                return ResourceManager.GetString("reservationTitleLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sélectionnez une image de fond.
+        /// </summary>
+        internal static string select_background_image {
+            get {
+                return ResourceManager.GetString("select_background_image", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sélectionnez une image pour le type .
+        /// </summary>
+        internal static string select_image_for_the_type {
+            get {
+                return ResourceManager.GetString("select_image_for_the_type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Certains champs ne sont pas remplis..
+        /// </summary>
+        internal static string some_not_filled {
+            get {
+                return ResourceManager.GetString("some_not_filled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gestion des statistiques.
         /// </summary>
         internal static string stats_management {
             get {
@@ -335,6 +621,15 @@ namespace PT_Camping.Properties {
         internal static string stocks_management {
             get {
                 return ResourceManager.GetString("stocks_management", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Libérer.
+        /// </summary>
+        internal static string unbook {
+            get {
+                return ResourceManager.GetString("unbook", resourceCulture);
             }
         }
         
@@ -362,106 +657,6 @@ namespace PT_Camping.Properties {
         internal static string unrecognized_website {
             get {
                 return ResourceManager.GetString("unrecognized_website", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Réserver.
-        /// </summary>
-        internal static string book {
-            get {
-                return ResourceManager.GetString("book", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Reservé.
-        /// </summary>
-        internal static string booked {
-            get {
-                return ResourceManager.GetString("booked", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Erreur lors de la sauvegarde dans la base de données : 
-        ///.
-        /// </summary>
-        internal static string db_save_error {
-            get {
-                return ResourceManager.GetString("db_save_error", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Erreur lors de l&apos;ouverture du fichier, veuillez réessayer..
-        /// </summary>
-        internal static string error_when_opening_the_file_please_retry {
-            get {
-                return ResourceManager.GetString("error_when_opening_the_file_please_retry", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Fichier non trouvé ! Veuillez réessayer..
-        /// </summary>
-        internal static string file_not_found_please_retry {
-            get {
-                return ResourceManager.GetString("file_not_found_please_retry", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Libre.
-        /// </summary>
-        internal static string free {
-            get {
-                return ResourceManager.GetString("free", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Image Files |*.png; *.jpg; *.bmp.
-        /// </summary>
-        internal static string images_files_formats {
-            get {
-                return ResourceManager.GetString("images_files_formats", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Non réservable.
-        /// </summary>
-        internal static string not_bookable {
-            get {
-                return ResourceManager.GetString("not_bookable", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Sélectionnez une image de fond.
-        /// </summary>
-        internal static string select_background_image {
-            get {
-                return ResourceManager.GetString("select_background_image", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Sélectionnez une image pour le type .
-        /// </summary>
-        internal static string select_image_for_the_type {
-            get {
-                return ResourceManager.GetString("select_image_for_the_type", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Libérer.
-        /// </summary>
-        internal static string unbook {
-            get {
-                return ResourceManager.GetString("unbook", resourceCulture);
             }
         }
     }

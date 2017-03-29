@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Net.Mail;
 using System.Windows.Forms;
-using PT_Camping.Model;
 using PT_Camping.Properties;
 using PT_Camping.Views.Forms;
 using sharpPDF;
@@ -20,7 +19,8 @@ namespace PT_Camping.Views.UserControls
     /// It is used to manage the camping's clients.
     /// 
     /// </summary>
-    /// Authors : Arthur, Valentine
+    /// Author : Arthur (File creation + UI)
+    /// Author : Valentine (Client feature)
     /// Since : 08/02/17
     public partial class ClientsUserControl : ManagementUserControl
     {
@@ -28,7 +28,6 @@ namespace PT_Camping.Views.UserControls
         {
             InitializeComponent();
             appBarTitle.Text = Resources.clients_management;
-            Db = new DataBase();
 
             clientListView.View = View.Details;
             clientListView.Columns.Add("Nom");
@@ -37,6 +36,14 @@ namespace PT_Camping.Views.UserControls
 
             UpdateClientListView();
             HandleResize();
+            InitPermissions();
+        }
+
+        public void InitPermissions()
+        {
+            addClientButton.Enabled = UserRights.Any(d => d.Libelle_Droit == "writeClients");
+            deleteButton.Visible = UserRights.Any(d => d.Libelle_Droit == "writeClients");
+            editButton.Visible = UserRights.Any(d => d.Libelle_Droit == "writeClients");
         }
 
 
@@ -94,8 +101,7 @@ namespace PT_Camping.Views.UserControls
                 phoneTextBox.Text = client.Personne.Telephone;
                 emailTextBox.Text = client.Personne.Email;
 
-                var currentReservations = Db.Reservation.Where(r => r.Date_Fin <= DateTime.Now).Select(r => r.Code_Reservation).ToList();
-                currentReservationsComboBox.DataSource = currentReservations;
+                nbReservationsLabel.Text = Db.Reservation.Count(a => a.Code_Personne == code).ToString();
             }
         }
 
@@ -103,6 +109,7 @@ namespace PT_Camping.Views.UserControls
         private void AddClientButton_Click(object sender, EventArgs e)
         {
             new AddClient(Db).ShowDialog();
+            Cursor.Current = Cursors.Default;
             UpdateClientListView();
         }
 
@@ -194,14 +201,19 @@ namespace PT_Camping.Views.UserControls
 
         private void DeleteClientButton_Click(object sender, EventArgs e)
         {
-            int code = int.Parse(clientListView.SelectedItems[0].Name);
-            var client = Db.Client.Find(code);
-
-            if (client != null)
+            var confirmResult = MessageBox.Show(Resources.delete_item_confirm_message,
+                                     "", MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
             {
-                Db.Client.Remove(client);
-                Db.SaveChanges();
-                UpdateClientListView();
+                int code = int.Parse(clientListView.SelectedItems[0].Name);
+                var client = Db.Client.Find(code);
+
+                if (client != null)
+                {
+                    Db.Client.Remove(client);
+                    Db.SaveChanges();
+                    UpdateClientListView();
+                }
             }
         }
 
@@ -214,18 +226,6 @@ namespace PT_Camping.Views.UserControls
             phoneTextBox.ReadOnly = true;
             emailTextBox.ReadOnly = true;
             UpdateClientDetails();
-        }
-
-
-        private void ReducClient_Click(object sender, EventArgs e)
-        {
-            //TODO : To use in reservation screen
-
-            int code = int.Parse(clientListView.SelectedItems[0].Name);
-            var client = Db.Client.Find(code);
-
-            new ApplyReduction(client).ShowDialog();
-            UpdateClientListView();
         }
 
 
@@ -274,8 +274,8 @@ namespace PT_Camping.Views.UserControls
 
         private void ReservationsButton_Click(object sender, EventArgs e)
         {
-            //TODO reservations feature
-            MessageBox.Show(Resources.not_implemented_feature);
+            int code = int.Parse(clientListView.SelectedItems[0].Name);
+            new Reservations(HomeUserControl, code).Show();
         }
 
         private void Facture_generate(object sender, EventArgs e)
