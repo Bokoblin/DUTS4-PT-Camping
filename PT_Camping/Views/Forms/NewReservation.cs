@@ -51,6 +51,7 @@ namespace PT_Camping.Views.Forms
         private HomeUserControl _homeUserControl;
         private Mode _mode;
         private int _resToEditCode;
+        private bool _fromMap;
 
         public delegate void LocationSelectedDelegate(int locationId);
 
@@ -58,6 +59,7 @@ namespace PT_Camping.Views.Forms
         {
             InitializeComponent();
             _homeUserControl = homeUserControl;
+            _fromMap = false;
             if (context == null)
             {
                 _db = new DataBase();
@@ -125,6 +127,7 @@ namespace PT_Camping.Views.Forms
         public NewReservation(HomeUserControl homeUserControl, DataBase context, Emplacement emplacement, Mode mode = Mode.Add, int resCode = -1): 
             this(homeUserControl, context, mode, resCode)
         {
+            _fromMap = true;
             locationsListBox.Items.Add(new LocationItem
             {
                 Location = _db.Emplacement.First(a => a.Code_Emplacement == emplacement.Code_Emplacement),
@@ -154,7 +157,14 @@ namespace PT_Camping.Views.Forms
 
         private void LocationPicked(int locationId)
         {
-            _homeUserControl.StartClientsFromLocations();
+            if (_fromMap)
+            {
+                _homeUserControl.HomeTabControl.SelectTab(1);
+            }
+            else
+            {
+                _homeUserControl.StartClientsFromLocations();
+            }
             BringToFront();
             Emplacement locationToAdd = _db.Emplacement.First(a => a.Code_Emplacement == locationId);
             if (locationsListBox.Items.Cast<LocationItem>().Any(locationItem => locationItem.Location.Code_Emplacement == locationToAdd.Code_Emplacement))
@@ -259,6 +269,7 @@ namespace PT_Camping.Views.Forms
                     Personne = client.Personne
                 };
                 _db.Reservation.Add(newReservation);
+                newReservation.Facture = new Facture {Date_Emission = DateTime.Now, Montant = 0};
             }
             else
             {
@@ -294,6 +305,7 @@ namespace PT_Camping.Views.Forms
                 try
                 {
                     _db.SaveChanges();
+                    _homeUserControl.MapUserControl.RefreshLocations();
                     if (_mode == Mode.Add)
                     {
                         MessageBox.Show(Resources.reservation_done);

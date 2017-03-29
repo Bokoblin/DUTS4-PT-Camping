@@ -25,12 +25,14 @@ namespace PT_Camping.Model
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<A_vendu> A_vendu { get; set; }
         public virtual DbSet<App> App { get; set; }
         public virtual DbSet<Caracteristique_Emplacement> Caracteristique_Emplacement { get; set; }
         public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<Droit> Droit { get; set; }
         public virtual DbSet<Emplacement> Emplacement { get; set; }
         public virtual DbSet<Employe> Employe { get; set; }
+        public virtual DbSet<Facture> Facture { get; set; }
         public virtual DbSet<Fournisseur> Fournisseur { get; set; }
         public virtual DbSet<Incident> Incident { get; set; }
         public virtual DbSet<Loge> Loge { get; set; }
@@ -40,7 +42,5 @@ namespace PT_Camping.Model
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Type_Emplacement> Type_Emplacement { get; set; }
         public virtual DbSet<Type_Incident> Type_Incident { get; set; }
-        public virtual DbSet<Facture> Facture { get; set; }
-        public virtual DbSet<A_vendu> A_vendu { get; set; }
     }
 }

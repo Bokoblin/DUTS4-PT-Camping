@@ -18,7 +18,6 @@ namespace PT_Camping.Model
         public Reservation()
         {
             this.Loge = new HashSet<Loge>();
-            this.Facture = new HashSet<Facture>();
         }
     
         public int Code_Reservation { get; set; }
@@ -28,10 +27,9 @@ namespace PT_Camping.Model
         public int Code_Personne { get; set; }
         public int Code_Facture { get; set; }
     
+        public virtual Facture Facture { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Loge> Loge { get; set; }
         public virtual Personne Personne { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Facture> Facture { get; set; }
     }
 }
