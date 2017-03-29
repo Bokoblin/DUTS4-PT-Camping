@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PT_Camping.Model;
 using PT_Camping.Properties;
@@ -24,9 +18,9 @@ namespace PT_Camping.Views.Forms
     /// 
     public partial class Reservations : Form
     {
-        private DataBase _db;
-        private int _codePerson;
-        private HomeUserControl _homeUserControl;
+        private readonly DataBase _db;
+        private readonly int _codePerson;
+        private readonly HomeUserControl _homeUserControl;
 
         public Reservations(HomeUserControl homeUserControl, int codeClient)
         {
@@ -40,6 +34,15 @@ namespace PT_Camping.Views.Forms
                 _codePerson = codeClient;
                 RefreshReservations();
             }
+            InitPermissions();
+        }
+
+        public void InitPermissions()
+        {
+            var userRights = _db.Personne.First(a => a.Code_Personne == LoginTools.Employee.Code_Personne).Droit.ToList();
+            deleteReservationButton.Enabled = userRights.Any(d => d.Libelle_Droit == "writeReservations");
+            editButton.Enabled = userRights.Any(d => d.Libelle_Droit == "writeReservations");
+            newReservationButton.Enabled = userRights.Any(d => d.Libelle_Droit == "writeReservations");
         }
 
         private void RefreshReservations()
@@ -47,7 +50,7 @@ namespace PT_Camping.Views.Forms
             reservationsList.Items.Clear();
             foreach (Reservation res in _db.Reservation.Where(a => a.Code_Personne == _codePerson))
             {
-                String[] itemArr = new string[5];
+                string[] itemArr = new string[5];
                 itemArr[0] = res.Date_Debut.ToString(CultureInfo.InvariantCulture);
                 itemArr[1] = res.Date_Fin.ToString(CultureInfo.InvariantCulture);
                 itemArr[2] =
@@ -62,7 +65,7 @@ namespace PT_Camping.Views.Forms
             }
         }
 
-        private void deleteReservationButton_Click(object sender, EventArgs e)
+        private void DeleteReservationButton_Click(object sender, EventArgs e)
         {
             if (reservationsList.SelectedItems.Count > 0 && reservationsList.SelectedItems[0] != null)
             {
@@ -82,7 +85,7 @@ namespace PT_Camping.Views.Forms
             }
         }
 
-        private void factureButton_Click(object sender, EventArgs e)
+        private void FactureButton_Click(object sender, EventArgs e)
         {
             if (reservationsList.SelectedItems.Count > 0 && reservationsList.SelectedItems[0] != null)
             {
@@ -104,7 +107,7 @@ namespace PT_Camping.Views.Forms
 
         }
 
-        private void reservationsList_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        private void ReservationsList_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             locationsList.Items.Clear();
             lodgerList.Items.Clear();
@@ -123,16 +126,16 @@ namespace PT_Camping.Views.Forms
             }
         }
 
-        private void newReservationButton_Click(object sender, EventArgs e)
+        private void NewReservationButton_Click(object sender, EventArgs e)
         {
             new NewReservation(_homeUserControl, _db, _codePerson).Show();
         }
 
-        private void locationsList_SelectedIndexChanged(object sender, EventArgs e)
+        private void LocationsList_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (reservationsList.SelectedItems.Count > 0)
             {
-                ListViewItem listViewItem = reservationsList.SelectedItems[0] as ListViewItem;
+                ListViewItem listViewItem = reservationsList.SelectedItems[0];
                 if (listViewItem != null)
                 {
                     int resId = int.Parse(listViewItem.SubItems[4].Text);
@@ -142,7 +145,7 @@ namespace PT_Camping.Views.Forms
                     ListBox listBox = sender as ListBox;
                     if (listBox?.SelectedItem != null)
                     {
-                        String locationName = (string)listBox.SelectedItem;
+                        string locationName = (string)listBox.SelectedItem;
                         Emplacement loc = _db.Emplacement.FirstOrDefault(a => a.Nom_Emplacement == locationName);
                         lodgerList.Items.Clear();
                         foreach (Personne lodger in _db.Loge.Where(a => a.Code_Reservation == res.Code_Reservation && a.Code_Emplacement == loc.Code_Emplacement).
@@ -155,9 +158,9 @@ namespace PT_Camping.Views.Forms
             }
         }
 
-        private void editButton_Click(object sender, EventArgs e)
+        private void EditButton_Click(object sender, EventArgs e)
         {
-            ListViewItem listViewItem = reservationsList.SelectedItems[0] as ListViewItem;
+            ListViewItem listViewItem = reservationsList.SelectedItems[0];
             if (listViewItem != null)
             {
                 int resId = int.Parse(listViewItem.SubItems[4].Text);
@@ -165,7 +168,7 @@ namespace PT_Camping.Views.Forms
             }
         }
 
-        private void refreshButton_Click(object sender, EventArgs e)
+        private void RefreshButton_Click(object sender, EventArgs e)
         {
             RefreshReservations();
         }

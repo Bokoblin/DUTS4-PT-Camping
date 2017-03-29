@@ -53,6 +53,9 @@
             this.infoLabel = new System.Windows.Forms.Label();
             this.statsLabel = new System.Windows.Forms.Label();
             this.readStats = new System.Windows.Forms.CheckBox();
+            this.reservationLabel = new System.Windows.Forms.Label();
+            this.readReservations = new System.Windows.Forms.CheckBox();
+            this.writeReservations = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // OKButton
@@ -78,7 +81,7 @@
             // clientLabel
             // 
             this.clientLabel.AutoSize = true;
-            this.clientLabel.Location = new System.Drawing.Point(29, 50);
+            this.clientLabel.Location = new System.Drawing.Point(29, 75);
             this.clientLabel.Name = "clientLabel";
             this.clientLabel.Size = new System.Drawing.Size(38, 13);
             this.clientLabel.TabIndex = 2;
@@ -87,7 +90,7 @@
             // issuesLabel
             // 
             this.issuesLabel.AutoSize = true;
-            this.issuesLabel.Location = new System.Drawing.Point(29, 75);
+            this.issuesLabel.Location = new System.Drawing.Point(29, 150);
             this.issuesLabel.Name = "issuesLabel";
             this.issuesLabel.Size = new System.Drawing.Size(50, 13);
             this.issuesLabel.TabIndex = 3;
@@ -96,7 +99,7 @@
             // employeesLabel
             // 
             this.employeesLabel.AutoSize = true;
-            this.employeesLabel.Location = new System.Drawing.Point(29, 100);
+            this.employeesLabel.Location = new System.Drawing.Point(29, 99);
             this.employeesLabel.Name = "employeesLabel";
             this.employeesLabel.Size = new System.Drawing.Size(52, 13);
             this.employeesLabel.TabIndex = 4;
@@ -114,7 +117,7 @@
             // stocksLabel
             // 
             this.stocksLabel.AutoSize = true;
-            this.stocksLabel.Location = new System.Drawing.Point(29, 150);
+            this.stocksLabel.Location = new System.Drawing.Point(29, 224);
             this.stocksLabel.Name = "stocksLabel";
             this.stocksLabel.Size = new System.Drawing.Size(40, 13);
             this.stocksLabel.TabIndex = 6;
@@ -123,7 +126,7 @@
             // mapLabel
             // 
             this.mapLabel.AutoSize = true;
-            this.mapLabel.Location = new System.Drawing.Point(29, 176);
+            this.mapLabel.Location = new System.Drawing.Point(29, 50);
             this.mapLabel.Name = "mapLabel";
             this.mapLabel.Size = new System.Drawing.Size(32, 13);
             this.mapLabel.TabIndex = 7;
@@ -132,7 +135,7 @@
             // readClients
             // 
             this.readClients.AutoSize = true;
-            this.readClients.Location = new System.Drawing.Point(155, 50);
+            this.readClients.Location = new System.Drawing.Point(155, 75);
             this.readClients.Name = "readClients";
             this.readClients.Size = new System.Drawing.Size(15, 14);
             this.readClients.TabIndex = 8;
@@ -142,7 +145,7 @@
             // readIssues
             // 
             this.readIssues.AutoSize = true;
-            this.readIssues.Location = new System.Drawing.Point(155, 75);
+            this.readIssues.Location = new System.Drawing.Point(155, 150);
             this.readIssues.Name = "readIssues";
             this.readIssues.Size = new System.Drawing.Size(15, 14);
             this.readIssues.TabIndex = 9;
@@ -172,7 +175,7 @@
             // readStocks
             // 
             this.readStocks.AutoSize = true;
-            this.readStocks.Location = new System.Drawing.Point(155, 150);
+            this.readStocks.Location = new System.Drawing.Point(155, 225);
             this.readStocks.Name = "readStocks";
             this.readStocks.Size = new System.Drawing.Size(15, 14);
             this.readStocks.TabIndex = 12;
@@ -182,7 +185,7 @@
             // readMap
             // 
             this.readMap.AutoSize = true;
-            this.readMap.Location = new System.Drawing.Point(155, 175);
+            this.readMap.Location = new System.Drawing.Point(155, 50);
             this.readMap.Name = "readMap";
             this.readMap.Size = new System.Drawing.Size(15, 14);
             this.readMap.TabIndex = 13;
@@ -192,7 +195,7 @@
             // writeIssues
             // 
             this.writeIssues.AutoSize = true;
-            this.writeIssues.Location = new System.Drawing.Point(246, 75);
+            this.writeIssues.Location = new System.Drawing.Point(246, 150);
             this.writeIssues.Name = "writeIssues";
             this.writeIssues.Size = new System.Drawing.Size(15, 14);
             this.writeIssues.TabIndex = 15;
@@ -202,7 +205,7 @@
             // writeClients
             // 
             this.writeClients.AutoSize = true;
-            this.writeClients.Location = new System.Drawing.Point(246, 50);
+            this.writeClients.Location = new System.Drawing.Point(246, 75);
             this.writeClients.Name = "writeClients";
             this.writeClients.Size = new System.Drawing.Size(15, 14);
             this.writeClients.TabIndex = 16;
@@ -212,7 +215,7 @@
             // writeEmployees
             // 
             this.writeEmployees.AutoSize = true;
-            this.writeEmployees.Location = new System.Drawing.Point(246, 100);
+            this.writeEmployees.Location = new System.Drawing.Point(246, 99);
             this.writeEmployees.Name = "writeEmployees";
             this.writeEmployees.Size = new System.Drawing.Size(15, 14);
             this.writeEmployees.TabIndex = 17;
@@ -222,7 +225,7 @@
             // writeProviders
             // 
             this.writeProviders.AutoSize = true;
-            this.writeProviders.Location = new System.Drawing.Point(246, 125);
+            this.writeProviders.Location = new System.Drawing.Point(246, 124);
             this.writeProviders.Name = "writeProviders";
             this.writeProviders.Size = new System.Drawing.Size(15, 14);
             this.writeProviders.TabIndex = 18;
@@ -232,7 +235,7 @@
             // writeStocks
             // 
             this.writeStocks.AutoSize = true;
-            this.writeStocks.Location = new System.Drawing.Point(246, 150);
+            this.writeStocks.Location = new System.Drawing.Point(246, 224);
             this.writeStocks.Name = "writeStocks";
             this.writeStocks.Size = new System.Drawing.Size(15, 14);
             this.writeStocks.TabIndex = 19;
@@ -242,7 +245,7 @@
             // writeMap
             // 
             this.writeMap.AutoSize = true;
-            this.writeMap.Location = new System.Drawing.Point(246, 175);
+            this.writeMap.Location = new System.Drawing.Point(246, 50);
             this.writeMap.Name = "writeMap";
             this.writeMap.Size = new System.Drawing.Size(15, 14);
             this.writeMap.TabIndex = 20;
@@ -281,9 +284,9 @@
             this.statsLabel.AutoSize = true;
             this.statsLabel.Location = new System.Drawing.Point(29, 200);
             this.statsLabel.Name = "statsLabel";
-            this.statsLabel.Size = new System.Drawing.Size(31, 13);
+            this.statsLabel.Size = new System.Drawing.Size(61, 13);
             this.statsLabel.TabIndex = 24;
-            this.statsLabel.Text = "Stats";
+            this.statsLabel.Text = "Statistiques";
             // 
             // readStats
             // 
@@ -294,11 +297,43 @@
             this.readStats.TabIndex = 25;
             this.readStats.UseVisualStyleBackColor = true;
             // 
+            // reservationLabel
+            // 
+            this.reservationLabel.AutoSize = true;
+            this.reservationLabel.Location = new System.Drawing.Point(29, 175);
+            this.reservationLabel.Name = "reservationLabel";
+            this.reservationLabel.Size = new System.Drawing.Size(69, 13);
+            this.reservationLabel.TabIndex = 26;
+            this.reservationLabel.Text = "Réservations";
+            // 
+            // readReservations
+            // 
+            this.readReservations.AutoSize = true;
+            this.readReservations.Location = new System.Drawing.Point(155, 175);
+            this.readReservations.Name = "readReservations";
+            this.readReservations.Size = new System.Drawing.Size(15, 14);
+            this.readReservations.TabIndex = 27;
+            this.readReservations.UseVisualStyleBackColor = true;
+            this.readReservations.CheckedChanged += new System.EventHandler(this.ReadReservations_CheckedChanged);
+            // 
+            // writeReservations
+            // 
+            this.writeReservations.AutoSize = true;
+            this.writeReservations.Location = new System.Drawing.Point(246, 175);
+            this.writeReservations.Name = "writeReservations";
+            this.writeReservations.Size = new System.Drawing.Size(15, 14);
+            this.writeReservations.TabIndex = 28;
+            this.writeReservations.UseVisualStyleBackColor = true;
+            this.writeReservations.CheckedChanged += new System.EventHandler(this.WriteReservations_CheckedChanged);
+            // 
             // Permissions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 361);
+            this.Controls.Add(this.writeReservations);
+            this.Controls.Add(this.readReservations);
+            this.Controls.Add(this.reservationLabel);
             this.Controls.Add(this.readStats);
             this.Controls.Add(this.statsLabel);
             this.Controls.Add(this.infoLabel);
@@ -364,5 +399,8 @@
         private System.Windows.Forms.Label readPermissionLabel;
         private System.Windows.Forms.Label editPermissionLabel;
         private System.Windows.Forms.Label infoLabel;
+        private System.Windows.Forms.Label reservationLabel;
+        private System.Windows.Forms.CheckBox readReservations;
+        private System.Windows.Forms.CheckBox writeReservations;
     }
 }

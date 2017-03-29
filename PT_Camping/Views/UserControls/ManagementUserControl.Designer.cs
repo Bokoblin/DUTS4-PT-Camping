@@ -47,9 +47,9 @@ namespace PT_Camping.Views.UserControls
             this.appBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.backArrow});
             this.appBar.Location = new System.Drawing.Point(0, 0);
+            this.appBar.MinimumSize = new System.Drawing.Size(0, 50);
             this.appBar.Name = "appBar";
-            this.appBar.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.appBar.Size = new System.Drawing.Size(900, 62);
+            this.appBar.Size = new System.Drawing.Size(984, 50);
             this.appBar.TabIndex = 5;
             this.appBar.Text = "appBar";
             // 
@@ -71,10 +71,9 @@ namespace PT_Camping.Views.UserControls
             this.appBarTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(81)))), ((int)(((byte)(181)))));
             this.appBarTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.appBarTitle.ForeColor = System.Drawing.Color.White;
-            this.appBarTitle.Location = new System.Drawing.Point(53, 18);
-            this.appBarTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.appBarTitle.Location = new System.Drawing.Point(40, 15);
             this.appBarTitle.Name = "appBarTitle";
-            this.appBarTitle.Size = new System.Drawing.Size(136, 25);
+            this.appBarTitle.Size = new System.Drawing.Size(107, 20);
             this.appBarTitle.TabIndex = 6;
             this.appBarTitle.Text = "TITLE_NAME";
             // 
@@ -87,10 +86,9 @@ namespace PT_Camping.Views.UserControls
             this.logoutButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.logoutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logoutButton.ForeColor = System.Drawing.Color.White;
-            this.logoutButton.Location = new System.Drawing.Point(700, 7);
-            this.logoutButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.logoutButton.Location = new System.Drawing.Point(800, 6);
             this.logoutButton.Name = "logoutButton";
-            this.logoutButton.Size = new System.Drawing.Size(160, 44);
+            this.logoutButton.Size = new System.Drawing.Size(120, 36);
             this.logoutButton.TabIndex = 10;
             this.logoutButton.Text = "Déconnexion";
             this.logoutButton.UseVisualStyleBackColor = false;
@@ -101,15 +99,16 @@ namespace PT_Camping.Views.UserControls
             this.userNameButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.userNameButton.AutoSize = true;
             this.userNameButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(81)))), ((int)(((byte)(181)))));
+            this.userNameButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.userNameButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(81)))), ((int)(((byte)(181)))));
             this.userNameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.userNameButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userNameButton.ForeColor = System.Drawing.Color.White;
-            this.userNameButton.Location = new System.Drawing.Point(473, 7);
-            this.userNameButton.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.userNameButton.Location = new System.Drawing.Point(699, 6);
+            this.userNameButton.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.userNameButton.Name = "userNameButton";
             this.userNameButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.userNameButton.Size = new System.Drawing.Size(200, 44);
+            this.userNameButton.Size = new System.Drawing.Size(101, 36);
             this.userNameButton.TabIndex = 9;
             this.userNameButton.Text = "User Name";
             this.userNameButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -118,16 +117,15 @@ namespace PT_Camping.Views.UserControls
             // 
             // ManagementUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.Controls.Add(this.userNameButton);
             this.Controls.Add(this.logoutButton);
             this.Controls.Add(this.appBarTitle);
             this.Controls.Add(this.appBar);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ManagementUserControl";
-            this.Size = new System.Drawing.Size(900, 600);
+            this.Size = new System.Drawing.Size(984, 600);
             this.appBar.ResumeLayout(false);
             this.appBar.PerformLayout();
             this.ResumeLayout(false);

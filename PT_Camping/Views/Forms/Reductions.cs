@@ -6,7 +6,7 @@ using PT_Camping.Properties;
 namespace PT_Camping.Views.Forms
 {
     /// <summary>
-    /// This class is used to apply a reduction on a client bill
+    /// This class should be used to apply a reduction on a client bill
     /// 
     /// </summary>
     /// Authors : Valentine

@@ -69,7 +69,7 @@
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(800, 550);
+            this.tableLayoutPanel.Size = new System.Drawing.Size(984, 550);
             this.tableLayoutPanel.TabIndex = 11;
             // 
             // mostAskedlocationsListView
@@ -78,11 +78,11 @@
             this.mostAskedlocationsListView.FullRowSelect = true;
             this.mostAskedlocationsListView.GridLines = true;
             this.mostAskedlocationsListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.mostAskedlocationsListView.Location = new System.Drawing.Point(43, 80);
+            this.mostAskedlocationsListView.Location = new System.Drawing.Point(52, 80);
             this.mostAskedlocationsListView.MultiSelect = false;
             this.mostAskedlocationsListView.Name = "mostAskedlocationsListView";
             this.mostAskedlocationsListView.Scrollable = false;
-            this.mostAskedlocationsListView.Size = new System.Drawing.Size(322, 186);
+            this.mostAskedlocationsListView.Size = new System.Drawing.Size(397, 186);
             this.mostAskedlocationsListView.TabIndex = 0;
             this.mostAskedlocationsListView.UseCompatibleStateImageBehavior = false;
             this.mostAskedlocationsListView.View = System.Windows.Forms.View.List;
@@ -95,11 +95,11 @@
             this.mostAskedProductsListView.FullRowSelect = true;
             this.mostAskedProductsListView.GridLines = true;
             this.mostAskedProductsListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.mostAskedProductsListView.Location = new System.Drawing.Point(427, 80);
+            this.mostAskedProductsListView.Location = new System.Drawing.Point(523, 80);
             this.mostAskedProductsListView.MultiSelect = false;
             this.mostAskedProductsListView.Name = "mostAskedProductsListView";
             this.mostAskedProductsListView.Scrollable = false;
-            this.mostAskedProductsListView.Size = new System.Drawing.Size(322, 186);
+            this.mostAskedProductsListView.Size = new System.Drawing.Size(397, 186);
             this.mostAskedProductsListView.TabIndex = 1;
             this.mostAskedProductsListView.UseCompatibleStateImageBehavior = false;
             this.mostAskedProductsListView.View = System.Windows.Forms.View.List;
@@ -112,11 +112,11 @@
             this.mostCommonIssueslistView.FullRowSelect = true;
             this.mostCommonIssueslistView.GridLines = true;
             this.mostCommonIssueslistView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.mostCommonIssueslistView.Location = new System.Drawing.Point(43, 305);
+            this.mostCommonIssueslistView.Location = new System.Drawing.Point(52, 305);
             this.mostCommonIssueslistView.MultiSelect = false;
             this.mostCommonIssueslistView.Name = "mostCommonIssueslistView";
             this.mostCommonIssueslistView.Scrollable = false;
-            this.mostCommonIssueslistView.Size = new System.Drawing.Size(322, 186);
+            this.mostCommonIssueslistView.Size = new System.Drawing.Size(397, 186);
             this.mostCommonIssueslistView.TabIndex = 2;
             this.mostCommonIssueslistView.UseCompatibleStateImageBehavior = false;
             this.mostCommonIssueslistView.View = System.Windows.Forms.View.List;
@@ -129,11 +129,11 @@
             this.bestClientsListView.FullRowSelect = true;
             this.bestClientsListView.GridLines = true;
             this.bestClientsListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.bestClientsListView.Location = new System.Drawing.Point(427, 305);
+            this.bestClientsListView.Location = new System.Drawing.Point(523, 305);
             this.bestClientsListView.MultiSelect = false;
             this.bestClientsListView.Name = "bestClientsListView";
             this.bestClientsListView.Scrollable = false;
-            this.bestClientsListView.Size = new System.Drawing.Size(322, 186);
+            this.bestClientsListView.Size = new System.Drawing.Size(397, 186);
             this.bestClientsListView.TabIndex = 3;
             this.bestClientsListView.UseCompatibleStateImageBehavior = false;
             this.bestClientsListView.View = System.Windows.Forms.View.List;
@@ -145,9 +145,9 @@
             this.productsStatsTitle.AutoSize = true;
             this.productsStatsTitle.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.productsStatsTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productsStatsTitle.Location = new System.Drawing.Point(427, 61);
+            this.productsStatsTitle.Location = new System.Drawing.Point(523, 61);
             this.productsStatsTitle.Name = "productsStatsTitle";
-            this.productsStatsTitle.Size = new System.Drawing.Size(322, 16);
+            this.productsStatsTitle.Size = new System.Drawing.Size(397, 16);
             this.productsStatsTitle.TabIndex = 4;
             this.productsStatsTitle.Text = "Produits les plus demandés";
             // 
@@ -156,9 +156,9 @@
             this.clientsStatsTitle.AutoSize = true;
             this.clientsStatsTitle.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.clientsStatsTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clientsStatsTitle.Location = new System.Drawing.Point(427, 286);
+            this.clientsStatsTitle.Location = new System.Drawing.Point(523, 286);
             this.clientsStatsTitle.Name = "clientsStatsTitle";
-            this.clientsStatsTitle.Size = new System.Drawing.Size(322, 16);
+            this.clientsStatsTitle.Size = new System.Drawing.Size(397, 16);
             this.clientsStatsTitle.TabIndex = 7;
             this.clientsStatsTitle.Text = "Meilleurs clients";
             // 
@@ -167,9 +167,9 @@
             this.locationsStatsTitle.AutoSize = true;
             this.locationsStatsTitle.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.locationsStatsTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.locationsStatsTitle.Location = new System.Drawing.Point(43, 61);
+            this.locationsStatsTitle.Location = new System.Drawing.Point(52, 61);
             this.locationsStatsTitle.Name = "locationsStatsTitle";
-            this.locationsStatsTitle.Size = new System.Drawing.Size(322, 16);
+            this.locationsStatsTitle.Size = new System.Drawing.Size(397, 16);
             this.locationsStatsTitle.TabIndex = 8;
             this.locationsStatsTitle.Text = "Emplacements les plus demandés";
             // 
@@ -178,9 +178,9 @@
             this.issuesStatsTitle.AutoSize = true;
             this.issuesStatsTitle.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.issuesStatsTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.issuesStatsTitle.Location = new System.Drawing.Point(43, 286);
+            this.issuesStatsTitle.Location = new System.Drawing.Point(52, 286);
             this.issuesStatsTitle.Name = "issuesStatsTitle";
-            this.issuesStatsTitle.Size = new System.Drawing.Size(322, 16);
+            this.issuesStatsTitle.Size = new System.Drawing.Size(397, 16);
             this.issuesStatsTitle.TabIndex = 9;
             this.issuesStatsTitle.Text = "Incidents les plus courants";
             // 
@@ -190,10 +190,10 @@
             this.yearPicker.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.yearPicker.Enabled = false;
             this.yearPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.yearPicker.Location = new System.Drawing.Point(371, 21);
+            this.yearPicker.Location = new System.Drawing.Point(455, 21);
             this.yearPicker.Name = "yearPicker";
             this.yearPicker.ShowUpDown = true;
-            this.yearPicker.Size = new System.Drawing.Size(50, 20);
+            this.yearPicker.Size = new System.Drawing.Size(62, 20);
             this.yearPicker.TabIndex = 10;
             this.yearPicker.ValueChanged += new System.EventHandler(this.YearPicker_ValueChanged);
             // 
@@ -203,6 +203,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel);
             this.Name = "StatsUserControl";
+            this.Size = new System.Drawing.Size(984, 600);
             this.Controls.SetChildIndex(this.tableLayoutPanel, 0);
             this.Controls.SetChildIndex(this.appBarTitle, 0);
             this.tableLayoutPanel.ResumeLayout(false);

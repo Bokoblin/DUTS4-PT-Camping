@@ -407,7 +407,18 @@ namespace PT_Camping.Properties {
                 return ResourceManager.GetString("issues_management", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à \n.
+        /// </summary>
+        internal static string new_line
+        {
+            get
+            {
+                return ResourceManager.GetString("new_line", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Aucun incident ne correspond à ce type pour cette période.
         /// </summary>
