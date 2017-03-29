@@ -44,6 +44,7 @@ namespace PT_Camping.Views.Forms
             readStocks.Checked = _permissionsList.Any(d => d.Libelle_Droit == "readStocks");
             readMap.Checked = _permissionsList.Any(d => d.Libelle_Droit == "readMap");
             readStats.Checked = _permissionsList.Any(d => d.Libelle_Droit == "readStats");
+            readReservations.Checked = _permissionsList.Any(d => d.Libelle_Droit == "readReservations");
 
             writeClients.Checked = _permissionsList.Any(d => d.Libelle_Droit == "writeClients");
             writeIssues.Checked = _permissionsList.Any(d => d.Libelle_Droit == "writeIssues");
@@ -51,6 +52,7 @@ namespace PT_Camping.Views.Forms
             writeProviders.Checked = _permissionsList.Any(d => d.Libelle_Droit == "writeProviders");
             writeStocks.Checked = _permissionsList.Any(d => d.Libelle_Droit == "writeStocks");
             writeMap.Checked = _permissionsList.Any(d => d.Libelle_Droit == "writeMap");
+            writeReservations.Checked = _permissionsList.Any(d => d.Libelle_Droit == "writeReservations");
         }
 
 
@@ -209,6 +211,27 @@ namespace PT_Camping.Views.Forms
             }
             #endregion
 
+            #region RESERVAIONS READ PERMISSION
+
+            if (readReservations.Checked)
+            {
+                if (_permissionsList.Find(d => d.Libelle_Droit == "readReservations") == null)
+                {
+                    Droit droit = _db.Droit.FirstOrDefault(d => d.Libelle_Droit == "readReservations");
+                    _concernedEmployee.Personne.Droit.Add(droit);
+                }
+            }
+            else
+            {
+                if (_permissionsList.Find(d => d.Libelle_Droit == "readReservations") != null)
+                {
+                    _concernedEmployee.Personne.Droit.Remove(
+                        _concernedEmployee.Personne.Droit.FirstOrDefault(d => d.Libelle_Droit == "readReservations")
+                        );
+                }
+            }
+            #endregion
+
             #region CLIENTS WRITE PERMISSION
 
             if (writeClients.Checked)
@@ -335,6 +358,27 @@ namespace PT_Camping.Views.Forms
             }
             #endregion
 
+            #region RESERVATIONS WRITE PERMISSION
+
+            if (writeReservations.Checked)
+            {
+                if (_permissionsList.Find(d => d.Libelle_Droit == "writeReservations") == null)
+                {
+                    Droit droit = _db.Droit.FirstOrDefault(d => d.Libelle_Droit == "writeReservations");
+                    _concernedEmployee.Personne.Droit.Add(droit);
+                }
+            }
+            else
+            {
+                if (_permissionsList.Find(d => d.Libelle_Droit == "writeReservations") != null)
+                {
+                    _concernedEmployee.Personne.Droit.Remove(
+                        _concernedEmployee.Personne.Droit.FirstOrDefault(d => d.Libelle_Droit == "writeReservations")
+                        );
+                }
+            }
+            #endregion
+
             Close();
         }
 
@@ -408,6 +452,18 @@ namespace PT_Camping.Views.Forms
         {
             if (writeMap.Checked)
                 readMap.Checked = true;
+        }
+
+        public void ReadReservations_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!readReservations.Checked)
+                writeReservations.Checked = false;
+        }
+
+        private void WriteReservations_CheckedChanged(object sender, EventArgs e)
+        {
+            if (writeReservations.Checked)
+                readReservations.Checked = true;
         }
     }
 }

@@ -86,7 +86,7 @@ namespace PT_Camping.Views.UserControls
 
                 if (client == null) return;
 
-                dateInscripTextBox.Text = client.Date_Inscription.ToShortDateString();
+                registerDateTextBox.Text = client.Date_Inscription.ToShortDateString();
                 surnameTextBox.Text = client.Personne.Nom_Personne;
                 nameTextBox.Text = client.Personne.Prenom_Personne;
                 birthDateTextBox.Text = client.Personne.Date_Naissance.ToShortDateString();
@@ -95,6 +95,7 @@ namespace PT_Camping.Views.UserControls
                 emailTextBox.Text = client.Personne.Email;
 
                 nbReservationsLabel.Text = Db.Reservation.Count(a => a.Code_Personne == code).ToString();
+                reservationButton.Enabled = UserRights.Any(r => r.Libelle_Droit == "readReservations");
             }
         }
 

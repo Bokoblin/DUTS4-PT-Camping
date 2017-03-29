@@ -170,12 +170,6 @@
     <Compile Include="Views\Forms\ModifyPassword.Designer.cs">
       <DependentUpon>ModifyPassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Forms\Reductions.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Reductions.Designer.cs">
-      <DependentUpon>Reductions.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\Forms\AddProvider.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -304,9 +298,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Forms\ModifyPassword.resx">
       <DependentUpon>ModifyPassword.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Forms\Reductions.resx">
-      <DependentUpon>Reductions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Forms\AddProvider.resx">
       <DependentUpon>AddProvider.cs</DependentUpon>

@@ -18,7 +18,7 @@ namespace UnitTestProject
         [TestMethod]
         public void InstanceTest()
         {
-            var e1 = new PT_Camping.Model.Emplacement { Nom_Emplacement = "e1" };
+            var e1 = new Emplacement { Nom_Emplacement = "e1" };
             var graphicLocation = new GraphicLocation(e1);
 
             Assert.AreEqual(e1, graphicLocation.Location);
@@ -29,7 +29,7 @@ namespace UnitTestProject
         [TestMethod]
         public void MoveTest()
         {
-            var e1 = new PT_Camping.Model.Emplacement
+            var e1 = new Emplacement
             {
                 Nom_Emplacement = "e1",
                 Cordonnee_X = 5,
@@ -62,7 +62,7 @@ namespace UnitTestProject
         [TestMethod]
         public void ResizeTest()
         {
-            var e1 = new PT_Camping.Model.Emplacement
+            var e1 = new Emplacement
             {
                 Nom_Emplacement = "e1",
                 Cordonnee_X = 5,
