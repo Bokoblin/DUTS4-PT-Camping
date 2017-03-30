@@ -66,14 +66,6 @@
       <HintPath>packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.Charting.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="sharpPDF-SL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\SharpPDF.1.1.0\lib\sharpPDF-SL.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="SharpPdf417, Version=1.0.0.0, Culture=neutral, PublicKeyToken=fd810bd351ebcf46, processorArchitecture=MSIL">
-      <HintPath>packages\SharpPdf417.1.0.2\lib\portable-net45+sl5+wp8+win8\SharpPdf417.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -99,7 +91,58 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\App.cs">
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\A_vendu.cs">
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Caracteristique_Emplacement.cs">
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Client.cs">
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Droit.cs">
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Emplacement.cs">
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Employe.cs">
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Facture.cs">
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Fournisseur.cs">
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\GraphicLocation.cs" />
+    <Compile Include="Model\Incident.cs">
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Loge.cs">
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Personne.cs">
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Produit.cs">
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Reservation.cs">
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sysdiagrams.cs">
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Type_Emplacement.cs">
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Type_Incident.cs">
+      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Views\Forms\AddClient.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,12 +178,6 @@
     <Compile Include="Views\Forms\ModifyPassword.Designer.cs">
       <DependentUpon>ModifyPassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Forms\Reductions.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Reductions.Designer.cs">
-      <DependentUpon>Reductions.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\Forms\AddProvider.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,6 +189,12 @@
     </Compile>
     <Compile Include="Views\Forms\AddProduct.Designer.cs">
       <DependentUpon>AddProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Forms\Reductions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Forms\Reductions.Designer.cs">
+      <DependentUpon>Reductions.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Forms\Reservations.cs">
       <SubType>Form</SubType>
@@ -201,36 +244,6 @@
     <Compile Include="Views\UserControls\ManagementUserControl.Designer.cs">
       <DependentUpon>ManagementUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\App.cs">
-      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\A_vendu.cs">
-      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Caracteristique_Emplacement.cs">
-      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Client.cs">
-      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Droit.cs">
-      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Emplacement.cs">
-      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Employe.cs">
-      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Facture.cs">
-      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Fournisseur.cs">
-      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Incident.cs">
-      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\InfoJoyeuxDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -246,28 +259,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>InfoJoyeuxDB.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model\Loge.cs">
-      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\LoginTools.cs" />
-    <Compile Include="Model\Personne.cs">
-      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Produit.cs">
-      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Reservation.cs">
-      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\sysdiagrams.cs">
-      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Type_Emplacement.cs">
-      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Type_Incident.cs">
-      <DependentUpon>InfoJoyeuxDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Views\Forms\Permissions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -321,11 +313,11 @@
     <EmbeddedResource Include="Views\Forms\ModifyPassword.resx">
       <DependentUpon>ModifyPassword.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Forms\Reductions.resx">
-      <DependentUpon>Reductions.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Views\Forms\AddProvider.resx">
       <DependentUpon>AddProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Forms\Reductions.resx">
+      <DependentUpon>Reductions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Forms\Reservations.resx">
       <DependentUpon>Reservations.cs</DependentUpon>

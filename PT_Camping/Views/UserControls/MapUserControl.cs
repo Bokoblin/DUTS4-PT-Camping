@@ -104,14 +104,19 @@ namespace PT_Camping.Views.UserControls
             }
             else
             {
-                MemoryStream ms = new MemoryStream(_db.App.FirstOrDefault().Fond_Image);
-                var imageJpeg = Image.FromStream(ms);
-                _image = new Bitmap(imageJpeg);
-                ms.Close();
-                pictureBox.Image = _image;
+                App app = _db.App.FirstOrDefault();
+                if (app != null)
+                {
+                    MemoryStream ms = new MemoryStream(app.Fond_Image);
+                    var imageJpeg = Image.FromStream(ms);
+                    _image = new Bitmap(imageJpeg);
+                    pictureBox.Image = _image;
+                    ms.Close();
+                }
                 _mode = MapMode.Normal;
             }
             ChangeMode(_mode);    
+            RefreshLocations();
         }
 
 
@@ -130,14 +135,9 @@ namespace PT_Camping.Views.UserControls
 
         public void ResetMode()
         {
-            if (!_db.App.Any(m => m.Fond_Image != null))
-            {
-                _mode = MapMode.LoadImage;
-            }
-            else
-            {
-                _mode = MapMode.Normal;
-            }
+            _mode = _db.App.Any(m => m.Fond_Image != null) 
+                ? MapMode.Normal 
+                : MapMode.LoadImage;
             ChangeMode(_mode);
         }
 
@@ -295,7 +295,7 @@ namespace PT_Camping.Views.UserControls
 
         private void TypePanel_MouseDown(object sender, MouseEventArgs e)
         {
-            Panel panel = getParentTypePanel(sender);
+            Panel panel = GetParentTypePanel(sender);
             if (e.Clicks == 2)
             {
                 LoginTools.CheckConnection();
@@ -339,7 +339,7 @@ namespace PT_Camping.Views.UserControls
         }
 
 
-        private Panel getParentTypePanel(object control)
+        private Panel GetParentTypePanel(object control)
         {
             Panel panel;
             if (control.GetType() == typeof(TableLayoutPanel))
@@ -356,14 +356,14 @@ namespace PT_Camping.Views.UserControls
 
         private void PanelType_MouseEnter(object sender, EventArgs e)
         {
-            Panel panel = getParentTypePanel(sender);
+            Panel panel = GetParentTypePanel(sender);
             panel.BackColor = Color.DimGray;
         }
 
 
         private void PanelType_MouseLeave(object sender, EventArgs e)
         {
-            Panel panel = getParentTypePanel(sender);
+            Panel panel = GetParentTypePanel(sender);
             if (!panel.ClientRectangle.Contains(panel.PointToClient(Cursor.Position)))
             {
                 panel.BackColor = Color.Gray;
@@ -714,7 +714,7 @@ namespace PT_Camping.Views.UserControls
                 {
                     _db.Loge.Remove(loge);
                 }
-                _db.Emplacement.Remove(_db.Emplacement.FirstOrDefault(a => a.Code_Emplacement == id));
+                _db.Emplacement.Remove(_db.Emplacement.First(a => a.Code_Emplacement == id));
             }
             try
             {
@@ -762,6 +762,8 @@ namespace PT_Camping.Views.UserControls
                     resStateLabel.Text = Resources.free;
                     reserveButton.Text = Resources.book;
                 }
+                var userRights = _db.Personne.First(a => a.Code_Personne == LoginTools.Employee.Code_Personne).Droit.ToList();
+                reserveButton.Enabled = userRights.Any(d => d.Libelle_Droit == "writeReservations");
             }
             else
             {
@@ -800,11 +802,13 @@ namespace PT_Camping.Views.UserControls
 
 
             locationNameTextBox.DataBindings.Clear();
-            locationNameTextBox.DataBindings.Add("Text", SelectedLocation.Location, "Nom_Emplacement", false, DataSourceUpdateMode.OnPropertyChanged);
+            locationNameTextBox.DataBindings.Add("Text", SelectedLocation.Location, 
+                "Nom_Emplacement", false, DataSourceUpdateMode.OnPropertyChanged);
 
             typeLocationComboBox.DataBindings.Clear();
             Binding typeLocationBinding = 
-                typeLocationComboBox.DataBindings.Add("SelectedItem", SelectedLocation.Location, "Type_Emplacement", true, DataSourceUpdateMode.OnPropertyChanged);
+                typeLocationComboBox.DataBindings.Add("SelectedItem", SelectedLocation.Location, 
+                "Type_Emplacement", true, DataSourceUpdateMode.OnPropertyChanged);
             typeLocationBinding.BindingComplete += (sender, args) => pictureBox.Refresh();
 
             rightPanel.Refresh();
@@ -814,12 +818,18 @@ namespace PT_Camping.Views.UserControls
 
         private void DateTimePicker_ValueChanged(object sender, EventArgs e)
         {
+            RefreshLocations();
+        }
+
+        public void RefreshLocations()
+        {
             foreach (var location in _locationsList)
             {
-                location.Booked = _db.Reservation.Where(r => r.Date_Debut < dateTimePicker.Value && dateTimePicker.Value < r.Date_Fin)
+                location.Booked = _db.Reservation.Where(r => r.Date_Debut <= dateTimePicker.Value && dateTimePicker.Value <= r.Date_Fin)
                     .SelectMany(a => a.Loge)
                     .Any(l => l.Code_Emplacement == location.Location.Code_Emplacement);
             }
+            pictureBox.Refresh();
             UpdateRightMenu();
         }
 
@@ -904,11 +914,30 @@ namespace PT_Camping.Views.UserControls
             }
         }
 
-        private void resButton_Click(object sender, EventArgs e)
+
+        private void ReserveButton_Click(object sender, EventArgs e)
         {
+            Button button = (Button) sender;
             if (_selectedLocation != null)
             {
-                new NewReservation(HomeUserControl, _db, _selectedLocation.Location).Show();
+                if (button.Text == Resources.book)
+                {
+                    new NewReservation(HomeUserControl, _db, _selectedLocation.Location).Show();
+                } else if (button.Text == Resources.unbook)
+                {
+                    foreach (Reservation res in _db.Loge.Where(a => a.Code_Emplacement == _selectedLocation.Location.Code_Emplacement)
+                        .Select(a => a.Reservation).Where(a => a.Date_Debut <= dateTimePicker.Value && a.Date_Fin >= dateTimePicker.Value))
+                    {
+                        foreach (Loge loge in _db.Loge.Where(a => a.Code_Reservation == res.Code_Reservation))
+                        {
+                            _db.Loge.Remove(loge);
+                        }
+                        _db.Facture.Remove(res.Facture);
+                        _db.Reservation.Remove(res);
+                    }
+                    _db.SaveChanges();
+                    RefreshLocations();
+                }
             }
         }
     }

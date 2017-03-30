@@ -4,40 +4,40 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7c554ddb574640c68f9ede79c4760fff" Name="Diagram1" DisplayType="false">
-        <EntityTypeShape EntityType="InfoJoyeuxDB.App" PointX="0.75" PointY="0.75" Width="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="InfoJoyeuxDB.Caracteristique_Emplacement" Width="1.5" PointX="3.75" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="InfoJoyeuxDB.Client" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="InfoJoyeuxDB.Droit" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="InfoJoyeuxDB.Emplacement" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="InfoJoyeuxDB.Employe" Width="1.5" PointX="5.25" PointY="13.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="InfoJoyeuxDB.Fournisseur" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="InfoJoyeuxDB.Incident" Width="1.5" PointX="8.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="InfoJoyeuxDB.Loge" Width="1.5" PointX="8.25" PointY="9.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="InfoJoyeuxDB.Personne" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="InfoJoyeuxDB.Produit" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="InfoJoyeuxDB.Reservation" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="InfoJoyeuxDB.sysdiagrams" Width="1.5" PointX="0.75" PointY="12.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="InfoJoyeuxDB.Type_Emplacement" Width="1.5" PointX="3.75" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="InfoJoyeuxDB.Type_Incident" Width="1.5" PointX="10.625" PointY="1.875" IsExpanded="true" />
-        <AssociationConnector Association="InfoJoyeuxDB.FK_Client_Code_Personne" ManuallyRouted="false" />
-        <AssociationConnector Association="InfoJoyeuxDB.FK_Emplacement_Code_Type" ManuallyRouted="false" />
-        <AssociationConnector Association="InfoJoyeuxDB.FK_Incident_Code_Emplacement" ManuallyRouted="false" />
-        <AssociationConnector Association="InfoJoyeuxDB.FK_Loge_Code_Emplacement" ManuallyRouted="false" />
-        <AssociationConnector Association="InfoJoyeuxDB.FK_Employe_Code_Personne" ManuallyRouted="false" />
-        <AssociationConnector Association="InfoJoyeuxDB.FK_Incident_Code_Type" ManuallyRouted="false" />
-        <AssociationConnector Association="InfoJoyeuxDB.FK_Loge_Code_Personne" ManuallyRouted="false" />
-        <AssociationConnector Association="InfoJoyeuxDB.FK_Loge_Code_Reservation" ManuallyRouted="false" />
-        <AssociationConnector Association="InfoJoyeuxDB.FK_Reservation_Code_Personne" ManuallyRouted="false" />
-        <AssociationConnector Association="InfoJoyeuxDB.A_le_droit" ManuallyRouted="false" />
-        <AssociationConnector Association="InfoJoyeuxDB.Fournit" ManuallyRouted="false" />
-        <AssociationConnector Association="InfoJoyeuxDB.Possede" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="InfoJoyeuxDB.Facture" Width="1.5" PointX="10.5" PointY="5.375" />
-        <AssociationConnector Association="InfoJoyeuxDB.FK_Facture_Code_Reservation" />
-        <EntityTypeShape EntityType="InfoJoyeuxDB.A_vendu" Width="1.5" PointX="5.25" PointY="7.75" />
+      <Diagram DiagramId="7c554ddb574640c68f9ede79c4760fff" Name="Diagram1" DisplayType="false" ZoomLevel="57">
+        <EntityTypeShape EntityType="InfoJoyeuxDB.A_vendu" Width="1.5" PointX="5.25" PointY="7.375" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.App" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Caracteristique_Emplacement" Width="1.5" PointX="6" PointY="0.875" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Client" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Droit" Width="1.5" PointX="0.75" PointY="7.625" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Emplacement" Width="1.5" PointX="8.25" PointY="1.5" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Employe" Width="1.5" PointX="3.625" PointY="12.625" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Facture" Width="1.5" PointX="6" PointY="10.5" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Fournisseur" Width="1.5" PointX="0.75" PointY="3.25" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Incident" Width="1.5" PointX="10.5" PointY="1.75" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Loge" Width="1.5" PointX="11.125" PointY="6.875" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Personne" Width="1.5" PointX="3" PointY="6.75" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Produit" Width="1.5" PointX="3" PointY="3.25" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Reservation" Width="1.5" PointX="7.5" PointY="6.5" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.sysdiagrams" Width="1.5" PointX="10.75" PointY="10.75" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Type_Emplacement" Width="1.5" PointX="6" PointY="3.25" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Type_Incident" Width="1.5" PointX="8.25" PointY="11.375" />
         <AssociationConnector Association="InfoJoyeuxDB.FK_A_vendu_Code_Personne" />
         <AssociationConnector Association="InfoJoyeuxDB.FK_A_vendu_Code_Produit" />
-        </Diagram>
+        <AssociationConnector Association="InfoJoyeuxDB.FK_Client_Code_Personne" />
+        <AssociationConnector Association="InfoJoyeuxDB.FK_Emplacement_Code_Type" />
+        <AssociationConnector Association="InfoJoyeuxDB.FK_Incident_Code_Emplacement" />
+        <AssociationConnector Association="InfoJoyeuxDB.FK_Loge_Code_Emplacement" />
+        <AssociationConnector Association="InfoJoyeuxDB.FK_Employe_Code_Personne" />
+        <AssociationConnector Association="InfoJoyeuxDB.FK_Reservation_Code_Facture" />
+        <AssociationConnector Association="InfoJoyeuxDB.FK_Incident_Code_Type" />
+        <AssociationConnector Association="InfoJoyeuxDB.FK_Loge_Code_Personne" />
+        <AssociationConnector Association="InfoJoyeuxDB.FK_Loge_Code_Reservation" />
+        <AssociationConnector Association="InfoJoyeuxDB.FK_Reservation_Code_Personne" />
+        <AssociationConnector Association="InfoJoyeuxDB.A_le_droit" />
+        <AssociationConnector Association="InfoJoyeuxDB.Fournit" />
+        <AssociationConnector Association="InfoJoyeuxDB.Possede" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

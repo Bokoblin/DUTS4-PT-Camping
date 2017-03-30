@@ -1,9 +1,33 @@
 Project Name : PT4-Camping
 Developers   : Yonnel BERWIT, Alexandre JACQUOT, Arthur JOLIVET, Claire MARCINIAK, Valentine RENAUD
 
-Current version : v0.6.1
+Current version : v0.7.2
 
 ==================================================================================================
+
+v0.7.2 (29/03/2017)
+
+- Added permissions to reservations from 0.7.0
+- Fixed database unit tests broken in 0.7.0
+- Removed duplicate database from unit test project
+- Bug fixes to UserControl swapping
+- Checkstyle
+
+
+--------------------------------------------------------------------------
+
+v0.7.1 (29/03/2017)
+
+- Bug fixes to reservation and maps
+
+
+--------------------------------------------------------------------------
+
+v0.7.0 (28/03/2017)
+
+- Added reservations
+
+--------------------------------------------------------------------------
 
 v0.6.1 (27/03/2017)
 
