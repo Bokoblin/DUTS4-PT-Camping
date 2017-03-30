@@ -5,6 +5,10 @@ using System.Windows.Forms;
 using PT_Camping.Model;
 using PT_Camping.Properties;
 using PT_Camping.Views.UserControls;
+using PdfSharp.Pdf;
+using PdfSharp.Drawing;
+using System.Diagnostics;
+using PdfSharp.Drawing.Layout;
 
 namespace PT_Camping.Views.Forms
 {
@@ -100,8 +104,100 @@ namespace PT_Camping.Views.Forms
                 }
                 if (reservation != null && client != null && facture != null)
                 {
-                    //TODO Ecrire le code de generation de facture ici et modifier l'entité facture avec le prix
-                    _db.SaveChanges();
+                    ApplyReduction applyReduction = new ApplyReduction(client);
+                    if (applyReduction.ShowDialog() == DialogResult.OK)
+                    {
+                        int totalReduction = applyReduction.TotalReduction;
+                        facture.Montant = 23;
+                        _db.SaveChanges();
+
+                        PdfDocument document = new PdfDocument();
+
+                        // Create an empty page
+                        PdfPage page = document.AddPage();
+
+                        // Get an XGraphics object for drawing
+                        XGraphics gfx = XGraphics.FromPdfPage(page);
+                        XTextFormatter tf = new XTextFormatter(gfx);
+
+                        // Set format of string.
+                        XStringFormat drawFormat = new XStringFormat {Alignment = XStringAlignment.Near};
+
+                        //font
+                        XFont boldLarge = new XFont("Arial", 20, XFontStyle.Bold);
+                        XFont boldSmall = new XFont("Arial", 15, XFontStyle.Bold);
+                        XFont italicLarge = new XFont("Arial", 20, XFontStyle.Italic);
+                        XFont italicSmall = new XFont("Arial", 15, XFontStyle.Italic);
+                        XFont normal = new XFont("Arial", 15, XFontStyle.Regular);
+
+                        // CAMPING NAME
+                        tf.DrawString("Les flots blancs", boldLarge, XBrushes.Black, new XRect(5, 1, page.Width, page.Height), XStringFormats.TopLeft);
+                        tf.DrawString("\n" + "camping", italicLarge, XBrushes.Black, new XRect(5, 1, page.Width, page.Height), drawFormat);
+
+                        //INFOS FACTURE
+                        int prix_unitaire = 23;
+                        int nbEmplacement = locationsList.Items.Count;
+                        TimeSpan ts = reservation.Date_Fin - reservation.Date_Debut;
+                        int dureeSejour = ts.Days;
+                        int montantBrut = prix_unitaire * nbEmplacement * dureeSejour;
+                        facture.Date_Emission = DateTime.Today;
+                        string labelDateEmission = "Date: " + facture.Date_Emission.Value.Day + "-" + facture.Date_Emission.Value.Month + "-" + facture.Date_Emission.Value.Year;
+                        string labelFact = "Facture n° " + codeRes;
+
+
+                        if (totalReduction != 0)
+                        {
+                            facture.Montant = montantBrut * 100 / totalReduction;
+          
+                        }
+                        else
+                        {
+                            facture.Montant = montantBrut;
+                        }  
+                      
+                        tf.DrawString(labelFact + "\n" + labelDateEmission + "\nNum Client: " + client.Code_Personne, boldSmall, XBrushes.Blue, new XRect(430, 10, page.Width, page.Height));
+
+                        //Infos client
+                        tf.DrawString( "M." + client.Personne.Prenom_Personne + " " + client.Personne.Nom_Personne, boldSmall, XBrushes.Black, new XRect(400, 100, page.Width, page.Height));
+                        tf.DrawString("\n" + client.Personne.Adresse,italicSmall, XBrushes.Black, new XRect(380, 105, page.Width, page.Height));
+
+                        //Infos camping
+                        tf.DrawString("17 Route de Sarnac" + "\n" + "33930 MONTALIVET"+ "\n" + "Tel : 05 56 41 70 44", normal, XBrushes.Black, new XRect(5, 105, page.Width, page.Height));
+                        int cmp = 20;
+
+                        // TABLEAU
+                        tf.DrawString("Emplacement : ", boldSmall, XBrushes.Black, new XRect(60, 200, page.Width, page.Height));
+                        tf.DrawString("Prix unitaire: ", boldSmall, XBrushes.Black, new XRect(260, 200, page.Width, page.Height));
+                        tf.DrawString("Durée du séjour: ", boldSmall, XBrushes.Black, new XRect(450, 200, page.Width, page.Height));
+
+                        for (int i = 1; i<=locationsList.Items.Count; i++)
+                        {
+                            
+                            tf.DrawString( i +". " + locationsList.Items[i-1] + "\n", normal, XBrushes.Black, new XRect(50, 220+cmp, page.Width, page.Height));
+                            tf.DrawString(prix_unitaire + " €"+"\n", normal, XBrushes.Black, new XRect(280, 220+cmp, page.Width, page.Height));
+                            tf.DrawString(dureeSejour + " jours" + "\n", normal, XBrushes.Black, new XRect(450, 220 + cmp, page.Width, page.Height));
+                       
+                            cmp += 20;
+
+                            if (i == locationsList.Items.Count)
+                            {
+
+                                tf.DrawString("TOTAL Hors réduction : " + montantBrut + " € \n", boldSmall, XBrushes.Black, new XRect(80,240+((i-2)*cmp)+cmp, page.Width, page.Height));
+                                tf.DrawString("TOTAL Net à Payer : " + facture.Montant + "€ \n", boldSmall, XBrushes.Red, new XRect(80, 260 + ((i-2) * cmp) + cmp, page.Width, page.Height));
+
+                            }
+                        }
+
+                        tf.DrawString("Signature : " , normal, XBrushes.Black, new XRect(400, 700, page.Width, page.Height));
+                        // Save the document...
+                        string filename = "Facture.pdf";
+                        document.Save(filename);
+                        Process.Start(filename);
+
+                        _db.SaveChanges();
+
+
+                    }
                 }
             }
 
