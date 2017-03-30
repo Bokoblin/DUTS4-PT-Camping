@@ -4,13 +4,6 @@ using System.Net.Mail;
 using System.Windows.Forms;
 using PT_Camping.Properties;
 using PT_Camping.Views.Forms;
-using sharpPDF;
-using sharpPDF.Enumerators;
-using PdfSharp.Pdf;
-using PdfSharp.Drawing;
-using System.Diagnostics;
-using System.Drawing;
-using PdfSharp.Drawing.Layout;
 
 namespace PT_Camping.Views.UserControls
 {
@@ -93,7 +86,7 @@ namespace PT_Camping.Views.UserControls
 
                 if (client == null) return;
 
-                dateInscripTextBox.Text = client.Date_Inscription.ToShortDateString();
+                registerDateTextBox.Text = client.Date_Inscription.ToShortDateString();
                 surnameTextBox.Text = client.Personne.Nom_Personne;
                 nameTextBox.Text = client.Personne.Prenom_Personne;
                 birthDateTextBox.Text = client.Personne.Date_Naissance.ToShortDateString();
@@ -102,6 +95,7 @@ namespace PT_Camping.Views.UserControls
                 emailTextBox.Text = client.Personne.Email;
 
                 nbReservationsLabel.Text = Db.Reservation.Count(a => a.Code_Personne == code).ToString();
+                reservationButton.Enabled = UserRights.Any(r => r.Libelle_Droit == "readReservations");
             }
         }
 
@@ -276,51 +270,6 @@ namespace PT_Camping.Views.UserControls
         {
             int code = int.Parse(clientListView.SelectedItems[0].Name);
             new Reservations(HomeUserControl, code).Show();
-        }
-
-        private void Facture_generate(object sender, EventArgs e)
-        {
-            PdfDocument document = new PdfDocument();
-
-            // Create an empty page
-            PdfPage page = document.AddPage();
-
-            // Get an XGraphics object for drawing
-            XGraphics gfx = XGraphics.FromPdfPage(page);
-           XTextFormatter tf = new XTextFormatter(gfx);
-
-            // Set format of string.
-            XStringFormat drawFormat = new XStringFormat();
-            drawFormat.Alignment = XStringAlignment.Near;
-
-            //font
-            XFont fontBold = new XFont("Arial", 20, XFontStyle.Bold);
-            XFont fontItalic = new XFont("Arial", 20, XFontStyle.Italic);
-
-            //Positions
-            double x = 0.5;
-            double y = 0.5;
-
-            // CAMPING NAME
-            tf.DrawString("Les flots blancs", fontBold, XBrushes.Black, new XRect(x,y,page.Width,page.Height), drawFormat);
-            tf.DrawString("\n" + "camping", fontItalic, XBrushes.Black, new XRect(x, y, page.Width, page.Height), drawFormat);
-
-            //INFOS FACTURE
-            Facture facture = new Facture();
-            var montant = facture.Montant = 0;
-            var dateEmission = facture.Date_Emission = DateTime.Now;
-            //var numResa = facture.Code_Reservation = ;
-            //var numCl = Db.Client.code;
-
-            string labelFact = "Facture n° 000test00";
-            string labelDateEmission = "Date: " + dateEmission;
-            string labelNumCl ="" ;
-
-            // Save the document...
-            string filename = "HelloWorld.pdf";
-            document.Save(filename);
-            // ...and start a viewer.
-            Process.Start(filename);
         }
     }
 }

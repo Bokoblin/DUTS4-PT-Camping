@@ -26,7 +26,6 @@ namespace PT_Camping.Views.UserControls
         {
             InitializeComponent();
             appBarTitle.Text = Resources.product_management;
-            appBarTitle.Text = Resources.product_management;
 
             productListView.View = View.Details;
             productListView.Columns.Add("Etat");

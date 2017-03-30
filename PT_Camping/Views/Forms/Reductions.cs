@@ -16,7 +16,7 @@ namespace PT_Camping.Views.Forms
         private int _reductionPercent;
         private int _fidelityReduction;
         private readonly Client _client;
-        private int _totalReduction;
+        public int TotalReduction { get; private set; }
 
 
         public ApplyReduction(Client client)
@@ -24,7 +24,7 @@ namespace PT_Camping.Views.Forms
             InitializeComponent();
             _reductionPercent = 0;
             _fidelityReduction = 0;
-            _totalReduction = 0;
+            TotalReduction = 0;
             _client = client;
             CalculateFidelityPercent();
         }
@@ -48,25 +48,27 @@ namespace PT_Camping.Views.Forms
             int nbYearsFidelity = DateTime.Now.Year - _client.Date_Inscription.Year;
             for (int i = 0; i < nbYearsFidelity; i++)
             {
-                if(i == 0 % 5)
+                if (i == 0 % 5)
                 {
-                  _fidelityReduction += 2;
+                    _fidelityReduction += 2;
                 }
             }
             percentageSeniorLabel.Text = _fidelityReduction + Resources.percent_symbol;
         }
-        
-        
+
+
         private void CalculateTotalReduction()
         {
-            _totalReduction = _reductionPercent + _fidelityReduction;
+            TotalReduction = _reductionPercent + _fidelityReduction;
         }
 
         private void ValidReducbutton_Click(object sender, EventArgs e)
         {
+            CalculateTotalReduction();
+            DialogResult = DialogResult.OK;
             Close();
         }
     }
 
-  
+
 }

@@ -54,7 +54,7 @@
             this.newReservationButton.TabIndex = 1;
             this.newReservationButton.Text = "Nouvelle Réservation";
             this.newReservationButton.UseVisualStyleBackColor = true;
-            this.newReservationButton.Click += new System.EventHandler(this.newReservationButton_Click);
+            this.newReservationButton.Click += new System.EventHandler(this.NewReservationButton_Click);
             // 
             // deleteReservationButton
             // 
@@ -65,7 +65,7 @@
             this.deleteReservationButton.TabIndex = 2;
             this.deleteReservationButton.Text = "Supprimer";
             this.deleteReservationButton.UseVisualStyleBackColor = true;
-            this.deleteReservationButton.Click += new System.EventHandler(this.deleteReservationButton_Click);
+            this.deleteReservationButton.Click += new System.EventHandler(this.DeleteReservationButton_Click);
             // 
             // factureButton
             // 
@@ -76,7 +76,7 @@
             this.factureButton.TabIndex = 3;
             this.factureButton.Text = "Télécharger la facture";
             this.factureButton.UseVisualStyleBackColor = true;
-            this.factureButton.Click += new System.EventHandler(this.factureButton_Click);
+            this.factureButton.Click += new System.EventHandler(this.FactureButton_Click);
             // 
             // reservationsList
             // 
@@ -95,7 +95,7 @@
             this.reservationsList.TabIndex = 4;
             this.reservationsList.UseCompatibleStateImageBehavior = false;
             this.reservationsList.View = System.Windows.Forms.View.Details;
-            this.reservationsList.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.reservationsList_ItemSelectionChanged);
+            this.reservationsList.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.ReservationsList_ItemSelectionChanged);
             // 
             // beginDateColumnHeader
             // 
@@ -137,7 +137,7 @@
             this.locationsList.Name = "locationsList";
             this.locationsList.Size = new System.Drawing.Size(153, 121);
             this.locationsList.TabIndex = 6;
-            this.locationsList.SelectedIndexChanged += new System.EventHandler(this.locationsList_SelectedIndexChanged);
+            this.locationsList.SelectedIndexChanged += new System.EventHandler(this.LocationsList_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -176,7 +176,7 @@
             this.editButton.TabIndex = 10;
             this.editButton.Text = "Modifier";
             this.editButton.UseVisualStyleBackColor = true;
-            this.editButton.Click += new System.EventHandler(this.editButton_Click);
+            this.editButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // refreshButton
             // 
@@ -186,13 +186,13 @@
             this.refreshButton.TabIndex = 11;
             this.refreshButton.Text = "Actualiser";
             this.refreshButton.UseVisualStyleBackColor = true;
-            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
+            this.refreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
             // 
             // Reservations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(578, 340);
+            this.ClientSize = new System.Drawing.Size(584, 341);
             this.Controls.Add(this.refreshButton);
             this.Controls.Add(this.editButton);
             this.Controls.Add(this.titleLabel);
@@ -207,6 +207,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "Reservations";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reservations";
             this.ResumeLayout(false);
             this.PerformLayout();

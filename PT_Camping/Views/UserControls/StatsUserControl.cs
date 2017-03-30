@@ -54,20 +54,31 @@ namespace PT_Camping.Views.UserControls
             mostAskedlocationsListView.Columns.Add("Type d'emplacement");
             mostAskedlocationsListView.Columns.Add("Réservations");
 
-            var statsLocations = /*Db.Loge.
-                Where(a => a.Reservation.Date_Debut.Year == _currentYear || a.Reservation.Date_Fin.Year == _currentYear)
-                .GroupBy(a => a.Code_Emplacement)*/
-                Db.Emplacement.ToDictionary(
-                location => location.Code_Emplacement, 
-                location => Db.Reservation.Count(
-                    res => res.Code_Personne == location.Code_Emplacement 
-                    && (res.Date_Debut.Year == _currentYear || res.Date_Fin.Year == _currentYear)));
+            var statslocations = Db.Loge.Where(loge => loge.Reservation.Date_Debut.Year == _currentYear 
+                                                || loge.Reservation.Date_Fin.Year == _currentYear)
+                .GroupBy(loge => new
+                {
+                    loge.Reservation.Code_Reservation,
+                    loge.Code_Emplacement
+                }, loge => new {loge.Reservation, Loge = loge}).Select(g => new
+                {
+                    g.Key.Code_Emplacement,
+                    Column1 = g.Count(p => p.Loge.Reservation.Code_Reservation != 0)
+                }).Distinct().ToDictionary(l => l.Code_Emplacement, l => l.Column1);
 
             foreach (Emplacement location in Db.Emplacement)
             {
                 string name = location.Nom_Emplacement;
                 string type = location.Type_Emplacement.Libelle_Type;
-                string nbReservations = statsLocations[location.Code_Emplacement].ToString();
+                string nbReservations;
+                try
+                {
+                    nbReservations = statslocations[location.Code_Emplacement].ToString();
+                }
+                catch (KeyNotFoundException)
+                {
+                    nbReservations = (0).ToString();
+                }
 
                 var item = new ListViewItem(new[] { "", name, type, nbReservations })
                 {

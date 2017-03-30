@@ -317,4 +317,8 @@ Veuillez contacter votre administrateur.</value>
   <data name="select_image_for_the_type" xml:space="preserve">
     <value>Sélectionnez une image pour le type</value>
   </data>
+  <data name="new_line" xml:space="preserve">
+    <value>
+</value>
+  </data>
 </root>

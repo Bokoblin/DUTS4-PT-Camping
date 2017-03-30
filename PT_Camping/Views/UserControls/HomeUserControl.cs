@@ -86,12 +86,14 @@ namespace PT_Camping.Views.UserControls
             Window.BringToFront();
         }
 
+
         public void StartClientsFromLocations()
         {
             Cursor.Current = Cursors.WaitCursor;
             _clientsUserControl = new ClientsUserControl(this);
             Window.WindowPanel.Controls.Add(_clientsUserControl);
-            Window.WindowPanel.Controls.Remove(_mapUserControl);
+            homeTabControl.SelectedIndex = 0;
+            Window.WindowPanel.Controls.Remove(this);
         }
 
         public void StartLocationsFromStats(int locationCode)
@@ -219,8 +221,6 @@ namespace PT_Camping.Views.UserControls
         internal void HandleResize()
         {
             Size = Window.Size;
-            managementTab.Size = Window.Size;
-            appBar.Size = new Size(Window.Size.Width, appBar.Size.Height);
             homeTabControl.ItemSize = new Size(Window.Size.Width / 2 - 30, 
                 homeTabControl.ItemSize.Height);
             _clientsUserControl?.HandleResize();
@@ -268,9 +268,6 @@ namespace PT_Camping.Views.UserControls
             set { _mapUserControl = value; }
         }
 
-        public TabControl HomeTabControl
-        {
-            get { return homeTabControl; }
-        }
+        public TabControl HomeTabControl => homeTabControl;
     }
 }

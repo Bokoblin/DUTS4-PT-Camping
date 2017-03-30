@@ -70,7 +70,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 72F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(900, 550);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(984, 550);
             this.tableLayoutPanel1.TabIndex = 22;
             // 
             // providerListView
@@ -78,10 +78,10 @@
             this.providerListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.providerListView.FullRowSelect = true;
             this.providerListView.GridLines = true;
-            this.providerListView.Location = new System.Drawing.Point(48, 47);
+            this.providerListView.Location = new System.Drawing.Point(52, 47);
             this.providerListView.Name = "providerListView";
             this.providerListView.Scrollable = false;
-            this.providerListView.Size = new System.Drawing.Size(354, 390);
+            this.providerListView.Size = new System.Drawing.Size(387, 390);
             this.providerListView.TabIndex = 0;
             this.providerListView.UseCompatibleStateImageBehavior = false;
             this.providerListView.SelectedIndexChanged += new System.EventHandler(this.ProviderListView_SelectedIndexChanged);
@@ -105,9 +105,9 @@
             this.detailPanel.Controls.Add(this.deleteButton);
             this.detailPanel.Controls.Add(this.detailTitlePanel);
             this.detailPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.detailPanel.Location = new System.Drawing.Point(498, 47);
+            this.detailPanel.Location = new System.Drawing.Point(543, 47);
             this.detailPanel.Name = "detailPanel";
-            this.detailPanel.Size = new System.Drawing.Size(354, 390);
+            this.detailPanel.Size = new System.Drawing.Size(387, 390);
             this.detailPanel.TabIndex = 1;
             // 
             // resetButton
@@ -116,7 +116,7 @@
             this.resetButton.BackgroundImage = global::PT_Camping.Properties.Resources.ic_undo;
             this.resetButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.resetButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.resetButton.Location = new System.Drawing.Point(246, 46);
+            this.resetButton.Location = new System.Drawing.Point(279, 46);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(30, 30);
             this.resetButton.TabIndex = 25;
@@ -127,7 +127,7 @@
             // addressTextBox
             // 
             this.addressTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.addressTextBox.Location = new System.Drawing.Point(180, 157);
+            this.addressTextBox.Location = new System.Drawing.Point(196, 157);
             this.addressTextBox.MaxLength = 50;
             this.addressTextBox.Multiline = true;
             this.addressTextBox.Name = "addressTextBox";
@@ -141,7 +141,7 @@
             this.contactButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.contactButton.AutoSize = true;
             this.contactButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.contactButton.Location = new System.Drawing.Point(114, 342);
+            this.contactButton.Location = new System.Drawing.Point(130, 342);
             this.contactButton.Name = "contactButton";
             this.contactButton.Size = new System.Drawing.Size(130, 30);
             this.contactButton.TabIndex = 21;
@@ -152,7 +152,7 @@
             // emailTextBox
             // 
             this.emailTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.emailTextBox.Location = new System.Drawing.Point(180, 203);
+            this.emailTextBox.Location = new System.Drawing.Point(196, 203);
             this.emailTextBox.MaxLength = 30;
             this.emailTextBox.Name = "emailTextBox";
             this.emailTextBox.ReadOnly = true;
@@ -163,7 +163,7 @@
             // websiteTextBox
             // 
             this.websiteTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.websiteTextBox.Location = new System.Drawing.Point(180, 229);
+            this.websiteTextBox.Location = new System.Drawing.Point(196, 229);
             this.websiteTextBox.MaxLength = 50;
             this.websiteTextBox.Name = "websiteTextBox";
             this.websiteTextBox.ReadOnly = true;
@@ -174,7 +174,7 @@
             // nameTextBox
             // 
             this.nameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.nameTextBox.Location = new System.Drawing.Point(180, 128);
+            this.nameTextBox.Location = new System.Drawing.Point(196, 128);
             this.nameTextBox.MaxLength = 25;
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.ReadOnly = true;
@@ -186,7 +186,7 @@
             // 
             this.websiteLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.websiteLabel.AutoSize = true;
-            this.websiteLabel.Location = new System.Drawing.Point(48, 232);
+            this.websiteLabel.Location = new System.Drawing.Point(64, 232);
             this.websiteLabel.Name = "websiteLabel";
             this.websiteLabel.Size = new System.Drawing.Size(120, 13);
             this.websiteLabel.TabIndex = 16;
@@ -196,7 +196,7 @@
             // 
             this.emailLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.emailLabel.AutoSize = true;
-            this.emailLabel.Location = new System.Drawing.Point(48, 206);
+            this.emailLabel.Location = new System.Drawing.Point(64, 206);
             this.emailLabel.Name = "emailLabel";
             this.emailLabel.Size = new System.Drawing.Size(104, 13);
             this.emailLabel.TabIndex = 15;
@@ -206,7 +206,7 @@
             // 
             this.addressLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.addressLabel.AutoSize = true;
-            this.addressLabel.Location = new System.Drawing.Point(48, 160);
+            this.addressLabel.Location = new System.Drawing.Point(64, 160);
             this.addressLabel.Name = "addressLabel";
             this.addressLabel.Size = new System.Drawing.Size(114, 13);
             this.addressLabel.TabIndex = 14;
@@ -216,7 +216,7 @@
             // 
             this.nameLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.nameLabel.AutoSize = true;
-            this.nameLabel.Location = new System.Drawing.Point(48, 131);
+            this.nameLabel.Location = new System.Drawing.Point(64, 131);
             this.nameLabel.Name = "nameLabel";
             this.nameLabel.Size = new System.Drawing.Size(98, 13);
             this.nameLabel.TabIndex = 13;
@@ -228,7 +228,7 @@
             this.editButton.BackgroundImage = global::PT_Camping.Properties.Resources.ic_edit;
             this.editButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.editButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.editButton.Location = new System.Drawing.Point(318, 46);
+            this.editButton.Location = new System.Drawing.Point(351, 46);
             this.editButton.Name = "editButton";
             this.editButton.Size = new System.Drawing.Size(30, 30);
             this.editButton.TabIndex = 12;
@@ -241,7 +241,7 @@
             this.deleteButton.BackgroundImage = global::PT_Camping.Properties.Resources.ic_delete;
             this.deleteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.deleteButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.deleteButton.Location = new System.Drawing.Point(282, 46);
+            this.deleteButton.Location = new System.Drawing.Point(315, 46);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(30, 30);
             this.deleteButton.TabIndex = 11;
@@ -255,7 +255,7 @@
             this.detailTitlePanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.detailTitlePanel.Location = new System.Drawing.Point(0, 0);
             this.detailTitlePanel.Name = "detailTitlePanel";
-            this.detailTitlePanel.Size = new System.Drawing.Size(352, 40);
+            this.detailTitlePanel.Size = new System.Drawing.Size(385, 40);
             this.detailTitlePanel.TabIndex = 0;
             // 
             // detailTitleLabel
@@ -264,7 +264,7 @@
             this.detailTitleLabel.AutoSize = true;
             this.detailTitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.detailTitleLabel.ForeColor = System.Drawing.Color.White;
-            this.detailTitleLabel.Location = new System.Drawing.Point(99, 10);
+            this.detailTitleLabel.Location = new System.Drawing.Point(115, 10);
             this.detailTitleLabel.Name = "detailTitleLabel";
             this.detailTitleLabel.Size = new System.Drawing.Size(149, 20);
             this.detailTitleLabel.TabIndex = 0;
@@ -274,7 +274,7 @@
             // 
             this.addProviderButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.addProviderButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.addProviderButton.Location = new System.Drawing.Point(165, 461);
+            this.addProviderButton.Location = new System.Drawing.Point(185, 461);
             this.addProviderButton.Name = "addProviderButton";
             this.addProviderButton.Size = new System.Drawing.Size(120, 40);
             this.addProviderButton.TabIndex = 2;
@@ -288,6 +288,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ProvidersUserControl";
+            this.Size = new System.Drawing.Size(984, 600);
             this.Controls.SetChildIndex(this.tableLayoutPanel1, 0);
             this.Controls.SetChildIndex(this.appBarTitle, 0);
             this.tableLayoutPanel1.ResumeLayout(false);

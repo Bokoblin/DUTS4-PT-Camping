@@ -13,7 +13,7 @@
         <EntityTypeShape EntityType="InfoJoyeuxDB.Emplacement" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="InfoJoyeuxDB.Employe" Width="1.5" PointX="5.25" PointY="13.375" IsExpanded="true" />
         <EntityTypeShape EntityType="InfoJoyeuxDB.Facture" Width="1.5" PointX="10.5" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="InfoJoyeuxDB.Fournisseur" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InfoJoyeuxDB.Fournisseur" Width="1.5" PointX="1.25" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="InfoJoyeuxDB.Incident" Width="1.5" PointX="8.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="InfoJoyeuxDB.Loge" Width="1.5" PointX="8.25" PointY="9.375" IsExpanded="true" />
         <EntityTypeShape EntityType="InfoJoyeuxDB.Personne" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
