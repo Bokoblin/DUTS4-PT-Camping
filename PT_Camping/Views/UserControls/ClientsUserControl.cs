@@ -31,15 +31,7 @@ namespace PT_Camping.Views.UserControls
             HandleResize();
             InitPermissions();
         }
-
-        public void InitPermissions()
-        {
-            addClientButton.Enabled = UserRights.Any(d => d.Libelle_Droit == "writeClients");
-            deleteButton.Visible = UserRights.Any(d => d.Libelle_Droit == "writeClients");
-            editButton.Visible = UserRights.Any(d => d.Libelle_Droit == "writeClients");
-        }
-
-
+        
         public ClientsUserControl(HomeUserControl home, int clientCode) : this(home)
         {
             foreach (ListViewItem item in clientListView.Items)
@@ -48,7 +40,13 @@ namespace PT_Camping.Views.UserControls
             }
         }
 
-
+        private void InitPermissions()
+        {
+            addClientButton.Enabled = UserRights.Any(d => d.Libelle_Droit == "writeClients");
+            deleteButton.Visible = UserRights.Any(d => d.Libelle_Droit == "writeClients");
+            editButton.Visible = UserRights.Any(d => d.Libelle_Droit == "writeClients");
+        }
+        
         private void UpdateClientListView()
         {
             clientListView.Items.Clear();
@@ -75,8 +73,7 @@ namespace PT_Camping.Views.UserControls
                 clientListView.Select();
             }
         }
-
-
+        
         private void UpdateClientDetails()
         {
             if (clientListView.SelectedItems.Count != 0)
@@ -98,16 +95,14 @@ namespace PT_Camping.Views.UserControls
                 reservationButton.Enabled = UserRights.Any(r => r.Libelle_Droit == "readReservations");
             }
         }
-
-
+        
         private void AddClientButton_Click(object sender, EventArgs e)
         {
             new AddClient(Db).ShowDialog();
             Cursor.Current = Cursors.Default;
             UpdateClientListView();
         }
-
-
+        
         private void EditClient_Click(object sender, EventArgs e)
         {
             if (addressTextBox.ReadOnly)
@@ -192,7 +187,7 @@ namespace PT_Camping.Views.UserControls
                 }
             }
         }
-
+        
         private void DeleteClientButton_Click(object sender, EventArgs e)
         {
             var confirmResult = MessageBox.Show(Resources.delete_item_confirm_message,
@@ -222,7 +217,6 @@ namespace PT_Camping.Views.UserControls
             UpdateClientDetails();
         }
 
-
         private void ResetButton_Click(object sender, EventArgs e)
         {
             UpdateClientDetails();
@@ -233,8 +227,7 @@ namespace PT_Camping.Views.UserControls
             emailTextBox.ReadOnly = true;
             editButton.BackgroundImage = Resources.ic_edit;
         }
-
-
+        
         /**
          * Prevent typing non digit values in the phone textbox
          */
@@ -245,8 +238,7 @@ namespace PT_Camping.Views.UserControls
                 e.Handled = true;
             }
         }
-
-
+        
         private void PhoneTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -254,8 +246,7 @@ namespace PT_Camping.Views.UserControls
                 e.Handled = true;
             }
         }
-
-
+        
         private void ClientlistView_Resize(object sender, EventArgs e)
         {
             if (clientListView.Columns.Count != 0)
@@ -264,7 +255,6 @@ namespace PT_Camping.Views.UserControls
                     columnHeader.Width = clientListView.Width / clientListView.Columns.Count;
             }
         }
-
 
         private void ReservationsButton_Click(object sender, EventArgs e)
         {

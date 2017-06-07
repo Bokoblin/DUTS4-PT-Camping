@@ -65,8 +65,7 @@ namespace PT_Camping.Views.Forms
                 e.Handled = true;
             }
         }
-
-
+        
         private void ProductCriticStockTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -74,11 +73,10 @@ namespace PT_Camping.Views.Forms
                 e.Handled = true;
             }
         }
-
-
+        
         private void ProductPriceTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if ( !char.IsControl(e.KeyChar) && e.KeyChar != ',' && !char.IsDigit(e.KeyChar))
+            if (!char.IsControl(e.KeyChar) && e.KeyChar != ',' && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
             }
@@ -88,6 +86,5 @@ namespace PT_Camping.Views.Forms
         {
             Close();
         }
-
     }
 }

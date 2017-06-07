@@ -36,8 +36,7 @@ namespace PT_Camping.Views.Forms
             issueTypecomboBox.DataSource = types;
             criticalityComboBox.Text = criticalityComboBox.Items[0].ToString();
         }
-
-
+        
         private void OkButton_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -69,8 +68,7 @@ namespace PT_Camping.Views.Forms
             }
 
         }
-
-
+        
         private void CancelButton_Click(object sender, EventArgs e)
         {
             Close();

@@ -28,8 +28,7 @@ namespace PT_Camping.Views.UserControls
             yearPicker.MaxDate = DateTime.Now.Date;
             yearPicker.Enabled = true;
         }
-
-
+        
         private void UpdateListViews()
         {
             mostAskedlocationsListView.Items.Clear();
@@ -44,8 +43,7 @@ namespace PT_Camping.Views.UserControls
             UpdateIssueslistView();
             UpdateClientsListView();
         }
-
-
+        
         private void UpdateLocationsListView()
         {
             mostAskedlocationsListView.View = View.Details;
@@ -101,8 +99,7 @@ namespace PT_Camping.Views.UserControls
                 cpt++;
             }
         }
-
-
+        
         private void UpdateProductsListView()
         {
             mostAskedProductsListView.View = View.Details;
@@ -149,8 +146,7 @@ namespace PT_Camping.Views.UserControls
                 cpt++;
             }
         }
-
-
+        
         private void UpdateIssueslistView()
         {
             mostCommonIssueslistView.View = View.Details;
@@ -188,8 +184,7 @@ namespace PT_Camping.Views.UserControls
                 cpt++;
             }
         }
-
-
+        
         private void UpdateClientsListView()
         {
             bestClientsListView.View = View.Details;
@@ -232,8 +227,7 @@ namespace PT_Camping.Views.UserControls
                 cpt++;
             }
         }
-
-
+        
         private void MostAskedlocationsListView_Resize(object sender, EventArgs e)
         {
 
@@ -245,8 +239,7 @@ namespace PT_Camping.Views.UserControls
                 mostAskedlocationsListView.Columns[3].Width = mostAskedlocationsListView.Width / 3 - 10;
             }
         }
-
-
+        
         private void MostAskedProductsListView_Resize(object sender, EventArgs e)
         {
             if (mostAskedProductsListView.Columns.Count != 0)
@@ -256,8 +249,7 @@ namespace PT_Camping.Views.UserControls
                 mostAskedProductsListView.Columns[2].Width = mostAskedProductsListView.Width / 2 - 15;
             }
         }
-
-
+        
         private void MostCommonIssueslistView_Resize(object sender, EventArgs e)
         {
             if (mostCommonIssueslistView.Columns.Count != 0)
@@ -267,8 +259,7 @@ namespace PT_Camping.Views.UserControls
                 mostCommonIssueslistView.Columns[2].Width = mostCommonIssueslistView.Width / 2 - 15;
             }
         }
-
-
+        
         private void BestClientsListView_Resize(object sender, EventArgs e)
         {
             if (bestClientsListView.Columns.Count != 0)
@@ -279,8 +270,7 @@ namespace PT_Camping.Views.UserControls
                 bestClientsListView.Columns[3].Width = bestClientsListView.Width / 3 - 10;
             }
         }
-
-
+        
         private void MostAskedLocationsListView_DoubleClick(object sender, EventArgs e)
         {
             if (mostAskedlocationsListView.SelectedItems.Count > 0)
@@ -296,8 +286,7 @@ namespace PT_Camping.Views.UserControls
                 }
             }
         }
-
-
+        
         private void MostAskedProductsListView_DoubleClick(object sender, EventArgs e)
         {
             if (mostAskedProductsListView.SelectedItems.Count > 0)
@@ -314,8 +303,7 @@ namespace PT_Camping.Views.UserControls
                 }
             }
         }
-
-
+        
         private void MostCommonIssuesListView_DoubleClick(object sender, EventArgs e)
         {
             if (mostCommonIssueslistView.SelectedItems.Count > 0)
@@ -337,8 +325,7 @@ namespace PT_Camping.Views.UserControls
                 }
             }
         }
-
-
+        
         private void BestClientsListView_DoubleClick(object sender, EventArgs e)
         {
             if (bestClientsListView.SelectedItems.Count > 0)
@@ -355,7 +342,6 @@ namespace PT_Camping.Views.UserControls
                 }
             }
         }
-
 
         private void YearPicker_ValueChanged(object sender, EventArgs e)
         {

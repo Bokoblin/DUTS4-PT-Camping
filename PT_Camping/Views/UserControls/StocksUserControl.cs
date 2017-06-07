@@ -21,7 +21,6 @@ namespace PT_Camping.Views.UserControls
     /// Since : 08/02/17
     public partial class StocksUserControl : ManagementUserControl
     {
-
         public StocksUserControl(HomeUserControl home) : base(home)
         {
             InitializeComponent();
@@ -43,15 +42,14 @@ namespace PT_Camping.Views.UserControls
             InitPermissions();
         }
 
-        public void InitPermissions()
+        private void InitPermissions()
         {
             addStockButton.Enabled = UserRights.Any(d => d.Libelle_Droit == "writeStocks");
             deleteProductButton.Visible = UserRights.Any(d => d.Libelle_Droit == "writeStocks");
             editButton.Visible = UserRights.Any(d => d.Libelle_Droit == "writeStocks");
             sellButton.Enabled = UserRights.Any(d => d.Libelle_Droit == "writeStocks");
         }
-
-
+        
         public StocksUserControl(HomeUserControl home, int code) : this(home)
         {
             foreach (ListViewItem item in productListView.Items)
@@ -60,8 +58,7 @@ namespace PT_Camping.Views.UserControls
             }
         }
 
-
-        public void UpdateProductListView()
+        private void UpdateProductListView()
         {
             productListView.Items.Clear();
 
@@ -90,8 +87,7 @@ namespace PT_Camping.Views.UserControls
             }
         }
 
-
-        public void UpdateProductDetails()
+        private void UpdateProductDetails()
         {
             if (productListView.SelectedItems.Count != 0)
             {
@@ -116,8 +112,7 @@ namespace PT_Camping.Views.UserControls
                     : product.Fournisseur.First().Nom_Fournisseur;
             }
         }
-
-
+        
         private void AddStockButton_Click(object sender, MouseEventArgs e)
         {
             AddProduct newStock = new AddProduct();
@@ -125,8 +120,7 @@ namespace PT_Camping.Views.UserControls
             Cursor.Current = Cursors.Default;
             UpdateProductListView();
         }
-
-
+        
         private void DeleteProductButton_Click(object sender, EventArgs e)
         {
             var confirmResult = MessageBox.Show(Resources.delete_item_confirm_message,
@@ -144,8 +138,7 @@ namespace PT_Camping.Views.UserControls
                 }
             }
         }
-
-
+        
         private void EditProductButton_Click(object sender, EventArgs e)
         {
             if (priceTextBox.ReadOnly)
@@ -264,8 +257,7 @@ namespace PT_Camping.Views.UserControls
                 }
             }
         }
-
-
+        
         private void ResetButton_Click(object sender, EventArgs e)
         {
             UpdateProductDetails();
@@ -276,8 +268,7 @@ namespace PT_Camping.Views.UserControls
             providerComboBox.Enabled = false;
             editButton.BackgroundImage = Resources.ic_edit;
         }
-
-
+        
         private void CommandButton_Click(object sender, EventArgs e)
         {
             string employeeSurname = LoginTools.Employee.Personne.Nom_Personne;
@@ -298,8 +289,7 @@ namespace PT_Camping.Views.UserControls
 
             Process.Start("mailto:" + receiver + "?subject=" + subject + "&body=" + body);
         }
-
-
+        
         private void SellButton_Click(object sender, EventArgs e)
         {
             int code = int.Parse(productListView.SelectedItems[0].Name);
@@ -316,7 +306,6 @@ namespace PT_Camping.Views.UserControls
             productListView.Select();
         }
 
-
         private void ProductListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             editButton.BackgroundImage = Resources.ic_edit;
@@ -327,8 +316,7 @@ namespace PT_Camping.Views.UserControls
             providerComboBox.Enabled = false;
             UpdateProductDetails();
         }
-
-
+        
         private void ProductListView_Resize(object sender, EventArgs e)
         {
             if (productListView.Columns.Count != 0)
@@ -338,15 +326,13 @@ namespace PT_Camping.Views.UserControls
                 productListView.Columns[2].Width = productListView.Width / 2 - 17;
             }
         }
-
-
+        
         private void ProductNameTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (productNameTextBox.Text.Length > 30)
                 e.Handled = true;
         }
-
-
+        
         private void AmountTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -354,8 +340,7 @@ namespace PT_Camping.Views.UserControls
                 e.Handled = true;
             }
         }
-
-
+        
         private void CriticAmountTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -363,8 +348,7 @@ namespace PT_Camping.Views.UserControls
                 e.Handled = true;
             }
         }
-
-
+        
         private void PriceTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && e.KeyChar != ',' && !char.IsDigit(e.KeyChar))
@@ -372,15 +356,13 @@ namespace PT_Camping.Views.UserControls
                 e.Handled = true;
             }
         }
-
-
+        
         private void PriceTextBox_Enter(object sender, EventArgs e)
         {
             if (!priceTextBox.ReadOnly)
                 priceTextBox.Text = priceTextBox.Text.Replace(CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol, "");
         }
-
-
+        
         private void PriceTextBox_Leave(object sender, EventArgs e)
         {
             if (!priceTextBox.ReadOnly)

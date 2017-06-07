@@ -24,8 +24,7 @@ namespace UnitTestProject
             Assert.AreEqual(e1, graphicLocation.Location);
             Assert.IsFalse(graphicLocation.Booked);
         }
-
-
+        
         [TestMethod]
         public void MoveTest()
         {
@@ -57,8 +56,7 @@ namespace UnitTestProject
             Assert.AreEqual(graphicLocation.Location.Cordonnee_X, 15);
             Assert.AreEqual(graphicLocation.Location.Coordonnee_Y, 30);
         }
-
-
+        
         [TestMethod]
         public void ResizeTest()
         {

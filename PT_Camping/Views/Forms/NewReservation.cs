@@ -25,7 +25,7 @@ namespace PT_Camping.Views.Forms
             }
         }
 
-        internal class LocationItem
+        private class LocationItem
         {
             public Emplacement Location;
             public HashSet<Lodger> Lodgers;

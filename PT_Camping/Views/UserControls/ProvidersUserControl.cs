@@ -34,14 +34,14 @@ namespace PT_Camping.Views.UserControls
             InitPermissions();
         }
 
-        public void InitPermissions()
+        private void InitPermissions()
         {
             addProviderButton.Enabled = UserRights.Any(d => d.Libelle_Droit == "writeProviders");
             deleteButton.Visible = UserRights.Any(d => d.Libelle_Droit == "writeProviders");
             editButton.Visible = UserRights.Any(d => d.Libelle_Droit == "writeProviders");
         }
 
-        public void UpdateProvidersListView()
+        private void UpdateProvidersListView()
         {
             providerListView.Items.Clear();
 
@@ -65,9 +65,8 @@ namespace PT_Camping.Views.UserControls
                 providerListView.Select();
             }
         }
-
-
-        public void UpdateProviderDetails()
+        
+        private void UpdateProviderDetails()
         {
             if (providerListView.SelectedItems.Count != 0)
             {
@@ -91,8 +90,7 @@ namespace PT_Camping.Views.UserControls
             if (provider != null)
                 Process.Start("mailto:" + provider.Email_Fournisseur);
         }
-
-
+        
         private void EditButton_Click(object sender, EventArgs e)
         {
             if (nameTextBox.ReadOnly)
@@ -185,8 +183,7 @@ namespace PT_Camping.Views.UserControls
                 }
             }
         }
-
-
+        
         private void ResetButton_Click(object sender, EventArgs e)
         {
             resetButton.Visible = false;
@@ -197,16 +194,14 @@ namespace PT_Camping.Views.UserControls
             editButton.BackgroundImage = Resources.ic_edit;
             UpdateProvidersListView();
         }
-
-
+        
         private void AddProvider_Click(object sender, EventArgs e)
         {
             new AddProvider(Db).ShowDialog();
             Cursor.Current = Cursors.Default;
             UpdateProvidersListView();
         }
-
-
+        
         private void ProviderListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             resetButton.Visible = false;

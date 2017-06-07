@@ -33,8 +33,7 @@ namespace PT_Camping.Views.Forms
 
             UpdateCheckBoxes();
         }
-
-
+        
         private void UpdateCheckBoxes()
         {
             readClients.Checked = _permissionsList.Any(d => d.Libelle_Droit == "readClients");
@@ -54,14 +53,12 @@ namespace PT_Camping.Views.Forms
             writeMap.Checked = _permissionsList.Any(d => d.Libelle_Droit == "writeMap");
             writeReservations.Checked = _permissionsList.Any(d => d.Libelle_Droit == "writeReservations");
         }
-
-
+        
         private void CancelButton_Click(object sender, EventArgs e)
         {
             Close();
         }
-
-
+        
         private void OkButton_Click(object sender, EventArgs e)
         {
             #region CLIENTS READ PERMISSION
@@ -454,7 +451,7 @@ namespace PT_Camping.Views.Forms
                 readMap.Checked = true;
         }
 
-        public void ReadReservations_CheckedChanged(object sender, EventArgs e)
+        private void ReadReservations_CheckedChanged(object sender, EventArgs e)
         {
             if (!readReservations.Checked)
                 writeReservations.Checked = false;

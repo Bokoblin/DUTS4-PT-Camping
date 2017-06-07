@@ -31,20 +31,17 @@ namespace PT_Camping.Views.Forms
             birthDateTimePicker.MinDate = DateTime.Now.AddYears(-100);
             birthDateTimePicker.MaxDate = DateTime.Now.AddYears(-16);
         }
-
-
+        
         private void PermissionButton_Click(object sender, EventArgs e)
         {
             new Permissions(_newEmployee, _db).ShowDialog();
         }
-
-
+        
         private void CancelButton_Click(object sender, EventArgs e)
         {
             Close();
         }
-
-
+        
         private void OkButton_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -89,8 +86,7 @@ namespace PT_Camping.Views.Forms
                 MessageBox.Show(exception.Message);
             }
         }
-
-
+        
         /**
          * Prevent typing non digit values in the phone textbox
          */
@@ -101,8 +97,7 @@ namespace PT_Camping.Views.Forms
                 e.Handled = true;
             }
         }
-
-
+        
         private void ShowPasswordCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             passwordTextBox.UseSystemPasswordChar = !showPasswordCheckBox.Checked;

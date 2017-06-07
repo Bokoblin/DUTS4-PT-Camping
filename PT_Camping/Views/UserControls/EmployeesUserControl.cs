@@ -44,7 +44,7 @@ namespace PT_Camping.Views.UserControls
         }
 
 
-        public void InitPermissions()
+        private void InitPermissions()
         {
             addEmployeeButton.Enabled = UserRights.Any(d => d.Libelle_Droit == "writeEmployees");
             dismissButton.Enabled = UserRights.Any(d => d.Libelle_Droit == "writeEmployees");
@@ -52,8 +52,7 @@ namespace PT_Camping.Views.UserControls
             permissionButton.Enabled = UserRights.Any(d => d.Libelle_Droit == "writeEmployees");
             addEmployeePhotoPictureBox.Visible = UserRights.Any(d => d.Libelle_Droit == "writeEmployees");
         }
-
-
+        
         private void UpdateEmployeesListView()
         {
             employeesListView.Items.Clear();
@@ -82,7 +81,6 @@ namespace PT_Camping.Views.UserControls
                 employeesListView.Select();
             }
         }
-
 
         private void UpdateEmployeeDetails()
         {
@@ -127,7 +125,6 @@ namespace PT_Camping.Views.UserControls
             }
         }
 
-
         private void AddEmployeeButton_Click(object sender, EventArgs e)
         {
             new AddEmployee(Db).ShowDialog();
@@ -135,7 +132,6 @@ namespace PT_Camping.Views.UserControls
             UpdateEmployeesListView();
         }
    
-
         private void EditButton_Click(object sender, EventArgs e)
         {
             if (addressTextBox.ReadOnly)
@@ -215,8 +211,7 @@ namespace PT_Camping.Views.UserControls
                     MessageBox.Show(message);
             }
         }
-
-
+        
         private void PermissionButton_Click(object sender, EventArgs e)
         {
             int code = int.Parse(employeesListView.SelectedItems[0].Name);
@@ -224,8 +219,7 @@ namespace PT_Camping.Views.UserControls
             new Permissions(employee, Db).ShowDialog();
             Db.SaveChanges();
         }
-
-
+        
         private void PassButton_Click(object sender, EventArgs e)
         {
             int code = int.Parse(employeesListView.SelectedItems[0].Name);
@@ -233,8 +227,7 @@ namespace PT_Camping.Views.UserControls
             new ModifyPassword(employee).ShowDialog();
             Db.SaveChanges();
         }
-
-
+        
         private void DismissEmployeeButton_Click(object sender, EventArgs e)
         {
             int code = int.Parse(employeesListView.SelectedItems[0].Name);
@@ -244,8 +237,7 @@ namespace PT_Camping.Views.UserControls
             Db.SaveChanges();
             UpdateEmployeesListView();
         }
-
-
+        
         private void EmployeeListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             resetButton.Visible = false;
@@ -256,8 +248,7 @@ namespace PT_Camping.Views.UserControls
             loginTextBox.ReadOnly = true;
             UpdateEmployeeDetails();
         }
-
-
+        
         private void EmployeeListView_Resize(object sender, EventArgs e)
         {
             if (employeesListView.Columns.Count != 0)
@@ -266,8 +257,7 @@ namespace PT_Camping.Views.UserControls
                     columnHeader.Width = employeesListView.Width / employeesListView.Columns.Count;
             }
         }
-
-
+        
         /**
          * Prevent typing non digit values in the phone textbox
          */
@@ -278,8 +268,7 @@ namespace PT_Camping.Views.UserControls
                 e.Handled = true;
             }
         }
-
-
+        
         private void ResetButton_Click(object sender, EventArgs e)
         {
             UpdateEmployeeDetails();
@@ -290,8 +279,7 @@ namespace PT_Camping.Views.UserControls
             loginTextBox.ReadOnly = true;
             editButton.BackgroundImage = Resources.ic_edit;
         }
-
-
+        
         private void AddEmployeePhotoPictureBox_Click(object sender, EventArgs e)
         {
             using (FileDialog fd = new OpenFileDialog())

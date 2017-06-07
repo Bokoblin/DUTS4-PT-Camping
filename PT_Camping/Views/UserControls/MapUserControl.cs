@@ -41,6 +41,7 @@ namespace PT_Camping.Views.UserControls
     public partial class MapUserControl : UserControl
     {
         private DataBase _db;
+        private HomeUserControl _homeUserControl;
         private Bitmap _image;
         private MapMode _mode;
         private List<GraphicLocation> _locationsList;
@@ -67,7 +68,7 @@ namespace PT_Camping.Views.UserControls
                     }
                     else
                     {
-                        HomeUserControl.HomeTabControl.SelectTab(0);
+                        _homeUserControl.HomeTabControl.SelectTab(0);
                         _pickCallBackAction(value.Location.Code_Emplacement);
                     }
                 }
@@ -81,13 +82,12 @@ namespace PT_Camping.Views.UserControls
                 return _selectedLocation;
             }
         }
-        public HomeUserControl HomeUserControl { get; set; }
 
         public MapUserControl(HomeUserControl home)
         {
             InitializeComponent();
             LoginTools.CheckConnection();
-            HomeUserControl = home;
+            _homeUserControl = home;
             _db = new DataBase();
 
             _cursorAction = CursorAction.Default;
@@ -118,8 +118,7 @@ namespace PT_Camping.Views.UserControls
             ChangeMode(_mode);    
             RefreshLocations();
         }
-
-
+        
         public MapUserControl(HomeUserControl home, int locationCode) : this(home)
         {
             SelectFromStats(locationCode);
@@ -408,7 +407,7 @@ namespace PT_Camping.Views.UserControls
             InitPermissions();
         }
 
-        public void InitPermissions()
+        private void InitPermissions()
         {
             var userRights = _db.Personne.First(a => a.Code_Personne == LoginTools.Employee.Code_Personne).Droit.ToList();
             importMapButton.Enabled = userRights.Any(d => d.Libelle_Droit == "writeMap");
@@ -416,7 +415,6 @@ namespace PT_Camping.Views.UserControls
             validateChangesButton.Visible = userRights.Any(d => d.Libelle_Droit == "writeMap");
             importMapRightPanel.Enabled = modeCheckBox.Checked;
         }
-
 
         private void ImportMapButton_Click(object sender, EventArgs e)
         {
@@ -461,16 +459,14 @@ namespace PT_Camping.Views.UserControls
                 }
             }
         }
-
-
+        
         private void ModeCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             _mode = ((CheckBox)sender).Checked ? MapMode.Edit : MapMode.Normal;
             ChangeMode(_mode);
             UpdateRightMenu();
         }
-
-
+        
         private void PictureBox_Paint(object sender, PaintEventArgs e)
         {
             foreach (GraphicLocation location in _locationsList)
@@ -481,8 +477,7 @@ namespace PT_Camping.Views.UserControls
                 }
             }
         }
-
-
+        
         private void PictureBox_MouseMove(object sender, MouseEventArgs e)
         {
             if (SelectedLocation != null)
@@ -632,8 +627,7 @@ namespace PT_Camping.Views.UserControls
                 pictureBox.Refresh();
             }
         }
-
-
+        
         private void PictureBox_MouseClick(object sender, MouseEventArgs e)
         {
             SelectedLocation = null;
@@ -646,15 +640,13 @@ namespace PT_Camping.Views.UserControls
             }
             Refresh();
         }
-
-
+        
         private void CategoriesCheckedListBox_MouseUp(object sender, MouseEventArgs e)
         {
             _cursorAction = CursorAction.Default;
             Refresh();
         }
-
-
+        
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
         {
             if (SelectedLocation != null)
@@ -670,8 +662,7 @@ namespace PT_Camping.Views.UserControls
                 }
             }
         }
-
-
+        
         private void PictureBox_MouseUp(object sender, MouseEventArgs e)
         {
             if (_moving)
@@ -679,8 +670,7 @@ namespace PT_Camping.Views.UserControls
                 _moving = false;
             }
         }
-
-
+        
         private void ValidateChangesButton_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -733,8 +723,7 @@ namespace PT_Camping.Views.UserControls
                 LoadLocationsFromDb();
             }
         }
-
-
+        
         private void UpdateRightMenu()
         {
             if (SelectedLocation == null)
@@ -814,8 +803,7 @@ namespace PT_Camping.Views.UserControls
             rightPanel.Refresh();
             _updatingRightMenu = false;
         }
-
-
+        
         private void DateTimePicker_ValueChanged(object sender, EventArgs e)
         {
             RefreshLocations();
@@ -832,8 +820,7 @@ namespace PT_Camping.Views.UserControls
             pictureBox.Refresh();
             UpdateRightMenu();
         }
-
-
+        
         private void CarCheckedListBox_Check(object sender, ItemCheckEventArgs e)
         {
             if (SelectedLocation != null && !_updatingRightMenu)
@@ -855,16 +842,14 @@ namespace PT_Camping.Views.UserControls
                 }
             }
         }
-
-
+        
         private void DeleteButton_Click(object sender, EventArgs e)
         {
             _locationsList.Remove(SelectedLocation);
             SelectedLocation = null;
             Refresh();
         }
-
-
+        
         private void MapTablePanel_DragDrop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(typeof(TableLayoutPanel).FullName, false))
@@ -887,14 +872,12 @@ namespace PT_Camping.Views.UserControls
                 }
             }
         }
-
-
+        
         private void MapTablePanel_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Move;
         }
-
-
+        
         private void LocationIssuesListBox_DoubleClick(object sender, EventArgs e)
         {
             var userRights = _db.Personne.First(a => a.Code_Personne == LoginTools.Employee.Code_Personne).Droit.ToList();
@@ -904,8 +887,8 @@ namespace PT_Camping.Views.UserControls
                 {
                     var code = int.Parse(locationIssuesListBox.SelectedItems[0].Name);
                     code = _db.Incident.First(i => i.Code_Incident == code).Code_Incident;
-                    HomeUserControl.Window.WindowPanel.Controls.Remove(this);
-                    HomeUserControl.StartIssuesFromStats(code);
+                    _homeUserControl.Window.WindowPanel.Controls.Remove(this);
+                    _homeUserControl.StartIssuesFromStats(code);
                 }
             }
             else
@@ -913,8 +896,7 @@ namespace PT_Camping.Views.UserControls
                 MessageBox.Show(Resources.denied_access);
             }
         }
-
-
+        
         private void ReserveButton_Click(object sender, EventArgs e)
         {
             Button button = (Button) sender;
@@ -922,8 +904,9 @@ namespace PT_Camping.Views.UserControls
             {
                 if (button.Text == Resources.book)
                 {
-                    new NewReservation(HomeUserControl, _db, _selectedLocation.Location).Show();
-                } else if (button.Text == Resources.unbook)
+                    new NewReservation(_homeUserControl, _db, _selectedLocation.Location).Show();
+                }
+                else if (button.Text == Resources.unbook)
                 {
                     foreach (Reservation res in _db.Loge.Where(a => a.Code_Emplacement == _selectedLocation.Location.Code_Emplacement)
                         .Select(a => a.Reservation).Where(a => a.Date_Debut <= dateTimePicker.Value && a.Date_Fin >= dateTimePicker.Value))

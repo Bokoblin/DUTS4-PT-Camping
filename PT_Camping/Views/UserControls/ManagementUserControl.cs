@@ -19,8 +19,9 @@ namespace PT_Camping.Views.UserControls
     /// Since : 08/02/17
     public partial class ManagementUserControl : UserControl
     {
-        protected DataBase Db;
-        protected List<Droit> UserRights;
+        protected readonly DataBase Db;
+        protected readonly HomeUserControl HomeUserControl;
+        protected readonly List<Droit> UserRights;
 
         public ManagementUserControl()
         {
@@ -28,7 +29,7 @@ namespace PT_Camping.Views.UserControls
             logoutButton.FlatAppearance.BorderSize = 0;
         }
 
-        public ManagementUserControl(HomeUserControl homeUserControl)
+        protected ManagementUserControl(HomeUserControl homeUserControl)
         {
             InitializeComponent();
             HomeUserControl = homeUserControl;
@@ -66,8 +67,5 @@ namespace PT_Camping.Views.UserControls
             Size = HomeUserControl.Size;
             appBar.Size = new Size(HomeUserControl.Size.Width, appBar.Size.Height);
         }
-
-
-        public HomeUserControl HomeUserControl { get; set; }
     }
 }

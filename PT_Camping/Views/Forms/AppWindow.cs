@@ -31,8 +31,7 @@ namespace PT_Camping.Views.Forms
             WindowPanel.Controls.Add(_homeUserControl);
             WindowPanel.Controls.Remove(_connectionUserControl);
         }
-
-
+        
         internal void Logout()
         {
             LoginTools.Login = "";
@@ -40,8 +39,7 @@ namespace PT_Camping.Views.Forms
             _connectionUserControl = new ConnectionUserControl(this);
             WindowPanel.Controls.Add(_connectionUserControl);
         }
-
-
+        
         private void Window_Resize(object sender, EventArgs e)
         {
             WindowPanel.Size = Size;

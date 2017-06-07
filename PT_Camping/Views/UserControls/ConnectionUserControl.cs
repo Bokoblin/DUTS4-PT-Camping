@@ -94,15 +94,13 @@ namespace PT_Camping.Views.UserControls
             else
                 errorLabel.Visible = false;
         }
-
-
+        
         private void ShowPasswordCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             passwordTextBox.UseSystemPasswordChar = !showPasswordCheckBox.Checked;
             showPasswordCheckBox.Text = showPasswordCheckBox.Checked ? "Masquer" : "Afficher";
         }
-
-
+        
         private void ConnectionUserControl_Paint(object sender, PaintEventArgs e)
         {
             var buttonPath = new System.Drawing.Drawing2D.GraphicsPath();
