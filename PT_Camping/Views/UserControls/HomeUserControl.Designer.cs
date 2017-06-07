@@ -30,7 +30,7 @@
         {
             this.appBar = new System.Windows.Forms.MenuStrip();
             this.homeTitle = new System.Windows.Forms.Label();
-            this.homeTabControl = new System.Windows.Forms.TabControl();
+            this.HomeTabControl = new System.Windows.Forms.TabControl();
             this.managementTab = new System.Windows.Forms.TabPage();
             this.providerButton = new System.Windows.Forms.Button();
             this.statsButton = new System.Windows.Forms.Button();
@@ -41,7 +41,7 @@
             this.mapTab = new System.Windows.Forms.TabPage();
             this.logoutButton = new System.Windows.Forms.Button();
             this.userNameButton = new System.Windows.Forms.Button();
-            this.homeTabControl.SuspendLayout();
+            this.HomeTabControl.SuspendLayout();
             this.managementTab.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,18 +70,18 @@
             // 
             // homeTabControl
             // 
-            this.homeTabControl.Controls.Add(this.managementTab);
-            this.homeTabControl.Controls.Add(this.mapTab);
-            this.homeTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.homeTabControl.ItemSize = new System.Drawing.Size(360, 30);
-            this.homeTabControl.Location = new System.Drawing.Point(0, 50);
-            this.homeTabControl.Name = "homeTabControl";
-            this.homeTabControl.Padding = new System.Drawing.Point(50, 3);
-            this.homeTabControl.SelectedIndex = 0;
-            this.homeTabControl.Size = new System.Drawing.Size(984, 550);
-            this.homeTabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.homeTabControl.TabIndex = 2;
-            this.homeTabControl.SelectedIndexChanged += new System.EventHandler(this.HomeTabControl_SelectedIndexChanged);
+            this.HomeTabControl.Controls.Add(this.managementTab);
+            this.HomeTabControl.Controls.Add(this.mapTab);
+            this.HomeTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.HomeTabControl.ItemSize = new System.Drawing.Size(360, 30);
+            this.HomeTabControl.Location = new System.Drawing.Point(0, 50);
+            this.HomeTabControl.Name = "HomeTabControl";
+            this.HomeTabControl.Padding = new System.Drawing.Point(50, 3);
+            this.HomeTabControl.SelectedIndex = 0;
+            this.HomeTabControl.Size = new System.Drawing.Size(984, 550);
+            this.HomeTabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.HomeTabControl.TabIndex = 2;
+            this.HomeTabControl.SelectedIndexChanged += new System.EventHandler(this.HomeTabControl_SelectedIndexChanged);
             // 
             // managementTab
             // 
@@ -233,12 +233,12 @@
             this.AutoSize = true;
             this.Controls.Add(this.userNameButton);
             this.Controls.Add(this.logoutButton);
-            this.Controls.Add(this.homeTabControl);
+            this.Controls.Add(this.HomeTabControl);
             this.Controls.Add(this.homeTitle);
             this.Controls.Add(this.appBar);
             this.Name = "HomeUserControl";
             this.Size = new System.Drawing.Size(984, 600);
-            this.homeTabControl.ResumeLayout(false);
+            this.HomeTabControl.ResumeLayout(false);
             this.managementTab.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -249,7 +249,6 @@
 
         private System.Windows.Forms.MenuStrip appBar;
         private System.Windows.Forms.Label homeTitle;
-        private System.Windows.Forms.TabControl homeTabControl;
         private System.Windows.Forms.TabPage managementTab;
         private System.Windows.Forms.Button providerButton;
         private System.Windows.Forms.Button statsButton;

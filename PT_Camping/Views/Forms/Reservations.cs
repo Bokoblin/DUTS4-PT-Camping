@@ -1,14 +1,14 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Windows.Forms;
+﻿using PdfSharp.Drawing;
+using PdfSharp.Drawing.Layout;
+using PdfSharp.Pdf;
 using PT_Camping.Model;
 using PT_Camping.Properties;
 using PT_Camping.Views.UserControls;
-using PdfSharp.Pdf;
-using PdfSharp.Drawing;
+using System;
 using System.Diagnostics;
-using PdfSharp.Drawing.Layout;
+using System.Globalization;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace PT_Camping.Views.Forms
 {
@@ -41,7 +41,7 @@ namespace PT_Camping.Views.Forms
             InitPermissions();
         }
 
-        public void InitPermissions()
+        private void InitPermissions()
         {
             var userRights = _db.Personne.First(a => a.Code_Personne == LoginTools.Employee.Code_Personne).Droit.ToList();
             deleteReservationButton.Enabled = userRights.Any(d => d.Libelle_Droit == "writeReservations");
@@ -54,7 +54,7 @@ namespace PT_Camping.Views.Forms
             reservationsList.Items.Clear();
             foreach (Reservation res in _db.Reservation.Where(a => a.Code_Personne == _codePerson))
             {
-                string[] itemArr = new string[5];
+                var itemArr = new string[5];
                 itemArr[0] = res.Date_Debut.ToString(CultureInfo.InvariantCulture);
                 itemArr[1] = res.Date_Fin.ToString(CultureInfo.InvariantCulture);
                 itemArr[2] =
@@ -135,11 +135,11 @@ namespace PT_Camping.Views.Forms
                         tf.DrawString("\n" + "camping", italicLarge, XBrushes.Black, new XRect(5, 1, page.Width, page.Height), drawFormat);
 
                         //INFOS FACTURE
-                        int prix_unitaire = 23;
+                        const int prixUnitaire = 23;
                         int nbEmplacement = locationsList.Items.Count;
                         TimeSpan ts = reservation.Date_Fin - reservation.Date_Debut;
                         int dureeSejour = ts.Days;
-                        int montantBrut = prix_unitaire * nbEmplacement * dureeSejour;
+                        int montantBrut = prixUnitaire * nbEmplacement * dureeSejour;
                         facture.Date_Emission = DateTime.Today;
                         string labelDateEmission = "Date: " + facture.Date_Emission.Value.Day + "-" + facture.Date_Emission.Value.Month + "-" + facture.Date_Emission.Value.Year;
                         string labelFact = "Facture n° " + codeRes;
@@ -148,7 +148,6 @@ namespace PT_Camping.Views.Forms
                         if (totalReduction != 0)
                         {
                             facture.Montant = montantBrut * 100 / totalReduction;
-          
                         }
                         else
                         {
@@ -158,11 +157,11 @@ namespace PT_Camping.Views.Forms
                         tf.DrawString(labelFact + "\n" + labelDateEmission + "\nNum Client: " + client.Code_Personne, boldSmall, XBrushes.Blue, new XRect(430, 10, page.Width, page.Height));
 
                         //Infos client
-                        tf.DrawString( "M." + client.Personne.Prenom_Personne + " " + client.Personne.Nom_Personne, boldSmall, XBrushes.Black, new XRect(400, 100, page.Width, page.Height));
+                        tf.DrawString("M." + client.Personne.Prenom_Personne + " " + client.Personne.Nom_Personne, boldSmall, XBrushes.Black, new XRect(400, 100, page.Width, page.Height));
                         tf.DrawString("\n" + client.Personne.Adresse,italicSmall, XBrushes.Black, new XRect(380, 105, page.Width, page.Height));
 
                         //Infos camping
-                        tf.DrawString("17 Route de Sarnac" + "\n" + "33930 MONTALIVET"+ "\n" + "Tel : 05 56 41 70 44", normal, XBrushes.Black, new XRect(5, 105, page.Width, page.Height));
+                        tf.DrawString("17 Route de Sarnac" + "\n" + "33930 MONTALIVET" + "\n" + "Tel : 05 56 41 70 44", normal, XBrushes.Black, new XRect(5, 105, page.Width, page.Height));
                         int cmp = 20;
 
                         // TABLEAU
@@ -170,37 +169,31 @@ namespace PT_Camping.Views.Forms
                         tf.DrawString("Prix unitaire: ", boldSmall, XBrushes.Black, new XRect(260, 200, page.Width, page.Height));
                         tf.DrawString("Durée du séjour: ", boldSmall, XBrushes.Black, new XRect(450, 200, page.Width, page.Height));
 
-                        for (int i = 1; i<=locationsList.Items.Count; i++)
-                        {
-                            
-                            tf.DrawString( i +". " + locationsList.Items[i-1] + "\n", normal, XBrushes.Black, new XRect(50, 220+cmp, page.Width, page.Height));
-                            tf.DrawString(prix_unitaire + " €"+"\n", normal, XBrushes.Black, new XRect(280, 220+cmp, page.Width, page.Height));
+                        for (int i = 1; i <= locationsList.Items.Count; i++)
+                        {                      
+                            tf.DrawString(i + ". " + locationsList.Items[i - 1] + "\n", normal, XBrushes.Black, new XRect(50, 220+cmp, page.Width, page.Height));
+                            tf.DrawString(prixUnitaire + " €" + "\n", normal, XBrushes.Black, new XRect(280, 220+cmp, page.Width, page.Height));
                             tf.DrawString(dureeSejour + " jours" + "\n", normal, XBrushes.Black, new XRect(450, 220 + cmp, page.Width, page.Height));
                        
                             cmp += 20;
 
                             if (i == locationsList.Items.Count)
                             {
-
-                                tf.DrawString("TOTAL Hors réduction : " + montantBrut + " € \n", boldSmall, XBrushes.Black, new XRect(80,240+((i-2)*cmp)+cmp, page.Width, page.Height));
-                                tf.DrawString("TOTAL Net à Payer : " + facture.Montant + "€ \n", boldSmall, XBrushes.Red, new XRect(80, 260 + ((i-2) * cmp) + cmp, page.Width, page.Height));
-
+                                tf.DrawString("TOTAL Hors réduction : " + montantBrut + " € \n", boldSmall, XBrushes.Black, new XRect(80, 240 + (i - 2) * cmp + cmp, page.Width, page.Height));
+                                tf.DrawString("TOTAL Net à Payer : " + facture.Montant + "€ \n", boldSmall, XBrushes.Red, new XRect(80, 260 + (i - 2) * cmp + cmp, page.Width, page.Height));
                             }
                         }
 
                         tf.DrawString("Signature : " , normal, XBrushes.Black, new XRect(400, 700, page.Width, page.Height));
                         // Save the document...
-                        string filename = "Facture.pdf";
+                        const string filename = "Facture.pdf";
                         document.Save(filename);
                         Process.Start(filename);
 
                         _db.SaveChanges();
-
-
                     }
                 }
             }
-
         }
 
         private void ReservationsList_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
@@ -244,8 +237,8 @@ namespace PT_Camping.Views.Forms
                         string locationName = (string)listBox.SelectedItem;
                         Emplacement loc = _db.Emplacement.FirstOrDefault(a => a.Nom_Emplacement == locationName);
                         lodgerList.Items.Clear();
-                        foreach (Personne lodger in _db.Loge.Where(a => a.Code_Reservation == res.Code_Reservation && a.Code_Emplacement == loc.Code_Emplacement).
-                            Select(a => a.Personne))
+                        foreach (Personne lodger in _db.Loge.Where(a => a.Code_Reservation == res.Code_Reservation 
+                        && a.Code_Emplacement == loc.Code_Emplacement).Select(a => a.Personne))
                         {
                             lodgerList.Items.Add(lodger.Nom_Personne + " " + lodger.Prenom_Personne);
                         }

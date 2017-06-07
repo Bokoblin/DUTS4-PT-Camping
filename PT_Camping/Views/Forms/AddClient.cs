@@ -76,8 +76,7 @@ namespace PT_Camping.Views.Forms
                 MessageBox.Show(exception.Message);
             }
         }
-
-
+    
         /**
          * Prevent typing non digit values in the phone textbox
          */

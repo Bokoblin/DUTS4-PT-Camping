@@ -22,8 +22,7 @@ namespace UnitTestProject
             LoginTools.HashedPassword = LoginTools.Sha256_hash("success");
             Assert.IsTrue(LoginTools.CheckConnection());
         }
-
-
+        
         [TestMethod]
         public void CheckConnectionFailedTest()
         {
@@ -31,8 +30,7 @@ namespace UnitTestProject
             LoginTools.HashedPassword = LoginTools.Sha256_hash("false");
             Assert.IsFalse(LoginTools.CheckConnection());
         }
-
-
+        
         [TestMethod]
         public void CheckConnectionFailedWithoutPermissionTest()
         {
@@ -40,15 +38,13 @@ namespace UnitTestProject
             LoginTools.HashedPassword = LoginTools.Sha256_hash("1234");
             Assert.IsFalse(LoginTools.CheckConnection());
         }
-
-
+        
         [TestMethod]
         public void Sha256SuccessfulTest()
         {
             Assert.IsTrue(LoginTools.Sha256_hash("lesha").Equals(LoginTools.Sha256_hash("lesha")));
         }
-
-
+        
         [TestMethod]
         public void Sha256FailedTest()
         {
@@ -56,4 +52,3 @@ namespace UnitTestProject
         }
     }
 }
-

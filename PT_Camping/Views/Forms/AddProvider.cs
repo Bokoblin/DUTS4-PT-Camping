@@ -65,6 +65,5 @@ namespace PT_Camping.Views.Forms
                 MessageBox.Show(exception.Message);
             }
         }
-
     }
 }

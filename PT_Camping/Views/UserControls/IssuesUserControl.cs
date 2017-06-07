@@ -37,7 +37,7 @@ namespace PT_Camping.Views.UserControls
             InitPermissions();
         }
 
-        public void InitPermissions()
+        private void InitPermissions()
         {
             addIssueButton.Enabled = UserRights.Any(d => d.Libelle_Droit == "writeIssues");
             deleteButton.Visible = UserRights.Any(d => d.Libelle_Droit == "writeIssues");
@@ -52,8 +52,7 @@ namespace PT_Camping.Views.UserControls
                 item.Selected = item.Name == issueCode.ToString();
             }
         }
-
-
+        
         private void UpdateIssuesListView()
         {
             issuesListView.Items.Clear();
@@ -67,7 +66,7 @@ namespace PT_Camping.Views.UserControls
                 var item = new ListViewItem(new[] { "", issueType, issueDescription, issueDate })
                 {
                     Name = issue.Code_Incident.ToString(),
-                    ImageKey = (issue.Date_Resolution == null)? "pending":"done"
+                    ImageKey = (issue.Date_Resolution == null)? "pending" : "done"
                 };
                 issuesListView.Items.Add(item);
             }
@@ -87,8 +86,7 @@ namespace PT_Camping.Views.UserControls
             issuesListView.Items.Clear();
             issuesListView.Items.AddRange(orderedList.ToArray());
         }
-
-
+        
         private void UpdateIssueDetails()
         {
             if (issuesListView.SelectedItems.Count != 0)
@@ -103,7 +101,7 @@ namespace PT_Camping.Views.UserControls
                     issueTypeTextBox.Text = issue.Type_Incident.Type_Incident1;
                     creationDateTextBox.Text = issue.Date_Incident.ToShortDateString();
                     resolutionDateTextBox.Text = issue.Date_Resolution?.ToShortDateString() ?? "";
-                    criticalityComboBox.SelectedIndex = issue.Criticite_Incident-1;
+                    criticalityComboBox.SelectedIndex = issue.Criticite_Incident - 1;
                     statusTextBox.Text = issue.Avancement_Incident;
                     descriptionTextBox.Text = issue.Description_Incident;
                     
@@ -113,16 +111,14 @@ namespace PT_Camping.Views.UserControls
             }
             
         }
-
-
+        
         private void OnAddIssueButtonClick(object sender, EventArgs e)
         {
             new AddIssue(Db).ShowDialog();
             Cursor.Current = Cursors.Default;
             UpdateIssuesListView();
         }
-
-
+        
         private void OnDeleteIssueButtonClick(object sender, EventArgs e)
         {
             var confirmResult = MessageBox.Show(Resources.delete_item_confirm_message,
@@ -140,8 +136,7 @@ namespace PT_Camping.Views.UserControls
                 }
             }
         }
-
-
+        
         private void OnEditButtonClick(object sender, EventArgs e)
         {
             if (resolutionDateTextBox.ReadOnly)
@@ -212,7 +207,7 @@ namespace PT_Camping.Views.UserControls
 
                     if (criticalityComboBox.SelectedIndex != issue.Criticite_Incident - 1)
                     {
-                        issue.Criticite_Incident = criticalityComboBox.SelectedIndex+1;
+                        issue.Criticite_Incident = criticalityComboBox.SelectedIndex + 1;
                         message += "criticité\n";
                         cptModifications++;
                     }
@@ -260,8 +255,7 @@ namespace PT_Camping.Views.UserControls
                 }
             }
         }
-
-
+        
         private void OnResolveIssueButtonClick(object sender, EventArgs e)
         {
             int code = int.Parse(issuesListView.SelectedItems[0].Name);
@@ -285,8 +279,7 @@ namespace PT_Camping.Views.UserControls
                 issuesListView.Select();
             }
         }
-
-
+        
         private void IssuesListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             resetButton.Visible = false;
@@ -297,8 +290,7 @@ namespace PT_Camping.Views.UserControls
             descriptionTextBox.ReadOnly = true;
             UpdateIssueDetails();
         }
-
-
+        
         private void IssuesListView_Resize(object sender, EventArgs e)
         {
             if (issuesListView.Columns.Count != 0)
@@ -309,7 +301,6 @@ namespace PT_Camping.Views.UserControls
                 issuesListView.Columns[3].Width = issuesListView.Width / 3 - 11;
             }
         }
-
         private void ResetButton_Click(object sender, EventArgs e)
         {
             UpdateIssueDetails();

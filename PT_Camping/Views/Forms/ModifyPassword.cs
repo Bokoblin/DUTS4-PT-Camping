@@ -21,14 +21,12 @@ namespace PT_Camping.Views.Forms
             InitializeComponent();
             _concernedEmployee = concernedEmployee;
         }
-
-
+        
         private void CancelButton_Click(object sender, EventArgs e)
         {
             Close();
         }
-
-
+        
         private void OkButton_Click(object sender, EventArgs e)
         {
             if (oldPasstextBox.Text == "" || newPassTextBox.Text == "" || confirmPassTextBox.Text == "")
@@ -43,7 +41,6 @@ namespace PT_Camping.Views.Forms
                 Close();  
             }
         }
-
         private void ShowPasswordCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             newPassTextBox.UseSystemPasswordChar = !showPasswordCheckBox.Checked;
