@@ -17,7 +17,7 @@ namespace PT_Camping.Views.UserControls
         Normal,
         Edit,
         PickLocation
-    };
+    }
 
     public enum CursorAction
     {
@@ -27,7 +27,7 @@ namespace PT_Camping.Views.UserControls
         ResizeE,
         ResizeS,
         ResizeW
-    };
+    }
 
     /// <summary>
     /// The MapUserControl is a UserControl handling the campground's map.
@@ -57,6 +57,10 @@ namespace PT_Camping.Views.UserControls
 
         private GraphicLocation SelectedLocation
         {
+            get
+            {
+                return _selectedLocation;
+            }
             set
             {
                 _selectedLocation = value;
@@ -76,10 +80,6 @@ namespace PT_Camping.Views.UserControls
                 {
                     UpdateRightMenu();
                 }
-            }
-            get
-            {
-                return _selectedLocation;
             }
         }
 
@@ -124,7 +124,8 @@ namespace PT_Camping.Views.UserControls
             SelectFromStats(locationCode);
         }
 
-        public void StartPickLocation(NewReservation.LocationSelectedDelegate pickLocationSelectedDelegate, DateTime date)
+        public void StartPickLocation(NewReservation.LocationSelectedDelegate pickLocationSelectedDelegate, 
+            DateTime date)
         {
             _mode = MapMode.PickLocation;
             dateTimePicker.Value = date;
@@ -171,7 +172,6 @@ namespace PT_Camping.Views.UserControls
             pictureBox.Refresh();
         }
 
-
         private void FillListsControlsDromDb()
         {
             carCheckedListBox.Items.Clear();
@@ -198,7 +198,6 @@ namespace PT_Camping.Views.UserControls
             typeLocationComboBox.DisplayMember = "Libelle_Type";
             typeLocationComboBox.ValueMember = "Code_Type";
         }
-
 
         private TableLayoutPanel CreateInsertLocationButton(Type_Emplacement type)
         {
@@ -291,7 +290,6 @@ namespace PT_Camping.Views.UserControls
             return typePanel;
         }
 
-
         private void TypePanel_MouseDown(object sender, MouseEventArgs e)
         {
             Panel panel = GetParentTypePanel(sender);
@@ -308,7 +306,6 @@ namespace PT_Camping.Views.UserControls
             }
         }
         
-
         private void CreateNewLocation(Type_Emplacement type, int x = 30, int y = 30)
         {
             LoginTools.CheckConnection();
@@ -336,8 +333,7 @@ namespace PT_Camping.Views.UserControls
             SelectedLocation = newGraphicLocation;
             Refresh();
         }
-
-
+        
         private Panel GetParentTypePanel(object control)
         {
             Panel panel;
@@ -351,15 +347,13 @@ namespace PT_Camping.Views.UserControls
             }
             return panel;
         }
-
-
+        
         private void PanelType_MouseEnter(object sender, EventArgs e)
         {
             Panel panel = GetParentTypePanel(sender);
             panel.BackColor = Color.DimGray;
         }
-
-
+        
         private void PanelType_MouseLeave(object sender, EventArgs e)
         {
             Panel panel = GetParentTypePanel(sender);
@@ -368,8 +362,7 @@ namespace PT_Camping.Views.UserControls
                 panel.BackColor = Color.Gray;
             }
         }
-
-
+        
         private void ChangeMode(MapMode mode)
         {
             importMapPanel.Visible = false;
@@ -735,6 +728,7 @@ namespace PT_Camping.Views.UserControls
             nullSelectionPanel.Visible = false;
             _updatingRightMenu = true;
             LoginTools.CheckConnection();
+
             if (SelectedLocation.Location.Type_Emplacement.Est_Reservable)
             {
                 reserveButton.Enabled = true;
@@ -788,8 +782,7 @@ namespace PT_Camping.Views.UserControls
                 };
                 locationIssuesListBox.Items.Add(item);
             }
-
-
+            
             locationNameTextBox.DataBindings.Clear();
             locationNameTextBox.DataBindings.Add("Text", SelectedLocation.Location, 
                 "Nom_Emplacement", false, DataSourceUpdateMode.OnPropertyChanged);

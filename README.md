@@ -1,7 +1,7 @@
 # DUTS4-PT-Camping #
 
 [![Build Status](https://travis-ci.com/Bokoblin/DUTS4-PT-Camping.svg?token=G5wZLAQfSsj9KcoZsDs4&branch=master)](https://travis-ci.com/Bokoblin/DUTS4-PT-Camping)
-[![Issue Count](https://codeclimate.com/repos/58c968b0eaf2280265000226/badges/80f805b4216876fb8994/issue_count.svg)](https://codeclimate.com/repos/58c968b0eaf2280265000226/feed)
+[![CodeFactor](https://www.codefactor.io/repository/github/bokoblin/duts4-pt-camping/badge)](https://www.codefactor.io/repository/github/bokoblin/duts4-pt-camping)
 
 ### Description ###
 
@@ -15,9 +15,11 @@ his camping (manually managed currently) by enhancing different management units
 ### Tools used ###
 
 * Language : C# with WinForms
+* Libraries : EntityFramework, PDFSharp
+* Database : MS SQL Server
 * IDE : Visual Studio
 * Continuous integration : Travis-CI
-* Code review : Code climate
+* Code review : CodeFactor
 
 
 ### Authors ###

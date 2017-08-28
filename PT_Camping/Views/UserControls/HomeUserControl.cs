@@ -67,8 +67,7 @@ namespace PT_Camping.Views.UserControls
             Window.WindowPanel.Controls.Add(_employeesUserControl);
             Window.WindowPanel.Controls.Remove(sender);
         }
-
-
+        
         public void StartLocationsFromClients()
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -84,8 +83,7 @@ namespace PT_Camping.Views.UserControls
             Window.WindowPanel.Controls.Remove(_clientsUserControl);
             Window.BringToFront();
         }
-
-
+        
         public void StartClientsFromLocations()
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -241,7 +239,6 @@ namespace PT_Camping.Views.UserControls
             }
         }
         
-
         /// <summary>
         /// Properties (Getters & Setters)
         /// </summary>

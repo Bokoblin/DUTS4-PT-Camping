@@ -17,7 +17,6 @@ namespace PT_Camping.Views.UserControls
     {
         private readonly AppWindow _appWindow;
 
-
         public ConnectionUserControl(AppWindow window)
         {
             InitializeComponent();

@@ -230,7 +230,6 @@ namespace PT_Camping.Views.UserControls
         
         private void MostAskedlocationsListView_Resize(object sender, EventArgs e)
         {
-
             if (mostAskedlocationsListView.Columns.Count != 0)
             {
                 mostAskedlocationsListView.Columns[0].Width = 30;

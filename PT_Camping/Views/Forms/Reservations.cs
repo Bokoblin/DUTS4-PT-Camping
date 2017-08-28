@@ -143,8 +143,7 @@ namespace PT_Camping.Views.Forms
                         facture.Date_Emission = DateTime.Today;
                         string labelDateEmission = "Date: " + facture.Date_Emission.Value.Day + "-" + facture.Date_Emission.Value.Month + "-" + facture.Date_Emission.Value.Year;
                         string labelFact = "Facture n° " + codeRes;
-
-
+                        
                         if (totalReduction != 0)
                         {
                             facture.Montant = montantBrut * 100 / totalReduction;

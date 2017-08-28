@@ -53,7 +53,6 @@ namespace PT_Camping.Views.UserControls
 
             foreach (var client in Db.Client)
             {
-
                 string surname = client.Personne.Nom_Personne.ToUpper();
                 string name = client.Personne.Prenom_Personne;
                 string email = client.Personne.Email;
