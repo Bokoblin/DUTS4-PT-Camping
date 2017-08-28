@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Windows.Forms;
+using PT_Camping.Model;
 using PT_Camping.Properties;
 using PT_Camping.Views.Forms;
 
@@ -109,7 +110,6 @@ namespace PT_Camping.Views.UserControls
                         && UserRights.Any(d => d.Libelle_Droit == "writeIssues");
                 }
             }
-            
         }
         
         private void OnAddIssueButtonClick(object sender, EventArgs e)
@@ -165,45 +165,7 @@ namespace PT_Camping.Views.UserControls
 
                 if (issue != null)
                 {
-                    #region CHECK & APPLY RESOLUTION DATE CHANGES
-                    try
-                    {
-                        if (resolutionDateTextBox.Text == "" && issue.Date_Resolution != null)
-                        {
-                            issue.Date_Resolution = null;
-                            message += "date de résolution\n";
-                            cptModifications++;
-                        }
-                        else if (resolutionDateTextBox.Text != "")
-                        {
-                            issue.Date_Resolution = DateTime.Parse(resolutionDateTextBox.Text);
-
-                            if (issue.Date_Resolution < issue.Date_Incident)
-                            {
-                                if (issue.Date_Resolution.Value.Day == issue.Date_Incident.Day)
-                                    issue.Date_Resolution = issue.Date_Incident.AddSeconds(1);
-                                else
-                                {
-                                    issue.Date_Resolution = null;
-                                    throw new Exception();
-                                }
-
-                            }
-
-                            if (((DateTime)issue.Date_Resolution).ToShortDateString() != resolutionDateTextBox.Text)
-                            {
-                                message += "date de résolution\n";
-                                cptModifications++;
-                            }
-
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        resolutionDateTextBox.Text = issue.Date_Resolution.ToString();
-                        MessageBox.Show(Resources.invalid_date_exception);
-                    }
-                    #endregion
+                    message = CheckAndApplyResolutionDateChanges(issue, message, ref cptModifications);
 
                     if (criticalityComboBox.SelectedIndex != issue.Criticite_Incident - 1)
                     {
@@ -255,7 +217,48 @@ namespace PT_Camping.Views.UserControls
                 }
             }
         }
-        
+
+        private string CheckAndApplyResolutionDateChanges(Incident issue, string message, ref int cptModifications)
+        {
+            try
+            {
+                if (resolutionDateTextBox.Text == "" && issue.Date_Resolution != null)
+                {
+                    issue.Date_Resolution = null;
+                    message += "date de résolution\n";
+                    cptModifications++;
+                }
+                else if (resolutionDateTextBox.Text != "")
+                {
+                    issue.Date_Resolution = DateTime.Parse(resolutionDateTextBox.Text);
+
+                    if (issue.Date_Resolution < issue.Date_Incident)
+                    {
+                        if (issue.Date_Resolution.Value.Day == issue.Date_Incident.Day)
+                            issue.Date_Resolution = issue.Date_Incident.AddSeconds(1);
+                        else
+                        {
+                            issue.Date_Resolution = null;
+                            throw new Exception();
+                        }
+                    }
+
+                    if (((DateTime) issue.Date_Resolution).ToShortDateString() != resolutionDateTextBox.Text)
+                    {
+                        message += "date de résolution\n";
+                        cptModifications++;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                resolutionDateTextBox.Text = issue.Date_Resolution.ToString();
+                MessageBox.Show(Resources.invalid_date_exception);
+            }
+
+            return message;
+        }
+
         private void OnResolveIssueButtonClick(object sender, EventArgs e)
         {
             int code = int.Parse(issuesListView.SelectedItems[0].Name);
@@ -265,7 +268,6 @@ namespace PT_Camping.Views.UserControls
             {
                 issue.Date_Resolution = DateTime.Now;
                 issue.Avancement_Incident = Resources.done_issue;
-
 
                 Db.SaveChanges();
 

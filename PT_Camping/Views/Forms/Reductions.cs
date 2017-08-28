@@ -65,6 +65,4 @@ namespace PT_Camping.Views.Forms
             Close();
         }
     }
-
-
 }

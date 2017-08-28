@@ -111,7 +111,6 @@ namespace PT_Camping.Views.UserControls
                 websiteTextBox.ReadOnly = true;
                 editButton.BackgroundImage = Resources.ic_edit;
 
-
                 string message = "Les données suivantes ont été mises à jour : \n";
                 int cptModifications = 0;
 

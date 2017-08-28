@@ -181,7 +181,6 @@ namespace PT_Camping.Views.UserControls
                             message += "libellé, ";
                             cptModifications++;
                         }
-
                     }
 
                     if (amountTextBox.Text != product.Quantite_Stock.ToString())

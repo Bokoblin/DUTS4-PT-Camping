@@ -1,14 +1,28 @@
 Project Name : PT4-Camping
 Developers   : Yonnel BERWIT, Alexandre JACQUOT, Arthur JOLIVET, Claire MARCINIAK, Valentine RENAUD
 
-Current version : v0.7.3
+Current version : v0.7.4
 
 ==================================================================================================
+
+v0.7.4 (28/08/2017)
+
+- Style fixes
+- Replaced CodeClimate by CodeFactor
+- Readme changes
+
+Known issues :
+- Build failure on unix due to PDFSharp library not available
+
+
+--------------------------------------------------------------------------
 
 v0.7.3 (30/03/2017)
 
 - Added bill for reservations
 
+Known issues :
+- Build failure on unix due to PDFSharp library not available
 
 --------------------------------------------------------------------------
 

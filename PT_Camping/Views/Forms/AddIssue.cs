@@ -66,7 +66,6 @@ namespace PT_Camping.Views.Forms
             {
                 MessageBox.Show(exception.Message);
             }
-
         }
         
         private void CancelButton_Click(object sender, EventArgs e)

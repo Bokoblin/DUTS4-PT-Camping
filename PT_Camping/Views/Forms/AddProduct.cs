@@ -37,7 +37,6 @@ namespace PT_Camping.Views.Forms
                 if (int.Parse(productStockTextBox.Text) < 0 || int.Parse(productCriticStockTextBox.Text) < 0)
                     throw new Exception("La quantité doit être positive.");
 
-
                 if (_db.Produit.Count(p => p.Libelle_Produit == productNameTextBox.Text) == 1)
                     throw new Exception("Un produit du même nom existe déjà.");
 

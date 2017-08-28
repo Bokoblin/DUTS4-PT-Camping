@@ -33,10 +33,8 @@ namespace UnitTestProject
                 Nom_Emplacement = "e1",
                 Cordonnee_X = 5,
                 Coordonnee_Y = 5
-
             };
             var graphicLocation = new GraphicLocation(e1);
-
 
             //Check position before
             Assert.AreEqual(graphicLocation.Location.Cordonnee_X, 5);
@@ -69,7 +67,6 @@ namespace UnitTestProject
                 Taille_Y = 50
             };
             var graphicLocation = new GraphicLocation(e1);
-
 
             //Check position before
             Assert.AreEqual(graphicLocation.Location.Taille_X, 50);

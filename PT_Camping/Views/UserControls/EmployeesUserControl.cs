@@ -34,7 +34,6 @@ namespace PT_Camping.Views.UserControls
             InitPermissions();
         }
 
-
         public EmployeesUserControl(HomeUserControl home, int employeeCode) : this(home)
         {
             foreach (ListViewItem item in employeesListView.Items)
@@ -42,7 +41,6 @@ namespace PT_Camping.Views.UserControls
                 item.Selected = item.Name == employeeCode.ToString();
             }
         }
-
 
         private void InitPermissions()
         {
@@ -177,7 +175,6 @@ namespace PT_Camping.Views.UserControls
                         }
                         else
                             MessageBox.Show(Resources.phone_char_exception);
-
                     }
 
                     if (emailTextBox.Text != employee.Personne.Email)
@@ -201,7 +198,6 @@ namespace PT_Camping.Views.UserControls
                         cptModifications++;
                     }
                 }
-                
 
                 Db.SaveChanges();
 

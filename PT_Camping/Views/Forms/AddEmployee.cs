@@ -66,8 +66,7 @@ namespace PT_Camping.Views.Forms
                 {
                     throw new Exception(Resources.unrecognized_email);
                 }
-
-
+                
                 _newEmployee.Personne.Nom_Personne = surnameTextBox.Text;
                 _newEmployee.Personne.Prenom_Personne = nameTextBox.Text;
                 _newEmployee.Personne.Date_Naissance = birthDateTimePicker.Value.Date;
